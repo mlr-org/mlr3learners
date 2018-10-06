@@ -20,8 +20,6 @@ Imports:
 Suggests:
     ranger,
     testthat
-VignetteBuilder:
-    knitr
 ByteCompile: true
 Encoding: UTF-8
 NeedsCompilation: no
