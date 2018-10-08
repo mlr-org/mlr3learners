@@ -22,6 +22,9 @@ Imports:
 Suggests:
     ranger,
     testthat
+Remotes: 
+    mlr-org/mlr3,
+    mlr-org/paradox
 ByteCompile: true
 Encoding: UTF-8
 NeedsCompilation: no
