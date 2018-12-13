@@ -6,30 +6,35 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         packages = "ranger",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         predict_types = c("response", "prob"),
-        par_set = ParamSet$new(
+        param_set = ParamSet$new(
           params = list(
-            ParamInt$new(id = "num.trees", default = 500L, lower = 1L),
-            ParamReal$new(id = "mtry", lower = 1)
+            ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = "train"),
+            ParamDbl$new(id = "mtry", lower = 1, tags = "train")
           )
         ),
         properties = c("twoclass", "multiclass")
       )
     },
 
-    train = function(task, ...) {
-      ranger::ranger(task$formula, task$data(), probability = (self$predict_type == "prob"), ...)
+    train = function(task) {
+      invoke(ranger::ranger,
+        formula = task$formula,
+        data = task$data(),
+        probability = (self$predict_type == "prob"),
+        .args = self$params_train
+      )
     },
 
-    predict = function(model, task, ...) {
-      newdata = task$data(cols = task$feature_names)
+    predict = function(model, task) {
+      newdata = task$data()
       preds = predict(model, data = newdata, predict.type = "response")
 
       if (self$predict_type == "response") {
-        prob = NULL
         response = preds$predictions
+        prob = NULL
       } else {
+        response = NULL
         prob = preds$predictions
-        response = colnames(prob)[apply(prob, 1, which.max)]
       }
 
       PredictionClassif$new(task, response, prob)

@@ -17,16 +17,17 @@ Depends:
 Imports:
     backports,
     mlr3,
+    mlr3misc,
     paradox,
     R6
 Suggests:
     ranger,
     testthat
-Remotes: 
+Remotes:
     mlr-org/mlr3,
     mlr-org/paradox
 ByteCompile: true
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
