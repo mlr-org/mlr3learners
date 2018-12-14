@@ -16,6 +16,7 @@ Depends:
     R (>= 3.1.0)
 Imports:
     backports,
+    data.table,
     mlr3,
     mlr3misc,
     paradox,
