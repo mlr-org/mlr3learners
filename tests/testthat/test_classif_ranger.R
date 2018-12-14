@@ -40,3 +40,19 @@ test_that("simple train/predict with probs", {
   e$score()
   expect_number(e$performance)
 })
+
+test_that("extract importance", {
+  # FIXME: we want this automated
+
+  learner = LearnerClassifRanger$new()
+  learner$param_vals = list(importance = "impurity")
+
+  task = mlr_tasks$get("iris")
+  e = Experiment$new(task, learner)
+  e$train()
+
+  tab = e$learner$importance()
+  expect_data_table(tab, ncol = 2L, nrow = task$ncol - 1L)
+  expect_set_equal(tab$name, task$feature_names)
+  expect_numeric(rev(tab$value), any.missing = FALSE, sorted = TRUE)
+})
