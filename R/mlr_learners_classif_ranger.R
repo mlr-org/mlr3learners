@@ -14,15 +14,15 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
-            ParamInt$new(id = "num.trees", default = 500L, lower = 1L),
-            ParamDbl$new(id = "mtry", lower = 1),
+            ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = "train"),
+            ParamDbl$new(id = "mtry", lower = 1, tags = "train"),
             ParamInt$new(id = "min.node.size", lower = 1L),
             ParamLgl$new(id = "replace", default = TRUE),
             ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L),
             ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1),
             ParamUty$new(id = "always.split.variables"),
             ParamFct$new(id = "respect.unordered.factors", values = c("ignore", "order", "partition"), default = "ignore"),
-            ParamFct$new(id = "importance", values = c("none", "impurity", "permutation"), default = "none"),
+            ParamFct$new(id = "importance", values = c("none", "impurity", "impurity_corrected", "permutation"), tags = "train")
             ParamLgl$new(id = "write.forest", default = TRUE),
             ParamLgl$new(id = "scale.permutation.importance", default = FALSE, requires = quote(importance == "permutation")),
             ParamInt$new(id = "num.threads", lower = 1L, when = "both"),
@@ -34,7 +34,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
             ParamLgl$new(id = "keep.inbag", default = FALSE)
           )
         ),
-        properties = c("twoclass", "multiclass")
+        properties = c("twoclass", "multiclass", "importance")
       )
     },
 
@@ -46,17 +46,27 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
     },
 
     predict = function(task) {
-      newdata = task$data(cols = task$feature_names)
-      response  = prob = NULL
-
+      newdata = task$data()
+      preds = predict(self$model, data = newdata, predict.type = "response")
 
       if (self$predict_type == "response") {
-        response = as.character(predict(self$model, newdata = newdata, type = "class"))
-      } else if (self$predict_type == "prob") {
-        prob = predict(self$model, newdata = newdata, type = "prob", .args = pars)
+        response = preds$predictions
+        prob = NULL
+      } else {
+        response = NULL
+        prob = preds$predictions
       }
 
       PredictionClassif$new(task, response, prob)
+    },
+
+    importance = function() {
+      if (is.null(self$model))
+        stopf("No model stored")
+      if (self$model$importance.mode == "none")
+        stopf("No importance stored")
+
+      setorderv(enframe(self$model$variable.importance), "value", order = -1L)[]
     }
   )
 )
