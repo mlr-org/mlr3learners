@@ -65,18 +65,13 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       PredictionClassif$new(task, response, prob)
     },
 
-    importance = function(model = NULL) {
-      if (is.null(model)) {
-        if (is.null(self$model))
-          stopf("No model stored or argument missing")
-        else
-          model = self$model
-      }
-
-      if (model$importance.mode == "none")
+    importance = function() {
+      if (is.null(self$model))
+        stopf("No model stored")
+      if (self$model$importance.mode == "none")
         stopf("No importance stored")
       
-      setorderv(enframe(model$variable.importance), "value", order = -1L)[]
+      setorderv(enframe(self$model$variable.importance), "value", order = -1L)[]
     }
   )
 )
