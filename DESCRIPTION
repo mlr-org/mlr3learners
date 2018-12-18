@@ -20,8 +20,10 @@ Imports:
     mlr3,
     mlr3misc,
     paradox,
-    R6
+    R6,
+    checkmate (>= 1.8.9)
 Suggests:
+    mlbench,
     rpart,
     ranger,
     testthat
