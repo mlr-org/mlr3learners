@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/index.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr3learners-package.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr_learners_classif_logreg.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr_learners_classif_ranger.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/articles/mlr3learners.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/articles/tutorial/add_classif_learner.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/articles/tutorial/add_regr_learner.html</loc>
+  </url>
+</urlset>
