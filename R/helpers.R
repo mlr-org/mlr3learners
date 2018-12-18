@@ -1,6 +1,6 @@
 propVectorToMatrix = function (p, levs)
 {
-    assertNumeric(p)
+    checkmate::assert_numeric(p)
     y = matrix(0, ncol = 2L, nrow = length(p))
     colnames(y) = levs
     y[, 1L] = p
