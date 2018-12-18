@@ -43,6 +43,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
           )
         ),
+        param_vals = list(s = 0.01),
         properties = c("weights", "twoclass", "multiclass")
       )
     },
