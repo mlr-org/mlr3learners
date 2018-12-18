@@ -6,10 +6,11 @@
 "_PACKAGE"
 
 .onLoad = function(libname, pkgname) {
-	# classification learners
+  # classification learners
   mlr_learners$add("classif.ranger", LearnerClassifRanger)
   mlr_learners$add("classif.logreg", LearnerClassifLogReg)
   mlr_learners$add("classif.glmnet", LearnerClassifGlmnet)
 
   # regression learners
+  mlr_learners$add("regr.ranger", LearnerRegrRanger)
 }
