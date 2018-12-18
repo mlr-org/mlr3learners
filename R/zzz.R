@@ -7,4 +7,5 @@
 
 .onLoad = function(libname, pkgname) {
   mlr_learners$add("classif.ranger", LearnerClassifRanger)
+  mlr_learners$add("classif.logreg", LearnerClassifLogReg)
 }
