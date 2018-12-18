@@ -83,10 +83,158 @@
 
     
     
-<p>Hello World</p>
+<div id="step-by-step-guide" class="section level1">
+<h1 class="hasAnchor">
+<a href="#step-by-step-guide" class="anchor"></a>Step-By-Step Guide</h1>
+<p>To implement a regression learner, you have to create an R6 reference object, which inherits from <code>LeanerRegr</code>.</p>
+<p>Here we show step-by-step how we implemented the random forest algorithm from <code>ranger</code>. Basically, we need to put information about the learner’s name, package, parameter set, properties and how to use the learner’s <code>train</code> and <code>predict</code> function into the following skeleton:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LearnerRegrYourLearner =<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">"LearnerRegrYourLearner"</span>, <span class="dt">inherit =</span> LearnerRegr,
+  <span class="dt">public =</span> <span class="kw">list</span>(
+    <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">id =</span> <span class="st">"regr.yourlearner"</span>) {
+      super<span class="op">$</span><span class="kw">initialize</span>(
+        <span class="dt">id =</span> id,
+        <span class="dt">packages =</span> ,
+        <span class="dt">feature_types =</span> ,
+        <span class="dt">predict_types =</span> ,
+        <span class="dt">param_set =</span> ParamSet<span class="op">$</span><span class="kw">new</span>(
+          <span class="dt">params =</span> <span class="kw">list</span>()
+        ),
+        <span class="dt">properties =</span> 
+      )
+    },
+
+    <span class="dt">train =</span> <span class="cf">function</span>(task) {
+    
+    },
+    <span class="dt">predict =</span> <span class="cf">function</span>(task) {
+  
+    }
+  )
+)</code></pre></div>
+<div id="specifying-basic-information" class="section level2">
+<h2 class="hasAnchor">
+<a href="#specifying-basic-information" class="anchor"></a>Specifying Basic Information</h2>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Field</th>
+<th align="left">Possible Values</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">id</td>
+<td align="left">id</td>
+</tr>
+<tr class="even">
+<td align="left">packages</td>
+<td align="left">package name as character variable</td>
+</tr>
+<tr class="odd">
+<td align="left">features_types</td>
+<td align="left">logical,integer,numeric,character,factor,ordered</td>
+</tr>
+<tr class="even">
+<td align="left">predict_types</td>
+<td align="left">response,se</td>
+</tr>
+<tr class="odd">
+<td align="left">param_set</td>
+<td align="left">ParamSet from the package paradox</td>
+</tr>
+<tr class="even">
+<td align="left">properties</td>
+<td align="left">missings,weights,parallel,importance</td>
+</tr>
+</tbody>
+</table>
+<p>First we need to define the learner’s name and unique identifier. Here we called the learner <code>ranger</code>. We use camel case for the R6 object’s name and lower case for the id. Available feature types, predict types and properties can be found in the table above. With the exception of the <code>id</code> and <code>param_set</code>, the information must be written as character vectors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LearnerRegrRanger =<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">"LearnerRegrRanger"</span>, <span class="dt">inherit =</span> LearnerRegr,
+  <span class="dt">public =</span> <span class="kw">list</span>(
+    <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">id =</span> <span class="st">"regr.ranger"</span>) {
+      super<span class="op">$</span><span class="kw">initialize</span>(
+        <span class="dt">id =</span> id,
+        <span class="dt">packages =</span> <span class="st">"ranger"</span>,
+        <span class="dt">feature_types =</span> <span class="kw">c</span>(<span class="st">"logical"</span>, <span class="st">"integer"</span>, <span class="st">"numeric"</span>, <span class="st">"character"</span>, <span class="st">"factor"</span>, <span class="st">"ordered"</span>),
+        <span class="dt">predict_types =</span> <span class="kw">c</span>(<span class="st">"response"</span>, <span class="st">"se"</span>),
+        <span class="dt">param_set =</span> ParamSet<span class="op">$</span><span class="kw">new</span>(
+          <span class="dt">params =</span> <span class="kw">list</span>()
+        ),
+        <span class="dt">properties =</span> <span class="kw">c</span>(<span class="st">"weights"</span>, <span class="st">"importance"</span>)
+      )
+    },
+
+    <span class="dt">train =</span> <span class="cf">function</span>(task) {
+    
+    },
+    <span class="dt">predict =</span> <span class="cf">function</span>(task) {
+  
+    }
+  )
+)</code></pre></div>
+</div>
+<div id="the-parameter-set" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-parameter-set" class="anchor"></a>The Parameter Set</h2>
+<p>The parameter set must be specified as a <code>ParamSet</code> object from the package <code>paradox</code>, the rewrite of <code>paramhelpers</code>. <!-- FIXME add some text --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LearnerRegrRanger =<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">"LearnerRegrRanger"</span>, <span class="dt">inherit =</span> LearnerRegr,
+  <span class="dt">public =</span> <span class="kw">list</span>(
+    <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">id =</span> <span class="st">"regr.ranger"</span>) {
+      super<span class="op">$</span><span class="kw">initialize</span>(
+        <span class="dt">id =</span> id,
+        <span class="dt">packages =</span> <span class="st">"ranger"</span>,
+        <span class="dt">feature_types =</span> <span class="kw">c</span>(<span class="st">"logical"</span>, <span class="st">"integer"</span>, <span class="st">"numeric"</span>, <span class="st">"character"</span>, <span class="st">"factor"</span>, <span class="st">"ordered"</span>),
+        <span class="dt">predict_types =</span> <span class="kw">c</span>(<span class="st">"response"</span>, <span class="st">"se"</span>),
+        <span class="dt">param_set =</span> ParamSet<span class="op">$</span><span class="kw">new</span>(
+          <span class="dt">params =</span> <span class="kw">list</span>(
+            ParamInt<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"num.trees"</span>, <span class="dt">default =</span> 500L, <span class="dt">lower =</span> 1L, <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">"train"</span>, <span class="st">"predict"</span>)),
+            ParamInt<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"mtry"</span>, <span class="dt">lower =</span> 1L, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamFct<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"importance"</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"none"</span>, <span class="st">"impurity"</span>, <span class="st">"impurity_corrected"</span>, <span class="st">"permutation"</span>), <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"write.forest"</span>, <span class="dt">default =</span> <span class="ot">TRUE</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamInt<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"min.node.size"</span>, <span class="dt">default =</span> 5L, <span class="dt">lower =</span> 1L, <span class="dt">tags =</span> <span class="st">"train"</span>), <span class="co"># for probability == TRUE, def = 10</span>
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"replace"</span>, <span class="dt">default =</span> <span class="ot">TRUE</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamDbl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"sample.fraction"</span>, <span class="dt">lower =</span> 0L, <span class="dt">upper =</span> 1L, <span class="dt">tags =</span> <span class="st">"train"</span>), <span class="co"># for replace == FALSE, def = 0.632</span>
+            ParamFct<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"splitrule"</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"variance"</span>, <span class="st">"extratrees"</span>, <span class="st">"maxstat"</span>), <span class="dt">default =</span> <span class="st">"variance"</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamInt<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"num.random.splits"</span>, <span class="dt">lower =</span> 1L, <span class="dt">default =</span> 1L, <span class="dt">tags =</span> <span class="st">"train"</span>), <span class="co"># requires = quote(splitrule == "extratrees")</span>
+            ParamDbl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"split.select.weights"</span>, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper =</span> <span class="dv">1</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamUty<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"always.split.variables"</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamFct<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"respect.unordered.factors"</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"ignore"</span>, <span class="st">"order"</span>, <span class="st">"partition"</span>), <span class="dt">default =</span> <span class="st">"ignore"</span>, <span class="dt">tags =</span> <span class="st">"train"</span>), <span class="co"># for splitrule == "extratrees", def = partition</span>
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"scale.permutation.importance"</span>, <span class="dt">default =</span> <span class="ot">FALSE</span>, <span class="dt">tags =</span> <span class="st">"train"</span>), <span class="co">#requires = quote(importance == "permutation")</span>
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"keep.inbag"</span>, <span class="dt">default =</span> <span class="ot">FALSE</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"holdout"</span>, <span class="dt">default =</span> <span class="ot">FALSE</span>, <span class="dt">tags =</span> <span class="st">"train"</span>), 
+            ParamInt<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"num.threads"</span>, <span class="dt">lower =</span> 1L, <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">"train"</span>, <span class="st">"predict"</span>)),
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"save.memory"</span>, <span class="dt">default =</span> <span class="ot">FALSE</span>, <span class="dt">tags =</span> <span class="st">"train"</span>),
+            ParamLgl<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"verbose"</span>, <span class="dt">default =</span> <span class="ot">TRUE</span>, <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">"train"</span>, <span class="st">"predict"</span>)),
+            ParamInt<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"seed"</span>, <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">"train"</span>, <span class="st">"predict"</span>))
+          )
+        ),
+        <span class="dt">properties =</span> <span class="kw">c</span>(<span class="st">"weights"</span>, <span class="st">"importance"</span>)
+      )
+    },
+
+    <span class="dt">train =</span> <span class="cf">function</span>(task) {
+    
+    },
+    <span class="dt">predict =</span> <span class="cf">function</span>(task) {
+  
+    }
+  )
+)</code></pre></div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li>
+<a href="#step-by-step-guide">Step-By-Step Guide</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#specifying-basic-information">Specifying Basic Information</a></li>
+      <li><a href="#the-parameter-set">The Parameter Set</a></li>
+      </ul>
+</li>
+      </ul>
+</div>
       </div>
 
 </div>

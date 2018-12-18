@@ -8,4 +8,124 @@ vignette: >
 editor_options: 
   chunk_output_type: console
 ---
-Hello World
+# Step-By-Step Guide
+To implement a regression learner, you have to create an R6 reference object, which inherits from `LeanerRegr`.
+
+Here we show step-by-step how we implemented the random forest algorithm from `ranger`.
+Basically, we need to put information about the learner's name, package, parameter set, properties and how to use the learner's `train` and `predict` function into the following skeleton:
+
+
+```{r, eval = FALSE}
+LearnerRegrYourLearner = R6Class("LearnerRegrYourLearner", inherit = LearnerRegr,
+  public = list(
+    initialize = function(id = "regr.yourlearner") {
+      super$initialize(
+        id = id,
+        packages = ,
+        feature_types = ,
+        predict_types = ,
+        param_set = ParamSet$new(
+          params = list()
+        ),
+        properties = 
+      )
+    },
+
+    train = function(task) {
+    
+    },
+    predict = function(task) {
+  
+    }
+  )
+)
+```
+
+```{r, echo = FALSE}
+library(mlr3)
+df = data.frame(field = c("id", "packages", "features_types", "predict_types", "param_set", "properties"), "possible_values" = c("id", "package name as character variable",
+  paste(mlr3::mlr_reflections$task_feature_types, collapse = ","), paste(mlr3::mlr_reflections$predict_types$regr, collapse = ","), "ParamSet from the package paradox", paste(mlr3::mlr_reflections$learner_properties$regr, collapse = ",")))
+```
+
+## Specifying Basic Information
+```{r, echo = FALSE}
+knitr::kable(df, col.names = c("Field", "Possible Values"))
+```
+
+First we need to define the learner's name and unique identifier. Here we called the learner `ranger`. We use camel case for the R6 object's name and lower case for the id. Available feature types, predict types and properties can be found in the table above. With the exception of the `id` and `param_set`, the information must be written as character vectors:
+
+```{r, eval = FALSE}
+LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
+  public = list(
+    initialize = function(id = "regr.ranger") {
+      super$initialize(
+        id = id,
+        packages = "ranger",
+        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        predict_types = c("response", "se"),
+        param_set = ParamSet$new(
+          params = list()
+        ),
+        properties = c("weights", "importance")
+      )
+    },
+
+    train = function(task) {
+    
+    },
+    predict = function(task) {
+  
+    }
+  )
+)
+```
+
+## The Parameter Set
+The parameter set must be specified as a `ParamSet` object from the package `paradox`, the rewrite of `paramhelpers`. 
+<!-- FIXME add some text -->
+
+```{r, eval = FALSE}
+LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
+  public = list(
+    initialize = function(id = "regr.ranger") {
+      super$initialize(
+        id = id,
+        packages = "ranger",
+        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        predict_types = c("response", "se"),
+        param_set = ParamSet$new(
+          params = list(
+            ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
+            ParamInt$new(id = "mtry", lower = 1L, tags = "train"),
+            ParamFct$new(id = "importance", values = c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
+            ParamLgl$new(id = "write.forest", default = TRUE, tags = "train"),
+            ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
+            ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
+            ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
+            ParamFct$new(id = "splitrule", values = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
+            ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
+            ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
+            ParamUty$new(id = "always.split.variables", tags = "train"),
+            ParamFct$new(id = "respect.unordered.factors", values = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
+            ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), #requires = quote(importance == "permutation")
+            ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
+            ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), 
+            ParamInt$new(id = "num.threads", lower = 1L, tags = c("train", "predict")),
+            ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
+            ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
+            ParamInt$new(id = "seed", tags = c("train", "predict"))
+          )
+        ),
+        properties = c("weights", "importance")
+      )
+    },
+
+    train = function(task) {
+    
+    },
+    predict = function(task) {
+  
+    }
+  )
+)
+```
