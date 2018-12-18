@@ -46,7 +46,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       self$model = invoke(ranger::ranger,
         formula = task$formula,
         data = task$data(),
-        probability = self$predict_type == "prob",
         case.weights = NULL, # FIXME: task$weights,
         .args = pars
       )
@@ -56,18 +55,20 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     predict = function(task) {
       pars = self$params_predict
       newdata = task$data()
-      preds = invoke(predict, self$model, data = newdata,
-        predict.type = "response", .args = pars)
 
       if (self$predict_type == "response") {
+        preds = invoke(predict, self$model, data = newdata,
+          type = "response", .args = pars)
         response = preds$predictions
-        prob = NULL
+        se = NULL
       } else {
-        response = NULL
-        prob = preds$predictions
+        preds = invoke(predict, self$model, data = newdata,
+          type = "se", .args = pars)
+        response = preds$predictions
+        se = preds$se
       }
 
-      PredictionClassif$new(task, response, prob)
+      PredictionRegr$new(task, response, se)
     },
 
     importance = function() {
