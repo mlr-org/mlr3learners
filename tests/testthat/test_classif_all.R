@@ -1,26 +1,14 @@
 context("classif learners")
 
 test_that("learner construction", {
-  learners_string = grep("classif.", mlr_learners$keys(), value = TRUE)
-  learners_string = setdiff(learners_string, "classif.debug")
+  learners_string = getLearnersByType("classif")
   learners = characterToLearner(learners_string)
 
   for (id in learners_string) expect_learner(learners[[id]])
 })
 
-testTrainPredict = function(id, task, learners) {
-  e = Experiment$new(task, learners[[id]])
-  e$train()
-  expect_false(e$has_errors, info = id)
-  e$predict()
-  expect_class(e$prediction, "Prediction", info = id)
-  e$score()
-  expect_number(e$performance, info = id)
-}
-
 test_that("simple train/predict multiclass", {
-  learners_string = grep("classif.", mlr_learners$keys(), value = TRUE)
-  learners_string = setdiff(learners_string, "classif.debug")
+  learners_string = getLearnersByType("classif")
   learners_string = filterLearnerByProperties(learners_string, "multiclass")
   learners = characterToLearner(learners_string)
 
@@ -31,8 +19,7 @@ test_that("simple train/predict multiclass", {
 })
 
 test_that("simple train/predict twoclass", {
-  learners_string = grep("classif.", mlr_learners$keys(), value = TRUE)
-  learners_string = setdiff(learners_string, "classif.debug")
+  learners_string = getLearnersByType("classif")
   learners_string = filterLearnerByProperties(learners_string, "twoclass")
   learners = characterToLearner(learners_string)
 
@@ -43,8 +30,7 @@ test_that("simple train/predict twoclass", {
 })
 
 test_that("simple train/predict with probs multiclass", {
-  learners_string = grep("classif.", mlr_learners$keys(), value = TRUE)
-  learners_string = setdiff(learners_string, "classif.debug")
+  learners_string = getLearnersByType("classif")
   learners_string = filterLearnerByProperties(learners_string, "multiclass")
   learners_string = filterLearnerByPredicttype(learners_string, "prob")
   learners = characterToLearner(learners_string)
@@ -57,8 +43,7 @@ test_that("simple train/predict with probs multiclass", {
 })
 
 test_that("simple train/predict with probs twoclass", {
-  learners_string = grep("classif.", mlr_learners$keys(), value = TRUE)
-  learners_string = setdiff(learners_string, "classif.debug")
+  learners_string = getLearnersByType("classif")
   learners_string = filterLearnerByProperties(learners_string, "twoclass")
   learners_string = filterLearnerByPredicttype(learners_string, "prob")
   learners = characterToLearner(learners_string)
