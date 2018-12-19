@@ -3,6 +3,7 @@
 export(LearnerClassifGlmnet)
 export(LearnerClassifLogReg)
 export(LearnerClassifRanger)
+export(LearnerRegrRanger)
 import(data.table, except = transpose)
 import(mlr3misc)
 import(paradox)
