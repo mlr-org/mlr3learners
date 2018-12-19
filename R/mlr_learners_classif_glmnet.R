@@ -10,7 +10,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       super$initialize(
         id = id,
         packages = "glmnet",
-        feature_types = c("integer", "numeric"),
+        feature_types = c("integer", "numeric"),  
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
@@ -88,7 +88,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         )
 
         if (length(task$class_names) == 2L) {
-          prob = set_names(cbind(1 - prob, prob), task$class_names)
+          prob = cbind(prob, 1 - prob)
+          colnames(prob) = task$class_names
         } else {
           prob = prob[, , 1]
         }

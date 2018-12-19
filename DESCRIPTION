@@ -26,6 +26,7 @@ Suggests:
     mlbench,
     rpart,
     ranger,
+    glmnet,
     testthat,
     knitr,
     rmarkdown
