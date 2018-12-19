@@ -4,12 +4,17 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 
 filterLearnerByProperties = function(x, properties = character()) {
   learners = setNames(lapply(x, mlr_learners$get), x)
-  x[unlist(lapply(learners, function(x) properties %in% x$properties))]
+  x[unlist(lapply(learners, function(x) all(properties %in% x$properties)))]
 }
 
-filterLearnerByPredicttype = function(x, predict_type = character()) {
+filterLearnerByPredictType = function(x, predict_types = character()) {
   learners = setNames(lapply(x, mlr_learners$get), x)
-  x[unlist(lapply(learners, function(x) predict_type %in% x$predict_types))]
+  x[unlist(lapply(learners, function(x) all(predict_types %in% x$predict_types)))]
+}
+
+filterLearnerByFeatureType = function(x, feature_types = character()) {
+  learners = setNames(lapply(x, mlr_learners$get), x)
+  x[unlist(lapply(learners, function(x) all(feature_types %in% x$feature_types)))]
 }
 
 characterToLearner = function(x) {
