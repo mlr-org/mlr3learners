@@ -27,6 +27,7 @@ Suggests:
     rpart,
     ranger,
     glmnet,
+    xgboost,
     testthat,
     knitr,
     rmarkdown
