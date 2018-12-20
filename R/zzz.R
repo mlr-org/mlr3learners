@@ -13,5 +13,6 @@
   mlr_learners$add("classif.xgboost", LearnerClassifXgboost)
 
   # regression learners
+  mlr_learners$add("regr.lm", LearnerRegrLm)
   mlr_learners$add("regr.ranger", LearnerRegrRanger)
 }
