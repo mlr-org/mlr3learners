@@ -20,10 +20,17 @@ Imports:
     mlr3,
     mlr3misc,
     paradox,
-    R6
+    R6,
+    checkmate (>= 1.8.9)
 Suggests:
+    mlbench,
+    rpart,
     ranger,
-    testthat
+    glmnet,
+    xgboost,
+    testthat,
+    knitr,
+    rmarkdown
 Remotes:
     mlr-org/mlr3,
     mlr-org/paradox
@@ -32,3 +39,4 @@ Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

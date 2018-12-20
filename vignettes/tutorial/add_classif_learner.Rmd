@@ -1,0 +1,11 @@
+---
+title: "Add a Classification Learner"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mlr3learners}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+Hello World

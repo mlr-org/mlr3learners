@@ -8,3 +8,5 @@
 ^\.Rproj\.user$
 ^man-roxygen$
 ^attic$
+^docs$
+^_pkgdown.yml$
