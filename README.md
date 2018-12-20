@@ -21,7 +21,6 @@ It's still work in progress.
 | Random Forest									| ranger 					 | x							| x						|
 | Boosting											| xgboost 				 | x							| 						|
 | Kriging												| DiceKriging 		 | 								| 						|
-| Neural Network								| keras 					 | 								| 						|
 
 
 How to add a learner: [Tutorial](https://mlr-org.github.io/mlr3learners/index.html)
