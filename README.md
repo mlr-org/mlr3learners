@@ -8,4 +8,20 @@
 This packages includes all recommended learners for [mlr3](https://mlr3.mlr-org.com).
 It's still work in progress.
 
+### Planned/Implemented learners
+
+ 
+| Name													| package 				 | Classification	| Regression	|
+|:------------------------------|:-----------------| ---------------|-------------|
+| Linear / Logistic Regression	| stats 					 | x							| 						|
+| Penalized Regression					| glmnet 					 | x							| 						|
+| kNN														| kknn 						 | 								| 						|
+| Naive Bayes										| e1071 					 | 								| 						|
+| SVM														| e1071 					 | 								| 						|
+| Random Forest									| ranger 					 | x							| x						|
+| Boosting											| xgboost 				 | x							| 						|
+| Kriging												| DiceKriging 		 | 								| 						|
+| Neural Network								| keras 					 | 								| 						|
+
+
 How to add a learner: [Tutorial](https://mlr-org.github.io/mlr3learners/index.html)
