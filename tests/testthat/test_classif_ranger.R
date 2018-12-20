@@ -1,7 +1,7 @@
 context("classif.ranger")
 
 test_that("classif.ranger registration", {
-  expect_subset("classif.ranger", mlr_learners$keys())
+  expect_subset("classif.ranger", mlr_learners$ids())
 })
 
 test_that("classif.ranger construction", {
