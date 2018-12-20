@@ -40,6 +40,10 @@ LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
       }
 
       PredictionRegr$new(task, response, se)
+    },
+
+    plot = function() {
+      plot(self$model)
     }
   )
 )
