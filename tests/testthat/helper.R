@@ -3,7 +3,7 @@ library(mlr3)
 lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.*\\.[rR]", full.names = TRUE), source)
 
 getLearnersByType = function(type) {
-	l = grep(paste0(type, "."), mlr_learners$keys(), value = TRUE)
+	l = grep(paste0(type, "."), mlr_learners$ids(), value = TRUE)
   return(setdiff(l, "classif.debug"))
 }
 
