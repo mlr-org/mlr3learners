@@ -7,10 +7,16 @@
     <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr3learners-package.html</loc>
   </url>
   <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr_learners_classif_glmnet.html</loc>
+  </url>
+  <url>
     <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr_learners_classif_logreg.html</loc>
   </url>
   <url>
     <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr_learners_classif_ranger.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/reference/mlr_learners_classif_xgboost.html</loc>
   </url>
   <url>
     <loc>https://mlr-org.github.io/mlr3learners/docs/index.html/articles/mlr3learners.html</loc>
