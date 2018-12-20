@@ -1,19 +1,20 @@
-#' @title Classification GLM with Elastic net Regularization
-#' @name mlr_learners_classif_glmnet
-#' @format [R6::R6Class()] inheriting from [LearnerClassif].
+#' @title Regression GLM with Elastic net Regularization
+#' @name mlr_learners_regr_glmnet
+#' @format [R6::R6Class()] inheriting from [LearnerRegr].
 #' @description
-#' A learner for a classification GLM with elastic net regularization implemented in [glmnet::glmnet()].
+#' A learner for a regression GLM with elastic net regularization implemented in [glmnet::glmnet()].
 #' @export
-LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
+LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "classif.glmnet") {
+    initialize = function(id = "regr.glmnet") {
       super$initialize(
         id = id,
         packages = "glmnet",
         feature_types = c("integer", "numeric"),
-        predict_types = c("response", "prob"),
+        predict_types = c("response"),
         param_set = ParamSet$new(
           params = list(
+            ParamFct$new(id = "family", default = "gaussian", values = c("gaussian", "poisson")),
             ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),
             ParamInt$new(id = "nfolds", default = 10L, lower = 3L),
             ParamUty$new(id = "foldid"),
@@ -47,8 +48,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
           )
         ),
-        param_vals = list(),
-        properties = c("weights", "twoclass", "multiclass")
+        param_vals = list(family = "gaussian"),
+        properties = c("weights")
       )
     },
 
@@ -57,8 +58,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
       if (!is.null(task$weights))
-         pars$weights = task$weights # FIXME: weights are not implemented in the task yet
-      pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
+        pars$weights = task$weights
 
       glmnet::glmnet.control(factory = TRUE)
       saved_ctrl = glmnet::glmnet.control()
@@ -81,33 +81,13 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
     predict = function(task) {
       pars = self$params_predict
       newdata = as.matrix(task$data(cols = task$feature_names))
-      response = prob = NULL
+      response = drop(invoke(predict,
+        self$model,
+        newx = newdata,
+        type = "response",
+        .args = pars))
 
-      if (self$predict_type == "prob") {
-        prob = invoke(predict,
-          self$model,
-          newx = newdata,
-          type = "response",
-          .args = pars
-        )
-
-        if (length(task$class_names) == 2L) {
-          prob = cbind(prob, 1 - prob)
-          colnames(prob) = task$class_names
-        } else {
-          prob = prob[, , 1]
-        }
-      } else {
-        response = drop(invoke(predict,
-          self$model,
-          newx = newdata,
-          type = "class",
-          .args = pars)
-        )
-        response = as.factor(response)
-      }
-
-      PredictionClassif$new(task, response, prob)
+      PredictionRegr$new(task, response)
     }
   )
 )
