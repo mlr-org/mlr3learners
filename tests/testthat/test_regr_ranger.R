@@ -1,6 +1,7 @@
-context("classif.ranger")
+context("regr.ranger")
 
-test_that("classif.ranger test feature types", {
-  lrn = LearnerClassifRanger$new()
+test_that("regr.ranger test feature types", {
+  lrn = LearnerRegrRanger$new()
+  lrn$param_vals = list(keep.inbag = TRUE)
   test_learner(lrn)
 })
