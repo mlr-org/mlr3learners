@@ -1,6 +1,6 @@
-context("classif.ranger")
+context("classif.xgboost")
 
-test_that("classif.ranger test feature types", {
-  lrn = LearnerClassifRanger$new()
+test_that("classif.xgboost test feature types", {
+  lrn = LearnerClassifXgboost$new()
   test_learner(lrn)
 })
