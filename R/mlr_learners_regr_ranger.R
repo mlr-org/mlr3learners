@@ -44,7 +44,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     train = function(task) {
       pars = self$params_train
       self$model = invoke(ranger::ranger,
-        formula = task$formula,
+        dependent.variable.name = task$target_names,
         data = task$data(),
         case.weights = NULL, # FIXME: task$weights,
         .args = pars

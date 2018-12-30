@@ -44,7 +44,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
     train = function(task) {
       pars = self$params_train
       self$model = invoke(ranger::ranger,
-        formula = task$formula,
+        dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
         case.weights = NULL, # FIXME: task$weights,
@@ -75,7 +75,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         stopf("No model stored")
       if (self$model$importance.mode == "none")
         stopf("No importance stored")
-      
+
       setorderv(enframe(self$model$variable.importance), "value", order = -1L)[]
     }
   )
