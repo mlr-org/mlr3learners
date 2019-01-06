@@ -15,12 +15,12 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
         param_set = ParamSet$new(
           params = list()
         ),
-        properties = c("weights", "twoclass", "missings")
+        properties = c("weights", "twoclass")
       )
     },
 
     train = function(task) {
-      self$model = invoke(stats::glm, 
+      self$model = invoke(stats::glm,
         formula = task$formula,
         data = task$data(),
         family = "binomial"
