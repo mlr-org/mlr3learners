@@ -19,7 +19,7 @@ It's still work in progress.
 | Naive Bayes										| e1071 					 | 								| 						|
 | SVM														| e1071 					 | 								| 						|
 | Random Forest									| ranger 					 | x							| x						|
-| Boosting											| xgboost 				 | x							| 						|
+| Boosting											| xgboost 				 | x							| x						|
 | Kriging												| DiceKriging 		 | 								| 						|
 
 
