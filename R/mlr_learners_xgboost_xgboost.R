@@ -11,7 +11,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         id = id,
         packages = "xgboost",
         feature_types = c("integer", "numeric"),
-        predict_types = c("response", "prob"),
+        predict_types = c("response"),
         param_set = ParamSet$new(
           params = list(
             # we pass all of what goes in 'params' directly to ... of xgboost
@@ -71,7 +71,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = target)
+      pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
       
       # if (!is.null(task$weights)) # FIXME: weights are not implemented in the task yet
       #   xgboost::setinfo(pars$data, "weight", task$weights)
@@ -95,7 +95,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         .args = pars
       )
       
-      PredictionRegr$new(task, response, se)
+      PredictionRegr$new(task, response)
     },
     
     importance = function() {

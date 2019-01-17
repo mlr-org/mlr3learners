@@ -15,6 +15,6 @@
   # regression learners
   mlr_learners$add("regr.lm", LearnerRegrLm)
   mlr_learners$add("regr.ranger", LearnerRegrRanger)
-  mlr_learners$add("regr.glmnet", LearnerRegrRanger)
-  mlr_learners$add("regr.xgboost", LearnerRegrRanger)
+  mlr_learners$add("regr.glmnet", LearnerRegrGlmnet)
+  mlr_learners$add("regr.xgboost", LearnerRegrXgboost)
 }
