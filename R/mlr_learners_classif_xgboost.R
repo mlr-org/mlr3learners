@@ -86,9 +86,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       if (is.null(pars$watchlist))
         pars$watchlist = list(train = pars$data)
 
-      self$model = invoke(xgboost::xgb.train,
-        .args = pars
-      )
+      self$model = invoke(xgboost::xgb.train, .args = pars)
       self
     },
 
@@ -96,7 +94,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       response = prob = NULL
       pars = self$params_predict
       newdata = task$data(cols = task$feature_names)
-      cls = task$class_names
+      cls = task$all_classes
       nc = length(cls)
       obj = pars$objective
 
@@ -104,7 +102,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         pars$objective = ifelse(nc == 2L, "binary:logistic", "multi:softprob")
 
       pred = invoke(predict,
-        self$model, 
+        self$model,
         newdata = data.matrix(newdata),
         .args = pars
       )
@@ -121,14 +119,12 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
           prob[, 2L] = pred
         }
         if (self$predict_type == "response") {
-          reponse = colnames(prob)[max.col(prob)]
-          names(pred) = NULL
-          response = factor(pred, levels = colnames(prob))
+          response = colnames(prob)[max.col(prob)]
+          response = factor(response, levels = cls)
         }
       } else { #multiclass
         if (pars$objective  == "multi:softmax") {
-          response = as.factor(pred) #special handling for multi:softmax which directly predicts class levels
-          levels(response) = cls
+          response = factor(as.character(pred), levels = cls)
         } else {
           pred = matrix(pred, nrow = length(pred) / nc, ncol = nc, byrow = TRUE)
           colnames(pred) = cls
@@ -136,8 +132,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
             prob = pred
           } else {
             ind = max.col(pred)
-            cns = colnames(pred)
-            response = factor(cns[ind], levels = cns)
+            response = factor(cls[ind], levels = cls)
           }
         }
       }
@@ -148,7 +143,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     importance = function() {
       if (is.null(self$model))
         stopf("No model stored")
-      
+
       imp = xgboost::xgb.importance(
         feature_names = self$model$features,
         model = self$model
