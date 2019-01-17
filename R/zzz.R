@@ -7,12 +7,14 @@
 
 .onLoad = function(libname, pkgname) {
   # classification learners
-  mlr_learners$add("classif.ranger", LearnerClassifRanger)
   mlr_learners$add("classif.logreg", LearnerClassifLogReg)
+  mlr_learners$add("classif.ranger", LearnerClassifRanger)
   mlr_learners$add("classif.glmnet", LearnerClassifGlmnet)
   mlr_learners$add("classif.xgboost", LearnerClassifXgboost)
 
   # regression learners
   mlr_learners$add("regr.lm", LearnerRegrLm)
   mlr_learners$add("regr.ranger", LearnerRegrRanger)
+  mlr_learners$add("regr.glmnet", LearnerRegrRanger)
+  mlr_learners$add("regr.xgboost", LearnerRegrRanger)
 }

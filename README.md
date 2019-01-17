@@ -14,7 +14,7 @@ It's still work in progress.
 | Name													| package 				 | Classification	| Regression	|
 |:------------------------------|:-----------------| :-------------:|:-----------:|
 | Linear / Logistic Regression	| stats 					 | x							| x						|
-| Penalized Regression					| glmnet 					 | x							| 						|
+| Penalized Regression					| glmnet 					 | x							| x						|
 | kNN														| kknn 						 | 								| 						|
 | Naive Bayes										| e1071 					 | 								| 						|
 | SVM														| e1071 					 | 								| 						|

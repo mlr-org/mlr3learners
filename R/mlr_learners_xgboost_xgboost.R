@@ -1,12 +1,12 @@
-#' @title Classification xgboost Learner
-#' @name mlr_learners_classif_xgboost
-#' @format [R6::R6Class()] inheriting from [LearnerClassif].
+#' @title Regression xgboost Learner
+#' @name mlr_learners_regr_xgboost
+#' @format [R6::R6Class()] inheriting from [LearnerRegr].
 #' @description
-#' An eXtreme Gradient Boosting learner for classification, implemented in [xgboost::xgb.train()].
+#' An eXtreme Gradient Boosting learner for regression, implemented in [xgboost::xgb.train()].
 #' @export
-LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
+LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "classif.xgboost") {
+    initialize = function(id = "regr.xgboost") {
       super$initialize(
         id = id,
         packages = "xgboost",
@@ -29,8 +29,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
             ParamDbl$new(id = "lambda", default = 1, lower = 0, tags = "train"),
             ParamDbl$new(id = "lambda_bias", default = 0, lower = 0, tags = "train"),
             ParamDbl$new(id = "alpha", default = 0, lower = 0, tags = "train"),
-            ParamUty$new(id = "objective", default = "binary:logistic", tags = c("train", "predict")),
-            ParamUty$new(id = "eval_metric", default = "error", tags = "train"),
+            ParamUty$new(id = "objective", default = "reg:linear", tags = c("train", "predict")),
+            ParamUty$new(id = "eval_metric", default = "rmse", tags = "train"),
             ParamDbl$new(id = "base_score", default = 0.5, tags = "train"),
             ParamDbl$new(id = "max_delta_step", lower = 0, default = 0, tags = "train"),
             ParamDbl$new(id = "missing", default = NA, tags = c("train", "predict"),
@@ -59,92 +59,45 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
           )
         ),
         param_vals = list(nrounds = 1L, verbose = 0L),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance")
+        properties = c("weights", "missings", "importance")
       )
     },
-
+    
     train = function(task) {
       pars = self$params_train
-
+      
       if (is.null(pars$objective))
-        pars$objective = ifelse(length(task$class_names) == 2L, "binary:logistic", "multi:softprob")
-
-      if (self$predict_type == "prob" && pars$objective == "multi:softmax")
-        stop("objective = 'multi:softmax' does not work with predict_type = 'prob'")
-
-      #if we use softprob or softmax as objective we have to add the number of classes 'num_class'
-      if (pars$objective %in% c("multi:softprob", "multi:softmax"))
-        pars$num_class = length(task$class_names)
-
+        pars$objective = "reg:linear"
+      
       data = task$data(cols = task$feature_names)
-      label = match(as.character(as.matrix(task$data(cols = task$target_names))), task$class_names) - 1
-      pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
-
+      target = task$data(cols = task$target_names)
+      pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = target)
+      
       # if (!is.null(task$weights)) # FIXME: weights are not implemented in the task yet
-        # xgboost::setinfo(pars$data, "weight", task$weights)
-
+      #   xgboost::setinfo(pars$data, "weight", task$weights)
+      
       if (is.null(pars$watchlist))
         pars$watchlist = list(train = pars$data)
-
+      
       self$model = invoke(xgboost::xgb.train,
         .args = pars
       )
       self
     },
-
+    
     predict = function(task) {
-      response = prob = NULL
       pars = self$params_predict
       newdata = task$data(cols = task$feature_names)
-      cls = task$class_names
-      nc = length(cls)
-      obj = pars$objective
-
-      if (is.null(obj))
-        pars$objective = ifelse(nc == 2L, "binary:logistic", "multi:softprob")
-
-      pred = invoke(predict,
+      
+      response = invoke(predict,
         self$model, 
         newdata = data.matrix(newdata),
         .args = pars
       )
-
-
-      if (nc == 2L) { #binaryclass
-        if (pars$objective == "multi:softprob") {
-          prob = matrix(pred, nrow = length(pred) / nc, ncol = nc, byrow = TRUE)
-          colnames(prob) = cls
-        } else {
-          prob = matrix(0, ncol = 2, nrow = nrow(newdata))
-          colnames(prob) = cls
-          prob[, 1L] = 1 - pred
-          prob[, 2L] = pred
-        }
-        if (self$predict_type == "response") {
-          reponse = colnames(prob)[max.col(prob)]
-          names(pred) = NULL
-          response = factor(pred, levels = colnames(prob))
-        }
-      } else { #multiclass
-        if (pars$objective  == "multi:softmax") {
-          response = as.factor(pred) #special handling for multi:softmax which directly predicts class levels
-          levels(response) = cls
-        } else {
-          pred = matrix(pred, nrow = length(pred) / nc, ncol = nc, byrow = TRUE)
-          colnames(pred) = cls
-          if (self$predict_type == "prob") {
-            prob = pred
-          } else {
-            ind = max.col(pred)
-            cns = colnames(pred)
-            response = factor(cns[ind], levels = cns)
-          }
-        }
-      }
-
-      PredictionClassif$new(task, response, prob)
+      
+      PredictionRegr$new(task, response, se)
     },
-
+    
     importance = function() {
       if (is.null(self$model))
         stopf("No model stored")
