@@ -4,12 +4,12 @@
 \name{mlr_learners_classif_glmnet}
 \alias{mlr_learners_classif_glmnet}
 \alias{LearnerClassifGlmnet}
-\title{Classification GLM with Lasso or Elasticnet Regularization Learner}
+\title{Classification GLM with Elastic net Regularization}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{LearnerClassif}.}
 \usage{
 LearnerClassifGlmnet
 }
 \description{
-A learner for a classification logistic regression implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+A learner for a classification GLM with elastic net regularization implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
 }
 \keyword{datasets}
