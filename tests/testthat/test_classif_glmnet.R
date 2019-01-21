@@ -1,6 +1,5 @@
 context("classif.glmnet")
-
 test_that("classif.glmnet test feature types", {
-  lrn = LearnerClassifGlmnet$new()
-  expect_autotest(lrn, exclude = c("feat_single"))
+  learner = LearnerClassifGlmnet$new()
+  expect_autotest(learner, exclude = "(feat_single|sanity)")
 })
