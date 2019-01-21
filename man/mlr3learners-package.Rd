@@ -20,4 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Michel Lang \email{michellang@gmail.com} (0000-0001-9754-0393)
 
+Authors:
+\itemize{
+  \item Quay Au \email{quayau@gmail.com} (0000-0002-5252-8902)
+  \item Stefan Coors \email{mail@stefancoors.de} (0000-0002-7465-2146)
+}
+
 }

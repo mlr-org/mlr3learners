@@ -15,12 +15,12 @@ LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
         param_set = ParamSet$new(
           params = list()
         ),
-        properties = c("weights", "missings")
+        properties = c("weights")
       )
     },
 
     train = function(task) {
-      self$model = invoke(stats::lm, 
+      self$model = invoke(stats::lm,
         formula = task$formula,
         data = task$data()
       ) # FIXME: weights = task$weights
