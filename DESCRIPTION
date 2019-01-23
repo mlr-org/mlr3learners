@@ -14,21 +14,22 @@ Depends:
     R (>= 3.1.0)
 Imports:
     backports,
+    checkmate (>= 1.9.1),
     data.table,
     mlr3,
     mlr3misc,
     paradox,
-    R6,
-    checkmate (>= 1.8.9)
+    R6
 Suggests:
-    mlbench,
-    rpart,
-    ranger,
     glmnet,
-    xgboost,
-    testthat,
+    kknn,
     knitr,
-    rmarkdown
+    mlbench,
+    ranger,
+    rmarkdown,
+    rpart,
+    testthat,
+    xgboost
 Remotes:
     mlr-org/mlr3,
     mlr-org/paradox
