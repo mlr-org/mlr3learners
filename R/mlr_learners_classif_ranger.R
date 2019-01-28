@@ -76,7 +76,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       if (self$model$importance.mode == "none")
         stopf("No importance stored")
 
-      setorderv(enframe(self$model$variable.importance), "value", order = -1L)[]
+      sort(self$model$variable.importance, decreasing = TRUE)
     }
   )
 )

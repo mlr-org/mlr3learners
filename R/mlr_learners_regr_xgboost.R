@@ -62,52 +62,51 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         properties = c("weights", "missings", "importance")
       )
     },
-    
+
     train = function(task) {
       pars = self$params_train
-      
+
       if (is.null(pars$objective))
         pars$objective = "reg:linear"
-      
+
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
       pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
-      
+
       # if (!is.null(task$weights)) # FIXME: weights are not implemented in the task yet
       #   xgboost::setinfo(pars$data, "weight", task$weights)
-      
+
       if (is.null(pars$watchlist))
         pars$watchlist = list(train = pars$data)
-      
+
       self$model = invoke(xgboost::xgb.train,
         .args = pars
       )
       self
     },
-    
+
     predict = function(task) {
       pars = self$params_predict
       newdata = task$data(cols = task$feature_names)
-      
+
       response = invoke(predict,
-        self$model, 
+        self$model,
         newdata = data.matrix(newdata),
         .args = pars
       )
-      
+
       PredictionRegr$new(task, response)
     },
-    
+
     importance = function() {
       if (is.null(self$model))
         stopf("No model stored")
-      
+
       imp = xgboost::xgb.importance(
         feature_names = self$model$features,
         model = self$model
       )
-      fiv = imp$Gain
-      setNames(fiv, imp$Feature)
+      set_names(imp$Gain, imp$Feature)
     }
   )
 )
