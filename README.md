@@ -15,7 +15,7 @@ It's still work in progress.
 |:------------------------------|:-----------------| :-------------:|:-----------:|
 | Linear / Logistic Regression	| stats 					 | x							| x						|
 | Penalized Regression					| glmnet 					 | x							| x						|
-| kNN														| kknn 						 | 								| 						|
+| kNN														| kknn 						 | x							| x 					|
 | Naive Bayes										| e1071 					 | 								| 						|
 | SVM														| e1071 					 | 								| 						|
 | Random Forest									| ranger 					 | x							| x						|
