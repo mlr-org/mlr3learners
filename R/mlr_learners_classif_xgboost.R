@@ -6,9 +6,9 @@
 #' @export
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.xgboost") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.xgboost",
         packages = "xgboost",
         feature_types = c("integer", "numeric"),
         predict_types = c("response", "prob"),

@@ -6,9 +6,9 @@
 #' @export
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.kknn") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.kknn",
         packages = "kknn",
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         predict_types = c("response", "prob"),
@@ -32,7 +32,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
 
     predict = function(task) {
       library("kknn") # -> https://github.com/KlausVigo/kknn/issues/16
-      m = invoke(kknn::kknn, formula = task$formula, train = self$model, test = task$data(), .args = self$params("predict"))
+      m = invoke(kknn::kknn, formula = task$formula, train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
       self$model = NULL
       PredictionClassif$new(task, response = m$fitted.values, prob = m$prob)
     }

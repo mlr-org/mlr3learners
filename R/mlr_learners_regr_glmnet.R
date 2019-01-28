@@ -6,9 +6,9 @@
 #' @export
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.glmnet") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.glmnet",
         packages = "glmnet",
         feature_types = c("integer", "numeric"),
         predict_types = c("response"),

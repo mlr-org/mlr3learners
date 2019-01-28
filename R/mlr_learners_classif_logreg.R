@@ -6,9 +6,9 @@
 #' @export
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.logreg") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.logreg",
         packages = "stats",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         predict_types = c("response", "prob"),

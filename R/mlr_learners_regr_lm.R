@@ -6,9 +6,9 @@
 #' @export
 LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.lm") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.lm",
         packages = "stats",
         feature_types = c("integer", "numeric", "factor"),
         predict_types = c("response", "se"),
@@ -28,7 +28,7 @@ LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
     },
 
     predict = function(task) {
-      newdata = task$data()
+      newdata = task$data(cols = task$feature_names)
       response = se = NULL
 
       if (self$predict_type == "response") {

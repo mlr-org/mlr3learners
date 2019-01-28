@@ -6,9 +6,9 @@
 #' @export
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.ranger") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.ranger",
         packages = "ranger",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         predict_types = c("response", "se"),
@@ -54,7 +54,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
 
     predict = function(task) {
       pars = self$params("predict")
-      newdata = task$data()
+      newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
         preds = invoke(predict, self$model, data = newdata,
