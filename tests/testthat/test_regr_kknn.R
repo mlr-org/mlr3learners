@@ -1,6 +1,7 @@
 context("regr.kknn")
 
-test_that("regr.kknn autotest", {
+test_that("autotest", {
   learner = LearnerRegrKKNN$new()
-  expect_autotest(learner)
+  result = run_autotest(learner)
+  expect_true(result, info = result$error)
 })

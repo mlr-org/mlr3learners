@@ -1,6 +1,7 @@
 context("regr.glmnet")
 
-test_that("regr.glmnet test feature types", {
+test_that("autotest", {
   learner = LearnerRegrGlmnet$new()
-  expect_autotest(learner, exclude = "(feat_single|sanity)")
+  result = run_autotest(learner, exclude = "(feat_single|sanity)")
+  expect_true(result, info = result$error)
 })

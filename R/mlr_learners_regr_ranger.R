@@ -67,7 +67,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
         response = preds$predictions
         se = preds$se
       }
-
       PredictionRegr$new(task, response, se)
     },
 
