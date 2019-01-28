@@ -64,7 +64,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     train = function(task) {
-      pars = self$params_train
+      pars = self$params("train")
 
       if (is.null(pars$objective))
         pars$objective = ifelse(length(task$class_names) == 2L, "binary:logistic", "multi:softprob")
@@ -92,7 +92,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
     predict = function(task) {
       response = prob = NULL
-      pars = self$params_predict
+      pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
       cls = task$all_classes
       nc = length(cls)

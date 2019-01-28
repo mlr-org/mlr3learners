@@ -54,7 +54,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
     },
 
     train = function(task) {
-      pars = self$params_train
+      pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
       if (!is.null(task$weights))
@@ -79,7 +79,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
     },
 
     predict = function(task) {
-      pars = self$params_predict
+      pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       response = drop(invoke(predict,
         self$model,

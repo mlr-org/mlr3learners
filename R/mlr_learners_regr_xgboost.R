@@ -64,7 +64,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
     },
 
     train = function(task) {
-      pars = self$params_train
+      pars = self$params("train")
 
       if (is.null(pars$objective))
         pars$objective = "reg:linear"
@@ -86,7 +86,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
     },
 
     predict = function(task) {
-      pars = self$params_predict
+      pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
 
       response = invoke(predict,

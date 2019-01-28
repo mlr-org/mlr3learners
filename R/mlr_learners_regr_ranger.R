@@ -42,7 +42,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     },
 
     train = function(task) {
-      pars = self$params_train
+      pars = self$params("train")
       self$model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
@@ -53,7 +53,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     },
 
     predict = function(task) {
-      pars = self$params_predict
+      pars = self$params("predict")
       newdata = task$data()
 
       if (self$predict_type == "response") {

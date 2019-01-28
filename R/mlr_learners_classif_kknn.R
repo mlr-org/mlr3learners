@@ -32,7 +32,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
 
     predict = function(task) {
       library("kknn") # -> https://github.com/KlausVigo/kknn/issues/16
-      m = invoke(kknn::kknn, formula = task$formula, train = self$model, test = task$data(), .args = self$params_predict)
+      m = invoke(kknn::kknn, formula = task$formula, train = self$model, test = task$data(), .args = self$params("predict"))
       self$model = NULL
       PredictionClassif$new(task, response = m$fitted.values, prob = m$prob)
     }

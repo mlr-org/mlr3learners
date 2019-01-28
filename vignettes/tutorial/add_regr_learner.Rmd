@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{mlr3learners}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 # Step-By-Step Guide
@@ -27,15 +27,15 @@ LearnerRegrYourLearner = R6Class("LearnerRegrYourLearner", inherit = LearnerRegr
         param_set = ParamSet$new(
           params = list()
         ),
-        properties = 
+        properties =
       )
     },
 
     train = function(task) {
-    
+
     },
     predict = function(task) {
-  
+
     }
   )
 )
@@ -75,11 +75,11 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
 ```
 
 ## The Parameter Set
-The parameter set must be specified as a `ParamSet` object from the package `paradox`, the rewrite of `paramhelpers`. 
+The parameter set must be specified as a `ParamSet` object from the package `paradox`, the rewrite of `paramhelpers`.
 Depending on its type (integer, double, factor or logical), you can define the hyperparameters of a learner including value ranges, special values and their defaults.
-For parameters which do not fit in any of the mentioned types, you can define untyped parameters as well.  
+For parameters which do not fit in any of the mentioned types, you can define untyped parameters as well.
 Additionally, you can set a tag `train` or `predict`, whether the parameter is used for training or prediction.
-When used for both, you can simply insert a character vector including both tags. 
+When used for both, you can simply insert a character vector including both tags.
 
 ```{r, eval = FALSE}
 ...
@@ -99,7 +99,7 @@ param_set = ParamSet$new(
     ParamFct$new(id = "respect.unordered.factors", values = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratree= partition
     ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), #requires = quote(importance == "permutation")
     ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
-    ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), 
+    ParamLgl$new(id = "holdout", default = FALSE, tags = "train"),
     ParamInt$new(id = "num.threads", lower = 1L, tags = c("train", "predict")),
     ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
     ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
@@ -111,7 +111,7 @@ param_set = ParamSet$new(
 ## Train function
 After defining the learner's  general information, properties, prediction types and parameter space, its time to define the training function.
 This method only has the `task` object as input parameter.
-Within the function call you can access the hyperparameters used for training (defined by the tag in the parameter set) by `self$params_train`.
+Within the function call you can access the hyperparameters used for training (defined by the tag in the parameter set) by `self$params("train")`.
 Those parameters can be easily parsed to the learner specific training function.
 The function `invoke` by `mlr3misc` can be used to match the leaner's parameters to its training function.
 Note that some training functions require a formula (which can be accessed by `task$formula`) or a special data format.
@@ -120,7 +120,7 @@ At the end, the learner itself is returned.
 
 ```{r, eval = FALSE}
 train = function(task) {
-      pars = self$params_train
+      pars = self$params("train")
       self$model = invoke(ranger::ranger,
         formula = task$formula,
         data = task$data(),

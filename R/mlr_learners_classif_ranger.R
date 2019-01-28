@@ -42,7 +42,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
     },
 
     train = function(task) {
-      pars = self$params_train
+      pars = self$params("train")
       self$model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
@@ -54,7 +54,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
     },
 
     predict = function(task) {
-      pars = self$params_predict
+      pars = self$params("predict")
       newdata = task$data()
       preds = invoke(predict, self$model, data = newdata,
         predict.type = "response", .args = pars)
