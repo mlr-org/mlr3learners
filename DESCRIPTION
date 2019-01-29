@@ -28,6 +28,7 @@ Suggests:
     rmarkdown,
     rpart,
     testthat,
+    withr,
     xgboost
 Remotes:
     mlr-org/mlr3,

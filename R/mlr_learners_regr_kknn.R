@@ -9,7 +9,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
     initialize = function() {
       super$initialize(
         id = "regr.kknn",
-        packages = "kknn",
+        packages = c("withr", "kknn"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         predict_types = "response",
         param_set = ParamSet$new(
@@ -30,8 +30,9 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
     },
 
     predict = function(task) {
-      library("kknn") # -> https://github.com/KlausVigo/kknn/issues/16
-      m = invoke(kknn::kknn, formula = task$formula, train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
+      withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
+        m = invoke(kknn::kknn, formula = task$formula, train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
+      })
       self$model = NULL
       PredictionRegr$new(task, response = m$fitted.values)
     }
