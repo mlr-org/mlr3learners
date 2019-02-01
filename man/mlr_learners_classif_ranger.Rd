@@ -7,7 +7,7 @@
 \alias{LearnerClassifRanger}
 \alias{LearnerRegrRanger}
 \title{Classification Ranger Learner}
-\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{LearnerClassif}.}
+\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifRanger
 

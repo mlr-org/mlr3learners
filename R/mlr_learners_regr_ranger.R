@@ -1,6 +1,6 @@
 #' @title Regression Ranger Learner
 #' @name mlr_learners_classif_ranger
-#' @format [R6::R6Class()] inheriting from [LearnerClassif].
+#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #' @description
 #' A learner for a regression random forest implemented in [ranger::ranger()].
 #' @export

@@ -5,7 +5,7 @@
 \alias{mlr_learners_classif_kknn}
 \alias{LearnerClassifKKNN}
 \title{Classification k-Nearest-Neighbor Learner}
-\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{LearnerClassif}.}
+\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifKKNN
 }

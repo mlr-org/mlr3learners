@@ -5,7 +5,7 @@
 \alias{mlr_learners_regr_xgboost}
 \alias{LearnerRegrXgboost}
 \title{Regression xgboost Learner}
-\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{LearnerRegr}.}
+\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
 \usage{
 LearnerRegrXgboost
 }

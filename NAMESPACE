@@ -3,6 +3,7 @@
 export(LearnerClassifGlmnet)
 export(LearnerClassifKKNN)
 export(LearnerClassifLogReg)
+export(LearnerClassifNaiveBayes)
 export(LearnerClassifRanger)
 export(LearnerClassifXgboost)
 export(LearnerRegrGlmnet)

@@ -1,6 +1,6 @@
 #' @title Linear Regression Learner
 #' @name mlr_learners_regr_lm
-#' @format [R6::R6Class()] inheriting from [LearnerRegr].
+#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #' @description
 #' A learner for linear regression implemented in [stats::glm()].
 #' @export

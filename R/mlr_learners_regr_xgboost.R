@@ -1,6 +1,6 @@
 #' @title Regression xgboost Learner
 #' @name mlr_learners_regr_xgboost
-#' @format [R6::R6Class()] inheriting from [LearnerRegr].
+#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #' @description
 #' An eXtreme Gradient Boosting learner for regression, implemented in [xgboost::xgb.train()].
 #' @export
