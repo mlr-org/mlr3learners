@@ -32,14 +32,14 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       newdata = task$data(cols = task$feature_names)
       response = prob = NULL
 
-      pred = predict(self$model, newdata = newdata, type = "response")
-      levs = task$class_names
+      p = unname(predict(self$model, newdata = newdata, type = "response"))
+      levs = as.character(task$class_names)
 
+      if (self$predict_type == "response") {
+        response = ifelse(p < 0.5, levs[1L], levs[2L])
+      }
       if (self$predict_type == "prob") {
-        prob = propVectorToMatrix(pred, levs) # FIXME
-      } else {
-        p = as.factor(ifelse(pred > 0.5, levs[1L], levs[2L]))
-        response = unname(p)
+        prob = propVectorToMatrix(1 - p, levs)
       }
 
       PredictionClassif$new(task, response, prob)

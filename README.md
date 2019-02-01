@@ -10,17 +10,17 @@ It's still work in progress.
 
 ### Planned/Implemented learners
 
- 
-| Name													| package 				 | Classification	| Regression	|
-|:------------------------------|:-----------------| :-------------:|:-----------:|
-| Linear / Logistic Regression	| stats 					 | x							| x						|
-| Penalized Regression					| glmnet 					 | x							| x						|
-| kNN														| kknn 						 | x							| x 					|
-| Naive Bayes										| e1071 					 | 								| 						|
-| SVM														| e1071 					 | 								| 						|
-| Random Forest									| ranger 					 | x							| x						|
-| Boosting											| xgboost 				 | x							| x						|
-| Kriging												| DiceKriging 		 | 								| 						|
+
+| Name                          | package          | Classification  | Regression  |
+|:------------------------------|:-----------------| :-------------:|:------------:|
+| Linear / Logistic Regression  | stats            | x              | x            |
+| Penalized Regression          | glmnet           | x              | x            |
+| kNN                           | kknn             | x              | x            |
+| Naive Bayes                   | e1071            | x              | -            |
+| SVM                           | e1071            |                |              |
+| Random Forest                 | ranger           | x              | x            |
+| Boosting                      | xgboost          | x              | x            |
+| Kriging                       | DiceKriging      |                |              |
 
 
 How to add a learner: [Tutorial](https://mlr-org.github.io/mlr3learners/index.html)
