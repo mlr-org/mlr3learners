@@ -6,17 +6,19 @@
 #' @export
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
-    initialize = function() {
+    initialize = function(id = "classif.naive_bayes", param_vals = list(), predict_type = "response") {
       super$initialize(
-        id = "classif.naive_bayes",
+        id = id,
         packages = "e1071",
         feature_types = c("logical", "integer", "numeric", "factor"),
+        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "laplace", default = 0, lower = 0, tags = "train")
           )
         ),
+        param_vals = param_vals,
         properties = c("twoclass", "multiclass")
       )
     },

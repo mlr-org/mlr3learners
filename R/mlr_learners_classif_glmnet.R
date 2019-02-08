@@ -6,18 +6,19 @@
 #' @export
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
   public = list(
-    initialize = function() {
+    initialize = function(id = "classif.glmnet", param_vals = list(), predict_type = "response") {
       super$initialize(
-        id = "classif.glmnet",
+        id = id,
         packages = "glmnet",
         feature_types = c("integer", "numeric"),
+        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),
             ParamInt$new(id = "nfolds", default = 10L, lower = 3L),
             ParamUty$new(id = "foldid"),
-            ParamFct$new(id = "type.measure", values = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
+            ParamFct$new(id = "type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
             ParamLgl$new(id = "grouped", default = TRUE),
             ParamLgl$new(id = "keep", default = FALSE),
             ParamUty$new(id = "s", default = "lambda.1se", tags = "predict"),
@@ -34,8 +35,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamUty$new(id = "lower.limits", tags = "train"),
             ParamUty$new(id = "upper.limits", tags = "train"),
             ParamInt$new(id = "maxit", default = 100000L, lower = 1L, tags = "train"),
-            ParamFct$new(id = "type.logistic", values = c("Newton", "modified.Newton"), tags = "train"),
-            ParamFct$new(id = "type.multinomial", values = c("ungrouped", "grouped"), tags = "train"),
+            ParamFct$new(id = "type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
+            ParamFct$new(id = "type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
             ParamDbl$new(id = "fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
@@ -47,7 +48,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
           )
         ),
-        param_vals = list(),
+        param_vals = param_vals,
         properties = c("weights", "twoclass", "multiclass")
       )
     },

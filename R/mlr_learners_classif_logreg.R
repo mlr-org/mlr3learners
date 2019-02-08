@@ -6,15 +6,17 @@
 #' @export
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
-    initialize = function() {
+    initialize = function(id = "classif.logreg", param_vals = list(), predict_type = "response") {
       super$initialize(
-        id = "classif.logreg",
+        id = id,
         packages = "stats",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list()
         ),
+        param_vals = param_vals,
         properties = c("weights", "twoclass")
       )
     },

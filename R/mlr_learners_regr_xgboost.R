@@ -6,17 +6,18 @@
 #' @export
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
-    initialize = function() {
+    initialize = function(id = "regr.xgboost", param_vals = list(nrounds = 1L, verbose = 0L), predict_type = "response") {
       super$initialize(
-        id = "regr.xgboost",
+        id = id,
         packages = "xgboost",
         feature_types = c("integer", "numeric"),
-        predict_types = c("response"),
+        predict_type = predict_type,
+        predict_types = "response",
         param_set = ParamSet$new(
           params = list(
             # we pass all of what goes in 'params' directly to ... of xgboost
             # ParamUty$new(id = "params", default = list()),
-            ParamFct$new(id = "booster", default = "gbtree", values = c("gbtree", "gblinear", "dart"), tags = "train"),
+            ParamFct$new(id = "booster", default = "gbtree", levels = c("gbtree", "gblinear", "dart"), tags = "train"),
             ParamUty$new(id = "watchlist", default = NULL, tags = "train"),
             ParamDbl$new(id = "eta", default = 0.3, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "gamma", default = 0, lower = 0, tags = "train"),
@@ -45,20 +46,20 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
             ParamInt$new(id = "print_every_n", default = 1L, lower = 1L, tags = "train"), #, requires = quote(verbose == 1L)
             ParamInt$new(id = "early_stopping_rounds", default = NULL, lower = 1L, special_vals = list(NULL), tags = "train"),
             ParamLgl$new(id = "maximize", default = NULL, special_vals = list(NULL), tags = "train"),
-            ParamFct$new(id = "sample_type", default = "uniform", values = c("uniform", "weighted"), tags = "train"), #, requires = quote(booster == "dart")
-            ParamFct$new(id = "normalize_type", default = "tree", values = c("tree", "forest"), tags = "train"), #, requires = quote(booster == "dart")
+            ParamFct$new(id = "sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"), #, requires = quote(booster == "dart")
+            ParamFct$new(id = "normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"), #, requires = quote(booster == "dart")
             ParamDbl$new(id = "rate_drop", default = 0, lower = 0, upper = 1, tags = "train"), #, requires = quote(booster == "dart")
             ParamDbl$new(id = "skip_drop", default = 0, lower = 0, upper = 1, tags = "train"), #, requires = quote(booster == "dart")
             # TODO: uncomment the following after the next CRAN update, and set max_depth's lower = 0L
             #ParamLgl$new(id = "one_drop", default = FALSE, requires = quote(booster == "dart")),
-            #ParamFct$new(id = "tree_method", default = "exact", values = c("exact", "hist"), requires = quote(booster != "gblinear")),
-            #ParamFct$new(id = "grow_policy", default = "depthwise", values = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
+            #ParamFct$new(id = "tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
+            #ParamFct$new(id = "grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
             #ParamInt$new(id = "max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
             #ParamInt$new(id = "max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
             ParamUty$new(id = "callbacks", default = list())
           )
         ),
-        param_vals = list(nrounds = 1L, verbose = 0L),
+        param_vals = param_vals,
         properties = c("weights", "missings", "importance")
       )
     },

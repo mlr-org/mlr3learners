@@ -6,28 +6,29 @@
 #' @export
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
   public = list(
-    initialize = function() {
+    initialize = function(id = "regr.ranger", param_vals = list(), predict_type = "response") {
       super$initialize(
-        id = "regr.ranger",
+        id = id,
         packages = "ranger",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        predict_type = predict_type,
         predict_types = c("response", "se"),
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
             ParamInt$new(id = "mtry", lower = 1L, tags = "train"),
-            ParamFct$new(id = "importance", values = c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
+            ParamFct$new(id = "importance", levels = c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
             ParamLgl$new(id = "write.forest", default = TRUE, tags = "train"),
             ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
             ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
             ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
             # ParamDbl$new(id = "case.weights", defaul = NULL, tags = "train"), # How to handle weights?
             # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
-            ParamFct$new(id = "splitrule", values = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
+            ParamFct$new(id = "splitrule", levels = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
             ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
             ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
             ParamUty$new(id = "always.split.variables", tags = "train"),
-            ParamFct$new(id = "respect.unordered.factors", values = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
+            ParamFct$new(id = "respect.unordered.factors", levels = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
             ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), #requires = quote(importance == "permutation")
             ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
             ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), #FIXME: do we need this?
@@ -37,6 +38,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
             ParamInt$new(id = "seed", tags = c("train", "predict"))
           )
         ),
+        param_vals = param_vals,
         properties = c("weights", "importance")
       )
     },
