@@ -6,17 +6,15 @@
 #' @export
 LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.lm", param_vals = list(), predict_type = "response") {
+    initialize = function(id = "regr.lm", predict_type = "response") {
       super$initialize(
         id = id,
         packages = "stats",
         feature_types = c("integer", "numeric", "factor"),
-        predict_type = predict_type,
         predict_types = c("response", "se"),
         param_set = ParamSet$new(
           params = list()
         ),
-        param_vals = param_vals,
         properties = c("weights")
       )
     },

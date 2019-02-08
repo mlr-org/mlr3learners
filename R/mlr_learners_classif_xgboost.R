@@ -6,12 +6,11 @@
 #' @export
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.xgboost", param_vals = list(nrounds = 1L, verbose = 0L), predict_type = "response") {
+    initialize = function(id = "classif.xgboost") {
       super$initialize(
         id = id,
         packages = "xgboost",
         feature_types = c("integer", "numeric"),
-        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
@@ -59,7 +58,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
             ParamUty$new(id = "callbacks", default = list())
           )
         ),
-        param_vals = param_vals,
+        param_vals = list(nrounds = 1L, verbose = 0L),
         properties = c("weights", "missings", "twoclass", "multiclass", "importance")
       )
     },

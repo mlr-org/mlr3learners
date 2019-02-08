@@ -6,12 +6,11 @@
 #' @export
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.glmnet", param_vals = list(), predict_type = "response") {
+    initialize = function(id = "classif.glmnet") {
       super$initialize(
         id = id,
         packages = "glmnet",
         feature_types = c("integer", "numeric"),
-        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
@@ -48,7 +47,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
           )
         ),
-        param_vals = param_vals,
         properties = c("weights", "twoclass", "multiclass")
       )
     },

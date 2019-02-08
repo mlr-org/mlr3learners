@@ -6,12 +6,11 @@
 #' @export
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.kknn", param_vals = list(), predict_type = "response") {
+    initialize = function(id = "classif.kknn") {
       super$initialize(
         id = id,
         packages = c("withr", "kknn"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
@@ -22,7 +21,6 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
             ParamLgl$new(id = "scale", default = TRUE, tags = "predict")
           )
         ),
-        param_vals = param_vals,
         properties = c("twoclass", "multiclass")
       )
     },

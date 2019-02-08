@@ -6,12 +6,11 @@
 #' @export
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.xgboost", param_vals = list(nrounds = 1L, verbose = 0L), predict_type = "response") {
+    initialize = function(id = "regr.xgboost") {
       super$initialize(
         id = id,
         packages = "xgboost",
         feature_types = c("integer", "numeric"),
-        predict_type = predict_type,
         predict_types = "response",
         param_set = ParamSet$new(
           params = list(
@@ -59,7 +58,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
             ParamUty$new(id = "callbacks", default = list())
           )
         ),
-        param_vals = param_vals,
+        param_vals = list(nrounds = 1L, verbose = 0L),
         properties = c("weights", "missings", "importance")
       )
     },

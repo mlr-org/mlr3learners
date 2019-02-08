@@ -6,12 +6,11 @@
 #' @export
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.kknn", param_vals = list(), predict_type = "response") {
+    initialize = function(id = "regr.kknn") {
       super$initialize(
         id = id,
         packages = c("withr", "kknn"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        predict_type = predict_type,
         predict_types = "response",
         param_set = ParamSet$new(
           params = list(
@@ -21,8 +20,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
           "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "predict"),
             ParamLgl$new(id = "scale", default = TRUE, tags = "predict")
           )
-        ),
-        param_vals = param_vals
+        )
       )
     },
 

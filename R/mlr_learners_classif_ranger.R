@@ -6,12 +6,11 @@
 #' @export
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.ranger", param_vals = list(), predict_type = "response") {
+    initialize = function(id = "classif.ranger") {
       super$initialize(
         id = id,
         packages = "ranger",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        predict_type = predict_type,
         predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
@@ -38,7 +37,6 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
             ParamInt$new(id = "seed", tags = c("train", "predict"))
           )
         ),
-        param_vals = param_vals,
         properties = c("weights", "twoclass", "multiclass", "importance")
       )
     },

@@ -6,12 +6,11 @@
 #' @export
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.glmnet", param_vals = list(family = "gaussian"), predict_type = "response") {
+    initialize = function(id = "regr.glmnet") {
       super$initialize(
         id = id,
         packages = "glmnet",
         feature_types = c("integer", "numeric"),
-        predict_type = predict_type,
         predict_types = "response",
         param_set = ParamSet$new(
           params = list(
@@ -49,7 +48,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
             ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
           )
         ),
-        param_vals = param_vals,
+        param_vals = list(family = "gaussian"),
         properties = c("weights")
       )
     },
