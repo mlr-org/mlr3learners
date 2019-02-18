@@ -1,17 +1,17 @@
 #' @title Classification Ranger Learner
+#'
 #' @name mlr_learners_classif_ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
 #' @description
 #' A learner for a classification random forest implemented in [ranger::ranger()].
+#'
 #' @export
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.ranger") {
       super$initialize(
         id = id,
-        packages = "ranger",
-        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
@@ -37,7 +37,10 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
             ParamInt$new(id = "seed", tags = c("train", "predict"))
           )
         ),
-        properties = c("weights", "twoclass", "multiclass", "importance")
+        predict_types = c("response", "prob"),
+        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        properties = c("weights", "twoclass", "multiclass", "importance"),
+        packages = "ranger"
       )
     },
 

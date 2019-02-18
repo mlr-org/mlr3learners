@@ -1,17 +1,17 @@
 #' @title Classification GLM with Elastic net Regularization
+#'
 #' @name mlr_learners_classif_glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
 #' @description
 #' A learner for a classification GLM with elastic net regularization implemented in [glmnet::glmnet()].
+#'
 #' @export
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.glmnet") {
       super$initialize(
         id = id,
-        packages = "glmnet",
-        feature_types = c("integer", "numeric"),
-        predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),
@@ -47,7 +47,10 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
           )
         ),
-        properties = c("weights", "twoclass", "multiclass")
+        predict_types = c("response", "prob"),
+        feature_types = c("integer", "numeric"),
+        properties = c("weights", "twoclass", "multiclass"),
+        packages = "glmnet"
       )
     },
 

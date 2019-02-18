@@ -1,17 +1,17 @@
 #' @title Classification xgboost Learner
+#'
 #' @name mlr_learners_classif_xgboost
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
 #' @description
 #' An eXtreme Gradient Boosting learner for classification, implemented in [xgboost::xgb.train()].
+#'
 #' @export
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.xgboost") {
       super$initialize(
         id = id,
-        packages = "xgboost",
-        feature_types = c("integer", "numeric"),
-        predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             # we pass all of what goes in 'params' directly to ... of xgboost
@@ -59,7 +59,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
           )
         ),
         param_vals = list(nrounds = 1L, verbose = 0L),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance")
+        predict_types = c("response", "prob"),
+        feature_types = c("integer", "numeric"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance"),
+        packages = "xgboost"
       )
     },
 

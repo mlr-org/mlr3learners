@@ -1,21 +1,21 @@
 #' @title Linear Regression Learner
+#'
 #' @name mlr_learners_regr_lm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
 #' @description
 #' A learner for linear regression implemented in [stats::glm()].
+#'
 #' @export
 LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.lm", predict_type = "response") {
       super$initialize(
         id = id,
-        packages = "stats",
-        feature_types = c("integer", "numeric", "factor"),
         predict_types = c("response", "se"),
-        param_set = ParamSet$new(
-          params = list()
-        ),
-        properties = c("weights")
+        feature_types = c("integer", "numeric", "factor"),
+        properties = "weights",
+        packages = "stats"
       )
     },
 

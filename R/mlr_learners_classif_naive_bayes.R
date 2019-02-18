@@ -1,23 +1,26 @@
 #' @title Classification Naive Bayes Learner
+#'
 #' @name mlr_learners_classif_naive_bayes
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
 #' @description
 #' A learner for naive Bayes implemented in [e1071::naiveBayes()].
+#'
 #' @export
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.naive_bayes") {
       super$initialize(
         id = id,
-        packages = "e1071",
-        feature_types = c("logical", "integer", "numeric", "factor"),
-        predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "laplace", default = 0, lower = 0, tags = "train")
           )
         ),
-        properties = c("twoclass", "multiclass")
+        predict_types = c("response", "prob"),
+        properties = c("twoclass", "multiclass"),
+        feature_types = c("logical", "integer", "numeric", "factor"),
+        packages = "e1071"
       )
     },
 

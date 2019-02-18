@@ -1,17 +1,17 @@
 #' @title Regression GLM with Elastic net Regularization
+#'
 #' @name mlr_learners_regr_glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
 #' @description
 #' A learner for a regression GLM with elastic net regularization implemented in [glmnet::glmnet()].
+#'
 #' @export
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.glmnet") {
       super$initialize(
         id = id,
-        packages = "glmnet",
-        feature_types = c("integer", "numeric"),
-        predict_types = "response",
         param_set = ParamSet$new(
           params = list(
             ParamFct$new(id = "family", default = "gaussian", levels = c("gaussian", "poisson")),
@@ -49,7 +49,9 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
           )
         ),
         param_vals = list(family = "gaussian"),
-        properties = c("weights")
+        feature_types = c("integer", "numeric"),
+        properties = "weights",
+        packages = "glmnet"
       )
     },
 

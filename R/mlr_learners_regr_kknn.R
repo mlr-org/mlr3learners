@@ -1,17 +1,17 @@
 #' @title Regression k-Nearest-Neighbor Learner
+#'
 #' @name mlr_learners_regr_kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
 #' @description
 #' A learner for a regression k-Nearest-Neighbor implemented in [kknn::kknn()].
+#'
 #' @export
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.kknn") {
       super$initialize(
         id = id,
-        packages = c("withr", "kknn"),
-        feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        predict_types = "response",
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "k", default = 7L, lower = 1L, tags = "predict"),
@@ -20,7 +20,9 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
           "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "predict"),
             ParamLgl$new(id = "scale", default = TRUE, tags = "predict")
           )
-        )
+        ),
+        feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
+        packages = c("withr", "kknn")
       )
     },
 

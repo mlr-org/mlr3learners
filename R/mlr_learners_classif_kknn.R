@@ -1,17 +1,17 @@
 #' @title Classification k-Nearest-Neighbor Learner
+#'
 #' @name mlr_learners_classif_kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
 #' @description
 #' A learner for a classification k-Nearest-Neighbor implemented in [kknn::kknn()].
+#'
 #' @export
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.kknn") {
       super$initialize(
         id = id,
-        packages = c("withr", "kknn"),
-        feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        predict_types = c("response", "prob"),
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "k", default = 7L, lower = 1L, tags = "predict"),
@@ -21,7 +21,10 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
             ParamLgl$new(id = "scale", default = TRUE, tags = "predict")
           )
         ),
-        properties = c("twoclass", "multiclass")
+        predict_types = c("response", "prob"),
+        feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
+        properties = c("twoclass", "multiclass"),
+        packages = c("withr", "kknn")
       )
     },
 

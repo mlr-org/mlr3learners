@@ -1,21 +1,21 @@
 #' @title Classification Logistic Regression Learner
+#'
 #' @name mlr_learners_classif_logreg
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
 #' @description
 #' A learner for a classification logistic regression implemented in [stats::glm()].
+#'
 #' @export
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.logreg") {
       super$initialize(
         id = id,
-        packages = "stats",
-        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         predict_types = c("response", "prob"),
-        param_set = ParamSet$new(
-          params = list()
-        ),
-        properties = c("weights", "twoclass")
+        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        properties = c("weights", "twoclass"),
+        packages = "stats"
       )
     },
 
