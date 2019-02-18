@@ -21,13 +21,13 @@ LearnerRegrYourLearner = R6Class("LearnerRegrYourLearner", inherit = LearnerRegr
     initialize = function(id = "regr.yourlearner") {
       super$initialize(
         id = id,
-        packages = ,
-        feature_types = ,
-        predict_types = ,
         param_set = ParamSet$new(
           params = list()
         ),
-        properties =
+        predict_types = ,
+        feature_types = ,
+        properties = ,
+        packages = ,
       )
     },
 
@@ -60,13 +60,13 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     initialize = function(id = "regr.ranger") {
       super$initialize(
         id = id,
-        packages = "ranger",
-        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        predict_types = c("response", "se"),
         param_set = ParamSet$new(
           params = list()
         ),
-        properties = c("weights", "importance")
+        predict_types = c("response", "se"),
+        feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
+        properties = c("weights", "importance"),
+        packages = "ranger"
       )
     },
     ...
