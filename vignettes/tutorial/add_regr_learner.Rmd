@@ -44,7 +44,7 @@ LearnerRegrYourLearner = R6Class("LearnerRegrYourLearner", inherit = LearnerRegr
 ```{r, echo = FALSE}
 library(mlr3)
 df = data.frame(field = c("id", "packages", "features_types", "predict_types", "param_set", "properties"), "possible_values" = c("id", "package name as character variable",
-  paste(mlr3::mlr_reflections$task_feature_types, collapse = ","), paste(mlr3::mlr_reflections$predict_types$regr, collapse = ","), "ParamSet from the package paradox", paste(mlr3::mlr_reflections$learner_properties$regr, collapse = ",")))
+  paste(mlr3::mlr_reflections$task_feature_types, collapse = ","), paste(mlr3::mlr_reflections$learner_predict_types$regr, collapse = ","), "ParamSet from the package paradox", paste(mlr3::mlr_reflections$learner_properties$regr, collapse = ",")))
 ```
 
 ## Specifying Basic Information
