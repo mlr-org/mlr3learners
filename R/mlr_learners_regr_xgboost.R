@@ -75,8 +75,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       target = task$data(cols = task$target_names)
       pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
 
-      # if (!is.null(task$weights)) # FIXME: weights are not implemented in the task yet
-      #   xgboost::setinfo(pars$data, "weight", task$weights)
+      if ("weights" %in% task$properties) {
+        xgboost::setinfo(pars$data, "weight", task$weights$weight)
+      }
 
       if (is.null(pars$watchlist))
         pars$watchlist = list(train = pars$data)

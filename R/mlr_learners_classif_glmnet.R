@@ -58,16 +58,16 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
-      if (!is.null(task$weights))
-         pars$weights = task$weights # FIXME: weights are not implemented in the task yet
+      if ("weights" %in% task$properties)
+         pars$weights = task$weights$weight
       pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
 
-      glmnet::glmnet.control(factory = TRUE)
       saved_ctrl = glmnet::glmnet.control()
+      on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
+      glmnet::glmnet.control(factory = TRUE)
       is_ctrl_pars = names(pars) %in% names(saved_ctrl)
 
       if (any(is_ctrl_pars)) {
-        on.exit(glmnet::glmnet.control(factory = TRUE))
         do.call(glmnet::glmnet.control, pars[is_ctrl_pars])
         pars = pars[!is_ctrl_pars]
       }

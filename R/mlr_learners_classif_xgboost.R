@@ -67,24 +67,25 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     train = function(task) {
+      cls = task$all_classes
       pars = self$params("train")
 
       if (is.null(pars$objective))
-        pars$objective = ifelse(length(task$class_names) == 2L, "binary:logistic", "multi:softprob")
+        pars$objective = ifelse(length(cls) == 2L, "binary:logistic", "multi:softprob")
 
       if (self$predict_type == "prob" && pars$objective == "multi:softmax")
         stop("objective = 'multi:softmax' does not work with predict_type = 'prob'")
 
       #if we use softprob or softmax as objective we have to add the number of classes 'num_class'
       if (pars$objective %in% c("multi:softprob", "multi:softmax"))
-        pars$num_class = length(task$class_names)
+        pars$num_class = length(cls)
 
       data = task$data(cols = task$feature_names)
-      label = match(as.character(as.matrix(task$data(cols = task$target_names))), task$class_names) - 1
+      label = match(as.character(as.matrix(task$data(cols = task$target_names))), cls) - 1
       pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
 
-      # if (!is.null(task$weights)) # FIXME: weights are not implemented in the task yet
-        # xgboost::setinfo(pars$data, "weight", task$weights)
+      if ("weights" %in% task$properties)
+        xgboost::setinfo(pars$data, "weight", task$weights$weight)
 
       if (is.null(pars$watchlist))
         pars$watchlist = list(train = pars$data)

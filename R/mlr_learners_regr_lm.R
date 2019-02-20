@@ -20,10 +20,15 @@ LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
     },
 
     train = function(task) {
+      pars = self$params("train")
+      if ("weights" %in% task$properties)
+        pars = insert_named(pars, list(weights = task$weights$weight))
+
       self$model = invoke(stats::lm,
         formula = task$formula,
-        data = task$data()
-      ) # FIXME: weights = task$weights
+        data = task$data(),
+        .args = pars
+      )
       self
     },
 

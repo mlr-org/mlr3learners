@@ -21,7 +21,6 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
             ParamInt$new(id = "min.node.size", default = 1L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
             ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
             ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
-            # ParamDbl$new(id = "case.weights", defaul = NULL, tags = "train"), # How to handle weights?
             # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
             ParamFct$new(id = "splitrule", levels = c("gini", "extratrees"), default = "gini", tags = "train"),
             ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
@@ -50,7 +49,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
-        case.weights = NULL, # FIXME: task$weights,
+        case.weights = task$weights$weight,
         .args = pars
       )
       self

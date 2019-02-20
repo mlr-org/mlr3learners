@@ -21,7 +21,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
             ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
             ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
             ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
-            # ParamDbl$new(id = "case.weights", defaul = NULL, tags = "train"), # How to handle weights?
             # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
             ParamFct$new(id = "splitrule", levels = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
             ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
@@ -49,7 +48,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       self$model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
-        case.weights = NULL, # FIXME: task$weights,
+        case.weights = task$weights$weight,
         .args = pars
       )
       self

@@ -20,11 +20,16 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
     },
 
     train = function(task) {
+      pars = self$params("train")
+      if ("weights" %in% task$properties)
+        pars = insert_named(pars, list(weights = task$weights$weight))
+
       self$model = invoke(stats::glm,
         formula = task$formula,
         data = task$data(),
-        family = "binomial"
-      ) # FIXME: weights = task$weights
+        family = "binomial",
+        .args = pars
+      )
       self
     },
 
