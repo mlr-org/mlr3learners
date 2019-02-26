@@ -1,8 +1,11 @@
-pandoc: 1.19.2.4
+pandoc: '2.5'
 pkgdown: 1.3.0
 pkgdown_sha: ~
-articles: []
+articles:
+  mlr3learners: mlr3learners.html
+  add_classif_learner: tutorial/add_classif_learner.html
+  add_regr_learner: tutorial/add_regr_learner.html
 urls:
-  reference: https://mlr-org.github.io/mlr3learners/docs/index.html/reference
-  article: https://mlr-org.github.io/mlr3learners/docs/index.html/articles
+  reference: https://mlr3learners.mlr-org.com/reference
+  article: https://mlr3learners.mlr-org.com/articles
 
