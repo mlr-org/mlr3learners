@@ -106,7 +106,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
           type = "class",
           .args = pars)
         )
-        levels = task$levels(col = task$target_names)
+        levels = task$all_classes
         response = factor(response, levels = levels)
       }
 
