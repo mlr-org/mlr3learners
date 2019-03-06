@@ -1,6 +1,6 @@
 #' @title Regression xgboost Learner
 #'
-#' @name mlr_learners_regr_xgboost
+#' @name mlr_learners_regr.xgboost
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description

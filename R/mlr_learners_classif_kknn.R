@@ -1,6 +1,6 @@
 #' @title Classification k-Nearest-Neighbor Learner
 #'
-#' @name mlr_learners_classif_kknn
+#' @name mlr_learners_classif.kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description

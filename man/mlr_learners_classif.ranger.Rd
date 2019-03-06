@@ -2,8 +2,8 @@
 % Please edit documentation in R/mlr_learners_classif_ranger.R,
 %   R/mlr_learners_regr_ranger.R
 \docType{data}
-\name{mlr_learners_classif_ranger}
-\alias{mlr_learners_classif_ranger}
+\name{mlr_learners_classif.ranger}
+\alias{mlr_learners_classif.ranger}
 \alias{LearnerClassifRanger}
 \alias{LearnerRegrRanger}
 \title{Classification Ranger Learner}

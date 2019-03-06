@@ -1,6 +1,6 @@
 #' @title Classification Logistic Regression Learner
 #'
-#' @name mlr_learners_classif_logreg
+#' @name mlr_learners_classif.logreg
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description

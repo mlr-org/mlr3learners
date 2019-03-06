@@ -1,6 +1,6 @@
 #' @title Linear Regression Learner
 #'
-#' @name mlr_learners_regr_lm
+#' @name mlr_learners_regr.lm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
