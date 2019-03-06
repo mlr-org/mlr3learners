@@ -7,34 +7,34 @@
     <loc>https://mlr3learners.mlr-org.com/reference/mlr3learners-package.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif_glmnet.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif_kknn.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif_logreg.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.logreg.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif_naive_bayes.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif_ranger.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif_xgboost.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr_glmnet.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr_kknn.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr_lm.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr_xgboost.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html</loc>
   </url>
   <url>
     <loc>https://mlr3learners.mlr-org.com/articles/mlr3learners.html</loc>
