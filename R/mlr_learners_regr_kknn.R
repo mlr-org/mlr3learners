@@ -9,7 +9,7 @@
 #' @export
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.kknn") {
+    initialize = function(id = "kknn") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(

@@ -9,7 +9,7 @@
 #' @export
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.ranger") {
+    initialize = function(id = "ranger") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(

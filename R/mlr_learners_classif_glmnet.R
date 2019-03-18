@@ -9,7 +9,7 @@
 #' @export
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.glmnet") {
+    initialize = function(id = "glmnet") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(

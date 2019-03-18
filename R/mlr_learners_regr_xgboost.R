@@ -9,7 +9,7 @@
 #' @export
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.xgboost") {
+    initialize = function(id = "xgboost") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(

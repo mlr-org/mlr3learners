@@ -9,7 +9,7 @@
 #' @export
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.xgboost") {
+    initialize = function(id = "xgboost") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(
