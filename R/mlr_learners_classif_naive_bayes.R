@@ -9,7 +9,7 @@
 #' @export
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "naive_bayes") {
+    initialize = function(id = "classif.naive_bayes") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(

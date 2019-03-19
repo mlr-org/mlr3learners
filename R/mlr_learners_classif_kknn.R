@@ -9,7 +9,7 @@
 #' @export
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "kknn") {
+    initialize = function(id = "classif.kknn") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(

@@ -9,7 +9,7 @@
 #' @export
 LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "lm", predict_type = "response") {
+    initialize = function(id = "regr.lm", predict_type = "response") {
       super$initialize(
         id = id,
         predict_types = c("response", "se"),
