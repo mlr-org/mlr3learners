@@ -25,7 +25,7 @@ LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
         pars = insert_named(pars, list(weights = task$weights$weight))
 
       self$model = invoke(stats::lm,
-        formula = task$formula,
+        formula = task$formula(),
         data = task$data(),
         .args = pars
       )
