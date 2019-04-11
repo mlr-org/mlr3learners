@@ -4,7 +4,7 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a generalized linear model with elastic net regularization implemented in [glmnet::glmnet()] in package \CRANpkg{glmnet}.
+#' A [mlr3::LearnerClassif] for a generalized linear model with elastic net regularization implemented in [glmnet::cv.glmnet()] in package \CRANpkg{glmnet}.
 #'
 #' @export
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
@@ -15,11 +15,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-            ParamInt$new(id = "nfolds", default = 10L, lower = 3L),
-            ParamUty$new(id = "foldid"),
+            ParamInt$new(id = "nfolds", default = 10L, lower = 3L, tags = "train"),
             ParamFct$new(id = "type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
-            ParamLgl$new(id = "grouped", default = TRUE),
-            ParamLgl$new(id = "keep", default = FALSE),
             ParamDbl$new(id = "s", lower = 0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
             ParamInt$new(id = "nlambda", default = 100L, lower = 1L, tags = "train"),
             ParamDbl$new(id = "lambda.min.ratio", lower = 0, upper = 1, tags = "train"),

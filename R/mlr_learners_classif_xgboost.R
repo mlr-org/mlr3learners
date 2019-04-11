@@ -55,7 +55,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
             #ParamFct$new(id = "grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
             #ParamInt$new(id = "max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
             #ParamInt$new(id = "max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
-            ParamUty$new(id = "callbacks", default = list())
+            ParamUty$new(id = "callbacks", default = list(), tags = "train")
           )
         ),
         param_vals = list(nrounds = 1L, verbose = 0L),

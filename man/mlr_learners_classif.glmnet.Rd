@@ -10,6 +10,6 @@
 LearnerClassifGlmnet
 }
 \description{
-A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a generalized linear model with elastic net regularization implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}} in package \CRANpkg{glmnet}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a generalized linear model with elastic net regularization implemented in \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} in package \CRANpkg{glmnet}.
 }
 \keyword{datasets}

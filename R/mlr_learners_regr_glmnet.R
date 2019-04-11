@@ -4,7 +4,7 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for a regression GLM with elastic net regularization implemented in [glmnet::glmnet()] in package \CRANpkg{glmnet}.
+#' A [mlr3::LearnerRegr] for a regression GLM with elastic net regularization implemented in [glmnet::cv.glmnet()] in package \CRANpkg{glmnet}.
 #'
 #' @export
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
@@ -14,13 +14,10 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         id = id,
         param_set = ParamSet$new(
           params = list(
-            ParamFct$new(id = "family", default = "gaussian", levels = c("gaussian", "poisson")),
+            ParamFct$new(id = "family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),
             ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-            ParamInt$new(id = "nfolds", default = 10L, lower = 3L),
-            ParamUty$new(id = "foldid"),
+            ParamInt$new(id = "nfolds", lower = 3L, default = 10L, tags = "train"),
             ParamFct$new(id = "type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
-            ParamLgl$new(id = "grouped", default = TRUE),
-            ParamLgl$new(id = "keep", default = FALSE),
             ParamDbl$new(id = "s", lower = 0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
             ParamInt$new(id = "nlambda", default = 100L, lower = 1L, tags = "train"),
             ParamDbl$new(id = "lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
