@@ -39,14 +39,16 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
     train = function(task) {
       pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
-      target = as.matrix(task$data(cols = task$target_names))
+      target = as.factor(as.matrix(task$data(cols = task$target_names)))
 
       self$model = invoke(e1071::svm,
         x = data,
         y = target,
-        .args = pars,
-        weights = task$weights$weight
+        probability = self$predict_type == "prob",
+        class.weights = task$weights$weight,
+        .args = pars
       )
+
       self
     },
 
@@ -54,29 +56,14 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       response = prob = NULL
+      levs = as.character(task$class_names)
+
+      probs = invoke(predict, self$model, newdata = newdata, probability = self$predict_type == "prob")#, .args = pars)
 
       if (self$predict_type == "prob") {
-        prob = invoke(predict,
-          self$model,
-          newx = newdata,
-          type = "response",
-          .args = pars
-        )
-
-        if (length(task$class_names) == 2L) {
-          prob = cbind(prob, 1 - prob)
-          colnames(prob) = task$class_names
-        } else {
-          prob = prob[, , 1]
-        }
+        prob = probs
       } else {
-        response = drop(invoke(predict,
-          self$model,
-          newx = newdata,
-          type = "class",
-          .args = pars)
-        )
-        response = factor(response, levels = task$class_names)
+        response = probs
       }
 
       PredictionClassif$new(task, response, prob)

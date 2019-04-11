@@ -12,6 +12,7 @@
   mlr_learners$add("classif.glmnet", LearnerClassifGlmnet)
   mlr_learners$add("classif.xgboost", LearnerClassifXgboost)
   mlr_learners$add("classif.kknn", LearnerClassifKKNN)
+  mlr_learners$add("classif.svm", LearnerClassifSvm)
 
   # regression learners
   mlr_learners$add("regr.lm", LearnerRegrLm)
