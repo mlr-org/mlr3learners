@@ -1,10 +1,10 @@
-#' @title Regression k-Nearest-Neighbor Learner
+#' @title k-Nearest-Neighbor Regression Learner
 #'
 #' @name mlr_learners_regr.kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A learner for a regression k-Nearest-Neighbor implemented in [kknn::kknn()].
+#' A [mlr3::LearnerRegr] for a regression k-Nearest-Neighbor implemented in [kknn::kknn()] in package \CRANpkg{kknn}.
 #'
 #' @export
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,

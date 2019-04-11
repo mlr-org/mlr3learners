@@ -4,12 +4,12 @@
 \name{mlr_learners_regr.lm}
 \alias{mlr_learners_regr.lm}
 \alias{LearnerRegrLm}
-\title{Linear Regression Learner}
+\title{Linear Model Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
 \usage{
 LearnerRegrLm
 }
 \description{
-A learner for linear regression implemented in \code{\link[stats:glm]{stats::glm()}}.
+A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for linear regression implemented in \code{\link[stats:glm]{stats::glm()}}.
 }
 \keyword{datasets}

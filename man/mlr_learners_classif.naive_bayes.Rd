@@ -4,12 +4,12 @@
 \name{mlr_learners_classif.naive_bayes}
 \alias{mlr_learners_classif.naive_bayes}
 \alias{LearnerClassifNaiveBayes}
-\title{Classification Naive Bayes Learner}
+\title{Naive Bayes Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifNaiveBayes
 }
 \description{
-A learner for naive Bayes implemented in \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for naive Bayes implemented in \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}} in package \CRANpkg{e1071}.
 }
 \keyword{datasets}

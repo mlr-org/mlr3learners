@@ -1,10 +1,10 @@
-#' @title Classification k-Nearest-Neighbor Learner
+#' @title k-Nearest-Neighbor Classification Learner
 #'
 #' @name mlr_learners_classif.kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A learner for a classification k-Nearest-Neighbor implemented in [kknn::kknn()].
+#' A [mlr3::LearnerClassif] for a classification k-Nearest-Neighbor implemented in [kknn::kknn()] in package \CRANpkg{kknn}.
 #'
 #' @export
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,

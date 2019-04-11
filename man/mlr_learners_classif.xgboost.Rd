@@ -4,12 +4,12 @@
 \name{mlr_learners_classif.xgboost}
 \alias{mlr_learners_classif.xgboost}
 \alias{LearnerClassifXgboost}
-\title{Classification xgboost Learner}
+\title{Extreme Gradiant Boosting Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifXgboost
 }
 \description{
-An eXtreme Gradient Boosting learner for classification, implemented in \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}}.
+An \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for eXtreme Gradient Boosting learner implemented in \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} in package \CRANpkg{xgboost}.
 }
 \keyword{datasets}

@@ -1,10 +1,10 @@
-#' @title Regression Ranger Learner
+#' @title Ranger Regression Learner
 #'
 #' @name mlr_learners_classif.ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A learner for a regression random forest implemented in [ranger::ranger()].
+#' A [mlr3::LearnerRegr] for a regression random forest implemented in [ranger::ranger()] in package \CRANpkg{ranger}.
 #'
 #' @export
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,

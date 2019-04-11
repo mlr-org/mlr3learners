@@ -4,12 +4,12 @@
 \name{mlr_learners_regr.kknn}
 \alias{mlr_learners_regr.kknn}
 \alias{LearnerRegrKKNN}
-\title{Regression k-Nearest-Neighbor Learner}
+\title{k-Nearest-Neighbor Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
 \usage{
 LearnerRegrKKNN
 }
 \description{
-A learner for a regression k-Nearest-Neighbor implemented in \code{\link[kknn:kknn]{kknn::kknn()}}.
+A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression k-Nearest-Neighbor implemented in \code{\link[kknn:kknn]{kknn::kknn()}} in package \CRANpkg{kknn}.
 }
 \keyword{datasets}

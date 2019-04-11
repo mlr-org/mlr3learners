@@ -1,10 +1,10 @@
-#' @title Classification Naive Bayes Learner
+#' @title Naive Bayes Classification Learner
 #'
 #' @name mlr_learners_classif.naive_bayes
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A learner for naive Bayes implemented in [e1071::naiveBayes()].
+#' A [mlr3::LearnerClassif] for naive Bayes implemented in [e1071::naiveBayes()] in package \CRANpkg{e1071}.
 #'
 #' @export
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,

@@ -4,12 +4,12 @@
 \name{mlr_learners_classif.logreg}
 \alias{mlr_learners_classif.logreg}
 \alias{LearnerClassifLogReg}
-\title{Classification Logistic Regression Learner}
+\title{Logistic Regression Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifLogReg
 }
 \description{
-A learner for a classification logistic regression implemented in \code{\link[stats:glm]{stats::glm()}}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification logistic regression implemented in \code{\link[stats:glm]{stats::glm()}}.
 }
 \keyword{datasets}

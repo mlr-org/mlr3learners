@@ -6,7 +6,7 @@
 \alias{mlr_learners_classif.ranger}
 \alias{LearnerClassifRanger}
 \alias{LearnerRegrRanger}
-\title{Classification Ranger Learner}
+\title{Ranger Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifRanger
@@ -14,8 +14,8 @@ LearnerClassifRanger
 LearnerRegrRanger
 }
 \description{
-A learner for a classification random forest implemented in \code{\link[ranger:ranger]{ranger::ranger()}}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification random forest implemented in \code{\link[ranger:ranger]{ranger::ranger()}} in package \CRANpkg{ranger}.
 
-A learner for a regression random forest implemented in \code{\link[ranger:ranger]{ranger::ranger()}}.
+A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression random forest implemented in \code{\link[ranger:ranger]{ranger::ranger()}} in package \CRANpkg{ranger}.
 }
 \keyword{datasets}

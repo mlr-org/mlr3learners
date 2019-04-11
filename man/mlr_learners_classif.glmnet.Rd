@@ -4,12 +4,12 @@
 \name{mlr_learners_classif.glmnet}
 \alias{mlr_learners_classif.glmnet}
 \alias{LearnerClassifGlmnet}
-\title{Classification GLM with Elastic net Regularization}
+\title{GLM with Elastic Net Regularization Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifGlmnet
 }
 \description{
-A learner for a classification GLM with elastic net regularization implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a generalized linear model with elastic net regularization implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}} in package \CRANpkg{glmnet}.
 }
 \keyword{datasets}

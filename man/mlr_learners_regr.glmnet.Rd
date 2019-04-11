@@ -4,12 +4,12 @@
 \name{mlr_learners_regr.glmnet}
 \alias{mlr_learners_regr.glmnet}
 \alias{LearnerRegrGlmnet}
-\title{Regression GLM with Elastic net Regularization}
+\title{GLM with Elastic Net Regularization Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
 \usage{
 LearnerRegrGlmnet
 }
 \description{
-A learner for a regression GLM with elastic net regularization implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression GLM with elastic net regularization implemented in \code{\link[glmnet:glmnet]{glmnet::glmnet()}} in package \CRANpkg{glmnet}.
 }
 \keyword{datasets}

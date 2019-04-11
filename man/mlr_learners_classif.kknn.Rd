@@ -4,12 +4,12 @@
 \name{mlr_learners_classif.kknn}
 \alias{mlr_learners_classif.kknn}
 \alias{LearnerClassifKKNN}
-\title{Classification k-Nearest-Neighbor Learner}
+\title{k-Nearest-Neighbor Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \usage{
 LearnerClassifKKNN
 }
 \description{
-A learner for a classification k-Nearest-Neighbor implemented in \code{\link[kknn:kknn]{kknn::kknn()}}.
+A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification k-Nearest-Neighbor implemented in \code{\link[kknn:kknn]{kknn::kknn()}} in package \CRANpkg{kknn}.
 }
 \keyword{datasets}

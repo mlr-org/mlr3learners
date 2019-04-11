@@ -1,10 +1,10 @@
-#' @title Regression GLM with Elastic net Regularization
+#' @title GLM with Elastic Net Regularization Regression Learner
 #'
 #' @name mlr_learners_regr.glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A learner for a regression GLM with elastic net regularization implemented in [glmnet::glmnet()].
+#' A [mlr3::LearnerRegr] for a regression GLM with elastic net regularization implemented in [glmnet::glmnet()] in package \CRANpkg{glmnet}.
 #'
 #' @export
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,

@@ -1,10 +1,10 @@
-#' @title Classification GLM with Elastic net Regularization
+#' @title GLM with Elastic Net Regularization Classification Learner
 #'
 #' @name mlr_learners_classif.glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A learner for a classification GLM with elastic net regularization implemented in [glmnet::glmnet()].
+#' A [mlr3::LearnerClassif] for a generalized linear model with elastic net regularization implemented in [glmnet::glmnet()] in package \CRANpkg{glmnet}.
 #'
 #' @export
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,

@@ -1,10 +1,10 @@
-#' @title Classification Logistic Regression Learner
+#' @title Logistic Regression Classification Learner
 #'
 #' @name mlr_learners_classif.logreg
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A learner for a classification logistic regression implemented in [stats::glm()].
+#' A [mlr3::LearnerClassif] for a classification logistic regression implemented in [stats::glm()].
 #'
 #' @export
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
