@@ -33,12 +33,12 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
             ParamInt$new(id = "num.threads", lower = 1L, tags = c("train", "predict")),
             ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
             ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
-            ParamInt$new(id = "seed", tags = c("train", "predict"))
+            ParamLgl$new(id = "oob.error", default = TRUE, tags = "train")
           )
         ),
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "multiclass", "importance"),
+        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error"),
         packages = "ranger"
       )
     },
@@ -79,6 +79,10 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         stopf("No importance stored")
 
       sort(self$model$variable.importance, decreasing = TRUE)
+    },
+
+    oob_error = function() {
+      mod$prediction.error
     }
   )
 )
