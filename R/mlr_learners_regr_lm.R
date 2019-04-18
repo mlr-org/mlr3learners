@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for linear regression implemented in [stats::glm()].
+#' Ordinary linear regression.
+#' Calls [stats::lm()].
 #'
 #' @export
 LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,

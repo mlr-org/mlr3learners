@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for eXtreme Gradient Boosting implemented in [xgboost::xgb.train()] in package \CRANpkg{xgboost}.
+#' eXtreme Gradient Boosting regression.
+#' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
 #' @export
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,

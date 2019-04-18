@@ -7,6 +7,7 @@
 
 .onLoad = function(libname, pkgname) { # nocov start
   # classification learners
+  # mlr_learners$add("classif.lda", LearnerClassifLDA)
   mlr_learners$add("classif.logreg", LearnerClassifLogReg)
   mlr_learners$add("classif.ranger", LearnerClassifRanger)
   mlr_learners$add("classif.glmnet", LearnerClassifGlmnet)

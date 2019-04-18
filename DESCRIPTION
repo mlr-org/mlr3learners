@@ -24,6 +24,7 @@ Suggests:
     glmnet,
     kknn,
     knitr,
+    MASS,
     mlbench,
     ranger,
     rmarkdown,

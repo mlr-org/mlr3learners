@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for a regression random forest implemented in [ranger::ranger()] in package \CRANpkg{ranger}.
+#' Random regression forest.
+#' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
 #' @export
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,

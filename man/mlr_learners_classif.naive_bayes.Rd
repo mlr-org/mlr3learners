@@ -10,6 +10,7 @@
 LearnerClassifNaiveBayes
 }
 \description{
-A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for naive Bayes implemented in \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}} in package \CRANpkg{e1071}.
+Naive Bayes classification.
+Calls \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}} from package \CRANpkg{e1071}.
 }
 \keyword{datasets}

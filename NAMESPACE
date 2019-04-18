@@ -2,6 +2,7 @@
 
 export(LearnerClassifGlmnet)
 export(LearnerClassifKKNN)
+export(LearnerClassifLDA)
 export(LearnerClassifLogReg)
 export(LearnerClassifNaiveBayes)
 export(LearnerClassifRanger)

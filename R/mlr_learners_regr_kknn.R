@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for a regression k-Nearest-Neighbor implemented in [kknn::kknn()] in package \CRANpkg{kknn}.
+#' k-Nearest-Neighbor regression.
+#' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @export
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,

@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a classification random forest implemented in [ranger::ranger()] in package \CRANpkg{ranger}.
+#' Random classification forest.
+#' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
 #' @export
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
@@ -56,18 +57,16 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
     },
 
     predict = function(task) {
+      response = prob = NULL
       pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
       preds = invoke(predict, self$model, data = newdata,
         predict.type = "response", .args = pars)
 
-      if (self$predict_type == "response") {
+      if (self$predict_type == "response")
         response = preds$predictions
-        prob = NULL
-      } else {
-        response = NULL
+      if (self$predict_type == "prob")
         prob = preds$predictions
-      }
 
       PredictionClassif$new(task, response, prob)
     },

@@ -14,8 +14,10 @@ LearnerClassifRanger
 LearnerRegrRanger
 }
 \description{
-A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification random forest implemented in \code{\link[ranger:ranger]{ranger::ranger()}} in package \CRANpkg{ranger}.
+Random classification forest.
+Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 
-A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression random forest implemented in \code{\link[ranger:ranger]{ranger::ranger()}} in package \CRANpkg{ranger}.
+Random regression forest.
+Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 }
 \keyword{datasets}

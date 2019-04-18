@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for naive Bayes implemented in [e1071::naiveBayes()] in package \CRANpkg{e1071}.
+#' Naive Bayes classification.
+#' Calls [e1071::naiveBayes()] from package \CRANpkg{e1071}.
 #'
 #' @export
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
