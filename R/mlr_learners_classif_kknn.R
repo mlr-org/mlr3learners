@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a classification k-Nearest-Neighbor implemented in [kknn::kknn()] in package \CRANpkg{kknn}.
+#' k-Nearest-Neighbor classification.
+#' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @export
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,

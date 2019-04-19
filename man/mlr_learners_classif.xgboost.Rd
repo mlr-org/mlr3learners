@@ -10,6 +10,7 @@
 LearnerClassifXgboost
 }
 \description{
-An \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for eXtreme Gradient Boosting learner implemented in \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} in package \CRANpkg{xgboost}.
+eXtreme Gradient Boosting classification.
+Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
 \keyword{datasets}

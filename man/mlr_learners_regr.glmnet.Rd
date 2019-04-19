@@ -10,6 +10,7 @@
 LearnerRegrGlmnet
 }
 \description{
-A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression GLM with elastic net regularization implemented in \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} in package \CRANpkg{glmnet}.
+Generalized linear models with elastic net regularization.
+Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
 }
 \keyword{datasets}

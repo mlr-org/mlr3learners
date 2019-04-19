@@ -10,6 +10,7 @@
 LearnerClassifKKNN
 }
 \description{
-A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification k-Nearest-Neighbor implemented in \code{\link[kknn:kknn]{kknn::kknn()}} in package \CRANpkg{kknn}.
+k-Nearest-Neighbor classification.
+Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
 \keyword{datasets}

@@ -10,6 +10,7 @@
 LearnerRegrLm
 }
 \description{
-A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for linear regression implemented in \code{\link[stats:glm]{stats::glm()}}.
+Ordinary linear regression.
+Calls \code{\link[stats:lm]{stats::lm()}}.
 }
 \keyword{datasets}
