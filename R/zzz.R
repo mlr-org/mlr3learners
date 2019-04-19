@@ -20,5 +20,6 @@
   mlr_learners$add("regr.ranger", LearnerRegrRanger)
   mlr_learners$add("regr.glmnet", LearnerRegrGlmnet)
   mlr_learners$add("regr.xgboost", LearnerRegrXgboost)
+  mlr_learners$add("regr.svm", LearnerRegrSvm)
   mlr_learners$add("regr.kknn", LearnerRegrKKNN)
 } # nocov end

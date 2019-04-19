@@ -1,37 +1,36 @@
 #' @title Support Vector Machine
 #'
-#' @name mlr_learners_classif.svm
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#' @name mlr_learners_regr.svm
+#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A learner for a classification support vector machine implemented in [e1071::svm()].
+#' A learner for a regression support vector machine implemented in [e1071::svm()].
 #'
 #' @export
-LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
+LearnerRegrSvm = R6Class("LearnerRegrSvm", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "classif.svm") {
+    initialize = function(id = "regr.svm") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(
           params = list(
-            ParamFct$new(id = "type", default = "C-classification", levels = c("C-classification", "nu-classification"), tag = "train"),
-            ParamDbl$new(id = "cost",  default = 1, lower = 0, tag = "train"), #requires = quote(type == "C-classification")),
-            ParamDbl$new(id = "nu", default = 0.5, tag = "train"), #requires = quote(type == "nu-classification")),
+            ParamFct$new(id = "type", default = "eps-regression", levels = c("eps-regression", "nu-regression"), tag = "train"),
             ParamFct$new(id = "kernel", default = "radial", levels = c("linear", "polynomial", "radial", "sigmoid"), tag = "train"),
             ParamInt$new(id = "degree", default = 3L, lower = 1L, tag = "train"), #requires = quote(kernel == "polynomial")),
             ParamDbl$new(id = "coef0", default = 0, tag = "train"), #requires = quote(kernel == "polynomial" || kernel == "sigmoid")),
+            ParamDbl$new(id = "cost",  default = 1, lower = 0, tag = "train"),#, requires = quote(type == "C-regrication")),
+            ParamDbl$new(id = "nu", default = 0.5, tag = "train"),#, requires = quote(type == "nu-regression")),
             ParamDbl$new(id = "gamma", lower = 0, tag = "train"), #requires = quote(kernel != "linear")),
             ParamDbl$new(id = "cachesize", default = 40L, tag = "train"),
             ParamDbl$new(id = "tolerance", default = 0.001, lower = 0, tag = "train"),
+            ParamDbl$new(id = "epsilon", lower = 0, tag = "train"),#, requires = quote(type == "eps-regression")),
             ParamLgl$new(id = "shrinking", default = TRUE, tag = "train"),
             ParamInt$new(id = "cross", default = 0L, lower = 0L, tag = "train"), #tunable = FALSE),
             ParamLgl$new(id = "fitted", default = TRUE, tag = "train"), #tunable = FALSE),
             ParamUty$new(id = "scale", default = TRUE, tag = "train")#, tunable = TRUE)
           )
         ),
-        predict_types = c("response", "prob"),
         feature_types = c("integer", "numeric"),
-        properties = c("twoclass", "multiclass"),
         packages = "e1071"
       )
     },
@@ -39,12 +38,13 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
     train = function(task) {
       pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
-      target = as.factor(as.matrix(task$data(cols = task$target_names)))
+      target = as.matrix(task$data(cols = task$target_names))
+
+      browser()
 
       self$model = invoke(e1071::svm,
         x = data,
         y = target,
-        probability = self$predict_type == "prob",
         .args = pars
       )
 
@@ -54,15 +54,9 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
     predict = function(task) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
+      response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars)
 
-      response = invoke(predict, self$model, newdata = newdata, probability = self$predict_type == "prob", .args = pars)
-      if (self$predict_type == "prob") {
-        prob = attr(response, "probabilities")
-      } else {
-        prob = NULL
-      }
-
-      PredictionClassif$new(task, response, prob)
+      PredictionRegr$new(task, response)
     }
   )
 )
