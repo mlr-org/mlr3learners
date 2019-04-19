@@ -41,13 +41,25 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.factor(as.matrix(task$data(cols = task$target_names)))
 
-      self$model = invoke(e1071::svm,
-        x = data,
-        y = target,
-        probability = self$predict_type == "prob",
-        class.weights = task$weights$weight,
-        .args = pars
-      )
+      if("weights" %in% task$properties) {
+        levs = as.character(task$class_names)
+        names(task$weights$weight) = levs
+
+        self$model = invoke(e1071::svm,
+          x = data,
+          y = target,
+          probability = self$predict_type == "prob",
+          class.weights = task$weights$weight,
+          .args = pars
+        )
+      } else {
+        self$model = invoke(e1071::svm,
+          x = data,
+          y = target,
+          probability = self$predict_type == "prob",
+          .args = pars
+        )
+      }
 
       self
     },
@@ -58,10 +70,10 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
       response = prob = NULL
       levs = as.character(task$class_names)
 
-      probs = invoke(predict, self$model, newdata = newdata, probability = self$predict_type == "prob")#, .args = pars)
+      probs = invoke(predict, self$model, newdata = newdata, probability = self$predict_type == "prob", .args = pars)
 
       if (self$predict_type == "prob") {
-        prob = probs
+        prob = attr(probs, "probabilities")
       } else {
         response = probs
       }
