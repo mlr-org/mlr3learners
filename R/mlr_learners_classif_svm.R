@@ -26,7 +26,7 @@ LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
             ParamLgl$new(id = "shrinking", default = TRUE),
             ParamInt$new(id = "cross", default = 0L, lower = 0L), #tunable = FALSE),
             ParamLgl$new(id = "fitted", default = TRUE), #tunable = FALSE),
-            ParamLgl$new(id = "scale", default = TRUE)#, tunable = TRUE) # <- gehen so vektorparameter ?
+            ParamUty$new(id = "scale", default = TRUE)#, tunable = TRUE) # <- gehen so vektorparameter ?
           )
         ),
         predict_types = c("response", "prob"),
