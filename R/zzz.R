@@ -13,11 +13,13 @@
   mlr_learners$add("classif.glmnet", LearnerClassifGlmnet)
   mlr_learners$add("classif.xgboost", LearnerClassifXgboost)
   mlr_learners$add("classif.kknn", LearnerClassifKKNN)
+  mlr_learners$add("classif.svm", LearnerClassifSvm)
 
   # regression learners
   mlr_learners$add("regr.lm", LearnerRegrLm)
   mlr_learners$add("regr.ranger", LearnerRegrRanger)
   mlr_learners$add("regr.glmnet", LearnerRegrGlmnet)
   mlr_learners$add("regr.xgboost", LearnerRegrXgboost)
+  mlr_learners$add("regr.svm", LearnerRegrSvm)
   mlr_learners$add("regr.kknn", LearnerRegrKKNN)
 } # nocov end
