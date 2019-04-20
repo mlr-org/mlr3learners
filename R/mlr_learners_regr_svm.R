@@ -37,14 +37,10 @@ LearnerRegrSvm = R6Class("LearnerRegrSvm", inherit = LearnerRegr,
 
     train = function(task) {
       pars = self$params("train")
-      data = as.matrix(task$data(cols = task$feature_names))
-      target = as.matrix(task$data(cols = task$target_names))
-
-      browser()
 
       self$model = invoke(e1071::svm,
-        x = data,
-        y = target,
+        x = as.matrix(task$data(cols = task$feature_names)),
+        y = task$truth(),
         .args = pars
       )
 
@@ -60,4 +56,3 @@ LearnerRegrSvm = R6Class("LearnerRegrSvm", inherit = LearnerRegr,
     }
   )
 )
-
