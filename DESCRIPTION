@@ -29,7 +29,6 @@ Suggests:
     mlbench,
     ranger,
     rmarkdown,
-    rpart,
     testthat,
     withr,
     xgboost
