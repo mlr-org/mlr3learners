@@ -20,7 +20,7 @@ It's still work in progress.
 | SVM                           | e1071            |                |              |
 | Random Forest                 | ranger           | x              | x            |
 | Boosting                      | xgboost          | x              | x            |
-| Kriging                       | DiceKriging      |                |              |
+| Kriging                       | DiceKriging      | -              | x            |
 
 
 How to add a learner: [Tutorial](https://mlr-org.github.io/mlr3learners/index.html)
