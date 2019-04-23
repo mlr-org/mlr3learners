@@ -20,6 +20,7 @@ Imports:
     paradox,
     R6
 Suggests:
+    DiceKriging,
     e1071,
     glmnet,
     kknn,
