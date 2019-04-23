@@ -31,7 +31,9 @@ Suggests:
     rpart,
     testthat,
     withr,
-    xgboost
+    xgboost,
+    DiceKriging,
+    rgenoud
 Remotes:
     mlr-org/mlr3,
     mlr-org/paradox

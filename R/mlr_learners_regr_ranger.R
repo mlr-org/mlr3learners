@@ -1,7 +1,7 @@
 #' @title Ranger Regression Learner
 #'
-#' @name mlr_learners_classif.ranger
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#' @name mlr_learners_regr.ranger
+#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
 #' Random regression forest.
@@ -22,7 +22,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
             ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
             ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
             ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
-            # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
+            # ParamDbl$new(id = "class.weights", default = NULL, tags = "train"), #
             ParamFct$new(id = "splitrule", levels = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
             ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
             ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
