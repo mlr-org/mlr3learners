@@ -11,16 +11,18 @@ It's still work in progress.
 ### Planned/Implemented learners
 
 
-| Name                          | package          | Classification  | Regression  |
-|:------------------------------|:-----------------| :-------------:|:------------:|
-| Linear / Logistic Regression  | stats            | x              | x            |
-| Penalized Regression          | glmnet           | x              | x            |
-| kNN                           | kknn             | x              | x            |
-| Naive Bayes                   | e1071            | x              | -            |
-| SVM                           | e1071            |                |              |
-| Random Forest                 | ranger           | x              | x            |
-| Boosting                      | xgboost          | x              | x            |
-| Kriging                       | DiceKriging      |                |              |
+| Learner                          | Package                                                       | Classification | Regression |
+| :------------------------------- | :------------------------------------------------------------ | :------------  | :--------- |
+| Linear / Logistic Regression     | stats                                                         | x              | x          |
+| Penalized Regression             | [glmnet](https://cran.r-project.org/package=glmnet)           | x              | x          |
+| kNN                              | [kknn](https://cran.r-project.org/package=kknn)               | x              | x          |
+| Naive Bayes                      | [e1071](https://cran.r-project.org/package=e1071)             | x              | -          |
+| SVM                              | [e1071](https://cran.r-project.org/package=e1071)             | x              | x          |
+| Random Forest                    | [ranger](https://cran.r-project.org/package=ranger)           | x              | x          |
+| Boosting                         | [xgboost](https://cran.r-project.org/package=xgboost)         | x              | x          |
+| Kriging                          | [DiceKriging](https://cran.r-project.org/package=DiceKriging) | -              | x          |
+| LDA                              | [MASS](https://cran.r-project.org/package=MASS)               | x              | -          |
+| QDA                              | [MASS](https://cran.r-project.org/package=MASS)               | x              | x          |
 
 
 How to add a learner: [Tutorial](https://mlr-org.github.io/mlr3learners/index.html)
