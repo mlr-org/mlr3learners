@@ -73,20 +73,3 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     }
   )
 )
-
-if (FALSE) {
-  lrn = LearnerRegrKM$new()
-  lrn$predict_type = "se"
-  task = mlr_tasks$get("mtcars")
-  e = Experiment$new(task, lrn)
-  lrn$param_set
-  lrn$param_set$values = list(type = "SK", jitter = 1e-12, nugget.stability = 1e-8)
-
-  e$train()
-  e$model
-  e$predict()
-  e$prediction
-  e$prediction$se
-  e$score()
-  e$performance
-}
