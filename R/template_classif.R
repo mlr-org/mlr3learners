@@ -1,6 +1,6 @@
 #' @title [Your learner name] Classification Learner
 #'
-#' @name mlr_learners_classif.[learner abbreviation]
+#' @name mlr_learners_classif.template
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
@@ -32,7 +32,7 @@ LearnerClassifTEMPLATE = R6Class("LearnerClassifTEMPLATE", inherit = LearnerClas
     },
 
     predict = function(task) {
-      # TODO: Predict here.
+      # TODO: Predict here and store result in `response` and `prob` (can be null if self$predict_type != "prob").
       PredictionClassif$new(task, response, prob)
     }
   )

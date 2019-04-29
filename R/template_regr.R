@@ -30,8 +30,8 @@ LearnerRegrTEMPLATE = R6Class("LearnerRegrTEMPLATE", inherit = LearnerRegr,
     },
 
     predict = function(task) {
-      # TODO: Predict here.
-      PredictionRegr$new(task, response = m$fitted.values)
+      # TODO: Predict here and store result in `response`.
+      PredictionRegr$new(task, response)
     }
   )
 )
