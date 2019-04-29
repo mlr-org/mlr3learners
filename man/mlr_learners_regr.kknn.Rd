@@ -10,6 +10,7 @@
 LearnerRegrKKNN
 }
 \description{
-A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for a regression k-Nearest-Neighbor implemented in \code{\link[kknn:kknn]{kknn::kknn()}} in package \CRANpkg{kknn}.
+k-Nearest-Neighbor regression.
+Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
 \keyword{datasets}

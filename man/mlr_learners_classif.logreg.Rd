@@ -10,6 +10,7 @@
 LearnerClassifLogReg
 }
 \description{
-A \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} for a classification logistic regression implemented in \code{\link[stats:glm]{stats::glm()}}.
+Classification via logistic regression.
+Calls \code{\link[stats:glm]{stats::glm()}}.
 }
 \keyword{datasets}

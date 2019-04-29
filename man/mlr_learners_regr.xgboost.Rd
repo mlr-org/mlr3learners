@@ -10,6 +10,7 @@
 LearnerRegrXgboost
 }
 \description{
-A \link[mlr3:LearnerRegr]{mlr3::LearnerRegr} for eXtreme Gradient Boosting implemented in \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} in package \CRANpkg{xgboost}.
+eXtreme Gradient Boosting regression.
+Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
 \keyword{datasets}

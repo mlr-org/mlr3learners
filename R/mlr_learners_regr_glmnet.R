@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
-#' A [mlr3::LearnerRegr] for a regression GLM with elastic net regularization implemented in [glmnet::cv.glmnet()] in package \CRANpkg{glmnet}.
+#' Generalized linear models with elastic net regularization.
+#' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
 #' @export
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,

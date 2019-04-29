@@ -4,7 +4,8 @@
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' A [mlr3::LearnerClassif] for a classification logistic regression implemented in [stats::glm()].
+#' Classification via logistic regression.
+#' Calls [stats::glm()].
 #'
 #' @export
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
