@@ -5,22 +5,8 @@
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
 "_PACKAGE"
 
-.onLoad = function(libname, pkgname) { # nocov start
-  # classification learners
-  mlr_learners$add("classif.glmnet", LearnerClassifGlmnet)
-  mlr_learners$add("classif.kknn", LearnerClassifKKNN)
-  mlr_learners$add("classif.lda", LearnerClassifLDA)
-  mlr_learners$add("classif.logreg", LearnerClassifLogReg)
-  mlr_learners$add("classif.ranger", LearnerClassifRanger)
-  mlr_learners$add("classif.svm", LearnerClassifSvm)
-  mlr_learners$add("classif.xgboost", LearnerClassifXgboost)
 
-  # regression learners
-  mlr_learners$add("regr.glmnet", LearnerRegrGlmnet)
-  mlr_learners$add("regr.kknn", LearnerRegrKKNN)
-  mlr_learners$add("regr.km", LearnerRegrKM)
-  mlr_learners$add("regr.lm", LearnerRegrLm)
-  mlr_learners$add("regr.ranger", LearnerRegrRanger)
-  mlr_learners$add("regr.svm", LearnerRegrSvm)
-  mlr_learners$add("regr.xgboost", LearnerRegrXgboost)
+.onLoad = function(libname, pkgname) { # nocov start
+  populate_dictionaries()
+  setHook(packageEvent("mlr3", "onLoad"), function(...) populate_dictionaries(), action = "append")
 } # nocov end
