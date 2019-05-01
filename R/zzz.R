@@ -5,7 +5,7 @@
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
 "_PACKAGE"
 
-populate_dictionaries = function() {
+register_package = function() {
   x = getFromNamespace("mlr_learners", ns = "mlr3")
 
   # classification learners
@@ -28,6 +28,13 @@ populate_dictionaries = function() {
 }
 
 .onLoad = function(libname, pkgname) { # nocov start
-  populate_dictionaries()
-  setHook(packageEvent("mlr3", "onLoad"), function(...) populate_dictionaries(), action = "append")
+  register_package()
+  setHook(packageEvent("mlr3", "onLoad"), function(...) register_package(), action = "append")
+} # nocov end
+
+.onUnload = function(libpath) { # nocov start
+  event = packageEvent("mlr3", "onLoad")
+  hooks = getHook(event)
+  pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)
+  setHook(event, hooks[pkgname != "mlr3learners"], action = "replace")
 } # nocov end
