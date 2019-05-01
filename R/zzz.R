@@ -5,7 +5,7 @@
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
 "_PACKAGE"
 
-register_package = function() {
+register_mlr3 = function() {
   x = getFromNamespace("mlr_learners", ns = "mlr3")
 
   # classification learners
@@ -28,8 +28,8 @@ register_package = function() {
 }
 
 .onLoad = function(libname, pkgname) { # nocov start
-  register_package()
-  setHook(packageEvent("mlr3", "onLoad"), function(...) register_package(), action = "append")
+  register_mlr3()
+  setHook(packageEvent("mlr3", "onLoad"), function(...) register_mlr3(), action = "append")
 } # nocov end
 
 .onUnload = function(libpath) { # nocov start
