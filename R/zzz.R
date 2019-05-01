@@ -6,7 +6,7 @@
 "_PACKAGE"
 
 register_mlr3 = function() {
-  x = getFromNamespace("mlr_learners", ns = "mlr3")
+  x = utils::getFromNamespace("mlr_learners", ns = "mlr3")
 
   # classification learners
   x$add("classif.glmnet", LearnerClassifGlmnet)
