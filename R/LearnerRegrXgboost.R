@@ -1,6 +1,6 @@
 #' @title Extreme Gradient Boosting Regressiong Learner
 #'
-#' @name mlr_learners_regr.xgboost
+#' @aliases mlr_learners_regr.xgboost
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description

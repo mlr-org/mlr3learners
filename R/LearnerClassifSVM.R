@@ -1,13 +1,13 @@
 #' @title Support Vector Machine
 #'
-#' @name mlr_learners_classif.svm
+#' @aliases mlr_learners_classif.svm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
 #' A learner for a classification support vector machine implemented in [e1071::svm()].
 #'
 #' @export
-LearnerClassifSvm = R6Class("LearnerClassifSvm", inherit = LearnerClassif,
+LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.svm") {
       super$initialize(

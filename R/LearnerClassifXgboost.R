@@ -1,6 +1,6 @@
 #' @title Extreme Gradiant Boosting Classification Learner
 #'
-#' @name mlr_learners_classif.xgboost
+#' @aliases mlr_learners_classif.xgboost
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description

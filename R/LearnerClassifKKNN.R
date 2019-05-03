@@ -1,16 +1,16 @@
-#' @title k-Nearest-Neighbor Regression Learner
+#' @title k-Nearest-Neighbor Classification Learner
 #'
-#' @name mlr_learners_regr.kknn
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#' @aliases mlr_learners_classif.kknn
+#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' k-Nearest-Neighbor regression.
+#' k-Nearest-Neighbor classification.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @export
-LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
+LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "regr.kknn") {
+    initialize = function(id = "classif.kknn") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(
@@ -22,7 +22,9 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
             ParamLgl$new(id = "scale", default = TRUE, tags = "predict")
           )
         ),
+        predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
+        properties = c("twoclass", "multiclass"),
         packages = c("withr", "kknn")
       )
     },
@@ -37,7 +39,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
         m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
       })
       self$model = NULL
-      PredictionRegr$new(task, response = m$fitted.values)
+      PredictionClassif$new(task, response = m$fitted.values, prob = m$prob)
     }
   )
 )

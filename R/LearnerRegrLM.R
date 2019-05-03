@@ -1,6 +1,6 @@
 #' @title Linear Model Regression Learner
 #'
-#' @name mlr_learners_regr.lm
+#' @aliases mlr_learners_regr.lm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
@@ -8,7 +8,7 @@
 #' Calls [stats::lm()].
 #'
 #' @export
-LearnerRegrLm = R6Class("LearnerRegrLm", inherit = LearnerRegr,
+LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.lm", predict_type = "response") {
       super$initialize(

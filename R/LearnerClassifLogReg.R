@@ -1,6 +1,6 @@
 #' @title Logistic Regression Classification Learner
 #'
-#' @name mlr_learners_classif.logreg
+#' @aliases mlr_learners_classif.log_reg
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
@@ -10,7 +10,7 @@
 #' @export
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.logreg") {
+    initialize = function(id = "classif.log_reg") {
       super$initialize(
         id = id,
         predict_types = c("response", "prob"),

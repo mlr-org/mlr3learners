@@ -1,4 +1,4 @@
-# helper for classif.logreg
+# helper for classif.log_reg
 # p = probabilites for levs[1] => matrix with probs for levs[1] and levs[2]
 propVectorToMatrix = function(p, levs) {
   checkmate::assert_numeric(p)

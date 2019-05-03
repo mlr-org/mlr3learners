@@ -1,6 +1,6 @@
 #' @title Kriging Regression Learner
 #'
-#' @name mlr_learners_regr.km
+#' @aliases mlr_learners_regr.km
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description

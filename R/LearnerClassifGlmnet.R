@@ -1,6 +1,6 @@
 #' @title GLM with Elastic Net Regularization Classification Learner
 #'
-#' @name mlr_learners_classif.glmnet
+#' @aliases mlr_learners_classif.glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description

@@ -1,4 +1,4 @@
-context("classif.logreg")
+context("classif.log_reg")
 
 test_that("autotest", {
   learner = LearnerClassifLogReg$new()

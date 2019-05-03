@@ -1,22 +1,22 @@
-#' @title Quadratic Discriminant Analysis Classification Learner
+#' @title Linear Discriminant Analysis Classification Learner
 #'
-#' @name mlr_learners_classif.qda
+#' @aliases mlr_learners_classif.lda
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
-#' Quadratic discriminant analysis.
-#' Calls [MASS::qda()] from package \CRANpkg{MASS}.
+#' Linear discriminant analysis.
+#' Calls [MASS::lda()] from package \CRANpkg{MASS}.
 #'
 #' @export
-LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
+LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.qda") {
+    initialize = function(id = "classif.lda") {
       super$initialize(
         id = id,
         param_set = ParamSet$new(
           params = list(
             ParamFct$new(id = "method", default = "moment", levels = c("moment", "mle", "mve", "t"), tags = "train"),
-            ParamFct$new(id = "predict.method", default = "plug-in", levels = c("plug-in", "predictive", "debiased", "looCV"), tags = "predict")
+            ParamFct$new(id = "predict.method", default = "plug-in", levels = c("plug-in", "predictive", "debiased"), tags = "predict")
           )
         ),
         predict_types = c("response", "prob"),
@@ -28,7 +28,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
 
     train = function(task) {
       f = task$formula()
-      self$model = invoke(MASS::qda, f, data = task$data(), .args = self$params("train"))
+      self$model = invoke(MASS::lda, f, data = task$data(), .args = self$params("train"))
       self
     },
 
@@ -38,10 +38,9 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
         pars$predict = pars$predict.method
         pars$predict.method = NULL
       }
-
       response = prob = NULL
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model, newdata = newdata, .args = pars)
+      p = invoke(predict, self$model, newdata = newdata, .args = self$params("predict"))
 
       if (self$predict_type == "response")
         response = p$class

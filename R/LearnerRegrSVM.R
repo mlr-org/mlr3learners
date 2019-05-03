@@ -1,13 +1,13 @@
 #' @title Support Vector Machine
 #'
-#' @name mlr_learners_regr.svm
+#' @aliases mlr_learners_regr.svm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @description
 #' A learner for a regression support vector machine implemented in [e1071::svm()].
 #'
 #' @export
-LearnerRegrSvm = R6Class("LearnerRegrSvm", inherit = LearnerRegr,
+LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.svm") {
       super$initialize(

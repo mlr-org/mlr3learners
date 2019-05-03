@@ -1,6 +1,6 @@
 #' @title Naive Bayes Classification Learner
 #'
-#' @name mlr_learners_classif.naive_bayes
+#' @aliases mlr_learners_classif.naive_bayes
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
