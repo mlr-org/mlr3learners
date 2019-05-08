@@ -1,6 +1,6 @@
 #' @title Ranger Regression Learner
 #'
-#' @aliases mlr_learners_classif.ranger
+#' @aliases mlr_learners_regr.ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @description
