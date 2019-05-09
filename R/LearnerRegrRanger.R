@@ -28,9 +28,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
             ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
             ParamUty$new(id = "always.split.variables", tags = "train"),
             ParamFct$new(id = "respect.unordered.factors", levels = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
-            ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), #requires = quote(importance == "permutation")
+            ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), # requires = quote(importance == "permutation")
             ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
-            ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), #FIXME: do we need this?
+            ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), # FIXME: do we need this?
             ParamInt$new(id = "num.threads", lower = 1L, tags = c("train", "predict")),
             ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
             ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
@@ -74,16 +74,17 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     },
 
     importance = function() {
-      if (is.null(self$model))
+      if (is.null(self$model)) {
         stopf("No model stored")
-      if (self$model$importance.mode == "none")
+      }
+      if (self$model$importance.mode == "none") {
         stopf("No importance stored")
+      }
 
       sort(self$model$variable.importance, decreasing = TRUE)
     },
 
     oob_error = function() {
       mod$prediction.error
-    }
-  )
+    })
 )

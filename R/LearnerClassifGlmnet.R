@@ -53,11 +53,13 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
     },
 
     train = function(task) {
+
       pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
-      if ("weights" %in% task$properties)
-         pars$weights = task$weights$weight
+      if ("weights" %in% task$properties) {
+        pars$weights = task$weights$weight
+      }
       pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
 
       saved_ctrl = glmnet::glmnet.control()
@@ -108,7 +110,5 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       }
 
       PredictionClassif$new(task, response, prob)
-    }
-  )
+    })
 )
-

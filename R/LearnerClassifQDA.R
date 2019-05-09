@@ -33,6 +33,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
     },
 
     predict = function(task) {
+
       pars = self$params("predict")
       if (!is.null(pars$predict.method)) {
         pars$predict = pars$predict.method
@@ -43,12 +44,13 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
       newdata = task$data(cols = task$feature_names)
       p = invoke(predict, self$model, newdata = newdata, .args = pars)
 
-      if (self$predict_type == "response")
+      if (self$predict_type == "response") {
         response = p$class
-      if (self$predict_type == "prob")
+      }
+      if (self$predict_type == "prob") {
         prob = p$posterior
+      }
 
       PredictionClassif$new(task, response, prob)
-    }
-  )
+    })
 )

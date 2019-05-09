@@ -22,8 +22,9 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
 
     train = function(task) {
       pars = self$params("train")
-      if ("weights" %in% task$properties)
+      if ("weights" %in% task$properties) {
         pars = insert_named(pars, list(weights = task$weights$weight))
+      }
 
       self$model = invoke(stats::lm,
         formula = task$formula(),
@@ -50,6 +51,5 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
 
     plot = function() {
       plot(self$model)
-    }
-  )
+    })
 )

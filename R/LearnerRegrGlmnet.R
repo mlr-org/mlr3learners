@@ -54,11 +54,13 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
     },
 
     train = function(task) {
+
       pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
-      if ("weights" %in% task$properties)
+      if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
+      }
 
       saved_ctrl = glmnet::glmnet.control()
       on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
@@ -88,7 +90,5 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         .args = pars))
 
       PredictionRegr$new(task, response)
-    }
-  )
+    })
 )
-

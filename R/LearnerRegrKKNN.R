@@ -18,7 +18,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
             ParamInt$new(id = "k", default = 7L, lower = 1L, tags = "predict"),
             ParamDbl$new(id = "distance", default = 2, lower = 0, tags = "predict"),
             ParamFct$new(id = "kernel", levels = c("rectangular", "triangular", "epanechnikov", "biweight",
-          "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "predict"),
+              "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "predict"),
             ParamLgl$new(id = "scale", default = TRUE, tags = "predict")
           )
         ),
@@ -38,6 +38,5 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
       })
       self$model = NULL
       PredictionRegr$new(task, response = m$fitted.values)
-    }
-  )
+    })
 )

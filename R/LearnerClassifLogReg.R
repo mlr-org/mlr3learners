@@ -22,8 +22,9 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
 
     train = function(task) {
       pars = self$params("train")
-      if ("weights" %in% task$properties)
+      if ("weights" %in% task$properties) {
         pars = insert_named(pars, list(weights = task$weights$weight))
+      }
 
       self$model = invoke(stats::glm,
         formula = task$formula(),
@@ -35,6 +36,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
     },
 
     predict = function(task) {
+
       newdata = task$data(cols = task$feature_names)
       response = prob = NULL
 
@@ -49,6 +51,5 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       }
 
       PredictionClassif$new(task, response, prob)
-    }
-  )
+    })
 )

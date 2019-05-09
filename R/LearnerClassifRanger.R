@@ -28,7 +28,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
             ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
             ParamUty$new(id = "always.split.variables", tags = "train"),
             ParamFct$new(id = "respect.unordered.factors", levels = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
-            ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), #requires = quote(importance == "permutation")
+            ParamLgl$new(id = "scale.permutation.importance", default = FALSE, tags = "train"), # requires = quote(importance == "permutation")
             ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
             ParamLgl$new(id = "holdout", default = FALSE, tags = "train"),
             ParamInt$new(id = "num.threads", lower = 1L, tags = c("train", "predict")),
@@ -63,25 +63,28 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       preds = invoke(predict, self$model, data = newdata,
         predict.type = "response", .args = pars)
 
-      if (self$predict_type == "response")
+      if (self$predict_type == "response") {
         response = preds$predictions
-      if (self$predict_type == "prob")
+      }
+      if (self$predict_type == "prob") {
         prob = preds$predictions
+      }
 
       PredictionClassif$new(task, response, prob)
     },
 
     importance = function() {
-      if (is.null(self$model))
+      if (is.null(self$model)) {
         stopf("No model stored")
-      if (self$model$importance.mode == "none")
+      }
+      if (self$model$importance.mode == "none") {
         stopf("No importance stored")
+      }
 
       sort(self$model$variable.importance, decreasing = TRUE)
     },
 
     oob_error = function() {
       mod$prediction.error
-    }
-  )
+    })
 )

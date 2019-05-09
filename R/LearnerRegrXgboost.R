@@ -37,25 +37,25 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
             ParamDbl$new(id = "missing", default = NA, tags = c("train", "predict"),
               special_vals = list(NA, NA_real_, NULL)),
             ParamInt$new(id = "monotone_constraints", default = 0, lower = -1, upper = 1, tags = "train"),
-            ParamDbl$new(id = "tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"), #, requires = quote(objective == "reg:tweedie")
+            ParamDbl$new(id = "tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"), # , requires = quote(objective == "reg:tweedie")
             ParamInt$new(id = "nthread", lower = 1L, tags = "train"),
             ParamInt$new(id = "nrounds", default = 1L, lower = 1L, tags = "train"),
             # FIXME nrounds seems to have no default in xgboost(), if it has 1, par.vals is redundant
             ParamUty$new(id = "feval", default = NULL, tags = "train"),
             ParamInt$new(id = "verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
-            ParamInt$new(id = "print_every_n", default = 1L, lower = 1L, tags = "train"), #, requires = quote(verbose == 1L)
+            ParamInt$new(id = "print_every_n", default = 1L, lower = 1L, tags = "train"), # , requires = quote(verbose == 1L)
             ParamInt$new(id = "early_stopping_rounds", default = NULL, lower = 1L, special_vals = list(NULL), tags = "train"),
             ParamLgl$new(id = "maximize", default = NULL, special_vals = list(NULL), tags = "train"),
-            ParamFct$new(id = "sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"), #, requires = quote(booster == "dart")
-            ParamFct$new(id = "normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"), #, requires = quote(booster == "dart")
-            ParamDbl$new(id = "rate_drop", default = 0, lower = 0, upper = 1, tags = "train"), #, requires = quote(booster == "dart")
-            ParamDbl$new(id = "skip_drop", default = 0, lower = 0, upper = 1, tags = "train"), #, requires = quote(booster == "dart")
+            ParamFct$new(id = "sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"), # , requires = quote(booster == "dart")
+            ParamFct$new(id = "normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"), # , requires = quote(booster == "dart")
+            ParamDbl$new(id = "rate_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
+            ParamDbl$new(id = "skip_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
             # TODO: uncomment the following after the next CRAN update, and set max_depth's lower = 0L
-            #ParamLgl$new(id = "one_drop", default = FALSE, requires = quote(booster == "dart")),
-            #ParamFct$new(id = "tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
-            #ParamFct$new(id = "grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
-            #ParamInt$new(id = "max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
-            #ParamInt$new(id = "max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
+            # ParamLgl$new(id = "one_drop", default = FALSE, requires = quote(booster == "dart")),
+            # ParamFct$new(id = "tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
+            # ParamFct$new(id = "grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
+            # ParamInt$new(id = "max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
+            # ParamInt$new(id = "max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
             ParamUty$new(id = "callbacks", default = list(), tags = "train")
           )
         ),
@@ -67,10 +67,12 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
     },
 
     train = function(task) {
+
       pars = self$params("train")
 
-      if (is.null(pars$objective))
+      if (is.null(pars$objective)) {
         pars$objective = "reg:linear"
+      }
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
@@ -80,8 +82,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         xgboost::setinfo(pars$data, "weight", task$weights$weight)
       }
 
-      if (is.null(pars$watchlist))
+      if (is.null(pars$watchlist)) {
         pars$watchlist = list(train = pars$data)
+      }
 
       self$model = invoke(xgboost::xgb.train,
         .args = pars
@@ -103,14 +106,14 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
     },
 
     importance = function() {
-      if (is.null(self$model))
+      if (is.null(self$model)) {
         stopf("No model stored")
+      }
 
       imp = xgboost::xgb.importance(
         feature_names = self$model$features,
         model = self$model
       )
       set_names(imp$Gain, imp$Feature)
-    }
-  )
+    })
 )
