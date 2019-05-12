@@ -110,5 +110,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       }
 
       PredictionClassif$new(task, response, prob)
-    })
+    }
+  )
 )

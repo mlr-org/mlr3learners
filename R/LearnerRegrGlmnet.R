@@ -90,5 +90,6 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         .args = pars))
 
       PredictionRegr$new(task, response)
-    })
+    }
+  )
 )

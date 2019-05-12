@@ -51,5 +51,6 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       }
 
       PredictionClassif$new(task, response, prob)
-    })
+    }
+  )
 )

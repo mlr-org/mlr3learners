@@ -38,5 +38,6 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
       })
       self$model = NULL
       PredictionRegr$new(task, response = m$fitted.values)
-    })
+    }
+  )
 )

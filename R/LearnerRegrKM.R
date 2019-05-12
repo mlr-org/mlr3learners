@@ -72,5 +72,6 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       )
 
       PredictionRegr$new(task, response = preds$mean, se = preds$sd)
-    })
+    }
+  )
 )

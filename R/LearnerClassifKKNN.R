@@ -40,5 +40,6 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
       })
       self$model = NULL
       PredictionClassif$new(task, response = m$fitted.values, prob = m$prob)
-    })
+    }
+  )
 )

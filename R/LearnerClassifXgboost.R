@@ -163,5 +163,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         model = self$model
       )
       set_names(imp$Gain, imp$Feature)
-    })
+    }
+  )
 )

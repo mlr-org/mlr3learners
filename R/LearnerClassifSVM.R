@@ -57,5 +57,6 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
       prob = attr(response, "probabilities") # is NULL if not requested in line before
 
       PredictionClassif$new(task, response, prob)
-    })
+    }
+  )
 )

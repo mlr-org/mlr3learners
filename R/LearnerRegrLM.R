@@ -51,5 +51,6 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
 
     plot = function() {
       plot(self$model)
-    })
+    }
+  )
 )

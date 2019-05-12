@@ -43,5 +43,6 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
         prob = predict(self$model, newdata = newdata, type = "raw")
       }
       PredictionClassif$new(task, response = response, prob = prob)
-    })
+    }
+  )
 )

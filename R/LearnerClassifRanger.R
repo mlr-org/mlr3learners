@@ -86,5 +86,6 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
 
     oob_error = function() {
       mod$prediction.error
-    })
+    }
+  )
 )

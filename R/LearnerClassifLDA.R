@@ -51,5 +51,6 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
       }
 
       PredictionClassif$new(task, response, prob)
-    })
+    }
+  )
 )
