@@ -23,13 +23,13 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
           )
         ),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
+        properties = "updates_model",
         packages = c("withr", "kknn")
       )
     },
 
     train = function(task) {
-      self$model = task$data()
-      self
+      task$data()
     },
 
     predict = function(task) {
@@ -37,7 +37,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
         m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
       })
       self$model = NULL
-      PredictionRegr$new(task, response = m$fitted.values)
+      list(response = m$fitted.values)
     }
   )
 )

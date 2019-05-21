@@ -38,11 +38,11 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
             ParamDbl$new(id = "devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "big", default = 9.9e35, tags = "train"),
-            ParamInt$new(id = "mnlam", default = 5, lower = 1, tags = "train"),
+            ParamInt$new(id = "mnlam", default = 5, lower = 1L, tags = "train"),
             ParamDbl$new(id = "pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "exmx", default = 250.0, tags = "train"),
             ParamDbl$new(id = "prec", default = 1e-10, tags = "train"),
-            ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
+            ParamInt$new(id = "mxit", default = 100L, lower = 1L, tags = "train")
           )
         ),
         predict_types = c("response", "prob"),
@@ -72,44 +72,27 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         pars = pars[!is_ctrl_pars]
       }
 
-      self$model = invoke(glmnet::cv.glmnet,
-        x = data,
-        y = target,
-        .args = pars
-      )
-      self
+      invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
     predict = function(task) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
-      response = prob = NULL
 
-      if (self$predict_type == "prob") {
-        prob = invoke(predict,
-          self$model,
-          newx = newdata,
-          type = "response",
-          .args = pars
-        )
+      if (self$predict_type == "response") {
+        response = invoke(predict, self$model, newx = newdata, type = "class", .args = pars)
+        list(response = drop(response))
+      } else {
+        prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
 
         if (length(task$class_names) == 2L) {
           prob = cbind(prob, 1 - prob)
           colnames(prob) = task$class_names
         } else {
-          prob = prob[, , 1]
+          prob = prob[, , 1L]
         }
-      } else {
-        response = drop(invoke(predict,
-          self$model,
-          newx = newdata,
-          type = "class",
-          .args = pars)
-        )
-        response = factor(response, levels = task$class_names)
+        list(prob = prob)
       }
-
-      PredictionClassif$new(task, response, prob)
     }
   )
 )

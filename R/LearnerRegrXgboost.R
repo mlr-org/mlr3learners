@@ -36,7 +36,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
             ParamDbl$new(id = "max_delta_step", lower = 0, default = 0, tags = "train"),
             ParamDbl$new(id = "missing", default = NA, tags = c("train", "predict"),
               special_vals = list(NA, NA_real_, NULL)),
-            ParamInt$new(id = "monotone_constraints", default = 0, lower = -1, upper = 1, tags = "train"),
+            ParamInt$new(id = "monotone_constraints", default = 0L, lower = -1L, upper = 1L, tags = "train"),
             ParamDbl$new(id = "tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"), # , requires = quote(objective == "reg:tweedie")
             ParamInt$new(id = "nthread", lower = 1L, tags = "train"),
             ParamInt$new(id = "nrounds", default = 1L, lower = 1L, tags = "train"),
@@ -67,7 +67,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
     },
 
     train = function(task) {
-
       pars = self$params("train")
 
       if (is.null(pars$objective)) {
@@ -76,33 +75,24 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      pars$data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
+      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
 
       if ("weights" %in% task$properties) {
-        xgboost::setinfo(pars$data, "weight", task$weights$weight)
+        xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
       if (is.null(pars$watchlist)) {
-        pars$watchlist = list(train = pars$data)
+        pars$watchlist = list(train = data)
       }
 
-      self$model = invoke(xgboost::xgb.train,
-        .args = pars
-      )
-      self
+      invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
     predict = function(task) {
       pars = self$params("predict")
-      newdata = task$data(cols = task$feature_names)
 
-      response = invoke(predict,
-        self$model,
-        newdata = data.matrix(newdata),
-        .args = pars
-      )
-
-      PredictionRegr$new(task, response)
+      newdata = data.matrix(task$data(cols = task$feature_names))
+      list(response = invoke(predict, self$model, newdata = newdata, .args = pars))
     },
 
     importance = function() {

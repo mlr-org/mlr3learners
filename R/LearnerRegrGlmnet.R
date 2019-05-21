@@ -39,11 +39,11 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
             ParamDbl$new(id = "devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "big", default = 9.9e35, tags = "train"),
-            ParamInt$new(id = "mnlam", default = 5, lower = 1, tags = "train"),
+            ParamInt$new(id = "mnlam", default = 5L, lower = 1L, tags = "train"),
             ParamDbl$new(id = "pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
             ParamDbl$new(id = "exmx", default = 250.0, tags = "train"),
             ParamDbl$new(id = "prec", default = 1e-10, tags = "train"),
-            ParamInt$new(id = "mxit", default = 100L, lower = 1, tags = "train")
+            ParamInt$new(id = "mxit", default = 100L, lower = 1L, tags = "train")
           )
         ),
         param_vals = list(family = "gaussian"),
@@ -54,7 +54,6 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
     },
 
     train = function(task) {
-
       pars = self$params("train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
@@ -65,31 +64,22 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       saved_ctrl = glmnet::glmnet.control()
       on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
       glmnet::glmnet.control(factory = TRUE)
-      is_ctrl_pars = names(pars) %in% names(saved_ctrl)
+      is_ctrl_pars = (names(pars) %in% names(saved_ctrl))
 
       if (any(is_ctrl_pars)) {
         do.call(glmnet::glmnet.control, pars[is_ctrl_pars])
         pars = pars[!is_ctrl_pars]
       }
 
-      self$model = invoke(glmnet::cv.glmnet,
-        x = data,
-        y = target,
-        .args = pars
-      )
-      self
+      invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
     predict = function(task) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
-      response = drop(invoke(predict,
-        self$model,
-        newx = newdata,
-        type = "response",
-        .args = pars))
 
-      PredictionRegr$new(task, response)
+      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+      list(response = drop(response))
     }
   )
 )

@@ -28,29 +28,23 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
 
     train = function(task) {
       f = task$formula()
-      self$model = invoke(MASS::lda, f, data = task$data(), .args = self$params("train"))
-      self
+      invoke(MASS::lda, f, data = task$data(), .args = self$params("train"))
     },
 
     predict = function(task) {
-
       pars = self$params("predict")
       if (!is.null(pars$predict.method)) {
-        pars$predict = pars$predict.method
+        pars$method = pars$predict.method
         pars$predict.method = NULL
       }
-      response = prob = NULL
       newdata = task$data(cols = task$feature_names)
       p = invoke(predict, self$model, newdata = newdata, .args = self$params("predict"))
 
       if (self$predict_type == "response") {
-        response = p$class
+        list(response = p$class)
+      } else {
+        list(prob = p$posterior)
       }
-      if (self$predict_type == "prob") {
-        prob = p$posterior
-      }
-
-      PredictionClassif$new(task, response, prob)
     }
   )
 )

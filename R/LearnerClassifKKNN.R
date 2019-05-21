@@ -24,14 +24,13 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
         ),
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        properties = c("twoclass", "multiclass"),
+        properties = c("twoclass", "multiclass", "updates_model"),
         packages = c("withr", "kknn")
       )
     },
 
     train = function(task) {
-      self$model = task$data()
-      self
+      task$data()
     },
 
     predict = function(task) {
@@ -39,7 +38,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
         m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
       })
       self$model = NULL
-      PredictionClassif$new(task, response = m$fitted.values, prob = m$prob)
+      list(response = m$fitted.values, prob = m$prob)
     }
   )
 )
