@@ -37,22 +37,13 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
 
     train = function(task) {
       pars = self$params("train")
-
-      self$model = invoke(e1071::svm,
-        x = as.matrix(task$data(cols = task$feature_names)),
-        y = task$truth(),
-        .args = pars
-      )
-
-      self
+      invoke(e1071::svm, x = as.matrix(task$data(cols = task$feature_names)), y = task$truth(), .args = pars)
     },
 
     predict = function(task) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
-      response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars)
-
-      PredictionRegr$new(task, response)
+      list(response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars))
     }
   )
 )

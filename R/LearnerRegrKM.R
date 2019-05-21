@@ -45,13 +45,12 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         pars$nugget = if (ns == 0) 0 else ns * var(truth)
       }
 
-      self$model = invoke(DiceKriging::km,
+      invoke(DiceKriging::km,
         response = task$truth(),
         design = data,
         control = list(trace = FALSE),
         .args = remove_named(pars, "nugget.stability")
       )
-      self
     },
 
     predict = function(task) {
@@ -63,7 +62,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         newdata = newdata + rnorm(length(newdata), mean = 0, sd = jitter)
       }
 
-      preds = invoke(DiceKriging::predict.km,
+      p = invoke(DiceKriging::predict.km,
         self$model,
         newdata = newdata,
         type = pars$type %??% "SK",
@@ -71,7 +70,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         .args = remove_named(pars, "jitter")
       )
 
-      PredictionRegr$new(task, response = preds$mean, se = preds$sd)
+      list(response = p$mean, se = p$sd)
     }
   )
 )
