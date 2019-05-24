@@ -59,10 +59,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       )
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
-      preds = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pars)
+      preds = invoke(predict, model, data = newdata, type = self$predict_type, .args = pars)
       list(response = preds$predictions, se = preds$se)
     },
 

@@ -74,11 +74,11 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
-      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+      response = invoke(predict, model, newx = newdata, type = "response", .args = pars)
       list(response = drop(response))
     }
   )

@@ -53,7 +53,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       )
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
@@ -63,7 +63,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       }
 
       p = invoke(DiceKriging::predict.km,
-        self$model,
+        model,
         newdata = newdata,
         type = pars$type %??% "SK",
         se.compute = self$predict_type == "se",

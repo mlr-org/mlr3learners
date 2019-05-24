@@ -55,10 +55,10 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       )
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model, data = newdata,
+      p = invoke(predict, model, data = newdata,
         predict.type = "response", .args = pars)
 
       if (self$predict_type == "response") {

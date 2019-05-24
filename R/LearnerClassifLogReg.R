@@ -29,10 +29,10 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       invoke(stats::glm, formula = task$formula(), data = task$data(), family = "binomial", .args = pars)
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       newdata = task$data(cols = task$feature_names)
 
-      p = unname(predict(self$model, newdata = newdata, type = "response"))
+      p = unname(predict(model, newdata = newdata, type = "response"))
       levs = as.character(task$class_names)
 
       if (self$predict_type == "response") {

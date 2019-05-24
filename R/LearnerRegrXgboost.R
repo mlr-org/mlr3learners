@@ -88,11 +88,11 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       pars = self$params("predict")
 
       newdata = data.matrix(task$data(cols = task$feature_names))
-      list(response = invoke(predict, self$model, newdata = newdata, .args = pars))
+      list(response = invoke(predict, model, newdata = newdata, .args = pars))
     },
 
     importance = function() {

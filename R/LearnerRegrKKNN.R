@@ -23,7 +23,6 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
           )
         ),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        properties = "updates_model",
         packages = c("withr", "kknn")
       )
     },
@@ -32,12 +31,11 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
       task$data()
     },
 
-    predict = function(task) {
+    predict = function(task, model = self$model) {
       withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
-        m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
+        m = invoke(kknn::kknn, formula = task$formula(), train = model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
       })
-      self$model = NULL
-      list(response = m$fitted.values)
+      list(model = TRUE, response = m$fitted.values)
     }
   )
 )
