@@ -40,4 +40,3 @@ Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-VignetteBuilder: knitr
