@@ -21,11 +21,12 @@ Imports:
     R6
 Suggests:
     DiceKriging,
+    MASS,
     e1071,
     glmnet,
     kknn,
     knitr,
-    MASS,
+    lgr,
     mlbench,
     ranger,
     rmarkdown,
