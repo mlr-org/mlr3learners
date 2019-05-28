@@ -51,18 +51,19 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
         pars$keep.inbag = TRUE
       }
 
-      invoke(ranger::ranger,
+      self$model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         case.weights = task$weights$weight,
         .args = pars
       )
+      self
     },
 
-    predict = function(task, model = self$model) {
+    predict = function(task) {
       pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
-      preds = invoke(predict, model, data = newdata, type = self$predict_type, .args = pars)
+      preds = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pars)
       list(response = preds$predictions, se = preds$se)
     },
 

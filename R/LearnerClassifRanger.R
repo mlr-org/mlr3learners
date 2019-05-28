@@ -46,19 +46,20 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
 
     train = function(task) {
       pars = self$params("train")
-      invoke(ranger::ranger,
+      self$model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
         case.weights = task$weights$weight,
         .args = pars
       )
+      self
     },
 
-    predict = function(task, model = self$model) {
+    predict = function(task) {
       pars = self$params("predict")
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, model, data = newdata,
+      p = invoke(predict, self$model, data = newdata,
         predict.type = "response", .args = pars)
 
       if (self$predict_type == "response") {
