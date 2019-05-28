@@ -27,10 +27,11 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
     },
 
     train = function(task) {
-      invoke(MASS::qda, task$formula(), data = task$data(), .args = self$params("train"))
+      self$model = invoke(MASS::qda, task$formula(), data = task$data(), .args = self$params("train"))
+      self
     },
 
-    predict = function(task, model = self$model) {
+    predict = function(task) {
       pars = self$params("predict")
       if (!is.null(pars$predict.method)) {
         pars$method = pars$predict.method
@@ -38,7 +39,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
       }
 
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, model, newdata = newdata, .args = pars)
+      p = invoke(predict, self$model, newdata = newdata, .args = pars)
 
       if (self$predict_type == "response") {
         list(response = p$class)

@@ -72,18 +72,19 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         pars = pars[!is_ctrl_pars]
       }
 
-      invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
+      self$model = invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
+      self
     },
 
-    predict = function(task, model = self$model) {
+    predict = function(task) {
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       if (self$predict_type == "response") {
-        response = invoke(predict, model, newx = newdata, type = "class", .args = pars)
+        response = invoke(predict, self$model, newx = newdata, type = "class", .args = pars)
         list(response = drop(response))
       } else {
-        prob = invoke(predict, model, newx = newdata, type = "response", .args = pars)
+        prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
 
         if (length(task$class_names) == 2L) {
           prob = cbind(prob, 1 - prob)

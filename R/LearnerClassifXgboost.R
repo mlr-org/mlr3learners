@@ -96,10 +96,11 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         pars$watchlist = list(train = data)
       }
 
-      invoke(xgboost::xgb.train, data = data, .args = pars)
+      self$model = invoke(xgboost::xgb.train, data = data, .args = pars)
+      self
     },
 
-    predict = function(task, model = self$model) {
+    predict = function(task) {
       pars = self$params("predict")
       response = prob = NULL
       lvls = task$class_names
@@ -110,7 +111,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       }
 
       newdata = data.matrix(task$data(cols = task$feature_names))
-      pred = invoke(predict, model, newdata = newdata, .args = pars)
+      pred = invoke(predict, self$model, newdata = newdata, .args = pars)
 
       if (nlvl == 2L) { # binaryclass
         if (pars$objective == "multi:softprob") {
