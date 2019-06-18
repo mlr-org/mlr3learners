@@ -129,7 +129,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      list(response = response, prob = prob)
+      as_prediction_data(task, response = response, prob = prob)
     },
 
     importance = function() {

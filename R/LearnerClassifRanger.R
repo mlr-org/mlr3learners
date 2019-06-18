@@ -63,9 +63,9 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         predict.type = "response", .args = pars)
 
       if (self$predict_type == "response") {
-        list(response = p$predictions)
+        as_prediction_data(task, response = p$predictions)
       } else {
-        list(prob = p$predictions)
+        as_prediction_data(task, prob = p$predictions)
       }
     },
 

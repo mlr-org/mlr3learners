@@ -34,10 +34,10 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        list(response = predict(self$model, newdata = newdata, se.fit = FALSE))
+        as_prediction_data(task, response = predict(self$model, newdata = newdata, se.fit = FALSE))
       } else {
         pred = predict(self$model, newdata = newdata, se.fit = TRUE)
-        list(response = pred$fit, se = pred$se.fit)
+        as_prediction_data(task, response = pred$fit, se = pred$se.fit)
       }
     }
   )

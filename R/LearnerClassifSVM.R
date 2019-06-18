@@ -53,7 +53,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
       newdata = as.matrix(task$data(cols = task$feature_names))
       p = invoke(predict, self$model, newdata = newdata, probability = (self$predict_type == "prob"), .args = pars)
 
-      list(
+      as_prediction_data(task,
         response = as.character(p),
         prob = attr(p, "probabilities") # is NULL if not requested during predict
       )
