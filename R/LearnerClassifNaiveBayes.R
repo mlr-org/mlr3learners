@@ -36,9 +36,9 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        as_prediction_data(task, response = predict(self$model, newdata = newdata, type = "class"))
+        self$new_prediction(task, response = predict(self$model, newdata = newdata, type = "class"))
       } else {
-        as_prediction_data(task, prob = predict(self$model, newdata = newdata, type = "raw"))
+        self$new_prediction(task, prob = predict(self$model, newdata = newdata, type = "raw"))
       }
     }
   )

@@ -82,7 +82,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newx = newdata, type = "class", .args = pars)
-        as_prediction_data(task, response = drop(response))
+        self$new_prediction(task, response = drop(response))
       } else {
         prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
 
@@ -92,7 +92,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         } else {
           prob = prob[, , 1L]
         }
-        as_prediction_data(task, prob = prob)
+        self$new_prediction(task, prob = prob)
       }
     }
   )

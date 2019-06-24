@@ -38,7 +38,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
       withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$params("predict"))
       })
-      as_prediction_data(task, response = m$fitted.values, prob = m$prob)
+      self$new_prediction(task, response = m$fitted.values, prob = m$prob)
     }
   )
 )

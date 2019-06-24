@@ -45,7 +45,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
       pars = self$params("predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars)
-      as_prediction_data(task, response = response)
+      self$new_prediction(task, response = response)
     }
   )
 )
