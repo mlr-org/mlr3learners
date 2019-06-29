@@ -37,7 +37,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
     },
 
     train = function(task) {
-      pars = self$params("train")
+      pars = self$param_set$get_values(tags ="train")
 
       self$model = invoke(e1071::svm,
         x = as.matrix(task$data(cols = task$feature_names)),
@@ -49,7 +49,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
     },
 
     predict = function(task) {
-      pars = self$params("predict")
+      pars = self$param_set$get_values(tags ="predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       p = invoke(predict, self$model, newdata = newdata, probability = (self$predict_type == "prob"), .args = pars)
 
