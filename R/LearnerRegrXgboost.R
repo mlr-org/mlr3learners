@@ -93,7 +93,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       pars = self$param_set$get_values(tags ="predict")
 
       newdata = data.matrix(task$data(cols = task$feature_names))
-      list(response = invoke(predict, self$model, newdata = newdata, .args = pars))
+      response = invoke(predict, self$model, newdata = newdata, .args = pars)
+      self$new_prediction(task, response = response)
     },
 
     importance = function() {

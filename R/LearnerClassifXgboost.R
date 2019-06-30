@@ -118,7 +118,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
           prob = matrix(pred, ncol = nlvl, byrow = TRUE)
           colnames(prob) = lvls
         } else {
-          prob = probVectorToMatrix(pred, lvls)
+          prob = prob_vector_to_matrix(pred, lvls)
         }
       } else { # multiclass
         if (pars$objective == "multi:softmax") {
@@ -129,7 +129,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      list(response = response, prob = prob)
+      self$new_prediction(task, response = response, prob = prob)
     },
 
     importance = function() {
