@@ -67,7 +67,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
       pars = self$param_set$get_values(tags ="train")
       lvls = task$class_names
 
@@ -96,11 +96,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         pars$watchlist = list(train = data)
       }
 
-      self$model = invoke(xgboost::xgb.train, data = data, .args = pars)
-      self
+      invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       pars = self$param_set$get_values(tags ="predict")
       response = prob = NULL
       lvls = task$class_names
@@ -129,7 +128,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      self$new_prediction(task, response = response, prob = prob)
+      list(response = response, prob = prob)
     },
 
     importance = function() {

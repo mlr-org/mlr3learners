@@ -20,24 +20,23 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
       pars = self$param_set$get_values(tags ="train")
       if ("weights" %in% task$properties) {
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      self$model = invoke(stats::lm, formula = task$formula(), data = task$data(), .args = pars)
-      self
+      invoke(stats::lm, formula = task$formula(), data = task$data(), .args = pars)
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        self$new_prediction(task, response = predict(self$model, newdata = newdata, se.fit = FALSE))
+        list(response = predict(self$model, newdata = newdata, se.fit = FALSE))
       } else {
         pred = predict(self$model, newdata = newdata, se.fit = TRUE)
-        self$new_prediction(task, response = pred$fit, se = pred$se.fit)
+        list(response = pred$fit, se = pred$se.fit)
       }
     }
   )

@@ -35,7 +35,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
       pars = self$param_set$get_values(tags ="train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
@@ -45,16 +45,15 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         pars$nugget = if (ns == 0) 0 else ns * var(truth)
       }
 
-      self$model = invoke(DiceKriging::km,
+      invoke(DiceKriging::km,
         response = task$truth(),
         design = data,
         control = list(trace = FALSE),
         .args = remove_named(pars, "nugget.stability")
       )
-      self
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       pars = self$param_set$get_values(tags ="predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
@@ -71,7 +70,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         .args = remove_named(pars, "jitter")
       )
 
-      self$new_prediction(task, response = p$mean, se = p$sd)
+      list(response = p$mean, se = p$sd)
     }
   )
 )

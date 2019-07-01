@@ -25,20 +25,19 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
       y = task$truth()
       x = task$data(cols = task$feature_names)
-      self$model = invoke(e1071::naiveBayes, x = x, y = y, .args = self$param_set$get_values(tags ="train"))
-      self
+      invoke(e1071::naiveBayes, x = x, y = y, .args = self$param_set$get_values(tags ="train"))
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        self$new_prediction(task, response = predict(self$model, newdata = newdata, type = "class"))
+        list(response = predict(self$model, newdata = newdata, type = "class"))
       } else {
-        self$new_prediction(task, prob = predict(self$model, newdata = newdata, type = "raw"))
+        list(prob = predict(self$model, newdata = newdata, type = "raw"))
       }
     }
   )

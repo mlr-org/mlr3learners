@@ -52,7 +52,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
 
       pars = self$param_set$get_values(tags ="train")
       data = as.matrix(task$data(cols = task$feature_names))
@@ -72,17 +72,16 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         pars = pars[!is_ctrl_pars]
       }
 
-      self$model = invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
-      self
+      invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       pars = self$param_set$get_values(tags ="predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newx = newdata, type = "class", .args = pars)
-        self$new_prediction(task, response = drop(response))
+        list(response = drop(response))
       } else {
         prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
 
@@ -92,7 +91,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         } else {
           prob = prob[, , 1L]
         }
-        self$new_prediction(task, prob = prob)
+        list(prob = prob)
       }
     }
   )

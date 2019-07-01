@@ -20,26 +20,25 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
       pars = self$param_set$get_values(tags ="train")
       if ("weights" %in% task$properties) {
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      self$model = invoke(stats::glm, formula = task$formula(), data = task$data(), family = "binomial", .args = pars)
-      self
+      invoke(stats::glm, formula = task$formula(), data = task$data(), family = "binomial", .args = pars)
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       p = unname(predict(self$model, newdata = newdata, type = "response"))
       levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {
-        self$new_prediction(task, response = ifelse(p < 0.5, levs[1L], levs[2L]))
+        list(response = ifelse(p < 0.5, levs[1L], levs[2L]))
       } else {
-        self$new_prediction(task, prob = prob_vector_to_matrix(p, levs))
+        list(prob = prob_vector_to_matrix(p, levs))
       }
     }
   )

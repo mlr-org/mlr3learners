@@ -66,7 +66,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       )
     },
 
-    train = function(task) {
+    train_internal = function(task) {
       pars = self$param_set$get_values(tags ="train")
 
       if (is.null(pars$objective)) {
@@ -85,16 +85,15 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         pars$watchlist = list(train = data)
       }
 
-      self$model = invoke(xgboost::xgb.train, data = data, .args = pars)
-      self
+      invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
-    predict = function(task) {
+    predict_internal = function(task) {
       pars = self$param_set$get_values(tags ="predict")
 
       newdata = data.matrix(task$data(cols = task$feature_names))
       response = invoke(predict, self$model, newdata = newdata, .args = pars)
-      self$new_prediction(task, response = response)
+      list(response = response)
     },
 
     importance = function() {
