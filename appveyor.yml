@@ -17,7 +17,7 @@ install:
   - cmd: R -q -e "tic::before_install()"
 
 cache:
-  - C:\RLibrary\
+  - C:\RLibrary\ -> appveyor.yml
 
 before_build: Rscript -e "tic::before_install()"
 build_script: Rscript -e "tic::install()"
