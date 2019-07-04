@@ -13,4 +13,9 @@ LearnerClassifGlmnet
 Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.glmnet")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

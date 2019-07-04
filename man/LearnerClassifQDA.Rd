@@ -13,4 +13,9 @@ LearnerClassifQDA
 Quadratic discriminant analysis.
 Calls \code{\link[MASS:qda]{MASS::qda()}} from package \CRANpkg{MASS}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.qda")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

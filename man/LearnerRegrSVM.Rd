@@ -12,4 +12,9 @@ LearnerRegrSVM
 \description{
 A learner for a regression support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("regr.svm")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

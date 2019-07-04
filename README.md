@@ -1,15 +1,12 @@
 # mlr3learners
 
-[![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
 [![CRAN](https://www.r-pkg.org/badges/version/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
 [![codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 
-This packages includes all recommended learners for [mlr3](https://mlr3.mlr-org.com).
-It's still work in progress.
+This packages provides learners for [mlr3](https://mlr3.mlr-org.com).
 
-### Planned/Implemented learners
-
+### Implemented learners
 
 | Learner                          | Package                                                       | Classification | Regression |
 | :------------------------------- | :------------------------------------------------------------ | :------------  | :--------- |
@@ -25,4 +22,4 @@ It's still work in progress.
 | QDA                              | [MASS](https://cran.r-project.org/package=MASS)               | x              | x          |
 
 
-How to add a learner: [Tutorial](https://mlr-org.github.io/mlr3learners/index.html)
+Creating custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).

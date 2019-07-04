@@ -8,6 +8,8 @@
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @export
+#' @templateVar learner_name regr.kknn
+#' @template example
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.kknn") {

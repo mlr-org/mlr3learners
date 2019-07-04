@@ -13,4 +13,9 @@ LearnerRegrXgboost
 eXtreme Gradient Boosting regression.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("regr.xgboost")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

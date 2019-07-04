@@ -12,4 +12,9 @@ LearnerClassifSVM
 \description{
 A learner for a classification support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.svm")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

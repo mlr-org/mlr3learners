@@ -8,6 +8,8 @@
 #' Calls [MASS::qda()] from package \CRANpkg{MASS}.
 #'
 #' @export
+#' @templateVar learner_name classif.qda
+#' @template example
 LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.qda") {

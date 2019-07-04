@@ -13,4 +13,9 @@ LearnerClassifLogReg
 Classification via logistic regression.
 Calls \code{\link[stats:glm]{stats::glm()}}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.log_reg")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

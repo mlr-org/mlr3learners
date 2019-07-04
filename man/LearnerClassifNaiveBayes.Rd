@@ -13,4 +13,9 @@ LearnerClassifNaiveBayes
 Naive Bayes classification.
 Calls \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}} from package \CRANpkg{e1071}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.naive_bayes")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

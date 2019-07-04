@@ -12,7 +12,7 @@ Recommended Learners for mlr3. Extends mlr3 with
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/mlr-org/mlr3learners}
+  \item \url{https://mlr3leaners.mlr-org.com}
   \item Report bugs at \url{https://github.com/mlr-org/mlr3learners/issues}
 }
 

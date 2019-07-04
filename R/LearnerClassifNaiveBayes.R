@@ -8,6 +8,8 @@
 #' Calls [e1071::naiveBayes()] from package \CRANpkg{e1071}.
 #'
 #' @export
+#' @templateVar learner_name classif.naive_bayes
+#' @template example
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.naive_bayes") {

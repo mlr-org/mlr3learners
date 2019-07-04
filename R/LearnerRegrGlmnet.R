@@ -8,6 +8,8 @@
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
 #' @export
+#' @templateVar learner_name regr.glmnet
+#' @template example
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.glmnet") {

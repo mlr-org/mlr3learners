@@ -8,6 +8,8 @@
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
 #' @export
+#' @templateVar learner_name regr.xgboost
+#' @template example
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.xgboost") {

@@ -1,4 +1,4 @@
-#' @rawNamespace import(data.table, except = transpose)
+#' @import data.table
 #' @import paradox
 #' @import mlr3misc
 #' @importFrom R6 R6Class
@@ -14,6 +14,8 @@ register_mlr3 = function() {
   x$add("classif.kknn", LearnerClassifKKNN)
   x$add("classif.lda", LearnerClassifLDA)
   x$add("classif.log_reg", LearnerClassifLogReg)
+  x$add("classif.naive_bayes", LearnerClassifNaiveBayes)
+  x$add("classif.qda", LearnerClassifQDA)
   x$add("classif.ranger", LearnerClassifRanger)
   x$add("classif.svm", LearnerClassifSVM)
   x$add("classif.xgboost", LearnerClassifXgboost)

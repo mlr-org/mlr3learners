@@ -13,6 +13,8 @@
 #' * The additional hyperparameter `jitter` can be set to add `N(0, [jitter])`-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value if `1e-12`.
 #'
 #' @export
+#' @templateVar learner_name regr.km
+#' @template example
 LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.km") {

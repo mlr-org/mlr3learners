@@ -13,4 +13,9 @@ LearnerRegrKKNN
 k-Nearest-Neighbor regression.
 Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("regr.kknn")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

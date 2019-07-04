@@ -13,4 +13,9 @@ LearnerClassifRanger
 Random classification forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.ranger")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

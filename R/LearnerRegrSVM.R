@@ -7,6 +7,8 @@
 #' A learner for a regression support vector machine implemented in [e1071::svm()].
 #'
 #' @export
+#' @templateVar learner_name regr.svm
+#' @template example
 LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.svm") {

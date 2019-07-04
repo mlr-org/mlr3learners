@@ -13,4 +13,9 @@ LearnerRegrLM
 Ordinary linear regression.
 Calls \code{\link[stats:lm]{stats::lm()}}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("regr.lm")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

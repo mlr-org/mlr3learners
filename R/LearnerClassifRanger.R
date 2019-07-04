@@ -8,6 +8,8 @@
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
 #' @export
+#' @templateVar learner_name classif.ranger
+#' @template example
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.ranger") {

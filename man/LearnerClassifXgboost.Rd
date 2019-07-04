@@ -13,4 +13,9 @@ LearnerClassifXgboost
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.xgboost")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

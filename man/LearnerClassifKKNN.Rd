@@ -13,4 +13,9 @@ LearnerClassifKKNN
 k-Nearest-Neighbor classification.
 Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("classif.kknn")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

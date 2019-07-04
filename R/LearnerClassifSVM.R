@@ -7,6 +7,8 @@
 #' A learner for a classification support vector machine implemented in [e1071::svm()].
 #'
 #' @export
+#' @templateVar learner_name classif.svm
+#' @template example
 LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.svm") {

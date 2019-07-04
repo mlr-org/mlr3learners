@@ -13,4 +13,9 @@ LearnerRegrRanger
 Random regression forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 }
+\examples{
+learner = mlr3::mlr_learners$get("regr.ranger")
+print(learner)
+print(learner$param_set)
+}
 \keyword{datasets}

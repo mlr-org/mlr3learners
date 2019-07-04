@@ -8,6 +8,8 @@
 #' Calls [stats::lm()].
 #'
 #' @export
+#' @templateVar learner_name regr.lm
+#' @template example
 LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
   public = list(
     initialize = function(id = "regr.lm", predict_type = "response") {

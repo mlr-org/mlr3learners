@@ -8,6 +8,8 @@
 #' Calls [stats::glm()].
 #'
 #' @export
+#' @templateVar learner_name classif.log_reg
+#' @template example
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
     initialize = function(id = "classif.log_reg") {
