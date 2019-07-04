@@ -18,7 +18,6 @@ learner = mlr3::mlr_learners$get("regr.xgboost")
 print(learner)
 
 # available parameters:
-tab = data.table::as.data.table(learner$param_set)
-tab[, list(id, class, lower, upper, levels)]
+learner$param_set$ids()
 }
 \keyword{datasets}

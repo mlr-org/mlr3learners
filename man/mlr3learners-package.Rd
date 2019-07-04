@@ -4,7 +4,7 @@
 \name{mlr3learners-package}
 \alias{mlr3learners}
 \alias{mlr3learners-package}
-\title{mlr3learners: Recommended learners for mlr3}
+\title{mlr3learners: Recommended Learners for 'mlr3'}
 \description{
 Recommended Learners for mlr3. Extends mlr3 with
     interfaces to the most popular machine learning packages on CRAN.

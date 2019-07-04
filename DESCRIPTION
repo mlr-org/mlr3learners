@@ -1,5 +1,5 @@
 Package: mlr3learners
-Title: Recommended learners for mlr3
+Title: Recommended Learners for 'mlr3'
 Version: 0.9.0
 Authors@R: c(person(given = "Michel", family = "Lang", role = c("cre", "aut"), email = "michellang@gmail.com", comment = c(ORCID = "0000-0001-9754-0393")),
     person(given = "Quay", family = "Au", role = c("aut"), email = "quayau@gmail.com", comment = c(ORCID = "0000-0002-5252-8902")),
