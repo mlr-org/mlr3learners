@@ -16,6 +16,8 @@ Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger
 \examples{
 learner = mlr3::mlr_learners$get("regr.ranger")
 print(learner)
-print(learner$param_set)
+
+# available parameters:
+as.data.table(learner$param_set)[, list(id, class, lower, upper, levels)]
 }
 \keyword{datasets}

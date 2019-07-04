@@ -16,6 +16,8 @@ Calls \code{\link[MASS:lda]{MASS::lda()}} from package \CRANpkg{MASS}.
 \examples{
 learner = mlr3::mlr_learners$get("classif.lda")
 print(learner)
-print(learner$param_set)
+
+# available parameters:
+as.data.table(learner$param_set)[, list(id, class, lower, upper, levels)]
 }
 \keyword{datasets}

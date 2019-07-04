@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
 [![codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 
-This packages provides learners for [mlr3](https://mlr3.mlr-org.com).
+This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com).
 
 ### Implemented learners
 

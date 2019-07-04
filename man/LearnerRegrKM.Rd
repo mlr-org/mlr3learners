@@ -22,6 +22,8 @@ We recommend a value of \code{1e-8}.
 \examples{
 learner = mlr3::mlr_learners$get("regr.km")
 print(learner)
-print(learner$param_set)
+
+# available parameters:
+as.data.table(learner$param_set)[, list(id, class, lower, upper, levels)]
 }
 \keyword{datasets}

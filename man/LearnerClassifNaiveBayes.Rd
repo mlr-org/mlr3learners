@@ -16,6 +16,8 @@ Calls \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}} from package \CRANpkg{
 \examples{
 learner = mlr3::mlr_learners$get("classif.naive_bayes")
 print(learner)
-print(learner$param_set)
+
+# available parameters:
+as.data.table(learner$param_set)[, list(id, class, lower, upper, levels)]
 }
 \keyword{datasets}
