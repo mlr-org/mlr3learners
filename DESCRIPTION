@@ -5,10 +5,10 @@ Authors@R: c(person(given = "Michel", family = "Lang", role = c("cre", "aut"), e
     person(given = "Quay", family = "Au", role = c("aut"), email = "quayau@gmail.com", comment = c(ORCID = "0000-0002-5252-8902")),
     person(given = "Stefan", family = "Coors", role = c("aut"), email = "mail@stefancoors.de", comment = c(ORCID = "0000-0002-7465-2146"))
   )
-Description: Recommended Learners for mlr3. Extends mlr3 with
+Description: Recommended Learners for 'mlr3'. Extends 'mlr3' with
     interfaces to the most popular machine learning packages on CRAN.
 License: MIT + file LICENSE
-URL: https://mlr3leaners.mlr-org.com
+URL: https://mlr3learners.mlr-org.com
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:
     R (>= 3.1.0)
