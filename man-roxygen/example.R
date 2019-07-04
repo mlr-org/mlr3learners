@@ -3,4 +3,5 @@
 #' print(learner)
 #'
 #' # available parameters:
-#' as.data.table(learner$param_set)[, list(id, class, lower, upper, levels)]
+#' tab = data.table::as.data.table(learner$param_set)
+#' tab[, list(id, class, lower, upper, levels)]
