@@ -1,7 +1,7 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.9.0
-Authors@R: 
+Version: 0.1.0
+Authors@R:
     c(person(given = "Michel",
              family = "Lang",
              role = c("cre", "aut"),
@@ -19,7 +19,7 @@ Authors@R:
              comment = c(ORCID = "0000-0002-7465-2146")))
 Description: Recommended Learners for 'mlr3'. Extends 'mlr3'
     with interfaces to the most popular machine learning packages on CRAN.
-License: MIT + file LICENSE
+License: LGPL-3
 URL: https://mlr3learners.mlr-org.com
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:

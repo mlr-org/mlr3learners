@@ -1,3 +1,3 @@
-# mlr3learners 0.9.0
+# mlr3learners 0.1.0
 
 * Initial prototype.
