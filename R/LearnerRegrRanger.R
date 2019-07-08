@@ -80,7 +80,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     },
 
     oob_error = function() {
-      mod$prediction.error
+      self$model$prediction.error
     }
   )
 )

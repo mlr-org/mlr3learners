@@ -6,8 +6,8 @@
 \alias{mlr3learners-package}
 \title{mlr3learners: Recommended Learners for 'mlr3'}
 \description{
-Recommended Learners for 'mlr3'. Extends 'mlr3' with
-    interfaces to the most popular machine learning packages on CRAN.
+Recommended Learners for 'mlr3'. Extends 'mlr3'
+    with interfaces to the most popular machine learning packages on CRAN.
 }
 \seealso{
 Useful links:
