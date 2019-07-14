@@ -16,19 +16,19 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
         id = id,
         param_set = ParamSet$new(
           params = list(
-            ParamFct$new(id = "type", default = "C-classification", levels = c("C-classification", "nu-classification"), tag = "train"),
-            ParamDbl$new(id = "cost", default = 1, lower = 0, tag = "train"), # requires = quote(type == "C-classification")),
-            ParamDbl$new(id = "nu", default = 0.5, tag = "train"), # requires = quote(type == "nu-classification")),
-            ParamFct$new(id = "kernel", default = "radial", levels = c("linear", "polynomial", "radial", "sigmoid"), tag = "train"),
-            ParamInt$new(id = "degree", default = 3L, lower = 1L, tag = "train"), # requires = quote(kernel == "polynomial")),
-            ParamDbl$new(id = "coef0", default = 0, tag = "train"), # requires = quote(kernel == "polynomial" || kernel == "sigmoid")),
-            ParamDbl$new(id = "gamma", lower = 0, tag = "train"), # requires = quote(kernel != "linear")),
-            ParamDbl$new(id = "cachesize", default = 40L, tag = "train"),
-            ParamDbl$new(id = "tolerance", default = 0.001, lower = 0, tag = "train"),
-            ParamLgl$new(id = "shrinking", default = TRUE, tag = "train"),
-            ParamInt$new(id = "cross", default = 0L, lower = 0L, tag = "train"), # tunable = FALSE),
-            ParamLgl$new(id = "fitted", default = TRUE, tag = "train"), # tunable = FALSE),
-            ParamUty$new(id = "scale", default = TRUE, tag = "train") # , tunable = TRUE)
+            ParamFct$new(id = "type", default = "C-classification", levels = c("C-classification", "nu-classification"), tags = "train"),
+            ParamDbl$new(id = "cost", default = 1, lower = 0, tags = "train"), # requires = quote(type == "C-classification")),
+            ParamDbl$new(id = "nu", default = 0.5, tags = "train"), # requires = quote(type == "nu-classification")),
+            ParamFct$new(id = "kernel", default = "radial", levels = c("linear", "polynomial", "radial", "sigmoid"), tags = "train"),
+            ParamInt$new(id = "degree", default = 3L, lower = 1L, tags = "train"), # requires = quote(kernel == "polynomial")),
+            ParamDbl$new(id = "coef0", default = 0, tags = "train"), # requires = quote(kernel == "polynomial" || kernel == "sigmoid")),
+            ParamDbl$new(id = "gamma", lower = 0, tags = "train"), # requires = quote(kernel != "linear")),
+            ParamDbl$new(id = "cachesize", default = 40L, tags = "train"),
+            ParamDbl$new(id = "tolerance", default = 0.001, lower = 0, tags = "train"),
+            ParamLgl$new(id = "shrinking", default = TRUE, tags = "train"),
+            ParamInt$new(id = "cross", default = 0L, lower = 0L, tags = "train"), # tunable = FALSE),
+            ParamLgl$new(id = "fitted", default = TRUE, tags = "train"), # tunable = FALSE),
+            ParamUty$new(id = "scale", default = TRUE, tags = "train") # , tunable = TRUE)
           )
         ),
         predict_types = c("response", "prob"),
@@ -39,7 +39,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
     },
 
     train_internal = function(task) {
-      pars = self$param_set$get_values(tags ="train")
+      pars = self$param_set$get_values(tags = "train")
 
       invoke(e1071::svm,
         x = as.matrix(task$data(cols = task$feature_names)),
@@ -50,7 +50,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
     },
 
     predict_internal = function(task) {
-      pars = self$param_set$get_values(tags ="predict")
+      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       p = invoke(predict, self$model, newdata = newdata, probability = (self$predict_type == "prob"), .args = pars)
 
