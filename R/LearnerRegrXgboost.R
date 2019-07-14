@@ -95,7 +95,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
 
       newdata = data.matrix(task$data(cols = task$feature_names))
       response = invoke(predict, self$model, newdata = newdata, .args = pars)
-      list(response = response)
+      PredictionRegr$new(task = task, response = response)
     },
 
     importance = function() {

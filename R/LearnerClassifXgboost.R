@@ -130,7 +130,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      list(response = response, prob = prob)
+      PredictionClassif$new(task = task, response = response, prob = prob)
     },
 
     importance = function() {

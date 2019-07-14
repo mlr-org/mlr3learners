@@ -72,7 +72,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         .args = remove_named(pars, "jitter")
       )
 
-      list(response = p$mean, se = p$sd)
+      PredictionRegr$new(task = task, response = p$mean, se = p$sd)
     }
   )
 )

@@ -37,7 +37,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
       withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$param_set$get_values(tags ="predict"))
       })
-      list(response = m$fitted.values)
+      PredictionRegr$new(task = task, response = m$fitted.values)
     }
   )
 )

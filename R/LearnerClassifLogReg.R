@@ -38,9 +38,9 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {
-        list(response = ifelse(p < 0.5, levs[1L], levs[2L]))
+        PredictionClassif$new(task = task, response = ifelse(p < 0.5, levs[1L], levs[2L]))
       } else {
-        list(prob = prob_vector_to_matrix(p, levs))
+        PredictionClassif$new(task = task, prob = prob_vector_to_matrix(p, levs))
       }
     }
   )

@@ -43,9 +43,9 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
       p = invoke(predict, self$model, newdata = newdata, .args = pars)
 
       if (self$predict_type == "response") {
-        list(response = p$class)
+        PredictionClassif$new(task = task, response = p$class)
       } else {
-        list(prob = p$posterior)
+        PredictionClassif$new(task = task, prob = p$posterior)
       }
     }
   )

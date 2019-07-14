@@ -81,7 +81,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
-      list(response = drop(response))
+      PredictionRegr$new(task = task, response = drop(response))
     }
   )
 )
