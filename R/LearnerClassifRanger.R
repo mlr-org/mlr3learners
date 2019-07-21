@@ -1,4 +1,4 @@
-@title Ranger Classification Learner
+#' @title Ranger Classification Learner
 #'
 #' @aliases mlr_learners_classif.ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
