@@ -6,6 +6,10 @@
 #' @description
 #' A learner for a regression support vector machine implemented in [e1071::svm()].
 #'
+#' Cortes, C. & Vapnik, V.
+#' Machine Learning Learn (1995) 20: 273.
+#' https://doi.org/10.1007/BF00994018
+#'
 #' @export
 #' @templateVar learner_name regr.svm
 #' @template example
