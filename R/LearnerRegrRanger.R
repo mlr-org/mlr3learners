@@ -7,6 +7,15 @@
 #' Random regression forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
+#' Marvin N. Wright, Andreas Ziegler (2017).
+#' ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.
+#' Journal of Statistical Software, 77(1), 1-17.
+#' doi:10.18637/jss.v077.i01
+#'
+#' Breiman, L.
+#' Machine Learning (2001) 45: 5.
+#' https://doi.org/10.1023/A:1010933404324
+#'
 #' @export
 #' @templateVar learner_name regr.ranger
 #' @template example
