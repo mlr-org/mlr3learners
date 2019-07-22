@@ -16,7 +16,7 @@
 #' Olivier Roustant, David Ginsbourger, Yves Deville (2012).
 #' DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.
 #' Journal of Statistical Software, 51(1), 1-55.
-#' URL http://www.jstatsoft.org/v51/i01/.
+#' \doi{10.18637/jss.v051.i01}.
 #'
 #' @export
 #' @templateVar learner_name regr.km

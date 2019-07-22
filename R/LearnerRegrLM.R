@@ -7,11 +7,6 @@
 #' Ordinary linear regression.
 #' Calls [stats::lm()].
 #'
-#' @references
-#' John M. Chambers (1992).
-#' Linear models.
-#' Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
-#'
 #' @export
 #' @templateVar learner_name regr.lm
 #' @template example

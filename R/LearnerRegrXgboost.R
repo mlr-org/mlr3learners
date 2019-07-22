@@ -9,9 +9,9 @@
 #'
 #' @references
 #' Tianqi Chen and Carlos Guestrin (2016).
-#' XGBoost: A Scalable Tree Boosting System
-#' 22nd SIGKDD Conference on Knowledge Discovery and Data Mining,
-#' https://arxiv.org/abs/1603.02754
+#' XGBoost: A Scalable Tree Boosting System.
+#' 22nd SIGKDD Conference on Knowledge Discovery and Data Mining.
+#' \doi{10.1145/2939672.2939785}.
 #'
 #' @export
 #' @templateVar learner_name regr.xgboost

@@ -20,9 +20,4 @@ print(learner)
 # available parameters:
 learner$param_set$ids()
 }
-\references{
-John M. Chambers (1992).
-Linear models.
-Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
-}
 \keyword{datasets}
