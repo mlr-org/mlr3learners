@@ -7,6 +7,10 @@
 #' Linear discriminant analysis.
 #' Calls [MASS::lda()] from package \CRANpkg{MASS}.
 #'
+#' Venables, W. N. & Ripley, B. D. (2002).
+#' Modern Applied Statistics with S.
+#' Fourth Edition. Springer, New York. ISBN 0-387-95457-0
+#'
 #' @export
 #' @templateVar learner_name classif.lda
 #' @template example

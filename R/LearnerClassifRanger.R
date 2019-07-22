@@ -1,4 +1,4 @@
-@title Ranger Classification Learner
+#' @title Ranger Classification Learner
 #'
 #' @aliases mlr_learners_classif.ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
@@ -12,8 +12,8 @@
 #' Journal of Statistical Software, 77(1), 1-17.
 #' doi:10.18637/jss.v077.i01
 #'
-#' Breiman, L.
-#' Machine Learning (2001) 45: 5.
+#' Breiman, L. (2001)
+#' Machine Learning 45: 5.
 #' https://doi.org/10.1023/A:1010933404324
 #'
 #' @export
