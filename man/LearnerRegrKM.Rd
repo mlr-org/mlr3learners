@@ -26,4 +26,10 @@ print(learner)
 # available parameters:
 learner$param_set$ids()
 }
+\references{
+Olivier Roustant, David Ginsbourger, Yves Deville (2012).
+DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.
+Journal of Statistical Software, 51(1), 1-55.
+URL http://www.jstatsoft.org/v51/i01/.
+}
 \keyword{datasets}

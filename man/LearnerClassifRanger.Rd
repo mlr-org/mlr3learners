@@ -20,4 +20,14 @@ print(learner)
 # available parameters:
 learner$param_set$ids()
 }
+\references{
+Marvin N. Wright and Andreas Ziegler (2017).
+ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.
+Journal of Statistical Software, 77(1), 1-17.
+doi:10.18637/jss.v077.i01
+
+Breiman, L. (2001)
+Machine Learning 45: 5.
+https://doi.org/10.1023/A:1010933404324
+}
 \keyword{datasets}

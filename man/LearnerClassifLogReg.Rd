@@ -20,4 +20,9 @@ print(learner)
 # available parameters:
 learner$param_set$ids()
 }
+\references{
+Annette J. Dobson and Adrian G. Barnett (2008).
+An introduction to generalized linear models.
+Chapman and Hall/CRC.
+}
 \keyword{datasets}
