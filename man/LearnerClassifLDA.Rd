@@ -12,6 +12,10 @@ LearnerClassifLDA
 \description{
 Linear discriminant analysis.
 Calls \code{\link[MASS:lda]{MASS::lda()}} from package \CRANpkg{MASS}.
+
+Venables, W. N. & Ripley, B. D. (2002).
+Modern Applied Statistics with S.
+Fourth Edition. Springer, New York. ISBN 0-387-95457-0
 }
 \examples{
 learner = mlr3::mlr_learners$get("classif.lda")

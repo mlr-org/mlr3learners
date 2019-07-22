@@ -7,6 +7,7 @@
 #' Classification via logistic regression.
 #' Calls [stats::glm()].
 #'
+#' @references
 #' Dobson, Annette J., and Adrian G. Barnett (2008).
 #' An introduction to generalized linear models.
 #' Chapman and Hall/CRC.

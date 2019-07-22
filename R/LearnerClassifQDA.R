@@ -7,6 +7,7 @@
 #' Quadratic discriminant analysis.
 #' Calls [MASS::qda()] from package \CRANpkg{MASS}.
 #'
+#' @references
 #' Venables, W. N. & Ripley, B. D (2002).
 #' Modern Applied Statistics with S.
 #' Fourth Edition. Springer, New York. ISBN 0-387-95457-0

@@ -12,6 +12,10 @@ LearnerClassifLogReg
 \description{
 Classification via logistic regression.
 Calls \code{\link[stats:glm]{stats::glm()}}.
+
+Dobson, Annette J., and Adrian G. Barnett (2008).
+An introduction to generalized linear models.
+Chapman and Hall/CRC.
 }
 \examples{
 learner = mlr3::mlr_learners$get("classif.log_reg")
