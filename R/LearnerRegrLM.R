@@ -8,7 +8,7 @@
 #' Calls [stats::lm()].
 #'
 #' @references
-#' Chambers, J. M. (1992).
+#' John M. Chambers (1992).
 #' Linear models.
 #' Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
 #'

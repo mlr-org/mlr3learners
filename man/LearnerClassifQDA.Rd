@@ -21,7 +21,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-Venables, W. N. & Ripley, B. D (2002).
+William N. Venables and Brian D. Ripley (2002).
 Modern Applied Statistics with S.
 Fourth Edition. Springer, New York. ISBN 0-387-95457-0
 }
