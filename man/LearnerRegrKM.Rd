@@ -18,11 +18,6 @@ Calls \code{\link[DiceKriging:km]{DiceKriging::km()}} from package \CRANpkg{Dice
 We recommend a value of \code{1e-8}.
 \item The additional hyperparameter \code{jitter} can be set to add \code{N(0, [jitter])}-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value if \code{1e-12}.
 }
-
-Olivier Roustant, David Ginsbourger, Yves Deville (2012).
-DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.
-Journal of Statistical Software, 51(1), 1-55.
-URL http://www.jstatsoft.org/v51/i01/.
 }
 \examples{
 learner = mlr3::mlr_learners$get("regr.km")
@@ -30,5 +25,11 @@ print(learner)
 
 # available parameters:
 learner$param_set$ids()
+}
+\references{
+Olivier Roustant, David Ginsbourger, Yves Deville (2012).
+DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.
+Journal of Statistical Software, 51(1), 1-55.
+URL http://www.jstatsoft.org/v51/i01/.
 }
 \keyword{datasets}

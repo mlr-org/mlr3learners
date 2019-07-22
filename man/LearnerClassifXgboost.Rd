@@ -12,11 +12,6 @@ LearnerClassifXgboost
 \description{
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
-
-Tianqi Chen and Carlos Guestrin (2016).
-XGBoost: A Scalable Tree Boosting System
-22nd SIGKDD Conference on Knowledge Discovery and Data Mining,
-https://arxiv.org/abs/1603.02754
 }
 \examples{
 learner = mlr3::mlr_learners$get("classif.xgboost")
@@ -24,5 +19,11 @@ print(learner)
 
 # available parameters:
 learner$param_set$ids()
+}
+\references{
+Tianqi Chen and Carlos Guestrin (2016).
+XGBoost: A Scalable Tree Boosting System
+22nd SIGKDD Conference on Knowledge Discovery and Data Mining,
+https://arxiv.org/abs/1603.02754
 }
 \keyword{datasets}

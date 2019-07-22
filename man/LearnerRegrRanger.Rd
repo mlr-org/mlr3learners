@@ -12,7 +12,15 @@ LearnerRegrRanger
 \description{
 Random regression forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
+}
+\examples{
+learner = mlr3::mlr_learners$get("regr.ranger")
+print(learner)
 
+# available parameters:
+learner$param_set$ids()
+}
+\references{
 Marvin N. Wright, Andreas Ziegler (2017).
 ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.
 Journal of Statistical Software, 77(1), 1-17.
@@ -21,12 +29,5 @@ doi:10.18637/jss.v077.i01
 Breiman, L.
 Machine Learning (2001) 45: 5.
 https://doi.org/10.1023/A:1010933404324
-}
-\examples{
-learner = mlr3::mlr_learners$get("regr.ranger")
-print(learner)
-
-# available parameters:
-learner$param_set$ids()
 }
 \keyword{datasets}

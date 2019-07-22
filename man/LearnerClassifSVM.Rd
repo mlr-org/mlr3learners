@@ -11,10 +11,6 @@ LearnerClassifSVM
 }
 \description{
 A learner for a classification support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
-
-Cortes, C. & Vapnik, V. (1995).
-Machine Learning 20: 273.
-https://doi.org/10.1007/BF00994018
 }
 \examples{
 learner = mlr3::mlr_learners$get("classif.svm")
@@ -22,5 +18,10 @@ print(learner)
 
 # available parameters:
 learner$param_set$ids()
+}
+\references{
+Cortes, C. & Vapnik, V. (1995).
+Machine Learning 20: 273.
+https://doi.org/10.1007/BF00994018
 }
 \keyword{datasets}
