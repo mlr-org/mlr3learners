@@ -45,6 +45,8 @@ Suggests:
     testthat,
     withr,
     xgboost
+Remotes:
+    mlr-org/mlr3
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
