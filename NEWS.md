@@ -1,3 +1,3 @@
-# mlr3learners 0.1.0
+# mlr3learners 0.1.1
 
-* Initial prototype.
+* Initial upload to CRAN.
