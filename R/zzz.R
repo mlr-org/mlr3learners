@@ -3,6 +3,30 @@
 #' @import mlr3misc
 #' @importFrom R6 R6Class
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
+#'
+#' @section Classification Learners:
+#' \tabular{lll}{
+#'   [classif.glmnet]      \tab \CRANpkg{glmnet}  \tab Penalized Logistic Regression
+#'   [classif.kknn]        \tab \CRANpkg{kknn}    \tab k-Nearest Neighbors
+#'   [classif.lda]         \tab \CRANpkg{MASS}    \tab Linear Discriminant Analysis
+#'   [classif.log_reg]     \tab \CRANpkg{stats}   \tab Logistic Regression
+#'   [classif.naive_bayes] \tab \CRANpkg{e1071}   \tab Naive Bayes
+#'   [classif.qda]         \tab \CRANpkg{MASS}    \tab Quadratic Discriminant Analysis
+#'   [classif.ranger]      \tab \CRANpkg{ranger}  \tab Random Classification Forest
+#'   [classif.svm]         \tab \CRANpkg{e1071}   \tab Support Vector Machine
+#'   [classif.xgboost]     \tab \CRANpkg{xgboost} \tab Gradient Boosting
+#' }
+#'
+#' @section Regression Learners:
+#' \tabular{lll}{
+#'   [regr.glmnet]  \tab \CRANpkg{glmnet}      \tab Penalized Linear Regression
+#'   [regr.kknn]    \tab \CRANpkg{kknn}        \tab k-Nearest Neighbors
+#'   [regr.km]      \tab \CRANpkg{DiceKriging} \tab Kriging
+#'   [regr.lm]      \tab \CRANpkg{stats}       \tab Linear Regression
+#'   [regr.ranger]  \tab \CRANpkg{ranger}      \tab Random Regression Forest
+#'   [regr.svm]     \tab \CRANpkg{e1071}       \tab Support Vector Machine
+#'   [regr.xgboost] \tab \CRANpkg{xgboost}     \tab Gradient Boosting
+#' }
 "_PACKAGE"
 
 register_mlr3 = function() {

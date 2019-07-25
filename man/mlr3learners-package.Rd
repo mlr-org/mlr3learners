@@ -9,6 +9,34 @@
 Recommended Learners for 'mlr3'. Extends 'mlr3'
     with interfaces to the most popular machine learning packages on CRAN.
 }
+\section{Classification Learners}{
+
+\tabular{lll}{
+\link{classif.glmnet}      \tab \CRANpkg{glmnet}  \tab Penalized Logistic Regression
+\link{classif.kknn}        \tab \CRANpkg{kknn}    \tab k-Nearest Neighbors
+\link{classif.lda}         \tab \CRANpkg{MASS}    \tab Linear Discriminant Analysis
+\link{classif.log_reg}     \tab \CRANpkg{stats}   \tab Logistic Regression
+\link{classif.naive_bayes} \tab \CRANpkg{e1071}   \tab Naive Bayes
+\link{classif.qda}         \tab \CRANpkg{MASS}    \tab Quadratic Discriminant Analysis
+\link{classif.ranger}      \tab \CRANpkg{ranger}  \tab Random Classification Forest
+\link{classif.svm}         \tab \CRANpkg{e1071}   \tab Support Vector Machine
+\link{classif.xgboost}     \tab \CRANpkg{xgboost} \tab Gradient Boosting
+}
+}
+
+\section{Regression Learners}{
+
+\tabular{lll}{
+\link{regr.glmnet}  \tab \CRANpkg{glmnet}      \tab Penalized Linear Regression
+\link{regr.kknn}    \tab \CRANpkg{kknn}        \tab k-Nearest Neighbors
+\link{regr.km}      \tab \CRANpkg{DiceKriging} \tab Kriging
+\link{regr.lm}      \tab \CRANpkg{stats}       \tab Linear Regression
+\link{regr.ranger}  \tab \CRANpkg{ranger}      \tab Random Regression Forest
+\link{regr.svm}     \tab \CRANpkg{e1071}       \tab Support Vector Machine
+\link{regr.xgboost} \tab \CRANpkg{xgboost}     \tab Gradient Boosting
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
