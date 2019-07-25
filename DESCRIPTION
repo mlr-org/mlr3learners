@@ -18,7 +18,8 @@ Authors@R:
              email = "mail@stefancoors.de",
              comment = c(ORCID = "0000-0002-7465-2146")))
 Description: Recommended Learners for 'mlr3'. Extends 'mlr3'
-    with interfaces to the most popular machine learning packages on CRAN.
+    with interfaces to essential machine learning packages for
+    classification and regression on CRAN.
 License: LGPL-3
 URL: https://mlr3learners.mlr-org.com
 BugReports: https://github.com/mlr-org/mlr3learners/issues
@@ -36,12 +37,9 @@ Suggests:
     e1071,
     glmnet,
     kknn,
-    knitr,
     lgr,
     MASS,
-    mlbench,
     ranger,
-    rmarkdown,
     testthat,
     withr,
     xgboost

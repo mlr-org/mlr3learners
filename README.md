@@ -5,8 +5,10 @@
 [![codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 
 This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com).
+Creating custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).
 
-### Classification
+
+### Classification Learners
 
 | ID                                                                                              | Learner                          | Package                                                |
 | :---------------------------------------------------------------------------------------------- | :------------------------------- | :----------------------------------------------------- |
@@ -20,7 +22,7 @@ This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com).
 | [classif.svm](https://mlr3learners.mlr-org.com/reference/LearnerClassifSVM.html)                | SVM                              | [e1071](https://cran.r-project.org/package=e1071)      |
 | [classif.xgboost](https://mlr3learners.mlr-org.com/reference/LearnerClassifXgboost.html)        | Gradient Boosting                | [xgboost](https://cran.r-project.org/package=xgboost)  |
 
-### Regression
+### Regression Learners
 
 | ID                                                                                 | Learner                          | Package                                                       |
 | :--------------------------------------------------------------------------------- | :------------------------------- | :------------------------------------------------------------ |
@@ -32,6 +34,3 @@ This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com).
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/LearnerRegrSVM.html)         | SVM                              | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/LearnerRegrXgboost.html) | Gradient Boosting                | [xgboost](https://cran.r-project.org/package=xgboost)         |
 
-See [here](https://mlr3learners.mlr-org.com/reference/mlr3learners-package.html)  for a list of implemented learners.
-
-Creating custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).

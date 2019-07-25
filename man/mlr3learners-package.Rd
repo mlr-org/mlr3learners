@@ -7,7 +7,8 @@
 \title{mlr3learners: Recommended Learners for 'mlr3'}
 \description{
 Recommended Learners for 'mlr3'. Extends 'mlr3'
-    with interfaces to the most popular machine learning packages on CRAN.
+    with interfaces to essential machine learning packages for
+    classification and regression on CRAN.
 }
 \seealso{
 Useful links:
