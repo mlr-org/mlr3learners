@@ -29,3 +29,11 @@ navbar:
     href: https://stackoverflow.com/questions/tagged/mlr3
   - icon: fa-rss
     href: https://mlr-org.com/
+
+reference:
+  - title: Classification Learnes
+    contents:
+      - starts_with("LearnerClassif")
+  - title: Regression Learners
+    contents:
+      - starts_with("LearnerRegr")
