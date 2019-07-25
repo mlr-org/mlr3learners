@@ -9,36 +9,6 @@
 Recommended Learners for 'mlr3'. Extends 'mlr3'
     with interfaces to the most popular machine learning packages on CRAN.
 }
-\section{Classification Learners}{
-
-\tabular{lll}{
-\strong{ID}                                                  \tab \strong{Package}       \tab \strong{Learner} \cr
-\link[=mlr_learners_classif.glmnet]{classif.glmnet}           \tab \CRANpkg{glmnet}  \tab Penalized Logistic Regression \cr
-\link[=mlr_learners_classif.kknn]{classif.kknn}               \tab \CRANpkg{kknn}    \tab k-Nearest Neighbors \cr
-\link[=mlr_learners_classif.lda]{classif.lda}                 \tab \CRANpkg{MASS}    \tab Linear Discriminant Analysis \cr
-\link[=mlr_learners_classif.log_reg]{classif.log_reg}         \tab \CRANpkg{stats}   \tab Logistic Regression \cr
-\link[=mlr_learners_classif.naive_bayes]{classif.naive_bayes} \tab \CRANpkg{e1071}   \tab Naive Bayes \cr
-\link[=mlr_learners_classif.qda]{classif.qda}                 \tab \CRANpkg{MASS}    \tab Quadratic Discriminant Analysis \cr
-\link[=mlr_learners_classif.ranger]{classif.ranger}           \tab \CRANpkg{ranger}  \tab Random Classification Forest \cr
-\link[=mlr_learners_classif.svm]{classif.svm}                 \tab \CRANpkg{e1071}   \tab Support Vector Machine \cr
-\link[=mlr_learners_classif.xgboost]{classif.xgboost}         \tab \CRANpkg{xgboost} \tab Gradient Boosting \cr
-}
-}
-
-\section{Regression Learners}{
-
-\tabular{lll}{
-\strong{ID}                                    \tab \strong{Package}           \tab \strong{Learner} \cr
-\link[=mlr_learners_regr.glmnet]{regr.glmnet}   \tab \CRANpkg{glmnet}      \tab Penalized Linear Regression \cr
-\link[=mlr_learners_regr.kknn]{regr.kknn}       \tab \CRANpkg{kknn}        \tab k-Nearest Neighbors \cr
-\link[=mlr_learners_regr.km]{regr.km}           \tab \CRANpkg{DiceKriging} \tab Kriging \cr
-\link[=mlr_learners_regr.lm]{regr.lm}           \tab \CRANpkg{stats}       \tab Linear Regression \cr
-\link[=mlr_learners_regr.ranger]{regr.ranger}   \tab \CRANpkg{ranger}      \tab Random Regression Forest \cr
-\link[=mlr_learners_regr.svm]{regr.svm}         \tab \CRANpkg{e1071}       \tab Support Vector Machine \cr
-\link[=mlr_learners_regr.xgboost]{regr.xgboost} \tab \CRANpkg{xgboost}     \tab Gradient Boosting \cr
-}
-}
-
 \seealso{
 Useful links:
 \itemize{
