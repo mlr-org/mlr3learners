@@ -13,8 +13,9 @@
 #' Journal of Statistical Software, 77(1), 1-17.
 #' \doi{10.18637/jss.v077.i01}.
 #'
-#' Breiman, L. (2001)
-#' Machine Learning 45: 5.
+#' Breiman, L. (2001).
+#' Random Forests.
+#' Machine Learning 45(1).
 #' \doi{10.1023/A:1010933404324}.
 #'
 #' @export
