@@ -23,7 +23,7 @@ Description: Recommended Learners for 'mlr3'. Extends 'mlr3'
     regression, linear and quadratic discriminant analysis, k-nearest neighbors,
     naive Bayes, support vector machines, and gradient boosting.
 License: LGPL-3
-URL: https://mlr3learners.mlr-org.com
+URL: https://mlr3learners.mlr-org.com, https://github.com/mlr-org/mlr3learners
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:
     R (>= 3.1.0)
