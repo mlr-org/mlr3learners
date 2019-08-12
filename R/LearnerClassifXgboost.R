@@ -76,7 +76,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     train_internal = function(task) {
-      pars = self$param_set$get_values(tags ="train")
+
+      pars = self$param_set$get_values(tags = "train")
       lvls = task$class_names
 
       if (is.null(pars$objective)) {
@@ -108,7 +109,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     predict_internal = function(task) {
-      pars = self$param_set$get_values(tags ="predict")
+
+      pars = self$param_set$get_values(tags = "predict")
       response = prob = NULL
       lvls = task$class_names
       nlvl = length(lvls)

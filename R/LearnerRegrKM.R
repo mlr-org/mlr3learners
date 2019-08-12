@@ -44,7 +44,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     },
 
     train_internal = function(task) {
-      pars = self$param_set$get_values(tags ="train")
+      pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
@@ -62,7 +62,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     },
 
     predict_internal = function(task) {
-      pars = self$param_set$get_values(tags ="predict")
+      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       jitter = pars$jitter

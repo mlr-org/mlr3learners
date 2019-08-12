@@ -58,7 +58,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     },
 
     train_internal = function(task) {
-      pars = self$param_set$get_values(tags ="train")
+      pars = self$param_set$get_values(tags = "train")
 
       if (self$predict_type == "se") {
         pars$keep.inbag = TRUE
@@ -73,7 +73,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
     },
 
     predict_internal = function(task) {
-      pars = self$param_set$get_values(tags ="predict")
+      pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
       preds = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pars)
       PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
