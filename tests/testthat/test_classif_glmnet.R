@@ -1,5 +1,7 @@
 context("classif.glmnet")
 
+skip_on_os("solaris")
+
 test_that("autotest", {
   learner = LearnerClassifGlmnet$new()
   expect_learner(learner)

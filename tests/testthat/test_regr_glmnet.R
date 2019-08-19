@@ -1,5 +1,7 @@
 context("regr.glmnet")
 
+skip_on_os("solaris")
+
 test_that("autotest", {
   learner = LearnerRegrGlmnet$new()
   expect_learner(learner)
