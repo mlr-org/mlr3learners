@@ -7,10 +7,11 @@
 \title{mlr3learners: Recommended Learners for 'mlr3'}
 \description{
 Recommended Learners for 'mlr3'. Extends 'mlr3'
-    with interfaces to essential machine learning packages on CRAN.
-    This includes, but is not limited to: (penalized) linear and logistic
-    regression, linear and quadratic discriminant analysis, k-nearest neighbors,
-    naive Bayes, support vector machines, and gradient boosting.
+    with interfaces to essential machine learning packages on CRAN.  This
+    includes, but is not limited to: (penalized) linear and logistic
+    regression, linear and quadratic discriminant analysis, k-nearest
+    neighbors, naive Bayes, support vector machines, and gradient
+    boosting.
 }
 \seealso{
 Useful links:
