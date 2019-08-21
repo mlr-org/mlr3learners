@@ -16,6 +16,7 @@
 #' Calls [stats::glm()].
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name classif.log_reg
 #' @template example
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,

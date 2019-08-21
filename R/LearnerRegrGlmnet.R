@@ -22,6 +22,7 @@
 #' \doi{10.18637/jss.v033.i01}.
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name regr.glmnet
 #' @template example
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,

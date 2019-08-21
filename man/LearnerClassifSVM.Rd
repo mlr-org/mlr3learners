@@ -28,4 +28,7 @@ Corinna Cortes and Vladimir Vapnik (1995).
 Machine Learning 20: 273.
 \doi{10.1007/BF00994018}.
 }
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+}
 \keyword{datasets}

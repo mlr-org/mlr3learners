@@ -30,4 +30,7 @@ XGBoost: A Scalable Tree Boosting System.
 22nd SIGKDD Conference on Knowledge Discovery and Data Mining.
 \doi{10.1145/2939672.2939785}.
 }
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+}
 \keyword{datasets}

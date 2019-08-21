@@ -30,4 +30,7 @@ Modern Applied Statistics with S.
 Fourth Edition. Springer, New York. ISBN 0-387-95457-0.
 \doi{10.1007/978-0-387-21706-2}.
 }
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+}
 \keyword{datasets}

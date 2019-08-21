@@ -20,6 +20,7 @@
 #' \doi{10.1007/BF00994018}.
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name classif.svm
 #' @template example
 LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,

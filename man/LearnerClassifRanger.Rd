@@ -35,4 +35,7 @@ Random Forests.
 Machine Learning 45(1).
 \doi{10.1023/A:1010933404324}.
 }
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+}
 \keyword{datasets}

@@ -16,6 +16,7 @@
 #' Calls [stats::lm()].
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name regr.lm
 #' @template example
 LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,

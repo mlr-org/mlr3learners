@@ -36,4 +36,7 @@ DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments 
 Journal of Statistical Software, 51(1), 1-55.
 \doi{10.18637/jss.v051.i01}.
 }
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+}
 \keyword{datasets}

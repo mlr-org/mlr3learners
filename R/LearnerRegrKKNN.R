@@ -16,6 +16,7 @@
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name regr.kknn
 #' @template example
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,

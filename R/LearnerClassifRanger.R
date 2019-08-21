@@ -27,6 +27,7 @@
 #' \doi{10.1023/A:1010933404324}.
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name classif.ranger
 #' @template example
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,

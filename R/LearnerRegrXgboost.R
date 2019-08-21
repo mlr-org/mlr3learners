@@ -22,6 +22,7 @@
 #' \doi{10.1145/2939672.2939785}.
 #'
 #' @export
+#' @template seealso-learner
 #' @templateVar learner_name regr.xgboost
 #' @template example
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
