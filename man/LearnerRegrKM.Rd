@@ -6,9 +6,6 @@
 \alias{mlr_learners_regr.km}
 \title{Kriging Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
-\usage{
-LearnerRegrKM
-}
 \description{
 Kriging regression.
 Calls \code{\link[DiceKriging:km]{DiceKriging::km()}} from package \CRANpkg{DiceKriging}.
@@ -19,6 +16,13 @@ We recommend a value of \code{1e-8}.
 \item The additional hyperparameter \code{jitter} can be set to add \code{N(0, [jitter])}-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value if \code{1e-12}.
 }
 }
+\section{Construction}{
+\preformatted{LearnerRegrKM$new()
+mlr3::mlr_learners$get("regr.km")
+mlr3::lrn("regr.km")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("regr.km")
 print(learner)

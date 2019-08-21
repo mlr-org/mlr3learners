@@ -1,7 +1,15 @@
 #' @title Kriging Regression Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_regr.km
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
+#' @section Construction:
+#' ```
+#' LearnerRegrKM$new()
+#' mlr3::mlr_learners$get("regr.km")
+#' mlr3::lrn("regr.km")
+#' ```
 #'
 #' @description
 #' Kriging regression.
@@ -23,9 +31,9 @@
 #' @template example
 LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.km") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.km",
         param_set = ParamSet$new(
           params = list(
             ParamFct$new(id = "covtype", default = "matern5_2", levels = c("gauss", "matern5_2", "matern3_2", "exp", "powexp"), tags = "train"),

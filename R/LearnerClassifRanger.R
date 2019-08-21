@@ -1,7 +1,15 @@
 #' @title Ranger Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifRanger$new()
+#' mlr3::mlr_learners$get("classif.ranger")
+#' mlr3::lrn("classif.ranger")
+#' ```
 #'
 #' @description
 #' Random classification forest.
@@ -23,9 +31,9 @@
 #' @template example
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.ranger") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.ranger",
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),

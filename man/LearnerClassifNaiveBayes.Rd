@@ -6,13 +6,17 @@
 \alias{mlr_learners_classif.naive_bayes}
 \title{Naive Bayes Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
-\usage{
-LearnerClassifNaiveBayes
-}
 \description{
 Naive Bayes classification.
 Calls \code{\link[e1071:naiveBayes]{e1071::naiveBayes()}} from package \CRANpkg{e1071}.
 }
+\section{Construction}{
+\preformatted{LearnerClassifNaiveBayes$new()
+mlr3::mlr_learners$get("classif.naive_bayes")
+mlr3::lrn("classif.naive_bayes")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("classif.naive_bayes")
 print(learner)

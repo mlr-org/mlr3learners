@@ -1,7 +1,15 @@
 #' @title GLM with Elastic Net Regularization Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifGlmnet$new()
+#' mlr3::mlr_learners$get("classif.glmnet")
+#' mlr3::lrn("classif.glmnet")
+#' ```
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
@@ -18,9 +26,9 @@
 #' @template example
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.glmnet") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.glmnet",
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),

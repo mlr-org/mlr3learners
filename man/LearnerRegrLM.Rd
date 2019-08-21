@@ -6,13 +6,17 @@
 \alias{mlr_learners_regr.lm}
 \title{Linear Model Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
-\usage{
-LearnerRegrLM
-}
 \description{
 Ordinary linear regression.
 Calls \code{\link[stats:lm]{stats::lm()}}.
 }
+\section{Construction}{
+\preformatted{LearnerRegrLM$new()
+mlr3::mlr_learners$get("regr.lm")
+mlr3::lrn("regr.lm")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("regr.lm")
 print(learner)

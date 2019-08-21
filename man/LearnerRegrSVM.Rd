@@ -6,12 +6,16 @@
 \alias{mlr_learners_regr.svm}
 \title{Support Vector Machine}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
-\usage{
-LearnerRegrSVM
-}
 \description{
 A learner for a regression support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
 }
+\section{Construction}{
+\preformatted{LearnerRegrSVM$new()
+mlr3::mlr_learners$get("regr.svm")
+mlr3::lrn("regr.svm")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("regr.svm")
 print(learner)

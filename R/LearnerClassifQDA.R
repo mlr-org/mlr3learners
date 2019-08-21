@@ -1,7 +1,15 @@
 #' @title Quadratic Discriminant Analysis Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.qda
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifQDA$new()
+#' mlr3::mlr_learners$get("classif.qda")
+#' mlr3::lrn("classif.qda")
+#' ```
 #'
 #' @description
 #' Quadratic discriminant analysis.
@@ -18,9 +26,9 @@
 #' @template example
 LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.qda") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.qda",
         param_set = ParamSet$new(
           params = list(
             ParamFct$new(id = "method", default = "moment", levels = c("moment", "mle", "mve", "t"), tags = "train"),

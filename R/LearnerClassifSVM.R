@@ -1,7 +1,15 @@
 #' @title Support Vector Machine
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.svm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifSVM$new()
+#' mlr3::mlr_learners$get("classif.svm")
+#' mlr3::lrn("classif.svm")
+#' ```
 #'
 #' @description
 #' A learner for a classification support vector machine implemented in [e1071::svm()].
@@ -16,9 +24,9 @@
 #' @template example
 LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.svm") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.svm",
         param_set = ParamSet$new(
           params = list(
             ParamFct$new(id = "type", default = "C-classification", levels = c("C-classification", "nu-classification"), tags = "train"),

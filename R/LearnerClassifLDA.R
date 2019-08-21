@@ -1,7 +1,15 @@
 #' @title Linear Discriminant Analysis Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.lda
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifLDA$new()
+#' mlr3::mlr_learners$get("classif.lda")
+#' mlr3::lrn("classif.lda")
+#' ```
 #'
 #' @description
 #' Linear discriminant analysis.
@@ -18,9 +26,9 @@
 #' @template example
 LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.lda") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.lda",
         param_set = ParamSet$new(
           params = list(
             ParamFct$new(id = "method", default = "moment", levels = c("moment", "mle", "mve", "t"), tags = "train"),

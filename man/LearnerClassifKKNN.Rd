@@ -6,13 +6,17 @@
 \alias{mlr_learners_classif.kknn}
 \title{k-Nearest-Neighbor Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
-\usage{
-LearnerClassifKKNN
-}
 \description{
 k-Nearest-Neighbor classification.
 Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
+\section{Construction}{
+\preformatted{LearnerClassifKKNN$new()
+mlr3::mlr_learners$get("classif.kknn")
+mlr3::lrn("classif.kknn")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("classif.kknn")
 print(learner)

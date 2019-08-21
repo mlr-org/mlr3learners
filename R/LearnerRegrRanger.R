@@ -1,7 +1,15 @@
 #' @title Ranger Regression Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_regr.ranger
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerRegrRanger$new()
+#' mlr3::mlr_learners$get("regr.ranger")
+#' mlr3::lrn("regr.ranger")
+#' ```
 #'
 #' @description
 #' Random regression forest.
@@ -23,9 +31,9 @@
 #' @template example
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.ranger") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.ranger",
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),

@@ -6,13 +6,17 @@
 \alias{mlr_learners_classif.xgboost}
 \title{Extreme Gradiant Boosting Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
-\usage{
-LearnerClassifXgboost
-}
 \description{
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
+\section{Construction}{
+\preformatted{LearnerClassifXgboost$new()
+mlr3::mlr_learners$get("classif.xgboost")
+mlr3::lrn("classif.xgboost")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("classif.xgboost")
 print(learner)

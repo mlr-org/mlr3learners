@@ -6,13 +6,17 @@
 \alias{mlr_learners_classif.lda}
 \title{Linear Discriminant Analysis Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
-\usage{
-LearnerClassifLDA
-}
 \description{
 Linear discriminant analysis.
 Calls \code{\link[MASS:lda]{MASS::lda()}} from package \CRANpkg{MASS}.
 }
+\section{Construction}{
+\preformatted{LearnerClassifLDA$new()
+mlr3::mlr_learners$get("classif.lda")
+mlr3::lrn("classif.lda")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("classif.lda")
 print(learner)

@@ -6,13 +6,17 @@
 \alias{mlr_learners_regr.ranger}
 \title{Ranger Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
-\usage{
-LearnerRegrRanger
-}
 \description{
 Random regression forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 }
+\section{Construction}{
+\preformatted{LearnerRegrRanger$new()
+mlr3::mlr_learners$get("regr.ranger")
+mlr3::lrn("regr.ranger")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("regr.ranger")
 print(learner)

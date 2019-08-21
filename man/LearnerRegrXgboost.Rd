@@ -6,13 +6,17 @@
 \alias{mlr_learners_regr.xgboost}
 \title{Extreme Gradient Boosting Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
-\usage{
-LearnerRegrXgboost
-}
 \description{
 eXtreme Gradient Boosting regression.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
+\section{Construction}{
+\preformatted{LearnerRegrSVM$new()
+mlr3::mlr_learners$get("regr.svm")
+mlr3::lrn("regr.svm")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("regr.xgboost")
 print(learner)

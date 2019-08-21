@@ -1,7 +1,15 @@
 #' @title Linear Model Regression Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_regr.lm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
+#' @section Construction:
+#' ```
+#' LearnerRegrLM$new()
+#' mlr3::mlr_learners$get("regr.lm")
+#' mlr3::lrn("regr.lm")
+#' ```
 #'
 #' @description
 #' Ordinary linear regression.
@@ -12,9 +20,9 @@
 #' @template example
 LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.lm", predict_type = "response") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.lm", ,
         predict_types = c("response", "se"),
         feature_types = c("integer", "numeric", "factor"),
         properties = "weights",

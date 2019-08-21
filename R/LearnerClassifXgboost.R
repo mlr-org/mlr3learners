@@ -1,7 +1,15 @@
 #' @title Extreme Gradiant Boosting Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.xgboost
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifXgboost$new()
+#' mlr3::mlr_learners$get("classif.xgboost")
+#' mlr3::lrn("classif.xgboost")
+#' ```
 #'
 #' @description
 #' eXtreme Gradient Boosting classification.
@@ -18,9 +26,9 @@
 #' @template example
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.xgboost") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.xgboost",
         param_set = ParamSet$new(
           params = list(
             # we pass all of what goes in 'params' directly to ... of xgboost

@@ -1,7 +1,15 @@
 #' @title Extreme Gradient Boosting Regression Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_regr.xgboost
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
+#' @section Construction:
+#' ```
+#' LearnerRegrSVM$new()
+#' mlr3::mlr_learners$get("regr.svm")
+#' mlr3::lrn("regr.svm")
+#' ```
 #'
 #' @description
 #' eXtreme Gradient Boosting regression.
@@ -18,9 +26,9 @@
 #' @template example
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.xgboost") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.xgboost",
         param_set = ParamSet$new(
           params = list(
             # we pass all of what goes in 'params' directly to ... of xgboost

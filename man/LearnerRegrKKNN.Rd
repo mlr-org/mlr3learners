@@ -6,13 +6,17 @@
 \alias{mlr_learners_regr.kknn}
 \title{k-Nearest-Neighbor Regression Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
-\usage{
-LearnerRegrKKNN
-}
 \description{
 k-Nearest-Neighbor regression.
 Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
+\section{Construction}{
+\preformatted{LearnerRegrKKNN$new()
+mlr3::mlr_learners$get("regr.kknn")
+mlr3::lrn("regr.kknn")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("regr.kknn")
 print(learner)

@@ -1,7 +1,15 @@
 #' @title k-Nearest-Neighbor Regression Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_regr.kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
+#'
+#' @section Construction:
+#' ```
+#' LearnerRegrKKNN$new()
+#' mlr3::mlr_learners$get("regr.kknn")
+#' mlr3::lrn("regr.kknn")
+#' ```
 #'
 #' @description
 #' k-Nearest-Neighbor regression.
@@ -12,9 +20,9 @@
 #' @template example
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
-    initialize = function(id = "regr.kknn") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "regr.kknn",
         param_set = ParamSet$new(
           params = list(
             ParamInt$new(id = "k", default = 7L, lower = 1L, tags = "predict"),

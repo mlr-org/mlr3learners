@@ -1,7 +1,15 @@
 #' @title Logistic Regression Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.log_reg
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifLogReg$new()
+#' mlr3::mlr_learners$get("classif.log_reg")
+#' mlr3::lrn("classif.log_reg")
+#' ```
 #'
 #' @description
 #' Classification via logistic regression.
@@ -12,9 +20,9 @@
 #' @template example
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.log_reg") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.log_reg",
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "twoclass"),

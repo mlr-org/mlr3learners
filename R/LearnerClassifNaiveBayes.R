@@ -1,7 +1,15 @@
 #' @title Naive Bayes Classification Learner
 #'
+#' @usage NULL
 #' @aliases mlr_learners_classif.naive_bayes
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
+#'
+#' @section Construction:
+#' ```
+#' LearnerClassifNaiveBayes$new()
+#' mlr3::mlr_learners$get("classif.naive_bayes")
+#' mlr3::lrn("classif.naive_bayes")
+#' ```
 #'
 #' @description
 #' Naive Bayes classification.
@@ -12,9 +20,9 @@
 #' @template example
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
-    initialize = function(id = "classif.naive_bayes") {
+    initialize = function() {
       super$initialize(
-        id = id,
+        id = "classif.naive_bayes",
         param_set = ParamSet$new(
           params = list(
             ParamDbl$new(id = "laplace", default = 0, lower = 0, tags = "train")

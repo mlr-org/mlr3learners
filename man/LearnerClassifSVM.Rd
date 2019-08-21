@@ -6,12 +6,16 @@
 \alias{mlr_learners_classif.svm}
 \title{Support Vector Machine}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
-\usage{
-LearnerClassifSVM
-}
 \description{
 A learner for a classification support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
 }
+\section{Construction}{
+\preformatted{LearnerClassifSVM$new()
+mlr3::mlr_learners$get("classif.svm")
+mlr3::lrn("classif.svm")
+}
+}
+
 \examples{
 learner = mlr3::mlr_learners$get("classif.svm")
 print(learner)
