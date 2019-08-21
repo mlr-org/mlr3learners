@@ -27,7 +27,7 @@
 #' \doi{10.1023/A:1010933404324}.
 #'
 #' @export
-#' @template seealso-learner
+#' @template seealso_learner
 #' @templateVar learner_name regr.ranger
 #' @template example
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,

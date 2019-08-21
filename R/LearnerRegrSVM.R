@@ -20,7 +20,7 @@
 #' \doi{10.1007/BF00994018}.
 #'
 #' @export
-#' @template seealso-learner
+#' @template seealso_learner
 #' @templateVar learner_name regr.svm
 #' @template example
 LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,

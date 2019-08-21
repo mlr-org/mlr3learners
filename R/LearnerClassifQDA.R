@@ -22,7 +22,7 @@
 #' \doi{10.1007/978-0-387-21706-2}.
 #'
 #' @export
-#' @template seealso-learner
+#' @template seealso_learner
 #' @templateVar learner_name classif.qda
 #' @template example
 LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,

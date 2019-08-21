@@ -27,7 +27,7 @@
 #' \doi{10.18637/jss.v051.i01}.
 #'
 #' @export
-#' @template seealso-learner
+#' @template seealso_learner
 #' @templateVar learner_name regr.km
 #' @template example
 LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,

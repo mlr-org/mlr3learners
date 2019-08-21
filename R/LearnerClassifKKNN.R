@@ -16,7 +16,7 @@
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @export
-#' @template seealso-learner
+#' @template seealso_learner
 #' @templateVar learner_name classif.kknn
 #' @template example
 LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,

@@ -16,7 +16,7 @@
 #' Calls [e1071::naiveBayes()] from package \CRANpkg{e1071}.
 #'
 #' @export
-#' @template seealso-learner
+#' @template seealso_learner
 #' @templateVar learner_name classif.naive_bayes
 #' @template example
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
