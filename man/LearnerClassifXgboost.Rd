@@ -18,7 +18,7 @@ mlr3::lrn("classif.xgboost")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("classif.xgboost")
+learner = mlr3::lrn("classif.xgboost")
 print(learner)
 
 # available parameters:

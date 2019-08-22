@@ -18,7 +18,7 @@ mlr3::lrn("classif.ranger")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("classif.ranger")
+learner = mlr3::lrn("classif.ranger")
 print(learner)
 
 # available parameters:

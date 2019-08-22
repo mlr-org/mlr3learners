@@ -17,7 +17,7 @@ mlr3::lrn("regr.svm")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("regr.svm")
+learner = mlr3::lrn("regr.svm")
 print(learner)
 
 # available parameters:

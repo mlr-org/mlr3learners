@@ -18,7 +18,7 @@ mlr3::lrn("regr.svm")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("regr.xgboost")
+learner = mlr3::lrn("regr.xgboost")
 print(learner)
 
 # available parameters:

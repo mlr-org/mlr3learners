@@ -17,7 +17,7 @@ mlr3::lrn("classif.svm")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("classif.svm")
+learner = mlr3::lrn("classif.svm")
 print(learner)
 
 # available parameters:

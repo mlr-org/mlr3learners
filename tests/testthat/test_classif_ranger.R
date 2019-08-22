@@ -1,7 +1,7 @@
 context("classif.ranger")
 
 test_that("autotest", {
-  learner = LearnerClassifRanger$new()
+  learner = mlr3::lrn("classif.ranger")
   expect_learner(learner)
   learner$param_set$values = list(num.trees = 30L, importance = "impurity")
   result = run_autotest(learner)

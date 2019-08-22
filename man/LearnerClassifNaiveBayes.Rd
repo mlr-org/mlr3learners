@@ -18,7 +18,7 @@ mlr3::lrn("classif.naive_bayes")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("classif.naive_bayes")
+learner = mlr3::lrn("classif.naive_bayes")
 print(learner)
 
 # available parameters:

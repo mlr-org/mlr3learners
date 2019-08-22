@@ -13,7 +13,7 @@ Calls \code{\link[DiceKriging:km]{DiceKriging::km()}} from package \CRANpkg{Dice
 \item The predict type hyperparameter "type" defaults to "SK" (simple Kriging).
 \item The additional hyperparameter \code{nugget.stability} is used to overwrite the hyperparameter \code{nugget} with \code{nugget.stability * var(y)} before training to improve the numerical stability.
 We recommend a value of \code{1e-8}.
-\item The additional hyperparameter \code{jitter} can be set to add \code{N(0, [jitter])}-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value if \code{1e-12}.
+\item The additional hyperparameter \code{jitter} can be set to add \code{N(0, [jitter])}-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value of \code{1e-12}.
 }
 }
 \section{Construction}{
@@ -24,7 +24,7 @@ mlr3::lrn("regr.km")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("regr.km")
+learner = mlr3::lrn("regr.km")
 print(learner)
 
 # available parameters:

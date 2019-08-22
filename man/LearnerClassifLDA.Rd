@@ -18,7 +18,7 @@ mlr3::lrn("classif.lda")
 }
 
 \examples{
-learner = mlr3::mlr_learners$get("classif.lda")
+learner = mlr3::lrn("classif.lda")
 print(learner)
 
 # available parameters:
