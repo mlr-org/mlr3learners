@@ -24,7 +24,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-Corinna Cortes and Vladimir Vapnik (1995).
+Corinna Cortes, Vladimir Vapnik (1995).
 Machine Learning 20: 273.
 \doi{10.1007/BF00994018}.
 }

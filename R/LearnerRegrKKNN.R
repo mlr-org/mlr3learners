@@ -15,6 +15,17 @@
 #' k-Nearest-Neighbor regression.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
+#' @references
+#' Klaus Hechenbichler, Klaus Schliep (2004).
+#' Weighted k-nearest-neighbor techniques and ordinal classification.
+#' Discussion Paper 399, SFB 386, Ludwig-Maximilians University Munich
+#' \doi{10.5282/ubm/epub.1769}
+#'
+#' Thomas Cover and Peter Hart (1967).
+#' Nearest neighbor pattern classification.
+#' IEEE transactions on information theory 13.1: 21-27.
+#' \doi{10.1109/TIT.1967.1053964}
+#'
 #' @export
 #' @template seealso_learner
 #' @templateVar learner_name regr.kknn
