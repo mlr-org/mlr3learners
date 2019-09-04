@@ -14,6 +14,7 @@
 #' @description
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
+#' Hyperparameter `family` is set to `"gaussian"`.
 #'
 #' @references
 #' Jerome Friedman, Trevor Hastie, Robert Tibshirani (2010).
@@ -28,42 +29,42 @@
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
     initialize = function() {
+      ps = ParamSet$new(list(
+        ParamFct$new("family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),
+        ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
+        ParamInt$new("nfolds", lower = 3L, default = 10L, tags = "train"),
+        ParamFct$new("type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
+        ParamDbl$new("s", lower = 0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
+        ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
+        ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
+        ParamUty$new("lambda", tags = "train"),
+        ParamLgl$new("standardize", default = TRUE, tags = "train"),
+        ParamLgl$new("intercept", default = TRUE, tags = "train"),
+        ParamDbl$new("thresh", default = 1e-07, lower = 0, tags = "train"),
+        ParamInt$new("dfmax", lower = 0L, tags = "train"),
+        ParamInt$new("pmax", lower = 0L, tags = "train"),
+        ParamInt$new("exclude", lower = 1L, tags = "train"),
+        ParamDbl$new("penalty.factor", lower = 0, upper = 1, tags = "train"),
+        ParamUty$new("lower.limits", tags = "train"),
+        ParamUty$new("upper.limits", tags = "train"),
+        ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
+        ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
+        ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
+        ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("big", default = 9.9e35, tags = "train"),
+        ParamInt$new("mnlam", default = 5L, lower = 1L, tags = "train"),
+        ParamDbl$new("pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("exmx", default = 250.0, tags = "train"),
+        ParamDbl$new("prec", default = 1e-10, tags = "train"),
+        ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train")
+      ))
+      ps$values = list(family = "gaussian")
+
       super$initialize(
         id = "regr.glmnet",
-        param_set = ParamSet$new(
-          params = list(
-            ParamFct$new(id = "family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),
-            ParamDbl$new(id = "alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-            ParamInt$new(id = "nfolds", lower = 3L, default = 10L, tags = "train"),
-            ParamFct$new(id = "type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
-            ParamDbl$new(id = "s", lower = 0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
-            ParamInt$new(id = "nlambda", default = 100L, lower = 1L, tags = "train"),
-            ParamDbl$new(id = "lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
-            ParamUty$new(id = "lambda", tags = "train"),
-            ParamLgl$new(id = "standardize", default = TRUE, tags = "train"),
-            ParamLgl$new(id = "intercept", default = TRUE, tags = "train"),
-            ParamDbl$new(id = "thresh", default = 1e-07, lower = 0, tags = "train"),
-            ParamInt$new(id = "dfmax", lower = 0L, tags = "train"),
-            ParamInt$new(id = "pmax", lower = 0L, tags = "train"),
-            ParamInt$new(id = "exclude", lower = 1L, tags = "train"),
-            ParamDbl$new(id = "penalty.factor", lower = 0, upper = 1, tags = "train"),
-            ParamUty$new(id = "lower.limits", tags = "train"),
-            ParamUty$new(id = "upper.limits", tags = "train"),
-            ParamInt$new(id = "maxit", default = 100000L, lower = 1L, tags = "train"),
-            ParamFct$new(id = "type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
-            ParamFct$new(id = "type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
-            ParamDbl$new(id = "fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
-            ParamDbl$new(id = "devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
-            ParamDbl$new(id = "eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
-            ParamDbl$new(id = "big", default = 9.9e35, tags = "train"),
-            ParamInt$new(id = "mnlam", default = 5L, lower = 1L, tags = "train"),
-            ParamDbl$new(id = "pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
-            ParamDbl$new(id = "exmx", default = 250.0, tags = "train"),
-            ParamDbl$new(id = "prec", default = 1e-10, tags = "train"),
-            ParamInt$new(id = "mxit", default = 100L, lower = 1L, tags = "train")
-          )
-        ),
-        param_vals = list(family = "gaussian"),
+        param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = "weights",
         packages = "glmnet"

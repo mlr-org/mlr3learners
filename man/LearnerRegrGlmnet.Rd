@@ -9,6 +9,7 @@
 \description{
 Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
+Hyperparameter \code{family} is set to \code{"gaussian"}.
 }
 \section{Construction}{
 \preformatted{LearnerRegrGlmnet$new()

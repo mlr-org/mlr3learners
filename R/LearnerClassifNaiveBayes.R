@@ -22,13 +22,13 @@
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
     initialize = function() {
+      ps = ParamSet$new(list(
+        ParamDbl$new("laplace", default = 0, lower = 0, tags = "train")
+      ))
+
       super$initialize(
         id = "classif.naive_bayes",
-        param_set = ParamSet$new(
-          params = list(
-            ParamDbl$new(id = "laplace", default = 0, lower = 0, tags = "train")
-          )
-        ),
+        param_set = ps,
         predict_types = c("response", "prob"),
         properties = c("twoclass", "multiclass"),
         feature_types = c("logical", "integer", "numeric", "factor"),

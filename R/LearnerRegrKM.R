@@ -33,19 +33,18 @@
 LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
   public = list(
     initialize = function() {
+      ps = ParamSet$new(list(
+        ParamFct$new("covtype", default = "matern5_2", levels = c("gauss", "matern5_2", "matern3_2", "exp", "powexp"), tags = "train"),
+        ParamDbl$new("nugget", tags = "train"),
+        ParamLgl$new("nugget.estim", default = FALSE, tags = "train"),
+        ParamFct$new("type", default = "SK", levels = c("SK", "UK"), tags = "predict"),
+        ParamDbl$new("nugget.stability", default = 0, lower = 0, tags = "train"),
+        ParamDbl$new("jitter", default = 0, lower = 0, tags = "predict")
+      ))
+
       super$initialize(
         id = "regr.km",
-        param_set = ParamSet$new(
-          params = list(
-            ParamFct$new(id = "covtype", default = "matern5_2", levels = c("gauss", "matern5_2", "matern3_2", "exp", "powexp"), tags = "train"),
-            ParamDbl$new(id = "nugget", tags = "train"),
-            ParamLgl$new(id = "nugget.estim", default = FALSE, tags = "train"),
-            ParamFct$new(id = "type", default = "SK", levels = c("SK", "UK"), tags = "predict"),
-            ParamDbl$new(id = "nugget.stability", default = 0, lower = 0, tags = "train"),
-            ParamDbl$new(id = "jitter", default = 0, lower = 0, tags = "predict")
-          )
-        ),
-
+        param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("integer", "numeric"),
         packages = "DiceKriging"
