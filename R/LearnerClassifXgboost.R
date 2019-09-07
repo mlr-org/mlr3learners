@@ -1,4 +1,4 @@
-#' @title Extreme Gradiant Boosting Classification Learner
+#' @title Extreme Gradient Boosting Classification Learner
 #'
 #' @usage NULL
 #' @aliases mlr_learners_classif.xgboost
