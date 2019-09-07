@@ -33,7 +33,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         ParamUty$new("watchlist", default = NULL, tags = "train"),
         ParamDbl$new("eta", default = 0.3, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("gamma", default = 0, lower = 0, tags = "train"),
-        ParamInt$new("max_depth", default = 6L, lower = 1L, tags = "train"),
+        ParamInt$new("max_depth", default = 6L, lower = 0L, tags = "train"),
         ParamDbl$new("min_child_weight", default = 1, lower = 0, tags = "train"),
         ParamDbl$new("subsample", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bytree", default = 1, lower = 0, upper = 1, tags = "train"),
@@ -60,12 +60,11 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         ParamFct$new("normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"), # , requires = quote(booster == "dart")
         ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
         ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
-        # TODO: uncomment the following after the next CRAN update, and set max_depth's lower = 0L
-        # ParamLgl$new("one_drop", default = FALSE, requires = quote(booster == "dart")),
-        # ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
-        # ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
-        # ParamInt$new("max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
-        # ParamInt$new("max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
+        ParamLgl$new("one_drop", default = FALSE, requires = quote(booster == "dart")),
+        ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
+        ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
+        ParamInt$new("max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
+        ParamInt$new("max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
         ParamUty$new("callbacks", default = list(), tags = "train")
       ))
       ps$values = list(nrounds = 1L, verbose = 0L)
