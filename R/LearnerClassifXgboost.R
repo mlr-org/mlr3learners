@@ -48,25 +48,39 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamDbl$new("max_delta_step", lower = 0, default = 0, tags = "train"),
         ParamDbl$new("missing", default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
         ParamInt$new("monotone_constraints", default = 0L, lower = -1L, upper = 1L, tags = "train"),
-        ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"), # , requires = quote(objective == "reg:tweedie")
+        ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"),
         ParamInt$new("nthread", lower = 1L, tags = "train"),
         ParamInt$new("nrounds", lower = 1L, tags = "train"),
         ParamUty$new("feval", default = NULL, tags = "train"),
         ParamInt$new("verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
-        ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"), # , requires = quote(verbose == 1L)
+        ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"),
         ParamInt$new("early_stopping_rounds", default = NULL, lower = 1L, special_vals = list(NULL), tags = "train"),
         ParamLgl$new("maximize", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamFct$new("sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"), # , requires = quote(booster == "dart")
-        ParamFct$new("normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"), # , requires = quote(booster == "dart")
-        ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
-        ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
-        ParamLgl$new("one_drop", default = FALSE, requires = quote(booster == "dart")),
-        ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
-        ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
-        ParamInt$new("max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
-        ParamInt$new("max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
+        ParamFct$new("sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"),
+        ParamFct$new("normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"),
+        ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamLgl$new("one_drop", default = FALSE),
+        ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist")),
+        ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide")),
+        ParamInt$new("max_leaves", default = 0L, lower = 0L),
+        ParamInt$new("max_bin", default = 256L, lower = 2L),
         ParamUty$new("callbacks", default = list(), tags = "train")
       ))
+      # param deps
+      ps$add_dep("tweedie_variance_power", "objective", "reg:tweedie")
+      ps$add_dep("print_every_n", "verbose", 1L)
+      ps$add_dep("sample_type", "booster", "dart")
+      ps$add_dep("normalize_type", "booster", "dart")
+      ps$add_dep("rate_drop", "booster", "dart")
+      ps$add_dep("skip_drop", "booster", "dart")
+      ps$add_dep("one_drop", "booster", "dart")
+      ps$add_dep("tree_method", "booster", "!= 'gblinear'")
+      ps$add_dep("grow_policy", "tree_method", "hist")
+      ps$add_dep("max_leaves", "grow_policy", "lossguide")
+      ps$add_dep("max_bin", "tree_method", "hist")
+
+      # custom defaults
       ps$values = list(nrounds = 1L, verbose = 0L)
 
       super$initialize(
