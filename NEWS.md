@@ -1,5 +1,3 @@
-# mlr3learners (development version)
-
 # mlr3learners 0.1.3
 
 * Changes to work with new `mlr3::Learner` API.
