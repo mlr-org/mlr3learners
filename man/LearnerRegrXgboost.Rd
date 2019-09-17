@@ -11,9 +11,9 @@ eXtreme Gradient Boosting regression.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
 \section{Construction}{
-\preformatted{LearnerRegrSVM$new()
-mlr3::mlr_learners$get("regr.svm")
-mlr3::lrn("regr.svm")
+\preformatted{LearnerRegrXgboost$new()
+mlr3::mlr_learners$get("regr.xgboost")
+mlr3::lrn("regr.xgboost")
 }
 }
 

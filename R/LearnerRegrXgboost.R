@@ -6,9 +6,9 @@
 #'
 #' @section Construction:
 #' ```
-#' LearnerRegrSVM$new()
-#' mlr3::mlr_learners$get("regr.svm")
-#' mlr3::lrn("regr.svm")
+#' LearnerRegrXgboost$new()
+#' mlr3::mlr_learners$get("regr.xgboost")
+#' mlr3::lrn("regr.xgboost")
 #' ```
 #'
 #' @description
