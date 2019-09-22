@@ -21,10 +21,7 @@
 #' * The additional hyperparameter `jitter` can be set to add `N(0, [jitter])`-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value of `1e-12`.
 #'
 #' @references
-#' Olivier Roustant, David Ginsbourger, Yves Deville (2012).
-#' DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.
-#' Journal of Statistical Software, 51(1), 1-55.
-#' \doi{10.18637/jss.v051.i01}.
+#' \cite{mlr3learners}{roustant_2012}
 #'
 #' @export
 #' @template seealso_learner

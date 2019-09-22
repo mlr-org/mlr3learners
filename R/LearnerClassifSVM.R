@@ -15,9 +15,7 @@
 #' A learner for a classification support vector machine implemented in [e1071::svm()].
 #'
 #' @references
-#' Corinna Cortes, Vladimir Vapnik (1995).
-#' Machine Learning 20: 273.
-#' \doi{10.1007/BF00994018}.
+#' \cite{mlr3learners}{cortes_1995}
 #'
 #' @export
 #' @template seealso_learner
