@@ -81,12 +81,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     train_internal = function(task) {
-
       pars = self$param_set$get_values(tags = "train")
+
       lvls = task$class_names
+      nlvls = length(lvls)
 
       if (is.null(pars$objective)) {
-        pars$objective = ifelse(length(lvls) == 2L, "binary:logistic", "multi:softprob")
+        pars$objective = if (nlvls == 2L) "binary:logistic" else "multi:softprob"
       }
 
       if (self$predict_type == "prob" && pars$objective == "multi:softmax") {
@@ -95,11 +96,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
       # if we use softprob or softmax as objective we have to add the number of classes 'num_class'
       if (pars$objective %in% c("multi:softprob", "multi:softmax")) {
-        pars$num_class = length(lvls)
+        pars$num_class = nlvls
       }
 
       data = task$data(cols = task$feature_names)
-      label = match(as.character(as.matrix(task$data(cols = task$target_names))), lvls) - 1
+      # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
+      # task$truth() is guaranteed to have the factor levels in the right order
+      label = nlvls - as.integer(task$truth())
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
 
       if ("weights" %in% task$properties) {
@@ -114,10 +117,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     predict_internal = function(task) {
-
       pars = self$param_set$get_values(tags = "predict")
       response = prob = NULL
-      lvls = task$class_names
+      lvls = rev(task$class_names)
       nlvl = length(lvls)
 
       if (is.null(pars$objective)) {
