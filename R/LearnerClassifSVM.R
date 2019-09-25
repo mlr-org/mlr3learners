@@ -54,9 +54,11 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
 
     train_internal = function(task) {
       pars = self$param_set$get_values(tags = "train")
+      data = as.matrix(task$data(cols = task$feature_names))
+      self$state$feature_names = colnames(data)
 
       invoke(e1071::svm,
-        x = as.matrix(task$data(cols = task$feature_names)),
+        x = data,
         y = task$truth(),
         probability = (self$predict_type == "prob"),
         .args = pars
@@ -66,6 +68,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
     predict_internal = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
+      newdata = newdata[, self$state$feature_names, drop = FALSE]
       p = invoke(predict, self$model, newdata = newdata, probability = (self$predict_type == "prob"), .args = pars)
 
       PredictionClassif$new(task = task,

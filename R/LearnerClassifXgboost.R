@@ -118,6 +118,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
     predict_internal = function(task) {
       pars = self$param_set$get_values(tags = "predict")
+      model = self$model
       response = prob = NULL
       lvls = rev(task$class_names)
       nlvl = length(lvls)
@@ -127,7 +128,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       }
 
       newdata = data.matrix(task$data(cols = task$feature_names))
-      pred = invoke(predict, self$model, newdata = newdata, .args = pars)
+      newdata = newdata[, model$feature_names, drop = FALSE]
+      pred = invoke(predict, model, newdata = newdata, .args = pars)
 
       if (nlvl == 2L) { # binaryclass
         if (pars$objective == "multi:softprob") {
