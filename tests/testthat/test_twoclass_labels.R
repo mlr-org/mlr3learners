@@ -61,7 +61,7 @@ test_that("classifiers respect positive label for binary tasks", {
       } else if (inherits(captured_predict_out, 'ranger.prediction')) {
         predictions = table(captured_predict_out$predictions)
       } else {
-        rlang::abort(paste0('Could not understand predict output for ', learner$id))
+        fail(paste0('Could not understand predict output for ', learner$id))
       }
       
       expect_lt(predictions['1'], predictions['0'])

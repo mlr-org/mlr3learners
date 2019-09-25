@@ -51,7 +51,8 @@ Suggests:
     ranger,
     testthat,
     withr,
-    xgboost
+    xgboost,
+    rpart
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
