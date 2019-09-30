@@ -16,10 +16,7 @@
 #' Calls [MASS::qda()] from package \CRANpkg{MASS}.
 #'
 #' @references
-#' William N. Venables, Brian D. Ripley (2002).
-#' Modern Applied Statistics with S.
-#' Fourth Edition. Springer, New York. ISBN 0-387-95457-0.
-#' \doi{10.1007/978-0-387-21706-2}.
+#' \cite{mlr3learners}{venables_2002}
 #'
 #' @export
 #' @template seealso_learner

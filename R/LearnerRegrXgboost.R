@@ -16,10 +16,7 @@
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
 #' @references
-#' Tianqi Chen, Carlos Guestrin (2016).
-#' XGBoost: A Scalable Tree Boosting System.
-#' 22nd SIGKDD Conference on Knowledge Discovery and Data Mining.
-#' \doi{10.1145/2939672.2939785}.
+#' \cite{mlr3learners}{chen_2016}
 #'
 #' @export
 #' @template seealso_learner
