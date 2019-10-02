@@ -10,6 +10,7 @@
 Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
 Hyperparameter \code{family} is set to \code{"gaussian"}.
+\insertNoCite{friedman_2010}{mlr3learners}
 }
 \section{Construction}{
 \preformatted{LearnerRegrGlmnet$new()
@@ -26,7 +27,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-\cite{mlr3learners}{friedman_2010}
+\insertAllCited{}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
