@@ -25,10 +25,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-Jerome Friedman, Trevor Hastie, Robert Tibshirani (2010).
-Regularization Paths for Generalized Linear Models via Coordinate Descent.
-Journal of Statistical Software, 33(1), 1-22.
-\doi{10.18637/jss.v033.i01}.
+\cite{mlr3learners}{friedman_2010}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

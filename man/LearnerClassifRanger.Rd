@@ -25,15 +25,9 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-Marvin N. Wright, Andreas Ziegler (2017).
-ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.
-Journal of Statistical Software, 77(1), 1-17.
-\doi{10.18637/jss.v077.i01}.
+\cite{mlr3learners}{wright_2017}
 
-Breiman, L. (2001).
-Random Forests.
-Machine Learning 45(1).
-\doi{10.1023/A:1010933404324}.
+\cite{mlr3learners}{breiman_2001}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
