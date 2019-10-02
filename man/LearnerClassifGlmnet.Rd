@@ -9,6 +9,7 @@
 \description{
 Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
+
 \insertNoCite{friedman_2010}{mlr3learners}
 }
 \section{Construction}{

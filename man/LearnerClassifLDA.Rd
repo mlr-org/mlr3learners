@@ -9,6 +9,8 @@
 \description{
 Linear discriminant analysis.
 Calls \code{\link[MASS:lda]{MASS::lda()}} from package \CRANpkg{MASS}.
+
+\insertNoCite{venables_2002}{mlr3learners}
 }
 \section{Construction}{
 \preformatted{LearnerClassifLDA$new()
@@ -25,7 +27,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-\cite{mlr3learners}{venables_2002}
+\insertAllCited{}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

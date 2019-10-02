@@ -15,8 +15,10 @@
 #' Linear discriminant analysis.
 #' Calls [MASS::lda()] from package \CRANpkg{MASS}.
 #'
+#' \insertNoCite{venables_2002}{mlr3learners}
+#'
 #' @references
-#' \cite{mlr3learners}{venables_2002}
+#'  \insertAllCited{}
 #'
 #' @export
 #' @template seealso_learner

@@ -9,6 +9,8 @@
 \description{
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
+
+\insertNoCite{chen_2016}{mlr3learners}
 }
 \section{Construction}{
 \preformatted{LearnerClassifXgboost$new()
@@ -25,7 +27,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-\cite{mlr3learners}{chen_2016}
+\insertAllCited{}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

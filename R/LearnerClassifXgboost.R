@@ -15,8 +15,10 @@
 #' eXtreme Gradient Boosting classification.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
+#' \insertNoCite{chen_2016}{mlr3learners}
+#'
 #' @references
-#' \cite{mlr3learners}{chen_2016}
+#'  \insertAllCited{}
 #'
 #' @export
 #' @template seealso_learner

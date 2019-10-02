@@ -15,12 +15,12 @@
 #' k-Nearest-Neighbor classification.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
+#' \insertNoCite{cover_1967}{mlr3learners}
+#' \insertNoCite{samworth_2012}{mlr3learners}
+#' \insertNoCite{hechenbichler_2004}{mlr3learners}
+#'
 #' @references
-#' \cite{mlr3learners}{hechenbichler_2004}
-#'
-#' \cite{mlr3learners}{samworth_2012}
-#'
-#' \cite{mlr3learners}{cover_1967}
+#'  \insertAllCited{}
 #'
 #' @export
 #' @template seealso_learner

@@ -8,6 +8,8 @@
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerRegr]{mlr3::LearnerRegr}.}
 \description{
 A learner for a regression support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
+
+\insertNoCite{cortes_1995}{mlr3learners}
 }
 \section{Construction}{
 \preformatted{LearnerRegrSVM$new()
@@ -24,7 +26,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-\cite{mlr3learners}{cortes_1995}
+\insertAllCited{}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

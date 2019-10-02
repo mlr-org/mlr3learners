@@ -15,10 +15,11 @@
 #' Random classification forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
-#' @references
-#' \cite{mlr3learners}{wright_2017}
+#' \insertNoCite{breiman_2001}{mlr3learners}
+#' \insertNoCite{wright_2017}{mlr3learners}
 #'
-#' \cite{mlr3learners}{breiman_2001}
+#' @references
+#'  \insertAllCited{}
 #'
 #' @export
 #' @template seealso_learner

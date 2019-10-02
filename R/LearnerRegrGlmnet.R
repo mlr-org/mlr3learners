@@ -15,6 +15,7 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #' Hyperparameter `family` is set to `"gaussian"`.
+#'
 #' \insertNoCite{friedman_2010}{mlr3learners}
 #'
 #' @references

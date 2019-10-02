@@ -14,8 +14,10 @@
 #' @description
 #' A learner for a regression support vector machine implemented in [e1071::svm()].
 #'
+#' \insertNoCite{cortes_1995}{mlr3learners}
+#'
 #' @references
-#' \cite{mlr3learners}{cortes_1995}
+#'  \insertAllCited{}
 #'
 #' @export
 #' @template seealso_learner

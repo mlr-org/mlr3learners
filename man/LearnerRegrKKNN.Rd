@@ -9,6 +9,10 @@
 \description{
 k-Nearest-Neighbor regression.
 Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
+
+\insertNoCite{cover_1967}{mlr3learners}
+\insertNoCite{samworth_2012}{mlr3learners}
+\insertNoCite{hechenbichler_2004}{mlr3learners}
 }
 \section{Construction}{
 \preformatted{LearnerRegrKKNN$new()
@@ -25,11 +29,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-\cite{mlr3learners}{hechenbichler_2004}
-
-\cite{mlr3learners}{samworth_2012}
-
-\cite{mlr3learners}{cover_1967}
+\insertAllCited{}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

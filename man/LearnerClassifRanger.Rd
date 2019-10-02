@@ -9,6 +9,9 @@
 \description{
 Random classification forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
+
+\insertNoCite{breiman_2001}{mlr3learners}
+\insertNoCite{wright_2017}{mlr3learners}
 }
 \section{Construction}{
 \preformatted{LearnerClassifRanger$new()
@@ -25,9 +28,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-\cite{mlr3learners}{wright_2017}
-
-\cite{mlr3learners}{breiman_2001}
+\insertAllCited{}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
