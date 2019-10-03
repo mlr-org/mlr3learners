@@ -6,9 +6,13 @@
 [![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 
-This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com).
-Creating custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).
+This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
+We will most likely not add new learners to this package.
 
+Other learners live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
+There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners) listing all currently available custom learners.
+A guide on how to create custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).
+Feel invited to contribute a missing learner to the mlr3 ecosystem :-)
 
 ### Classification Learners
 
