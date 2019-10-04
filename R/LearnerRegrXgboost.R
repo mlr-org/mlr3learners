@@ -72,7 +72,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = c("weights", "missings", "importance"),
-        packages = "xgboost"
+        packages = "xgboost",
+        man = "mlr3learners::mlr_learners_regr.xgboost"
       )
     },
 

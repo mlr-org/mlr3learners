@@ -56,7 +56,8 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error"),
-        packages = "ranger"
+        packages = "ranger",
+        man = "mlr3learners::mlr_learners_regr.ranger"
       )
     },
 

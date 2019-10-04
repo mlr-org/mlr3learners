@@ -46,7 +46,8 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         feature_types = c("integer", "numeric"),
         properties = c("twoclass", "multiclass"),
-        packages = "e1071"
+        packages = "e1071",
+        man = "mlr3learners::mlr_learners_classif.svm"
       )
     },
 

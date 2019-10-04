@@ -69,11 +69,12 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
       super$initialize(
         id = "classif.xgboost",
-        param_set = ps,
         predict_types = c("response", "prob"),
+        param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = c("weights", "missings", "twoclass", "multiclass", "importance"),
-        packages = "xgboost"
+        packages = "xgboost",
+        man = "mlr3learners::mlr_learners_classif.xgboost"
       )
     },
 

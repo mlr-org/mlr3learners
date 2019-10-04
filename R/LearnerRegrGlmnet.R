@@ -64,7 +64,8 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = "weights",
-        packages = "glmnet"
+        packages = "glmnet",
+        man = "mlr3learners::mlr_learners_regr.glmnet"
       )
     },
 

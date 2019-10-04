@@ -36,7 +36,8 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         properties = c("weights", "twoclass", "multiclass"),
-        packages = "MASS"
+        packages = "MASS",
+        man = "mlr3learners::mlr_learners_classif.lda"
       )
     },
 

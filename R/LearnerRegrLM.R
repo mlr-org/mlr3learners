@@ -27,7 +27,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
         predict_types = c("response", "se"),
         feature_types = c("integer", "numeric", "factor"),
         properties = "weights",
-        packages = "stats"
+        packages = "stats",
+        man = "mlr3learners::mlr_learners_regr.lm"
       )
     },
 

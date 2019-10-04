@@ -44,7 +44,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("integer", "numeric"),
-        packages = "DiceKriging"
+        packages = "DiceKriging",
+        man = "mlr3learners::mlr_learners_regr.km"
       )
     },
 

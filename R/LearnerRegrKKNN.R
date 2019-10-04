@@ -40,7 +40,8 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
         id = "regr.kknn",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        packages = c("withr", "kknn")
+        packages = c("withr", "kknn"),
+        man = "mlr3learners::mlr_learners_regr.kknn"
       )
     },
 

@@ -45,7 +45,8 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
         id = "regr.svm",
         param_set = ps,
         feature_types = c("integer", "numeric"),
-        packages = "e1071"
+        packages = "e1071",
+        man = "mlr3learners::mlr_learners_regr.svm"
       )
     },
 
