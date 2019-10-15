@@ -66,7 +66,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide")),
         ParamInt$new("max_leaves", default = 0L, lower = 0L),
         ParamInt$new("max_bin", default = 256L, lower = 2L),
-        ParamUty$new("callbacks", default = list(), tags = "train")
+        ParamUty$new("callbacks", default = list(), tags = "train"),
+        ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train")
       ))
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", "reg:tweedie")
@@ -80,6 +81,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       ps$add_dep("grow_policy", "tree_method", "hist")
       ps$add_dep("max_leaves", "grow_policy", "lossguide")
       ps$add_dep("max_bin", "tree_method", "hist")
+      ps$add_dep("sketch_eps", "tree_method", "approx")
 
       # custom defaults
       ps$values = list(nrounds = 1L, verbose = 0L)
