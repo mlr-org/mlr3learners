@@ -83,6 +83,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       ps$add_dep("max_leaves", "grow_policy", CondEqual$new("lossguide"))
       ps$add_dep("max_bin", "tree_method", CondEqual$new("hist"))
       ps$add_dep("sketch_eps", "tree_method", CondEqual$new("approx"))
+      ps$add_dep("lambda", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("alpha", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
       ps$values = list(nrounds = 1L, verbose = 0L)
