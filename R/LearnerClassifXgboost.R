@@ -62,7 +62,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"),
         ParamLgl$new("one_drop", default = FALSE),
-        ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist")),
+        ParamFct$new("tree_method", default = "auto", levels = c("auto", "exact", "approx", "hist", "gpu_hist"), tags = "train"),
         ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide")),
         ParamInt$new("max_leaves", default = 0L, lower = 0L),
         ParamInt$new("max_bin", default = 256L, lower = 2L),
@@ -76,7 +76,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       ps$add_dep("rate_drop", "booster", "dart")
       ps$add_dep("skip_drop", "booster", "dart")
       ps$add_dep("one_drop", "booster", "dart")
-      ps$add_dep("tree_method", "booster", "!= 'gblinear'")
+      ps$add_dep("tree_method", "booster", CondAnyOf$new(c("gbtree", "dart")))
       ps$add_dep("grow_policy", "tree_method", "hist")
       ps$add_dep("max_leaves", "grow_policy", "lossguide")
       ps$add_dep("max_bin", "tree_method", "hist")
