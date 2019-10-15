@@ -38,6 +38,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamDbl$new("subsample", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bytree", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bylevel", default = 1, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("colsample_bynode", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("num_parallel_tree", default = 1L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda", default = 1, lower = 0, tags = "train"),
         ParamDbl$new("lambda_bias", default = 0, lower = 0, tags = "train"),
