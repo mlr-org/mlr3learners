@@ -67,7 +67,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamInt$new("max_leaves", default = 0L, lower = 0L),
         ParamInt$new("max_bin", default = 256L, lower = 2L),
         ParamUty$new("callbacks", default = list(), tags = "train"),
-        ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train")
+        ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("scale_pos_weight", default = 1, tags = "train")
       ))
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", "reg:tweedie")
