@@ -70,7 +70,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("scale_pos_weight", default = 1, tags = "train"),
         ParamUty$new("updater", tags = "train"), # Default depends on the selected booster
-        ParamLgl$new("refresh_leaf", default=TRUE, tags = "train")
+        ParamLgl$new("refresh_leaf", default = TRUE, tags = "train"),
+        ParamFct$new("feature_selector", default = "cyclic", levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
+        ParamInt$new("top_k", default = 0, lower = 0, tags = "train")
       ))
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
@@ -88,6 +90,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       ps$add_dep("lambda", "booster", CondEqual$new("gblinear"))
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
       ps$add_dep("alpha", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("feature_selector", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
 
       # custom defaults
       ps$values = list(nrounds = 1L, verbose = 0L)
