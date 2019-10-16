@@ -69,7 +69,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         ParamUty$new("updater", tags = "train"), # Default depends on the selected booster
         ParamLgl$new("refresh_leaf", default = TRUE, tags = "train"),
         ParamFct$new("feature_selector", default = "cyclic", levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
-        ParamInt$new("top_k", default = 0, lower = 0, tags = "train")
+        ParamInt$new("top_k", default = 0, lower = 0, tags = "train"),
+        ParamFct$new("predictor", default = "cpu_predictor", levels = c("cpu_predictor", "gpu_predictor"), tags = "train")
       ))
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
