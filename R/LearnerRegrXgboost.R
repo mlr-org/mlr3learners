@@ -38,6 +38,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         ParamDbl$new("subsample", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bytree", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bylevel", default = 1, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("colsample_bynode", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("num_parallel_tree", default = 1L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda", default = 1, lower = 0, tags = "train"),
         ParamDbl$new("lambda_bias", default = 0, lower = 0, tags = "train"),
@@ -60,25 +61,38 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         ParamFct$new("normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"),
         ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"),
-        ParamLgl$new("one_drop", default = FALSE),
-        ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist")),
-        ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide")),
-        ParamInt$new("max_leaves", default = 0L, lower = 0L),
-        ParamInt$new("max_bin", default = 256L, lower = 2L),
-        ParamUty$new("callbacks", default = list(), tags = "train")
+        ParamLgl$new("one_drop", default = FALSE, tags = "train"),
+        ParamFct$new("tree_method", default = "auto", levels = c("auto", "exact", "approx", "hist", "gpu_hist"), tags = "train"),
+        ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), tags = "train"),
+        ParamInt$new("max_leaves", default = 0L, lower = 0L, tags = "train"),
+        ParamInt$new("max_bin", default = 256L, lower = 2L, tags = "train"),
+        ParamUty$new("callbacks", default = list(), tags = "train"),
+        ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("scale_pos_weight", default = 1, tags = "train"),
+        ParamUty$new("updater", tags = "train"), # Default depends on the selected booster
+        ParamLgl$new("refresh_leaf", default = TRUE, tags = "train"),
+        ParamFct$new("feature_selector", default = "cyclic", levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
+        ParamInt$new("top_k", default = 0, lower = 0, tags = "train")
       ))
       # param deps
-      ps$add_dep("tweedie_variance_power", "objective", "reg:tweedie")
-      ps$add_dep("print_every_n", "verbose", 1L)
-      ps$add_dep("sample_type", "booster", "dart")
-      ps$add_dep("normalize_type", "booster", "dart")
-      ps$add_dep("rate_drop", "booster", "dart")
-      ps$add_dep("skip_drop", "booster", "dart")
-      ps$add_dep("one_drop", "booster", "dart")
-      ps$add_dep("tree_method", "booster", "!= 'gblinear'")
-      ps$add_dep("grow_policy", "tree_method", "hist")
-      ps$add_dep("max_leaves", "grow_policy", "lossguide")
-      ps$add_dep("max_bin", "tree_method", "hist")
+      ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
+      ps$add_dep("print_every_n", "verbose", CondEqual$new(1L))
+      ps$add_dep("sample_type", "booster", CondEqual$new("dart"))
+      ps$add_dep("normalize_type", "booster", CondEqual$new("dart"))
+      ps$add_dep("rate_drop", "booster", CondEqual$new("dart"))
+      ps$add_dep("skip_drop", "booster", CondEqual$new("dart"))
+      ps$add_dep("one_drop", "booster", CondEqual$new("dart"))
+      ps$add_dep("tree_method", "booster", CondAnyOf$new(c("gbtree", "dart")))
+      ps$add_dep("grow_policy", "tree_method", CondEqual$new("hist"))
+      ps$add_dep("max_leaves", "grow_policy", CondEqual$new("lossguide"))
+      ps$add_dep("max_bin", "tree_method", CondEqual$new("hist"))
+      ps$add_dep("sketch_eps", "tree_method", CondEqual$new("approx"))
+      ps$add_dep("lambda", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("alpha", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("feature_selector", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
 
       # custom defaults
       ps$values = list(nrounds = 1L, verbose = 0L)
