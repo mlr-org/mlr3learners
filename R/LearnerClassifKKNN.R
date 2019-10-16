@@ -16,15 +16,11 @@
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
 #' @references
-#' Klaus Hechenbichler, Klaus Schliep (2004).
-#' Weighted k-nearest-neighbor techniques and ordinal classification.
-#' Discussion Paper 399, SFB 386, Ludwig-Maximilians University Munich
-#' \doi{10.5282/ubm/epub.1769}
+#' \cite{mlr3learners}{hechenbichler_2004}
 #'
-#' Thomas Cover and Peter Hart (1967).
-#' Nearest neighbor pattern classification.
-#' IEEE transactions on information theory 13.1: 21-27.
-#' \doi{10.1109/TIT.1967.1053964}
+#' \cite{mlr3learners}{samworth_2012}
+#'
+#' \cite{mlr3learners}{cover_1967}
 #'
 #' @export
 #' @template seealso_learner
@@ -46,7 +42,8 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         properties = c("twoclass", "multiclass"),
-        packages = c("withr", "kknn")
+        packages = c("withr", "kknn"),
+        man = "mlr3learners::mlr_learners_classif.kknn"
       )
     },
 

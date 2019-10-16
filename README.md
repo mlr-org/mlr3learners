@@ -1,15 +1,18 @@
 # mlr3learners
 
 [![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
-[![cran checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
-[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/mlr3learners)](https://cran.rstudio.com/web/packages/mlr3learners/index.html)
-[![codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
+[![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
+[![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
+[![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 
-This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com).
-Creating custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).
+This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
+We will most likely not add new learners to this package.
 
+Other learners live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
+There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners) listing all currently available custom learners.
+A guide on how to create custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).
+Feel invited to contribute a missing learner to the mlr3 ecosystem :-)
 
 ### Classification Learners
 

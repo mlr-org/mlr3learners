@@ -16,10 +16,7 @@
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
 #' @references
-#' Tianqi Chen, Carlos Guestrin (2016).
-#' XGBoost: A Scalable Tree Boosting System.
-#' 22nd SIGKDD Conference on Knowledge Discovery and Data Mining.
-#' \doi{10.1145/2939672.2939785}.
+#' \cite{mlr3learners}{chen_2016}
 #'
 #' @export
 #' @template seealso_learner
@@ -102,7 +99,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
         param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = c("weights", "missings", "importance"),
-        packages = "xgboost"
+        packages = "xgboost",
+        man = "mlr3learners::mlr_learners_regr.xgboost"
       )
     },
 
@@ -131,9 +129,11 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
 
     predict_internal = function(task) {
       pars = self$param_set$get_values(tags = "predict")
-
+      model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
-      response = invoke(predict, self$model, newdata = newdata, .args = pars)
+      newdata = newdata[, model$feature_names, drop = FALSE]
+      response = invoke(predict, model, newdata = newdata, .args = pars)
+
       PredictionRegr$new(task = task, response = response)
     },
 

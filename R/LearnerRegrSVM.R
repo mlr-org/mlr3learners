@@ -15,9 +15,7 @@
 #' A learner for a regression support vector machine implemented in [e1071::svm()].
 #'
 #' @references
-#' Corinna Cortes, Vladimir Vapnik (1995).
-#' Machine Learning 20: 273.
-#' \doi{10.1007/BF00994018}.
+#' \cite{mlr3learners}{cortes_1995}
 #'
 #' @export
 #' @template seealso_learner
@@ -47,18 +45,23 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
         id = "regr.svm",
         param_set = ps,
         feature_types = c("integer", "numeric"),
-        packages = "e1071"
+        packages = "e1071",
+        man = "mlr3learners::mlr_learners_regr.svm"
       )
     },
 
     train_internal = function(task) {
       pars = self$param_set$get_values(tags = "train")
-      invoke(e1071::svm, x = as.matrix(task$data(cols = task$feature_names)), y = task$truth(), .args = pars)
+      data = as.matrix(task$data(cols = task$feature_names))
+      self$state$feature_names = colnames(data)
+
+      invoke(e1071::svm, x = data, y = task$truth(), .args = pars)
     },
 
     predict_internal = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
+      newdata = newdata[, self$state$feature_names, drop = FALSE]
       response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars)
       PredictionRegr$new(task = task, response = response)
     }

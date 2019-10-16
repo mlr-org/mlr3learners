@@ -16,10 +16,7 @@
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
 #' @references
-#' Tianqi Chen, Carlos Guestrin (2016).
-#' XGBoost: A Scalable Tree Boosting System.
-#' 22nd SIGKDD Conference on Knowledge Discovery and Data Mining.
-#' \doi{10.1145/2939672.2939785}.
+#' \cite{mlr3learners}{chen_2016}
 #'
 #' @export
 #' @template seealso_learner
@@ -99,21 +96,23 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
       super$initialize(
         id = "classif.xgboost",
-        param_set = ps,
         predict_types = c("response", "prob"),
+        param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = c("weights", "missings", "twoclass", "multiclass", "importance"),
-        packages = "xgboost"
+        packages = "xgboost",
+        man = "mlr3learners::mlr_learners_classif.xgboost"
       )
     },
 
     train_internal = function(task) {
-
       pars = self$param_set$get_values(tags = "train")
+
       lvls = task$class_names
+      nlvls = length(lvls)
 
       if (is.null(pars$objective)) {
-        pars$objective = ifelse(length(lvls) == 2L, "binary:logistic", "multi:softprob")
+        pars$objective = if (nlvls == 2L) "binary:logistic" else "multi:softprob"
       }
 
       if (self$predict_type == "prob" && pars$objective == "multi:softmax") {
@@ -122,11 +121,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
       # if we use softprob or softmax as objective we have to add the number of classes 'num_class'
       if (pars$objective %in% c("multi:softprob", "multi:softmax")) {
-        pars$num_class = length(lvls)
+        pars$num_class = nlvls
       }
 
       data = task$data(cols = task$feature_names)
-      label = match(as.character(as.matrix(task$data(cols = task$target_names))), lvls) - 1
+      # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
+      # task$truth() is guaranteed to have the factor levels in the right order
+      label = nlvls - as.integer(task$truth())
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
 
       if ("weights" %in% task$properties) {
@@ -141,10 +142,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     predict_internal = function(task) {
-
       pars = self$param_set$get_values(tags = "predict")
+      model = self$model
       response = prob = NULL
-      lvls = task$class_names
+      lvls = rev(task$class_names)
       nlvl = length(lvls)
 
       if (is.null(pars$objective)) {
@@ -152,7 +153,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       }
 
       newdata = data.matrix(task$data(cols = task$feature_names))
-      pred = invoke(predict, self$model, newdata = newdata, .args = pars)
+      newdata = newdata[, model$feature_names, drop = FALSE]
+      pred = invoke(predict, model, newdata = newdata, .args = pars)
 
       if (nlvl == 2L) { # binaryclass
         if (pars$objective == "multi:softprob") {

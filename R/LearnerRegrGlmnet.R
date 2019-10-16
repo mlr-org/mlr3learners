@@ -17,10 +17,7 @@
 #' Hyperparameter `family` is set to `"gaussian"`.
 #'
 #' @references
-#' Jerome Friedman, Trevor Hastie, Robert Tibshirani (2010).
-#' Regularization Paths for Generalized Linear Models via Coordinate Descent.
-#' Journal of Statistical Software, 33(1), 1-22.
-#' \doi{10.18637/jss.v033.i01}.
+#' \cite{mlr3learners}{friedman_2010}
 #'
 #' @export
 #' @template seealso_learner
@@ -67,7 +64,8 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         param_set = ps,
         feature_types = c("integer", "numeric"),
         properties = "weights",
-        packages = "glmnet"
+        packages = "glmnet",
+        man = "mlr3learners::mlr_learners_regr.glmnet"
       )
     },
 

@@ -16,10 +16,7 @@
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
 #' @references
-#' Jerome Friedman, Trevor Hastie, Robert Tibshirani (2010).
-#' Regularization Paths for Generalized Linear Models via Coordinate Descent.
-#' Journal of Statistical Software, 33(1), 1-22.
-#' \doi{10.18637/jss.v033.i01}.
+#' \cite{mlr3learners}{friedman_2010}
 #'
 #' @export
 #' @template seealso_learner
@@ -65,7 +62,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         feature_types = c("integer", "numeric"),
         properties = c("weights", "twoclass", "multiclass"),
-        packages = "glmnet"
+        packages = "glmnet",
+        man = "mlr3learners::mlr_learners_classif.glmnet"
       )
     },
 

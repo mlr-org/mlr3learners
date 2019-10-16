@@ -24,9 +24,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-Corinna Cortes, Vladimir Vapnik (1995).
-Machine Learning 20: 273.
-\doi{10.1007/BF00994018}.
+\cite{mlr3learners}{cortes_1995}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

@@ -25,10 +25,7 @@ print(learner)
 learner$param_set$ids()
 }
 \references{
-Tianqi Chen, Carlos Guestrin (2016).
-XGBoost: A Scalable Tree Boosting System.
-22nd SIGKDD Conference on Knowledge Discovery and Data Mining.
-\doi{10.1145/2939672.2939785}.
+\cite{mlr3learners}{chen_2016}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
