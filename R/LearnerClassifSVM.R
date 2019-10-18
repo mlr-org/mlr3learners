@@ -37,7 +37,8 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
         ParamLgl$new("shrinking", default = TRUE, tags = "train"),
         ParamInt$new("cross", default = 0L, lower = 0L, tags = "train"), # tunable = FALSE),
         ParamLgl$new("fitted", default = TRUE, tags = "train"), # tunable = FALSE),
-        ParamUty$new("scale", default = TRUE, tags = "train") # , tunable = TRUE)
+        ParamUty$new("scale", default = TRUE, tags = "train"), # , tunable = TRUE)
+        ParamUty$new("class.weights", default = NULL, tags = "train")
       ))
       ps$add_dep("cost", "type", CondEqual$new("C-classification"))
       ps$add_dep("nu", "type", CondEqual$new("nu-classification"))
