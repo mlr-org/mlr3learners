@@ -6,12 +6,10 @@
 \alias{mlr3learners-package}
 \title{mlr3learners: Recommended Learners for 'mlr3'}
 \description{
-Recommended Learners for 'mlr3'. Extends 'mlr3'
-    with interfaces to essential machine learning packages on CRAN.  This
-    includes, but is not limited to: (penalized) linear and logistic
-    regression, linear and quadratic discriminant analysis, k-nearest
-    neighbors, naive Bayes, support vector machines, and gradient
-    boosting.
+More learners are available in the \code{mlr3learners} repository on Github (\url{https://github.com/mlr3learners}).
+There also is a wiki page listing all currently available custom learners (\url{https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners}).
+A guide on how to create custom learners is covered in the book: \url{https://mlr3book.mlr-org.com}.
+Feel invited to contribute a missing learner to the \CRANpkg{mlr3} ecosystem!
 }
 \seealso{
 Useful links:
