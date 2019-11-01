@@ -30,10 +30,10 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamInt$new("k", default = 7L, lower = 1L, tags = "predict"),
-        ParamDbl$new("distance", default = 2, lower = 0, tags = "predict"),
-        ParamFct$new("kernel", levels = c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "predict"),
-        ParamLgl$new("scale", default = TRUE, tags = "predict")
+        ParamInt$new("k", default = 7L, lower = 1L, tags = "train"),
+        ParamDbl$new("distance", default = 2, lower = 0, tags = "train"),
+        ParamFct$new("kernel", levels = c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
+        ParamLgl$new("scale", default = TRUE, tags = "train")
       ))
 
       super$initialize(
@@ -46,14 +46,22 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
     },
 
     train_internal = function(task) {
-      task$data()
+      list(
+        formula = task$formula(),
+        data = task$data(),
+        pars = self$param_set$get_values(tags = "train")
+      )
     },
 
     predict_internal = function(task) {
+      model = self$model
+      newdata = task$data(cols = task$feature_names)
+
       withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
-        m = invoke(kknn::kknn, formula = task$formula(), train = self$model, test = task$data(cols = task$feature_names), .args = self$param_set$get_values(tags = "predict"))
+        p = invoke(kknn::kknn, formula = model$formula, train = model$data, test = newdata, .args = model$pars)
       })
-      PredictionRegr$new(task = task, response = m$fitted.values)
+
+      PredictionRegr$new(task = task, response = p$fitted.values)
     }
   )
 )
