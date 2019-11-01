@@ -145,7 +145,15 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      PredictionClassif$new(task = task, response = response, prob = prob)
+      if(!is.null(response)) {
+        PredictionClassif$new(task = task, response = response)
+      } else if(self$predict_type == "response") {
+        i = max.col(prob, ties.method = "random")
+        response = factor(colnames(prob)[i], levels = lvls)
+        PredictionClassif$new(task = task, response = response)
+      } else {
+        PredictionClassif$new(task = task, prob = prob)
+      }
     },
 
     importance = function() {
