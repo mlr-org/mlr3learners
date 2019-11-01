@@ -145,9 +145,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      if(!is.null(response)) {
+      if (!is.null(response)) {
         PredictionClassif$new(task = task, response = response)
-      } else if(self$predict_type == "response") {
+      } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
         response = factor(colnames(prob)[i], levels = lvls)
         PredictionClassif$new(task = task, response = response)
