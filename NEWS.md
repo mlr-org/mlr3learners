@@ -10,7 +10,7 @@
 * Added references.
 
 * add new parameters of xgboost version 0.90.2
-* add parameter depenencies for xgboost
+* add parameter dependencies for xgboost
 
 # mlr3learners 0.1.2
 
