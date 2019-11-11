@@ -41,7 +41,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         ParamUty$new("noise.var", default = NULL, tags = "train"),
         ParamFct$new("estim.method", default = "MLE", levels = c("MLE", "LOO"), tags = "train"),
         ParamUty$new("penalty", default = NULL, tags = "train"),
-        ParamFct$new("optim.method", default = "BFGS", levels = c("BFGS", "gen"), tags = "train"), # gen requires rgenoud package
+        ParamFct$new("optim.method", default = "BFGS", levels = c("BFGS", "gen"), tags = "train"),
         ParamUty$new("parinit", default = NULL, tags = "train"),
         ParamInt$new("multistart", default = 1, tags = "train"),
         ParamUty$new("lower", default = NULL, tags = "train"),
@@ -71,6 +71,10 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
+
+      if(pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
+        stop("For optimization method gen, rgenoud package must be installed.")
+      }
 
       ns = pars$nugget.stability
       if (!is.null(ns)) {
