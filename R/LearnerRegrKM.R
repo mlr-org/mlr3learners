@@ -72,8 +72,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
-      if(pars$optim.method == "gen") {
-        if(!requireNamespace("rgenoud", quietly = TRUE)) {
+      if(!is.null(pars$optim.method)) {
+        if(pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
           Stop("rgenoud package required for optimization method gen")
         }
       }
