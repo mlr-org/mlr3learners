@@ -79,6 +79,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     train_internal = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
@@ -115,6 +116,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     predict_internal = function(task) {
+
       pars = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL

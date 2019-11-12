@@ -35,13 +35,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
         ParamInt$new("min.node.size", default = 5L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
         ParamLgl$new("replace", default = TRUE, tags = "train"),
         ParamDbl$new("sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
-        # ParamDbl$new("class.weights", defaul = NULL, tags = "train"), #
         ParamFct$new("splitrule", levels = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
-        ParamInt$new("num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
+        ParamInt$new("num.random.splits", lower = 1L, default = 1L, tags = "train"),
+        ParamDbl$new("alpha", default = 0.5, tags = "train"),
+        ParamDbl$new("minprop", default = 0.1, tags = "train"),
         ParamDbl$new("split.select.weights", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("always.split.variables", tags = "train"),
         ParamFct$new("respect.unordered.factors", levels = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
-        ParamLgl$new("scale.permutation.importance", default = FALSE, tags = "train"), # requires = quote(importance == "permutation")
+        ParamLgl$new("scale.permutation.importance", default = FALSE, tags = "train"),
         ParamLgl$new("keep.inbag", default = FALSE, tags = "train"),
         ParamLgl$new("holdout", default = FALSE, tags = "train"), # FIXME: do we need this?
         ParamInt$new("num.threads", lower = 1L, tags = c("train", "predict")),
@@ -49,6 +50,11 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
         ParamLgl$new("verbose", default = TRUE, tags = c("train", "predict")),
         ParamLgl$new("oob.error", default = TRUE, tags = "train")
       ))
+      ps$add_dep("num.random.splits", "splitrule", CondEqual$new("extratrees"))
+      ps$add_dep("alpha", "splitrule", CondEqual$new("maxstat"))
+      ps$add_dep("minprop", "splitrule", CondEqual$new("maxstat"))
+      ps$add_dep("scale.permutation.importance", "importance", CondEqual$new("permutation"))
+
 
       super$initialize(
         id = "regr.ranger",

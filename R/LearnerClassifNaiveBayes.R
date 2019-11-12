@@ -23,7 +23,9 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
   public = list(
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamDbl$new("laplace", default = 0, lower = 0, tags = "train")
+        ParamDbl$new("laplace", default = 0, lower = 0, tags = "train"),
+        ParamDbl$new("threshold", default = 0.001, tags = "predict"),
+        ParamDbl$new("eps", default = 0, tags = "predict")
       ))
 
       super$initialize(
@@ -44,13 +46,14 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
     },
 
     predict_internal = function(task) {
+      pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = predict(self$model, newdata = newdata, type = "class")
+        response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pars)
         PredictionClassif$new(task = task, response = response)
       } else {
-        prob = predict(self$model, newdata = newdata, type = "raw")
+        prob = invoke(predict, self$model, newdata = newdata, type = "raw", .args = pars)
         PredictionClassif$new(task = task, prob = prob)
       }
     }

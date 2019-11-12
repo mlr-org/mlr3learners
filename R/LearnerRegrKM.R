@@ -32,12 +32,30 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("covtype", default = "matern5_2", levels = c("gauss", "matern5_2", "matern3_2", "exp", "powexp"), tags = "train"),
+        ParamUty$new("coef.trend", default = NULL, tags = "train"),
+        ParamUty$new("coef.cov", default = NULL, tags = "train"),
+        ParamUty$new("coef.var", default = NULL, tags = "train"),
         ParamDbl$new("nugget", tags = "train"),
         ParamLgl$new("nugget.estim", default = FALSE, tags = "train"),
-        ParamFct$new("type", default = "SK", levels = c("SK", "UK"), tags = "predict"),
         ParamDbl$new("nugget.stability", default = 0, lower = 0, tags = "train"),
+        ParamUty$new("noise.var", default = NULL, tags = "train"),
+        ParamFct$new("estim.method", default = "MLE", levels = c("MLE", "LOO"), tags = "train"),
+        ParamUty$new("penalty", default = NULL, tags = "train"),
+        ParamFct$new("optim.method", default = "BFGS", levels = c("BFGS", "gen"), tags = "train"),
+        ParamUty$new("parinit", default = NULL, tags = "train"),
+        ParamInt$new("multistart", default = 1, tags = "train"),
+        ParamUty$new("lower", default = NULL, tags = "train"),
+        ParamUty$new("upper", default = NULL, tags = "train"),
+        ParamLgl$new("gr", default = TRUE, tags = "train"),
+        ParamLgl$new("iso", default = FALSE, tags = "train"),
+        ParamLgl$new("scaling", default = FALSE, tags = "train"),
+        ParamUty$new("knots", default = NULL, tags = "train"),
+        ParamUty$new("kernel", default = NULL, tags = "train"),
+        ParamFct$new("type", default = "SK", levels = c("SK", "UK"), tags = "predict"),
         ParamDbl$new("jitter", default = 0, lower = 0, tags = "predict")
       ))
+      ps$add_dep("multistart", "optim.method", CondEqual$new("BFGS"))
+      ps$add_dep("knots", "scaling", CondEqual$new(TRUE))
 
       super$initialize(
         id = "regr.km",
@@ -50,9 +68,16 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     },
 
     train_internal = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
+
+      if (!is.null(pars$optim.method)) {
+        if (pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
+          stop("The 'rgenoud' package is required for optimization method 'gen'.")
+        }
+      }
 
       ns = pars$nugget.stability
       if (!is.null(ns)) {
