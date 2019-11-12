@@ -68,13 +68,14 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     },
 
     train_internal = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
-      if(!is.null(pars$optim.method)) {
-        if(pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
-          Stop("rgenoud package required for optimization method gen")
+      if (!is.null(pars$optim.method)) {
+        if (pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
+          stop("The 'rgenoud' package is required for optimization method 'gen'.")
         }
       }
 
