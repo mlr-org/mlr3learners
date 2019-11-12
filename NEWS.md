@@ -1,7 +1,7 @@
 # mlr3learners 0.1.5
 
 * Added parameter and parameter dependencies to `regr.glmnet`, `regr.km`, `regr.ranger`, `regr.svm`, `regr.xgboost`, `classif.glmnet`, `classif.lda`, `classif.naivebayes`, `classif.qda`, `classif.ranger` and `classif.svm`.
-* Added `relax` parameter of `glmnet` 3.0 
+* glmnet: Added `relax` parameter (v3.0)
 * Updated `*.xgboost` parameter to `xgboost` 0.90.0.2
 
 # mlr3learners 0.1.4
