@@ -28,6 +28,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),
+        ParamUty$new("offset", default = NULL, tags = "train"),
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("nfolds", lower = 3L, default = 10L, tags = "train"),
         ParamFct$new("type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
@@ -45,8 +46,11 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         ParamUty$new("lower.limits", tags = "train"),
         ParamUty$new("upper.limits", tags = "train"),
         ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
+        ParamFct$new("type.gaussian", levels = c("covariance", "naive"), tags = "train"),
         ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
         ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
+        ParamUty$new("gamma", tags = "train"),
+        ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
@@ -57,6 +61,9 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         ParamDbl$new("prec", default = 1e-10, tags = "train"),
         ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train")
       ))
+      ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
+      ps$add_dep("type.gaussian", "family", CondEqual$new("gaussian"))
+
       ps$values = list(family = "gaussian")
 
       super$initialize(

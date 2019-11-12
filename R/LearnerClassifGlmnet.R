@@ -45,6 +45,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
         ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
         ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
+        ParamUty$new("gamma", tags = "train"),
+        ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
@@ -55,6 +57,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         ParamDbl$new("prec", default = 1e-10, tags = "train"),
         ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train")
       ))
+      ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
 
       super$initialize(
         id = "classif.glmnet",

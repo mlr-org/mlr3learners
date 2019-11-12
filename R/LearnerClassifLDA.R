@@ -26,9 +26,13 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
   public = list(
     initialize = function() {
       ps = ParamSet$new(list(
+        ParamUty$new("prior", tags = "train"),
+        ParamDbl$new("tol", tags = "train"),
         ParamFct$new("method", default = "moment", levels = c("moment", "mle", "mve", "t"), tags = "train"),
+        ParamInt$new("nu", tags = "train"),
         ParamFct$new("predict.method", default = "plug-in", levels = c("plug-in", "predictive", "debiased"), tags = "predict")
       ))
+      ps$add_dep("nu", "method", CondEqual$new("t"))
 
       super$initialize(
         id = "classif.lda",

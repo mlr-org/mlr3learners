@@ -107,6 +107,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     train_internal = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
@@ -143,6 +144,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     predict_internal = function(task) {
+
       pars = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL
@@ -173,7 +175,15 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         }
       }
 
-      PredictionClassif$new(task = task, response = response, prob = prob)
+      if (!is.null(response)) {
+        PredictionClassif$new(task = task, response = response)
+      } else if (self$predict_type == "response") {
+        i = max.col(prob, ties.method = "random")
+        response = factor(colnames(prob)[i], levels = lvls)
+        PredictionClassif$new(task = task, response = response)
+      } else {
+        PredictionClassif$new(task = task, prob = prob)
+      }
     },
 
     importance = function() {
