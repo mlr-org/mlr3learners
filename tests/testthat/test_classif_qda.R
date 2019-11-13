@@ -1,5 +1,7 @@
 context("classif.qda")
 
+skip_if_not_installed("MASS")
+
 test_that("autotest", {
   learner = mlr3::lrn("classif.qda")
   expect_learner(learner)

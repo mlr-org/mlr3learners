@@ -1,5 +1,7 @@
 context("regr.km")
 
+skip_if_not_installed("DiceKriging")
+
 test_that("autotest", {
   learner = mlr3::lrn("regr.km", nugget.stability = 1e-8)
   expect_learner(learner)

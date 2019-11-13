@@ -1,5 +1,7 @@
 context("classif.xgboost")
 
+skip_if_not_installed("xgboost")
+
 test_that("autotest", {
   learner = mlr3::lrn("classif.xgboost", nrounds = 5L)
   expect_learner(learner)

@@ -1,5 +1,7 @@
 context("classif.ranger")
 
+skip_if_not_installed("ranger")
+
 test_that("autotest", {
   learner = mlr3::lrn("classif.ranger")
   expect_learner(learner)

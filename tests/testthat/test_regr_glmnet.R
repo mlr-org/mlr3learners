@@ -1,5 +1,7 @@
 context("regr.glmnet")
 
+skip_if_not_installed("glmnet")
+
 test_that("autotest", {
   learner = mlr3::lrn("regr.glmnet")
   expect_learner(learner)

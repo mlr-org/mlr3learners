@@ -1,5 +1,7 @@
 context("regr.xgboost")
 
+skip_if_not_installed("xgboost")
+
 test_that("autotest", {
   learner = mlr3::lrn("regr.xgboost", nrounds = 5L)
   expect_learner(learner)

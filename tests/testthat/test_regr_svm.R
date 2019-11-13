@@ -1,5 +1,7 @@
 context("regr.svm")
 
+skip_if_not_installed("e1071")
+
 test_that("autotest", {
   learner = mlr3::lrn("regr.svm")
   expect_learner(learner)
