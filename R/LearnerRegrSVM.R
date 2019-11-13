@@ -40,8 +40,8 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
         ParamLgl$new("fitted", default = TRUE, tags = "train"), # tunable = FALSE),
         ParamUty$new("scale", default = TRUE, tags = "train") # , tunable = TRUE)
       ))
-      ps$add_dep("cost", "type", CondEqual$new("C-classification"))
-      ps$add_dep("nu", "type", CondEqual$new("nu-classification"))
+      ps$add_dep("cost", "type", CondEqual$new("eps-regression"))
+      ps$add_dep("nu", "type", CondEqual$new("nu-regression"))
       ps$add_dep("degree", "kernel", CondEqual$new("polynomial"))
       ps$add_dep("coef0", "kernel", CondAnyOf$new(c("polynomial", "sigmoid")))
       ps$add_dep("gamma", "kernel", CondAnyOf$new(c("polynomial", "radial", "sigmoid")))
