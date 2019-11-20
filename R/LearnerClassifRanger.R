@@ -35,7 +35,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
         ParamInt$new("min.node.size", default = 1L, lower = 1L, tags = "train"), # for probability == TRUE, def = 10
         ParamLgl$new("replace", default = TRUE, tags = "train"),
         ParamDbl$new("sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
-        ParamDbl$new("class.weights", defaul = NULL, special_vals = list(NULL), tags = "train"),
+        ParamDbl$new("class.weights", default = NULL, special_vals = list(NULL), tags = "train"),
         ParamFct$new("splitrule", levels = c("gini", "extratrees"), default = "gini", tags = "train"),
         ParamInt$new("num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
         ParamDbl$new("split.select.weights", lower = 0, upper = 1, tags = "train"),
