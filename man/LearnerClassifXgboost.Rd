@@ -3,7 +3,7 @@
 \name{LearnerClassifXgboost}
 \alias{LearnerClassifXgboost}
 \alias{mlr_learners_classif.xgboost}
-\title{Extreme Gradiant Boosting Classification Learner}
+\title{Extreme Gradient Boosting Classification Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \description{
 eXtreme Gradient Boosting classification.

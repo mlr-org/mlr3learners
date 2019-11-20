@@ -1,4 +1,4 @@
-#' @title Extreme Gradiant Boosting Classification Learner
+#' @title Extreme Gradient Boosting Classification Learner
 #'
 #' @usage NULL
 #' @aliases mlr_learners_classif.xgboost
@@ -30,11 +30,12 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamUty$new("watchlist", default = NULL, tags = "train"),
         ParamDbl$new("eta", default = 0.3, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("gamma", default = 0, lower = 0, tags = "train"),
-        ParamInt$new("max_depth", default = 6L, lower = 1L, tags = "train"),
+        ParamInt$new("max_depth", default = 6L, lower = 0L, tags = "train"),
         ParamDbl$new("min_child_weight", default = 1, lower = 0, tags = "train"),
         ParamDbl$new("subsample", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bytree", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("colsample_bylevel", default = 1, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("colsample_bynode", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("num_parallel_tree", default = 1L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda", default = 1, lower = 0, tags = "train"),
         ParamDbl$new("lambda_bias", default = 0, lower = 0, tags = "train"),
@@ -45,26 +46,53 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         ParamDbl$new("max_delta_step", lower = 0, default = 0, tags = "train"),
         ParamDbl$new("missing", default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
         ParamInt$new("monotone_constraints", default = 0L, lower = -1L, upper = 1L, tags = "train"),
-        ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"), # , requires = quote(objective == "reg:tweedie")
+        ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"),
         ParamInt$new("nthread", lower = 1L, tags = "train"),
         ParamInt$new("nrounds", lower = 1L, tags = "train"),
         ParamUty$new("feval", default = NULL, tags = "train"),
         ParamInt$new("verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
-        ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"), # , requires = quote(verbose == 1L)
+        ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"),
         ParamInt$new("early_stopping_rounds", default = NULL, lower = 1L, special_vals = list(NULL), tags = "train"),
         ParamLgl$new("maximize", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamFct$new("sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"), # , requires = quote(booster == "dart")
-        ParamFct$new("normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"), # , requires = quote(booster == "dart")
-        ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
-        ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"), # , requires = quote(booster == "dart")
-        # TODO: uncomment the following after the next CRAN update, and set max_depth's lower = 0L
-        # ParamLgl$new("one_drop", default = FALSE, requires = quote(booster == "dart")),
-        # ParamFct$new("tree_method", default = "exact", levels = c("exact", "hist"), requires = quote(booster != "gblinear")),
-        # ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), requires = quote(tree_method == "hist")),
-        # ParamInt$new("max_leaves", default = 0L, lower = 0L, requires = quote(grow_policy == "lossguide")),
-        # ParamInt$new("max_bin", default = 256L, lower = 2L, requires = quote(tree_method == "hist")),
-        ParamUty$new("callbacks", default = list(), tags = "train")
+        ParamFct$new("sample_type", default = "uniform", levels = c("uniform", "weighted"), tags = "train"),
+        ParamFct$new("normalize_type", default = "tree", levels = c("tree", "forest"), tags = "train"),
+        ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamLgl$new("one_drop", default = FALSE, tags = "train"),
+        ParamFct$new("tree_method", default = "auto", levels = c("auto", "exact", "approx", "hist", "gpu_hist"), tags = "train"),
+        ParamFct$new("grow_policy", default = "depthwise", levels = c("depthwise", "lossguide"), tags = "train"),
+        ParamInt$new("max_leaves", default = 0L, lower = 0L, tags = "train"),
+        ParamInt$new("max_bin", default = 256L, lower = 2L, tags = "train"),
+        ParamUty$new("callbacks", default = list(), tags = "train"),
+        ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("scale_pos_weight", default = 1, tags = "train"),
+        ParamUty$new("updater", tags = "train"), # Default depends on the selected booster
+        ParamLgl$new("refresh_leaf", default = TRUE, tags = "train"),
+        ParamFct$new("feature_selector", default = "cyclic", levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
+        ParamInt$new("top_k", default = 0, lower = 0, tags = "train"),
+        ParamFct$new("predictor", default = "cpu_predictor", levels = c("cpu_predictor", "gpu_predictor"), tags = "train")
       ))
+      # param deps
+      ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
+      ps$add_dep("print_every_n", "verbose", CondEqual$new(1L))
+      ps$add_dep("sample_type", "booster", CondEqual$new("dart"))
+      ps$add_dep("normalize_type", "booster", CondEqual$new("dart"))
+      ps$add_dep("rate_drop", "booster", CondEqual$new("dart"))
+      ps$add_dep("skip_drop", "booster", CondEqual$new("dart"))
+      ps$add_dep("one_drop", "booster", CondEqual$new("dart"))
+      ps$add_dep("tree_method", "booster", CondAnyOf$new(c("gbtree", "dart")))
+      ps$add_dep("grow_policy", "tree_method", CondEqual$new("hist"))
+      ps$add_dep("max_leaves", "grow_policy", CondEqual$new("lossguide"))
+      ps$add_dep("max_bin", "tree_method", CondEqual$new("hist"))
+      ps$add_dep("sketch_eps", "tree_method", CondEqual$new("approx"))
+      ps$add_dep("lambda", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("alpha", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("feature_selector", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
+      ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
+
+      # custom defaults
       ps$values = list(nrounds = 1L, verbose = 0L)
 
       super$initialize(
