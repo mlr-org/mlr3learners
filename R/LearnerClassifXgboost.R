@@ -15,6 +15,10 @@
 #' eXtreme Gradient Boosting classification.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
+#' We changed the following defaults for this learner:
+#' * Verbosity is reduced by setting `verbose` to `0`.
+#' * Number of boosting iterations `nrounds` is set to `1`.
+#'
 #' @references
 #' \cite{mlr3learners}{chen_2016}
 #'

@@ -8,6 +8,12 @@
 \description{
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
+
+We changed the following defaults for this learner:
+\itemize{
+\item Verbosity is reduced by setting \code{verbose} to \code{0}.
+\item Number of boosting iterations \code{nrounds} is set to \code{1}.
+}
 }
 \section{Construction}{
 \preformatted{LearnerClassifXgboost$new()
