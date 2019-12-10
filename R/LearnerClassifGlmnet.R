@@ -64,7 +64,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("integer", "numeric"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = c("weights", "twoclass", "multiclass", "importance"),
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_classif.glmnet"
       )
@@ -111,6 +111,18 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         }
         PredictionClassif$new(task = task, prob = prob)
       }
+    },
+
+    importance = function() {
+      model = self$model$glmnet.fit
+
+      res = sapply(seq_len(nrow(model$beta)), function(i) {
+        ind = which(model$beta[i,] != 0)[1]
+        model$lambda[ind]
+      })
+
+      names(res) = model$beta@Dimnames[[1]]
+      sort(res, decreasing = TRUE)
     }
   )
 )
