@@ -1,7 +1,7 @@
 #' @title Quadratic Discriminant Analysis Classification Learner
 #'
 #' @usage NULL
-#' @aliases mlr_learners_classif.qda
+#' @name mlr_learners_classif.qda
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @section Construction:

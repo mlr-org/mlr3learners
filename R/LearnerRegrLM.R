@@ -1,7 +1,7 @@
 #' @title Linear Model Regression Learner
 #'
 #' @usage NULL
-#' @aliases mlr_learners_regr.lm
+#' @name mlr_learners_regr.lm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @section Construction:

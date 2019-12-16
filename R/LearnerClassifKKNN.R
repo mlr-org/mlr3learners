@@ -1,7 +1,7 @@
 #' @title k-Nearest-Neighbor Classification Learner
 #'
 #' @usage NULL
-#' @aliases mlr_learners_classif.kknn
+#' @name mlr_learners_classif.kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @section Construction:

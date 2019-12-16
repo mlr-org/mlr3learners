@@ -1,7 +1,7 @@
 #' @title k-Nearest-Neighbor Regression Learner
 #'
 #' @usage NULL
-#' @aliases mlr_learners_regr.kknn
+#' @name mlr_learners_regr.kknn
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @section Construction:

@@ -57,4 +57,4 @@ RdMacros: mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE, r6 = FALSE)
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2

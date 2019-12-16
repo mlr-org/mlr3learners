@@ -1,7 +1,7 @@
 #' @title Support Vector Machine
 #'
 #' @usage NULL
-#' @aliases mlr_learners_classif.svm
+#' @name mlr_learners_classif.svm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @section Construction:

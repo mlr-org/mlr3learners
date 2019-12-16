@@ -1,7 +1,7 @@
 #' @title GLM with Elastic Net Regularization Regression Learner
 #'
 #' @usage NULL
-#' @aliases mlr_learners_regr.glmnet
+#' @name mlr_learners_regr.glmnet
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @section Construction:

@@ -1,7 +1,7 @@
 #' @title Support Vector Machine
 #'
 #' @usage NULL
-#' @aliases mlr_learners_regr.svm
+#' @name mlr_learners_regr.svm
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
 #'
 #' @section Construction:

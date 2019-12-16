@@ -1,7 +1,7 @@
 #' @title Linear Discriminant Analysis Classification Learner
 #'
 #' @usage NULL
-#' @aliases mlr_learners_classif.lda
+#' @name mlr_learners_classif.lda
 #' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
 #'
 #' @section Construction:
