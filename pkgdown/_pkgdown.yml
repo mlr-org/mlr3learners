@@ -33,10 +33,10 @@ navbar:
 reference:
   - title: Classification Learnes
     contents:
-      - starts_with("LearnerClassif")
+      - starts_with("mlr_learners_classif")
   - title: Regression Learners
     contents:
-      - starts_with("LearnerRegr")
+      - starts_with("mlr_learners_regr")
   - title: General
     contents:
       - mlr3learners-package
