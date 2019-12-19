@@ -49,9 +49,9 @@ Steps 2-6 are only needed if you want to add a learner yourself.
 1. Fork the
    [mlr3learnertemplate](https://github.com/mlr-org/mlr3learnertemplate) repo
    and adjust the template to your needs. 
-  Follow the instructions given in the [mlr3book](https://mlr3book.mlr-org.com/ext-learner.html) to get started.
+   Follow the instructions given in the [mlr3book](https://mlr3book.mlr-org.com/ext-learner.html) to get started.
 
-2. When you are somewhat done, request to add your learner to the [mlr3learners](https://github.com/mlr3learners) organization by asking for it in the issue you opened. You will get access rights to your repository to finalize the learner.
+2. When you are somewhat done, request to add your learner to the [mlr3learners](https://github.com/mlr3learners) organization by transfering your repository to the _mlr3learners_ organization. Once transfered, you will get access rights to your repository to finalize the learner.
 
 3. Add your learner to the section in [mlr3learners wiki](https://github.com/mlr-org/mlr3learners/wiki) which matches best the current status of your repo.
 
