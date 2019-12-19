@@ -98,10 +98,10 @@
 <a href="#mlr3learners" class="anchor"></a>mlr3learners</h1></div>
 <p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com">mlr3</a>, maintained by the mlr-org team. We will most likely not add new learners to this package.</p>
 <p><a href="https://travis-ci.org/mlr-org/mlr3learners"><img src="https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master" alt="Build Status"></a> <a href="https://cran.r-project.org/package=mlr3learners"><img src="https://www.r-pkg.org/badges/version-ago/mlr3learners" alt="CRAN Status Badge"></a> <a href="https://cran.r-project.org/web/checks/check_results_mlr3learners.html"><img src="https://cranchecks.info/badges/worst/mlr3learners" alt="Cran Checks"></a> <a href="https://codecov.io/gh/mlr-org/mlr3learners"><img src="https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg" alt="Codecov"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a></p>
-<p>Other learners live in the <a href="https://github.com/mlr3learners">mlr3learners</a> organization and are possibly maintained by people outside the mlr-org team. There is a <a href="https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners">wiki page</a> listing all currently available custom learners. A guide on how to create custom learners is covered in the <a href="https://mlr3book.mlr-org.com">mlr3book</a>. Feel invited to contribute a missing learner to the mlr3 ecosystem :-)</p>
-<div id="classification-learners" class="section level3">
-<h3 class="hasAnchor">
-<a href="#classification-learners" class="anchor"></a>Classification Learners</h3>
+<p>Other learners live in the <a href="https://github.com/mlr3learners">mlr3learners</a> organization and are possibly maintained by people outside the mlr-org team. There is a <a href="https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners">wiki page</a> listing all currently available custom learners. See <a href="#requesting-adding-additional-learners">below</a> for instructions on how to add a new learner.</p>
+<div id="classification-learners" class="section level2">
+<h2 class="hasAnchor">
+<a href="#classification-learners" class="anchor"></a>Classification Learners</h2>
 <table class="table">
 <thead><tr class="header">
 <th align="left">ID</th>
@@ -157,9 +157,9 @@
 </tbody>
 </table>
 </div>
-<div id="regression-learners" class="section level3">
-<h3 class="hasAnchor">
-<a href="#regression-learners" class="anchor"></a>Regression Learners</h3>
+<div id="regression-learners" class="section level2">
+<h2 class="hasAnchor">
+<a href="#regression-learners" class="anchor"></a>Regression Learners</h2>
 <table class="table">
 <thead><tr class="header">
 <th align="left">ID</th>
@@ -204,6 +204,19 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div id="requestingadding-additional-learners" class="section level2">
+<h2 class="hasAnchor">
+<a href="#requestingadding-additional-learners" class="anchor"></a>Requesting/Adding additional learners</h2>
+<p>Please follow these steps to add/request a new learner. Steps 2-6 are only needed if you want to add a learner yourself.</p>
+<ol>
+<li><p>Open an issue in <a href="https://github.com/mlr-org/mlr3learners/issues">mlr3learners</a> following the issue template.</p></li>
+<li><p>Fork the <a href="https://github.com/mlr-org/mlr3learnertemplate">mlr3learnertemplate</a> repo and adjust the template to your needs. Follow the instructions given in the <a href="https://mlr3book.mlr-org.com/ext-learner.html">mlr3book</a> to get started.</p></li>
+<li><p>When you are somewhat done, request to add your learner to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization by asking for it in the issue you opened. You will get access rights to your repository to finalize the learner.</p></li>
+<li><p>Add your learner to the section in <a href="https://github.com/mlr-org/mlr3learners/wiki">mlr3learners wiki</a> which matches best the current status of your repo.</p></li>
+<li><p>Once you are happy with the status of the learner, request a review in the issue from @mllg, @berndbischl, @pat-s or @be-marc</p></li>
+<li><p>Congrats! Your learner has been successfully added to the mlr3 ecosystem. Now that you’ve implemented the learner, we would also be happy if you also maintain it against the upstream package :)</p></li>
+</ol>
 </div>
 </div>
   </div>
