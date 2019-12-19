@@ -11,7 +11,7 @@ We will most likely not add new learners to this package.
 
 Other learners live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
 There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners) listing all currently available custom learners.
-See [below](#requesting-adding-additional-learners) for instructions on how to add a new learner.
+See [below](#requestingadding-additional-learners) for instructions on how to add a new learner.
 
 ## Classification Learners
 
