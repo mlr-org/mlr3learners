@@ -99,6 +99,18 @@
 <p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com">mlr3</a>, maintained by the mlr-org team. We will most likely not add new learners to this package.</p>
 <p><a href="https://travis-ci.org/mlr-org/mlr3learners"><img src="https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master" alt="Build Status"></a> <a href="https://cran.r-project.org/package=mlr3learners"><img src="https://www.r-pkg.org/badges/version-ago/mlr3learners" alt="CRAN Status Badge"></a> <a href="https://cran.r-project.org/web/checks/check_results_mlr3learners.html"><img src="https://cranchecks.info/badges/worst/mlr3learners" alt="Cran Checks"></a> <a href="https://codecov.io/gh/mlr-org/mlr3learners"><img src="https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg" alt="Codecov"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a></p>
 <p>Other learners live in the <a href="https://github.com/mlr3learners">mlr3learners</a> organization and are possibly maintained by people outside the mlr-org team. There is a <a href="https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners">wiki page</a> listing all currently available custom learners. See <a href="#requestingadding-additional-learners">below</a> for instructions on how to add a new learner.</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># CRAN version</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"mlr3learners"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Development version:</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"mlr-org/mlr3learners"</span>)</a></code></pre></div>
+<p>If you also want to install all packages of the connected learners, set argument <code>dependencies</code> to <code>TRUE</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"mlr3learners"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"mlr-org/mlr3learners"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
 <div id="classification-learners" class="section level2">
 <h2 class="hasAnchor">
 <a href="#classification-learners" class="anchor"></a>Classification Learners</h2>
