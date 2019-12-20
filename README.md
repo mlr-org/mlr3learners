@@ -3,11 +3,13 @@
 This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
 We will most likely not add new learners to this package.
 
+<!-- badges: start -->
 [![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
 [![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
 [![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
+<!-- badges: end -->
 
 Other learners live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
 There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners) listing all currently available custom learners.
