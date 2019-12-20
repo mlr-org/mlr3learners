@@ -16,7 +16,7 @@ See [below](#requestingadding-additional-learners) for instructions on how to ad
 ## Installation
 
 ```r
-# CRAN version
+# CRAN version:
 install.packages("mlr3learners")
 
 # Development version:
@@ -25,7 +25,10 @@ remotes::install_github("mlr-org/mlr3learners")
 
 If you also want to install all packages of the connected learners, set argument `dependencies` to `TRUE`:
 ```r
+# CRAN version:
 install.packages("mlr3learners", dependencies = TRUE)
+
+# Development version:
 remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 ```
 
