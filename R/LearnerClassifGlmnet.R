@@ -116,7 +116,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
     importance = function() {
       model = self$model$glmnet.fit
 
-      res = sapply(seq_len(nrow(model$beta)), function(i) {
+      res = map_dbl(seq_len(nrow(model$beta)), function(i) {
         ind = which(model$beta[i,] != 0)[1]
         model$lambda[ind]
       })
