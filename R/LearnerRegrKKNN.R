@@ -40,7 +40,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
         id = "regr.kknn",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
-        packages = c("withr", "kknn"),
+        packages = "kknn",
         man = "mlr3learners::mlr_learners_regr.kknn"
       )
     },
@@ -57,7 +57,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
       model = self$model
       newdata = task$data(cols = task$feature_names)
 
-      withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
+      with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn, formula = model$formula, train = model$data, test = newdata, .args = model$pars)
       })
 
