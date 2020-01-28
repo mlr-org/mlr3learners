@@ -37,7 +37,7 @@ Depends:
 Imports:
     data.table,
     mlr3 (>= 0.1.4),
-    mlr3misc (>= 0.1.5),
+    mlr3misc (>= 0.1.7),
     paradox,
     R6
 Suggests:
@@ -51,7 +51,6 @@ Suggests:
     MASS,
     ranger,
     testthat,
-    withr,
     xgboost
 RdMacros: mlr3misc
 Encoding: UTF-8

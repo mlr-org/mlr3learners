@@ -42,7 +42,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         properties = c("twoclass", "multiclass"),
-        packages = c("withr", "kknn"),
+        packages = "kknn",
         man = "mlr3learners::mlr_learners_classif.kknn"
       )
     },
@@ -59,7 +59,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
       model = self$model
       newdata = task$data(cols = task$feature_names)
 
-      withr::with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
+      with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn, formula = model$formula, train = model$data, test = newdata, .args = model$pars)
       })
 
