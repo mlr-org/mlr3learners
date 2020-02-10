@@ -63,7 +63,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         id = "classif.glmnet",
         param_set = ps,
         predict_types = c("response", "prob"),
-        feature_types = c("integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "twoclass", "multiclass"),
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_classif.glmnet"

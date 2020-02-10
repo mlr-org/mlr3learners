@@ -1,3 +1,7 @@
+# mlr3learners 0.1.6
+
+* Added missing feature type `logical()` to multiple learners.
+
 # mlr3learners 0.1.5
 
 * Added parameter and parameter dependencies to `regr.glmnet`, `regr.km`,

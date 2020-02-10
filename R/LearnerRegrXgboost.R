@@ -102,7 +102,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       super$initialize(
         id = "regr.xgboost",
         param_set = ps,
-        feature_types = c("integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "missings", "importance"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_regr.xgboost"

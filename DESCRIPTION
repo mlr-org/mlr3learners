@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.1.5
+Version: 0.1.6
 Authors@R:
     c(person(given = "Michel",
              family = "Lang",
