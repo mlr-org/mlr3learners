@@ -63,30 +63,6 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       )
     },
 
-    train_internal = function(task) {
-      pars = self$param_set$get_values(tags = "train")
-      invoke(ranger::ranger,
-        dependent.variable.name = task$target_names,
-        data = task$data(),
-        probability = self$predict_type == "prob",
-        case.weights = task$weights$weight,
-        .args = pars
-      )
-    },
-
-    predict_internal = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
-      newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model, data = newdata,
-        predict.type = "response", .args = pars)
-
-      if (self$predict_type == "response") {
-        PredictionClassif$new(task = task, response = p$predictions)
-      } else {
-        PredictionClassif$new(task = task, prob = p$predictions)
-      }
-    },
-
     importance = function() {
       if (is.null(self$model)) {
         stopf("No model stored")
@@ -100,6 +76,32 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
 
     oob_error = function() {
       self$model$prediction.error
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
+      pars = self$param_set$get_values(tags = "train")
+      invoke(ranger::ranger,
+        dependent.variable.name = task$target_names,
+        data = task$data(),
+        probability = self$predict_type == "prob",
+        case.weights = task$weights$weight,
+        .args = pars
+      )
+    },
+
+    .predict = function(task) {
+      pars = self$param_set$get_values(tags = "predict")
+      newdata = task$data(cols = task$feature_names)
+      p = invoke(predict, self$model, data = newdata,
+        predict.type = "response", .args = pars)
+
+      if (self$predict_type == "response") {
+        PredictionClassif$new(task = task, response = p$predictions)
+      } else {
+        PredictionClassif$new(task = task, prob = p$predictions)
+      }
     }
   )
 )

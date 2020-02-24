@@ -43,9 +43,11 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
         packages = "kknn",
         man = "mlr3learners::mlr_learners_regr.kknn"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       list(
         formula = task$formula(),
         data = task$data(),
@@ -53,7 +55,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
       )
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       model = self$model
       newdata = task$data(cols = task$feature_names)
 

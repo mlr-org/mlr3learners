@@ -55,9 +55,11 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
         packages = "e1071",
         man = "mlr3learners::mlr_learners_classif.svm"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       self$state$feature_names = colnames(data)
@@ -70,7 +72,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
       )
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]

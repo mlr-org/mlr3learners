@@ -110,8 +110,21 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       )
     },
 
-    train_internal = function(task) {
+    importance = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
 
+      imp = xgboost::xgb.importance(
+        feature_names = self$model$features,
+        model = self$model
+      )
+      set_names(imp$Gain, imp$Feature)
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
@@ -147,8 +160,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
-    predict_internal = function(task) {
-
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL
@@ -188,18 +200,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       } else {
         PredictionClassif$new(task = task, prob = prob)
       }
-    },
-
-    importance = function() {
-      if (is.null(self$model)) {
-        stopf("No model stored")
-      }
-
-      imp = xgboost::xgb.importance(
-        feature_names = self$model$features,
-        model = self$model
-      )
-      set_names(imp$Gain, imp$Feature)
     }
   )
 )

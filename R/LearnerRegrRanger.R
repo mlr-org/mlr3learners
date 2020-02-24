@@ -67,7 +67,24 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       )
     },
 
-    train_internal = function(task) {
+    importance = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
+      if (self$model$importance.mode == "none") {
+        stopf("No importance stored")
+      }
+
+      sort(self$model$variable.importance, decreasing = TRUE)
+    },
+
+    oob_error = function() {
+      self$model$prediction.error
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
 
       if (self$predict_type == "se") {
@@ -82,26 +99,11 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       )
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
       preds = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pars)
       PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
-    },
-
-    importance = function() {
-      if (is.null(self$model)) {
-        stopf("No model stored")
-      }
-      if (self$model$importance.mode == "none") {
-        stopf("No importance stored")
-      }
-
-      sort(self$model$variable.importance, decreasing = TRUE)
-    },
-
-    oob_error = function() {
-      self$model$prediction.error
     }
   )
 )

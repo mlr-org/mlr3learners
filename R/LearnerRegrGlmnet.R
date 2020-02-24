@@ -75,10 +75,11 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
-
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
@@ -99,7 +100,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 

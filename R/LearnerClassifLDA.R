@@ -43,14 +43,16 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
         packages = "MASS",
         man = "mlr3learners::mlr_learners_classif.lda"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       f = task$formula()
       invoke(MASS::lda, f, data = task$data(), .args = self$param_set$get_values(tags = "train"))
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       if (!is.null(pars$predict.method)) {
         pars$method = pars$predict.method
