@@ -54,9 +54,11 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
         packages = "e1071",
         man = "mlr3learners::mlr_learners_regr.svm"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       self$state$feature_names = colnames(data)
@@ -64,7 +66,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
       invoke(e1071::svm, x = data, y = task$truth(), .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]

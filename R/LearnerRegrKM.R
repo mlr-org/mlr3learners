@@ -65,10 +65,11 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
         packages = "DiceKriging",
         man = "mlr3learners::mlr_learners_regr.km"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
-
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
@@ -92,7 +93,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       )
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 

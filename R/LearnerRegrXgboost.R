@@ -109,7 +109,21 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       )
     },
 
-    train_internal = function(task) {
+    importance = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
+
+      imp = xgboost::xgb.importance(
+        feature_names = self$model$features,
+        model = self$model
+      )
+      set_names(imp$Gain, imp$Feature)
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
 
@@ -132,7 +146,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
@@ -140,18 +154,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       response = invoke(predict, model, newdata = newdata, .args = pars)
 
       PredictionRegr$new(task = task, response = response)
-    },
-
-    importance = function() {
-      if (is.null(self$model)) {
-        stopf("No model stored")
-      }
-
-      imp = xgboost::xgb.importance(
-        feature_names = self$model$features,
-        model = self$model
-      )
-      set_names(imp$Gain, imp$Feature)
     }
   )
 )

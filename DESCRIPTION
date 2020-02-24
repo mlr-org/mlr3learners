@@ -36,7 +36,7 @@ Depends:
     R (>= 3.1.0)
 Imports:
     data.table,
-    mlr3 (>= 0.1.4),
+    mlr3 (>= 0.1.7),
     mlr3misc (>= 0.1.7),
     paradox,
     R6

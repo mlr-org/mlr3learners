@@ -30,9 +30,11 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
         packages = "stats",
         man = "mlr3learners::mlr_learners_classif.log_reg"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
         pars = insert_named(pars, list(weights = task$weights$weight))
@@ -41,7 +43,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
       invoke(stats::glm, formula = task$formula(), data = task$data(), family = "binomial", .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       p = unname(predict(self$model, newdata = newdata, type = "response"))

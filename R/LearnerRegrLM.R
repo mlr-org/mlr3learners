@@ -30,9 +30,11 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
         packages = "stats",
         man = "mlr3learners::mlr_learners_regr.lm"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
         pars = insert_named(pars, list(weights = task$weights$weight))
@@ -41,7 +43,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
       invoke(stats::lm, formula = task$formula(), data = task$data(), .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
