@@ -1,28 +1,24 @@
 #' @title Support Vector Machine
 #'
-#' @usage NULL
 #' @name mlr_learners_classif.svm
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifSVM$new()
-#' mlr3::mlr_learners$get("classif.svm")
-#' mlr3::lrn("classif.svm")
-#' ```
 #'
 #' @description
 #' A learner for a classification support vector machine implemented in [e1071::svm()].
+#'
+#' @template section_dictionary_learner
+#' @templateVar id classif.svm
 #'
 #' @references
 #' \cite{mlr3learners}{cortes_1995}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.svm
 #' @template example
 LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("type", default = "C-classification", levels = c("C-classification", "nu-classification"), tags = "train"),

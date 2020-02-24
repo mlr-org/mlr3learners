@@ -1,29 +1,25 @@
 #' @title Quadratic Discriminant Analysis Classification Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_classif.qda
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifQDA$new()
-#' mlr3::mlr_learners$get("classif.qda")
-#' mlr3::lrn("classif.qda")
-#' ```
 #'
 #' @description
 #' Quadratic discriminant analysis.
 #' Calls [MASS::qda()] from package \CRANpkg{MASS}.
+#'
+#' @templateVar id classif.qda
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{venables_2002}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.qda
 #' @template example
 LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamUty$new("prior", tags = "train"),

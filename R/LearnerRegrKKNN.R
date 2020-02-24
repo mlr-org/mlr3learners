@@ -1,19 +1,13 @@
 #' @title k-Nearest-Neighbor Regression Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_regr.kknn
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrKKNN$new()
-#' mlr3::mlr_learners$get("regr.kknn")
-#' mlr3::lrn("regr.kknn")
-#' ```
 #'
 #' @description
 #' k-Nearest-Neighbor regression.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
+#'
+#' @templateVar id regr.kknn
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{hechenbichler_2004}
@@ -24,10 +18,12 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.kknn
 #' @template example
 LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("k", default = 7L, lower = 1L, tags = "train"),

@@ -1,15 +1,6 @@
 #' @title GLM with Elastic Net Regularization Regression Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_regr.glmnet
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrGlmnet$new()
-#' mlr3::mlr_learners$get("regr.glmnet")
-#' mlr3::lrn("regr.glmnet")
-#' ```
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
@@ -17,15 +8,20 @@
 #'
 #' The default for hyperparameter `family` is changed to `"gaussian"`.
 #'
+#' @templateVar id regr.glmnet
+#' @template section_dictionary_learner
+#'
 #' @references
 #' \cite{mlr3learners}{friedman_2010}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.glmnet
 #' @template example
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),

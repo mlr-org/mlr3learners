@@ -55,5 +55,5 @@ Suggests:
 RdMacros: mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
-Roxygen: list(markdown = TRUE, r6 = FALSE)
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2

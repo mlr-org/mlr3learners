@@ -1,15 +1,6 @@
 #' @title Extreme Gradient Boosting Regression Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_regr.xgboost
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrXgboost$new()
-#' mlr3::mlr_learners$get("regr.xgboost")
-#' mlr3::lrn("regr.xgboost")
-#' ```
 #'
 #' @description
 #' eXtreme Gradient Boosting regression.
@@ -19,15 +10,20 @@
 #' * Verbosity is reduced by setting `verbose` to `0`.
 #' * Number of boosting iterations `nrounds` is set to `1`.
 #'
+#' @template section_dictionary_learner
+#' @templateVar id regr.xgboost
+#'
 #' @references
 #' \cite{mlr3learners}{chen_2016}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.xgboost
 #' @template example
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("booster", default = "gbtree", levels = c("gbtree", "gblinear", "dart"), tags = "train"),
@@ -109,6 +105,10 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
       )
     },
 
+    #' @description
+    #' The importance scores are calculated with [xgboost::xgb.importance()].
+    #'
+    #' @return Named `numeric()`.
     importance = function() {
       if (is.null(self$model)) {
         stopf("No model stored")

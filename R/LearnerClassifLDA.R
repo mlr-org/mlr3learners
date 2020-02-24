@@ -1,29 +1,25 @@
 #' @title Linear Discriminant Analysis Classification Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_classif.lda
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifLDA$new()
-#' mlr3::mlr_learners$get("classif.lda")
-#' mlr3::lrn("classif.lda")
-#' ```
 #'
 #' @description
 #' Linear discriminant analysis.
 #' Calls [MASS::lda()] from package \CRANpkg{MASS}.
+#'
+#' @templateVar id classif.lda
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{venables_2002}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.lda
 #' @template example
 LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamUty$new("prior", tags = "train"),

@@ -1,29 +1,25 @@
 #' @title Logistic Regression Classification Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_classif.log_reg
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifLogReg$new()
-#' mlr3::mlr_learners$get("classif.log_reg")
-#' mlr3::lrn("classif.log_reg")
-#' ```
 #'
 #' @description
 #' Classification via logistic regression.
 #' Calls [stats::glm()] with `family` set to `"binomial"`.
 #' Argument `model` is set to `FALSE`.
 #'
+#' @templateVar id classif.log_reg
+#' @template section_dictionary_learner
+#'
 #' @template section_contrasts
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.log_reg
 #' @template example
 LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       super$initialize(
         id = "classif.log_reg",

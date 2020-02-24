@@ -1,19 +1,13 @@
 #' @title Ranger Regression Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_regr.ranger
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrRanger$new()
-#' mlr3::mlr_learners$get("regr.ranger")
-#' mlr3::lrn("regr.ranger")
-#' ```
 #'
 #' @description
 #' Random regression forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
+#'
+#' @templateVar id regr.ranger
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{wright_2017}
@@ -22,10 +16,12 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.ranger
 #' @template example
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
@@ -67,6 +63,12 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       )
     },
 
+    #' @description
+    #' The importance scores are extracted from the model slot `variable.importance`.
+    #' Parameter `importance.mode` must be set to `"impurity"`, `"impurity_corrected"`, or
+    #' `"permutation"`
+    #'
+    #' @return Named `numeric()`.
     importance = function() {
       if (is.null(self$model)) {
         stopf("No model stored")
@@ -78,6 +80,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       sort(self$model$variable.importance, decreasing = TRUE)
     },
 
+    #' @description
+    #' The out-of-bag error, extracted from model slot `prediction.error`.
+    #'
+    #' @return `numeric(1)`.
     oob_error = function() {
       self$model$prediction.error
     }

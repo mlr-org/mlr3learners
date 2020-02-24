@@ -1,28 +1,24 @@
 #' @title Linear Model Regression Learner
 #'
-#' @usage NULL
 #' @name mlr_learners_regr.lm
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrLM$new()
-#' mlr3::mlr_learners$get("regr.lm")
-#' mlr3::lrn("regr.lm")
-#' ```
 #'
 #' @description
 #' Ordinary linear regression.
 #' Calls [stats::lm()].
 #'
+#' @templateVar id regr.lm
+#' @template section_dictionary_learner
+#'
 #' @template section_contrasts
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.lm
 #' @template example
 LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       super$initialize(
         id = "regr.lm", ,
