@@ -1,3 +1,8 @@
+# mlr3learners 0.1.7
+
+* Learners `regr.lm` and `classif.log_reg` now ignore the global option
+  `"contrasts"`.
+
 # mlr3learners 0.1.6
 
 * Added missing feature type `logical()` to multiple learners.

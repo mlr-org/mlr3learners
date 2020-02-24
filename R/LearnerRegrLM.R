@@ -15,6 +15,8 @@
 #' Ordinary linear regression.
 #' Calls [stats::lm()].
 #'
+#' @template section_contrasts
+#'
 #' @export
 #' @template seealso_learner
 #' @templateVar learner_name regr.lm
@@ -40,7 +42,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      invoke(stats::lm, formula = task$formula(), data = task$data(), .args = pars)
+      invoke(stats::lm, formula = task$formula(), data = task$data(),
+        .args = pars, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {

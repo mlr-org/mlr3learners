@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.1.6
+Version: 0.1.6-9000
 Authors@R:
     c(person(given = "Michel",
              family = "Lang",
@@ -41,14 +41,14 @@ Imports:
     paradox,
     R6
 Suggests:
+    DiceKriging,
+    MASS,
     bibtex,
     checkmate,
-    DiceKriging,
     e1071,
     glmnet,
     kknn,
     lgr,
-    MASS,
     ranger,
     testthat,
     xgboost

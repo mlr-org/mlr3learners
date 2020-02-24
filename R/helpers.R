@@ -5,3 +5,5 @@ prob_vector_to_matrix = function(p, levs) {
   colnames(y) = levs
   y
 }
+
+opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))

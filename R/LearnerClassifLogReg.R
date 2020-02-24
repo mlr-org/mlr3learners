@@ -13,7 +13,10 @@
 #'
 #' @description
 #' Classification via logistic regression.
-#' Calls [stats::glm()].
+#' Calls [stats::glm()] with `family` set to `"binomial"`.
+#' Argument `model` is set to `FALSE`.
+#'
+#' @template section_contrasts
 #'
 #' @export
 #' @template seealso_learner
@@ -40,7 +43,9 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      invoke(stats::glm, formula = task$formula(), data = task$data(), family = "binomial", .args = pars)
+      invoke(stats::glm, formula = task$formula(), data = task$data(),
+        family = "binomial", model = FALSE,
+        .args = pars, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {

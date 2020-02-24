@@ -7,13 +7,26 @@
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link[mlr3:LearnerClassif]{mlr3::LearnerClassif}.}
 \description{
 Classification via logistic regression.
-Calls \code{\link[stats:glm]{stats::glm()}}.
+Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"binomial"}.
+Argument \code{model} is set to \code{FALSE}.
 }
 \section{Construction}{
 \preformatted{LearnerClassifLogReg$new()
 mlr3::mlr_learners$get("classif.log_reg")
 mlr3::lrn("classif.log_reg")
 }
+}
+
+\section{Contrasts}{
+
+To ensure reproducibility, this learner always uses the default contrasts:
+\itemize{
+\item \code{\link[=contr.treatment]{contr.treatment()}} for unordered factors, and
+\item \code{\link[=contr.poly]{contr.poly()}} for ordered factors.
+}
+
+Setting the option \code{"contrasts"} does not have any effect.
+Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to create dummy features.
 }
 
 \examples{

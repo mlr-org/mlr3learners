@@ -16,6 +16,18 @@ mlr3::lrn("regr.lm")
 }
 }
 
+\section{Contrasts}{
+
+To ensure reproducibility, this learner always uses the default contrasts:
+\itemize{
+\item \code{\link[=contr.treatment]{contr.treatment()}} for unordered factors, and
+\item \code{\link[=contr.poly]{contr.poly()}} for ordered factors.
+}
+
+Setting the option \code{"contrasts"} does not have any effect.
+Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to create dummy features.
+}
+
 \examples{
 learner = mlr3::lrn("regr.lm")
 print(learner)
