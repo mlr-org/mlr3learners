@@ -6,7 +6,7 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' @templateVar id regr.rpart
+#' @templateVar id classif.glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
