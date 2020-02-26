@@ -10,13 +10,13 @@ Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.rpart")
-lrn("regr.rpart")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.glmnet")
+lrn("classif.glmnet")
 }
 }
 
 \examples{
-learner = mlr3::lrn("regr.rpart")
+learner = mlr3::lrn("classif.glmnet")
 print(learner)
 
 # available parameters:
