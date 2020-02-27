@@ -51,7 +51,8 @@ Suggests:
     lgr,
     ranger,
     testthat,
-    xgboost
+    xgboost,
+    nnet
 RdMacros: mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
