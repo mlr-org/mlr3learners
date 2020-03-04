@@ -25,6 +25,7 @@ register_mlr3 = function() {
   x$add("classif.ranger", LearnerClassifRanger)
   x$add("classif.svm", LearnerClassifSVM)
   x$add("classif.xgboost", LearnerClassifXgboost)
+  x$add("classif.multinom", LearnerClassifMultinom)
 
   # regression learners
   x$add("regr.glmnet", LearnerRegrGlmnet)
