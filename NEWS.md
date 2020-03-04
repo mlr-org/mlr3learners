@@ -1,5 +1,6 @@
 # mlr3learners 0.1.7
 
+* Added learner `classif.multinom` from package `nnet`.
 * Learners `regr.lm` and `classif.log_reg` now ignore the global option
   `"contrasts"`.
 

@@ -55,11 +55,6 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom", inherit = LearnerClas
          pars$summ = as.integer(pars$summ)
       }
 
-      if ("twoclass" %in% task$properties) {
-        data[[task$target_names]] = factor(data[[task$target_names]],
-          levels = c(task$positive, task$negative))
-      }
-
       invoke(nnet::multinom, data = data, .args = pars)
     },
 
