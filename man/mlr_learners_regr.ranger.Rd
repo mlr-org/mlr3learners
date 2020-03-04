@@ -16,11 +16,13 @@ lrn("regr.ranger")
 }
 
 \examples{
-learner = mlr3::lrn("regr.ranger")
-print(learner)
+if (requireNamespace("ranger") {
+  learner = mlr3::lrn("regr.ranger")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{wright_2017}

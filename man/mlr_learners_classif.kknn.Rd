@@ -16,11 +16,13 @@ lrn("classif.kknn")
 }
 
 \examples{
-learner = mlr3::lrn("classif.kknn")
-print(learner)
+if (requireNamespace("kknn") {
+  learner = mlr3::lrn("classif.kknn")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{hechenbichler_2004}

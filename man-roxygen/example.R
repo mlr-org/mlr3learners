@@ -1,6 +1,11 @@
+<%
+lrn = mlr3::lrn(id)
+%>
 #' @examples
-#' learner = mlr3::lrn("<%= id %>")
-#' print(learner)
+#' if (requireNamespace("<%= lrn$packages %>") {
+#'   learner = mlr3::lrn("<%= id %>")
+#'   print(learner)
 #'
-#' # available parameters:
+#'   # available parameters:
 #' learner$param_set$ids()
+#' }

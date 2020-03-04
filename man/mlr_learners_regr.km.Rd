@@ -22,11 +22,13 @@ lrn("regr.km")
 }
 
 \examples{
-learner = mlr3::lrn("regr.km")
-print(learner)
+if (requireNamespace("DiceKriging") {
+  learner = mlr3::lrn("regr.km")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{roustant_2012}

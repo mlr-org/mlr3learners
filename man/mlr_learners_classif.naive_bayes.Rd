@@ -16,11 +16,13 @@ lrn("classif.naive_bayes")
 }
 
 \examples{
-learner = mlr3::lrn("classif.naive_bayes")
-print(learner)
+if (requireNamespace("e1071") {
+  learner = mlr3::lrn("classif.naive_bayes")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

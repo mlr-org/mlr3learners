@@ -28,11 +28,13 @@ Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to cre
 }
 
 \examples{
-learner = mlr3::lrn("regr.lm")
-print(learner)
+if (requireNamespace("stats") {
+  learner = mlr3::lrn("regr.lm")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

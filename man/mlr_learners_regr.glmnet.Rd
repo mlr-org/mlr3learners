@@ -18,11 +18,13 @@ lrn("regr.glmnet")
 }
 
 \examples{
-learner = mlr3::lrn("regr.glmnet")
-print(learner)
+if (requireNamespace("glmnet") {
+  learner = mlr3::lrn("regr.glmnet")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{friedman_2010}

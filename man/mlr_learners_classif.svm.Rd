@@ -15,11 +15,13 @@ lrn("classif.svm")
 }
 
 \examples{
-learner = mlr3::lrn("classif.svm")
-print(learner)
+if (requireNamespace("e1071") {
+  learner = mlr3::lrn("classif.svm")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{cortes_1995}

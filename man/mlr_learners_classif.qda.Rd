@@ -16,11 +16,13 @@ lrn("classif.qda")
 }
 
 \examples{
-learner = mlr3::lrn("classif.qda")
-print(learner)
+if (requireNamespace("MASS") {
+  learner = mlr3::lrn("classif.qda")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{venables_2002}

@@ -16,11 +16,13 @@ lrn("classif.multinom")
 }
 
 \examples{
-learner = mlr3::lrn("classif.multinom")
-print(learner)
+if (requireNamespace("nnet") {
+  learner = mlr3::lrn("classif.multinom")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

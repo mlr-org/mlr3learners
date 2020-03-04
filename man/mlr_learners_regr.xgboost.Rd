@@ -22,11 +22,13 @@ lrn("regr.xgboost")
 }
 
 \examples{
-learner = mlr3::lrn("regr.xgboost")
-print(learner)
+if (requireNamespace("xgboost") {
+  learner = mlr3::lrn("regr.xgboost")
+  print(learner)
 
-# available parameters:
+  # available parameters:
 learner$param_set$ids()
+}
 }
 \references{
 \cite{mlr3learners}{chen_2016}
