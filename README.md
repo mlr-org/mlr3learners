@@ -4,7 +4,7 @@ This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), 
 We will most likely not add new learners to this package.
 
 <!-- badges: start -->
-[![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
+[![R build status](https://github.com/mlr-org/mlr3learners/workflows/R-CMD-check/badge.svg)](https://github.com/mlr-org/mlr3learners/actions)
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
 [![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
 [![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
