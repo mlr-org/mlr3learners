@@ -209,7 +209,22 @@ doi: <a href='https://doi.org/10.1007/BF00994018'>10.1007/BF00994018</a>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"e1071"</span>)) {
+  <span class='no'>learner</span> <span class='kw'>=</span> <span class='kw pkg'>mlr3</span><span class='kw ns'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.svm"</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>learner</span>)
+
+  <span class='co'># available parameters:</span>
+<span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='fu'>ids</span>()
+}</div><div class='output co'>#&gt; &lt;LearnerClassifSVM:classif.svm&gt;
+#&gt; * Model: -
+#&gt; * Parameters: list()
+#&gt; * Packages: e1071
+#&gt; * Predict Type: response
+#&gt; * Feature types: logical, integer, numeric
+#&gt; * Properties: multiclass, twoclass</div><div class='output co'>#&gt;  [1] "type"          "cost"          "nu"            "kernel"       
+#&gt;  [5] "degree"        "coef0"         "gamma"         "cachesize"    
+#&gt;  [9] "tolerance"     "shrinking"     "cross"         "fitted"       
+#&gt; [13] "scale"         "class.weights"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>

@@ -217,7 +217,19 @@ Instead, set the respective hyperparameter or use <a href='https://CRAN.R-projec
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"stats"</span>)) {
+  <span class='no'>learner</span> <span class='kw'>=</span> <span class='kw pkg'>mlr3</span><span class='kw ns'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.log_reg"</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>learner</span>)
+
+  <span class='co'># available parameters:</span>
+<span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='fu'>ids</span>()
+}</div><div class='output co'>#&gt; &lt;LearnerClassifLogReg:classif.log_reg&gt;
+#&gt; * Model: -
+#&gt; * Parameters: list()
+#&gt; * Packages: stats
+#&gt; * Predict Type: response
+#&gt; * Feature types: logical, integer, numeric, character, factor, ordered
+#&gt; * Properties: twoclass, weights</div><div class='output co'>#&gt; character(0)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>

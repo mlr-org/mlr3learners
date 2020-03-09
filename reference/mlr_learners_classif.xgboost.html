@@ -230,7 +230,33 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"xgboost"</span>)) {
+  <span class='no'>learner</span> <span class='kw'>=</span> <span class='kw pkg'>mlr3</span><span class='kw ns'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"classif.xgboost"</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>learner</span>)
+
+  <span class='co'># available parameters:</span>
+<span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='fu'>ids</span>()
+}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: xgboost</span></div><div class='output co'>#&gt; &lt;LearnerClassifXgboost:classif.xgboost&gt;
+#&gt; * Model: -
+#&gt; * Parameters: nrounds=1, verbose=0
+#&gt; * Packages: xgboost
+#&gt; * Predict Type: response
+#&gt; * Feature types: logical, integer, numeric
+#&gt; * Properties: importance, missings, multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "booster"                "watchlist"              "eta"                   
+#&gt;  [4] "gamma"                  "max_depth"              "min_child_weight"      
+#&gt;  [7] "subsample"              "colsample_bytree"       "colsample_bylevel"     
+#&gt; [10] "colsample_bynode"       "num_parallel_tree"      "lambda"                
+#&gt; [13] "lambda_bias"            "alpha"                  "objective"             
+#&gt; [16] "eval_metric"            "base_score"             "max_delta_step"        
+#&gt; [19] "missing"                "monotone_constraints"   "tweedie_variance_power"
+#&gt; [22] "nthread"                "nrounds"                "feval"                 
+#&gt; [25] "verbose"                "print_every_n"          "early_stopping_rounds" 
+#&gt; [28] "maximize"               "sample_type"            "normalize_type"        
+#&gt; [31] "rate_drop"              "skip_drop"              "one_drop"              
+#&gt; [34] "tree_method"            "grow_policy"            "max_leaves"            
+#&gt; [37] "max_bin"                "callbacks"              "sketch_eps"            
+#&gt; [40] "scale_pos_weight"       "updater"                "refresh_leaf"          
+#&gt; [43] "feature_selector"       "top_k"                  "predictor"             </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
