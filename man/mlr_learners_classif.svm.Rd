@@ -15,7 +15,7 @@ lrn("classif.svm")
 }
 
 \examples{
-if (requireNamespace("e1071") {
+if (requireNamespace("e1071")) {
   learner = mlr3::lrn("classif.svm")
   print(learner)
 

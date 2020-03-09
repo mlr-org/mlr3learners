@@ -16,7 +16,7 @@ lrn("classif.multinom")
 }
 
 \examples{
-if (requireNamespace("nnet") {
+if (requireNamespace("nnet")) {
   learner = mlr3::lrn("classif.multinom")
   print(learner)
 

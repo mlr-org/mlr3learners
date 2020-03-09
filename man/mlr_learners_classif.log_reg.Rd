@@ -29,7 +29,7 @@ Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to cre
 }
 
 \examples{
-if (requireNamespace("stats") {
+if (requireNamespace("stats")) {
   learner = mlr3::lrn("classif.log_reg")
   print(learner)
 

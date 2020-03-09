@@ -16,7 +16,7 @@ lrn("regr.kknn")
 }
 
 \examples{
-if (requireNamespace("kknn") {
+if (requireNamespace("kknn")) {
   learner = mlr3::lrn("regr.kknn")
   print(learner)
 

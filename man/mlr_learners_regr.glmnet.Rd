@@ -18,7 +18,7 @@ lrn("regr.glmnet")
 }
 
 \examples{
-if (requireNamespace("glmnet") {
+if (requireNamespace("glmnet")) {
   learner = mlr3::lrn("regr.glmnet")
   print(learner)
 

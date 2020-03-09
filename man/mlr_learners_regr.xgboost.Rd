@@ -22,7 +22,7 @@ lrn("regr.xgboost")
 }
 
 \examples{
-if (requireNamespace("xgboost") {
+if (requireNamespace("xgboost")) {
   learner = mlr3::lrn("regr.xgboost")
   print(learner)
 

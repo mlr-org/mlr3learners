@@ -16,7 +16,7 @@ lrn("classif.glmnet")
 }
 
 \examples{
-if (requireNamespace("glmnet") {
+if (requireNamespace("glmnet")) {
   learner = mlr3::lrn("classif.glmnet")
   print(learner)
 

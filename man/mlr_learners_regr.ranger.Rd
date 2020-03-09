@@ -16,7 +16,7 @@ lrn("regr.ranger")
 }
 
 \examples{
-if (requireNamespace("ranger") {
+if (requireNamespace("ranger")) {
   learner = mlr3::lrn("regr.ranger")
   print(learner)
 

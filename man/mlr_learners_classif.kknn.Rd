@@ -16,7 +16,7 @@ lrn("classif.kknn")
 }
 
 \examples{
-if (requireNamespace("kknn") {
+if (requireNamespace("kknn")) {
   learner = mlr3::lrn("classif.kknn")
   print(learner)
 

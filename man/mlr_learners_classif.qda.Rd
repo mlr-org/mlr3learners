@@ -16,7 +16,7 @@ lrn("classif.qda")
 }
 
 \examples{
-if (requireNamespace("MASS") {
+if (requireNamespace("MASS")) {
   learner = mlr3::lrn("classif.qda")
   print(learner)
 

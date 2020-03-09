@@ -16,7 +16,7 @@ lrn("classif.ranger")
 }
 
 \examples{
-if (requireNamespace("ranger") {
+if (requireNamespace("ranger")) {
   learner = mlr3::lrn("classif.ranger")
   print(learner)
 
