@@ -79,7 +79,7 @@ Calls e1071::naiveBayes() from package e1071." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.1.6.9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.1.6-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -102,7 +102,7 @@ Calls e1071::naiveBayes() from package e1071." />
   </a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3learners">
+  <a href="https://github.com/mlr-org/mlr3learners/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -154,9 +154,8 @@ Calls <code><a href='https://rdrr.io/pkg/e1071/man/naiveBayes.html'>e1071::naive
 
     
 
-<p>This Learner can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><pre>mlr_learners$get("classif.naive_bayes")
-lrn("classif.naive_bayes")
-</pre>
+<p>This Learner can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><pre><span class='no'>mlr_learners</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"classif.naive_bayes"</span>)
+<span class='fu'>lrn</span>(<span class='st'>"classif.naive_bayes"</span>)</pre>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -188,12 +187,12 @@ lrn("classif.naive_bayes")
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>LearnerClassifNaiveBayes$new()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>LearnerClassifNaiveBayes</span>$<span class='fu'>new</span>()</pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>LearnerClassifNaiveBayes$clone(deep = FALSE)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>LearnerClassifNaiveBayes</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl class='dl-horizontal'>
