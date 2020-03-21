@@ -15,7 +15,7 @@ We will most likely not add new learners to this package.
 
 Other learners live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
 There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/) listing all currently available custom learners.
-See [below](#requestingadding-additional-learners) for instructions on how to add a new learner.
+See [below for instructions](#requestingadding-additional-learners) on how to add a new learner.
 
 ## Installation
 
@@ -27,7 +27,7 @@ install.packages("mlr3learners")
 remotes::install_github("mlr-org/mlr3learners")
 ```
 
-If you also want to install all packages of the connected learners, set argument `dependencies` to `TRUE`:
+If you also want to install all packages of the connected learners, set `dependencies = TRUE`:
 
 ```r
 # CRAN version:
@@ -71,16 +71,16 @@ Steps 2-6 are only needed if you want to add a learner yourself.
 
 1. Open an issue in [mlr3learners](https://github.com/mlr-org/mlr3learners/issues) following the issue template.
 
-1. Fork the [mlr3learnertemplate](https://github.com/mlr-org/mlr3learnertemplate) repo and adjust the template to your needs.
-   Follow the instructions given in the [mlr3book](https://mlr3book.mlr-org.com/extending-learners.html) to get started.
+1. Fork the [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template) repo and adjust the template to your needs.
+   Follow the instructions given in the README and in the section ["Adding new Learners"](https://mlr3book.mlr-org.com/extending-learners.html) in the mlr3book.
 
-1. When you are somewhat done, request to add your learner to the [mlr3learners](https://github.com/mlr3learners) organization by transferring your repository to the _mlr3learners_ organization.
-   To do so, please request an invitation to be added to the [mlr3learners](https://github.com/mlr3learners) organization.
-   Add your learner to the matching section in the [mlr3learners wiki](https://github.com/mlr-org/mlr3learners/wiki).
+1. When you are somewhat done, request a review in the opened issue.
+1. After you can transfer the learner to the [mlr3learners](https://github.com/mlr3learners) organization.
+   To do so, please first request an invitation from [@pat-s](https://github.com/pat-s) / [@be-marc](https://github.com/be-marc) to be added to the [mlr3learners](https://github.com/mlr3learners) organization.
    Once transferred, you will get access rights to your repository to finalize the learner.
 
-1. Once you are happy with the status of the learner, request a review in the issue from @mllg, @berndbischl, @pat-s or @be-marc
-
 1. Congrats! Your learner has been successfully added to the mlr3 ecosystem.
-   We would be happy it you also add your learner to [{mlr3learners.drat}](https://github.com/mlr3learners/mlr3learners.drat) to simplify installation.
-   In addition, we would also be grateful if you keep maintaining it against upstream changes :)
+   Now the learner is ready to be added to [{mlr3learners.drat}](https://github.com/mlr3learners/mlr3learners.drat).
+   This makes is possible to install the learner via `install.packages()` without the need of submitting the learner package to CRAN.
+
+   (Last, we would be very happy if you keep maintaining the learner against upstream changes :)
