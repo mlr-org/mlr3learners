@@ -3,40 +3,84 @@
 This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
 We will most likely not add new learners to this package.
 
-[![Build Status](https://travis-ci.org/mlr-org/mlr3learners.svg?branch=master)](https://travis-ci.org/mlr-org/mlr3learners)
+<!-- badges: start -->
+
+[![R build status](https://github.com/mlr-org/mlr3learners/workflows/R-CMD-check/badge.svg)](https://github.com/mlr-org/mlr3learners/actions)
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
 [![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
 [![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 
+<!-- badges: end -->
+
 Other learners live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
-There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners) listing all currently available custom learners.
-A guide on how to create custom learners is covered in the [mlr3book](https://mlr3book.mlr-org.com).
-Feel invited to contribute a missing learner to the mlr3 ecosystem :-)
+There is a [wiki page](https://github.com/mlr-org/mlr3learners/wiki/) listing all currently available custom learners.
+See [below for instructions](#requestingadding-additional-learners) on how to add a new learner.
 
-### Classification Learners
+## Installation
 
-| ID                                                                                              | Learner                          | Package                                                |
-| :---------------------------------------------------------------------------------------------- | :------------------------------- | :----------------------------------------------------- |
-| [classif.glmnet](https://mlr3learners.mlr-org.com/reference/LearnerClassifGlmnet.html)          | Penalized Logistic Regression    | [glmnet](https://cran.r-project.org/package=glmnet)    |
-| [classif.kknn](https://mlr3learners.mlr-org.com/reference/LearnerClassifKKNN.html)              | k-Nearest Neighbors              | [kknn](https://cran.r-project.org/package=kknn)        |
-| [classif.lda](https://mlr3learners.mlr-org.com/reference/LearnerClassifLDA.html)                | LDA                              | [MASS](https://cran.r-project.org/package=MASS)        |
-| [classif.log_reg](https://mlr3learners.mlr-org.com/reference/LearnerClassifLogReg.html)         | Logistic Regression              | stats                                                  |
-| [classif.naive_bayes](https://mlr3learners.mlr-org.com/reference/LearnerClassifNaiveBayes.html) | Naive Bayes                      | [e1071](https://cran.r-project.org/package=e1071)      |
-| [classif.qda](https://mlr3learners.mlr-org.com/reference/LearnerClassifQDA.html)                | QDA                              | [MASS](https://cran.r-project.org/package=MASS)        |
-| [classif.ranger](https://mlr3learners.mlr-org.com/reference/LearnerClassifRanger.html)          | Random Forest                    | [ranger](https://cran.r-project.org/package=ranger)    |
-| [classif.svm](https://mlr3learners.mlr-org.com/reference/LearnerClassifSVM.html)                | SVM                              | [e1071](https://cran.r-project.org/package=e1071)      |
-| [classif.xgboost](https://mlr3learners.mlr-org.com/reference/LearnerClassifXgboost.html)        | Gradient Boosting                | [xgboost](https://cran.r-project.org/package=xgboost)  |
+```r
+# CRAN version:
+install.packages("mlr3learners")
 
-### Regression Learners
+# Development version:
+remotes::install_github("mlr-org/mlr3learners")
+```
 
-| ID                                                                                 | Learner                          | Package                                                       |
-| :--------------------------------------------------------------------------------- | :------------------------------- | :------------------------------------------------------------ |
-| [regr.glmnet](https://mlr3learners.mlr-org.com/reference/LearnerRegrGlmnet.html)   | Penalized Linear Regression      | [glmnet](https://cran.r-project.org/package=glmnet)           |
-| [regr.kknn](https://mlr3learners.mlr-org.com/reference/LearnerRegrKKNN.html)       | k-Nearest Neighbors              | [kknn](https://cran.r-project.org/package=kknn)               |
-| [regr.km](https://mlr3learners.mlr-org.com/reference/LearnerRegrKM.html)           | Kriging                          | [DiceKriging](https://cran.r-project.org/package=DiceKriging) |
-| [regr.lm](https://mlr3learners.mlr-org.com/reference/LearnerRegrLM.html)           | Linear Regression                | stats                                                         |
-| [regr.ranger](https://mlr3learners.mlr-org.com/reference/LearnerRegrRanger.html)   | Random Forest                    | [ranger](https://cran.r-project.org/package=ranger)           |
-| [regr.svm](https://mlr3learners.mlr-org.com/reference/LearnerRegrSVM.html)         | SVM                              | [e1071](https://cran.r-project.org/package=e1071)             |
-| [regr.xgboost](https://mlr3learners.mlr-org.com/reference/LearnerRegrXgboost.html) | Gradient Boosting                | [xgboost](https://cran.r-project.org/package=xgboost)         |
+If you also want to install all packages of the connected learners, set `dependencies = TRUE`:
 
+```r
+# CRAN version:
+install.packages("mlr3learners", dependencies = TRUE)
+
+# Development version:
+remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
+```
+
+## Classification Learners
+
+| ID                                                                                                      | Learner                       | Package                                               |
+| :------------------------------------------------------------------------------------------------------ | :---------------------------- | :---------------------------------------------------- |
+| [classif.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html)           | Penalized Logistic Regression | [glmnet](https://cran.r-project.org/package=glmnet)   |
+| [classif.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html)               | k-Nearest Neighbors           | [kknn](https://cran.r-project.org/package=kknn)       |
+| [classif.lda](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.lda.html)                 | LDA                           | [MASS](https://cran.r-project.org/package=MASS)       |
+| [classif.log_reg](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.log_reg.html)         | Logistic Regression           | stats                                                 |
+| [classif.multinom](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.multinom.html)       | Multinomial log-linear model  | [nnet](https://cran.r-project.org/package=nnet)       |
+| [classif.naive_bayes](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html) | Naive Bayes                   | [e1071](https://cran.r-project.org/package=e1071)     |
+| [classif.qda](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.qda.html)                 | QDA                           | [MASS](https://cran.r-project.org/package=MASS)       |
+| [classif.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html)           | Random Forest                 | [ranger](https://cran.r-project.org/package=ranger)   |
+| [classif.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html)                 | SVM                           | [e1071](https://cran.r-project.org/package=e1071)     |
+| [classif.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html)         | Gradient Boosting             | [xgboost](https://cran.r-project.org/package=xgboost) |
+
+## Regression Learners
+
+| ID                                                                                        | Learner                     | Package                                                       |
+| :---------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
+| [regr.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html)   | Penalized Linear Regression | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [regr.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html)       | k-Nearest Neighbors         | [kknn](https://cran.r-project.org/package=kknn)               |
+| [regr.km](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html)           | Kriging                     | [DiceKriging](https://cran.r-project.org/package=DiceKriging) |
+| [regr.lm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html)           | Linear Regression           | stats                                                         |
+| [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)   | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
+| [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)         | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
+| [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html) | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
+
+## Requesting/Adding additional learners
+
+Please follow these steps to add/request a new learner.
+Steps 2-6 are only needed if you want to add a learner yourself.
+
+1. Open an issue in [mlr3learners](https://github.com/mlr-org/mlr3learners/issues) following the issue template.
+
+1. Fork the [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template) repo and adjust the template to your needs.
+   Follow the instructions given in the README and in the section ["Adding new Learners"](https://mlr3book.mlr-org.com/extending-learners.html) in the mlr3book.
+
+1. When you are somewhat done, request a review in the opened issue.
+1. After you can transfer the learner to the [mlr3learners](https://github.com/mlr3learners) organization.
+   To do so, please first request an invitation from [@pat-s](https://github.com/pat-s) / [@be-marc](https://github.com/be-marc) to be added to the [mlr3learners](https://github.com/mlr3learners) organization.
+   Once transferred, you will get access rights to your repository to finalize the learner.
+
+1. Congrats! Your learner has been successfully added to the mlr3 ecosystem.
+   Now the learner is ready to be added to [{mlr3learners.drat}](https://github.com/mlr3learners/mlr3learners.drat).
+   This makes is possible to install the learner via `install.packages()` without the need of submitting the learner package to CRAN.
+
+   (Last, we would be very happy if you keep maintaining the learner against upstream changes :)

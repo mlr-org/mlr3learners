@@ -1,15 +1,6 @@
 #' @title Extreme Gradient Boosting Classification Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_classif.xgboost
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifXgboost$new()
-#' mlr3::mlr_learners$get("classif.xgboost")
-#' mlr3::lrn("classif.xgboost")
-#' ```
+#' @name mlr_learners_classif.xgboost
 #'
 #' @description
 #' eXtreme Gradient Boosting classification.
@@ -19,15 +10,20 @@
 #' * Verbosity is reduced by setting `verbose` to `0`.
 #' * Number of boosting iterations `nrounds` is set to `1`.
 #'
+#' @template section_dictionary_learner
+#' @templateVar id classif.xgboost
+#'
 #' @references
 #' \cite{mlr3learners}{chen_2016}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.xgboost
 #' @template example
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("booster", default = "gbtree", levels = c("gbtree", "gblinear", "dart"), tags = "train"),
@@ -89,9 +85,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       ps$add_dep("max_leaves", "grow_policy", CondEqual$new("lossguide"))
       ps$add_dep("max_bin", "tree_method", CondEqual$new("hist"))
       ps$add_dep("sketch_eps", "tree_method", CondEqual$new("approx"))
-      ps$add_dep("lambda", "booster", CondEqual$new("gblinear"))
-      ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
-      ps$add_dep("alpha", "booster", CondEqual$new("gblinear"))
       ps$add_dep("feature_selector", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
@@ -103,15 +96,32 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
         id = "classif.xgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
-        feature_types = c("integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "missings", "twoclass", "multiclass", "importance"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_classif.xgboost"
       )
     },
 
-    train_internal = function(task) {
+    #' @description
+    #' The importance scores are calculated with [xgboost::xgb.importance()].
+    #'
+    #' @return Named `numeric()`.
+    importance = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
 
+      imp = xgboost::xgb.importance(
+        feature_names = self$model$features,
+        model = self$model
+      )
+      set_names(imp$Gain, imp$Feature)
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
@@ -147,8 +157,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
-    predict_internal = function(task) {
-
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL
@@ -188,18 +197,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       } else {
         PredictionClassif$new(task = task, prob = prob)
       }
-    },
-
-    importance = function() {
-      if (is.null(self$model)) {
-        stopf("No model stored")
-      }
-
-      imp = xgboost::xgb.importance(
-        feature_names = self$model$features,
-        model = self$model
-      )
-      set_names(imp$Gain, imp$Feature)
     }
   )
 )

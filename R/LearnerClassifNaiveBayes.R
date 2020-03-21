@@ -1,26 +1,22 @@
 #' @title Naive Bayes Classification Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_classif.naive_bayes
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifNaiveBayes$new()
-#' mlr3::mlr_learners$get("classif.naive_bayes")
-#' mlr3::lrn("classif.naive_bayes")
-#' ```
+#' @name mlr_learners_classif.naive_bayes
 #'
 #' @description
 #' Naive Bayes classification.
 #' Calls [e1071::naiveBayes()] from package \CRANpkg{e1071}.
 #'
+#' @template section_dictionary_learner
+#' @templateVar id classif.naive_bayes
+#'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.naive_bayes
 #' @template example
 LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamDbl$new("laplace", default = 0, lower = 0, tags = "train"),
@@ -37,15 +33,17 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
         packages = "e1071",
         man = "mlr3learners::mlr_learners_classif.naive_bayes"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       y = task$truth()
       x = task$data(cols = task$feature_names)
       invoke(e1071::naiveBayes, x = x, y = y, .args = self$param_set$get_values(tags = "train"))
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
 

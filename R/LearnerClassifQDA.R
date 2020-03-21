@@ -1,29 +1,25 @@
 #' @title Quadratic Discriminant Analysis Classification Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_classif.qda
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifQDA$new()
-#' mlr3::mlr_learners$get("classif.qda")
-#' mlr3::lrn("classif.qda")
-#' ```
+#' @name mlr_learners_classif.qda
 #'
 #' @description
 #' Quadratic discriminant analysis.
 #' Calls [MASS::qda()] from package \CRANpkg{MASS}.
+#'
+#' @templateVar id classif.qda
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{venables_2002}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.qda
 #' @template example
 LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamUty$new("prior", tags = "train"),
@@ -42,13 +38,15 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA", inherit = LearnerClassif,
         packages = "MASS",
         man = "mlr3learners::mlr_learners_classif.qda"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       invoke(MASS::qda, task$formula(), data = task$data(), .args = self$param_set$get_values(tags = "train"))
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       if (!is.null(pars$predict.method)) {
         pars$method = pars$predict.method

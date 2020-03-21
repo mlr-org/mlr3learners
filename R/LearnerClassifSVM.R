@@ -1,28 +1,24 @@
 #' @title Support Vector Machine
 #'
-#' @usage NULL
-#' @aliases mlr_learners_classif.svm
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifSVM$new()
-#' mlr3::mlr_learners$get("classif.svm")
-#' mlr3::lrn("classif.svm")
-#' ```
+#' @name mlr_learners_classif.svm
 #'
 #' @description
 #' A learner for a classification support vector machine implemented in [e1071::svm()].
+#'
+#' @template section_dictionary_learner
+#' @templateVar id classif.svm
 #'
 #' @references
 #' \cite{mlr3learners}{cortes_1995}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.svm
 #' @template example
 LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("type", default = "C-classification", levels = c("C-classification", "nu-classification"), tags = "train"),
@@ -50,14 +46,16 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
         id = "classif.svm",
         param_set = ps,
         predict_types = c("response", "prob"),
-        feature_types = c("integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric"),
         properties = c("twoclass", "multiclass"),
         packages = "e1071",
         man = "mlr3learners::mlr_learners_classif.svm"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       self$state$feature_names = colnames(data)
@@ -70,7 +68,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM", inherit = LearnerClassif,
       )
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]

@@ -1,15 +1,6 @@
 #' @title GLM with Elastic Net Regularization Regression Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_regr.glmnet
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerRegr].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrGlmnet$new()
-#' mlr3::mlr_learners$get("regr.glmnet")
-#' mlr3::lrn("regr.glmnet")
-#' ```
+#' @name mlr_learners_regr.glmnet
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
@@ -17,15 +8,20 @@
 #'
 #' The default for hyperparameter `family` is changed to `"gaussian"`.
 #'
+#' @templateVar id regr.glmnet
+#' @template section_dictionary_learner
+#'
 #' @references
 #' \cite{mlr3learners}{friedman_2010}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.glmnet
 #' @template example
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamFct$new("family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),
@@ -70,15 +66,17 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       super$initialize(
         id = "regr.glmnet",
         param_set = ps,
-        feature_types = c("integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "importance"),
+        properties = "weights",
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
-
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
@@ -99,11 +97,12 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
-      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+      response = invoke(predict, self$model, newx = newdata, type = "response",
+       .args = pars)
       PredictionRegr$new(task = task, response = drop(response))
     },
 

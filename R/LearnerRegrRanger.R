@@ -1,19 +1,13 @@
 #' @title Ranger Regression Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_regr.ranger
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerRegrRanger$new()
-#' mlr3::mlr_learners$get("regr.ranger")
-#' mlr3::lrn("regr.ranger")
-#' ```
+#' @name mlr_learners_regr.ranger
 #'
 #' @description
 #' Random regression forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
+#'
+#' @templateVar id regr.ranger
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{wright_2017}
@@ -22,10 +16,12 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name regr.ranger
 #' @template example
 LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
@@ -67,7 +63,34 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       )
     },
 
-    train_internal = function(task) {
+    #' @description
+    #' The importance scores are extracted from the model slot `variable.importance`.
+    #' Parameter `importance.mode` must be set to `"impurity"`, `"impurity_corrected"`, or
+    #' `"permutation"`
+    #'
+    #' @return Named `numeric()`.
+    importance = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
+      if (self$model$importance.mode == "none") {
+        stopf("No importance stored")
+      }
+
+      sort(self$model$variable.importance, decreasing = TRUE)
+    },
+
+    #' @description
+    #' The out-of-bag error, extracted from model slot `prediction.error`.
+    #'
+    #' @return `numeric(1)`.
+    oob_error = function() {
+      self$model$prediction.error
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
 
       if (self$predict_type == "se") {
@@ -82,26 +105,11 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       )
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
       preds = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pars)
       PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
-    },
-
-    importance = function() {
-      if (is.null(self$model)) {
-        stopf("No model stored")
-      }
-      if (self$model$importance.mode == "none") {
-        stopf("No importance stored")
-      }
-
-      sort(self$model$variable.importance, decreasing = TRUE)
-    },
-
-    oob_error = function() {
-      self$model$prediction.error
     }
   )
 )

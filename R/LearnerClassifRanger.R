@@ -1,19 +1,13 @@
 #' @title Ranger Classification Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_classif.ranger
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifRanger$new()
-#' mlr3::mlr_learners$get("classif.ranger")
-#' mlr3::lrn("classif.ranger")
-#' ```
+#' @name mlr_learners_classif.ranger
 #'
 #' @description
 #' Random classification forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
+#'
+#' @template section_dictionary_learner
+#' @templateVar id classif.ranger
 #'
 #' @references
 #' \cite{mlr3learners}{wright_2017}
@@ -22,10 +16,12 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.ranger
 #' @template example
 LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
@@ -63,30 +59,12 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       )
     },
 
-    train_internal = function(task) {
-      pars = self$param_set$get_values(tags = "train")
-      invoke(ranger::ranger,
-        dependent.variable.name = task$target_names,
-        data = task$data(),
-        probability = self$predict_type == "prob",
-        case.weights = task$weights$weight,
-        .args = pars
-      )
-    },
-
-    predict_internal = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
-      newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model, data = newdata,
-        predict.type = "response", .args = pars)
-
-      if (self$predict_type == "response") {
-        PredictionClassif$new(task = task, response = p$predictions)
-      } else {
-        PredictionClassif$new(task = task, prob = p$predictions)
-      }
-    },
-
+    #' @description
+    #' The importance scores are extracted from the model slot `variable.importance`.
+    #' Parameter `importance.mode` must be set to `"impurity"`, `"impurity_corrected"`, or
+    #' `"permutation"`
+    #'
+    #' @return Named `numeric()`.
     importance = function() {
       if (is.null(self$model)) {
         stopf("No model stored")
@@ -98,8 +76,38 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger", inherit = LearnerClassif,
       sort(self$model$variable.importance, decreasing = TRUE)
     },
 
+    #' @description
+    #' The out-of-bag error, extracted from model slot `prediction.error`.
+    #'
+    #' @return `numeric(1)`.
     oob_error = function() {
       self$model$prediction.error
+    }
+  ),
+
+  private = list(
+    .train = function(task) {
+      pars = self$param_set$get_values(tags = "train")
+      invoke(ranger::ranger,
+        dependent.variable.name = task$target_names,
+        data = task$data(),
+        probability = self$predict_type == "prob",
+        case.weights = task$weights$weight,
+        .args = pars
+      )
+    },
+
+    .predict = function(task) {
+      pars = self$param_set$get_values(tags = "predict")
+      newdata = task$data(cols = task$feature_names)
+      p = invoke(predict, self$model, data = newdata,
+        predict.type = "response", .args = pars)
+
+      if (self$predict_type == "response") {
+        PredictionClassif$new(task = task, response = p$predictions)
+      } else {
+        PredictionClassif$new(task = task, prob = p$predictions)
+      }
     }
   )
 )

@@ -1,29 +1,25 @@
 #' @title GLM with Elastic Net Regularization Classification Learner
 #'
-#' @usage NULL
-#' @aliases mlr_learners_classif.glmnet
-#' @format [R6::R6Class()] inheriting from [mlr3::LearnerClassif].
-#'
-#' @section Construction:
-#' ```
-#' LearnerClassifGlmnet$new()
-#' mlr3::mlr_learners$get("classif.glmnet")
-#' mlr3::lrn("classif.glmnet")
-#' ```
+#' @name mlr_learners_classif.glmnet
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
+#'
+#' @templateVar id classif.glmnet
+#' @template section_dictionary_learner
 #'
 #' @references
 #' \cite{mlr3learners}{friedman_2010}
 #'
 #' @export
 #' @template seealso_learner
-#' @templateVar learner_name classif.glmnet
 #' @template example
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
@@ -63,14 +59,16 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         id = "classif.glmnet",
         param_set = ps,
         predict_types = c("response", "prob"),
-        feature_types = c("integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "twoclass", "multiclass", "importance"),
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_classif.glmnet"
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
@@ -78,7 +76,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
-      pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
+      pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial") # nolint
 
       saved_ctrl = glmnet::glmnet.control()
       on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
@@ -93,15 +91,17 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newx = newdata, type = "class", .args = pars)
+        response = invoke(predict, self$model, newx = newdata, type = "class",
+         .args = pars)
         PredictionClassif$new(task = task, response = drop(response))
       } else {
-        prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+        prob = invoke(predict, self$model, newx = newdata, type = "response",
+         .args = pars)
 
         if (length(task$class_names) == 2L) {
           prob = cbind(prob, 1 - prob)

@@ -16,13 +16,21 @@ toc:
 
 navbar:
   structure:
-    left:  [reference, news]
-    right: [github, slack, stackoverflow, rss]
+    left:  [reference, news, book]
+    right: [github, mattermost, stackoverflow, rss]
   components:
     home: ~
-    slack:
-      icon: fab fa-slack
-      href: https://mlr-org.slack.com
+    reference:
+      icon: fa fa-file-alt
+      text: Reference
+      href: reference/index.html
+    mattermost:
+      icon: fa fa-comments
+      href: https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/
+    book:
+      text: mlr3book
+      icon: fa fa-link
+      href: https://mlr3book.mlr-org.com
     stackoverflow:
       icon: fab fa-stack-overflow
       href: https://stackoverflow.com/questions/tagged/mlr
@@ -33,10 +41,10 @@ navbar:
 reference:
   - title: Classification Learnes
     contents:
-      - starts_with("LearnerClassif")
+      - starts_with("mlr_learners_classif")
   - title: Regression Learners
     contents:
-      - starts_with("LearnerRegr")
+      - starts_with("mlr_learners_regr")
   - title: General
     contents:
       - mlr3learners-package
