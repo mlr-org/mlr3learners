@@ -1,6 +1,4 @@
 on: [push, pull_request]
-  schedule:
-    - cron: '15 8 * * *'
 
 name: R-CMD-check-extra
 
