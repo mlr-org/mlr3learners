@@ -39,6 +39,7 @@ learner$param_set$ids()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerRegrGlmnet$new()}}
+\item \href{#method-importance}{\code{LearnerRegrGlmnet$importance()}}
 \item \href{#method-clone}{\code{LearnerRegrGlmnet$clone()}}
 }
 }
@@ -57,6 +58,7 @@ learner$param_set$ids()
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -65,7 +67,22 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-importance}{}}}
+\subsection{Method \code{importance()}}{
+The importance scores are extracted from the beta coefficients of the
+fitted model.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerRegrGlmnet$importance()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Named \code{numeric()}.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

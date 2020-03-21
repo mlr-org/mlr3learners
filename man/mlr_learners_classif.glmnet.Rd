@@ -37,6 +37,7 @@ learner$param_set$ids()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifGlmnet$new()}}
+\item \href{#method-importance}{\code{LearnerClassifGlmnet$importance()}}
 \item \href{#method-clone}{\code{LearnerClassifGlmnet$clone()}}
 }
 }
@@ -55,6 +56,7 @@ learner$param_set$ids()
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -63,7 +65,31 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-importance}{}}}
+\subsection{Method \code{importance()}}{
+The importance scores are extracted from the beta coefficients of the
+fitted model.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifGlmnet$importance(task)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{task}}{(\link{Task})\cr
+Task to calculate the importance on. If a model was already fitted,
+no refitting is done.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Named \code{numeric()}.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
