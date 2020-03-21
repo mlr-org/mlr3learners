@@ -68,10 +68,30 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "importance"),
-        properties = "weights",
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
+    },
+
+    #' @description
+    #' The importance scores are extracted from the beta coefficients of the
+    #' fitted model.
+    #' @return Named `numeric()`.
+    importance = function() {
+
+      if (is.null(self$model)) {
+        stopf("No model stored. Please train the model first.")
+      }
+
+      model = self$model$glmnet.fit
+
+      res = mlr3misc::map_dbl(seq_len(nrow(model$beta)), function(.i) {
+        ind = which(model$beta[.i, ] != 0)[1]
+        model$lambda[ind]
+      })
+
+      names(res) = model$beta@Dimnames[[1]]
+      sort(res, decreasing = TRUE)
     }
   ),
 
@@ -104,18 +124,6 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
       response = invoke(predict, self$model, newx = newdata, type = "response",
        .args = pars)
       PredictionRegr$new(task = task, response = drop(response))
-    },
-
-    importance = function() {
-      model = self$model$glmnet.fit
-
-      res = sapply(seq_len(nrow(model$beta)), function(i) {
-        ind = which(model$beta[i,] != 0)[1]
-        model$lambda[ind]
-      })
-
-      names(res) = model$beta@Dimnames[[1]]
-      sort(res, decreasing = TRUE)
     }
   )
 )

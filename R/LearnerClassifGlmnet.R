@@ -64,10 +64,39 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_classif.glmnet"
       )
+    },
+
+    #' @description
+    #' The importance scores are extracted from the beta coefficients of the
+    #' fitted model.
+    #' @param task ([Task])\cr
+    #'   Task to calculate the importance on. If a model was already fitted,
+    #' no refitting is done.
+    #' @return Named `numeric()`.
+    importance = function(task) {
+
+      if (is.null(self$model)) {
+        self$train(task)
+      }
+
+      if ("multiclass" %in% task$properties) {
+        mlr3misc::stopf("Learner 'glmnet' only support feature importance for
+          'twoclass' tasks.", wrap = TRUE)
+      }
+      model = self$model$glmnet.fit
+
+      res = mlr3misc::map_dbl(seq_len(nrow(model$beta)), function(.i) {
+        ind = which(model$beta[.i, ] != 0)[1]
+        model$lambda[ind]
+      })
+
+      names(res) = model$beta@Dimnames[[1]]
+      sort(res, decreasing = TRUE)
     }
   ),
 
   private = list(
+
     .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
@@ -97,11 +126,11 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newx = newdata, type = "class",
-         .args = pars)
+          .args = pars)
         PredictionClassif$new(task = task, response = drop(response))
       } else {
         prob = invoke(predict, self$model, newx = newdata, type = "response",
-         .args = pars)
+          .args = pars)
 
         if (length(task$class_names) == 2L) {
           prob = cbind(prob, 1 - prob)
@@ -111,18 +140,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         }
         PredictionClassif$new(task = task, prob = prob)
       }
-    },
-
-    importance = function() {
-      model = self$model$glmnet.fit
-
-      res = map_dbl(seq_len(nrow(model$beta)), function(i) {
-        ind = which(model$beta[i,] != 0)[1]
-        model$lambda[ind]
-      })
-
-      names(res) = model$beta@Dimnames[[1]]
-      sort(res, decreasing = TRUE)
     }
   )
 )
