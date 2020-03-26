@@ -56,7 +56,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
     },
 
     predict_internal = function(task) {
-      pars = self$param_set$get_values(tags ="predict")
+      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       jitter = pars$jitter
@@ -73,6 +73,34 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
       )
 
       list(response = p$mean, se = p$sd)
+    },
+
+    update = function(task) {
+      assert_task(task) # asserts here are not so nice? should be generalizef for update
+      if (is.null(self$model)) {
+        stop ("Learner has to be trained first!") # or do we just call train in this case? OR do we allow train to be called a second time and abolish update() -- okay that would be stupid, right?
+      }
+
+      # copy paste from predict_internal :(
+      pars = self$param_set$get_values(tags = "predict") # or tag update or both?
+
+      newdata = as.matrix(task$data(cols = task$feature_names))
+
+      jitter = pars$jitter
+      if (!is.null(jitter) && jitter > 0) {
+        newdata = newdata + rnorm(length(newdata), mean = 0, sd = jitter)
+      }
+      # copy paste end
+
+      self$model = invoke(DiceKriging::update,
+        object = self$model,
+        newX = newdata,
+        newy = task$truth(),
+        cov.reestim = TRUE, # param for paramset with tag update?
+        trend.reestim = TRUE, # ...
+        nugget.reestim = TRUE # ...
+      )
+      invisible(self$model)
     }
   )
 )
