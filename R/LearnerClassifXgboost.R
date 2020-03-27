@@ -90,7 +90,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, verbose = 0L)
+      ps$values = list(
+        nrounds = 1L, # xgboost::xgb.train has no default here
+        verbose = 0L
+      )
 
       super$initialize(
         id = "classif.xgboost",
