@@ -1,0 +1,14 @@
+# OS ---------------------------------------------------------------------------
+os: linux
+
+# meta -------------------------------------------------------------------------
+language: r
+cache: packages
+latex: false
+
+# Stages -----------------------------------------------------------------------
+
+install: true
+script:
+  - Rscript -e 'if (!requireNamespace("lintr")) install.packages("lintr")'
+  - Rscript -e 'lintr::lint_package()'
