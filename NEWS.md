@@ -1,12 +1,9 @@
-# mlr3learners 0.1.7.9000
-
-- Add vignette `additional-learners.Rmd` listing all mlr3 custom learners
-
-# mlr3learners 0.1.7
+# mlr3learners 0.1.6.9000
 
 - Added learner `classif.multinom` from package `nnet`.
 - Learners `regr.lm` and `classif.log_reg` now ignore the global option
   `"contrasts"`.
+- Add vignette `additional-learners.Rmd` listing all mlr3 custom learners
 
 # mlr3learners 0.1.6
 
