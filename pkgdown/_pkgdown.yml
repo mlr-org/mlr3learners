@@ -14,12 +14,17 @@ development:
 toc:
   depth: 3
 
+authors:
+  Patrick Schratz:
+    href: https://pat-s.me
+
 navbar:
   structure:
-    left:  [reference, news, book]
+    left:  [reference, news, book, learners]
     right: [github, mattermost, stackoverflow, rss]
   components:
     home: ~
+    articles: ~
     reference:
       icon: fa fa-file-alt
       text: Reference
@@ -37,6 +42,9 @@ navbar:
     rss:
       icon: fa-rss
       href: https://mlr-org.com/
+    learners:
+      text: Additional Learners
+      href: articles/additional-learners.html
 
 reference:
   - title: Classification Learnes

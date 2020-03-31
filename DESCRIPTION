@@ -41,19 +41,24 @@ Imports:
     paradox,
     R6
 Suggests:
-    DiceKriging,
-    MASS,
     bibtex,
     checkmate,
+    DiceKriging,
     e1071,
     glmnet,
     kknn,
+    knitr,
     lgr,
+    MASS,
+    nnet,
     ranger,
+    rmarkdown,
     testthat,
-    xgboost,
-    nnet
-RdMacros: mlr3misc
+    xgboost
+VignetteBuilder: 
+    knitr
+RdMacros: 
+    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
