@@ -11,4 +11,8 @@ latex: false
 install: true
 script:
   - Rscript -e 'if (!requireNamespace("lintr")) install.packages("lintr")'
+  - Rscript -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
+  - Rscript -e 'remotes::install_deps()'
+  - R CMD build .
+  - R CMD INSTALL *.tar.gz
   - Rscript -e 'lintr::lint_package()'
