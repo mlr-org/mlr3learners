@@ -37,12 +37,12 @@ register_mlr3 = function() {
   x$add("regr.xgboost", LearnerRegrXgboost)
 }
 
-.onLoad = function(libname, pkgname) { # nocov start
+.onLoad = function(libname, pkgname) { # nolint
   register_mlr3()
   setHook(packageEvent("mlr3", "onLoad"), function(...) register_mlr3(), action = "append")
 } # nocov end
 
-.onUnload = function(libpath) { # nocov start
+.onUnload = function(libpath) { # nolint
   event = packageEvent("mlr3", "onLoad")
   hooks = getHook(event)
   pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)
