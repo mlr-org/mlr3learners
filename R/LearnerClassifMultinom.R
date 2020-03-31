@@ -12,7 +12,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifMultinom = R6Class("LearnerClassifMultinom", inherit = LearnerClassif,
+LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
+  inherit = LearnerClassif,
   public = list(
 
     #' @description
@@ -51,8 +52,8 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom", inherit = LearnerClas
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
-      if(!is.null(pars$summ)) {
-         pars$summ = as.integer(pars$summ)
+      if (!is.null(pars$summ)) {
+        pars$summ = as.integer(pars$summ)
       }
 
       invoke(nnet::multinom, data = data, .args = pars)

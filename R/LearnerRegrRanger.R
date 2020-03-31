@@ -17,7 +17,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
+LearnerRegrRanger = R6Class("LearnerRegrRanger",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -94,7 +95,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger", inherit = LearnerRegr,
       pars = self$param_set$get_values(tags = "train")
 
       if (self$predict_type == "se") {
-        pars$keep.inbag = TRUE
+        pars$keep.inbag = TRUE # nolint
       }
 
       invoke(ranger::ranger,

@@ -19,12 +19,14 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassif,
+LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
+  inherit = LearnerClassif,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+
       ps = ParamSet$new(list(
         ParamFct$new("booster", default = "gbtree", levels = c("gbtree", "gblinear", "dart"), tags = "train"),
         ParamUty$new("watchlist", default = NULL, tags = "train"),
@@ -122,6 +124,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
 
   private = list(
     .train = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
@@ -158,6 +161,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost", inherit = LearnerClassi
     },
 
     .predict = function(task) {
+
       pars = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL

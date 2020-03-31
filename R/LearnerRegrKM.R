@@ -20,7 +20,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
+LearnerRegrKM = R6Class("LearnerRegrKM",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -66,6 +67,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM", inherit = LearnerRegr,
 
   private = list(
     .train = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()

@@ -17,7 +17,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
+LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -76,6 +77,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet", inherit = LearnerRegr,
 
   private = list(
     .train = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))

@@ -19,12 +19,14 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrXgboost = R6Class("LearnerRegrXgboost", inherit = LearnerRegr,
+LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+
       ps = ParamSet$new(list(
         ParamFct$new("booster", default = "gbtree", levels = c("gbtree", "gblinear", "dart"), tags = "train"),
         ParamUty$new("watchlist", default = NULL, tags = "train"),
