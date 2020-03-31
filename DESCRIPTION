@@ -22,8 +22,8 @@ Authors@R:
              role = "aut",
              email = "patrick.schratz@gmail.com",
              comment = c(ORCID = "0000-0003-0748-6624")))
-Description: Recommended Learners for 'mlr3'. Extends 'mlr3'
-    with interfaces to essential machine learning packages on CRAN.  This
+Description: Recommended Learners for 'mlr3'. Extends 'mlr3' with
+    interfaces to essential machine learning packages on CRAN.  This
     includes, but is not limited to: (penalized) linear and logistic
     regression, linear and quadratic discriminant analysis, k-nearest
     neighbors, naive Bayes, support vector machines, and gradient
@@ -62,4 +62,4 @@ RdMacros:
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
