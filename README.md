@@ -3,10 +3,6 @@
 Package website: [release](https://mlr3learners.mlr-org.com/) |
 [dev](https://mlr3learners.mlr-org.com/dev)
 
-This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
-We will most likely not add new learners to this package.
-See section ["More Learners"](#more-learners) below for more information.
-
 <!-- badges: start -->
 
 [![R build status](https://github.com/mlr-org/mlr3learners/workflows/R-CMD-check/badge.svg)](https://github.com/mlr-org/mlr3learners/actions)
@@ -16,6 +12,10 @@ See section ["More Learners"](#more-learners) below for more information.
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 
 <!-- badges: end -->
+
+This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
+We will most likely not add new learners to this package.
+See section ["More Learners"](#more-learners) below for more information.
 
 ## Installation
 
