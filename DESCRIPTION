@@ -55,9 +55,7 @@ Suggests:
     rmarkdown,
     testthat,
     xgboost
-VignetteBuilder: 
-    knitr
-RdMacros: 
+RdMacros:
     mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
