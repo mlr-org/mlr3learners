@@ -5,6 +5,7 @@ Package website: [release](https://mlr3learners.mlr-org.com/) |
 
 This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
 We will most likely not add new learners to this package.
+See section ["More Learners"](#more-learners) below for more information.
 
 <!-- badges: start -->
 
@@ -15,11 +16,6 @@ We will most likely not add new learners to this package.
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 
 <!-- badges: end -->
-
-Learners from other packages live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
-All learners are listed in the vignette ["Additional Learners"](https://mlr3learners.mlr-org.com/dev/articles/learners/additional-learners.html).
-
-See [below for instructions](#requestingadding-additional-learners) on how to add a new learner.
 
 ## Installation
 
@@ -67,6 +63,12 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)   | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)         | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html) | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
+
+## More Learners
+
+Learners from other packages live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people _outside_ the mlr-org team.
+
+:point_right: [Table of all additional learners](https://mlr3learners.mlr-org.com/dev/articles/learners/additional-learners.html)
 
 ## Requesting/Adding additional learners
 
