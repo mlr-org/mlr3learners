@@ -17,7 +17,7 @@ We will most likely not add new learners to this package.
 <!-- badges: end -->
 
 Learners from other packages live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people outside the mlr-org team.
-All learners are listed in the vignette ["Additional Learners"](https://mlr3learners.mlr-org.com/dev/articles/additional-learners.html).
+All learners are listed in the vignette ["Additional Learners"](https://mlr3learners.mlr-org.com/dev/articles/learners/additional-learners.html).
 
 See [below for instructions](#requestingadding-additional-learners) on how to add a new learner.
 
