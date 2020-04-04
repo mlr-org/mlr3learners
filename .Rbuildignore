@@ -13,3 +13,5 @@
 ^\.vscode$
 ^docs$
 vignettes/learners/
+^\.ccache$
+^clang-.*
