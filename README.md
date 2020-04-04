@@ -70,23 +70,29 @@ Learners from other packages live in the [mlr3learners](https://github.com/mlr3l
 
 :point_right: [Table of all additional learners](https://mlr3learners.mlr-org.com/dev/articles/learners/additional-learners.html)
 
-## Requesting/Adding additional learners
+## Requesting/Adding Additional Learners
 
-Please follow these steps to add/request a new learner.
-Steps 2-6 are only needed if you want to add a learner yourself.
+Follow these steps to add/request a new learner.
 
 1. Open an issue in [mlr3learners](https://github.com/mlr-org/mlr3learners/issues) following the issue template.
-
-1. Fork the [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template) repo and adjust the template to your needs.
-   Follow the instructions given in the README and in the section ["Adding new Learners"](https://mlr3book.mlr-org.com/extending-learners.html) in the mlr3book.
-
-1. When you are somewhat done, request a review in the opened issue.
-1. After you can transfer the learner to the [mlr3learners](https://github.com/mlr3learners) organization.
+   (If you don't want to add the learner yourself, you are done here.
+   We might take your vote into consideration but can't promise when your requested learner will be available.)
+1. Fork the [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template) repo and adjust the template to match your learner.
+   Essentially, replace the placeholders like `<package>` with the respective terms for your learner.
+   More detailed instructions including FAQ are given in section ["Adding new Learners"](https://mlr3book.mlr-org.com/extending-learners.html) of the mlr3book.
+1. When you are done, request a review for the learner.
+   Make sure that you have checked on all points of [this checklist](https://github.com/mlr-org/mlr3learners.template/issues/5) before requesting a review.
+1. After approval, transfer the learner to the [mlr3learners](https://github.com/mlr3learners) organization.
    To do so, please first request an invitation from [@pat-s](https://github.com/pat-s) / [@be-marc](https://github.com/be-marc) to be added to the [mlr3learners](https://github.com/mlr3learners) organization.
-   Once transferred, you will get access rights to your repository to finalize the learner.
-
+   Once transferred, you will get access rights to the learner repository to finalize and maintain it.
 1. Congrats! Your learner has been successfully added to the mlr3 ecosystem.
-   Now the learner is ready to be added to [{mlr3learners.drat}](https://github.com/mlr3learners/mlr3learners.drat).
-   This makes is possible to install the learner via `install.packages()` without the need of submitting the learner package to CRAN.
+   Now the last step is to add the learner to [{mlr3learners.drat}](https://github.com/mlr3learners/mlr3learners.drat).
+   This makes is possible to install the learner via `install.packages()` without the need to submit the learner to CRAN (none of the custom learners live on CRAN).
 
-   (Last, we would be very happy if you keep maintaining the learner against upstream changes :)
+**Resources for adding a new learner (summary)**
+
+- [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template)
+- [mlr3book section "Adding new learners" including FAQ](https://mlr3book.mlr-org.com/extending-learners.html)
+- [Checklist prior to requesting a review](https://github.com/mlr-org/mlr3learners.template/issues/5)
+
+Last, thanks for contributing to the mlr3 ecosystem! We would be very happy if you keep maintaining the learner against upstream changes :)
