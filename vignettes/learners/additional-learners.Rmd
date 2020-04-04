@@ -20,6 +20,12 @@ Some can possibly be maintained by external persons.
 
 See the section in the {mlr3learners} README on [how to add/request a new learner](https://github.com/mlr-org/mlr3learners#requestingadding-additional-learners).
 
+**Resources for adding a new learner (summary)**
+
+- [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template)
+- [mlr3book section "Adding new learners" including FAQ](https://mlr3book.mlr-org.com/extending-learners.html)
+- [Checklist prior to requesting a review](https://github.com/mlr-org/mlr3learners.template/issues/5)
+
 # Installation
 
 Besides installing from GitHub via `remotes::install_github()` it is possible to have a CRAN-like installation via `install.packages()` by installing the learners from [mlr3learners.drat](https://github.com/mlr3learners/mlr3learners.drat) (instructions in the README).
