@@ -249,18 +249,22 @@
 </div>
 <div id="requestingadding-additional-learners" class="section level2">
 <h2 class="hasAnchor">
-<a href="#requestingadding-additional-learners" class="anchor"></a>Requesting/Adding additional learners</h2>
-<p>Please follow these steps to add/request a new learner. Steps 2-6 are only needed if you want to add a learner yourself.</p>
+<a href="#requestingadding-additional-learners" class="anchor"></a>Requesting/Adding Additional Learners</h2>
+<p>Follow these steps to add/request a new learner.</p>
 <ol>
-<li><p>Open an issue in <a href="https://github.com/mlr-org/mlr3learners/issues">mlr3learners</a> following the issue template.</p></li>
-<li><p>Fork the <a href="https://github.com/mlr-org/mlr3learners.template">mlr3learners.template</a> repo and adjust the template to your needs. Follow the instructions given in the README and in the section <a href="https://mlr3book.mlr-org.com/extending-learners.html">âAdding new Learnersâ</a> in the mlr3book.</p></li>
-<li><p>When you are somewhat done, request a review in the opened issue.</p></li>
-<li><p>After you can transfer the learner to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization. To do so, please first request an invitation from <a href="https://github.com/pat-s">@pat-s</a> / <a href="https://github.com/be-marc">@be-marc</a> to be added to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization. Once transferred, you will get access rights to your repository to finalize the learner.</p></li>
-<li>
-<p>Congrats! Your learner has been successfully added to the mlr3 ecosystem. Now the learner is ready to be added to <a href="https://github.com/mlr3learners/mlr3learners.drat">{mlr3learners.drat}</a>. This makes is possible to install the learner via <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> without the need of submitting the learner package to CRAN.</p>
-<p>(Last, we would be very happy if you keep maintaining the learner against upstream changes :)</p>
-</li>
+<li>Open an issue in <a href="https://github.com/mlr-org/mlr3learners/issues">mlr3learners</a> following the issue template. (If you donât want to add the learner yourself, you are done here. We might take your vote into consideration but canât promise when your requested learner will be available.)</li>
+<li>Fork the <a href="https://github.com/mlr-org/mlr3learners.template">mlr3learners.template</a> repo and adjust the template to match your learner. Essentially, replace the placeholders like <code>&lt;package&gt;</code> with the respective terms for your learner. More detailed instructions including FAQ are given in section <a href="https://mlr3book.mlr-org.com/extending-learners.html">âAdding new Learnersâ</a> of the mlr3book.</li>
+<li>When you are done, request a review for the learner. Make sure that you have checked on all points of <a href="https://github.com/mlr-org/mlr3learners.template/issues/5">this checklist</a> before requesting a review.</li>
+<li>After approval, transfer the learner to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization. To do so, please first request an invitation from <a href="https://github.com/pat-s">@pat-s</a> / <a href="https://github.com/be-marc">@be-marc</a> to be added to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization. Once transferred, you will get access rights to the learner repository to finalize and maintain it.</li>
+<li>Congrats! Your learner has been successfully added to the mlr3 ecosystem. Now the last step is to add the learner to <a href="https://github.com/mlr3learners/mlr3learners.drat">{mlr3learners.drat}</a>. This makes is possible to install the learner via <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> without the need to submit the learner to CRAN (none of the custom learners live on CRAN).</li>
 </ol>
+<p><strong>Resources for adding a new learner (summary)</strong></p>
+<ul>
+<li><a href="https://github.com/mlr-org/mlr3learners.template">mlr3learners.template</a></li>
+<li><a href="https://mlr3book.mlr-org.com/extending-learners.html">mlr3book section âAdding new learnersâ including FAQ</a></li>
+<li><a href="https://github.com/mlr-org/mlr3learners.template/issues/5">Checklist prior to requesting a review</a></li>
+</ul>
+<p>Last, thanks for contributing to the mlr3 ecosystem! We would be very happy if you keep maintaining the learner against upstream changes :)</p>
 </div>
 </div>
   </div>
