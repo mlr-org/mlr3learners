@@ -15,7 +15,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
+LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
+  inherit = LearnerClassif,
   public = list(
 
     #' @description
@@ -24,8 +25,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       ps = ParamSet$new(list(
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("nfolds", default = 10L, lower = 3L, tags = "train"),
-        ParamFct$new("type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
-        ParamDbl$new("s", lower = 0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
+        ParamFct$new("type.measure",
+          levels = c("deviance", "class", "auc", "mse", "mae"),
+          default = "deviance", tags = "train"),
+        ParamDbl$new("s",
+          lower = 0, special_vals = list("lambda.1se", "lambda.min"),
+          default = "lambda.1se", tags = "predict"),
         ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("lambda", tags = "train"),
@@ -39,8 +44,21 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
         ParamUty$new("lower.limits", tags = "train"),
         ParamUty$new("upper.limits", tags = "train"),
         ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
-        ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
-        ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
+        ParamFct$new("type.logistic",
+          levels = c("Newton", "modified.Newton"),
+          tags = "train"),
+        ParamFct$new("type.multinomial",
+          levels = c("ungrouped", "grouped"),
+          tags = "train"),
+        ParamLgl$new("keep", default = FALSE, tags = "train"),
+        ParamLgl$new("parallel", default = FALSE, tags = "train"),
+        ParamInt$new("trace.it", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamUty$new("foldid", default = NULL, tags = "train"),
+        ParamFct$new("alignment",
+          default = "lambda",
+          levels = c("lambda", "fraction"), tags = "train"),
+        ParamLgl$new("grouped", default = TRUE, tags = "train"),
+        ParamUty$new("offset", default = NULL, tags = "train"),
         ParamUty$new("gamma", tags = "train"),
         ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
@@ -96,10 +114,14 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet", inherit = LearnerClassif,
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newx = newdata, type = "class", .args = pars)
+        response = invoke(predict, self$model,
+          newx = newdata, type = "class",
+          .args = pars)
         PredictionClassif$new(task = task, response = drop(response))
       } else {
-        prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+        prob = invoke(predict, self$model,
+          newx = newdata, type = "response",
+          .args = pars)
 
         if (length(task$class_names) == 2L) {
           prob = cbind(prob, 1 - prob)
