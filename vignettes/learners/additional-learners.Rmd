@@ -1,4 +1,3 @@
-
 ---
 title: "Learner Extension Packages"
 output: rmarkdown::html_vignette
