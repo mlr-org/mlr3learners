@@ -17,6 +17,7 @@
 #' @template example
 LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
   inherit = LearnerClassif,
+
   public = list(
 
     #' @description
@@ -97,12 +98,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
 
       saved_ctrl = glmnet::glmnet.control()
-      on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
+      on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
       glmnet::glmnet.control(factory = TRUE)
       is_ctrl_pars = names(pars) %in% names(saved_ctrl)
 
       if (any(is_ctrl_pars)) {
-        do.call(glmnet::glmnet.control, pars[is_ctrl_pars])
+        mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
         pars = pars[!is_ctrl_pars]
       }
 

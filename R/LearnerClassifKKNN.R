@@ -64,7 +64,9 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
       newdata = task$data(cols = task$feature_names)
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
-        p = invoke(kknn::kknn, formula = model$formula, train = model$data, test = newdata, .args = model$pars)
+        p = invoke(kknn::kknn,
+          formula = model$formula, train = model$data,
+          test = newdata, .args = model$pars)
       })
 
       if (self$predict_type == "response") {

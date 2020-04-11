@@ -60,11 +60,15 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         ParamDbl$new("min.prop", default = 0.1, tags = "train"),
         ParamUty$new("regularization.factor", default = 1, tags = "train"),
         ParamLgl$new("regularization.usedepth", default = FALSE, tags = "train"),
-        ParamInt$new("seed", default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
+        ParamInt$new("seed",
+          default = NULL, special_vals = list(NULL),
+          tags = c("train", "predict")),
         ParamLgl$new("quantreg", default = FALSE, tags = "train"),
         ParamLgl$new("predict.all", default = FALSE, tags = "predict"),
         # FIXME: only works if predict_type == "se". How to set dependency?
-        ParamFct$new("se.method", default = "infjack", levels = c("jack", "infjack"), tags = "predict")
+        ParamFct$new("se.method",
+          default = "infjack", levels = c("jack", "infjack"),
+          tags = "predict")
       ))
 
       # deps
@@ -130,7 +134,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      preds = mlr3misc::invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pars)
+      preds = mlr3misc::invoke(predict, self$model,
+        data = newdata,
+        type = self$predict_type, .args = pars)
       PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
     }
   )

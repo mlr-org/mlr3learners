@@ -61,7 +61,9 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         ParamDbl$new("minprop", default = 0.1, tags = "train"),
         ParamLgl$new("predict.all", default = FALSE, tags = "predict"),
         # FIXME: only works if predict_type == "se". How to set dependency?
-        ParamFct$new("se.method", default = "infjack", levels = c("jack", "infjack"), tags = "predict")
+        ParamFct$new("se.method",
+          default = "infjack", levels = c("jack", "infjack"),
+          tags = "predict")
 
       ))
       ps$add_dep("num.random.splits", "splitrule", CondEqual$new("extratrees"))
