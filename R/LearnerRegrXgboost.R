@@ -72,7 +72,22 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         ParamLgl$new("refresh_leaf", default = TRUE, tags = "train"),
         ParamFct$new("feature_selector", default = "cyclic", levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
         ParamInt$new("top_k", default = 0, lower = 0, tags = "train"),
-        ParamFct$new("predictor", default = "cpu_predictor", levels = c("cpu_predictor", "gpu_predictor"), tags = "train")
+        ParamFct$new("predictor", default = "cpu_predictor", levels = c("cpu_predictor", "gpu_predictor"), tags = "train"),
+        ParamInt$new("save_period",
+          default = NULL, special_vals = list(NULL),
+          lower = 0, tags = "train"),
+        ParamUty$new("save_name", default = NULL, tags = "train"),
+        ParamUty$new("xgb_model", default = NULL, tags = "train"),
+        ParamLgl$new("outputmargin", default = FALSE, tags = "predict"),
+        ParamInt$new("ntreelimit",
+          default = NULL, special_vals = list(NULL),
+          lower = 1, tags = "predict"),
+        ParamLgl$new("predleaf", default = FALSE, tags = "predict"),
+        ParamLgl$new("predcontrib", default = FALSE, tags = "predict"),
+        ParamLgl$new("approxcontrib", default = FALSE, tags = "predict"),
+        ParamLgl$new("predinteraction", default = FALSE, tags = "predict"),
+        ParamLgl$new("reshape", default = FALSE, tags = "predict"),
+        ParamLgl$new("training", default = FALSE, tags = "predict")
       ))
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))

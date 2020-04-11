@@ -14,14 +14,32 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
+LearnerRegrLM = R6Class("LearnerRegrLM",
+  inherit = LearnerRegr,
+
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      ps = ParamSet$new(list(
+        ParamLgl$new("x", default = FALSE, tags = "train"),
+        ParamLgl$new("y", default = FALSE, tags = "train"),
+        ParamLgl$new("model", default = TRUE, tags = "train"),
+        ParamLgl$new("qr", default = TRUE, tags = "train"),
+        ParamLgl$new("singular.ok", default = TRUE, tags = "train"),
+        ParamLgl$new("offset", tags = "train"),
+        ParamLgl$new("se.fit", default = FALSE, tags = "predict"),
+        ParamDbl$new("scale", default = NULL, special_vals = list(NULL), tags = "predict"),
+        ParamDbl$new("df", default = Inf, tags = "predict"),
+        ParamFct$new("interval", levels = c("none", "confidence", "prediction"), tags = "predict"),
+        ParamDbl$new("level", default = 0.95, tags = "predict"),
+        ParamUty$new("pred.var", tags = "predict")
+      ))
+
       super$initialize(
-        id = "regr.lm", ,
+        id = "regr.lm",
+        param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "factor"),
         properties = "weights",
@@ -38,7 +56,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM", inherit = LearnerRegr,
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      invoke(stats::lm, formula = task$formula(), data = task$data(),
+      mlr3misc::invoke(stats::lm,
+        formula = task$formula(), data = task$data(),
         .args = pars, .opts = opts_default_contrasts)
     },
 

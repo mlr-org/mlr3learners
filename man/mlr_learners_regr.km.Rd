@@ -8,10 +8,12 @@
 Kriging regression.
 Calls \code{\link[DiceKriging:km]{DiceKriging::km()}} from package \CRANpkg{DiceKriging}.
 \itemize{
-\item The predict type hyperparameter "type" defaults to "SK" (simple Kriging).
-\item The additional hyperparameter \code{nugget.stability} is used to overwrite the hyperparameter \code{nugget} with \code{nugget.stability * var(y)} before training to improve the numerical stability.
-We recommend a value of \code{1e-8}.
-\item The additional hyperparameter \code{jitter} can be set to add \verb{N(0, [jitter])}-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value of \code{1e-12}.
+\item The predict type hyperparameter "type" defaults to "sk" (simple kriging).
+\item The additional hyperparameter \code{nugget.stability} is used to overwrite the
+hyperparameter \code{nugget} with \code{nugget.stability * var(y)} before training to
+improve the numerical stability. We recommend a value of \code{1e-8}.
+\item The additional hyperparameter \code{jitter} can be set to add \verb{N(0, [jitter])}-distributed noise to the data before prediction to avoid perfect
+interpolation. We recommend a value of \code{1e-12}.
 }
 }
 \section{Dictionary}{

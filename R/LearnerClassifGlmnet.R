@@ -114,12 +114,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       newdata = as.matrix(task$data(cols = task$feature_names))
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model,
+        response = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "class",
           .args = pars)
         PredictionClassif$new(task = task, response = drop(response))
       } else {
-        prob = invoke(predict, self$model,
+        prob = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "response",
           .args = pars)
 

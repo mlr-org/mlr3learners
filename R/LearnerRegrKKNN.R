@@ -19,7 +19,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
+LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -29,7 +30,8 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN", inherit = LearnerRegr,
         ParamInt$new("k", default = 7L, lower = 1L, tags = "train"),
         ParamDbl$new("distance", default = 2, lower = 0, tags = "train"),
         ParamFct$new("kernel", levels = c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
-        ParamLgl$new("scale", default = TRUE, tags = "train")
+        ParamLgl$new("scale", default = TRUE, tags = "train"),
+        ParamUty$new("ykernel", default = NULL, tags = "train")
       ))
 
       super$initialize(
