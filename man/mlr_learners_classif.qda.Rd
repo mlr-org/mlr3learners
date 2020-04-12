@@ -8,6 +8,12 @@
 Quadratic discriminant analysis.
 Calls \code{\link[MASS:qda]{MASS::qda()}} from package \CRANpkg{MASS}.
 }
+\details{
+Parameters \code{method} and \code{prior} exist for training and prediction but
+accept different values for each. Therefore, arguments for
+the predict stage have been renamed to \code{predict.method} and \code{predict.prior},
+respectively.
+}
 \section{Dictionary}{
 
 This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.qda")

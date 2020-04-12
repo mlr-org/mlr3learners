@@ -6,6 +6,12 @@
 #' Linear discriminant analysis.
 #' Calls [MASS::lda()] from package \CRANpkg{MASS}.
 #'
+#' @details
+#' Parameters `method` and `prior` exist for training and prediction but
+#' accept different values for each. Therefore, arguments for
+#' the predict stage have been renamed to `predict.method` and `predict.prior`,
+#' respectively.
+#'
 #' @templateVar id classif.lda
 #' @template section_dictionary_learner
 #'
@@ -15,7 +21,9 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
+LearnerClassifLDA = R6Class("LearnerClassifLDA",
+  inherit = LearnerClassif,
+
   public = list(
 
     #' @description
@@ -24,9 +32,14 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
       ps = ParamSet$new(list(
         ParamUty$new("prior", tags = "train"),
         ParamDbl$new("tol", tags = "train"),
-        ParamFct$new("method", default = "moment", levels = c("moment", "mle", "mve", "t"), tags = "train"),
+        ParamFct$new("method", default = "moment", levels = c(
+          "moment", "mle", "mve", "t"), tags = "train"),
         ParamInt$new("nu", tags = "train"),
-        ParamFct$new("predict.method", default = "plug-in", levels = c("plug-in", "predictive", "debiased"), tags = "predict")
+        ParamFct$new("predict.method",
+          default = "plug-in",
+          levels = c("plug-in", "predictive", "debiased"), tags = "predict"),
+        ParamUty$new("predict.prior", tags = "predict"),
+        ParamUty$new("dimen", tags = "predict")
       ))
       ps$add_dep("nu", "method", CondEqual$new("t"))
 
@@ -44,8 +57,10 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
 
   private = list(
     .train = function(task) {
-      f = task$formula()
-      invoke(MASS::lda, f, data = task$data(), .args = self$param_set$get_values(tags = "train"))
+      formula = task$formula()
+      mlr3misc::invoke(MASS::lda, formula,
+        data = task$data(),
+        .args = self$param_set$get_values(tags = "train"))
     },
 
     .predict = function(task) {
@@ -54,8 +69,14 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA", inherit = LearnerClassif,
         pars$method = pars$predict.method
         pars$predict.method = NULL
       }
+      if (!is.null(pars$predict.prior)) {
+        pars$prior = pars$predict.prior
+        pars$predict.prior = NULL
+      }
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model, newdata = newdata, .args = self$param_set$get_values(tags = "predict"))
+      p = mlr3misc::invoke(predict, self$model,
+        newdata = newdata,
+        .args = self$param_set$get_values(tags = "predict"))
 
       if (self$predict_type == "response") {
         PredictionClassif$new(task = task, response = p$class)

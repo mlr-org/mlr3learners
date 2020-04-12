@@ -12,7 +12,9 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = LearnerClassif,
+LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
+  inherit = LearnerClassif,
+
   public = list(
 
     #' @description
@@ -40,7 +42,9 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
     .train = function(task) {
       y = task$truth()
       x = task$data(cols = task$feature_names)
-      invoke(e1071::naiveBayes, x = x, y = y, .args = self$param_set$get_values(tags = "train"))
+      mlr3misc::invoke(e1071::naiveBayes,
+        x = x, y = y,
+        .args = self$param_set$get_values(tags = "train"))
     },
 
     .predict = function(task) {
@@ -48,10 +52,12 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes", inherit = Learner
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pars)
+        response = mlr3misc::invoke(predict, self$model,
+          newdata = newdata,
+          type = "class", .args = pars)
         PredictionClassif$new(task = task, response = response)
       } else {
-        prob = invoke(predict, self$model, newdata = newdata, type = "raw", .args = pars)
+        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "raw", .args = pars)
         PredictionClassif$new(task = task, prob = prob)
       }
     }

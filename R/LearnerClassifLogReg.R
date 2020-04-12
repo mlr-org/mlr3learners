@@ -15,14 +15,33 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
+LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
+  inherit = LearnerClassif,
+
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      ps = ParamSet$new(list(
+        ParamLgl$new("singular.ok", default = TRUE, tags = "train"),
+        ParamLgl$new("x", default = FALSE, tags = "train"),
+        ParamLgl$new("y", default = TRUE, tags = "train"),
+        ParamLgl$new("model", default = TRUE, tags = "train"),
+        ParamUty$new("etastart", tags = "train"),
+        ParamUty$new("mustart", tags = "train"),
+        ParamUty$new("start", default = NULL, tags = "train"),
+        ParamUty$new("offset", tags = "train"),
+        ParamDbl$new("epsilon", default = 1e-8, tags = c("train", "control")),
+        ParamDbl$new("maxit", default = 25, tags = c("train", "control")),
+        ParamLgl$new("trace", default = FALSE, tags = c("train", "control")),
+        ParamLgl$new("se.fit", default = FALSE, tags = "predict"),
+        ParamUty$new("dispersion", default = NULL, tags = "predict")
+      ))
+
       super$initialize(
         id = "classif.log_reg",
+        param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "twoclass"),
@@ -39,9 +58,9 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg", inherit = LearnerClassif,
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      invoke(stats::glm, formula = task$formula(), data = task$data(),
-        family = "binomial", model = FALSE,
-        .args = pars, .opts = opts_default_contrasts)
+      mlr3misc::invoke(stats::glm,
+        formula = task$formula(), data = task$data(),
+        family = "binomial", model = FALSE, .args = pars, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {

@@ -19,7 +19,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
+LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
+  inherit = LearnerClassif,
   public = list(
 
     #' @description
@@ -28,8 +29,13 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
       ps = ParamSet$new(list(
         ParamInt$new("k", default = 7L, lower = 1L, tags = "train"),
         ParamDbl$new("distance", default = 2, lower = 0, tags = "train"),
-        ParamFct$new("kernel", levels = c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
-        ParamLgl$new("scale", default = TRUE, tags = "train")
+        ParamFct$new("kernel",
+          levels = c(
+            "rectangular", "triangular", "epanechnikov",
+            "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"),
+          default = "optimal", tags = "train"),
+        ParamLgl$new("scale", default = TRUE, tags = "train"),
+        ParamUty$new("ykernel", default = NULL, tags = "train")
       ))
 
       super$initialize(
@@ -58,7 +64,9 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN", inherit = LearnerClassif,
       newdata = task$data(cols = task$feature_names)
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
-        p = invoke(kknn::kknn, formula = model$formula, train = model$data, test = newdata, .args = model$pars)
+        p = invoke(kknn::kknn,
+          formula = model$formula, train = model$data,
+          test = newdata, .args = model$pars)
       })
 
       if (self$predict_type == "response") {

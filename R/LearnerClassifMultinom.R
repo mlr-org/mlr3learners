@@ -14,6 +14,7 @@
 #' @template example
 LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
   inherit = LearnerClassif,
+
   public = list(
 
     #' @description
@@ -56,7 +57,7 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         pars$summ = as.integer(pars$summ)
       }
 
-      invoke(nnet::multinom, data = data, .args = pars)
+      mlr3misc::invoke(nnet::multinom, data = data, .args = pars)
     },
 
     .predict = function(task) {
@@ -64,10 +65,10 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
       levs = task$class_names
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newdata = newdata, type = "class")
+        response = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "class")
         PredictionClassif$new(task = task, response = drop(response))
       } else {
-        prob = invoke(predict, self$model, newdata = newdata, type = "probs")
+        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "probs")
         if (length(levs) == 2L) {
           prob = matrix(c(1 - prob, prob), ncol = 2L, byrow = FALSE)
           colnames(prob) = levs
