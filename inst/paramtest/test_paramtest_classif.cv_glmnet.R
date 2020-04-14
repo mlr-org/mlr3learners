@@ -1,7 +1,7 @@
 library(mlr3learners)
 
-test_that("regr.glmnet", {
-  learner = lrn("regr.glmnet")
+test_that("classif.glmnet", {
+  learner = lrn("classif.glmnet")
   fun = glmnet::cv.glmnet
   exclude = c(
     "x", # handled by mlr3
@@ -16,8 +16,8 @@ test_that("regr.glmnet", {
 })
 
 # example for checking a "control" function of a learner
-test_that("regr.glmnet", {
-  learner = lrn("regr.glmnet")
+test_that("classif.glmnet", {
+  learner = lrn("classif.glmnet")
   fun = glmnet::glmnet.control
   exclude = c(
     "itrace", # supported via param trace.it
@@ -30,13 +30,12 @@ test_that("regr.glmnet", {
     paste0("- '", ParamTest$missing, "'", collapse = "‚")))
 })
 
-test_that("predict regr.glmnet", {
-  learner = lrn("regr.glmnet")
-  fun = glmnet::predict.glmnet
+test_that("predict classif.cv_glmnet", {
+  learner = lrn("classif.cv_glmnet")
+  fun = glmnet:::predict.cv.glmnet
   exclude = c(
     "object", # handled via mlr3
-    "newx", # handled via mlr3
-    "type" # handled via mlr3
+    "newx" # handled via mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

@@ -4,9 +4,15 @@
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
-#' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
+#' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
 #' The default for hyperparameter `family` is changed to `"gaussian"`.
+#'
+#' Caution: This learner is different to `cv_glmnet` in that it does not use the
+#' internal optimization of lambda. The parameter needs to be tuned by the user.
+#' Essentially, one needs to tune parameter `s` which is used at predict-time.
+#'
+#' See https://stackoverflow.com/questions/50995525/ for more information.
 #'
 #' @templateVar id regr.glmnet
 #' @template section_dictionary_learner
@@ -35,9 +41,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         ParamFct$new("type.measure",
           levels = c("deviance", "class", "auc", "mse", "mae"),
           default = "deviance", tags = "train"),
-        ParamDbl$new("s",
-          lower = 0, special_vals = list("lambda.1se", "lambda.min"),
-          default = "lambda.1se", tags = "predict"),
+        ParamDbl$new("s", lower = 0, default = 0.01, tags = "predict"),
         ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("lambda", tags = "train"),
@@ -74,7 +78,8 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         ParamDbl$new("prec", default = 1e-10, tags = "train"),
         ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train"),
         ParamUty$new("newoffset", tags = "predict"),
-        ParamDbl$new("predict.gamma", default = 1, tags = "predict")
+        ParamDbl$new("predict.gamma", default = 1, tags = "predict"),
+        ParamLgl$new("exact", default = FALSE, tags = "predict")
       ))
       ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
       ps$add_dep("type.gaussian", "family", CondEqual$new("gaussian"))
@@ -93,7 +98,6 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
   ),
 
   private = list(
-
     .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
@@ -113,7 +117,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         pars = pars[!is_ctrl_pars]
       }
 
-      mlr3misc::invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
+      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, .args = pars)
     },
 
     .predict = function(task) {
@@ -124,8 +128,14 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         pars$gamma = pars$predict.gamma
         pars$predict.gamma = NULL
       }
+      # only predict for one instance of 's' and not for 100
+      if (is.null(pars$s)) {
+        pars$s = self$param_set$default$s
+      }
 
-      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+      response = mlr3misc::invoke(predict, self$model,
+        newx = newdata,
+        type = "response", .args = pars)
       PredictionRegr$new(task = task, response = drop(response))
     }
   )

@@ -1,18 +1,14 @@
-#' @title GLM with Elastic Net Regularization Classification Learner
+#' @title GLM with Elastic Net Regularization Regression Learner
 #'
-#' @name mlr_learners_classif.glmnet
+#' @name mlr_learners_regr.cv_glmnet
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
-#' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
+#' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' Caution: This learner is different to `_glmnet` in that it does not use the
-#' internal optimization of lambda. The parameter needs to be tuned by the user.
-#' Essentially, one needs to tune parameter `s` which is used at predict-time.
+#' The default for hyperparameter `family` is changed to `"gaussian"`.
 #'
-#' See https://stackoverflow.com/questions/50995525/ for more information.
-#'
-#' @templateVar id classif.glmnet
+#' @templateVar id regr.cv_glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
@@ -21,8 +17,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
-  inherit = LearnerClassif,
+LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
+  inherit = LearnerRegr,
 
   public = list(
 
@@ -30,12 +26,18 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
+        ParamFct$new("family",
+          default = "gaussian", levels = c("gaussian", "poisson"),
+          tags = "train"),
+        ParamUty$new("offset", default = NULL, tags = "train"),
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-        ParamInt$new("nfolds", default = 10L, lower = 3L, tags = "train"),
+        ParamInt$new("nfolds", lower = 3L, default = 10L, tags = "train"),
         ParamFct$new("type.measure",
           levels = c("deviance", "class", "auc", "mse", "mae"),
           default = "deviance", tags = "train"),
-        ParamDbl$new("s", lower = 0, default = 0.01, tags = "predict"),
+        ParamDbl$new("s",
+          lower = 0, special_vals = list("lambda.1se", "lambda.min"),
+          default = "lambda.1se", tags = "predict"),
         ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("lambda", tags = "train"),
@@ -49,12 +51,9 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         ParamUty$new("lower.limits", tags = "train"),
         ParamUty$new("upper.limits", tags = "train"),
         ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
-        ParamFct$new("type.logistic",
-          levels = c("Newton", "modified.Newton"),
-          tags = "train"),
-        ParamFct$new("type.multinomial",
-          levels = c("ungrouped", "grouped"),
-          tags = "train"),
+        ParamFct$new("type.gaussian", levels = c("covariance", "naive"), tags = "train"),
+        ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
+        ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
         ParamLgl$new("keep", default = FALSE, tags = "train"),
         ParamLgl$new("parallel", default = FALSE, tags = "train"),
         ParamInt$new("trace.it", default = 0, lower = 0, upper = 1, tags = "train"),
@@ -63,32 +62,32 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
           default = "lambda",
           levels = c("lambda", "fraction"), tags = "train"),
         ParamLgl$new("grouped", default = TRUE, tags = "train"),
-        ParamUty$new("offset", default = NULL, tags = "train"),
         ParamUty$new("gamma", tags = "train"),
         ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("big", default = 9.9e35, tags = "train"),
-        ParamInt$new("mnlam", default = 5, lower = 1L, tags = "train"),
+        ParamInt$new("mnlam", default = 5L, lower = 1L, tags = "train"),
         ParamDbl$new("pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("exmx", default = 250.0, tags = "train"),
         ParamDbl$new("prec", default = 1e-10, tags = "train"),
         ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train"),
         ParamUty$new("newoffset", tags = "predict"),
-        ParamDbl$new("predict.gamma", default = 1, tags = "predict"),
-        ParamLgl$new("exact", default = FALSE, tags = "predict")
+        ParamDbl$new("predict.gamma", default = 1, tags = "predict")
       ))
       ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
+      ps$add_dep("type.gaussian", "family", CondEqual$new("gaussian"))
+
+      ps$values = list(family = "gaussian")
 
       super$initialize(
-        id = "classif.glmnet",
+        id = "regr.cv_glmnet",
         param_set = ps,
-        predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = "weights",
         packages = "glmnet",
-        man = "mlr3learners::mlr_learners_classif.glmnet"
+        man = "mlr3learners::mlr_learners_regr.cv_glmnet"
       )
     }
   ),
@@ -102,19 +101,18 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
-      pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
 
       saved_ctrl = glmnet::glmnet.control()
       on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
       glmnet::glmnet.control(factory = TRUE)
-      is_ctrl_pars = names(pars) %in% names(saved_ctrl)
+      is_ctrl_pars = (names(pars) %in% names(saved_ctrl))
 
       if (any(is_ctrl_pars)) {
         mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
         pars = pars[!is_ctrl_pars]
       }
 
-      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, .args = pars)
+      mlr3misc::invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
     .predict = function(task) {
@@ -126,29 +124,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         pars$predict.gamma = NULL
       }
 
-      # only predict for one instance of 's' and not for 100
-      if (is.null(pars$s)) {
-        pars$s = self$param_set$default$s
-      }
-
-      if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model,
-          newx = newdata, type = "class",
-          .args = pars)
-        PredictionClassif$new(task = task, response = drop(response))
-      } else {
-        prob = mlr3misc::invoke(predict, self$model,
-          newx = newdata, type = "response",
-          .args = pars)
-
-        if (length(task$class_names) == 2L) {
-          prob = cbind(prob, 1 - prob)
-          colnames(prob) = task$class_names
-        } else {
-          prob = prob[, , 1L]
-        }
-        PredictionClassif$new(task = task, prob = prob)
-      }
+      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
+      PredictionRegr$new(task = task, response = drop(response))
     }
   )
 )
