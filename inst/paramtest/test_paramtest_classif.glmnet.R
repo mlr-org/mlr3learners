@@ -30,13 +30,15 @@ test_that("classif.glmnet", {
     paste0("- '", ParamTest$missing, "'", collapse = "‚")))
 })
 
-test_that("predict classif.glmnet", {
-  learner = lrn("classif.glmnet")
-  fun = glmnet:::predict.cv.glmnet
+test_that("predict regr.glmnet", {
+  learner = lrn("regr.glmnet")
+  fun = glmnet::predict.glmnet
   exclude = c(
     "object", # handled via mlr3
     "newx", # handled via mlr3
-    "s" # automatically set by glmnet via the best value from internal tuning
+    "s", # automatically set by glmnet via the best value from internal tuning
+    "type", # handled via mlr3
+    "exact" # because "s" is not supplied by the user here, "exact" has no influence
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
