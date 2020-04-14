@@ -88,6 +88,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
   ),
 
   private = list(
+
     .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
@@ -108,7 +109,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         pars = pars[!is_ctrl_pars]
       }
 
-      invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
+      mlr3misc::invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
     .predict = function(task) {
