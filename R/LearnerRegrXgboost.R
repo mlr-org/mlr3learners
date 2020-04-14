@@ -6,9 +6,17 @@
 #' eXtreme Gradient Boosting regression.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
-#' We changed the following defaults for this learner:
-#' * Verbosity is reduced by setting `verbose` to `0`.
-#' * Number of boosting iterations `nrounds` is set to `1`.
+#' @section Custom mlr3 defaults:
+#' - `nrounds`:
+#'   - Actual default: no default
+#'   - Adjusted default: 1
+#'   - Reason for change: Without a default construction of the learner
+#'     would error. Just setting a nonsense default to workaround this.
+#'     `nrounds` needs to be tuned by the user.
+#' - `verbose`:
+#'   - Actual default: 1
+#'   - Adjusted default: 0
+#'   - Reason for change: Reduce verbosity.
 #'
 #' @template section_dictionary_learner
 #' @templateVar id regr.xgboost
