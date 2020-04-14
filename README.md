@@ -5,7 +5,8 @@ Package website: [release](https://mlr3learners.mlr-org.com/) |
 
 <!-- badges: start -->
 
-[![R build status](https://github.com/mlr-org/mlr3learners/workflows/R-CMD-check/badge.svg)](https://github.com/mlr-org/mlr3learners/actions)
+[![R CMD Check via {tic}](https://github.com/mlr-org/mlr3learners/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
+[![Parameter Check](https://github.com/mlr-org/mlr3learners/workflows/Parameter%20Check/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
 [![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
 [![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)

@@ -14,15 +14,20 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrSVM = R6Class("LearnerRegrSVM", inherit = LearnerRegr,
+LearnerRegrSVM = R6Class("LearnerRegrSVM",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamFct$new("type", default = "eps-regression", levels = c("eps-regression", "nu-regression"), tags = "train"),
-        ParamFct$new("kernel", default = "radial", levels = c("linear", "polynomial", "radial", "sigmoid"), tags = "train"),
+        ParamFct$new("type",
+          default = "eps-regression",
+          levels = c("eps-regression", "nu-regression"), tags = "train"),
+        ParamFct$new("kernel", default = "radial", levels = c(
+          "linear", "polynomial",
+          "radial", "sigmoid"), tags = "train"),
         ParamInt$new("degree", default = 3L, lower = 1L, tags = "train"),
         ParamDbl$new("coef0", default = 0, tags = "train"),
         ParamDbl$new("cost", default = 1, lower = 0, tags = "train"),

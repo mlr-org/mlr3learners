@@ -19,18 +19,25 @@
 #' @template example
 LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
   inherit = LearnerRegr,
+
   public = list(
 
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamFct$new("family", default = "gaussian", levels = c("gaussian", "poisson"), tags = "train"),
+        ParamFct$new("family",
+          default = "gaussian", levels = c("gaussian", "poisson"),
+          tags = "train"),
         ParamUty$new("offset", default = NULL, tags = "train"),
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("nfolds", lower = 3L, default = 10L, tags = "train"),
-        ParamFct$new("type.measure", levels = c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
-        ParamDbl$new("s", lower = 0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
+        ParamFct$new("type.measure",
+          levels = c("deviance", "class", "auc", "mse", "mae"),
+          default = "deviance", tags = "train"),
+        ParamDbl$new("s",
+          lower = 0, special_vals = list("lambda.1se", "lambda.min"),
+          default = "lambda.1se", tags = "predict"),
         ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("lambda", tags = "train"),
@@ -47,6 +54,14 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         ParamFct$new("type.gaussian", levels = c("covariance", "naive"), tags = "train"),
         ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
         ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
+        ParamLgl$new("keep", default = FALSE, tags = "train"),
+        ParamLgl$new("parallel", default = FALSE, tags = "train"),
+        ParamInt$new("trace.it", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamUty$new("foldid", default = NULL, tags = "train"),
+        ParamFct$new("alignment",
+          default = "lambda",
+          levels = c("lambda", "fraction"), tags = "train"),
+        ParamLgl$new("grouped", default = TRUE, tags = "train"),
         ParamUty$new("gamma", tags = "train"),
         ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
@@ -86,16 +101,16 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
       }
 
       saved_ctrl = glmnet::glmnet.control()
-      on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
+      on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
       glmnet::glmnet.control(factory = TRUE)
       is_ctrl_pars = (names(pars) %in% names(saved_ctrl))
 
       if (any(is_ctrl_pars)) {
-        do.call(glmnet::glmnet.control, pars[is_ctrl_pars])
+        mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
         pars = pars[!is_ctrl_pars]
       }
 
-      invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
+      mlr3misc::invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
     },
 
     .predict = function(task) {
