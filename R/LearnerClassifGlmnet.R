@@ -61,7 +61,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
           levels = c("lambda", "fraction"), tags = "train"),
         ParamLgl$new("grouped", default = TRUE, tags = "train"),
         ParamUty$new("offset", default = NULL, tags = "train"),
-        ParamUty$new("gamma", tags = "train"),
         ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
@@ -73,8 +72,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         ParamDbl$new("prec", default = 1e-10, tags = "train"),
         ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train"),
         ParamUty$new("newoffset", tags = "predict"),
-        ParamDbl$new("predict.gamma", default = 1, tags = "predict"),
-        ParamLgl$new("exact", default = FALSE, tags = "predict")
+        ParamLgl$new("exact", default = FALSE, tags = "predict"),
+        ParamDbl$new("gamma", default = 1, tags = "predict")
       ))
       ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
 
@@ -117,11 +116,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
-
-      if (!is.null(pars$predict.gamma)) {
-        pars$gamma = pars$predict.gamma
-        pars$predict.gamma = NULL
-      }
 
       # only predict for one instance of 's' and not for 100
       if (is.null(pars$s)) {
