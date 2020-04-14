@@ -5,6 +5,10 @@
   `"contrasts"`.
 - Add vignette `additional-learners.Rmd` listing all mlr3 custom learners
 
+## XGBoost
+
+- Add parameter `"interaction_constraints" (#95)
+
 # mlr3learners 0.1.6
 
 - Added missing feature type `logical()` to multiple learners.
