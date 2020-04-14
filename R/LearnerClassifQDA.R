@@ -67,6 +67,10 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
         pars$method = pars$predict.method
         pars$predict.method = NULL
       }
+      if (!is.null(pars$predict.prior)) {
+        pars$prior = pars$predict.prior
+        pars$predict.prior = NULL
+      }
 
       newdata = task$data(cols = task$feature_names)
       p = mlr3misc::invoke(predict, self$model, newdata = newdata, .args = pars)
