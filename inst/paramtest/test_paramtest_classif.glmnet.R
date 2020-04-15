@@ -6,7 +6,9 @@ test_that("classif.glmnet", {
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
-    "weights" # handled by mlr3
+    "weights", # handled by mlr3
+    "nfolds", # not used by learner
+    "foldid" # not used by learner
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
