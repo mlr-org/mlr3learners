@@ -157,6 +157,12 @@ Calls <code><a href='https://rdrr.io/pkg/MASS/man/qda.html'>MASS::qda()</a></cod
 
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Parameters <code>method</code> and <code>prior</code> exist for training and prediction but
+accept different values for each. Therefore, arguments for
+the predict stage have been renamed to <code>predict.method</code> and <code>predict.prior</code>,
+respectively.</p>
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
     
@@ -228,7 +234,8 @@ ISBN 0-387-95457-0, <a href='http://www.stats.ox.ac.uk/pub/MASS4'>http://www.sta
 #&gt; * Packages: MASS
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric, factor, ordered
-#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt; [1] "prior"          "method"         "nu"             "predict.method"</div></pre>
+#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt; [1] "prior"          "method"         "nu"             "predict.method"
+#&gt; [5] "predict.prior" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -244,7 +251,7 @@ ISBN 0-387-95457-0, <a href='http://www.stats.ox.ac.uk/pub/MASS4'>http://www.sta
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

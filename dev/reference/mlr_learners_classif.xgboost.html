@@ -49,12 +49,7 @@
 
 <meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost" />
 <meta property="og:description" content="eXtreme Gradient Boosting classification.
-Calls xgboost::xgb.train() from package xgboost.
-We changed the following defaults for this learner:
-Verbosity is reduced by setting verbose to 0.
-Number of boosting iterations nrounds is set to 1.
-
-" />
+Calls xgboost::xgb.train() from package xgboost." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -158,14 +153,28 @@ Number of boosting iterations nrounds is set to 1.
     <div class="ref-description">
     <p>eXtreme Gradient Boosting classification.
 Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xgb.train()</a></code> from package <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a>.</p>
-<p>We changed the following defaults for this learner:</p><ul>
-<li><p>Verbosity is reduced by setting <code>verbose</code> to <code>0</code>.</p></li>
-<li><p>Number of boosting iterations <code>nrounds</code> is set to <code>1</code>.</p></li>
-</ul>
-
     </div>
 
 
+
+    <h2 class="hasAnchor" id="custom-mlr-defaults"><a class="anchor" href="#custom-mlr-defaults"></a>Custom mlr3 defaults</h2>
+
+    
+
+<ul>
+<li><p><code>nrounds</code>:</p><ul>
+<li><p>Actual default: no default</p></li>
+<li><p>Adjusted default: 1</p></li>
+<li><p>Reason for change: Without a default construction of the learner
+would error. Just setting a nonsense default to workaround this.
+<code>nrounds</code> needs to be tuned by the user.</p></li>
+</ul></li>
+<li><p><code>verbose</code>:</p><ul>
+<li><p>Actual default: 1</p></li>
+<li><p>Adjusted default: 0</p></li>
+<li><p>Reason for change: Reduce verbosity.</p></li>
+</ul></li>
+</ul>
 
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
@@ -244,25 +253,39 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 <span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='fu'>ids</span>()
 }</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: xgboost</span></div><div class='output co'>#&gt; &lt;LearnerClassifXgboost:classif.xgboost&gt;
 #&gt; * Model: -
-#&gt; * Parameters: nrounds=1, verbose=0
+#&gt; * Parameters: verbose=0, nrounds=1
 #&gt; * Packages: xgboost
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: importance, missings, multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "booster"                "watchlist"              "eta"                   
-#&gt;  [4] "gamma"                  "max_depth"              "min_child_weight"      
-#&gt;  [7] "subsample"              "colsample_bytree"       "colsample_bylevel"     
-#&gt; [10] "colsample_bynode"       "num_parallel_tree"      "lambda"                
-#&gt; [13] "lambda_bias"            "alpha"                  "objective"             
-#&gt; [16] "eval_metric"            "base_score"             "max_delta_step"        
-#&gt; [19] "missing"                "monotone_constraints"   "tweedie_variance_power"
-#&gt; [22] "nthread"                "nrounds"                "feval"                 
-#&gt; [25] "verbose"                "print_every_n"          "early_stopping_rounds" 
-#&gt; [28] "maximize"               "sample_type"            "normalize_type"        
-#&gt; [31] "rate_drop"              "skip_drop"              "one_drop"              
-#&gt; [34] "tree_method"            "grow_policy"            "max_leaves"            
-#&gt; [37] "max_bin"                "callbacks"              "sketch_eps"            
-#&gt; [40] "scale_pos_weight"       "updater"                "refresh_leaf"          
-#&gt; [43] "feature_selector"       "top_k"                  "predictor"             </div></pre>
+#&gt; * Properties: importance, missings, multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "booster"                 "watchlist"              
+#&gt;  [3] "eta"                     "gamma"                  
+#&gt;  [5] "max_depth"               "min_child_weight"       
+#&gt;  [7] "subsample"               "colsample_bytree"       
+#&gt;  [9] "colsample_bylevel"       "colsample_bynode"       
+#&gt; [11] "num_parallel_tree"       "lambda"                 
+#&gt; [13] "lambda_bias"             "alpha"                  
+#&gt; [15] "objective"               "eval_metric"            
+#&gt; [17] "base_score"              "max_delta_step"         
+#&gt; [19] "missing"                 "monotone_constraints"   
+#&gt; [21] "tweedie_variance_power"  "nthread"                
+#&gt; [23] "nrounds"                 "feval"                  
+#&gt; [25] "verbose"                 "print_every_n"          
+#&gt; [27] "early_stopping_rounds"   "maximize"               
+#&gt; [29] "sample_type"             "normalize_type"         
+#&gt; [31] "rate_drop"               "skip_drop"              
+#&gt; [33] "one_drop"                "tree_method"            
+#&gt; [35] "grow_policy"             "max_leaves"             
+#&gt; [37] "max_bin"                 "callbacks"              
+#&gt; [39] "sketch_eps"              "scale_pos_weight"       
+#&gt; [41] "updater"                 "refresh_leaf"           
+#&gt; [43] "feature_selector"        "top_k"                  
+#&gt; [45] "predictor"               "save_period"            
+#&gt; [47] "save_name"               "xgb_model"              
+#&gt; [49] "interaction_constraints" "outputmargin"           
+#&gt; [51] "ntreelimit"              "predleaf"               
+#&gt; [53] "predcontrib"             "approxcontrib"          
+#&gt; [55] "predinteraction"         "reshape"                
+#&gt; [57] "training"               </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -278,7 +301,7 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
