@@ -6,7 +6,9 @@ test_that("regr.glmnet", {
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
-    "weights" # handled by mlr3
+    "weights", # handled by mlr3
+    "nfolds", # not used by learner
+    "foldid" # not used by learner
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
@@ -36,9 +38,7 @@ test_that("predict regr.glmnet", {
   exclude = c(
     "object", # handled via mlr3
     "newx", # handled via mlr3
-    "s", # automatically set by glmnet via the best value from internal tuning
-    "type", # handled via mlr3
-    "exact" # because "s" is not supplied by the user here, "exact" has no influence
+    "type" # handled via mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

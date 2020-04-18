@@ -19,6 +19,7 @@ register_mlr3 = function() {
   x = utils::getFromNamespace("mlr_learners", ns = "mlr3")
 
   # classification learners
+  x$add("classif.cv_glmnet", LearnerClassifCVGlmnet)
   x$add("classif.glmnet", LearnerClassifGlmnet)
   x$add("classif.kknn", LearnerClassifKKNN)
   x$add("classif.lda", LearnerClassifLDA)
@@ -31,6 +32,7 @@ register_mlr3 = function() {
   x$add("classif.multinom", LearnerClassifMultinom)
 
   # regression learners
+  x$add("regr.cv_glmnet", LearnerRegrCVGlmnet)
   x$add("regr.glmnet", LearnerRegrGlmnet)
   x$add("regr.kknn", LearnerRegrKKNN)
   x$add("regr.km", LearnerRegrKM)
