@@ -49,8 +49,12 @@
 
 <meta property="og:title" content="GLM with Elastic Net Regularization Regression Learner — mlr_learners_regr.glmnet" />
 <meta property="og:description" content="Generalized linear models with elastic net regularization.
-Calls glmnet::cv.glmnet() from package glmnet.
-The default for hyperparameter family is changed to &quot;gaussian&quot;." />
+Calls glmnet::glmnet() from package glmnet.
+The default for hyperparameter family is changed to &quot;gaussian&quot;.
+Caution: This learner is different to cv_glmnet in that it does not use the
+internal optimization of lambda. The parameter needs to be tuned by the user.
+Essentially, one needs to tune parameter s which is used at predict-time.
+See https://stackoverflow.com/questions/50995525/ for more information." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -153,8 +157,12 @@ The default for hyperparameter family is changed to &quot;gaussian&quot;." />
 
     <div class="ref-description">
     <p>Generalized linear models with elastic net regularization.
-Calls <code><a href='https://rdrr.io/pkg/glmnet/man/cv.glmnet.html'>glmnet::cv.glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
+Calls <code><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet::glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
 <p>The default for hyperparameter <code>family</code> is changed to <code>"gaussian"</code>.</p>
+<p>Caution: This learner is different to <code>cv_glmnet</code> in that it does not use the
+internal optimization of lambda. The parameter needs to be tuned by the user.
+Essentially, one needs to tune parameter <code>s</code> which is used at predict-time.</p>
+<p>See https://stackoverflow.com/questions/50995525/ for more information.</p>
     </div>
 
 
@@ -231,17 +239,16 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 #&gt; * Packages: glmnet
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: weights</div><div class='output co'>#&gt;  [1] "family"           "offset"           "alpha"            "nfolds"          
-#&gt;  [5] "type.measure"     "s"                "nlambda"          "lambda.min.ratio"
-#&gt;  [9] "lambda"           "standardize"      "intercept"        "thresh"          
-#&gt; [13] "dfmax"            "pmax"             "exclude"          "penalty.factor"  
-#&gt; [17] "lower.limits"     "upper.limits"     "maxit"            "type.gaussian"   
-#&gt; [21] "type.logistic"    "type.multinomial" "keep"             "parallel"        
-#&gt; [25] "trace.it"         "foldid"           "alignment"        "grouped"         
-#&gt; [29] "gamma"            "relax"            "fdev"             "devmax"          
-#&gt; [33] "eps"              "big"              "mnlam"            "pmin"            
-#&gt; [37] "exmx"             "prec"             "mxit"             "newoffset"       
-#&gt; [41] "predict.gamma"   </div></pre>
+#&gt; * Properties: weights</div><div class='output co'>#&gt;  [1] "family"           "offset"           "alpha"            "type.measure"    
+#&gt;  [5] "s"                "nlambda"          "lambda.min.ratio" "lambda"          
+#&gt;  [9] "standardize"      "intercept"        "thresh"           "dfmax"           
+#&gt; [13] "pmax"             "exclude"          "penalty.factor"   "lower.limits"    
+#&gt; [17] "upper.limits"     "maxit"            "type.gaussian"    "type.logistic"   
+#&gt; [21] "type.multinomial" "keep"             "parallel"         "trace.it"        
+#&gt; [25] "alignment"        "grouped"          "relax"            "fdev"            
+#&gt; [29] "devmax"           "eps"              "big"              "mnlam"           
+#&gt; [33] "pmin"             "exmx"             "prec"             "mxit"            
+#&gt; [37] "newoffset"        "predict.gamma"    "exact"            "gamma"           </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
