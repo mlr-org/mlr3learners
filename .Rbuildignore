@@ -17,3 +17,4 @@ vignettes/learners/
 ^clang-.*
 ^gfortran.*
 ^tic\.R$
+^revdep$
