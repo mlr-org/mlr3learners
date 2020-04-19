@@ -49,7 +49,11 @@
 
 <meta property="og:title" content="GLM with Elastic Net Regularization Classification Learner — mlr_learners_classif.glmnet" />
 <meta property="og:description" content="Generalized linear models with elastic net regularization.
-Calls glmnet::cv.glmnet() from package glmnet." />
+Calls glmnet::glmnet() from package glmnet.
+Caution: This learner is different to _glmnet in that it does not use the
+internal optimization of lambda. The parameter needs to be tuned by the user.
+Essentially, one needs to tune parameter s which is used at predict-time.
+See https://stackoverflow.com/questions/50995525/ for more information." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -83,7 +87,7 @@ Calls glmnet::cv.glmnet() from package glmnet." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.1.6-9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.2.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -106,7 +110,7 @@ Calls glmnet::cv.glmnet() from package glmnet." />
   </a>
 </li>
 <li>
-  <a href="../articles/additional-learners.html">Additional Learners</a>
+  <a href="../articles/learners/additional-learners.html">Additional Learners</a>
 </li>
         <li>
   <a href="https://github.com/mlr-org/mlr3learners/">
@@ -152,7 +156,11 @@ Calls glmnet::cv.glmnet() from package glmnet." />
 
     <div class="ref-description">
     <p>Generalized linear models with elastic net regularization.
-Calls <code><a href='https://rdrr.io/pkg/glmnet/man/cv.glmnet.html'>glmnet::cv.glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
+Calls <code><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet::glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
+<p>Caution: This learner is different to <code>_glmnet</code> in that it does not use the
+internal optimization of lambda. The parameter needs to be tuned by the user.
+Essentially, one needs to tune parameter <code>s</code> which is used at predict-time.</p>
+<p>See https://stackoverflow.com/questions/50995525/ for more information.</p>
     </div>
 
 
@@ -223,20 +231,21 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 
   <span class='co'># available parameters:</span>
 <span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='fu'>ids</span>()
-}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: glmnet</span></div><div class='output co'>#&gt; &lt;LearnerClassifGlmnet:classif.glmnet&gt;
+}</div><div class='output co'>#&gt; &lt;LearnerClassifGlmnet:classif.glmnet&gt;
 #&gt; * Model: -
 #&gt; * Parameters: list()
 #&gt; * Packages: glmnet
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alpha"            "nfolds"           "type.measure"     "s"               
-#&gt;  [5] "nlambda"          "lambda.min.ratio" "lambda"           "standardize"     
-#&gt;  [9] "intercept"        "thresh"           "dfmax"            "pmax"            
-#&gt; [13] "exclude"          "penalty.factor"   "lower.limits"     "upper.limits"    
-#&gt; [17] "maxit"            "type.logistic"    "type.multinomial" "gamma"           
-#&gt; [21] "relax"            "fdev"             "devmax"           "eps"             
-#&gt; [25] "big"              "mnlam"            "pmin"             "exmx"            
-#&gt; [29] "prec"             "mxit"            </div></pre>
+#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alpha"            "type.measure"     "s"                "lambda.min.ratio"
+#&gt;  [5] "lambda"           "standardize"      "intercept"        "thresh"          
+#&gt;  [9] "dfmax"            "pmax"             "exclude"          "penalty.factor"  
+#&gt; [13] "lower.limits"     "upper.limits"     "maxit"            "type.logistic"   
+#&gt; [17] "type.multinomial" "keep"             "parallel"         "trace.it"        
+#&gt; [21] "alignment"        "grouped"          "offset"           "relax"           
+#&gt; [25] "fdev"             "devmax"           "eps"              "big"             
+#&gt; [29] "mnlam"            "pmin"             "exmx"             "prec"            
+#&gt; [33] "mxit"             "newoffset"        "exact"            "gamma"           </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +261,7 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

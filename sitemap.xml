@@ -7,6 +7,9 @@
     <loc>https://mlr3learners.mlr-org.com/reference/mlr3learners-package.html</loc>
   </url>
   <url>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.cv_glmnet.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html</loc>
   </url>
   <url>
@@ -37,6 +40,9 @@
     <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html</loc>
   </url>
   <url>
+    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.cv_glmnet.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html</loc>
   </url>
   <url>
@@ -58,6 +64,6 @@
     <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html</loc>
   </url>
   <url>
-    <loc>https://mlr3learners.mlr-org.com/articles/additional-learners.html</loc>
+    <loc>https://mlr3learners.mlr-org.com/articles/learners/additional-learners.html</loc>
   </url>
 </urlset>

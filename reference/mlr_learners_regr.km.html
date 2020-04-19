@@ -50,10 +50,12 @@
 <meta property="og:title" content="Kriging Regression Learner — mlr_learners_regr.km" />
 <meta property="og:description" content="Kriging regression.
 Calls DiceKriging::km() from package DiceKriging.
-The predict type hyperparameter &quot;type&quot; defaults to &quot;SK&quot; (simple Kriging).
-The additional hyperparameter nugget.stability is used to overwrite the hyperparameter nugget with nugget.stability * var(y) before training to improve the numerical stability.
-We recommend a value of 1e-8.
-The additional hyperparameter jitter can be set to add N(0, [jitter])-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value of 1e-12.
+The predict type hyperparameter &quot;type&quot; defaults to &quot;sk&quot; (simple kriging).
+The additional hyperparameter nugget.stability is used to overwrite the
+hyperparameter nugget with nugget.stability * var(y) before training to
+improve the numerical stability. We recommend a value of 1e-8.
+The additional hyperparameter jitter can be set to add N(0, [jitter])-distributed noise to the data before prediction to avoid perfect
+interpolation. We recommend a value of 1e-12.
 
 " />
 <meta name="twitter:card" content="summary" />
@@ -89,7 +91,7 @@ The additional hyperparameter jitter can be set to add N(0, [jitter])-distribute
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.1.6-9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.2.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -112,7 +114,7 @@ The additional hyperparameter jitter can be set to add N(0, [jitter])-distribute
   </a>
 </li>
 <li>
-  <a href="../articles/additional-learners.html">Additional Learners</a>
+  <a href="../articles/learners/additional-learners.html">Additional Learners</a>
 </li>
         <li>
   <a href="https://github.com/mlr-org/mlr3learners/">
@@ -159,10 +161,12 @@ The additional hyperparameter jitter can be set to add N(0, [jitter])-distribute
     <div class="ref-description">
     <p>Kriging regression.
 Calls <code><a href='https://rdrr.io/pkg/DiceKriging/man/km.html'>DiceKriging::km()</a></code> from package <a href='https://CRAN.R-project.org/package=DiceKriging'><span class="pkg">DiceKriging</span></a>.</p><ul>
-<li><p>The predict type hyperparameter "type" defaults to "SK" (simple Kriging).</p></li>
-<li><p>The additional hyperparameter <code>nugget.stability</code> is used to overwrite the hyperparameter <code>nugget</code> with <code>nugget.stability * var(y)</code> before training to improve the numerical stability.
-We recommend a value of <code>1e-8</code>.</p></li>
-<li><p>The additional hyperparameter <code>jitter</code> can be set to add <code>N(0, [jitter])</code>-distributed noise to the data before prediction to avoid perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
+<li><p>The predict type hyperparameter "type" defaults to "sk" (simple kriging).</p></li>
+<li><p>The additional hyperparameter <code>nugget.stability</code> is used to overwrite the
+hyperparameter <code>nugget</code> with <code>nugget.stability * var(y)</code> before training to
+improve the numerical stability. We recommend a value of <code>1e-8</code>.</p></li>
+<li><p>The additional hyperparameter <code>jitter</code> can be set to add <code>N(0, [jitter])</code>-distributed noise to the data before prediction to avoid perfect
+interpolation. We recommend a value of <code>1e-12</code>.</p></li>
 </ul>
 
     </div>
@@ -246,7 +250,8 @@ doi: <a href='https://doi.org/10.18637/jss.v051.i01'>10.18637/jss.v051.i01</a>
 #&gt;  [9] "estim.method"     "penalty"          "optim.method"     "parinit"         
 #&gt; [13] "multistart"       "lower"            "upper"            "gr"              
 #&gt; [17] "iso"              "scaling"          "knots"            "kernel"          
-#&gt; [21] "type"             "jitter"          </div></pre>
+#&gt; [21] "type"             "jitter"           "control"          "se.compute"      
+#&gt; [25] "cov.compute"      "light.return"     "bias.correct"     "checkNames"      </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,7 +267,7 @@ doi: <a href='https://doi.org/10.18637/jss.v051.i01'>10.18637/jss.v051.i01</a>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
