@@ -19,8 +19,8 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <link href="extra.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Recommended Learners for mlr3">
-<meta property="og:description" content="Recommended Learners for mlr3. Extends mlr3 with
-    interfaces to essential machine learning packages on CRAN.  This
+<meta property="og:description" content="Recommended Learners for mlr3. Extends mlr3
+    with interfaces to essential machine learning packages on CRAN.  This
     includes, but is not limited to: (penalized) linear and logistic
     regression, linear and quadratic discriminant analysis, k-nearest
     neighbors, naive Bayes, support vector machines, and gradient
@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
-        <a class="navbar-brand" href="index.html">mlr3learners <small>v0.1.6-9000</small></a>
+        <a class="navbar-brand" href="index.html">mlr3learners <small>v0.2.0.9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -141,51 +141,56 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html">classif.glmnet</a></td>
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.cv_glmnet.html">classif.cv_glmnet</a></td>
 <td align="left">Penalized Logistic Regression</td>
 <td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
 </tr>
 <tr class="even">
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html">classif.glmnet</a></td>
+<td align="left">Penalized Logistic Regression</td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html">classif.kknn</a></td>
 <td align="left">k-Nearest Neighbors</td>
 <td align="left"><a href="https://cran.r-project.org/package=kknn">kknn</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.lda.html">classif.lda</a></td>
 <td align="left">LDA</td>
 <td align="left"><a href="https://cran.r-project.org/package=MASS">MASS</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.log_reg.html">classif.log_reg</a></td>
 <td align="left">Logistic Regression</td>
 <td align="left">stats</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.multinom.html">classif.multinom</a></td>
 <td align="left">Multinomial log-linear model</td>
 <td align="left"><a href="https://cran.r-project.org/package=nnet">nnet</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html">classif.naive_bayes</a></td>
 <td align="left">Naive Bayes</td>
 <td align="left"><a href="https://cran.r-project.org/package=e1071">e1071</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.qda.html">classif.qda</a></td>
 <td align="left">QDA</td>
 <td align="left"><a href="https://cran.r-project.org/package=MASS">MASS</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html">classif.ranger</a></td>
 <td align="left">Random Forest</td>
 <td align="left"><a href="https://cran.r-project.org/package=ranger">ranger</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html">classif.svm</a></td>
 <td align="left">SVM</td>
 <td align="left"><a href="https://cran.r-project.org/package=e1071">e1071</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html">classif.xgboost</a></td>
 <td align="left">Gradient Boosting</td>
 <td align="left"><a href="https://cran.r-project.org/package=xgboost">xgboost</a></td>
@@ -204,36 +209,41 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html">regr.glmnet</a></td>
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.cv_glmnet.html">regr.cv_glmnet</a></td>
 <td align="left">Penalized Linear Regression</td>
 <td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
 </tr>
 <tr class="even">
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html">regr.glmnet</a></td>
+<td align="left">Penalized Linear Regression</td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html">regr.kknn</a></td>
 <td align="left">k-Nearest Neighbors</td>
 <td align="left"><a href="https://cran.r-project.org/package=kknn">kknn</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html">regr.km</a></td>
 <td align="left">Kriging</td>
 <td align="left"><a href="https://cran.r-project.org/package=DiceKriging">DiceKriging</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html">regr.lm</a></td>
 <td align="left">Linear Regression</td>
 <td align="left">stats</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html">regr.ranger</a></td>
 <td align="left">Random Forest</td>
 <td align="left"><a href="https://cran.r-project.org/package=ranger">ranger</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html">regr.svm</a></td>
 <td align="left">SVM</td>
 <td align="left"><a href="https://cran.r-project.org/package=e1071">e1071</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html">regr.xgboost</a></td>
 <td align="left">Gradient Boosting</td>
 <td align="left"><a href="https://cran.r-project.org/package=xgboost">xgboost</a></td>
