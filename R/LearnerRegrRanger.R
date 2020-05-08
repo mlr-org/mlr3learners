@@ -111,6 +111,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #'
     #' @return `numeric(1)`.
     oob_error = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
       self$model$prediction.error
     }
   ),
