@@ -1,9 +1,11 @@
+# mlr3learners 0.2.0.9001
+
+- Glmnet: Add params `mxitnr` and `epsnr` from glmnet v4.0 update
+
+
 # mlr3learners 0.2.0.9000
 
-- Split glmnet learner into CVGlmnet and Glmnet (#99)
-* glmnet: add predict.gamma and newoffset arg (#98)
-- Add a test that all learners can be constructed without parameters, fixes #78
-- Add Paramtest for all learners and check for missing params (#96)
+- Internal changes only.
 
 
 # mlr3learners 0.2.0
