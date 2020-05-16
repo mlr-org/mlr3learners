@@ -1,7 +1,7 @@
 library(mlr3learners)
 
 test_that("surv.glmnet", {
-  learner = lrn("surv.glmnet")
+  learner = mlr3learners::LearnerSurvGlmnet$new()
   fun = glmnet::glmnet
   exclude = c(
     "x", # handled by mlr3
@@ -22,7 +22,7 @@ test_that("surv.glmnet", {
 
 # example for checking a "control" function of a learner
 test_that("surv.glmnet", {
-  learner = lrn("surv.glmnet")
+  learner = mlr3learners::LearnerSurvGlmnet$new()
   fun = glmnet::glmnet.control
   exclude = c(
     "itrace", # supported via param trace.it
@@ -36,7 +36,7 @@ test_that("surv.glmnet", {
 })
 
 test_that("predict surv.glmnet", {
-  learner = lrn("surv.glmnet")
+  learner = mlr3learners::LearnerSurvGlmnet$new()
   fun = glmnet::predict.glmnet
   exclude = c(
     "object", # handled via mlr3
