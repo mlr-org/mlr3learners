@@ -50,6 +50,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
+    mlr3proba,
     nnet,
     ranger,
     rmarkdown,
