@@ -66,13 +66,6 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
 
-## Survival Learners
-
-| ID                                                           | Learner                     | Package                                             |
-| :----------------------------------------------------------- | :-------------------------- | :-------------------------------------------------- |
-| [surv.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html) | Penalized Linear Regression | [glmnet](https://cran.r-project.org/package=glmnet) |
-| [surv.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html) | Penalized Linear Regression | [glmnet](https://cran.r-project.org/package=glmnet) |
-
 ## More Learners
 
 Learners from other packages live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people _outside_ the mlr-org team.
