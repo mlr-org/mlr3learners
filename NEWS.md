@@ -1,3 +1,10 @@
+# mlr3learners 0.2.0.9002
+
+- Add surv glmnet (#130)
+- Increase mlr3 minimum version to v0.3.0
+- Request mlr3proba >= 0.1.6 for survival learners
+
+
 # mlr3learners 0.2.0.9001
 
 - Glmnet: Add params `mxitnr` and `epsnr` from glmnet v4.0 update
