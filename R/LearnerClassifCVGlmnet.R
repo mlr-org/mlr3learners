@@ -90,7 +90,6 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
   ),
 
   private = list(
-
     .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
