@@ -52,6 +52,7 @@ Suggests:
     MASS,
     mlr3proba (>= 0.1.6),
     nnet,
+    pracma,
     ranger,
     rmarkdown,
     testthat,
