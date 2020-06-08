@@ -24,7 +24,7 @@ lrn("surv.glmnet")
 }
 
 \examples{
-if (requireNamespace("glmnet survival")) {
+if (requireNamespace("glmnet")) {
   learner = mlr3::lrn("surv.glmnet")
   print(learner)
 
