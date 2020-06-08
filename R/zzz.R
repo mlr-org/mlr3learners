@@ -44,6 +44,7 @@ register_mlr3 = function() {
   # survival learners
   x$add("surv.glmnet", LearnerSurvGlmnet)
   x$add("surv.cv_glmnet", LearnerSurvCVGlmnet)
+  x$add("surv.ranger", LearnerSurvRanger)
 }
 
 .onLoad = function(libname, pkgname) { # nolint
