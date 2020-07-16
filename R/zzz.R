@@ -45,6 +45,7 @@ register_mlr3 = function() {
   x$add("surv.glmnet", LearnerSurvGlmnet)
   x$add("surv.cv_glmnet", LearnerSurvCVGlmnet)
   x$add("surv.xgboost", LearnerSurvXgboost)
+  x$add("surv.ranger", LearnerSurvRanger)
 }
 
 .onLoad = function(libname, pkgname) { # nolint
