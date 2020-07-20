@@ -7,7 +7,9 @@
 # library(mlr3learners)
 # library(mlr3proba)
 # library(data.table)
-extra_learners = rownames(available.packages(repos = "https://mlr3learners.github.io/mlr3learners.drat"))
+extra_learners = rownames(
+  available.packages(repos = "https://mlr3learners.github.io/mlr3learners.drat")
+  )
 # install.packages(extra_learners, repos = "https://mlr3learners.github.io/mlr3learners.drat")
 lapply(extra_learners, require, character.only = TRUE, quietly = TRUE)
 
@@ -32,7 +34,7 @@ learner_table = data.table(t(rbindlist(list(mlr3misc::map(all_lrns, function(.x)
 
 colnames(learner_table) = c("name", "class", "id", "mlr3_package", "required_package",
                  "properties", "feature_types", "predict_types")
-learner_table[,1:4] = lapply(learner_table[,1:4], as.character)
+learner_table[, 1:4] = lapply(learner_table[, 1:4], as.character)
 rm(all_lrns, extra_learners, keys)
 
 # getter function for the mlr3 learner table, assume it is called `learner_table`
@@ -49,6 +51,8 @@ rm(all_lrns, extra_learners, keys)
 list_mlr3learners = function(hide_cols = NULL, filter = NULL, tibble = FALSE) {
 
   dt = copy(learner_table)
+
+  class = mlr3_package = required_package = NULL # hacky fix to prevent NOTE for global binding
 
   if (!is.null(filter)) {
     if (!is.null(filter$class)) {
@@ -107,11 +111,12 @@ list_mlr3learners = function(hide_cols = NULL, filter = NULL, tibble = FALSE) {
 # utils::remove.packages("mlr3learners.coxboost")
 # lrn("surv.coxboost")
 
-lrn <- function(.key, ...) {
-  pkg <- unlist(subset(list_mlr3learners(), id == .key)$mlr3_package)
-  inst <- suppressWarnings(require(pkg, quietly = FALSE, character.only = TRUE))
+lrn = function(.key, ...) {
+  id = NULL # hacky fix to prevent NOTE for global binding
+  pkg = unlist(subset(list_mlr3learners(), id == .key)$mlr3_package)
+  inst = suppressWarnings(require(pkg, quietly = FALSE, character.only = TRUE))
   if (!inst) {
-    ans <- usethis::ui_yeah(
+    ans = usethis::ui_yeah(
       sprintf("%s is not installed but is required, do you want to install this now?", pkg),
       n_no = 1
     )
@@ -123,6 +128,3 @@ lrn <- function(.key, ...) {
   }
   mlr3misc::dictionary_sugar_get(mlr_learners, .key, ...)
 }
-
-
-
