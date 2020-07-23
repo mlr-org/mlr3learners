@@ -59,3 +59,5 @@ register_mlr3 = function() {
   pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)
   setHook(event, hooks[pkgname != "mlr3learners"], action = "replace")
 } # nocov end
+
+utils::globalVariables(c("class", "mlr3_package", "required_package", "id"), "mlr3learners")

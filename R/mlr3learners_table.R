@@ -2,7 +2,7 @@
 #  and loaded. Required packages are mlr3, mlr3learners, mlr3proba, and all packages in
 #  mlr3learners org, also when ready other packages in mlr3verse that have learners implemented in
 #  them.
-
+#
 # library(mlr3)
 # library(mlr3learners)
 # library(mlr3proba)
@@ -51,8 +51,6 @@ rm(all_lrns, extra_learners, keys)
 list_mlr3learners = function(hide_cols = NULL, filter = NULL, tibble = FALSE) {
 
   dt = copy(learner_table)
-
-  class = mlr3_package = required_package = NULL # hacky fix to prevent NOTE for global binding
 
   if (!is.null(filter)) {
     if (!is.null(filter$class)) {
@@ -104,22 +102,20 @@ list_mlr3learners = function(hide_cols = NULL, filter = NULL, tibble = FALSE) {
 #  .key `character(1)`: learner key
 #
 # examples:
-#
-# lrn("classif.ranger")
-#
-# unloadNamespace("mlr3learners.coxboost")
-# utils::remove.packages("mlr3learners.coxboost")
-# lrn("surv.coxboost")
+
+lrn("classif.ranger")
+
+unloadNamespace("mlr3learners.coxboost")
+utils::remove.packages("mlr3learners.coxboost")
+lrn("surv.coxboost")
 
 lrn = function(.key, ...) {
-  id = NULL # hacky fix to prevent NOTE for global binding
   pkg = unlist(subset(list_mlr3learners(), id == .key)$mlr3_package)
   inst = suppressWarnings(require(pkg, quietly = FALSE, character.only = TRUE))
   if (!inst) {
-    ans = usethis::ui_yeah(
-      sprintf("%s is not installed but is required, do you want to install this now?", pkg),
-      n_no = 1
-    )
+    cat(sprintf("%s is not installed but is required, do you want to install this now?\n\n", pkg))
+    cat("1: Yes\n2: No")
+    ans = readline() == 1
     if (ans) {
       install.packages(pkg, repos = "https://mlr3learners.github.io/mlr3learners.drat")
     } else {
