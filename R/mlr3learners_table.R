@@ -3,14 +3,14 @@
 #  mlr3learners org, also when ready other packages in mlr3verse that have learners implemented in
 #  them.
 #
-# library(mlr3)
-# library(mlr3learners)
-# library(mlr3proba)
-# library(data.table)
+library(mlr3)
+library(mlr3learners)
+library(mlr3proba)
+library(data.table)
 extra_learners = rownames(
   available.packages(repos = "https://mlr3learners.github.io/mlr3learners.drat")
   )
-# install.packages(extra_learners, repos = "https://mlr3learners.github.io/mlr3learners.drat")
+install.packages(extra_learners, repos = "https://mlr3learners.github.io/mlr3learners.drat")
 lapply(extra_learners, require, character.only = TRUE, quietly = TRUE)
 
 # construct all learners in attached mlr3verse
@@ -113,7 +113,7 @@ lrn = function(.key, ...) {
   pkg = unlist(subset(list_mlr3learners(), id == .key)$mlr3_package)
   inst = suppressWarnings(require(pkg, quietly = FALSE, character.only = TRUE))
   if (!inst) {
-    cat(sprintf("%s is not installed but is required, do you want to install this now?\n\n", pkg))
+    mlr3misc::catf("%s is not installed but is required, do you want to install this now?\n", pkg)
     cat("1: Yes\n2: No")
     ans = readline() == 1
     if (ans) {
