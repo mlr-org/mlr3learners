@@ -1,3 +1,8 @@
+# mlr3learners 0.2.0.9004
+
+- add mlr3learners.catboost (#143)
+
+
 # mlr3learners 0.2.0.9003
 
 - glmnet learners: `penalty.factor` is a vector param, not a `ParamDbl` (#141)
