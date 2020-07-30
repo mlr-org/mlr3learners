@@ -1,13 +1,10 @@
-# mlr3learners 0.2.0.9004
-
-- add mlr3learners.catboost (#143)
-
-
 # mlr3learners 0.2.0.9003
 
 - glmnet learners: `penalty.factor` is a vector param, not a `ParamDbl` (#141)
 - add surv.xgboost (#135)
 - add surv.ranger (#134)
+- Require mlr3proba CRAN (#144)
+- add mlr3learners.catboost (#143)
 
 
 # mlr3learners 0.2.0.9002
