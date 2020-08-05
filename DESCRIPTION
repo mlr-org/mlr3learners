@@ -36,7 +36,7 @@ Depends:
     R (>= 3.1.0)
 Imports:
     data.table,
-    mlr3 (>= 0.3.0),
+    mlr3 (>= 0.4.0.9000),
     mlr3misc (>= 0.2.0),
     paradox,
     R6
@@ -50,7 +50,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
-    mlr3proba (>= 0.2.0),
+    mlr3proba (>= 0.2.0.9000),
     nnet,
     pracma,
     ranger,
@@ -59,6 +59,9 @@ Suggests:
     xgboost
 RdMacros:
     mlr3misc
+Remotes: 
+    mlr-org/mlr3,
+    mlr-org/mlr3proba
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
