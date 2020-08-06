@@ -1,5 +1,8 @@
 # R CMD check
 if (!ci_has_env("PARAMTEST")) {
+  get_stage("install") %>%
+    add_step(step_install_cran("bibtex"))
+
   do_package_checks()
 } else {
   # PARAMTEST
