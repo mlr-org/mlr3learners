@@ -15,7 +15,7 @@
 "_PACKAGE"
 
 register_mlr3 = function() {
-
+cat("REGISTERING\n")
   x = utils::getFromNamespace("mlr_learners", ns = "mlr3")
 
   # classification learners

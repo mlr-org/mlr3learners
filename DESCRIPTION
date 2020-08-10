@@ -60,8 +60,11 @@ Suggests:
 RdMacros:
     mlr3misc
 Remotes: 
-    mlr-org/mlr3,
-    mlr-org/mlr3proba
+    mlr-org/mlr3@leanify_with_misc,
+    mlr-org/mlr3proba,
+    mlr-org/paradox@leanify,
+    mlr-org/mlr3measures@leanify,
+    mlr-org/mlr3misc@leanify
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
