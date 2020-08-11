@@ -63,7 +63,7 @@ Remotes:
     mlr-org/mlr3@leanify_with_misc,
     mlr-org/mlr3proba,
     mlr-org/paradox@leanify,
-    mlr-org/mlr3misc@leanify
+    mlr-org/mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
