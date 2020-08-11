@@ -44,6 +44,7 @@ Suggests:
     bibtex,
     checkmate,
     DiceKriging,
+    distr6,
     e1071,
     glmnet,
     kknn,
@@ -54,12 +55,13 @@ Suggests:
     nnet,
     pracma,
     ranger,
+    rgenoud,
     rmarkdown,
     testthat,
     xgboost
 RdMacros:
     mlr3misc
-Remotes: 
+Remotes:
     mlr-org/mlr3@leanify_with_misc,
     mlr-org/mlr3proba,
     mlr-org/paradox@leanify,
@@ -67,4 +69,4 @@ Remotes:
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9000

@@ -192,9 +192,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      response = invoke(predict, model, newdata = newdata, .args = pars)
+      response = invoke(stats::predict, model, newdata = newdata, .args = pars)
 
-      PredictionRegr$new(task = task, response = response)
+      mlr3::PredictionRegr$new(task = task, response = response)
     }
   )
 )

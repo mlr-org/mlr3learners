@@ -117,7 +117,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     .predict = function(task) {
 
       newdata = task$data(cols = task$feature_names)
-      fit = predict(object = self$model, data = newdata)
+      fit = stats::predict(object = self$model, data = newdata)
 
       # define WeightedDiscrete distr6 object from predicted survival function
       x = rep(list(data = data.frame(x = fit$unique.death.times, cdf = 0)), task$nrow)

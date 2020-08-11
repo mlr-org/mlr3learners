@@ -123,12 +123,12 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
       }
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model,
+        response = mlr3misc::invoke(stats::predict, self$model,
           newx = newdata, type = "class",
           .args = pars)
-        PredictionClassif$new(task = task, response = drop(response))
+        mlr3::PredictionClassif$new(task = task, response = drop(response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model,
+        prob = mlr3misc::invoke(stats::predict, self$model,
           newx = newdata, type = "response",
           .args = pars)
 
@@ -138,7 +138,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         } else {
           prob = prob[, , 1L]
         }
-        PredictionClassif$new(task = task, prob = prob)
+        mlr3::PredictionClassif$new(task = task, prob = prob)
       }
     }
   )

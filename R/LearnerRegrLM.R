@@ -65,12 +65,12 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        PredictionRegr$new(task = task, response = predict(self$model,
+        mlr3::PredictionRegr$new(task = task, response = stats::predict(self$model,
           newdata = newdata,
           se.fit = FALSE))
       } else {
-        pred = predict(self$model, newdata = newdata, se.fit = TRUE)
-        PredictionRegr$new(task = task, response = pred$fit, se = pred$se.fit)
+        pred = stats::predict(self$model, newdata = newdata, se.fit = TRUE)
+        mlr3::PredictionRegr$new(task = task, response = pred$fit, se = pred$se.fit)
       }
     }
   )
