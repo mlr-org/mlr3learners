@@ -1,7 +1,6 @@
 # mlr3learners 0.2.0.9003
 
-- Compact in-memory representation of R6 objects to save space when
-  saving mlr3 objects via saveRDS(), serialize() etc.
+- Compact in-memory representation of R6 objects to save space when saving mlr3 objects via `saveRDS()`, `serialize()` etc.
 - glmnet learners: `penalty.factor` is a vector param, not a `ParamDbl` (#141)
 - add surv.xgboost (#135)
 - add surv.ranger (#134)
