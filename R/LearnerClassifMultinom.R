@@ -65,15 +65,15 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
       levs = task$class_names
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "class")
-        PredictionClassif$new(task = task, response = drop(response))
+        response = mlr3misc::invoke(stats::predict, self$model, newdata = newdata, type = "class")
+        mlr3::PredictionClassif$new(task = task, response = drop(response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "probs")
+        prob = mlr3misc::invoke(stats::predict, self$model, newdata = newdata, type = "probs")
         if (length(levs) == 2L) {
           prob = matrix(c(1 - prob, prob), ncol = 2L, byrow = FALSE)
           colnames(prob) = levs
         }
-        PredictionClassif$new(task = task, prob = prob)
+        mlr3::PredictionClassif$new(task = task, prob = prob)
       }
     }
   )

@@ -118,7 +118,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
         pars$s = self$param_set$default$s
       }
 
-      lp = invoke(predict, self$model, newx = newdata, type = "link", .args = pars)
+      lp = invoke(stats::predict, self$model, newx = newdata, type = "link", .args = pars)
 
       mlr3proba::PredictionSurv$new(task = task, crank = lp, lp = lp)
     }

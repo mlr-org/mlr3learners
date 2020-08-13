@@ -67,7 +67,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
           test = newdata, .args = model$pars)
       })
 
-      PredictionRegr$new(task = task, response = pred$fitted.values)
+      mlr3::PredictionRegr$new(task = task, response = pred$fitted.values)
     }
   )
 )

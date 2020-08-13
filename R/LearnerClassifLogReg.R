@@ -66,13 +66,13 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
-      p = unname(predict(self$model, newdata = newdata, type = "response"))
+      p = unname(stats::predict(self$model, newdata = newdata, type = "response"))
       levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {
-        PredictionClassif$new(task = task, response = ifelse(p < 0.5, levs[1L], levs[2L]))
+        mlr3::PredictionClassif$new(task = task, response = ifelse(p < 0.5, levs[1L], levs[2L]))
       } else {
-        PredictionClassif$new(task = task, prob = prob_vector_to_matrix(p, levs))
+        mlr3::PredictionClassif$new(task = task, prob = prob_vector_to_matrix(p, levs))
       }
     }
   )

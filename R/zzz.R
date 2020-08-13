@@ -15,7 +15,6 @@
 "_PACKAGE"
 
 register_mlr3 = function() {
-
   x = utils::getFromNamespace("mlr_learners", ns = "mlr3")
 
   # classification learners
@@ -59,3 +58,5 @@ register_mlr3 = function() {
   pkgname = vapply(hooks, function(x) environment(x)$pkgname, NA_character_)
   setHook(event, hooks[pkgname != "mlr3learners"], action = "replace")
 } # nocov end
+
+leanify_package()

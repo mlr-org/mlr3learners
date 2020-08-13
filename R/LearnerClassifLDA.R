@@ -74,14 +74,14 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
         pars$predict.prior = NULL
       }
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model,
+      p = mlr3misc::invoke(stats::predict, self$model,
         newdata = newdata,
         .args = self$param_set$get_values(tags = "predict"))
 
       if (self$predict_type == "response") {
-        PredictionClassif$new(task = task, response = p$class)
+        mlr3::PredictionClassif$new(task = task, response = p$class)
       } else {
-        PredictionClassif$new(task = task, response = p$class, prob = p$posterior)
+        mlr3::PredictionClassif$new(task = task, response = p$class, prob = p$posterior)
       }
     }
   )

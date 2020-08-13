@@ -36,14 +36,15 @@ Depends:
     R (>= 3.1.0)
 Imports:
     data.table,
-    mlr3 (>= 0.4.0.9000),
-    mlr3misc (>= 0.2.0),
+    mlr3 (>= 0.5.0),
+    mlr3misc (>= 0.5.0),
     paradox,
     R6
 Suggests:
     bibtex,
     checkmate,
     DiceKriging,
+    distr6,
     e1071,
     glmnet,
     kknn,
@@ -54,15 +55,15 @@ Suggests:
     nnet,
     pracma,
     ranger,
+    rgenoud,
     rmarkdown,
     testthat,
     xgboost
 RdMacros:
     mlr3misc
-Remotes: 
-    mlr-org/mlr3,
-    mlr-org/mlr3proba
+Remotes:
+    mlr-org/mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9000
