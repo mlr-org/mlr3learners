@@ -115,7 +115,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
       p = mlr3misc::invoke(DiceKriging::predict.km,
         self$model,
         newdata = newdata,
-        type = checkmate::"%??%"(pars$type, "SK"),
+        type = if (is.null(pars$type)) "SK" else pars$type,
         se.compute = self$predict_type == "se",
         .args = remove_named(pars, "jitter")
       )
