@@ -1,3 +1,9 @@
+# mlr3learners 0.2.0.9004
+
+- The `$model` slot of the {kknn} learner now returns a list containing some information which is being used during the predict step. 
+  Before, the slot was empty because there is no training step for {kknn}.
+
+
 # mlr3learners 0.2.0.9003
 
 - Compact in-memory representation of R6 objects to save space when saving mlr3 objects via `saveRDS()`, `serialize()` etc.
