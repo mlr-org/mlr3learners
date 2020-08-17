@@ -8,6 +8,17 @@
 k-Nearest-Neighbor classification.
 Calls \code{\link[kknn:kknn]{kknn::kknn()}} from package \CRANpkg{kknn}.
 }
+\note{
+There is no training step for k-NN models, just storing the training data to
+process it during the predict step.
+Therefore, \verb{$model} returns a list with the following elements:
+\itemize{
+\item \code{formula}: Formula for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
+\item \code{data}: Training data for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
+\item \code{pars}: Training parameters for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
+\item \code{kknn}: Model as returned by \code{\link[kknn:kknn]{kknn::kknn()}}, only available \strong{after} \verb{$predict()} has been called.
+}
+}
 \section{Dictionary}{
 
 This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.kknn")

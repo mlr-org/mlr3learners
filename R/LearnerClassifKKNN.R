@@ -6,6 +6,8 @@
 #' k-Nearest-Neighbor classification.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
+#' @template note_kknn
+#'
 #' @templateVar id classif.kknn
 #' @template section_dictionary_learner
 #'
@@ -55,12 +57,13 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
       list(
         formula = task$formula(),
         data = task$data(),
-        pars = self$param_set$get_values(tags = "train")
+        pars = self$param_set$get_values(tags = "train"),
+        kknn = NULL
       )
     },
 
     .predict = function(task) {
-      model = self$model
+      model = self$state$model
       newdata = task$data(cols = task$feature_names)
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
@@ -68,6 +71,8 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
           formula = model$formula, train = model$data,
           test = newdata, .args = model$pars)
       })
+
+      self$state$model$kknn = p
 
       if (self$predict_type == "response") {
         mlr3::PredictionClassif$new(task = task, response = p$fitted.values)
