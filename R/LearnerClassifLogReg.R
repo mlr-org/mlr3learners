@@ -72,7 +72,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
       if (self$predict_type == "response") {
         mlr3::PredictionClassif$new(task = task, response = ifelse(p < 0.5, levs[1L], levs[2L]))
       } else {
-        mlr3::PredictionClassif$new(task = task, prob = prob_vector_to_matrix(p, levs))
+        mlr3::PredictionClassif$new(task = task, prob = pvec2mat(p, levs))
       }
     }
   )

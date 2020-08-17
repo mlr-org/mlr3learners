@@ -9,15 +9,24 @@ test_that("autotest", {
   expect_true(result, info = result$error)
 })
 
-test_that("custom model AB", {
+test_that("custom model", {
   task = tsk("iris")
   learner = mlr3::lrn("classif.kknn")
   expect_null(learner$model)
 
   learner$train(task)
-  expect_null(learner$model)
+  mod = learner$model
+  expect_list(mod, names = "unique", len = 4L)
+  expect_null(mod$kknn)
+  expect_formula(mod$formula)
+  expect_data_table(mod$data)
+  expect_list(mod$pars, names = "unique")
 
   learner$predict(task)
-  learner$state
-  expect_is(learner$model, "kknn")
+  mod = learner$model
+  expect_list(mod, names = "unique", len = 4L)
+  expect_is(mod$kknn, "kknn")
+  expect_formula(mod$formula)
+  expect_data_table(mod$data)
+  expect_list(mod$pars, names = "unique")
 })

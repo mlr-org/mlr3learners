@@ -230,7 +230,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           prob = matrix(pred, ncol = nlvls, byrow = TRUE)
           colnames(prob) = lvls
         } else {
-          prob = prob_vector_to_matrix(pred, lvls)
+          prob = pvec2mat(pred, lvls)
         }
       } else { # multiclass
         if (pars$objective == "multi:softmax") {

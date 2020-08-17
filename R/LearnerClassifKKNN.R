@@ -6,6 +6,8 @@
 #' k-Nearest-Neighbor classification.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
+#' @template note_kknn
+#'
 #' @templateVar id classif.kknn
 #' @template section_dictionary_learner
 #'
@@ -47,12 +49,6 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
         packages = "kknn",
         man = "mlr3learners::mlr_learners_classif.kknn"
       )
-    }
-  ),
-
-  active = list(
-    model = function() {
-      self$state$model$kknn
     }
   ),
 

@@ -6,6 +6,8 @@
 #' k-Nearest-Neighbor regression.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
+#' @template note_kknn
+#'
 #' @templateVar id regr.kknn
 #' @template section_dictionary_learner
 #'
@@ -53,7 +55,8 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
       list(
         formula = task$formula(),
         data = task$data(),
-        pars = self$param_set$get_values(tags = "train")
+        pars = self$param_set$get_values(tags = "train"),
+        kknn = NULL
       )
     },
 
@@ -62,12 +65,14 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
       newdata = task$data(cols = task$feature_names)
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
-        pred = invoke(kknn::kknn,
+        p = invoke(kknn::kknn,
           formula = model$formula, train = model$data,
           test = newdata, .args = model$pars)
       })
 
-      mlr3::PredictionRegr$new(task = task, response = pred$fitted.values)
+      self$state$model$kknn = p
+
+      mlr3::PredictionRegr$new(task = task, response = p$fitted.values)
     }
   )
 )

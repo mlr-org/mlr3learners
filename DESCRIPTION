@@ -61,7 +61,9 @@ Suggests:
     xgboost
 RdMacros:
     mlr3misc
+Remotes:
+    mlr-org/mlr3proba
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.1
