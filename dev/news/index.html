@@ -80,7 +80,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.2.0.9003</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.2.0.9004</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -146,6 +146,14 @@
       <small>Source: <a href='https://github.com/mlr-org/mlr3learners/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="mlr3learners-0209004" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0.9004">
+<a href="#mlr3learners-0209004" class="anchor"></a>mlr3learners 0.2.0.9004<small> Unreleased </small>
+</h1>
+<ul>
+<li>The <code>$model</code> slot of the {kknn} learner now returns a list containing some information which is being used during the predict step. Before, the slot was empty because there is no training step for {kknn}.</li>
+</ul>
+</div>
     <div id="mlr3learners-0209003" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0.9003">
 <a href="#mlr3learners-0209003" class="anchor"></a>mlr3learners 0.2.0.9003<small> Unreleased </small>
@@ -157,6 +165,7 @@
 <li>add surv.ranger (<a href='https://github.com/mlr-org/mlr3learners/issues/134'>#134</a>)</li>
 <li>Require mlr3proba CRAN (<a href='https://github.com/mlr-org/mlr3learners/issues/144'>#144</a>)</li>
 <li>add mlr3learners.catboost (<a href='https://github.com/mlr-org/mlr3learners/issues/143'>#143</a>)</li>
+<li>Allow accessing the model as returned by <code>kknn</code> after <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> has been called.</li>
 </ul>
 </div>
     <div id="mlr3learners-0209002" class="section level1">
