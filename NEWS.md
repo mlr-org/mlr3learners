@@ -6,6 +6,8 @@
 - add surv.ranger (#134)
 - Require mlr3proba CRAN (#144)
 - add mlr3learners.catboost (#143)
+- Allow accessing the model as returned by `kknn` after `predict()` has been
+  called.
 
 
 # mlr3learners 0.2.0.9002
@@ -30,7 +32,7 @@
 - Split {glmnet} learner into `cv_glmnet` and `glmnet` (#99)
 - {glmnet} learners: Add `predict.gamma` and `newoffset` arg (#98)
 - We now test that all learners can be constructed without parameters.
-- A new custom "Paramtest" which lives `inst/paramtest` was added. 
+- A new custom "Paramtest" which lives `inst/paramtest` was added.
   This test checks against the arguments of the upstream train & predict functions and ensures that all parameters are implemented in the respective mlr3 learner. (#96)
 - A lot missing parameters were added to learners. See #96 for a complete list.
 - Add parameter `interaction_constraints` to {xgboost} learners (#97).
