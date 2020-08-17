@@ -79,9 +79,9 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
       self$state$model$kknn = p
 
       if (self$predict_type == "response") {
-        PredictionClassif$new(task = task, response = p$fitted.values)
+        mlr3::PredictionClassif$new(task = task, response = p$fitted.values)
       } else {
-        PredictionClassif$new(task = task, prob = p$prob)
+        mlr3::PredictionClassif$new(task = task, prob = p$prob)
       }
     }
   )

@@ -5,6 +5,9 @@ os: linux
 language: r
 cache: packages
 latex: false
+branches:
+  only:
+  - master
 
 # Stages -----------------------------------------------------------------------
 

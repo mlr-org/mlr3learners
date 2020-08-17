@@ -1,11 +1,10 @@
 # mlr3learners
 
-Package website: [release](https://mlr3learners.mlr-org.com/) |
-[dev](https://mlr3learners.mlr-org.com/dev)
+Package website: [release](https://mlr3learners.mlr-org.com/) | [dev](https://mlr3learners.mlr-org.com/dev)
 
 <!-- badges: start -->
 
-[![R CMD Check via {tic}](https://github.com/mlr-org/mlr3learners/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
+[![tic](https://github.com/mlr-org/mlr3learners/workflows/tic/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
 [![Parameter Check](https://github.com/mlr-org/mlr3learners/workflows/Parameter%20Check/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
 [![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
@@ -42,6 +41,7 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 
 | ID                                                                                                      | Learner                       | Package                                               |
 | :------------------------------------------------------------------------------------------------------ | :---------------------------- | :---------------------------------------------------- |
+| [classif.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.cv_glmnet.html)     | Penalized Logistic Regression | [glmnet](https://cran.r-project.org/package=glmnet)   |
 | [classif.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html)           | Penalized Logistic Regression | [glmnet](https://cran.r-project.org/package=glmnet)   |
 | [classif.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html)               | k-Nearest Neighbors           | [kknn](https://cran.r-project.org/package=kknn)       |
 | [classif.lda](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.lda.html)                 | LDA                           | [MASS](https://cran.r-project.org/package=MASS)       |
@@ -55,15 +55,16 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 
 ## Regression Learners
 
-| ID                                                                                        | Learner                     | Package                                                       |
-| :---------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
-| [regr.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html)   | Penalized Linear Regression | [glmnet](https://cran.r-project.org/package=glmnet)           |
-| [regr.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html)       | k-Nearest Neighbors         | [kknn](https://cran.r-project.org/package=kknn)               |
-| [regr.km](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html)           | Kriging                     | [DiceKriging](https://cran.r-project.org/package=DiceKriging) |
-| [regr.lm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html)           | Linear Regression           | stats                                                         |
-| [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)   | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
-| [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)         | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
-| [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html) | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
+| ID                                                                                            | Learner                     | Package                                                       |
+| :-------------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
+| [regr.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.cv_glmnet.html) | Penalized Linear Regression | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [regr.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html)       | Penalized Linear Regression | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [regr.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html)           | k-Nearest Neighbors         | [kknn](https://cran.r-project.org/package=kknn)               |
+| [regr.km](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html)               | Kriging                     | [DiceKriging](https://cran.r-project.org/package=DiceKriging) |
+| [regr.lm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html)               | Linear Regression           | stats                                                         |
+| [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
+| [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
+| [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
 
 ## More Learners
 

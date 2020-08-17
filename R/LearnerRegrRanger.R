@@ -111,6 +111,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #'
     #' @return `numeric(1)`.
     oob_error = function() {
+      if (is.null(self$model)) {
+        stopf("No model stored")
+      }
       self$model$prediction.error
     }
   ),
@@ -134,10 +137,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      preds = mlr3misc::invoke(predict, self$model,
+      preds = mlr3misc::invoke(stats::predict, self$model,
         data = newdata,
         type = self$predict_type, .args = pars)
-      PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
+      mlr3::PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
     }
   )
 )

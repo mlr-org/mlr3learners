@@ -15,3 +15,6 @@
 vignettes/learners/
 ^\.ccache$
 ^clang-.*
+^gfortran.*
+^tic\.R$
+^revdep$

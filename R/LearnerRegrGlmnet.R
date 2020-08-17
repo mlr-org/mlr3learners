@@ -4,9 +4,15 @@
 #'
 #' @description
 #' Generalized linear models with elastic net regularization.
-#' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
+#' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
 #' The default for hyperparameter `family` is changed to `"gaussian"`.
+#'
+#' Caution: This learner is different to `cv_glmnet` in that it does not use the
+#' internal optimization of lambda. The parameter needs to be tuned by the user.
+#' Essentially, one needs to tune parameter `s` which is used at predict-time.
+#'
+#' See https://stackoverflow.com/questions/50995525/ for more information.
 #'
 #' @templateVar id regr.glmnet
 #' @template section_dictionary_learner
@@ -31,13 +37,10 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
           tags = "train"),
         ParamUty$new("offset", default = NULL, tags = "train"),
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-        ParamInt$new("nfolds", lower = 3L, default = 10L, tags = "train"),
         ParamFct$new("type.measure",
           levels = c("deviance", "class", "auc", "mse", "mae"),
           default = "deviance", tags = "train"),
-        ParamDbl$new("s",
-          lower = 0, special_vals = list("lambda.1se", "lambda.min"),
-          default = "lambda.1se", tags = "predict"),
+        ParamDbl$new("s", lower = 0, default = 0.01, tags = "predict"),
         ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
         ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("lambda", tags = "train"),
@@ -47,7 +50,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         ParamInt$new("dfmax", lower = 0L, tags = "train"),
         ParamInt$new("pmax", lower = 0L, tags = "train"),
         ParamInt$new("exclude", lower = 1L, tags = "train"),
-        ParamDbl$new("penalty.factor", lower = 0, upper = 1, tags = "train"),
+        ParamUty$new("penalty.factor", tags = "train"),
         ParamUty$new("lower.limits", tags = "train"),
         ParamUty$new("upper.limits", tags = "train"),
         ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
@@ -57,22 +60,26 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         ParamLgl$new("keep", default = FALSE, tags = "train"),
         ParamLgl$new("parallel", default = FALSE, tags = "train"),
         ParamInt$new("trace.it", default = 0, lower = 0, upper = 1, tags = "train"),
-        ParamUty$new("foldid", default = NULL, tags = "train"),
         ParamFct$new("alignment",
           default = "lambda",
           levels = c("lambda", "fraction"), tags = "train"),
         ParamLgl$new("grouped", default = TRUE, tags = "train"),
-        ParamUty$new("gamma", tags = "train"),
         ParamLgl$new("relax", default = FALSE, tags = "train"),
         ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("epsnr", default = 1.0e-8, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("big", default = 9.9e35, tags = "train"),
         ParamInt$new("mnlam", default = 5L, lower = 1L, tags = "train"),
         ParamDbl$new("pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
         ParamDbl$new("exmx", default = 250.0, tags = "train"),
         ParamDbl$new("prec", default = 1e-10, tags = "train"),
-        ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train")
+        ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train"),
+        ParamInt$new("mxitnr", default = 25L, lower = 1L, tags = "train"),
+        ParamUty$new("newoffset", tags = "predict"),
+        ParamDbl$new("predict.gamma", default = 1, tags = "predict"),
+        ParamLgl$new("exact", default = FALSE, tags = "predict"),
+        ParamDbl$new("gamma", default = 1, tags = "predict")
       ))
       ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
       ps$add_dep("type.gaussian", "family", CondEqual$new("gaussian"))
@@ -110,15 +117,22 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         pars = pars[!is_ctrl_pars]
       }
 
-      mlr3misc::invoke(glmnet::cv.glmnet, x = data, y = target, .args = pars)
+      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, .args = pars)
     },
 
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
-      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pars)
-      PredictionRegr$new(task = task, response = drop(response))
+      # only predict for one instance of 's' and not for 100
+      if (is.null(pars$s)) {
+        pars$s = self$param_set$default$s
+      }
+
+      response = mlr3misc::invoke(stats::predict, self$model,
+        newx = newdata,
+        type = "response", .args = pars)
+      mlr3::PredictionRegr$new(task = task, response = drop(response))
     }
   )
 )

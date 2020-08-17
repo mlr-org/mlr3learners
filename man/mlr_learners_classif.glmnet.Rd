@@ -6,7 +6,13 @@
 \title{GLM with Elastic Net Regularization Classification Learner}
 \description{
 Generalized linear models with elastic net regularization.
-Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
+Calls \code{\link[glmnet:glmnet]{glmnet::glmnet()}} from package \CRANpkg{glmnet}.
+
+Caution: This learner is different to \verb{_glmnet} in that it does not use the
+internal optimization of lambda. The parameter needs to be tuned by the user.
+Essentially, one needs to tune parameter \code{s} which is used at predict-time.
+
+See https://stackoverflow.com/questions/50995525/ for more information.
 }
 \section{Dictionary}{
 

@@ -111,6 +111,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           lower = 0, tags = "train"),
         ParamUty$new("save_name", default = NULL, tags = "train"),
         ParamUty$new("xgb_model", default = NULL, tags = "train"),
+        ParamUty$new("interaction_constraints", tags = "train"),
         ParamLgl$new("outputmargin", default = FALSE, tags = "predict"),
         ParamInt$new("ntreelimit",
           default = NULL, special_vals = list(NULL),
@@ -222,7 +223,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      pred = mlr3misc::invoke(predict, model, newdata = newdata, .args = pars)
+      pred = mlr3misc::invoke(stats::predict, model, newdata = newdata, .args = pars)
 
       if (nlvls == 2L) { # binaryclass
         if (pars$objective == "multi:softprob") {
@@ -241,13 +242,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       if (!is.null(response)) {
-        PredictionClassif$new(task = task, response = response)
+        mlr3::PredictionClassif$new(task = task, response = response)
       } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
         response = factor(colnames(prob)[i], levels = lvls)
-        PredictionClassif$new(task = task, response = response)
+        mlr3::PredictionClassif$new(task = task, response = response)
       } else {
-        PredictionClassif$new(task = task, prob = prob)
+        mlr3::PredictionClassif$new(task = task, prob = prob)
       }
     }
   )
