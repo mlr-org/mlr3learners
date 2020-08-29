@@ -7,10 +7,10 @@
   objects via `saveRDS()`, `serialize()` etc.
 - glmnet learners: `penalty.factor` is a vector param, not a `ParamDbl` (#141)
 - glmnet: Add params `mxitnr` and `epsnr` from glmnet v4.0 update
+- Add learner `surv.glmnet` (#130)
 - Suggest package `mlr3proba` (#144)
 - Add learner `surv.xgboost` (#135)
 - Add learner `surv.ranger` (#134)
-- Add learner `surv.glmnet` (#130)
 
 
 # mlr3learners 0.2.0
