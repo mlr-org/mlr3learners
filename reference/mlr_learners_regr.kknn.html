@@ -83,7 +83,7 @@ Calls kknn::kknn() from package kknn." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.2.0</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.3.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -156,6 +156,17 @@ Calls <code><a href='https://rdrr.io/pkg/kknn/man/kknn.html'>kknn::kknn()</a></c
     </div>
 
 
+
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>There is no training step for k-NN models, just storing the training data to
+process it during the predict step.
+Therefore, <code>$model</code> returns a list with the following elements:</p><ul>
+<li><p><code>formula</code>: Formula for calling <code><a href='https://rdrr.io/pkg/kknn/man/kknn.html'>kknn::kknn()</a></code> during <code>$predict()</code>.</p></li>
+<li><p><code>data</code>: Training data for calling <code><a href='https://rdrr.io/pkg/kknn/man/kknn.html'>kknn::kknn()</a></code> during <code>$predict()</code>.</p></li>
+<li><p><code>pars</code>: Training parameters for calling <code><a href='https://rdrr.io/pkg/kknn/man/kknn.html'>kknn::kknn()</a></code> during <code>$predict()</code>.</p></li>
+<li><p><code>kknn</code>: Model as returned by <code><a href='https://rdrr.io/pkg/kknn/man/kknn.html'>kknn::kknn()</a></code>, only available <strong>after</strong> <code>$predict()</code> has been called.</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
