@@ -146,52 +146,19 @@
       <small>Source: <a href='https://github.com/mlr-org/mlr3learners/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="mlr3learners-0209004" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9004">
-<a href="#mlr3learners-0209004" class="anchor"></a>mlr3learners 0.2.0.9004<small> Unreleased </small>
+    <div id="mlr3learners-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#mlr3learners-030" class="anchor"></a>mlr3learners 0.3.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>The <code>$model</code> slot of the {kknn} learner now returns a list containing some information which is being used during the predict step. Before, the slot was empty because there is no training step for {kknn}.</li>
-</ul>
-</div>
-    <div id="mlr3learners-0209003" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9003">
-<a href="#mlr3learners-0209003" class="anchor"></a>mlr3learners 0.2.0.9003<small> Unreleased </small>
-</h1>
-<ul>
 <li>Compact in-memory representation of R6 objects to save space when saving mlr3 objects via <code><a href="https://rdrr.io/r/base/readRDS.html">saveRDS()</a></code>, <code><a href="https://rdrr.io/r/base/serialize.html">serialize()</a></code> etc.</li>
 <li>glmnet learners: <code>penalty.factor</code> is a vector param, not a <code>ParamDbl</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/141'>#141</a>)</li>
-<li>add surv.xgboost (<a href='https://github.com/mlr-org/mlr3learners/issues/135'>#135</a>)</li>
-<li>add surv.ranger (<a href='https://github.com/mlr-org/mlr3learners/issues/134'>#134</a>)</li>
-<li>Require mlr3proba CRAN (<a href='https://github.com/mlr-org/mlr3learners/issues/144'>#144</a>)</li>
-<li>add mlr3learners.catboost (<a href='https://github.com/mlr-org/mlr3learners/issues/143'>#143</a>)</li>
-<li>Allow accessing the model as returned by <code>kknn</code> after <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> has been called.</li>
-</ul>
-</div>
-    <div id="mlr3learners-0209002" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9002">
-<a href="#mlr3learners-0209002" class="anchor"></a>mlr3learners 0.2.0.9002<small> Unreleased </small>
-</h1>
-<ul>
-<li>Add surv glmnet (<a href='https://github.com/mlr-org/mlr3learners/issues/130'>#130</a>)</li>
-<li>Increase mlr3 minimum version to v0.3.0</li>
-<li>Request mlr3proba &gt;= 0.1.6 for survival learners</li>
-</ul>
-</div>
-    <div id="mlr3learners-0209001" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9001">
-<a href="#mlr3learners-0209001" class="anchor"></a>mlr3learners 0.2.0.9001<small> Unreleased </small>
-</h1>
-<ul>
-<li>Glmnet: Add params <code>mxitnr</code> and <code>epsnr</code> from glmnet v4.0 update</li>
-</ul>
-</div>
-    <div id="mlr3learners-0209000" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9000">
-<a href="#mlr3learners-0209000" class="anchor"></a>mlr3learners 0.2.0.9000<small> Unreleased </small>
-</h1>
-<ul>
-<li>Internal changes only.</li>
+<li>glmnet: Add params <code>mxitnr</code> and <code>epsnr</code> from glmnet v4.0 update</li>
+<li>Suggest package <code>mlr3proba</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/144'>#144</a>)</li>
+<li>Add learner <code>surv.xgboost</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/135'>#135</a>)</li>
+<li>Add learner <code>surv.ranger</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/134'>#134</a>)</li>
+<li>Add learner <code>surv.glmnet</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/130'>#130</a>)</li>
 </ul>
 </div>
     <div id="mlr3learners-020" class="section level1">
