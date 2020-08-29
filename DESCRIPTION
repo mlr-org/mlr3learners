@@ -51,7 +51,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
-    mlr3proba (>= 0.2.0),
+    mlr3proba (>= 0.2.1),
     nnet,
     pracma,
     ranger,

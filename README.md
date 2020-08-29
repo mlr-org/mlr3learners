@@ -1,6 +1,6 @@
 # mlr3learners
 
-Package website: [release](https://mlr3learners.mlr-org.com/) | [dev](https://mlr3learners.mlr-org.com/dev)
+Package website: [release](https://mlr3learners.mlr-org.com/) | [dev](https://mlr3learners.mlr-org.com/dev/)
 
 <!-- badges: start -->
 

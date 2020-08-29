@@ -1,36 +1,16 @@
-# mlr3learners 0.2.0.9004
+# mlr3learners 0.3.0
 
-- The `$model` slot of the {kknn} learner now returns a list containing some information which is being used during the predict step. 
+- The `$model` slot of the {kknn} learner now returns a list containing some
+  information which is being used during the predict step.
   Before, the slot was empty because there is no training step for {kknn}.
-
-
-# mlr3learners 0.2.0.9003
-
-- Compact in-memory representation of R6 objects to save space when saving mlr3 objects via `saveRDS()`, `serialize()` etc.
+- Compact in-memory representation of R6 objects to save space when saving mlr3
+  objects via `saveRDS()`, `serialize()` etc.
 - glmnet learners: `penalty.factor` is a vector param, not a `ParamDbl` (#141)
-- add surv.xgboost (#135)
-- add surv.ranger (#134)
-- Require mlr3proba CRAN (#144)
-- add mlr3learners.catboost (#143)
-- Allow accessing the model as returned by `kknn` after `predict()` has been
-  called.
-
-
-# mlr3learners 0.2.0.9002
-
-- Add surv glmnet (#130)
-- Increase mlr3 minimum version to v0.3.0
-- Request mlr3proba >= 0.1.6 for survival learners
-
-
-# mlr3learners 0.2.0.9001
-
-- Glmnet: Add params `mxitnr` and `epsnr` from glmnet v4.0 update
-
-
-# mlr3learners 0.2.0.9000
-
-- Internal changes only.
+- glmnet: Add params `mxitnr` and `epsnr` from glmnet v4.0 update
+- Suggest package `mlr3proba` (#144)
+- Add learner `surv.xgboost` (#135)
+- Add learner `surv.ranger` (#134)
+- Add learner `surv.glmnet` (#130)
 
 
 # mlr3learners 0.2.0
