@@ -72,7 +72,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
       newdata = as.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
       response = invoke(stats::predict, self$model, newdata = newdata, type = "response", .args = pars)
-      mlr3::PredictionRegr$new(task = task, response = response)
+      list(response = response)
     }
   )
 )

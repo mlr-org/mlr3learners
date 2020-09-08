@@ -55,11 +55,11 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
         response = mlr3misc::invoke(stats::predict, self$model,
           newdata = newdata,
           type = "class", .args = pars)
-        mlr3::PredictionClassif$new(task = task, response = response)
+        list(response = response)
       } else {
         prob = mlr3misc::invoke(stats::predict, self$model, newdata = newdata,
           type = "raw", .args = pars)
-        mlr3::PredictionClassif$new(task = task, prob = prob)
+        list(prob = prob)
       }
     }
   )

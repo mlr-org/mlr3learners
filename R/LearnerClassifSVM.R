@@ -83,8 +83,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
         newdata = newdata,
         probability = (self$predict_type == "prob"), .args = pars)
 
-      mlr3::PredictionClassif$new(
-        task = task,
+      list(
         response = as.character(p),
         prob = attr(p, "probabilities") # is NULL if not requested during predict
       )

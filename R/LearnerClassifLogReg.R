@@ -70,9 +70,9 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
       levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {
-        mlr3::PredictionClassif$new(task = task, response = ifelse(p < 0.5, levs[1L], levs[2L]))
+        list(response = ifelse(p < 0.5, levs[1L], levs[2L]))
       } else {
-        mlr3::PredictionClassif$new(task = task, prob = pvec2mat(p, levs))
+        list(prob = pvec2mat(p, levs))
       }
     }
   )

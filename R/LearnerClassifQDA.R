@@ -76,9 +76,9 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
       p = mlr3misc::invoke(stats::predict, self$model, newdata = newdata, .args = pars)
 
       if (self$predict_type == "response") {
-        mlr3::PredictionClassif$new(task = task, response = p$class)
+        list(response = p$class)
       } else {
-        mlr3::PredictionClassif$new(task = task, prob = p$posterior)
+        list(prob = p$posterior)
       }
     }
   )

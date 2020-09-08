@@ -194,7 +194,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       newdata = newdata[, model$feature_names, drop = FALSE]
       response = invoke(stats::predict, model, newdata = newdata, .args = pars)
 
-      mlr3::PredictionRegr$new(task = task, response = response)
+      list(response = response)
     }
   )
 )

@@ -140,7 +140,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       preds = mlr3misc::invoke(stats::predict, self$model,
         data = newdata,
         type = self$predict_type, .args = pars)
-      mlr3::PredictionRegr$new(task = task, response = preds$predictions, se = preds$se)
+      list(response = preds$predictions, se = preds$se)
     }
   )
 )

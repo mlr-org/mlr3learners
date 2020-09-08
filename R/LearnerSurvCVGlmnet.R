@@ -125,7 +125,7 @@ LearnerSurvCVGlmnet = R6Class("LearnerSurvCVGlmnet",
       }
 
       lp = as.numeric(invoke(stats::predict, self$model, newx = newdata, type = "link", .args = pars))
-      mlr3proba::PredictionSurv$new(task = task, lp = lp, crank = lp)
+      list(lp = lp, crank = lp)
     }
   )
 )

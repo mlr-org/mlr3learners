@@ -242,13 +242,12 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       if (!is.null(response)) {
-        mlr3::PredictionClassif$new(task = task, response = response)
+        list(response = response)
       } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
-        response = factor(colnames(prob)[i], levels = lvls)
-        mlr3::PredictionClassif$new(task = task, response = response)
+        list(response = factor(colnames(prob)[i], levels = lvls))
       } else {
-        mlr3::PredictionClassif$new(task = task, prob = prob)
+        list(prob = prob)
       }
     }
   )

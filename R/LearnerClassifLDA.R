@@ -79,9 +79,9 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
         .args = self$param_set$get_values(tags = "predict"))
 
       if (self$predict_type == "response") {
-        mlr3::PredictionClassif$new(task = task, response = p$class)
+        list(response = p$class)
       } else {
-        mlr3::PredictionClassif$new(task = task, response = p$class, prob = p$posterior)
+        list(response = p$class, prob = p$posterior)
       }
     }
   )
