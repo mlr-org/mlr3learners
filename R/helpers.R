@@ -15,6 +15,8 @@ ordered_features = function(task, feature_names) {
 }
 
 glmnet_feature_names = function(model) {
-  beta = model$beta %??% model$glmnet.fit$beta
+  beta = model$beta
+  if (is.null(beta))
+    beta = model$glmnet.fit$beta
   rownames(if (is.list(beta)) beta[[1L]] else beta)
 }
