@@ -129,9 +129,9 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         predict.type = "response", .args = pars)
 
       if (self$predict_type == "response") {
-        mlr3::PredictionClassif$new(task = task, response = p$predictions)
+        list(response = p$predictions)
       } else {
-        mlr3::PredictionClassif$new(task = task, prob = p$predictions)
+        list(prob = p$predictions)
       }
     }
   )

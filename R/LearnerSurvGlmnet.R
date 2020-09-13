@@ -120,7 +120,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
 
       lp = invoke(stats::predict, self$model, newx = newdata, type = "link", .args = pars)
 
-      mlr3proba::PredictionSurv$new(task = task, crank = lp, lp = lp)
+      list(crank = lp, lp = lp)
     }
   )
 )

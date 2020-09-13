@@ -72,7 +72,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
 
       self$state$model$kknn = p
 
-      mlr3::PredictionRegr$new(task = task, response = p$fitted.values)
+      list(response = p$fitted.values)
     }
   )
 )
