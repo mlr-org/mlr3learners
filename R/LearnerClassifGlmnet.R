@@ -135,8 +135,9 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
           .args = pars)
 
         if (length(task$class_names) == 2L) {
-          prob = cbind(prob, 1 - prob)
-          colnames(prob) = task$class_names
+          # glmnet returns probabilities for the **last** alphabetical class label
+          prob = cbind(1 - prob, prob)
+          colnames(prob) = sort(task$class_names)
         } else {
           prob = prob[, , 1L]
         }
