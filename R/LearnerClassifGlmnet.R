@@ -117,7 +117,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
 
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
-      newdata = as.matrix(task$data(cols = task$feature_names))
+      newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
 
       # only predict for one instance of 's' and not for 100
       if (is.null(pars$s)) {

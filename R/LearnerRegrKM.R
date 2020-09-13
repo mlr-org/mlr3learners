@@ -10,9 +10,9 @@
 #' * The additional hyperparameter `nugget.stability` is used to overwrite the
 #'   hyperparameter `nugget` with `nugget.stability * var(y)` before training to
 #'   improve the numerical stability. We recommend a value of `1e-8`.
-#' * The additional hyperparameter `jitter` can be set to add `N(0,
-#'   [jitter])`-distributed noise to the data before prediction to avoid perfect
-#'   interpolation. We recommend a value of `1e-12`.
+#' * The additional hyperparameter `jitter` can be set to add
+#'   `N(0, [jitter])`-distributed noise to the data before prediction to avoid
+#'   perfect interpolation. We recommend a value of `1e-12`.
 #'
 #' @template section_dictionary_learner
 #' @templateVar id regr.km

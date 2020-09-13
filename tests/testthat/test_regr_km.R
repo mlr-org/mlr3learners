@@ -10,7 +10,7 @@ test_that("autotest", {
 })
 
 test_that("autotest w/ jitter", {
-  learner = mlr3::lrn("regr.km", nugget.stability = 1e-8, jitter = 1e-8)
+  learner = mlr3::lrn("regr.km", nugget.stability = 1e-8, jitter = 1e-12)
   expect_learner(learner)
   result = run_autotest(learner, exclude = "feat_single", N = 50)
   expect_true(result, info = result$error)
