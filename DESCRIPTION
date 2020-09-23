@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.3.0-9000
+Version: 0.4.0
 Authors@R:
     c(person(given = "Michel",
              family = "Lang",
@@ -51,7 +51,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
-    mlr3proba (>= 0.2.1),
+    mlr3proba (>= 0.2.2),
     nnet,
     pracma,
     ranger,
