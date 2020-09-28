@@ -249,6 +249,27 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       } else {
         list(prob = prob)
       }
+    },
+
+    .continue = function(task) {
+      model = self$model
+      pars = self$param_set$get_values(tags = "train")
+
+      if(model$niter >= pars$nrounds) {
+        stop("No additional boosting iterations provided.")
+      }
+
+      # Calculate additional boosting iterations
+      # niter in model and nrounds in ps should be equal after train and continue
+      pars$nrounds = pars$nrounds - model$niter
+
+      # Construct data
+      nlvls = length(task$class_names)
+      data = task$data(cols = task$feature_names)
+      label = nlvls - as.integer(task$truth())
+      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
+
+      invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
     }
   )
 )
