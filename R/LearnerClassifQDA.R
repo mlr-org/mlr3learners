@@ -16,7 +16,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' \cite{mlr3learners}{venables_2002}
+#' `r tools::toRd(bibentries["venables_2002"])`
 #'
 #' @export
 #' @template seealso_learner

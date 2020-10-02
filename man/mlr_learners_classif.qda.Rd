@@ -31,7 +31,10 @@ learner$param_set$ids()
 }
 }
 \references{
-\cite{mlr3learners}{venables_2002}
+Venables WN, Ripley BD (2002).
+\emph{Modern Applied Statistics with S}, Fourth edition.
+Springer, New York.
+ISBN 0-387-95457-0, \url{http://www.stats.ox.ac.uk/pub/MASS4/}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

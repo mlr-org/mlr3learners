@@ -36,11 +36,18 @@ learner$param_set$ids()
 }
 }
 \references{
-\cite{mlr3learners}{hechenbichler_2004}
-
-\cite{mlr3learners}{samworth_2012}
-
-\cite{mlr3learners}{cover_1967}
+Cover, Thomas, Hart, Peter (1967).
+\dQuote{Nearest neighbor pattern classification.}
+\emph{IEEE transactions on information theory}, \bold{13}(1), 21--27.
+\doi{10.1109/TIT.1967.1053964}.
+Hechenbichler, Klaus, Schliep, Klaus (2004).
+\dQuote{Weighted k-nearest-neighbor techniques and ordinal classification.}
+Technical Report Discussion Paper 399, SFB 386, Ludwig-Maximilians University Munich.
+\doi{10.5282/ubm/epub.1769}.
+Samworth, J R (2012).
+\dQuote{Optimal weighted nearest neighbour classifiers.}
+\emph{The Annals of Statistics}, \bold{40}(5), 2733--2763.
+\doi{10.1214/12-AOS1049}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

@@ -24,7 +24,10 @@ learner$param_set$ids()
 }
 }
 \references{
-\cite{mlr3learners}{cortes_1995}
+Cortes, Corinna, Vapnik, Vladimir (1995).
+\dQuote{Support-vector networks.}
+\emph{Machine Learning}, \bold{20}(3), 273--297.
+\doi{10.1007/BF00994018}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

@@ -22,7 +22,7 @@
 #' @templateVar id classif.xgboost
 #'
 #' @references
-#' \cite{mlr3learners}{chen_2016}
+#' `r tools::toRd(bibentries["chen_2016"])`
 #'
 #' @export
 #' @template seealso_learner
