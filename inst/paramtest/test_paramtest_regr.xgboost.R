@@ -13,7 +13,7 @@ test_that("regr.xgboost", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
 
 test_that("predict regr.xgboost", {
@@ -27,5 +27,5 @@ test_that("predict regr.xgboost", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
