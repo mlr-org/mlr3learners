@@ -59,6 +59,8 @@ Suggests:
     rmarkdown,
     testthat,
     xgboost
+Remotes:
+    mlr-org/mlr3@continue
 RdMacros:
     mlr3misc
 Encoding: UTF-8
