@@ -1,4 +1,4 @@
-library(mlr3learners)
+,ibrary(mlr3learners)
 
 test_that("regr.kknn", {
   learner = lrn("regr.kknn")
