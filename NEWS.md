@@ -1,6 +1,7 @@
-# mlr3learners 0.4.0.9000
+# mlr3learners 0.4.1
 
-- Internal changes only.
+- Disabled some `glmnet` tests on solaris.
+- Removed dependency on orphaned package `bibtex`.
 
 
 # mlr3learners 0.4.0

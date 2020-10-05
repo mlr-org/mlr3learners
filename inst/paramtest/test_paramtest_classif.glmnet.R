@@ -1,5 +1,7 @@
 library(mlr3learners)
 
+skip_on_os("solaris")
+
 test_that("classif.glmnet", {
   learner = lrn("classif.glmnet")
   fun = glmnet::cv.glmnet
