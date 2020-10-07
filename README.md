@@ -13,8 +13,10 @@ Package website: [release](https://mlr3learners.mlr-org.com/) | [dev](https://ml
 <!-- badges: end -->
 
 This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
-We will most likely not add new learners to this package.
-See section ["More Learners"](#more-learners) below for more information.
+Additional learners can be found in the [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners) package on GitHub.
+Request additional learners over there.
+
+:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html)
 
 ## Installation
 
@@ -65,9 +67,11 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
 
-## More Learners
+## Survival Learners (via [mlr3proba](https://mlr3proba.mlr-org.com))
 
-Additional learners can be found in the [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners) package.
-Request additional learners over there.
-
-:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html)
+| ID                                                                                            | Learner                     | Package                                                       |
+| :-------------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
+| [surv.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html) | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [surv.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html)       | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [surv.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
+| [surv.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |

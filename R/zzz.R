@@ -7,8 +7,8 @@
 #' @description
 #' More learners are implemented in the [mlr3extralearners package](https://github.com/mlr-org/mlr3extralearners).
 #' A guide on how to create custom learners is covered in the book:
-#' \url{https://mlr3book.mlr-org.com}. Feel invited to contribute a missing
-#' learner to the \CRANpkg{mlr3} ecosystem!
+#' \url{https://mlr3book.mlr-org.com}.
+#' Feel invited to contribute a missing learner to the \CRANpkg{mlr3} ecosystem!
 "_PACKAGE"
 
 register_mlr3 = function() {
