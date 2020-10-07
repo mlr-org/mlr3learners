@@ -8,8 +8,8 @@
 \description{
 More learners are implemented in the \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners package}.
 A guide on how to create custom learners is covered in the book:
-\url{https://mlr3book.mlr-org.com}. Feel invited to contribute a missing
-learner to the \CRANpkg{mlr3} ecosystem!
+\url{https://mlr3book.mlr-org.com}.
+Feel invited to contribute a missing learner to the \CRANpkg{mlr3} ecosystem!
 }
 \seealso{
 Useful links:
