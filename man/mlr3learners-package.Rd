@@ -6,11 +6,8 @@
 \alias{mlr3learners-package}
 \title{mlr3learners: Recommended Learners for 'mlr3'}
 \description{
-More learners are available in the \code{mlr3learners} repository on Github
-(\url{https://github.com/mlr3learners}). There also is a wiki page listing
-all currently available custom learners
-(\url{https://github.com/mlr-org/mlr3learners/wiki/Extra-Learners}). A guide
-on how to create custom learners is covered in the book:
+More learners are implemented in the \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners package}.
+A guide on how to create custom learners is covered in the book:
 \url{https://mlr3book.mlr-org.com}. Feel invited to contribute a missing
 learner to the \CRANpkg{mlr3} ecosystem!
 }
