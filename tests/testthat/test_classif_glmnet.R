@@ -1,6 +1,7 @@
 context("classif.glmnet")
 
 skip_if_not_installed("glmnet")
+skip_on_os("solaris")
 
 test_that("autotest", {
   learner = mlr3::lrn("classif.glmnet")
