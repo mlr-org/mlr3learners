@@ -44,7 +44,7 @@ navbar:
       href: https://mlr-org.com/
     learners:
       text: Additional Learners
-      href: articles/learners/additional-learners.html
+      href: https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html
 
 reference:
   - title: Classification Learnes
