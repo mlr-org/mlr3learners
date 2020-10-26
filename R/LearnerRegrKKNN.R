@@ -12,11 +12,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' \cite{mlr3learners}{hechenbichler_2004}
-#'
-#' \cite{mlr3learners}{samworth_2012}
-#'
-#' \cite{mlr3learners}{cover_1967}
+#' `r tools::toRd(bibentries[c("hechenbichler_2004", "samworth_2012", "cover_1967")])`
 #'
 #' @export
 #' @template seealso_learner

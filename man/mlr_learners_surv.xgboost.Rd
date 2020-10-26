@@ -57,7 +57,11 @@ learner$param_set$ids()
 }
 }
 \references{
-\cite{mlr3learners}{chen_2016}
+Chen, Tianqi, Guestrin, Carlos (2016).
+\dQuote{Xgboost: A scalable tree boosting system.}
+In \emph{Proceedings of the 22nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining}, 785--794.
+ACM.
+\doi{10.1145/2939672.2939785}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

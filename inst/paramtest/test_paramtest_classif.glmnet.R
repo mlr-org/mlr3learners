@@ -1,5 +1,7 @@
 library(mlr3learners)
 
+skip_on_os("solaris")
+
 test_that("classif.glmnet", {
   learner = lrn("classif.glmnet")
   fun = glmnet::cv.glmnet
@@ -14,7 +16,7 @@ test_that("classif.glmnet", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
 
 # example for checking a "control" function of a learner
@@ -29,7 +31,7 @@ test_that("classif.glmnet", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
 
 test_that("predict classif.glmnet", {
@@ -44,5 +46,5 @@ test_that("predict classif.glmnet", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })

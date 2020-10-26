@@ -10,9 +10,7 @@
 #' @templateVar id classif.ranger
 #'
 #' @references
-#' \cite{mlr3learners}{wright_2017}
-#'
-#' \cite{mlr3learners}{breiman_2001}
+#' `r tools::toRd(bibentries[c("wright_2017", "breiman_2001")])`
 #'
 #' @export
 #' @template seealso_learner

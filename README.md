@@ -6,16 +6,17 @@ Package website: [release](https://mlr3learners.mlr-org.com/) | [dev](https://ml
 
 [![tic](https://github.com/mlr-org/mlr3learners/workflows/tic/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
 [![Parameter Check](https://github.com/mlr-org/mlr3learners/workflows/Parameter%20Check/badge.svg?branch=master)](https://github.com/mlr-org/mlr3learners/actions)
-[![CRAN Status Badge](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
-[![Cran Checks](https://cranchecks.info/badges/worst/mlr3learners)](https://cran.r-project.org/web/checks/check_results_mlr3learners.html)
-[![Codecov](https://codecov.io/gh/mlr-org/mlr3learners/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr-org/mlr3learners)
+[![CRAN Status](https://www.r-pkg.org/badges/version-ago/mlr3learners)](https://cran.r-project.org/package=mlr3learners)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
+[![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 
 <!-- badges: end -->
 
 This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
-We will most likely not add new learners to this package.
-See section ["More Learners"](#more-learners) below for more information.
+Additional learners can be found in the [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners) package on GitHub.
+Request additional learners over there.
+
+:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html)
 
 ## Installation
 
@@ -66,35 +67,11 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
 
-## More Learners
+## Survival Learners (via [mlr3proba](https://mlr3proba.mlr-org.com))
 
-Learners from other packages live in the [mlr3learners](https://github.com/mlr3learners) organization and are possibly maintained by people _outside_ the mlr-org team.
-
-:point_right: [Table of all additional learners](https://mlr3learners.mlr-org.com/dev/articles/learners/additional-learners.html)
-
-## Requesting/Adding Additional Learners
-
-Follow these steps to add/request a new learner.
-
-1. Open an issue in [mlr3learners](https://github.com/mlr-org/mlr3learners/issues) following the issue template.
-   (If you don't want to add the learner yourself, you are done here.
-   We might take your vote into consideration but can't promise when your requested learner will be available.)
-1. Fork the [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template) repo and adjust the template to match your learner.
-   Essentially, replace the placeholders like `<package>` with the respective terms for your learner.
-   More detailed instructions including FAQ are given in section ["Adding new Learners"](https://mlr3book.mlr-org.com/extending-learners.html) of the mlr3book.
-1. When you are done, request a review for the learner.
-   Make sure that you have checked on all points of [this checklist](https://github.com/mlr-org/mlr3learners.template/issues/5) before requesting a review.
-1. After approval, transfer the learner to the [mlr3learners](https://github.com/mlr3learners) organization.
-   To do so, please first request an invitation from [@pat-s](https://github.com/pat-s) / [@be-marc](https://github.com/be-marc) to be added to the [mlr3learners](https://github.com/mlr3learners) organization.
-   Once transferred, you will get access rights to the learner repository to finalize and maintain it.
-1. Congrats! Your learner has been successfully added to the mlr3 ecosystem.
-   Now the last step is to add the learner to [{mlr3learners.drat}](https://github.com/mlr3learners/mlr3learners.drat).
-   This makes is possible to install the learner via `install.packages()` without the need to submit the learner to CRAN (none of the custom learners live on CRAN).
-
-**Resources for adding a new learner (summary)**
-
-- [mlr3learners.template](https://github.com/mlr-org/mlr3learners.template)
-- [mlr3book section "Adding new learners" including FAQ](https://mlr3book.mlr-org.com/extending-learners.html)
-- [Checklist prior to requesting a review](https://github.com/mlr-org/mlr3learners.template/issues/5)
-
-Last, thanks for contributing to the mlr3 ecosystem! We would be very happy if you keep maintaining the learner against upstream changes :)
+| ID                                                                                            | Learner                     | Package                                                       |
+| :-------------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
+| [surv.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html) | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [surv.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html)       | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
+| [surv.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
+| [surv.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |

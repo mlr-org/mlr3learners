@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.4.0
+Version: 0.4.1
 Authors@R:
     c(person(given = "Michel",
              family = "Lang",
@@ -41,7 +41,6 @@ Imports:
     paradox,
     R6
 Suggests:
-    bibtex,
     checkmate,
     DiceKriging,
     distr6,
@@ -61,8 +60,6 @@ Suggests:
     xgboost
 Remotes:
     mlr-org/mlr3@continue
-RdMacros:
-    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)

@@ -9,7 +9,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' \cite{mlr3learners}{cortes_1995}
+#' `r tools::toRd(bibentries["cortes_1995"])`
 #'
 #' @export
 #' @template seealso_learner

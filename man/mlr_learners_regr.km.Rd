@@ -34,7 +34,10 @@ learner$param_set$ids()
 }
 }
 \references{
-\cite{mlr3learners}{roustant_2012}
+Roustant O, Ginsbourger D, Deville Y (2012).
+\dQuote{DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.}
+\emph{Journal of Statistical Software}, \bold{51}(1), 1--55.
+\doi{10.18637/jss.v051.i01}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

@@ -1,3 +1,8 @@
+# mlr3learners 0.4.1
+
+- Disabled some `glmnet` tests on solaris.
+- Removed dependency on orphaned package `bibtex`.
+
 # mlr3learners 0.4.0
 
 - Fixed a potential label switch in `classif.glmnet` and `classif.cv_glmnet`

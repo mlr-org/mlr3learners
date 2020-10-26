@@ -25,9 +25,14 @@ learner$param_set$ids()
 }
 }
 \references{
-\cite{mlr3learners}{wright_2017}
-
-\cite{mlr3learners}{breiman_2001}
+Breiman, Leo (2001).
+\dQuote{Random Forests.}
+\emph{Machine Learning}, \bold{45}(1), 5--32.
+ISSN 1573-0565, \doi{10.1023/A:1010933404324}.
+Wright, N. M, Ziegler, Andreas (2017).
+\dQuote{ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.}
+\emph{Journal of Statistical Software}, \bold{77}(1), 1--17.
+\doi{10.18637/jss.v077.i01}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

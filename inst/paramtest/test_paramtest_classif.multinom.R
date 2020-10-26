@@ -15,7 +15,7 @@ test_that("classif.multinom", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
 
 # no extra args for predict.multinom
@@ -28,5 +28,5 @@ test_that("classif.multinom", {
 #   ParamTest = run_paramtest(learner, fun, exclude)
 #   expect_true(ParamTest, info = paste0(
 #     "Missing parameters:",
-#     paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+#     paste0("- '", ParamTest$missing, "'", collapse = ",")))
 # })

@@ -16,7 +16,7 @@ test_that("regr.lm", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
 
 test_that("predict regr.lm", {
@@ -34,5 +34,5 @@ test_that("predict regr.lm", {
   ParamTest = run_paramtest(learner, fun, exclude)
   expect_true(ParamTest, info = paste0(
     "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = "‚")))
+    paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
