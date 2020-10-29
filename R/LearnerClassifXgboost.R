@@ -148,7 +148,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "continue"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "continue", "update"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_classif.xgboost"
       )
@@ -270,6 +270,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
+    },
+
+    .update = function(task) {
+      private$.continue(task)
     }
   )
 )

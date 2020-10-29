@@ -28,3 +28,27 @@ test_that("xgboost with binary:logistic", {
   p = learner$train(task)$predict(task)
   expect_equal(unname(p$score()), 0)
 })
+
+test_that("continue", {
+  learner = mlr3::lrn("classif.xgboost", nrounds = 5L)
+  task = tsk("pima")
+
+  learner$train(task)
+  expect_equal(learner$model$niter, 5)
+
+  learner$param_set$values$nrounds = 10
+  learner$continue(task)
+  expect_equal(learner$model$niter, 10)
+})
+
+test_that("update", {
+  learner = mlr3::lrn("classif.xgboost", nrounds = 5L)
+  task = tsk("pima")
+
+  learner$train(task, row_ids = 1:50)
+  expect_equal(learner$model$niter, 5)
+
+  learner$param_set$values$nrounds = 10
+  learner$update(task, row_ids = 51:100)
+  expect_equal(learner$model$niter, 10)
+})

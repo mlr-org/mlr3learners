@@ -140,7 +140,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         id = "regr.xgboost",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "importance"),
+        properties = c("weights", "missings", "importance", "continue", "update"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_regr.xgboost"
       )
@@ -195,6 +195,30 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       response = invoke(stats::predict, model, newdata = newdata, .args = pars)
 
       list(response = response)
+    },
+
+    .continue = function(task) {
+      model = self$model
+      pars = self$param_set$get_values(tags = "train")
+
+      if(model$niter >= pars$nrounds) {
+        stop("No additional boosting iterations provided.")
+      }
+
+      # Calculate additional boosting iterations
+      # niter in model and nrounds in ps should be equal after train and continue
+      pars$nrounds = pars$nrounds - model$niter
+
+      # Construct data
+      data = task$data(cols = task$feature_names)
+      target = task$data(cols = task$target_names)
+      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
+
+      invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
+    },
+
+    .update = function(task) {
+      private$.continue(task)
     }
   )
 )
