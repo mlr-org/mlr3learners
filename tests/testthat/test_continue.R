@@ -24,11 +24,11 @@ test_that("continue method works", {
   expect_error(learner$continue(task),
     regexp = "Learner does not contain a model")
 
-  learner = lrn("classif.rpart")
+  learner = lrn("classif.lda")
   learner$train(task)
 
   expect_error(learner$continue(task),
-    regexp = "Learner 'classif.rpart' does not support continue")
+    regexp = "Learner 'classif.lda' does not support continue")
 
   task = tsk("iris")
   learner = LearnerClassifXgboost$new()
