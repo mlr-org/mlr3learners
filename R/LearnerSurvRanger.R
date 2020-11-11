@@ -130,7 +130,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
 
       crank = as.numeric(sapply(x, function(y) sum(y[, 1] * c(y[, 2][1], diff(y[, 2])))))
 
-      list(distr = distr, crank = crank)
+      list(distr = distr, crank = -crank)
     }
   )
 )
