@@ -1,3 +1,7 @@
+# mlr3learners 0.4.2
+
+- Fixed a bug in the survival random forest `LearnerSurvRanger`.,
+
 # mlr3learners 0.4.1
 
 - Disabled some `glmnet` tests on solaris.
@@ -14,7 +18,7 @@
 
 - The `$model` slot of the {kknn} learner now returns a list containing some
   information which is being used during the predict step.
-  Before, the slot was empty because there is no training step for {kknn}.
+  Before, the slot was empty because there is no training step for kknn.
 - Compact in-memory representation of R6 objects to save space when saving mlr3
   objects via `saveRDS()`, `serialize()` etc.
 - glmnet learners: `penalty.factor` is a vector param, not a `ParamDbl` (#141)
@@ -27,8 +31,8 @@
 
 # mlr3learners 0.2.0
 
-- Split {glmnet} learner into `cv_glmnet` and `glmnet` (#99)
-- {glmnet} learners: Add `predict.gamma` and `newoffset` arg (#98)
+- Split glmnet learner into `cv_glmnet` and `glmnet` (#99)
+- glmnet learners: Add `predict.gamma` and `newoffset` arg (#98)
 - We now test that all learners can be constructed without parameters.
 - A new custom "Paramtest" which lives `inst/paramtest` was added.
   This test checks against the arguments of the upstream train & predict functions and ensures that all parameters are implemented in the respective mlr3 learner. (#96)
