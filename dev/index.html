@@ -46,7 +46,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
-        <a class="navbar-brand" href="index.html">mlr3learners <small>v0.4.0.9000</small></a>
+        <a class="navbar-brand" href="index.html">mlr3learners <small>v0.4.2-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -69,7 +69,7 @@
   </a>
 </li>
 <li>
-  <a href="articles/learners/additional-learners.html">Additional Learners</a>
+  <a href="https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html">Additional Learners</a>
 </li>
         <li>
   <a href="https://github.com/mlr-org/mlr3learners/">
@@ -114,23 +114,24 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com">mlr3</a>, maintained by the mlr-org team. We will most likely not add new learners to this package. See section <a href="#more-learners">“More Learners”</a> below for more information.</p>
+<p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com">mlr3</a>, maintained by the mlr-org team. Additional learners can be found in the <a href="https://github.com/mlr-org/mlr3extralearners">mlr3extralearners</a> package on GitHub. Request additional learners over there.</p>
+<p><span class="emoji" data-emoji="point_right">👉</span> <a href="https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html">Table of all learners</a></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># CRAN version:</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># CRAN version:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mlr3learners"</span><span class="op">)</span>
 
 <span class="co"># Development version:</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span><span class="op">)</span></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span><span class="op">)</span></code></pre></div>
 <p>If you also want to install all packages of the connected learners, set <code>dependencies = TRUE</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># CRAN version:</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># CRAN version:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># Development version:</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="classification-learners" class="section level2">
 <h2 class="hasAnchor">
@@ -253,30 +254,38 @@
 </tbody>
 </table>
 </div>
-<div id="more-learners" class="section level2">
+<div id="survival-learners-via-mlr3proba" class="section level2">
 <h2 class="hasAnchor">
-<a href="#more-learners" class="anchor"></a>More Learners</h2>
-<p>Learners from other packages live in the <a href="https://github.com/mlr3learners">mlr3learners</a> organization and are possibly maintained by people <em>outside</em> the mlr-org team.</p>
-<p><span class="emoji" data-emoji="point_right">👉</span> <a href="https://mlr3learners.mlr-org.com/dev/articles/learners/additional-learners.html">Table of all additional learners</a></p>
-</div>
-<div id="requestingadding-additional-learners" class="section level2">
-<h2 class="hasAnchor">
-<a href="#requestingadding-additional-learners" class="anchor"></a>Requesting/Adding Additional Learners</h2>
-<p>Follow these steps to add/request a new learner.</p>
-<ol>
-<li>Open an issue in <a href="https://github.com/mlr-org/mlr3learners/issues">mlr3learners</a> following the issue template. (If you don’t want to add the learner yourself, you are done here. We might take your vote into consideration but can’t promise when your requested learner will be available.)</li>
-<li>Fork the <a href="https://github.com/mlr-org/mlr3learners.template">mlr3learners.template</a> repo and adjust the template to match your learner. Essentially, replace the placeholders like <code>&lt;package&gt;</code> with the respective terms for your learner. More detailed instructions including FAQ are given in section <a href="https://mlr3book.mlr-org.com/extending-learners.html">“Adding new Learners”</a> of the mlr3book.</li>
-<li>When you are done, request a review for the learner. Make sure that you have checked on all points of <a href="https://github.com/mlr-org/mlr3learners.template/issues/5">this checklist</a> before requesting a review.</li>
-<li>After approval, transfer the learner to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization. To do so, please first request an invitation from <a href="https://github.com/pat-s">@pat-s</a> / <a href="https://github.com/be-marc">@be-marc</a> to be added to the <a href="https://github.com/mlr3learners">mlr3learners</a> organization. Once transferred, you will get access rights to the learner repository to finalize and maintain it.</li>
-<li>Congrats! Your learner has been successfully added to the mlr3 ecosystem. Now the last step is to add the learner to <a href="https://github.com/mlr3learners/mlr3learners.drat">{mlr3learners.drat}</a>. This makes is possible to install the learner via <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> without the need to submit the learner to CRAN (none of the custom learners live on CRAN).</li>
-</ol>
-<p><strong>Resources for adding a new learner (summary)</strong></p>
-<ul>
-<li><a href="https://github.com/mlr-org/mlr3learners.template">mlr3learners.template</a></li>
-<li><a href="https://mlr3book.mlr-org.com/extending-learners.html">mlr3book section “Adding new learners” including FAQ</a></li>
-<li><a href="https://github.com/mlr-org/mlr3learners.template/issues/5">Checklist prior to requesting a review</a></li>
-</ul>
-<p>Last, thanks for contributing to the mlr3 ecosystem! We would be very happy if you keep maintaining the learner against upstream changes :)</p>
+<a href="#survival-learners-via-mlr3proba" class="anchor"></a>Survival Learners (via <a href="https://mlr3proba.mlr-org.com">mlr3proba</a>)</h2>
+<table class="table">
+<thead><tr class="header">
+<th align="left">ID</th>
+<th align="left">Learner</th>
+<th align="left">Package</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html">surv.cv_glmnet</a></td>
+<td align="left">Penalized Cox Regression</td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html">surv.glmnet</a></td>
+<td align="left">Penalized Cox Regression</td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html">surv.ranger</a></td>
+<td align="left">Random Forest</td>
+<td align="left"><a href="https://cran.r-project.org/package=ranger">ranger</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html">surv.xgboost</a></td>
+<td align="left">Gradient Boosting</td>
+<td align="left"><a href="https://cran.r-project.org/package=xgboost">xgboost</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
   </div>
