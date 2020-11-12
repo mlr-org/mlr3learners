@@ -1,6 +1,10 @@
+# mlr3learners 0.4.3
+
+- Fixed stochastic test failures on solaris.
+
 # mlr3learners 0.4.2
 
-- Fixed a bug in the survival random forest `LearnerSurvRanger`.,
+- Fixed a bug in the survival random forest `LearnerSurvRanger`.
 
 # mlr3learners 0.4.1
 
