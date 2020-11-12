@@ -120,7 +120,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
 
       # define WeightedDiscrete distr6 object from predicted survival function
       x = rep(list(data = data.frame(x = fit$unique.death.times, cdf = 0)), task$nrow)
-      for (i in 1:task$nrow) {
+      for (i in seq_len(task$nrow)) {
         x[[i]]$cdf = 1 - fit$survival[i, ]
       }
 
