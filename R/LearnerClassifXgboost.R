@@ -22,7 +22,7 @@
 #' @templateVar id classif.xgboost
 #'
 #' @references
-#' `r tools::toRd(bibentries["chen_2016"])`
+#' `r format_bib("chen_2016")`
 #'
 #' @export
 #' @template seealso_learner

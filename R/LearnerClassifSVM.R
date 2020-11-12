@@ -9,7 +9,7 @@
 #' @templateVar id classif.svm
 #'
 #' @references
-#' `r tools::toRd(bibentries["cortes_1995"])`
+#' `r format_bib("cortes_1995")`
 #'
 #' @export
 #' @template seealso_learner

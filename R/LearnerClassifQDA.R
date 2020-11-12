@@ -16,7 +16,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["venables_2002"])`
+#' `r format_bib("venables_2002")`
 #'
 #' @export
 #' @template seealso_learner

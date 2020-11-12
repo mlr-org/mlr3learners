@@ -10,7 +10,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["friedman_2010"])`
+#' `r format_bib("friedman_2010")`
 #'
 #' @export
 #' @template seealso_learner

@@ -10,7 +10,7 @@
 #' @templateVar id classif.ranger
 #'
 #' @references
-#' `r tools::toRd(bibentries[c("wright_2017", "breiman_2001")])`
+#' `r format_bib("wright_2017", "breiman_2001")`
 #'
 #' @export
 #' @template seealso_learner
