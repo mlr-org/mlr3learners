@@ -50,7 +50,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
-    mlr3proba (>= 0.2.2),
+    mlr3proba (>= 0.2.4.9000),
     nnet,
     pracma,
     ranger,
@@ -58,6 +58,8 @@ Suggests:
     rmarkdown,
     testthat,
     xgboost
+Remotes:
+    mlr-org/mlr3proba
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
