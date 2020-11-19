@@ -52,11 +52,12 @@
 - Learners `regr.lm` and `classif.log_reg` now ignore the global option
   `"contrasts"`.
 - Add vignette `additional-learners.Rmd` listing all mlr3 custom learners
-- Move Learner\*Glmnet to Learner\*CVGlmnet and add Learner\*Glmnet (without internal tuning) (#90)
+- Move Learner\*Glmnet to Learner\*CVGlmnet and add Learner\*Glmnet
+  (without internal tuning) (#90)
 
 ## XGBoost
 
-- Add parameter `"interaction_constraints" (#95)
+- Add parameter `interaction_constraints` (#95)
 
 # mlr3learners 0.1.6
 
