@@ -1,6 +1,7 @@
 # mlr3learners 0.4.3
 
 - Fixed stochastic test failures on solaris.
+- Fixed `surv.ranger`, c.f. https://github.com/mlr-org/mlr3proba/issues/165.
 
 # mlr3learners 0.4.2
 
