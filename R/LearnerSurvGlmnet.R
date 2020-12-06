@@ -118,7 +118,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
         pars$s = self$param_set$default$s
       }
 
-      lp = invoke(stats::predict, self$model, newx = newdata, type = "link", .args = pars)
+      lp = invoke(predict, self$model, newx = newdata, type = "link", .args = pars)
 
       list(crank = lp, lp = lp)
     }

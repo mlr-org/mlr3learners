@@ -129,7 +129,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         pars$s = self$param_set$default$s
       }
 
-      response = mlr3misc::invoke(stats::predict, self$model,
+      response = mlr3misc::invoke(predict, self$model,
         newx = newdata,
         type = "response", .args = pars)
       list(response = drop(response))

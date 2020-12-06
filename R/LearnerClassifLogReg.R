@@ -71,7 +71,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
-      p = unname(stats::predict(self$model, newdata = newdata, type = "response"))
+      p = unname(predict(self$model, newdata = newdata, type = "response"))
       levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {

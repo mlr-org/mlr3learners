@@ -125,7 +125,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
         pars$predict.gamma = NULL
       }
 
-      response = invoke(stats::predict, self$model, newx = newdata,
+      response = invoke(predict, self$model, newx = newdata,
         type = "response", .args = pars)
       list(response = drop(response))
     }

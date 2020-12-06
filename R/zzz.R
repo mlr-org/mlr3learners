@@ -3,6 +3,7 @@
 #' @import mlr3misc
 #' @importFrom R6 R6Class
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
+#' @importFrom stats predict
 #'
 #' @description
 #' More learners are implemented in the [mlr3extralearners package](https://github.com/mlr-org/mlr3extralearners).

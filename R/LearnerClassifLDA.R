@@ -74,7 +74,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
         pars$predict.prior = NULL
       }
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(stats::predict, self$model,
+      p = mlr3misc::invoke(predict, self$model,
         newdata = newdata,
         .args = self$param_set$get_values(tags = "predict"))
 

@@ -125,12 +125,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       }
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(stats::predict, self$model,
+        response = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "class",
           .args = pars)
         list(response = drop(response))
       } else {
-        prob = mlr3misc::invoke(stats::predict, self$model,
+        prob = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "response",
           .args = pars)
 

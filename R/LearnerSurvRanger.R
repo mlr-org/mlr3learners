@@ -115,7 +115,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
-      fit = stats::predict(object = self$model, data = newdata)
+      fit = predict(object = self$model, data = newdata)
       mlr3proba::.surv_return(times = fit$unique.death.times, surv = fit$survival)
     }
   )
