@@ -74,7 +74,7 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         predict_types = c("prob", "response"),
         param_set = ps,
         properties = c("twoclass", "multiclass", "weights"),
-        man = "mlr3extralearners::mlr_learners_classif.nnet"
+        man = "mlr3learners::mlr_learners_classif.nnet"
       )
     }
   ),
