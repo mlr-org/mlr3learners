@@ -1,5 +1,3 @@
-context("classif.multinom")
-
 skip_if_not_installed("nnet")
 
 test_that("autotest", {

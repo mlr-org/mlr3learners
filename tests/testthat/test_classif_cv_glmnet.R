@@ -1,5 +1,3 @@
-context("classif.cv_glmnet")
-
 skip_on_os("solaris")
 skip_if_not_installed("glmnet")
 

@@ -1,5 +1,3 @@
-context("classif.log_reg")
-
 test_that("autotest", {
   learner = mlr3::lrn("classif.log_reg")
   expect_learner(learner)

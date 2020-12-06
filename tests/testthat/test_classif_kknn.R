@@ -1,5 +1,3 @@
-context("classif.kknn")
-
 skip_if_not_installed("kknn")
 
 test_that("autotest", {

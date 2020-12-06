@@ -1,5 +1,3 @@
-context("regr.xgboost")
-
 skip_if_not_installed("xgboost")
 
 test_that("autotest", {

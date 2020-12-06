@@ -1,5 +1,3 @@
-context("classif.qda")
-
 skip_if_not_installed("MASS")
 
 test_that("autotest", {

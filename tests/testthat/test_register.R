@@ -1,5 +1,3 @@
-context("populate dictionaries")
-
 test_that("re-populate dictionaries", {
   rm("classif.log_reg", envir = mlr_learners$items)
   expect_disjunct("classif.log_reg", mlr_learners$keys())

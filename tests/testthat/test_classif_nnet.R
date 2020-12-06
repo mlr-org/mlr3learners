@@ -1,5 +1,3 @@
-context("classif.nnet")
-
 skip_if_not_installed("nnet")
 
 test_that("autotest", {

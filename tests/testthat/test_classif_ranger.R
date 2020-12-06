@@ -1,5 +1,3 @@
-context("classif.ranger")
-
 skip_if_not_installed("ranger")
 
 test_that("autotest", {

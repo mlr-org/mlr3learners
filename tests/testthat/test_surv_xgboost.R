@@ -1,5 +1,3 @@
-context("surv.xgboost")
-
 test_that("autotest", {
   skip_on_cran()
   with_seed(1, {
