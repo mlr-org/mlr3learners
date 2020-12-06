@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Support Vector Machine — mlr_learners_classif.svm • mlr3learners</title>
+<title>Classification Neural Network Learner — mlr_learners_classif.nnet • mlr3learners</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -47,9 +47,11 @@
 
 
 
-<meta property="og:title" content="Support Vector Machine — mlr_learners_classif.svm" />
-<meta property="og:description" content="Support vector machine for classification.
-Calls e1071::svm() from package e1071." />
+<meta property="og:title" content="Classification Neural Network Learner — mlr_learners_classif.nnet" />
+<meta property="og:description" content="Single Layer Neural Network.
+Calls nnet::nnet.formula() from package nnet.
+Note that modern neural networks with multiple layers are connected
+via package mlr3keras." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -145,14 +147,16 @@ Calls e1071::svm() from package e1071." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Support Vector Machine</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3learners/blob/master/R/LearnerClassifSVM.R'><code>R/LearnerClassifSVM.R</code></a></small>
-    <div class="hidden name"><code>mlr_learners_classif.svm.Rd</code></div>
+    <h1>Classification Neural Network Learner</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3learners/blob/master/R/LearnerClassifNnet.R'><code>R/LearnerClassifNnet.R</code></a></small>
+    <div class="hidden name"><code>mlr_learners_classif.nnet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Support vector machine for classification.
-Calls <code><a href='https://rdrr.io/pkg/e1071/man/svm.html'>e1071::svm()</a></code> from package <a href='https://CRAN.R-project.org/package=e1071'><span class="pkg">e1071</span></a>.</p>
+    <p>Single Layer Neural Network.
+Calls <code><a href='https://rdrr.io/pkg/nnet/man/nnet.html'>nnet::nnet.formula()</a></code> from package <a href='https://CRAN.R-project.org/package=nnet'><span class="pkg">nnet</span></a>.</p>
+<p>Note that modern neural networks with multiple layers are connected
+via package <a href='https://github.com/mlr-org/mlr3keras'>mlr3keras</a>.</p>
     </div>
 
 
@@ -161,31 +165,42 @@ Calls <code><a href='https://rdrr.io/pkg/e1071/man/svm.html'>e1071::svm()</a></c
 
     
 
-<p>This Learner can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><pre><span class='va'>mlr_learners</span><span class='op'>$</span><span class='fu'>get</span><span class='op'>(</span><span class='st'>"classif.svm"</span><span class='op'>)</span>
-<span class='fu'>lrn</span><span class='op'>(</span><span class='st'>"classif.svm"</span><span class='op'>)</span>
+<p>This Learner can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><pre><span class='va'>mlr_learners</span><span class='op'>$</span><span class='fu'>get</span><span class='op'>(</span><span class='st'>"classif.nnet"</span><span class='op'>)</span>
+<span class='fu'>lrn</span><span class='op'>(</span><span class='st'>"classif.nnet"</span><span class='op'>)</span>
 </pre>
+
+    <h2 class="hasAnchor" id="custom-mlr-defaults"><a class="anchor" href="#custom-mlr-defaults"></a>Custom mlr3 defaults</h2>
+
+    
+
+<ul>
+<li><p><code>size</code>:</p><ul>
+<li><p>Adjusted default: 3L</p></li>
+<li><p>Reason for change: no default in <code>nnet()</code>.</p></li>
+</ul></li>
+</ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Cortes, Corinna, Vapnik, Vladimir (1995).
-&#8220;Support-vector networks.&#8221;
-<em>Machine Learning</em>, <b>20</b>(3), 273--297.
-doi: <a href='https://doi.org/10.1007/BF00994018'>10.1007/BF00994018</a>
-.</p>
+    <p>Ripley BD (1996).
+<em>Pattern Recognition and Neural Networks</em>.
+Cambridge University Press.
+doi: <a href='https://doi.org/10.1017/cbo9780511812651'>10.1017/cbo9780511812651</a>
+, <a href='https://doi.org/10.1017/cbo9780511812651'>https://doi.org/10.1017/cbo9780511812651</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>Dictionary</a> of <a href='https://mlr3.mlr-org.com/reference/Learner.html'>Learners</a>: <a href='https://mlr3.mlr-org.com/reference/mlr_learners.html'>mlr3::mlr_learners</a></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
-    <p><code><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></code> -&gt; <code><a href='https://mlr3.mlr-org.com/reference/LearnerClassif.html'>mlr3::LearnerClassif</a></code> -&gt; <code>LearnerClassifSVM</code></p>
+    <p><code><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></code> -&gt; <code><a href='https://mlr3.mlr-org.com/reference/LearnerClassif.html'>mlr3::LearnerClassif</a></code> -&gt; <code>LearnerClassifNnet</code></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-new'><code>LearnerClassifSVM$new()</code></a></p></li>
-<li><p><a href='#method-clone'><code>LearnerClassifSVM$clone()</code></a></p></li>
+<li><p><a href='#method-new'><code>LearnerClassifNnet$new()</code></a></p></li>
+<li><p><a href='#method-clone'><code>LearnerClassifNnet$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
@@ -202,12 +217,12 @@ doi: <a href='https://doi.org/10.1007/BF00994018'>10.1007/BF00994018</a>
 <hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Creates a new instance of this <a href='https://r6.r-lib.org/reference/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>LearnerClassifSVM</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>LearnerClassifNnet</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>LearnerClassifSVM</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>LearnerClassifNnet</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -218,23 +233,23 @@ doi: <a href='https://doi.org/10.1007/BF00994018'>10.1007/BF00994018</a>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"e1071"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.svm"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.nnet"</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span>
 
   <span class='co'># available parameters:</span>
 <span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; &lt;LearnerClassifSVM:classif.svm&gt;
+</div><div class='output co'>#&gt; &lt;LearnerClassifNnet:classif.nnet&gt;
 #&gt; * Model: -
-#&gt; * Parameters: list()
-#&gt; * Packages: e1071
-#&gt; * Predict Type: response
-#&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: multiclass, twoclass</div><div class='output co'>#&gt;  [1] "type"            "cost"            "nu"              "kernel"         
-#&gt;  [5] "degree"          "coef0"           "gamma"           "cachesize"      
-#&gt;  [9] "tolerance"       "shrinking"       "cross"           "fitted"         
-#&gt; [13] "scale"           "class.weights"   "decision.values"</div></pre>
+#&gt; * Parameters: size=3
+#&gt; * Packages: nnet
+#&gt; * Predict Type: prob
+#&gt; * Feature types: numeric, factor, ordered
+#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "size"      "subset"    "na.action" "contrasts" "Wts"       "mask"     
+#&gt;  [7] "linout"    "entropy"   "softmax"   "censored"  "skip"      "rang"     
+#&gt; [13] "decay"     "maxit"     "Hess"      "trace"     "MaxNWts"   "abstol"   
+#&gt; [19] "reltol"   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
