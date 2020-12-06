@@ -2,6 +2,7 @@
 
 - Fixed stochastic test failures on solaris.
 - Fixed `surv.ranger`, c.f. https://github.com/mlr-org/mlr3proba/issues/165.
+- Added `classif.nnet` learner (moved from mlr3extralearners).
 
 # mlr3learners 0.4.2
 
