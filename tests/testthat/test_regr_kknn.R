@@ -23,7 +23,7 @@ test_that("custom model", {
   learner$predict(task)
   mod = learner$model
   expect_list(mod, names = "unique", len = 4L)
-  expect_is(mod$kknn, "kknn")
+  expect_s3_class(mod$kknn, "kknn")
   expect_formula(mod$formula)
   expect_data_table(mod$data)
   expect_list(mod$pars, names = "unique")
