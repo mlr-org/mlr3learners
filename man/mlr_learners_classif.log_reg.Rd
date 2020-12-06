@@ -7,8 +7,19 @@
 \description{
 Classification via logistic regression.
 Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"binomial"}.
-Argument \code{model} is set to \code{FALSE}.
 }
+\section{Custom mlr3 defaults}{
+
+\itemize{
+\item \code{model}:
+\itemize{
+\item Actual default: \code{TRUE}
+\item Adjusted default: \code{FALSE}
+\item Reason for change: Save some memory.
+}
+}
+}
+
 \section{Dictionary}{
 
 This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.log_reg")

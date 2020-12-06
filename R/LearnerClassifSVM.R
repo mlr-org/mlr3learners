@@ -3,7 +3,8 @@
 #' @name mlr_learners_classif.svm
 #'
 #' @description
-#' A learner for a classification support vector machine implemented in [e1071::svm()].
+#' Support vector machine for classification.
+#' Calls [e1071::svm()] from package \CRANpkg{e1071}.
 #'
 #' @template section_dictionary_learner
 #' @templateVar id classif.svm

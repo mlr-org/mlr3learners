@@ -5,7 +5,12 @@
 #' @description
 #' Classification via logistic regression.
 #' Calls [stats::glm()] with `family` set to `"binomial"`.
-#' Argument `model` is set to `FALSE`.
+#'
+#' @section Custom mlr3 defaults:
+#' - `model`:
+#'   - Actual default: `TRUE`
+#'   - Adjusted default: `FALSE`
+#'   - Reason for change: Save some memory.
 #'
 #' @templateVar id classif.log_reg
 #' @template section_dictionary_learner

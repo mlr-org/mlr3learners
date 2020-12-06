@@ -10,7 +10,7 @@
 #' internal optimization of lambda. The parameter needs to be tuned by the user.
 #' Essentially, one needs to tune parameter `s` which is used at predict-time.
 #'
-#' See https://stackoverflow.com/questions/50995525/ for more information.
+#' See \url{https://stackoverflow.com/questions/50995525/} for more information.
 #'
 #' @templateVar id classif.glmnet
 #' @template section_dictionary_learner

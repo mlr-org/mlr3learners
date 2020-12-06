@@ -49,6 +49,7 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [classif.log_reg](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.log_reg.html)         | Logistic Regression           | stats                                                 |
 | [classif.multinom](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.multinom.html)       | Multinomial log-linear model  | [nnet](https://cran.r-project.org/package=nnet)       |
 | [classif.naive_bayes](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html) | Naive Bayes                   | [e1071](https://cran.r-project.org/package=e1071)     |
+| [classif.nnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.nnet.html)               | Single Layer Neural Network   | [nnet](https://cran.r-project.org/package=nnet)       |
 | [classif.qda](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.qda.html)                 | QDA                           | [MASS](https://cran.r-project.org/package=MASS)       |
 | [classif.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html)           | Random Forest                 | [ranger](https://cran.r-project.org/package=ranger)   |
 | [classif.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html)                 | SVM                           | [e1071](https://cran.r-project.org/package=e1071)     |

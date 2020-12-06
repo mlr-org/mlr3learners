@@ -20,12 +20,13 @@ register_mlr3 = function() {
   x$add("classif.kknn", LearnerClassifKKNN)
   x$add("classif.lda", LearnerClassifLDA)
   x$add("classif.log_reg", LearnerClassifLogReg)
+  x$add("classif.multinom", LearnerClassifMultinom)
   x$add("classif.naive_bayes", LearnerClassifNaiveBayes)
+  x$add("classif.nnet", LearnerClassifNnet)
   x$add("classif.qda", LearnerClassifQDA)
   x$add("classif.ranger", LearnerClassifRanger)
   x$add("classif.svm", LearnerClassifSVM)
   x$add("classif.xgboost", LearnerClassifXgboost)
-  x$add("classif.multinom", LearnerClassifMultinom)
 
   # regression learners
   x$add("regr.cv_glmnet", LearnerRegrCVGlmnet)
@@ -38,10 +39,10 @@ register_mlr3 = function() {
   x$add("regr.xgboost", LearnerRegrXgboost)
 
   # survival learners
-  x$add("surv.glmnet", LearnerSurvGlmnet)
   x$add("surv.cv_glmnet", LearnerSurvCVGlmnet)
-  x$add("surv.xgboost", LearnerSurvXgboost)
+  x$add("surv.glmnet", LearnerSurvGlmnet)
   x$add("surv.ranger", LearnerSurvRanger)
+  x$add("surv.xgboost", LearnerSurvXgboost)
 }
 
 .onLoad = function(libname, pkgname) { # nolint

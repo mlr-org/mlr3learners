@@ -3,7 +3,8 @@
 #' @name mlr_learners_regr.svm
 #'
 #' @description
-#' A learner for a regression support vector machine implemented in [e1071::svm()].
+#' Support vector machine for regression.
+#' Calls [e1071::svm()] from package \CRANpkg{e1071}.
 #'
 #' @templateVar id regr.svm
 #' @template section_dictionary_learner

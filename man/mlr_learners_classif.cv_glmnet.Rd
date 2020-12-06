@@ -7,6 +7,9 @@
 \description{
 Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{glmnet}.
+
+The default for hyperparameter \code{family} is set to \code{"binomial"} or \code{"multinomial"},
+depending on the number of classes.
 }
 \section{Dictionary}{
 

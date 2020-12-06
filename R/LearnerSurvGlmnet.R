@@ -6,13 +6,13 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' The default for hyperparameter `family` is changed to `"cox"`.
+#' The default for hyperparameter `family` is set to `"cox"`.
 #'
 #' Caution: This learner is different to `cv_glmnet` in that it does not use the
 #' internal optimization of lambda. The parameter needs to be tuned by the user.
 #' Essentially, one needs to tune parameter `s` which is used at predict-time.
 #'
-#' See https://stackoverflow.com/questions/50995525/ for more information.
+#' See \url{https://stackoverflow.com/questions/50995525/} for more information.
 #'
 #' @templateVar id surv.glmnet
 #' @template section_dictionary_learner
