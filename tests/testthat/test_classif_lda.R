@@ -1,5 +1,3 @@
-context("classif.lda")
-
 skip_if_not_installed("MASS")
 
 test_that("autotest", {

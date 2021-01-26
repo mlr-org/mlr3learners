@@ -6,13 +6,13 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' The default for hyperparameter `family` is changed to `"gaussian"`.
+#' The default for hyperparameter `family` is set to `"gaussian"`.
 #'
 #' @templateVar id regr.cv_glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["friedman_2010"])`
+#' `r format_bib("friedman_2010")`
 #'
 #' @export
 #' @template seealso_learner
@@ -125,7 +125,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
         pars$predict.gamma = NULL
       }
 
-      response = invoke(stats::predict, self$model, newx = newdata,
+      response = invoke(predict, self$model, newx = newdata,
         type = "response", .args = pars)
       list(response = drop(response))
     }

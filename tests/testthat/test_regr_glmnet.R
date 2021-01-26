@@ -1,5 +1,3 @@
-context("regr.glmnet")
-
 skip_if_not_installed("glmnet")
 
 test_that("autotest", {

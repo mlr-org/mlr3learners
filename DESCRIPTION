@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.4.1
+Version: 0.4.3
 Authors@R:
     c(person(given = "Michel",
              family = "Lang",
@@ -50,17 +50,18 @@ Suggests:
     knitr,
     lgr,
     MASS,
-    mlr3proba (>= 0.2.2),
+    mlr3proba (>= 0.2.5),
     nnet,
     pracma,
     ranger,
     rgenoud,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     xgboost
 Remotes:
     mlr-org/mlr3@continue
 Encoding: UTF-8
 NeedsCompilation: no
+Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

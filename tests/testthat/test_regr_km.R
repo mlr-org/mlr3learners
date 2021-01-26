@@ -1,5 +1,3 @@
-context("regr.km")
-
 skip_if_not_installed("DiceKriging")
 
 test_that("autotest", {

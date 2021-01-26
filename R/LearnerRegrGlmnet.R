@@ -6,19 +6,19 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' The default for hyperparameter `family` is changed to `"gaussian"`.
+#' The default for hyperparameter `family` is set to `"gaussian"`.
 #'
 #' Caution: This learner is different to `cv_glmnet` in that it does not use the
 #' internal optimization of lambda. The parameter needs to be tuned by the user.
 #' Essentially, one needs to tune parameter `s` which is used at predict-time.
 #'
-#' See https://stackoverflow.com/questions/50995525/ for more information.
+#' See \url{https://stackoverflow.com/questions/50995525/} for more information.
 #'
 #' @templateVar id regr.glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["friedman_2010"])`
+#' `r format_bib("friedman_2010")`
 #'
 #' @export
 #' @template seealso_learner
@@ -129,7 +129,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         pars$s = self$param_set$default$s
       }
 
-      response = mlr3misc::invoke(stats::predict, self$model,
+      response = mlr3misc::invoke(predict, self$model,
         newx = newdata,
         type = "response", .args = pars)
       list(response = drop(response))

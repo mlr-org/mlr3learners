@@ -18,7 +18,7 @@
 #' @templateVar id regr.km
 #'
 #' @references
-#' `r tools::toRd(bibentries["roustant_2012"])`
+#' `r format_bib("roustant_2012")`
 #'
 #' @export
 #' @template seealso_learner

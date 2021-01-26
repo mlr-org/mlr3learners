@@ -30,7 +30,7 @@
 #' @templateVar id surv.xgboost
 #'
 #' @references
-#' `r tools::toRd(bibentries["chen_2016"])`
+#' `r format_bib("chen_2016")`
 #'
 #' @export
 #' @template seealso_learner
@@ -187,7 +187,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      lp = log(mlr3misc::invoke(stats::predict, model, newdata = newdata, .args = pars))
+      lp = log(mlr3misc::invoke(predict, model, newdata = newdata, .args = pars))
 
       list(crank = lp, lp = lp)
     }

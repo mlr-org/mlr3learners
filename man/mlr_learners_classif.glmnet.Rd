@@ -12,7 +12,7 @@ Caution: This learner is different to \verb{_glmnet} in that it does not use the
 internal optimization of lambda. The parameter needs to be tuned by the user.
 Essentially, one needs to tune parameter \code{s} which is used at predict-time.
 
-See https://stackoverflow.com/questions/50995525/ for more information.
+See \url{https://stackoverflow.com/questions/50995525/} for more information.
 }
 \section{Dictionary}{
 

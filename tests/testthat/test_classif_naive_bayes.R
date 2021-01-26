@@ -1,5 +1,3 @@
-context("classif.naive_bayes")
-
 skip_if_not_installed("e1071")
 
 test_that("autotest", {

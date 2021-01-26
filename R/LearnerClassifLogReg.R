@@ -5,7 +5,12 @@
 #' @description
 #' Classification via logistic regression.
 #' Calls [stats::glm()] with `family` set to `"binomial"`.
-#' Argument `model` is set to `FALSE`.
+#'
+#' @section Custom mlr3 defaults:
+#' - `model`:
+#'   - Actual default: `TRUE`
+#'   - Adjusted default: `FALSE`
+#'   - Reason for change: Save some memory.
 #'
 #' @templateVar id classif.log_reg
 #' @template section_dictionary_learner
@@ -66,7 +71,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
-      p = unname(stats::predict(self$model, newdata = newdata, type = "response"))
+      p = unname(predict(self$model, newdata = newdata, type = "response"))
       levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {

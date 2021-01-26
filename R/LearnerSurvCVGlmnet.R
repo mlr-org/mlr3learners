@@ -6,13 +6,13 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' The default for hyperparameter `family` is changed to `"cox"`.
+#' The default for hyperparameter `family` is set to `"cox"`.
 #'
 #' @templateVar id surv.cv_glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["friedman_2010"])`
+#' `r format_bib("friedman_2010")`
 #'
 #' @export
 #' @template seealso_learner
@@ -124,7 +124,7 @@ LearnerSurvCVGlmnet = R6Class("LearnerSurvCVGlmnet",
         pars$predict.gamma = NULL
       }
 
-      lp = as.numeric(invoke(stats::predict, self$model, newx = newdata, type = "link", .args = pars))
+      lp = as.numeric(invoke(predict, self$model, newx = newdata, type = "link", .args = pars))
       list(lp = lp, crank = lp)
     }
   )

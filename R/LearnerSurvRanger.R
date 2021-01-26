@@ -10,7 +10,7 @@
 #' @templateVar id surv.ranger
 #'
 #' @references
-#' `r tools::toRd(bibentries[c("wright_2017", "breiman_2001")])`
+#' `r format_bib("wright_2017", "breiman_2001")`
 #'
 #' @export
 #' @template seealso_learner
@@ -114,23 +114,9 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     },
 
     .predict = function(task) {
-
       newdata = task$data(cols = task$feature_names)
-      fit = stats::predict(object = self$model, data = newdata)
-
-      # define WeightedDiscrete distr6 object from predicted survival function
-      x = rep(list(data = data.frame(x = fit$unique.death.times, cdf = 0)), task$nrow)
-      for (i in 1:task$nrow) {
-        x[[i]]$cdf = 1 - fit$survival[i, ]
-      }
-
-      distr = distr6::VectorDistribution$new(
-        distribution = "WeightedDiscrete", params = x,
-        decorators = c("CoreStatistics", "ExoticStatistics"))
-
-      crank = as.numeric(sapply(x, function(y) sum(y[, 1] * c(y[, 2][1], diff(y[, 2])))))
-
-      list(distr = distr, crank = crank)
+      fit = predict(object = self$model, data = newdata)
+      mlr3proba::.surv_return(times = fit$unique.death.times, surv = fit$survival)
     }
   )
 )

@@ -53,6 +53,9 @@ reference:
   - title: Regression Learners
     contents:
       - starts_with("mlr_learners_regr")
+  - title: Survival Learners
+    contents:
+      - starts_with("mlr_learners_surv")
   - title: General
     contents:
       - mlr3learners-package

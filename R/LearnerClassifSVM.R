@@ -3,13 +3,14 @@
 #' @name mlr_learners_classif.svm
 #'
 #' @description
-#' A learner for a classification support vector machine implemented in [e1071::svm()].
+#' Support vector machine for classification.
+#' Calls [e1071::svm()] from package \CRANpkg{e1071}.
 #'
 #' @template section_dictionary_learner
 #' @templateVar id classif.svm
 #'
 #' @references
-#' `r tools::toRd(bibentries["cortes_1995"])`
+#' `r format_bib("cortes_1995")`
 #'
 #' @export
 #' @template seealso_learner
@@ -79,7 +80,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
-      p = mlr3misc::invoke(stats::predict, self$model,
+      p = mlr3misc::invoke(predict, self$model,
         newdata = newdata,
         probability = (self$predict_type == "prob"), .args = pars)
 

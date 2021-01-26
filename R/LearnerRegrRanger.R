@@ -10,7 +10,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries[c("wright_2017", "breiman_2001")])`
+#' `r format_bib("wright_2017", "breiman_2001")`
 #'
 #' @export
 #' @template seealso_learner
@@ -135,7 +135,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      preds = mlr3misc::invoke(stats::predict, self$model,
+      preds = mlr3misc::invoke(predict, self$model,
         data = newdata,
         type = self$predict_type, .args = pars)
       list(response = preds$predictions, se = preds$se)

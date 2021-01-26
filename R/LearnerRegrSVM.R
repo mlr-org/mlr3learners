@@ -3,13 +3,14 @@
 #' @name mlr_learners_regr.svm
 #'
 #' @description
-#' A learner for a regression support vector machine implemented in [e1071::svm()].
+#' Support vector machine for regression.
+#' Calls [e1071::svm()] from package \CRANpkg{e1071}.
 #'
 #' @templateVar id regr.svm
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["cortes_1995"])`
+#' `r format_bib("cortes_1995")`
 #'
 #' @export
 #' @template seealso_learner
@@ -71,7 +72,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
-      response = invoke(stats::predict, self$model, newdata = newdata, type = "response", .args = pars)
+      response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars)
       list(response = response)
     }
   )

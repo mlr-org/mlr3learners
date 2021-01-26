@@ -12,7 +12,7 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries[c("hechenbichler_2004", "samworth_2012", "cover_1967")])`
+#' `r format_bib("hechenbichler_2004", "samworth_2012", "cover_1967")`
 #'
 #' @export
 #' @template seealso_learner

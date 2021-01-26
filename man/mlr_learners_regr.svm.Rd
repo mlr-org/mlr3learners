@@ -5,7 +5,8 @@
 \alias{LearnerRegrSVM}
 \title{Support Vector Machine}
 \description{
-A learner for a regression support vector machine implemented in \code{\link[e1071:svm]{e1071::svm()}}.
+Support vector machine for regression.
+Calls \code{\link[e1071:svm]{e1071::svm()}} from package \CRANpkg{e1071}.
 }
 \section{Dictionary}{
 

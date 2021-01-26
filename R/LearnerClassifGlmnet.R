@@ -10,13 +10,13 @@
 #' internal optimization of lambda. The parameter needs to be tuned by the user.
 #' Essentially, one needs to tune parameter `s` which is used at predict-time.
 #'
-#' See https://stackoverflow.com/questions/50995525/ for more information.
+#' See \url{https://stackoverflow.com/questions/50995525/} for more information.
 #'
 #' @templateVar id classif.glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["friedman_2010"])`
+#' `r format_bib("friedman_2010")`
 #'
 #' @export
 #' @template seealso_learner
@@ -125,12 +125,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       }
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(stats::predict, self$model,
+        response = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "class",
           .args = pars)
         list(response = drop(response))
       } else {
-        prob = mlr3misc::invoke(stats::predict, self$model,
+        prob = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "response",
           .args = pars)
 

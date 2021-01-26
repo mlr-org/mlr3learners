@@ -6,11 +6,14 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::cv.glmnet()] from package \CRANpkg{glmnet}.
 #'
+#' The default for hyperparameter `family` is set to `"binomial"` or `"multinomial"`,
+#' depending on the number of classes.
+#'
 #' @templateVar id classif.cv_glmnet
 #' @template section_dictionary_learner
 #'
 #' @references
-#' `r tools::toRd(bibentries["friedman_2010"])`
+#' `r format_bib("friedman_2010")`
 #'
 #' @export
 #' @template seealso_learner
@@ -123,13 +126,13 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
       }
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(stats::predict, self$model,
+        response = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "class",
           .args = pars)
 
         list(response = drop(response))
       } else {
-        prob = mlr3misc::invoke(stats::predict, self$model,
+        prob = mlr3misc::invoke(predict, self$model,
           newx = newdata, type = "response",
           .args = pars)
 
