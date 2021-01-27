@@ -1,7 +1,7 @@
 library(mlr3learners)
 
-test_that("regr.xgboost", {
-  learner = lrn("regr.xgboost", nrounds = 1)
+test_that("surv.xgboost", {
+  learner = lrn("surv.xgboost", nrounds = 1)
   fun = xgboost::xgb.train
   exclude = c(
     "x", # handled by mlr3
@@ -16,12 +16,19 @@ test_that("regr.xgboost", {
     paste0("- '", ParamTest$missing, "'", collapse = ",")))
 })
 
-test_that("predict regr.xgboost", {
-  learner = lrn("regr.xgboost")
+test_that("predict surv.xgboost", {
+  learner = lrn("surv.xgboost")
   fun = xgboost:::predict.xgb.Booster
   exclude = c(
     "object", # handled by mlr3
-    "newdata" # handled by mlr3
+    "newdata", # handled by mlr3
+    "outputmargin", # always FALSE
+    "predleaf", # always FALSE
+    "predcontrib", # always FALSE
+    "approxcontrib", # unused
+    "predinteraction", # always FALSE
+    "reshape", # handled internally
+    "training" # always FALSE
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

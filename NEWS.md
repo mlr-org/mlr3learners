@@ -1,3 +1,7 @@
+# mlr3learners 0.4.3.9000
+
+- Added `survival:aft` objective to `surv.xgboost`
+
 # mlr3learners 0.4.3
 
 - Fixed stochastic test failures on solaris.

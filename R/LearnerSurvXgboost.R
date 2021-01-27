@@ -20,11 +20,7 @@
 #' - `objective`:
 #'   - Actual default: `reg:squarederror`
 #'   - Adjusted default: `survival:cox`
-#'   - Reason for change: This is the only available objective for survival.
-#' - `eval_metric`:
-#'   - Actual default: no default
-#'   - Adjusted default: `cox-nloglik`
-#'   - Reason for change: Only sensible metric for objective.
+#'   - Reason for change: Changed to a survival objective.
 #'
 #' @template section_dictionary_learner
 #' @templateVar id surv.xgboost
@@ -59,8 +55,12 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         ParamDbl$new("lambda", default = 1, lower = 0, tags = "train"),
         ParamDbl$new("lambda_bias", default = 0, lower = 0, tags = "train"),
         ParamDbl$new("alpha", default = 0, lower = 0, tags = "train"),
-        ParamUty$new("objective", default = "reg:linear", tags = c("train", "predict")),
-        ParamUty$new("eval_metric", default = "rmse", tags = "train"),
+        ParamFct$new("aft_loss_distribution", default = "normal",
+          levels = c("normal", "logistic", "extreme"), tags = "train"),
+        ParamDbl$new("aft_loss_distribution_scale", tags = "train"),
+        ParamFct$new("objective", default = "survival:cox",
+         levels = c("survival:cox", "survival:aft"),
+         tags = c("train", "predict")),
         ParamDbl$new("base_score", default = 0.5, tags = "train"),
         ParamDbl$new("max_delta_step", lower = 0, default = 0, tags = "train"),
         ParamDbl$new("missing",
@@ -77,6 +77,9 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
           default = NULL, lower = 1L,
           special_vals = list(NULL), tags = "train"),
         ParamLgl$new("maximize", default = NULL, special_vals = list(NULL), tags = "train"),
+        ParamInt$new("save_period", lower = 0L, tags = "train"),
+        ParamUty$new("save_name", tags = "train"),
+        ParamUty$new("xgb_model", tags = "train"),
         ParamFct$new("sample_type",
           default = "uniform", levels = c("uniform", "weighted"),
           tags = "train"),
@@ -106,7 +109,8 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         ParamInt$new("top_k", default = 0, lower = 0, tags = "train"),
         ParamFct$new("predictor",
           default = "cpu_predictor",
-          levels = c("cpu_predictor", "gpu_predictor"), tags = "train")
+          levels = c("cpu_predictor", "gpu_predictor"), tags = "train"),
+        ParamInt$new("ntreelimit", lower = 1L, tags = "predict")
       ))
       # param deps
       ps$add_dep("print_every_n", "verbose", CondEqual$new(1L))
@@ -123,16 +127,18 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       ps$add_dep("feature_selector", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
+      ps$add_dep("aft_loss_distribution", "objective", CondEqual$new("survival:aft"))
+      ps$add_dep("aft_loss_distribution_scale", "objective", CondEqual$new("survival:aft"))
 
-      ps$values = list(nrounds = 1L, verbose = 0L, eval_metric = "cox-nloglik")
+      ps$values = list(nrounds = 1L, verbose = 0L)
 
       super$initialize(
         id = "surv.xgboost",
         param_set = ps,
         predict_types = c("crank", "lp"),
-        feature_types = c("logical", "integer", "numeric"),
+        feature_types = c("integer", "numeric"),
         properties = c("weights", "missings", "importance"),
-        packages = c("xgboost"),
+        packages = "xgboost",
         man = "mlr3learners::mlr_learners_surv.xgboost"
       )
     },
@@ -158,17 +164,32 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
     .train = function(task) {
 
       pars = self$param_set$get_values(tags = "train")
-      pars[["objective"]] = "survival:cox"
-      targets = task$target_names
+
+      if (is.null(pars$objective)) {
+        pars$objective = "survival:cox"
+      }
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
+      targets = task$target_names
       label = target[[targets[1]]]
       status = target[[targets[2]]]
-      label[status != 1] = -1L * label[status != 1]
-      data = xgboost::xgb.DMatrix(
-        data = data.matrix(data),
-        label = label)
+
+      if (pars$objective == "survival:cox") {
+        pars$eval_metric = "cox-nloglik"
+        label[status != 1] = -1L * label[status != 1]
+        data = xgboost::xgb.DMatrix(
+          data = as.matrix(data),
+          label = label)
+      } else {
+        pars$eval_metric = "aft-nloglik"
+        y_lower_bound = y_upper_bound = label
+        y_upper_bound[status == 0] = Inf
+
+        data = xgboost::xgb.DMatrix(as.matrix(data))
+        xgboost::setinfo(data, 'label_lower_bound', y_lower_bound)
+        xgboost::setinfo(data, 'label_upper_bound', y_upper_bound)
+      }
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(data, "weight", task$weights$weight)
@@ -178,7 +199,11 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         pars$watchlist = list(train = data)
       }
 
-      mlr3misc::invoke(xgboost::xgb.train, data = data, .args = pars)
+      mlr3misc::invoke(
+        xgboost::xgb.train,
+        data = data,
+        .args = pars
+      )
 
     },
 
@@ -187,7 +212,11 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      lp = log(mlr3misc::invoke(predict, model, newdata = newdata, .args = pars))
+      lp = log(mlr3misc::invoke(
+        predict, model,
+        newdata = newdata,
+        .args = pars
+      ))
 
       list(crank = lp, lp = lp)
     }

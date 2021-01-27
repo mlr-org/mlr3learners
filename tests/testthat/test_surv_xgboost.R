@@ -7,3 +7,15 @@ test_that("autotest", {
     expect_true(result, info = result$error)
   })
 })
+
+
+test_that("manual aft", {
+  skip_on_cran()
+  set.seed(2)
+  learner = lrn("surv.xgboost", objective = "survival:aft")
+  task = TaskSurv$new("test",
+    data.frame(x = rnorm(10), time = runif(10), status = rbinom(10, 1, 0.7)),
+    time = "time", event = "status"
+  )
+  expect_true(inherits(learner$train(task)$predict(task), "PredictionSurv"))
+})
