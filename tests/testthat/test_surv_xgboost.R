@@ -13,9 +13,8 @@ test_that("manual aft", {
   skip_on_cran()
   set.seed(2)
   learner = lrn("surv.xgboost", objective = "survival:aft")
-  task = TaskSurv$new("test",
-    data.frame(x = rnorm(10), time = runif(10), status = rbinom(10, 1, 0.7)),
-    time = "time", event = "status"
-  )
-  expect_true(inherits(learner$train(task)$predict(task), "PredictionSurv"))
+  task = generate_tasks(learner, 30)$sanity
+  p = learner$train(task)$predict(task)
+  expect_true(inherits(p, "PredictionSurv"))
+  expect_true(p$score() >= 0.5)
 })

@@ -218,6 +218,10 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         .args = pars
       ))
 
+      if (!is.null(pars$objective) && pars$objective == "survival:aft") {
+        lp = -lp
+      }
+
       list(crank = lp, lp = lp)
     }
   )
