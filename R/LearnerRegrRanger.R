@@ -62,7 +62,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
           default = NULL, special_vals = list(NULL),
           tags = c("train", "predict")),
         ParamLgl$new("quantreg", default = FALSE, tags = "train"),
-        ParamLgl$new("predict.all", default = FALSE, tags = "predict"),
         # FIXME: only works if predict_type == "se". How to set dependency?
         ParamFct$new("se.method",
           default = "infjack", levels = c("jack", "infjack"),
