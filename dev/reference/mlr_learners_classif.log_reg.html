@@ -49,8 +49,7 @@
 
 <meta property="og:title" content="Logistic Regression Classification Learner — mlr_learners_classif.log_reg" />
 <meta property="og:description" content="Classification via logistic regression.
-Calls stats::glm() with family set to &quot;binomial&quot;.
-Argument model is set to FALSE." />
+Calls stats::glm() with family set to &quot;binomial&quot;." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -84,7 +83,7 @@ Argument model is set to FALSE." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.4.2-9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.4.3-9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -111,7 +110,7 @@ Argument model is set to FALSE." />
 </li>
         <li>
   <a href="https://github.com/mlr-org/mlr3learners/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -123,13 +122,13 @@ Argument model is set to FALSE." />
 </li>
 <li>
   <a href="https://stackoverflow.com/questions/tagged/mlr">
-    <span class="fab fa fab fa-stack-overflow"></span>
+    <span class="fab fa-stack-overflow"></span>
      
   </a>
 </li>
 <li>
   <a href="https://mlr-org.com/">
-    <span class="fa fa-rss"></span>
+    <span class="fas fa-rss"></span>
      
   </a>
 </li>
@@ -153,11 +152,22 @@ Argument model is set to FALSE." />
 
     <div class="ref-description">
     <p>Classification via logistic regression.
-Calls <code><a href='https://rdrr.io/r/stats/glm.html'>stats::glm()</a></code> with <code>family</code> set to <code>"binomial"</code>.
-Argument <code>model</code> is set to <code>FALSE</code>.</p>
+Calls <code><a href='https://rdrr.io/r/stats/glm.html'>stats::glm()</a></code> with <code>family</code> set to <code>"binomial"</code>.</p>
     </div>
 
 
+
+    <h2 class="hasAnchor" id="custom-mlr-defaults"><a class="anchor" href="#custom-mlr-defaults"></a>Custom mlr3 defaults</h2>
+
+    
+
+<ul>
+<li><p><code>model</code>:</p><ul>
+<li><p>Actual default: <code>TRUE</code></p></li>
+<li><p>Adjusted default: <code>FALSE</code></p></li>
+<li><p>Reason for change: Save some memory.</p></li>
+</ul></li>
+</ul>
 
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
