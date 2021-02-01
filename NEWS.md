@@ -1,5 +1,6 @@
-# mlr3learners 0.4.3-9000
+# mlr3learners 0.4.3.9000
 
+- Added `survival:aft` objective to `surv.xgboost`
 - Removed hyperparameter `predict.all` from ranger learners (#172).
 
 # mlr3learners 0.4.3

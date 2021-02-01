@@ -29,13 +29,7 @@ would error. Just setting a nonsense default to workaround this.
 \itemize{
 \item Actual default: \code{reg:squarederror}
 \item Adjusted default: \code{survival:cox}
-\item Reason for change: This is the only available objective for survival.
-}
-\item \code{eval_metric}:
-\itemize{
-\item Actual default: no default
-\item Adjusted default: \code{cox-nloglik}
-\item Reason for change: Only sensible metric for objective.
+\item Reason for change: Changed to a survival objective.
 }
 }
 }
