@@ -1,3 +1,7 @@
+# mlr3learners 0.4.3-9000
+
+- Removed hyperparameter `predict.all` from ranger learners (#172).
+
 # mlr3learners 0.4.3
 
 - Fixed stochastic test failures on solaris.
