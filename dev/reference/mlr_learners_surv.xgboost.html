@@ -177,12 +177,7 @@ would error. Just setting a nonsense default to workaround this.
 <li><p><code>objective</code>:</p><ul>
 <li><p>Actual default: <code>reg:squarederror</code></p></li>
 <li><p>Adjusted default: <code>survival:cox</code></p></li>
-<li><p>Reason for change: This is the only available objective for survival.</p></li>
-</ul></li>
-<li><p><code>eval_metric</code>:</p><ul>
-<li><p>Actual default: no default</p></li>
-<li><p>Adjusted default: <code>cox-nloglik</code></p></li>
-<li><p>Reason for change: Only sensible metric for objective.</p></li>
+<li><p>Reason for change: Changed to a survival objective.</p></li>
 </ul></li>
 </ul>
 
@@ -265,25 +260,35 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; &lt;LearnerSurvXgboost:surv.xgboost&gt;
 #&gt; * Model: -
-#&gt; * Parameters: nrounds=1, verbose=0, eval_metric=cox-nloglik
+#&gt; * Parameters: nrounds=1, verbose=0
 #&gt; * Packages: xgboost
 #&gt; * Predict Type: crank
-#&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: importance, missings, weights</div><div class='output co'>#&gt;  [1] "booster"                "watchlist"              "eta"                   
-#&gt;  [4] "gamma"                  "max_depth"              "min_child_weight"      
-#&gt;  [7] "subsample"              "colsample_bytree"       "colsample_bylevel"     
-#&gt; [10] "colsample_bynode"       "num_parallel_tree"      "lambda"                
-#&gt; [13] "lambda_bias"            "alpha"                  "objective"             
-#&gt; [16] "eval_metric"            "base_score"             "max_delta_step"        
-#&gt; [19] "missing"                "monotone_constraints"   "tweedie_variance_power"
-#&gt; [22] "nthread"                "nrounds"                "feval"                 
-#&gt; [25] "verbose"                "print_every_n"          "early_stopping_rounds" 
-#&gt; [28] "maximize"               "sample_type"            "normalize_type"        
-#&gt; [31] "rate_drop"              "skip_drop"              "one_drop"              
-#&gt; [34] "tree_method"            "grow_policy"            "max_leaves"            
-#&gt; [37] "max_bin"                "callbacks"              "sketch_eps"            
-#&gt; [40] "scale_pos_weight"       "updater"                "refresh_leaf"          
-#&gt; [43] "feature_selector"       "top_k"                  "predictor"             </div></pre>
+#&gt; * Feature types: integer, numeric
+#&gt; * Properties: importance, missings, weights</div><div class='output co'>#&gt;  [1] "booster"                     "watchlist"                  
+#&gt;  [3] "eta"                         "gamma"                      
+#&gt;  [5] "max_depth"                   "min_child_weight"           
+#&gt;  [7] "subsample"                   "colsample_bytree"           
+#&gt;  [9] "colsample_bylevel"           "colsample_bynode"           
+#&gt; [11] "num_parallel_tree"           "lambda"                     
+#&gt; [13] "lambda_bias"                 "alpha"                      
+#&gt; [15] "aft_loss_distribution"       "aft_loss_distribution_scale"
+#&gt; [17] "objective"                   "base_score"                 
+#&gt; [19] "max_delta_step"              "missing"                    
+#&gt; [21] "monotone_constraints"        "tweedie_variance_power"     
+#&gt; [23] "nthread"                     "nrounds"                    
+#&gt; [25] "feval"                       "verbose"                    
+#&gt; [27] "print_every_n"               "early_stopping_rounds"      
+#&gt; [29] "maximize"                    "save_period"                
+#&gt; [31] "save_name"                   "xgb_model"                  
+#&gt; [33] "sample_type"                 "normalize_type"             
+#&gt; [35] "rate_drop"                   "skip_drop"                  
+#&gt; [37] "one_drop"                    "tree_method"                
+#&gt; [39] "grow_policy"                 "max_leaves"                 
+#&gt; [41] "max_bin"                     "callbacks"                  
+#&gt; [43] "sketch_eps"                  "scale_pos_weight"           
+#&gt; [45] "updater"                     "refresh_leaf"               
+#&gt; [47] "feature_selector"            "top_k"                      
+#&gt; [49] "predictor"                   "ntreelimit"                 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
