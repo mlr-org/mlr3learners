@@ -6,6 +6,12 @@
 #' Random classification forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
+#' @section Custom mlr3 defaults:
+#' - `num.threads`:
+#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
+#'   - Adjusted value: 1.
+#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+#'
 #' @template section_dictionary_learner
 #' @templateVar id classif.ranger
 #'
@@ -46,7 +52,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         ParamLgl$new("scale.permutation.importance", default = FALSE, tags = "train"),
         ParamLgl$new("keep.inbag", default = FALSE, tags = "train"),
         ParamLgl$new("holdout", default = FALSE, tags = "train"),
-        ParamInt$new("num.threads", lower = 1L, tags = c("train", "predict")),
+        ParamInt$new("num.threads", lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
         ParamLgl$new("save.memory", default = FALSE, tags = "train"),
         ParamLgl$new("verbose", default = TRUE, tags = c("train", "predict")),
         ParamLgl$new("oob.error", default = TRUE, tags = "train"),
@@ -63,6 +69,9 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
           tags = "predict")
 
       ))
+
+      ps$values = list(num.threads = 1L)
+
       ps$add_dep("num.random.splits", "splitrule", CondEqual$new("extratrees"))
       ps$add_dep("scale.permutation.importance", "importance", CondEqual$new("permutation"))
 

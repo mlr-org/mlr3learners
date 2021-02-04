@@ -8,14 +8,18 @@
 #'
 #' @section Custom mlr3 defaults:
 #' - `nrounds`:
-#'   - Actual default: no default
-#'   - Adjusted default: 1
+#'   - Actual default: no default.
+#'   - Adjusted default: 1.
 #'   - Reason for change: Without a default construction of the learner
 #'     would error. Just setting a nonsense default to workaround this.
 #'     `nrounds` needs to be tuned by the user.
+#' - `nthread`:
+#'   - Actual value: Undefined, triggering auto-detection of the number of CPUs.
+#'   - Adjusted value: 1.
+#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #' - `verbose`:
-#'   - Actual default: 1
-#'   - Adjusted default: 0
+#'   - Actual default: 1.
+#'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #' - `objective`:
 #'   - Actual default: `reg:squarederror`
@@ -68,7 +72,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
           special_vals = list(NA, NA_real_, NULL)),
         ParamInt$new("monotone_constraints", default = 0L, lower = -1L, upper = 1L, tags = "train"),
         ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"),
-        ParamInt$new("nthread", lower = 1L, tags = "train"),
+        ParamInt$new("nthread", lower = 1L, default = 1L, tags = c("train", "threads")),
         ParamInt$new("nrounds", lower = 1L, tags = "train"),
         ParamUty$new("feval", default = NULL, tags = "train"),
         ParamInt$new("verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
@@ -130,7 +134,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       ps$add_dep("aft_loss_distribution", "objective", CondEqual$new("survival:aft"))
       ps$add_dep("aft_loss_distribution_scale", "objective", CondEqual$new("survival:aft"))
 
-      ps$values = list(nrounds = 1L, verbose = 0L)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
 
       super$initialize(
         id = "surv.xgboost",
