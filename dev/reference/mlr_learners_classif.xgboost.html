@@ -163,15 +163,20 @@ Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xg
 
 <ul>
 <li><p><code>nrounds</code>:</p><ul>
-<li><p>Actual default: no default</p></li>
-<li><p>Adjusted default: 1</p></li>
+<li><p>Actual default: no default.</p></li>
+<li><p>Adjusted default: 1.</p></li>
 <li><p>Reason for change: Without a default construction of the learner
 would error. Just setting a nonsense default to workaround this.
 <code>nrounds</code> needs to be tuned by the user.</p></li>
 </ul></li>
+<li><p><code>nthread</code>:</p><ul>
+<li><p>Actual value: Undefined, triggering auto-detection of the number of CPUs.</p></li>
+<li><p>Adjusted value: 1.</p></li>
+<li><p>Reason for change: Conflicting with parallelization via <a href='https://CRAN.R-project.org/package=future'><span class="pkg">future</span></a>.</p></li>
+</ul></li>
 <li><p><code>verbose</code>:</p><ul>
-<li><p>Actual default: 1</p></li>
-<li><p>Adjusted default: 0</p></li>
+<li><p>Actual default: 1.</p></li>
+<li><p>Adjusted default: 0.</p></li>
 <li><p>Reason for change: Reduce verbosity.</p></li>
 </ul></li>
 </ul>
@@ -255,7 +260,7 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required namespace: xgboost</span></div><div class='output co'>#&gt; &lt;LearnerClassifXgboost:classif.xgboost&gt;
 #&gt; * Model: -
-#&gt; * Parameters: verbose=0, nrounds=1
+#&gt; * Parameters: nrounds=1, nthread=1, verbose=0
 #&gt; * Packages: xgboost
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
