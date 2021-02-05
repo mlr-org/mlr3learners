@@ -13,8 +13,8 @@ Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"bin
 \itemize{
 \item \code{model}:
 \itemize{
-\item Actual default: \code{TRUE}
-\item Adjusted default: \code{FALSE}
+\item Actual default: \code{TRUE}.
+\item Adjusted default: \code{FALSE}.
 \item Reason for change: Save some memory.
 }
 }

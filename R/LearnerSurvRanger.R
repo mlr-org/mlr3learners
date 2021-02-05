@@ -6,6 +6,8 @@
 #' Random survival forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
+#' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
+#'
 #' @template section_dictionary_learner
 #' @templateVar id surv.ranger
 #'
@@ -21,53 +23,55 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      ps = ParamSet$new(params = list(
+        ParamInt$new(
+          id = "num.trees", default = 500L, lower = 1L,
+          tags = c("train", "predict")),
+        ParamInt$new(id = "mtry", lower = 1L, tags = "train"),
+        ParamFct$new(id = "importance", levels = c(
+            "none", "impurity", "impurity_corrected",
+            "permutation"), tags = "train"),
+        ParamLgl$new(id = "write.forest", default = TRUE, tags = "train"),
+        ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"),
+        ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
+        ParamDbl$new(
+          id = "sample.fraction", lower = 0L, upper = 1L,
+          tags = "train"), # for replace == FALSE, def = 0.632
+        # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
+        ParamFct$new(
+          id = "splitrule", levels = c("logrank", "extratrees", "C", "maxstat"),
+          default = "logrank", tags = "train"),
+        ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"),
+        # requires = quote(splitrule == "extratrees")
+        ParamInt$new("max.depth", default = NULL, special_vals = list(NULL), tags = "train"),
+        ParamDbl$new("alpha", default = 0.5, tags = "train"),
+        ParamDbl$new("minprop", default = 0.1, tags = "train"),
+        ParamUty$new("regularization.factor", default = 1, tags = "train"),
+        ParamLgl$new("regularization.usedepth", default = FALSE, tags = "train"),
+        ParamInt$new("seed", default = NULL, special_vals = list(NULL),
+          tags = c("train", "predict")),
+        ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
+        ParamUty$new(id = "always.split.variables", tags = "train"),
+        ParamFct$new(
+          id = "respect.unordered.factors",
+          levels = c("ignore", "order", "partition"), default = "ignore",
+          tags = "train"), # for splitrule == "extratrees", def = partition
+        ParamLgl$new(
+          id = "scale.permutation.importance", default = FALSE,
+          tags = "train"), # requires = quote(importance == "permutation")
+        ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
+        ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), # FIXME: do we need this?
+        ParamInt$new(id = "num.threads", lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
+        ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
+        ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
+        ParamLgl$new(id = "oob.error", default = TRUE, tags = "train")
+      ))
+
+      ps$values = list(num.threads = 1L)
+
       super$initialize(
         id = "surv.ranger",
-        param_set = ParamSet$new(
-          params = list(
-            ParamInt$new(
-              id = "num.trees", default = 500L, lower = 1L,
-              tags = c("train", "predict")),
-            ParamInt$new(id = "mtry", lower = 1L, tags = "train"),
-            ParamFct$new(id = "importance", levels = c(
-              "none", "impurity", "impurity_corrected",
-              "permutation"), tags = "train"),
-            ParamLgl$new(id = "write.forest", default = TRUE, tags = "train"),
-            ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"),
-            ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
-            ParamDbl$new(
-              id = "sample.fraction", lower = 0L, upper = 1L,
-              tags = "train"), # for replace == FALSE, def = 0.632
-            # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
-            ParamFct$new(
-              id = "splitrule", levels = c("logrank", "extratrees", "C", "maxstat"),
-              default = "logrank", tags = "train"),
-            ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"),
-            # requires = quote(splitrule == "extratrees")
-            ParamInt$new("max.depth", default = NULL, special_vals = list(NULL), tags = "train"),
-            ParamDbl$new("alpha", default = 0.5, tags = "train"),
-            ParamDbl$new("minprop", default = 0.1, tags = "train"),
-            ParamUty$new("regularization.factor", default = 1, tags = "train"),
-            ParamLgl$new("regularization.usedepth", default = FALSE, tags = "train"),
-            ParamInt$new("seed", default = NULL, special_vals = list(NULL),
-                         tags = c("train", "predict")),
-            ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
-            ParamUty$new(id = "always.split.variables", tags = "train"),
-            ParamFct$new(
-              id = "respect.unordered.factors",
-              levels = c("ignore", "order", "partition"), default = "ignore",
-              tags = "train"), # for splitrule == "extratrees", def = partition
-            ParamLgl$new(
-              id = "scale.permutation.importance", default = FALSE,
-              tags = "train"), # requires = quote(importance == "permutation")
-            ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
-            ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), # FIXME: do we need this?
-            ParamInt$new(id = "num.threads", lower = 1L, tags = c("train", "predict")),
-            ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
-            ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
-            ParamLgl$new(id = "oob.error", default = TRUE, tags = "train")
-          )
-        ),
+        param_set = ps,
         predict_types = c("distr", "crank"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error"),

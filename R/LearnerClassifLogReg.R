@@ -8,8 +8,8 @@
 #'
 #' @section Custom mlr3 defaults:
 #' - `model`:
-#'   - Actual default: `TRUE`
-#'   - Adjusted default: `FALSE`
+#'   - Actual default: `TRUE`.
+#'   - Adjusted default: `FALSE`.
 #'   - Reason for change: Save some memory.
 #'
 #' @templateVar id classif.log_reg

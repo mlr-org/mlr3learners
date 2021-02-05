@@ -23,7 +23,7 @@ lrn("classif.nnet")
 \itemize{
 \item \code{size}:
 \itemize{
-\item Adjusted default: 3L
+\item Adjusted default: 3L.
 \item Reason for change: no default in \code{nnet()}.
 }
 }
