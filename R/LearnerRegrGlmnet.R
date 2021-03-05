@@ -92,6 +92,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         feature_types = c("logical", "integer", "numeric"),
         properties = "weights",
         packages = "glmnet",
+        data_formats = c("Matrix", "data.table"),
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
     }
@@ -99,10 +100,10 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
 
   private = list(
     .train = function(task) {
-
-      pars = self$param_set$get_values(tags = "train")
-      data = as.matrix(task$data(cols = task$feature_names))
+      data_format = intersect(self$data_formats, task$data_formats)[1L]
+      data = task$data(cols = task$feature_names, data_format = data_format)
       target = as.matrix(task$data(cols = task$target_names))
+      pars = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }

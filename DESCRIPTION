@@ -45,7 +45,7 @@ Suggests:
     DiceKriging,
     distr6,
     e1071,
-    glmnet,
+    glmnet (>= 4.1.1),
     kknn,
     knitr,
     lgr,
