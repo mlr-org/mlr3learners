@@ -1,5 +1,9 @@
 # mlr3learners 0.4.3.9000
 
+- Changed hyperparameters of all learners to make them run sequentially in their
+  defaults.
+  The new function `set_threads()` provides a generic way to set the respective
+  hyperparameter to the desired number of parallel threads.
 - Added `survival:aft` objective to `surv.xgboost`
 - Removed hyperparameter `predict.all` from ranger learners (#172).
 
