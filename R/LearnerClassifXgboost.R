@@ -69,7 +69,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           tags = c("train", "control")),
         ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"),
         ParamInt$new("nthread", lower = 1L, tags = c("train", "control")),
-        ParamInt$new("nrounds", default = 1, lower = 1L, tags = c("train", "budget")),
+        ParamInt$new("nrounds", default = 1, lower = 1L, tags = c("train", "retrain")),
         ParamUty$new("feval", default = NULL, tags = "train"),
         ParamInt$new("verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
         ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"),
@@ -251,13 +251,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
     },
 
-    .continue = function(task) {
+    .retrain = function(task) {
       model = self$model
       pars = self$param_set$get_values(tags = "train")
-
-      if(model$niter >= pars$nrounds) {
-        stop("No additional boosting iterations provided.")
-      }
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
@@ -270,6 +266,11 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
+    },
+
+    .is_retrainable = function(param_vals) {
+      pars = param_set$get_values(tags = "retrain")
+      param_vals$nrounds > pars$nrounds
     },
 
     .update = function(task) {
