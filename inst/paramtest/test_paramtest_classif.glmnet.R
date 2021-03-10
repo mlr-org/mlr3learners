@@ -10,6 +10,7 @@ test_that("classif.glmnet", {
     "y", # handled by mlr3
     "weights", # handled by mlr3
     "nfolds", # not used by learner
+    "type.measure", # not used by learner
     "foldid" # not used by learner
   )
 
