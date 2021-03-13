@@ -9,6 +9,8 @@
 #' @templateVar id regr.ranger
 #' @template section_dictionary_learner
 #'
+#' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
+#'
 #' @references
 #' `r format_bib("wright_2017", "breiman_2001")`
 #'
@@ -49,7 +51,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
           default = "ignore", tags = "train"),
         ParamLgl$new("keep.inbag", default = FALSE, tags = "train"),
         ParamLgl$new("holdout", default = FALSE, tags = "train"),
-        ParamInt$new("num.threads", lower = 1L, tags = c("train", "predict")),
+        ParamInt$new("num.threads", lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
         ParamLgl$new("save.memory", default = FALSE, tags = "train"),
         ParamLgl$new("verbose", default = TRUE, tags = c("train", "predict")),
         ParamLgl$new("oob.error", default = TRUE, tags = "train"),
@@ -62,12 +64,13 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
           default = NULL, special_vals = list(NULL),
           tags = c("train", "predict")),
         ParamLgl$new("quantreg", default = FALSE, tags = "train"),
-        ParamLgl$new("predict.all", default = FALSE, tags = "predict"),
         # FIXME: only works if predict_type == "se". How to set dependency?
         ParamFct$new("se.method",
           default = "infjack", levels = c("jack", "infjack"),
           tags = "predict")
       ))
+
+      ps$values = list(num.threads = 1L)
 
       # deps
       ps$add_dep("num.random.splits", "splitrule", CondEqual$new("extratrees"))
