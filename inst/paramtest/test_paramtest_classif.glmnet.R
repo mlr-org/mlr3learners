@@ -10,8 +10,8 @@ test_that("classif.glmnet", {
     "y", # handled by mlr3
     "weights", # handled by mlr3
     "nfolds", # not used by learner
-    "type.measure", # not used by learner
-    "foldid" # not used by learner
+    "foldid", # not used by learner
+    "type.measure" # only used by cv.glmnet
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
