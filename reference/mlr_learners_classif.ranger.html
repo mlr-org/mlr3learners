@@ -83,7 +83,7 @@ Calls ranger::ranger() from package ranger." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.4.3</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.4.4</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -156,6 +156,18 @@ Calls <code><a href='https://rdrr.io/pkg/ranger/man/ranger.html'>ranger::ranger(
     </div>
 
 
+
+    <h2 class="hasAnchor" id="custom-mlr-defaults"><a class="anchor" href="#custom-mlr-defaults"></a>Custom mlr3 defaults</h2>
+
+    
+
+<ul>
+<li><p><code>num.threads</code>:</p><ul>
+<li><p>Actual default: <code>NULL</code>, triggering auto-detection of the number of CPUs.</p></li>
+<li><p>Adjusted value: 1.</p></li>
+<li><p>Reason for change: Conflicting with parallelization via <a href='https://CRAN.R-project.org/package=future'><span class="pkg">future</span></a>.</p></li>
+</ul></li>
+</ul>
 
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
@@ -250,7 +262,7 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required namespace: ranger</span></div><div class='output co'>#&gt; &lt;LearnerClassifRanger:classif.ranger&gt;
 #&gt; * Model: -
-#&gt; * Parameters: list()
+#&gt; * Parameters: num.threads=1
 #&gt; * Packages: ranger
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric, character, factor, ordered
