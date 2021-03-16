@@ -1,3 +1,7 @@
+# mlr3learners 0.4.5
+
+- Fixed SVM for new release of package `e1071`.
+
 # mlr3learners 0.4.4
 
 - Changed hyperparameters of all learners to make them run sequentially in their
