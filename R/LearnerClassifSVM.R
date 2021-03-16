@@ -65,7 +65,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
   private = list(
     .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
-      data = as.matrix(task$data(cols = task$feature_names))
+      data = as_numeric_matrix(task$data(cols = task$feature_names))
       self$state$feature_names = colnames(data)
 
       invoke(e1071::svm,
@@ -78,7 +78,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
 
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
-      newdata = as.matrix(task$data(cols = task$feature_names))
+      newdata = as_numeric_matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
       p = mlr3misc::invoke(predict, self$model,
         newdata = newdata,
