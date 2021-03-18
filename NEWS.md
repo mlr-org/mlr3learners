@@ -1,6 +1,6 @@
 # mlr3learners 0.4.5
 
-- Fixed SVM for new release of package `e1071`.
+- Fixed SVM learners for new release of package `e1071`.
 
 # mlr3learners 0.4.4
 
