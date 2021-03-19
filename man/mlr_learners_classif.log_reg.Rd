@@ -39,15 +39,6 @@ Setting the option \code{"contrasts"} does not have any effect.
 Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to create dummy features.
 }
 
-\examples{
-if (requireNamespace("stats")) {
-  learner = mlr3::lrn("classif.log_reg")
-  print(learner)
-
-  # available parameters:
-learner$param_set$ids()
-}
-}
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
 }
@@ -58,6 +49,7 @@ learner$param_set$ids()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifLogReg$new()}}
+\item \href{#method-loglik}{\code{LearnerClassifLogReg$loglik()}}
 \item \href{#method-clone}{\code{LearnerClassifLogReg$clone()}}
 }
 }
@@ -81,6 +73,15 @@ learner$param_set$ids()
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-loglik"></a>}}
+\if{latex}{\out{\hypertarget{method-loglik}{}}}
+\subsection{Method \code{loglik()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$loglik()}\if{html}{\out{</div>}}
 }
 
 }

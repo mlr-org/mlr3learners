@@ -42,10 +42,14 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = "weights",
+        properties = c("weights", "loglik"),
         packages = "stats",
         man = "mlr3learners::mlr_learners_regr.lm"
       )
+    },
+
+    loglik = function() {
+      extract_loglik(self)
     }
   ),
 

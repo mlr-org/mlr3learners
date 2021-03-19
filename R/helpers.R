@@ -21,6 +21,15 @@ glmnet_feature_names = function(model) {
 }
 
 
+extract_loglik = function(self) {
+  require_namespaces(self$packages)
+  if (is.null(self$model)) {
+    stopf("No model stored")
+  }
+  stats::logLik(self$model)
+}
+
+
 as_numeric_matrix = function(x) { # for svm / #181
   x = as.matrix(x)
   if (is.logical(x)) {
