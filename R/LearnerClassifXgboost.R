@@ -148,7 +148,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "continue", "update"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "retrain", "update"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_classif.xgboost"
       )
@@ -254,10 +254,11 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     .retrain = function(task) {
       model = self$model
       pars = self$param_set$get_values(tags = "train")
+      pars_train = self$state$param_vals
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
-      pars$nrounds = pars$nrounds - model$niter
+      pars$nrounds = pars$nrounds - pars_train$nrounds
 
       # Construct data
       nlvls = length(task$class_names)
@@ -269,7 +270,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     },
 
     .is_retrainable = function(param_vals) {
-      pars = param_set$get_values(tags = "retrain")
+      pars = self$state$param_vals
       param_vals$nrounds > pars$nrounds
     },
 
