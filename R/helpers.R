@@ -21,4 +21,12 @@ glmnet_feature_names = function(model) {
 }
 
 
+as_numeric_matrix = function(x) { # for svm / #181
+  x = as.matrix(x)
+  if (is.logical(x)) {
+    storage.mode(x) = "double"
+  }
+  x
+}
+
 opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))

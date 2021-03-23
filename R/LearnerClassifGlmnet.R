@@ -31,9 +31,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
     initialize = function() {
       ps = ParamSet$new(list(
         ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-        ParamFct$new("type.measure",
-          levels = c("deviance", "class", "auc", "mse", "mae"),
-          default = "deviance", tags = "train"),
         ParamDbl$new("s", lower = 0, default = 0.01, tags = "predict"),
         ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
         ParamUty$new("lambda", tags = "train"),

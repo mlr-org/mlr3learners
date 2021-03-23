@@ -13,29 +13,29 @@ Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpk
 \itemize{
 \item \code{nrounds}:
 \itemize{
-\item Actual default: no default
-\item Adjusted default: 1
+\item Actual default: no default.
+\item Adjusted default: 1.
 \item Reason for change: Without a default construction of the learner
 would error. Just setting a nonsense default to workaround this.
 \code{nrounds} needs to be tuned by the user.
 }
+\item \code{nthread}:
+\itemize{
+\item Actual value: Undefined, triggering auto-detection of the number of CPUs.
+\item Adjusted value: 1.
+\item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+}
 \item \code{verbose}:
 \itemize{
-\item Actual default: 1
-\item Adjusted default: 0
+\item Actual default: 1.
+\item Adjusted default: 0.
 \item Reason for change: Reduce verbosity.
 }
 \item \code{objective}:
 \itemize{
 \item Actual default: \code{reg:squarederror}
 \item Adjusted default: \code{survival:cox}
-\item Reason for change: This is the only available objective for survival.
-}
-\item \code{eval_metric}:
-\itemize{
-\item Actual default: no default
-\item Adjusted default: \code{cox-nloglik}
-\item Reason for change: Only sensible metric for objective.
+\item Reason for change: Changed to a survival objective.
 }
 }
 }

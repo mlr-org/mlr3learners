@@ -6,17 +6,7 @@
 #' eXtreme Gradient Boosting regression.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
-#' @section Custom mlr3 defaults:
-#' - `nrounds`:
-#'   - Actual default: no default
-#'   - Adjusted default: 1
-#'   - Reason for change: Without a default construction of the learner
-#'     would error. Just setting a nonsense default to workaround this.
-#'     `nrounds` needs to be tuned by the user.
-#' - `verbose`:
-#'   - Actual default: 1
-#'   - Adjusted default: 0
-#'   - Reason for change: Reduce verbosity.
+#' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
 #' @template section_dictionary_learner
 #' @templateVar id regr.xgboost
@@ -61,8 +51,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           special_vals = list(NA, NA_real_, NULL)),
         ParamInt$new("monotone_constraints", default = 0L, lower = -1L, upper = 1L, tags = "train"),
         ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"),
-        ParamInt$new("nthread", lower = 1L, tags = "train"),
-        ParamInt$new("nrounds", lower = 1L, tags = c("train", "budget")),
+        ParamInt$new("nthread", lower = 1L, default = 1L, tags = c("train", "threads")),
+        ParamInt$new("nrounds", lower = 1L, tags = c("train", "retrain")),
         ParamUty$new("feval", default = NULL, tags = "train"),
         ParamInt$new("verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
         ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"),
@@ -134,7 +124,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, verbose = 0L)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
 
       super$initialize(
         id = "regr.xgboost",

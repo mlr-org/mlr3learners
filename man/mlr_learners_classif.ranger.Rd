@@ -8,6 +8,18 @@
 Random classification forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 }
+\section{Custom mlr3 defaults}{
+
+\itemize{
+\item \code{num.threads}:
+\itemize{
+\item Actual default: \code{NULL}, triggering auto-detection of the number of CPUs.
+\item Adjusted value: 1.
+\item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+}
+}
+}
+
 \section{Dictionary}{
 
 This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.ranger")

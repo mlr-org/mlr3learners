@@ -23,7 +23,7 @@ lrn("classif.nnet")
 \itemize{
 \item \code{size}:
 \itemize{
-\item Adjusted default: 3L
+\item Adjusted default: 3L.
 \item Reason for change: no default in \code{nnet()}.
 }
 }
@@ -42,7 +42,7 @@ learner$param_set$ids()
 Ripley BD (1996).
 \emph{Pattern Recognition and Neural Networks}.
 Cambridge University Press.
-\doi{10.1017/cbo9780511812651}, \url{https://doi.org/10.1017/cbo9780511812651}.
+\doi{10.1017/cbo9780511812651}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}

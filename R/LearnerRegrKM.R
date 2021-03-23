@@ -105,7 +105,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         response = task$truth(),
         design = data,
         control = pars$control,
-        .args = remove_named(pars, "nugget.stability")
+        .args = remove_named(pars, c("control", "nugget.stability"))
       )
     },
 

@@ -31,6 +31,7 @@ test_that("predict classif.ranger", {
   exclude = c(
     "quantiles", # required type not supported in mlr3
     "what", # required type (quantiles) not supported in mlr3
+    "predict.all", # not supported in mlr3
     "formula", # handled via mlr3
     "object", # handled via mlr3
     "data", # handled via mlr3

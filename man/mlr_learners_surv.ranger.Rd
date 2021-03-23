@@ -15,6 +15,18 @@ lrn("surv.ranger")
 }
 }
 
+\section{Custom mlr3 defaults}{
+
+\itemize{
+\item \code{num.threads}:
+\itemize{
+\item Actual default: \code{NULL}, triggering auto-detection of the number of CPUs.
+\item Adjusted value: 1.
+\item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+}
+}
+}
+
 \examples{
 if (requireNamespace("ranger")) {
   learner = mlr3::lrn("surv.ranger")
