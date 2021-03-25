@@ -61,13 +61,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         ParamLgl$new("cov.compute", default = TRUE, tags = "predict"),
         ParamLgl$new("light.return", default = FALSE, tags = "predict"),
         ParamLgl$new("bias.correct", default = FALSE, tags = "predict"),
-        ParamLgl$new("checkNames", default = TRUE, tags = "predict"),
-        ParamLgl$new("newX.alreadyExist", default = FALSE, tags = "update"),
-        ParamLgl$new("cov.reestim", default = TRUE, tags = "update"),
-        ParamLgl$new("trend.reestim", default = TRUE, tags = "update"),
-        ParamLgl$new("nugget.reestim", default = FALSE, tags = "update"),
-        ParamUty$new("newnoise.var", default = NULL, tags = "update"),
-        ParamUty$new("kmcontrol", default = NULL, tags = "update")
+        ParamLgl$new("checkNames", default = TRUE, tags = "predict")
       ))
       ps$add_dep("multistart", "optim.method", CondEqual$new("BFGS"))
       ps$add_dep("knots", "scaling", CondEqual$new(TRUE))
