@@ -127,15 +127,6 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
       )
 
       list(response = p$mean, se = p$sd)
-    },
-
-    .update = function(task) {
-      pars = self$param_set$get_values(tags = "update")
-      data = as.matrix(task$data(cols = task$feature_names))
-      truth = task$truth()
-
-      invoke(DiceKriging::update, object = self$model, newX = data, 
-        newy = truth, .args = pars) 
     }
   )
 )

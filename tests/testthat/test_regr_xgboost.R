@@ -7,28 +7,18 @@ test_that("autotest", {
   expect_true(result, info = result$error)
 })
 
-test_that("continue", {
-  learner = mlr3::lrn("regr.xgboost", nrounds = 5L)
+test_that("retrain", {
+  learner = lrn("regr.xgboost", nrounds = 5L)
   task = tsk("boston_housing")
   task$select(task$feature_names[task$feature_names %nin% c("chas", "town")])
-
   learner$train(task)
   expect_equal(learner$model$niter, 5)
+  expect_equal(learner$state$param_vals$nrounds, 5)
 
-  learner$param_set$values$nrounds = 10
-  learner$continue(task)
+  expect_true(learner$is_retrainable(list(nrounds = 10)))
+  learner$retrain(task, list(nrounds = 10))
   expect_equal(learner$model$niter, 10)
-})
+  expect_equal(learner$state$param_vals$nrounds, 10)
 
-test_that("update", {
-  learner = mlr3::lrn("regr.xgboost", nrounds = 5L)
-  task = tsk("boston_housing")
-  task$select(task$feature_names[task$feature_names %nin% c("chas", "town")])
-
-  learner$train(task, row_ids = 1:50)
-  expect_equal(learner$model$niter, 5)
-
-  learner$param_set$values$nrounds = 10
-  learner$update(task, row_ids = 51:100)
-  expect_equal(learner$model$niter, 10)
+  expect_false(learner$is_retrainable(list(nrounds = 10)))
 })

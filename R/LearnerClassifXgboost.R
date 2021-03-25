@@ -276,10 +276,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     .is_retrainable = function(param_vals) {
       pars = self$state$param_vals
       param_vals$nrounds > pars$nrounds
-    },
-
-    .update = function(task) {
-      private$.continue(task)
     }
   )
 )

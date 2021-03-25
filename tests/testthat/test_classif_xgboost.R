@@ -27,26 +27,19 @@ test_that("xgboost with binary:logistic", {
   expect_equal(unname(p$score()), 0)
 })
 
-test_that("continue", {
-  learner = mlr3::lrn("classif.xgboost", nrounds = 5L)
+test_that("retrain", {
+  learner = lrn("classif.xgboost", nrounds = 5L)
   task = tsk("pima")
-
   learner$train(task)
-  expect_equal(learner$model$niter, 5)
+  expect_equal(learner$model$niter, 5L)
+  expect_equal(learner$state$param_vals$nrounds, 5L)
 
-  learner$param_set$values$nrounds = 10
-  learner$continue(task)
-  expect_equal(learner$model$niter, 10)
-})
+  expect_true(learner$is_retrainable(list(nrounds = 10L)))
+  learner$retrain(task, list(nrounds = 10L), allow_train = FALSE)
+  expect_equal(learner$model$niter, 10L)
+  expect_equal(learner$state$param_vals$nrounds, 10L)
 
-test_that("update", {
-  learner = mlr3::lrn("classif.xgboost", nrounds = 5L)
-  task = tsk("pima")
-
-  learner$train(task, row_ids = 1:50)
-  expect_equal(learner$model$niter, 5)
-
-  learner$param_set$values$nrounds = 10
-  learner$update(task, row_ids = 51:100)
-  expect_equal(learner$model$niter, 10)
+  expect_false(learner$is_retrainable(list(nrounds = 10L)))
+  expect_error(learner$retrain(task, list(nrounds = 10L), allow_train = FALSE),
+    regexp = "is not retrainable")
 })
