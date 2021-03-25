@@ -92,7 +92,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         feature_selector = p_fct(default = "cyclic", levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
         top_k = p_int(default = 0, lower = 0, tags = "train"),
         predictor = p_fct(default = "cpu_predictor", levels = c("cpu_predictor", "gpu_predictor"), tags = "train"),
-        ntreelimit = p_int(lower = 1L, tags = "predit")
+        ntreelimit = p_int(lower = 1L, tags = "predict")
       )
       # param deps
       ps$add_dep("print_every_n", "verbose", CondEqual$new(1L))
