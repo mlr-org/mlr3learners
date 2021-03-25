@@ -18,15 +18,6 @@ lrn("classif.cv_glmnet")
 }
 }
 
-\examples{
-if (requireNamespace("glmnet")) {
-  learner = mlr3::lrn("classif.cv_glmnet")
-  print(learner)
-
-  # available parameters:
-learner$param_set$ids()
-}
-}
 \references{
 Friedman J, Hastie T, Tibshirani R (2010).
 \dQuote{Regularization Paths for Generalized Linear Models via Coordinate Descent.}

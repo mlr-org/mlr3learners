@@ -29,46 +29,37 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
-        ParamInt$new("mtry", lower = 1L, tags = "train"),
-        ParamFct$new("importance",
-          levels = c(
-            "none", "impurity", "impurity_corrected", "permutation"),
-          tags = "train"),
-        ParamLgl$new("write.forest", default = TRUE, tags = "train"),
-        ParamInt$new("min.node.size", default = 1L, lower = 1L, tags = "train"),
-        ParamLgl$new("replace", default = TRUE, tags = "train"),
-        ParamDbl$new("sample.fraction", lower = 0L, upper = 1L, tags = "train"),
-        ParamDbl$new("class.weights", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamFct$new("splitrule",
-          default = "gini", levels = c("gini", "extratrees"), tags = "train"),
-        ParamInt$new("num.random.splits", lower = 1L, default = 1L, tags = "train"),
-        ParamDbl$new("split.select.weights", lower = 0, upper = 1, tags = "train"),
-        ParamUty$new("always.split.variables", tags = "train"),
-        ParamFct$new("respect.unordered.factors",
-          default = "ignore",
-          levels = c("ignore", "order", "partition"), tags = "train"),
-        ParamLgl$new("scale.permutation.importance", default = FALSE, tags = "train"),
-        ParamLgl$new("keep.inbag", default = FALSE, tags = "train"),
-        ParamLgl$new("holdout", default = FALSE, tags = "train"),
-        ParamInt$new("num.threads", lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
-        ParamLgl$new("save.memory", default = FALSE, tags = "train"),
-        ParamLgl$new("verbose", default = TRUE, tags = c("train", "predict")),
-        ParamLgl$new("oob.error", default = TRUE, tags = "train"),
-        ParamInt$new("max.depth", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamDbl$new("alpha", default = 0.5, tags = "train"),
-        ParamDbl$new("min.prop", default = 0.1, tags = "train"),
-        ParamUty$new("regularization.factor", default = 1, tags = "train"),
-        ParamLgl$new("regularization.usedepth", default = FALSE, tags = "train"),
-        ParamInt$new("seed", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamDbl$new("minprop", default = 0.1, tags = "train"),
+      ps = ps(
         # FIXME: only works if predict_type == "se". How to set dependency?
-        ParamFct$new("se.method",
-          default = "infjack", levels = c("jack", "infjack"),
-          tags = "predict")
-
-      ))
+        alpha                        = p_dbl(default = 0.5, tags = "train"),
+        always.split.variables       = p_uty(tags = "train"),
+        class.weights                = p_dbl(default = NULL, special_vals = list(NULL), tags = "train"),
+        holdout                      = p_lgl(default = FALSE, tags = "train"),
+        importance                   = p_fct(c( "none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
+        keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
+        max.depth                    = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
+        min.node.size                = p_int(1L, default = 1L, tags = "train"),
+        min.prop                     = p_dbl(default = 0.1, tags = "train"),
+        minprop                      = p_dbl(default = 0.1, tags = "train"),
+        mtry                         = p_int(1L, tags = "train"),
+        num.random.splits            = p_int(1L, default = 1L, tags = "train"),
+        num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
+        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
+        oob.error                    = p_lgl(default = TRUE, tags = "train"),
+        regularization.factor        = p_uty(default = 1, tags = "train"),
+        regularization.usedepth      = p_lgl(default = FALSE, tags = "train"),
+        replace                      = p_lgl(default = TRUE, tags = "train"),
+        respect.unordered.factors    = p_fct(c("ignore", "order", "partition"), default = "ignore", tags = "train"),
+        sample.fraction              = p_dbl(0L, 1L, tags = "train"),
+        save.memory                  = p_lgl(default = FALSE, tags = "train"),
+        scale.permutation.importance = p_lgl(default = FALSE, tags = "train"),
+        se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"),
+        seed                         = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
+        split.select.weights         = p_dbl(0, 1, tags = "train"),
+        splitrule                    = p_fct(c("gini", "extratrees"), default = "gini", tags = "train"),
+        verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
+        write.forest                 = p_lgl(default = TRUE, tags = "train")
+      )
 
       ps$values = list(num.threads = 1L)
 
