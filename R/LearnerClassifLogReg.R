@@ -28,21 +28,21 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamLgl$new("singular.ok", default = TRUE, tags = "train"),
-        ParamLgl$new("x", default = FALSE, tags = "train"),
-        ParamLgl$new("y", default = TRUE, tags = "train"),
-        ParamLgl$new("model", default = TRUE, tags = "train"),
-        ParamUty$new("etastart", tags = "train"),
-        ParamUty$new("mustart", tags = "train"),
-        ParamUty$new("start", default = NULL, tags = "train"),
-        ParamUty$new("offset", tags = "train"),
-        ParamDbl$new("epsilon", default = 1e-8, tags = c("train", "control")),
-        ParamDbl$new("maxit", default = 25, tags = c("train", "control")),
-        ParamLgl$new("trace", default = FALSE, tags = c("train", "control")),
-        ParamLgl$new("se.fit", default = FALSE, tags = "predict"),
-        ParamUty$new("dispersion", default = NULL, tags = "predict")
-      ))
+      ps = ps(
+        singular.ok = p_lgl(default = TRUE, tags = "train"),
+        x = p_lgl(default = FALSE, tags = "train"),
+        y = p_lgl(default = TRUE, tags = "train"),
+        model = p_lgl(default = TRUE, tags = "train"),
+        etastart = p_uty(tags = "train"),
+        mustart = p_uty(tags = "train"),
+        start = p_uty(default = NULL, tags = "train"),
+        offset = p_uty(tags = "train"),
+        epsilon = p_dbl(default = 1e-8, tags = c("train", "control")),
+        maxit = p_dbl(default = 25, tags = c("train", "control")),
+        trace = p_lgl(default = FALSE, tags = c("train", "control")),
+        se.fit = p_lgl(default = FALSE, tags = "predict"),
+        dispersion = p_uty(default = NULL, tags = "predict")
+      )
 
       super$initialize(
         id = "classif.log_reg",

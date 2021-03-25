@@ -24,17 +24,13 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamInt$new("k", default = 7L, lower = 1L, tags = "train"),
-        ParamDbl$new("distance", default = 2, lower = 0, tags = "train"),
-        ParamFct$new("kernel",
-          levels = c(
-            "rectangular", "triangular", "epanechnikov",
-            "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"),
-          default = "optimal", tags = "train"),
-        ParamLgl$new("scale", default = TRUE, tags = "train"),
-        ParamUty$new("ykernel", default = NULL, tags = "train")
-      ))
+      ps = ps(
+        k = p_int(default = 7L, lower = 1L, tags = "train"),
+        distance = p_dbl(default = 2, lower = 0, tags = "train"),
+        kernel = p_fct(levels = c( "rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
+        scale = p_lgl(default = TRUE, tags = "train"),
+        ykernel = p_uty(default = NULL, tags = "train")
+      )
 
       super$initialize(
         id = "classif.kknn",

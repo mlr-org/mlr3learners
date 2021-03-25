@@ -20,18 +20,18 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamLgl$new("Hess", default = FALSE, tags = "train"),
-        ParamFct$new("summ", default = "0", levels = c("0", "1", "2", "3"), tags = "train"),
-        ParamLgl$new("censored", default = FALSE, tags = "train"),
-        ParamLgl$new("model", default = FALSE, tags = "train"),
-        ParamDbl$new("rang", default = 0.7, tags = "train"),
-        ParamDbl$new("decay", default = 0, tags = "train"),
-        ParamInt$new("maxit", default = 100L, lower = 1L, tags = "train"),
-        ParamLgl$new("trace", default = TRUE, tags = "train"),
-        ParamDbl$new("abstol", default = 1.0e-4, tags = "train"),
-        ParamDbl$new("reltol", default = 1.0e-8, tags = "train")
-      ))
+      ps = ps(
+        Hess = p_lgl(default = FALSE, tags = "train"),
+        summ = p_fct(default = "0", levels = c("0", "1", "2", "3"), tags = "train"),
+        censored = p_lgl(default = FALSE, tags = "train"),
+        model = p_lgl(default = FALSE, tags = "train"),
+        rang = p_dbl(default = 0.7, tags = "train"),
+        decay = p_dbl(default = 0, tags = "train"),
+        maxit = p_int(default = 100L, lower = 1L, tags = "train"),
+        trace = p_lgl(default = TRUE, tags = "train"),
+        abstol = p_dbl(default = 1.0e-4, tags = "train"),
+        reltol = p_dbl(default = 1.0e-8, tags = "train")
+      )
 
       super$initialize(
         id = "classif.multinom",

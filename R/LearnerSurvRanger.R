@@ -23,49 +23,33 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(params = list(
-        ParamInt$new(
-          id = "num.trees", default = 500L, lower = 1L,
-          tags = c("train", "predict")),
-        ParamInt$new(id = "mtry", lower = 1L, tags = "train"),
-        ParamFct$new(id = "importance", levels = c(
-            "none", "impurity", "impurity_corrected",
-            "permutation"), tags = "train"),
-        ParamLgl$new(id = "write.forest", default = TRUE, tags = "train"),
-        ParamInt$new(id = "min.node.size", default = 5L, lower = 1L, tags = "train"),
-        ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
-        ParamDbl$new(
-          id = "sample.fraction", lower = 0L, upper = 1L,
-          tags = "train"), # for replace == FALSE, def = 0.632
-        # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
-        ParamFct$new(
-          id = "splitrule", levels = c("logrank", "extratrees", "C", "maxstat"),
-          default = "logrank", tags = "train"),
-        ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"),
-        # requires = quote(splitrule == "extratrees")
-        ParamInt$new("max.depth", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamDbl$new("alpha", default = 0.5, tags = "train"),
-        ParamDbl$new("minprop", default = 0.1, tags = "train"),
-        ParamUty$new("regularization.factor", default = 1, tags = "train"),
-        ParamLgl$new("regularization.usedepth", default = FALSE, tags = "train"),
-        ParamInt$new("seed", default = NULL, special_vals = list(NULL),
-          tags = c("train", "predict")),
-        ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
-        ParamUty$new(id = "always.split.variables", tags = "train"),
-        ParamFct$new(
-          id = "respect.unordered.factors",
-          levels = c("ignore", "order", "partition"), default = "ignore",
-          tags = "train"), # for splitrule == "extratrees", def = partition
-        ParamLgl$new(
-          id = "scale.permutation.importance", default = FALSE,
-          tags = "train"), # requires = quote(importance == "permutation")
-        ParamLgl$new(id = "keep.inbag", default = FALSE, tags = "train"),
-        ParamLgl$new(id = "holdout", default = FALSE, tags = "train"), # FIXME: do we need this?
-        ParamInt$new(id = "num.threads", lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
-        ParamLgl$new(id = "save.memory", default = FALSE, tags = "train"),
-        ParamLgl$new(id = "verbose", default = TRUE, tags = c("train", "predict")),
-        ParamLgl$new(id = "oob.error", default = TRUE, tags = "train")
-      ))
+      ps = ps(
+        num.trees = p_int(default = 500L, lower = 1L, tags = c("train", "predict")),
+        mtry = p_int(lower = 1L, tags = "train"),
+        importance = p_fct(levels = c( "none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
+        write.forest = p_lgl(default = TRUE, tags = "train"),
+        min.node.size = p_int(default = 5L, lower = 1L, tags = "train"),
+        replace = p_lgl(default = TRUE, tags = "train"),
+        sample.fraction = p_dbl(lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
+        splitrule = p_fct(levels = c("logrank", "extratrees", "C", "maxstat"), default = "logrank", tags = "train"),
+        num.random.splits = p_int(lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
+        max.depth = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
+        alpha = p_dbl(default = 0.5, tags = "train"),
+        minprop = p_dbl(default = 0.1, tags = "train"),
+        regularization.factor = p_uty(default = 1, tags = "train"),
+        regularization.usedepth = p_lgl(default = FALSE, tags = "train"),
+        seed = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
+        split.select.weights = p_dbl(lower = 0, upper = 1, tags = "train"),
+        always.split.variables = p_uty(tags = "train"),
+        respect.unordered.factors = p_fct(levels = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
+        scale.permutation.importance = p_lgl(default = FALSE, tags = "train"), # requires = quote(importance == "permutation")
+        keep.inbag = p_lgl(default = FALSE, tags = "train"),
+        holdout = p_lgl(default = FALSE, tags = "train"), # FIXME: do we need this?
+        num.threads = p_int(lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
+        save.memory = p_lgl(default = FALSE, tags = "train"),
+        verbose = p_lgl(default = TRUE, tags = c("train", "predict")),
+        oob.error = p_lgl(default = TRUE, tags = "train")
+      )
 
       ps$values = list(num.threads = 1L)
 

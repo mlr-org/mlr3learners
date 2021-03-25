@@ -30,28 +30,26 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
 
-      ps = ParamSet$new(
-        params = list(
-          ParamInt$new(id = "size", default = 3L, lower = 0L, tags = "train"),
-          ParamUty$new(id = "subset", tags = "train"),
-          ParamUty$new(id = "na.action", tags = "train"),
-          ParamUty$new(id = "contrasts", default = NULL, tags = "train"),
-          ParamUty$new(id = "Wts", tags = "train"),
-          ParamUty$new(id = "mask", tags = "train"),
-          ParamLgl$new(id = "linout", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "entropy", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "softmax", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "censored", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "skip", default = FALSE, tags = "train"),
-          ParamDbl$new(id = "rang", default = 0.7, tags = "train"),
-          ParamDbl$new(id = "decay", default = 0, tags = "train"),
-          ParamInt$new(id = "maxit", default = 100L, lower = 1L, tags = "train"),
-          ParamLgl$new(id = "Hess", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "trace", default = TRUE, tags = "train"),
-          ParamInt$new(id = "MaxNWts", default = 1000L, lower = 1L, tags = "train"),
-          ParamDbl$new(id = "abstol", default = 1.0e-4, tags = "train"),
-          ParamDbl$new(id = "reltol", default = 1.0e-8, tags = "train")
-        )
+      ps = ps(
+        size = p_int(default = 3L, lower = 0L, tags = "train"),
+        subset = p_uty(tags = "train"),
+        na.action = p_uty(tags = "train"),
+        contrasts = p_uty(default = NULL, tags = "train"),
+        Wts = p_uty(tags = "train"),
+        mask = p_uty(tags = "train"),
+        linout = p_lgl(default = FALSE, tags = "train"),
+        entropy = p_lgl(default = FALSE, tags = "train"),
+        softmax = p_lgl(default = FALSE, tags = "train"),
+        censored = p_lgl(default = FALSE, tags = "train"),
+        skip = p_lgl(default = FALSE, tags = "train"),
+        rang = p_dbl(default = 0.7, tags = "train"),
+        decay = p_dbl(default = 0, tags = "train"),
+        maxit = p_int(default = 100L, lower = 1L, tags = "train"),
+        Hess = p_lgl(default = FALSE, tags = "train"),
+        trace = p_lgl(default = TRUE, tags = "train"),
+        MaxNWts = p_int(default = 1000L, lower = 1L, tags = "train"),
+        abstol = p_dbl(default = 1.0e-4, tags = "train"),
+        reltol = p_dbl(default = 1.0e-8, tags = "train")
       )
       ps$values = list(size = 3L)
       ps$add_dep("linout", "entropy", CondEqual$new(FALSE))
