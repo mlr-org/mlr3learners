@@ -23,18 +23,18 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        x = p_lgl(default = FALSE, tags = "train"),
-        y = p_lgl(default = FALSE, tags = "train"),
-        model = p_lgl(default = TRUE, tags = "train"),
-        qr = p_lgl(default = TRUE, tags = "train"),
+        df          = p_dbl(default = Inf, tags = "predict"),
+        interval    = p_fct(c("none", "confidence", "prediction"), tags = "predict"),
+        level       = p_dbl(default = 0.95, tags = "predict"),
+        model       = p_lgl(default = TRUE, tags = "train"),
+        offset      = p_lgl(tags = "train"),
+        pred.var    = p_uty(tags = "predict"),
+        qr          = p_lgl(default = TRUE, tags = "train"),
+        scale       = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
+        se.fit      = p_lgl(default = FALSE, tags = "predict"),
         singular.ok = p_lgl(default = TRUE, tags = "train"),
-        offset = p_lgl(tags = "train"),
-        se.fit = p_lgl(default = FALSE, tags = "predict"),
-        scale = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
-        df = p_dbl(default = Inf, tags = "predict"),
-        interval = p_fct(levels = c("none", "confidence", "prediction"), tags = "predict"),
-        level = p_dbl(default = 0.95, tags = "predict"),
-        pred.var = p_uty(tags = "predict")
+        x           = p_lgl(default = FALSE, tags = "train"),
+        y           = p_lgl(default = FALSE, tags = "train")
       )
 
       super$initialize(

@@ -24,31 +24,31 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        num.trees = p_int(default = 500L, lower = 1L, tags = c("train", "predict")),
-        mtry = p_int(lower = 1L, tags = "train"),
-        importance = p_fct(levels = c( "none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
-        write.forest = p_lgl(default = TRUE, tags = "train"),
-        min.node.size = p_int(default = 5L, lower = 1L, tags = "train"),
-        replace = p_lgl(default = TRUE, tags = "train"),
-        sample.fraction = p_dbl(lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
-        splitrule = p_fct(levels = c("logrank", "extratrees", "C", "maxstat"), default = "logrank", tags = "train"),
-        num.random.splits = p_int(lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
-        max.depth = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
-        alpha = p_dbl(default = 0.5, tags = "train"),
-        minprop = p_dbl(default = 0.1, tags = "train"),
-        regularization.factor = p_uty(default = 1, tags = "train"),
-        regularization.usedepth = p_lgl(default = FALSE, tags = "train"),
-        seed = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
-        split.select.weights = p_dbl(lower = 0, upper = 1, tags = "train"),
-        always.split.variables = p_uty(tags = "train"),
-        respect.unordered.factors = p_fct(levels = c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
+        alpha                        = p_dbl(default = 0.5, tags = "train"),
+        always.split.variables       = p_uty(tags = "train"),
+        holdout                      = p_lgl(default = FALSE, tags = "train"), # FIXME: do we need this?
+        importance                   = p_fct(c( "none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
+        keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
+        max.depth                    = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
+        min.node.size                = p_int(1L, default = 5L, tags = "train"),
+        minprop                      = p_dbl(default = 0.1, tags = "train"),
+        mtry                         = p_int(1L, tags = "train"),
+        num.random.splits            = p_int(1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
+        num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
+        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
+        oob.error                    = p_lgl(default = TRUE, tags = "train"),
+        regularization.factor        = p_uty(default = 1, tags = "train"),
+        regularization.usedepth      = p_lgl(default = FALSE, tags = "train"),
+        replace                      = p_lgl(default = TRUE, tags = "train"),
+        respect.unordered.factors    = p_fct(c("ignore", "order", "partition"), default = "ignore", tags = "train"), # for splitrule == "extratrees", def = partition
+        sample.fraction              = p_dbl(0L, 1L, tags = "train"), # for replace == FALSE, def = 0.632
+        save.memory                  = p_lgl(default = FALSE, tags = "train"),
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train"), # requires = quote(importance == "permutation")
-        keep.inbag = p_lgl(default = FALSE, tags = "train"),
-        holdout = p_lgl(default = FALSE, tags = "train"), # FIXME: do we need this?
-        num.threads = p_int(lower = 1L, default = 1L, tags = c("train", "predict", "threads")),
-        save.memory = p_lgl(default = FALSE, tags = "train"),
-        verbose = p_lgl(default = TRUE, tags = c("train", "predict")),
-        oob.error = p_lgl(default = TRUE, tags = "train")
+        seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
+        split.select.weights         = p_dbl(0, 1, tags = "train"),
+        splitrule                    = p_fct(c("logrank", "extratrees", "C", "maxstat"), default = "logrank", tags = "train"),
+        verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
+        write.forest                 = p_lgl(default = TRUE, tags = "train")
       )
 
       ps$values = list(num.threads = 1L)

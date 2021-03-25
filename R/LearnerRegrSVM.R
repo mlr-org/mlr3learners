@@ -23,18 +23,18 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        type = p_fct(default = "eps-regression", levels = c("eps-regression", "nu-regression"), tags = "train"),
-        kernel = p_fct(default = "radial", levels = c("linear", "polynomial", "radial", "sigmoid"), tags = "train"),
-        degree = p_int(default = 3L, lower = 1L, tags = "train"),
-        coef0 = p_dbl(default = 0, tags = "train"),
-        cost = p_dbl(default = 1, lower = 0, tags = "train"),
-        nu = p_dbl(default = 0.5, tags = "train"),
-        gamma = p_dbl(lower = 0, tags = "train"),
         cachesize = p_dbl(default = 40L, tags = "train"),
-        tolerance = p_dbl(default = 0.001, lower = 0, tags = "train"),
-        epsilon = p_dbl(lower = 0, tags = "train"),
+        coef0     = p_dbl(default = 0, tags = "train"),
+        cost      = p_dbl(0, default = 1, tags = "train"),
+        cross     = p_int(0L, default = 0L, tags = "train"), # tunable = FALSE),
+        degree    = p_int(1L, default = 3L, tags = "train"),
+        epsilon   = p_dbl(0, tags = "train"),
+        gamma     = p_dbl(0, tags = "train"),
+        kernel    = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
+        nu        = p_dbl(default = 0.5, tags = "train"),
         shrinking = p_lgl(default = TRUE, tags = "train"),
-        cross = p_int(default = 0L, lower = 0L, tags = "train"), # tunable = FALSE),
+        tolerance = p_dbl(0, default = 0.001, tags = "train"),
+        type      = p_fct(c("eps-regression", "nu-regression"), default = "eps-regression", tags = "train"),
         fitted = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
         scale = p_uty(default = TRUE, tags = "train") # , tunable = TRUE)
       )

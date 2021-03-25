@@ -30,13 +30,13 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        prior = p_uty(tags = "train"),
-        tol = p_dbl(tags = "train"),
-        method = p_fct(default = "moment", levels = c( "moment", "mle", "mve", "t"), tags = "train"),
-        nu = p_int(tags = "train"),
-        predict.method = p_fct(default = "plug-in", levels = c("plug-in", "predictive", "debiased"), tags = "predict"),
-        predict.prior = p_uty(tags = "predict"),
-        dimen = p_uty(tags = "predict")
+        dimen          = p_uty(tags = "predict"),
+        method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
+        nu             = p_int(tags = "train"),
+        predict.method = p_fct(c("plug-in", "predictive", "debiased"), default = "plug-in", tags = "predict"),
+        predict.prior  = p_uty(tags = "predict"),
+        prior          = p_uty(tags = "train"),
+        tol            = p_dbl(tags = "train")
       )
       ps$add_dep("nu", "method", CondEqual$new("t"))
 

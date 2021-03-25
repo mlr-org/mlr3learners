@@ -21,9 +21,9 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        laplace = p_dbl(default = 0, lower = 0, tags = "train"),
-        threshold = p_dbl(default = 0.001, tags = "predict"),
-        eps = p_dbl(default = 0, tags = "predict")
+        eps       = p_dbl(default = 0, tags = "predict"),
+        laplace   = p_dbl(0, default = 0, tags = "train"),
+        threshold = p_dbl(default = 0.001, tags = "predict")
       )
 
       super$initialize(

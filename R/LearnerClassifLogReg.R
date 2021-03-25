@@ -29,19 +29,19 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
+        dispersion  = p_uty(default = NULL, tags = "predict"),
+        epsilon     = p_dbl(default = 1e-8, tags = c("train", "control")),
+        etastart    = p_uty(tags = "train"),
+        maxit       = p_dbl(default = 25, tags = c("train", "control")),
+        model       = p_lgl(default = TRUE, tags = "train"),
+        mustart     = p_uty(tags = "train"),
+        offset      = p_uty(tags = "train"),
+        se.fit      = p_lgl(default = FALSE, tags = "predict"),
         singular.ok = p_lgl(default = TRUE, tags = "train"),
-        x = p_lgl(default = FALSE, tags = "train"),
-        y = p_lgl(default = TRUE, tags = "train"),
-        model = p_lgl(default = TRUE, tags = "train"),
-        etastart = p_uty(tags = "train"),
-        mustart = p_uty(tags = "train"),
-        start = p_uty(default = NULL, tags = "train"),
-        offset = p_uty(tags = "train"),
-        epsilon = p_dbl(default = 1e-8, tags = c("train", "control")),
-        maxit = p_dbl(default = 25, tags = c("train", "control")),
-        trace = p_lgl(default = FALSE, tags = c("train", "control")),
-        se.fit = p_lgl(default = FALSE, tags = "predict"),
-        dispersion = p_uty(default = NULL, tags = "predict")
+        start       = p_uty(default = NULL, tags = "train"),
+        trace       = p_lgl(default = FALSE, tags = c("train", "control")),
+        x           = p_lgl(default = FALSE, tags = "train"),
+        y           = p_lgl(default = TRUE, tags = "train")
       )
 
       super$initialize(

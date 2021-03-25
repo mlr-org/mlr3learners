@@ -21,16 +21,16 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        Hess = p_lgl(default = FALSE, tags = "train"),
-        summ = p_fct(default = "0", levels = c("0", "1", "2", "3"), tags = "train"),
+        Hess     = p_lgl(default = FALSE, tags = "train"),
+        abstol   = p_dbl(default = 1.0e-4, tags = "train"),
         censored = p_lgl(default = FALSE, tags = "train"),
-        model = p_lgl(default = FALSE, tags = "train"),
-        rang = p_dbl(default = 0.7, tags = "train"),
-        decay = p_dbl(default = 0, tags = "train"),
-        maxit = p_int(default = 100L, lower = 1L, tags = "train"),
-        trace = p_lgl(default = TRUE, tags = "train"),
-        abstol = p_dbl(default = 1.0e-4, tags = "train"),
-        reltol = p_dbl(default = 1.0e-8, tags = "train")
+        decay    = p_dbl(default = 0, tags = "train"),
+        maxit    = p_int(1L, default = 100L, tags = "train"),
+        model    = p_lgl(default = FALSE, tags = "train"),
+        rang     = p_dbl(default = 0.7, tags = "train"),
+        reltol   = p_dbl(default = 1.0e-8, tags = "train"),
+        summ     = p_fct(c("0", "1", "2", "3"), default = "0", tags = "train"),
+        trace    = p_lgl(default = TRUE, tags = "train")
       )
 
       super$initialize(
