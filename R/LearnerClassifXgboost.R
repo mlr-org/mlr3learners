@@ -152,7 +152,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "retrain", "update"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "retrain"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_classif.xgboost"
       )
