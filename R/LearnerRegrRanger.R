@@ -27,7 +27,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     initialize = function() {
 
       ps = ParamSet$new(list(
-        ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
+        ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict", "retrain")),
         ParamInt$new("mtry", lower = 1L, tags = "train"),
         ParamFct$new("importance",
           levels = c(
@@ -84,7 +84,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "importance", "oob_error"),
+        properties = c("weights", "importance", "oob_error", "retrain"),
         packages = "ranger",
         man = "mlr3learners::mlr_learners_regr.ranger"
       )
@@ -142,6 +142,19 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         data = newdata,
         type = self$predict_type, .args = pars)
       list(response = preds$predictions, se = preds$se)
+    },
+
+    .retrain = function(task) {
+      self$model
+    },
+
+    .is_retrainable = function(param_vals) {
+      pars = self$state$param_vals
+      param_vals$num.trees < pars$num.trees
+    },
+
+    .which_retrain = function(retrain_values, xss) {
+      retrain_backward_default(retrain_values, xss)
     }
   )
 )
