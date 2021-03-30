@@ -30,7 +30,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict")),
+        ParamInt$new("num.trees", default = 500L, lower = 1L, tags = c("train", "predict", "retrain")),
         ParamInt$new("mtry", lower = 1L, tags = "train"),
         ParamFct$new("importance",
           levels = c(
@@ -139,6 +139,19 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       } else {
         list(prob = p$predictions)
       }
+    },
+
+    .retrain = function(task) {
+      self$model
+    },
+
+    .is_retrainable = function(param_vals) {
+      pars = self$state$param_vals
+      param_vals$num.trees < pars$num.trees
+    },
+
+    .which_retrain = function(retrain_values, xss) {
+      retrain_backward_default(retrain_values, xss)
     }
   )
 )

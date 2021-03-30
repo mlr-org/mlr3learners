@@ -59,7 +59,7 @@ Suggests:
     testthat (>= 3.0.0),
     xgboost
 Remotes:
-    mlr-org/mlr3@continue
+    mlr-org/mlr3@retrain
 Encoding: UTF-8
 NeedsCompilation: no
 Config/testthat/edition: 3

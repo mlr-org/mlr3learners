@@ -276,6 +276,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     .is_retrainable = function(param_vals) {
       pars = self$state$param_vals
       param_vals$nrounds > pars$nrounds
+    },
+
+    .which_retrain = function(retrain_values, xss) {
+      retrain_forward_default(retrain_values, xss)
     }
   )
 )

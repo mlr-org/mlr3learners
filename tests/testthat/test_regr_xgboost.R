@@ -21,4 +21,6 @@ test_that("retrain", {
   expect_equal(learner$state$param_vals$nrounds, 10)
 
   expect_false(learner$is_retrainable(list(nrounds = 10)))
+  expect_error(learner$retrain(task, list(nrounds = 10L), allow_train = FALSE),
+    regexp = "is not retrainable")
 })
