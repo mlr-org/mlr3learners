@@ -142,7 +142,9 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     },
 
     .retrain = function(task) {
-      self$model
+      model = self$model
+      model$num.trees = self$param_set$values$num.trees
+      model
     },
 
     .is_retrainable = function(param_vals) {

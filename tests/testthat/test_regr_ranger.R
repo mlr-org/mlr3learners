@@ -13,10 +13,12 @@ test_that("retrain", {
   task$select(task$feature_names[task$feature_names %nin% c("chas", "town")])
   learner$train(task)
   expect_equal(learner$state$param_vals$num.trees, 1000L)
+  expect_equal(learner$model$num.trees, 1000L)
 
   expect_true(learner$is_retrainable(list(num.trees = 500L)))
   learner$retrain(task, list(num.trees = 500L), allow_train = FALSE)
   expect_equal(learner$state$param_vals$num.trees, 500L)
+  expect_equal(learner$model$num.trees, 500L)
 
   expect_false(learner$is_retrainable(list(num.trees = 2000L)))
   expect_error(learner$retrain(task, list(num.trees = 2000L), allow_train = FALSE),
