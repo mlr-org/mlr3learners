@@ -1,6 +1,3 @@
-library(mlr3extralearners)
-install_learners("classif.nnet")
-
 test_that("classif.nnet", {
   learner = lrn("classif.nnet")
   fun = nnet::nnet.formula
