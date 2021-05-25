@@ -24,20 +24,20 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        cachesize = p_dbl(default = 40L, tags = "train"),
-        coef0     = p_dbl(default = 0, tags = "train"),
-        cost      = p_dbl(0, default = 1, tags = "train"),
-        cross     = p_int(0L, default = 0L, tags = "train"), # tunable = FALSE),
-        degree    = p_int(1L, default = 3L, tags = "train"),
-        gamma     = p_dbl(0, tags = "train"),
-        kernel    = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
-        nu        = p_dbl(default = 0.5, tags = "train"),
-        shrinking = p_lgl(default = TRUE, tags = "train"),
-        tolerance = p_dbl(0, default = 0.001, tags = "train"),
-        type      = p_fct(c("C-classification", "nu-classification"), default = "C-classification", tags = "train"),
-        fitted = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
-        scale = p_uty(default = TRUE, tags = "train"), # , tunable = TRUE)
-        class.weights = p_uty(default = NULL, tags = "train"),
+        cachesize       = p_dbl(default = 40L, tags = "train"),
+        coef0           = p_dbl(default = 0, tags = "train"),
+        cost            = p_dbl(0, default = 1, tags = "train"),
+        cross           = p_int(0L, default = 0L, tags = "train"), # tunable = FALSE),
+        degree          = p_int(1L, default = 3L, tags = "train"),
+        gamma           = p_dbl(0, tags = "train"),
+        kernel          = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
+        nu              = p_dbl(default = 0.5, tags = "train"),
+        shrinking       = p_lgl(default = TRUE, tags = "train"),
+        tolerance       = p_dbl(0, default = 0.001, tags = "train"),
+        type            = p_fct(c("C-classification", "nu-classification"), default = "C-classification", tags = "train"),
+        fitted          = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
+        scale           = p_uty(default = TRUE, tags = "train"), # , tunable = TRUE)
+        class.weights   = p_uty(default = NULL, tags = "train"),
         decision.values = p_lgl(default = FALSE, tags = "predict")
       )
       ps$add_dep("cost", "type", CondEqual$new("C-classification"))

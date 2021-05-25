@@ -27,7 +27,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
         alpha                        = p_dbl(default = 0.5, tags = "train"),
         always.split.variables       = p_uty(tags = "train"),
         holdout                      = p_lgl(default = FALSE, tags = "train"), # FIXME: do we need this?
-        importance                   = p_fct(c( "none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
+        importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
         keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
         max.depth                    = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
         min.node.size                = p_int(1L, default = 5L, tags = "train"),

@@ -169,8 +169,8 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         y_upper_bound[status == 0] = Inf
 
         data = xgboost::xgb.DMatrix(as.matrix(data))
-        xgboost::setinfo(data, 'label_lower_bound', y_lower_bound)
-        xgboost::setinfo(data, 'label_upper_bound', y_upper_bound)
+        xgboost::setinfo(data, "label_lower_bound", y_lower_bound)
+        xgboost::setinfo(data, "label_upper_bound", y_upper_bound)
       }
 
       if ("weights" %in% task$properties) {

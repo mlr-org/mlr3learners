@@ -35,8 +35,8 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
         shrinking = p_lgl(default = TRUE, tags = "train"),
         tolerance = p_dbl(0, default = 0.001, tags = "train"),
         type      = p_fct(c("eps-regression", "nu-regression"), default = "eps-regression", tags = "train"),
-        fitted = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
-        scale = p_uty(default = TRUE, tags = "train") # , tunable = TRUE)
+        fitted    = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
+        scale     = p_uty(default = TRUE, tags = "train") # , tunable = TRUE)
       )
       ps$add_dep("cost", "type", CondEqual$new("eps-regression"))
       ps$add_dep("nu", "type", CondEqual$new("nu-regression"))
