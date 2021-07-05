@@ -66,7 +66,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         maximize                = p_lgl(default = NULL, special_vals = list(NULL), tags = "train"),
         min_child_weight        = p_dbl(0, default = 1, tags = c("train", "control")),
         missing                 = p_dbl(default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
-        monotone_constraints    = p_int(-1L, 1L, default = 0L, tags = c("train", "control")),
+        monotone_constraints    = p_uty(default = 0, tags = c("train", "control"), custom_check = function(x) {
+                                    check_integerish(x, lower = -1, upper = 1, any.missing = FALSE, null.ok = TRUE)
+                                  }),
         normalize_type          = p_fct(c("tree", "forest"), default = "tree", tags = "train"),
         nrounds                 = p_int(1L, default = 1, tags = c("train")),
         nthread                 = p_int(1L, default = 1L, tags = c("train", "control", "threads")),
