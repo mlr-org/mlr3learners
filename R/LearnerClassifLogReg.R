@@ -58,8 +58,12 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
+      dd = task$data()
+      tn = task$target_names
+      dd[[tn]] = factor(dd[[tn]], levels = c(task$negative, task$positive))
+
       mlr3misc::invoke(stats::glm,
-        formula = task$formula(), data = task$data(),
+        formula = task$formula(), data = dd,
         family = "binomial", model = FALSE, .args = pars, .opts = opts_default_contrasts)
     },
 

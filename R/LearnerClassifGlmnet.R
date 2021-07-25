@@ -96,7 +96,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
 
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
-      target = as.matrix(task$data(cols = task$target_names))
+      target = factor(task$data()[[task$target_names]], levels = c(task$negative, task$positive))
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
