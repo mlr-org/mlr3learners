@@ -6,11 +6,19 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' Caution: This learner is different to `_glmnet` in that it does not use the
-#' internal optimization of lambda. The parameter needs to be tuned by the user.
-#' Essentially, one needs to tune parameter `s` which is used at predict-time.
+#' Caution: This learner is different to `cv_glmnet` in that it does not use the
+#' internal optimization of `lambda`. The parameter needs to be tuned by the user.
+#' When `lambda` is tuned, the `glmnet` will be trained for each tuning iteration.
+#' While fitting the whole path of `lambda`s would be more efficient, as is done
+#' by default in `glmnet`, tuning/selecting the parameter at prediction time
+#' (using parameter `s`) is currently not supported in \CRANpkg{mlr3}
+#' (at least not in efficient manner).
+#' Tuning the `s` parameter is, therefore, currently discouraged.
 #'
-#' See \url{https://stackoverflow.com/questions/50995525/} for more information.
+#' When the data are i.i.d. and efficiency is key, we recommend using `cv_glmnet`.
+#' However, in some situations this is not applicable, usually when data are
+#' imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
+#' custom resampling strategies (blocked design, stratification).
 #'
 #' @templateVar id classif.glmnet
 #' @template section_dictionary_learner
@@ -110,8 +118,10 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
 
-      # only predict for one instance of 's' and not for 100
-      if (is.null(pars$s)) {
+      # if model was fit with more then one lambda,
+      # set to default such that only one prediction is returned
+      if (is.null(pars$s) & length(self$model$lambda) > 1) {
+        warning("Multiple lambdas have been fit. For prediction, lambda will be set to 0.01 (see parameter 's').")
         pars$s = self$param_set$default$s
       }
 
