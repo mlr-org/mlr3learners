@@ -6,6 +6,10 @@
 #' Classification via logistic regression.
 #' Calls [stats::glm()] with `family` set to `"binomial"`.
 #'
+#' Starting with \CRANpkg{mlr3}-v0.5.0, the order of class labels is reversed to
+#' comply to the [stats::glm()] convention that the negative class is provided
+#' as the first factor level.
+#'
 #' @section Custom mlr3 defaults:
 #' - `model`:
 #'   - Actual default: `TRUE`.
@@ -63,21 +67,27 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
+      # logreg expects the first label to be the negative class, contrary
+      # to the mlr3 convention that the positive class comes first.
+      tn = task$target_names
+      data = task$data()
+      data[[tn]] = as_factor(data[[tn]], levels = c(task$negative, task$positive))
+
       mlr3misc::invoke(stats::glm,
-        formula = task$formula(), data = task$data(),
+        formula = task$formula(), data = data,
         family = "binomial", model = FALSE, .args = pars, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {
+      lvls = c(task$negative, task$positive)
       newdata = task$data(cols = task$feature_names)
 
       p = unname(predict(self$model, newdata = newdata, type = "response"))
-      levs = levels(self$model$data[[task$target_names]])
 
       if (self$predict_type == "response") {
-        list(response = ifelse(p < 0.5, levs[1L], levs[2L]))
+        list(response = ifelse(p < 0.5, lvls[1L], lvls[2L]))
       } else {
-        list(prob = pvec2mat(p, levs))
+        list(prob = pvec2mat(p, lvls))
       }
     }
   )
