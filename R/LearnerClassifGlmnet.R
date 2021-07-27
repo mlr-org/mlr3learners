@@ -6,6 +6,7 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
+#'
 #' @details
 #' Caution: This learner is different to learners calling [glmnet::cv.glmnet()]
 #' in that it does not use the internal optimization of parameter `lambda`.
@@ -23,6 +24,8 @@
 #' However, in some situations this is not applicable, usually when data are
 #' imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
 #' custom resampling strategies (blocked design, stratification).
+#'
+#' @inheritSection mlr_learners_classif.log_reg Internal Encoding
 #'
 #' @templateVar id classif.glmnet
 #' @template section_dictionary_learner

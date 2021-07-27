@@ -9,6 +9,8 @@
 #' The default for hyperparameter `family` is set to `"binomial"` or `"multinomial"`,
 #' depending on the number of classes.
 #'
+#' @inheritSection mlr_learners_classif.log_reg Internal Encoding
+#'
 #' @templateVar id classif.cv_glmnet
 #' @template section_dictionary_learner
 #'

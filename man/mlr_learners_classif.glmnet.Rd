@@ -33,6 +33,13 @@ lrn("classif.glmnet")
 }
 }
 
+\section{Internal Encoding}{
+
+Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
+model fitting to comply to the \code{\link[stats:glm]{stats::glm()}} convention that the negative class is provided
+as the first factor level.
+}
+
 \examples{
 if (requireNamespace("glmnet")) {
   learner = mlr3::lrn("classif.glmnet")

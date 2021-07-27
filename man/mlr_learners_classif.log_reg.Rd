@@ -7,11 +7,14 @@
 \description{
 Classification via logistic regression.
 Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"binomial"}.
+}
+\section{Internal Encoding}{
 
-Starting with \CRANpkg{mlr3}-v0.5.0, the order of class labels is reversed to
-comply to the \code{\link[stats:glm]{stats::glm()}} convention that the negative class is provided
+Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
+model fitting to comply to the \code{\link[stats:glm]{stats::glm()}} convention that the negative class is provided
 as the first factor level.
 }
+
 \section{Custom mlr3 defaults}{
 
 \itemize{
