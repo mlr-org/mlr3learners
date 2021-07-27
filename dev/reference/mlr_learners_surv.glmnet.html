@@ -50,11 +50,7 @@
 <meta property="og:title" content="GLM with Elastic Net Regularization Survival Learner — mlr_learners_surv.glmnet" />
 <meta property="og:description" content="Generalized linear models with elastic net regularization.
 Calls glmnet::glmnet() from package glmnet.
-The default for hyperparameter family is set to &quot;cox&quot;.
-Caution: This learner is different to cv_glmnet in that it does not use the
-internal optimization of lambda. The parameter needs to be tuned by the user.
-Essentially, one needs to tune parameter s which is used at predict-time.
-See https://stackoverflow.com/questions/50995525/ for more information." />
+The default for hyperparameter family is set to &quot;cox&quot;." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,14 +155,27 @@ See https://stackoverflow.com/questions/50995525/ for more information." />
     <p>Generalized linear models with elastic net regularization.
 Calls <code><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet::glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
 <p>The default for hyperparameter <code>family</code> is set to <code>"cox"</code>.</p>
-<p>Caution: This learner is different to <code>cv_glmnet</code> in that it does not use the
-internal optimization of lambda. The parameter needs to be tuned by the user.
-Essentially, one needs to tune parameter <code>s</code> which is used at predict-time.</p>
-<p>See <a href='https://stackoverflow.com/questions/50995525/'>https://stackoverflow.com/questions/50995525/</a> for more information.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Caution: This learner is different to learners calling <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmnet::cv.glmnet()</a></code>
+in that it does not use the internal optimization of parameter <code>lambda</code>.
+Instead, <code>lambda</code> needs to be tuned by the user (e.g., via <a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a>).
+When <code>lambda</code> is tuned, the <code>glmnet</code> will be trained for each tuning iteration.
+While fitting the whole path of <code>lambda</code>s would be more efficient, as is done
+by default in <code><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
+(using parameter <code>s</code>) is currently not supported in <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>
+(at least not in efficient manner).
+Tuning the <code>s</code> parameter is, therefore, currently discouraged.</p>
+<p>When the data are i.i.d. and efficiency is key, we recommend using the respective
+auto-tuning counterparts in <code><a href='mlr_learners_classif.cv_glmnet.html'>mlr_learners_classif.cv_glmnet()</a></code>,
+<code><a href='mlr_learners_regr.cv_glmnet.html'>mlr_learners_regr.cv_glmnet()</a></code>, or <code><a href='mlr_learners_surv.cv_glmnet.html'>mlr_learners_surv.cv_glmnet()</a></code>.
+However, in some situations this is not applicable, usually when data are
+imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
+custom resampling strategies (blocked design, stratification).</p>
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
     
@@ -199,6 +208,7 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>

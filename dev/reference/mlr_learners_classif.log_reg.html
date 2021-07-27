@@ -157,6 +157,13 @@ Calls <code><a href='https://rdrr.io/r/stats/glm.html'>stats::glm()</a></code> w
 
 
 
+    <h2 class="hasAnchor" id="internal-encoding"><a class="anchor" href="#internal-encoding"></a>Internal Encoding</h2>
+
+    
+
+<p>Starting with <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a> v0.5.0, the order of class labels is reversed prior to
+model fitting to comply to the <code><a href='https://rdrr.io/r/stats/glm.html'>stats::glm()</a></code> convention that the negative class is provided
+as the first factor level.</p>
     <h2 class="hasAnchor" id="custom-mlr-defaults"><a class="anchor" href="#custom-mlr-defaults"></a>Custom mlr3 defaults</h2>
 
     
@@ -205,6 +212,7 @@ Instead, set the respective hyperparameter or use <a href='https://CRAN.R-projec
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>

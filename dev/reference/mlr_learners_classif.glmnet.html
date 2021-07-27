@@ -49,11 +49,7 @@
 
 <meta property="og:title" content="GLM with Elastic Net Regularization Classification Learner — mlr_learners_classif.glmnet" />
 <meta property="og:description" content="Generalized linear models with elastic net regularization.
-Calls glmnet::glmnet() from package glmnet.
-Caution: This learner is different to _glmnet in that it does not use the
-internal optimization of lambda. The parameter needs to be tuned by the user.
-Essentially, one needs to tune parameter s which is used at predict-time.
-See https://stackoverflow.com/questions/50995525/ for more information." />
+Calls glmnet::glmnet() from package glmnet." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -157,14 +153,27 @@ See https://stackoverflow.com/questions/50995525/ for more information." />
     <div class="ref-description">
     <p>Generalized linear models with elastic net regularization.
 Calls <code><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet::glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
-<p>Caution: This learner is different to <code>_glmnet</code> in that it does not use the
-internal optimization of lambda. The parameter needs to be tuned by the user.
-Essentially, one needs to tune parameter <code>s</code> which is used at predict-time.</p>
-<p>See <a href='https://stackoverflow.com/questions/50995525/'>https://stackoverflow.com/questions/50995525/</a> for more information.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Caution: This learner is different to learners calling <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmnet::cv.glmnet()</a></code>
+in that it does not use the internal optimization of parameter <code>lambda</code>.
+Instead, <code>lambda</code> needs to be tuned by the user (e.g., via <a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a>).
+When <code>lambda</code> is tuned, the <code>glmnet</code> will be trained for each tuning iteration.
+While fitting the whole path of <code>lambda</code>s would be more efficient, as is done
+by default in <code><a href='https://glmnet.stanford.edu/reference/glmnet.html'>glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
+(using parameter <code>s</code>) is currently not supported in <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>
+(at least not in efficient manner).
+Tuning the <code>s</code> parameter is, therefore, currently discouraged.</p>
+<p>When the data are i.i.d. and efficiency is key, we recommend using the respective
+auto-tuning counterparts in <code><a href='mlr_learners_classif.cv_glmnet.html'>mlr_learners_classif.cv_glmnet()</a></code>,
+<code><a href='mlr_learners_regr.cv_glmnet.html'>mlr_learners_regr.cv_glmnet()</a></code>, or <code><a href='mlr_learners_surv.cv_glmnet.html'>mlr_learners_surv.cv_glmnet()</a></code>.
+However, in some situations this is not applicable, usually when data are
+imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
+custom resampling strategies (blocked design, stratification).</p>
     <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
 
     
@@ -173,6 +182,13 @@ Essentially, one needs to tune parameter <code>s</code> which is used at predict
 <span class='fu'>lrn</span><span class='op'>(</span><span class='st'>"classif.glmnet"</span><span class='op'>)</span>
 </pre>
 
+    <h2 class="hasAnchor" id="internal-encoding"><a class="anchor" href="#internal-encoding"></a>Internal Encoding</h2>
+
+    
+
+<p>Starting with <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a> v0.5.0, the order of class labels is reversed prior to
+model fitting to comply to the <code><a href='https://rdrr.io/r/stats/glm.html'>stats::glm()</a></code> convention that the negative class is provided
+as the first factor level.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Friedman J, Hastie T, Tibshirani R (2010).
@@ -197,6 +213,7 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>
@@ -225,6 +242,30 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.glmnet"</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span>
+
+  <span class='co'># available parameters:</span>
+<span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; &lt;LearnerClassifGlmnet:classif.glmnet&gt;
+#&gt; * Model: -
+#&gt; * Parameters: list()
+#&gt; * Packages: glmnet
+#&gt; * Predict Type: response
+#&gt; * Feature types: logical, integer, numeric
+#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alignment"        "alpha"            "big"              "devmax"          
+#&gt;  [5] "dfmax"            "eps"              "epsnr"            "exact"           
+#&gt;  [9] "exclude"          "exmx"             "fdev"             "gamma"           
+#&gt; [13] "grouped"          "intercept"        "keep"             "lambda"          
+#&gt; [17] "lambda.min.ratio" "lower.limits"     "maxit"            "mnlam"           
+#&gt; [21] "mxit"             "mxitnr"           "newoffset"        "offset"          
+#&gt; [25] "parallel"         "penalty.factor"   "pmax"             "pmin"            
+#&gt; [29] "prec"             "relax"            "s"                "standardize"     
+#&gt; [33] "thresh"           "trace.it"         "type.logistic"    "type.multinomial"
+#&gt; [37] "upper.limits"    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
