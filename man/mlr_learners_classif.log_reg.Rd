@@ -7,6 +7,10 @@
 \description{
 Classification via logistic regression.
 Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"binomial"}.
+
+Starting with \CRANpkg{mlr3}-v0.5.0, the order of class labels is reversed to
+comply to the \code{\link[stats:glm]{stats::glm()}} convention that the negative class is provided
+as the first factor level.
 }
 \section{Custom mlr3 defaults}{
 
@@ -64,6 +68,7 @@ learner$param_set$ids()
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}

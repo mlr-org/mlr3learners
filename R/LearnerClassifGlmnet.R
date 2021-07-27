@@ -6,16 +6,20 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' Caution: This learner is different to `cv_glmnet` in that it does not use the
-#' internal optimization of `lambda`. The parameter needs to be tuned by the user.
+#' @details
+#' Caution: This learner is different to learners calling [glmnet::cv.glmnet()]
+#' in that it does not use the internal optimization of parameter `lambda`.
+#' Instead, `lambda` needs to be tuned by the user (e.g., via \CRANpkg{mlr3tuning}).
 #' When `lambda` is tuned, the `glmnet` will be trained for each tuning iteration.
 #' While fitting the whole path of `lambda`s would be more efficient, as is done
-#' by default in `glmnet`, tuning/selecting the parameter at prediction time
+#' by default in [glmnet::glmnet()], tuning/selecting the parameter at prediction time
 #' (using parameter `s`) is currently not supported in \CRANpkg{mlr3}
 #' (at least not in efficient manner).
 #' Tuning the `s` parameter is, therefore, currently discouraged.
 #'
-#' When the data are i.i.d. and efficiency is key, we recommend using `cv_glmnet`.
+#' When the data are i.i.d. and efficiency is key, we recommend using the respective
+#' auto-tuning counterparts in [mlr_learners_classif_cv.glmnet()],
+#' [mlr_learners_classif_regr.glmnet()], or [mlr_learners_surv_cv.glmnet()].
 #' However, in some situations this is not applicable, usually when data are
 #' imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
 #' custom resampling strategies (blocked design, stratification).
@@ -120,7 +124,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
 
       # if model was fit with more then one lambda,
       # set to default such that only one prediction is returned
-      if (is.null(pars$s) & length(self$model$lambda) > 1) {
+      if (is.null(pars$s) & length(self$model$lambda) > 1L) {
         warning("Multiple lambdas have been fit. For prediction, lambda will be set to 0.01 (see parameter 's').")
         pars$s = self$param_set$default$s
       }

@@ -9,12 +9,24 @@ Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:glmnet]{glmnet::glmnet()}} from package \CRANpkg{glmnet}.
 
 The default for hyperparameter \code{family} is set to \code{"gaussian"}.
+}
+\details{
+Caution: This learner is different to learners calling \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}
+in that it does not use the internal optimization of parameter \code{lambda}.
+Instead, \code{lambda} needs to be tuned by the user (e.g., via \CRANpkg{mlr3tuning}).
+When \code{lambda} is tuned, the \code{glmnet} will be trained for each tuning iteration.
+While fitting the whole path of \code{lambda}s would be more efficient, as is done
+by default in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}, tuning/selecting the parameter at prediction time
+(using parameter \code{s}) is currently not supported in \CRANpkg{mlr3}
+(at least not in efficient manner).
+Tuning the \code{s} parameter is, therefore, currently discouraged.
 
-Caution: This learner is different to \code{cv_glmnet} in that it does not use the
-internal optimization of lambda. The parameter needs to be tuned by the user.
-Essentially, one needs to tune parameter \code{s} which is used at predict-time.
-
-See \url{https://stackoverflow.com/questions/50995525/} for more information.
+When the data are i.i.d. and efficiency is key, we recommend using the respective
+auto-tuning counterparts in \code{\link[=mlr_learners_classif_cv.glmnet]{mlr_learners_classif_cv.glmnet()}},
+\code{\link[=mlr_learners_classif_regr.glmnet]{mlr_learners_classif_regr.glmnet()}}, or \code{\link[=mlr_learners_surv_cv.glmnet]{mlr_learners_surv_cv.glmnet()}}.
+However, in some situations this is not applicable, usually when data are
+imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
+custom resampling strategies (blocked design, stratification).
 }
 \section{Dictionary}{
 
@@ -54,6 +66,7 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}

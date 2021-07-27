@@ -18,6 +18,15 @@ lrn("classif.cv_glmnet")
 }
 }
 
+\examples{
+if (requireNamespace("glmnet")) {
+  learner = mlr3::lrn("classif.cv_glmnet")
+  print(learner)
+
+  # available parameters:
+learner$param_set$ids()
+}
+}
 \references{
 Friedman J, Hastie T, Tibshirani R (2010).
 \dQuote{Regularization Paths for Generalized Linear Models via Coordinate Descent.}
@@ -40,6 +49,7 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
