@@ -30,4 +30,9 @@ as_numeric_matrix = function(x) { # for svm / #181
   x
 }
 
+
+swap_levels = function(x) {
+  factor(x, levels = rev(levels(x)))
+}
+
 opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))

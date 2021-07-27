@@ -20,8 +20,8 @@ by default in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}, tuning/selecting th
 Tuning the \code{s} parameter is, therefore, currently discouraged.
 
 When the data are i.i.d. and efficiency is key, we recommend using the respective
-auto-tuning counterparts in \code{\link[=mlr_learners_classif_cv.glmnet]{mlr_learners_classif_cv.glmnet()}},
-\code{\link[=mlr_learners_classif_regr.glmnet]{mlr_learners_classif_regr.glmnet()}}, or \code{\link[=mlr_learners_surv_cv.glmnet]{mlr_learners_surv_cv.glmnet()}}.
+auto-tuning counterparts in \code{\link[=mlr_learners_classif.cv_glmnet]{mlr_learners_classif.cv_glmnet()}},
+\code{\link[=mlr_learners_regr.cv_glmnet]{mlr_learners_regr.cv_glmnet()}}, or \code{\link[=mlr_learners_surv.cv_glmnet]{mlr_learners_surv.cv_glmnet()}}.
 However, in some situations this is not applicable, usually when data are
 imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
 custom resampling strategies (blocked design, stratification).
@@ -31,6 +31,13 @@ custom resampling strategies (blocked design, stratification).
 This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.glmnet")
 lrn("classif.glmnet")
 }
+}
+
+\section{Internal Encoding}{
+
+Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
+model fitting to comply to the \code{\link[stats:glm]{stats::glm()}} convention that the negative class is provided
+as the first factor level.
 }
 
 \examples{

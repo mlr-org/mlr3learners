@@ -9,6 +9,8 @@
 #' The default for hyperparameter `family` is set to `"binomial"` or `"multinomial"`,
 #' depending on the number of classes.
 #'
+#' @inheritSection mlr_learners_classif.log_reg Internal Encoding
+#'
 #' @templateVar id classif.cv_glmnet
 #' @template section_dictionary_learner
 #'
@@ -87,7 +89,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
 
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
-      target = as.matrix(task$data(cols = task$target_names))
+      target = swap_levels(task$truth())
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
@@ -127,9 +129,11 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
           .args = pars)
 
         if (length(task$class_names) == 2L) {
-          # glmnet returns probabilities for the **last** alphabetical class label
+          # the docs are really not clear here; before we tried to reorder the class
+          # labels alphabetically; this does not seem to be required, we instead rely on
+          # the (undocumented) class labels as stored in the model
           prob = cbind(1 - prob, prob)
-          colnames(prob) = sort(task$class_names)
+          colnames(prob) = self$model$glmnet.fit$classnames
         } else {
           prob = prob[, , 1L]
         }
