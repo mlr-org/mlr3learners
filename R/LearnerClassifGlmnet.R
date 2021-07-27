@@ -99,7 +99,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
 
       pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
-      target = as.matrix(task$data(cols = task$target_names))
+      target = swap_levels(task$truth())
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
@@ -140,9 +140,11 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
           .args = pars)
 
         if (length(task$class_names) == 2L) {
-          # glmnet returns probabilities for the **last** alphabetical class label
+          # the docs are really not clear here; before we tried to reorder the class
+          # labels alphabetically; this does not seem to be required, we instead rely on
+          # the (undocumented) class labels as stored in the model
           prob = cbind(1 - prob, prob)
-          colnames(prob) = sort(task$class_names)
+          colnames(prob) = self$model$classnames
         } else {
           prob = prob[, , 1L]
         }

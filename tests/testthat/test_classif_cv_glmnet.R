@@ -24,3 +24,18 @@ test_that("prob column reordering (#155)", {
   p = learner$predict(task)
   expect_gt(p$score(msr("classif.acc")), 0.6)
 })
+
+test_that("same label ordering as in glm() / log_reg", {
+  task = tgen("2dnormals")$generate(50)
+  for (pos in task$class_names) {
+    task$positive = pos
+
+    l1 = lrn("classif.log_reg")
+    l2 = lrn("classif.cv_glmnet")
+    l1$train(task)
+    l2$train(task)
+
+    expect_equal(sign(as.numeric(coef(l1$model))), sign(as.numeric(coef(l2$model))),
+      info = sprintf("positive label = %s", pos))
+  }
+})

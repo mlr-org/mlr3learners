@@ -71,7 +71,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
       # to the mlr3 convention that the positive class comes first.
       tn = task$target_names
       data = task$data()
-      data[[tn]] = as_factor(data[[tn]], levels = c(task$negative, task$positive))
+      data[[tn]] = swap_levels(data[[tn]])
 
       mlr3misc::invoke(stats::glm,
         formula = task$formula(), data = data,
