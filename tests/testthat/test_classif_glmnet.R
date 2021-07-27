@@ -26,7 +26,7 @@ test_that("prob column reordering (#155)", {
 })
 
 test_that("same label ordering as in glm() / log_reg", {
-  task = tgen("2dnormals")$generate(50)
+  task = tgen("2dnormals")$generate(100)
   for (pos in task$class_names) {
     task$positive = pos
 

@@ -26,7 +26,7 @@ test_that("prob column reordering (#155)", {
 })
 
 test_that("same label ordering as in glm() / log_reg", {
-  task = tgen("2dnormals")$generate(50)
+  task = tgen("2dnormals")$generate(100)
   for (pos in task$class_names) {
     task$positive = pos
 
@@ -35,7 +35,7 @@ test_that("same label ordering as in glm() / log_reg", {
     l1$train(task)
     l2$train(task)
 
-    expect_equal(sign(as.numeric(coef(l1$model))), sign(as.numeric(coef(l2$model))),
+    expect_equal(sign(as.numeric(coef(l1$model))), sign(as.numeric(coef(l2$model, s = 0))),
       info = sprintf("positive label = %s", pos))
   }
 })
