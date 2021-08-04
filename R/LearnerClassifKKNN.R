@@ -25,12 +25,13 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
+        k        = p_int(default = 7L, lower = 1L, tags = c("required", "train")),
         distance = p_dbl(0, default = 2, tags = "train"),
         kernel   = p_fct(c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
-        k        = p_int(default = 7L, lower = 1L, tags = "train"),
         scale    = p_lgl(default = TRUE, tags = "train"),
         ykernel  = p_uty(default = NULL, tags = "train")
       )
+      ps$values = list(k = 7L)
 
       super$initialize(
         id = "classif.kknn",
@@ -46,10 +47,17 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
 
   private = list(
     .train = function(task) {
+      # https://github.com/mlr-org/mlr3learners/issues/191
+      pv = self$param_set$get_values(tags = "train")
+      if (pv$k >= task$nrow) {
+        stopf("Parameter k = %i must be smaller than the number of observations (n = %i)",
+          pv$k, task$nrow)
+      }
+
       list(
         formula = task$formula(),
         data = task$data(),
-        pars = self$param_set$get_values(tags = "train"),
+        pars = pv,
         kknn = NULL
       )
     },
