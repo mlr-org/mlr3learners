@@ -196,6 +196,7 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 
 <ul>
 <li><p><a href='#method-new'><code>LearnerClassifCVGlmnet$new()</code></a></p></li>
+<li><p><a href='#method-selected_features'><code>LearnerClassifCVGlmnet$selected_features()</code></a></p></li>
 <li><p><a href='#method-clone'><code>LearnerClassifCVGlmnet$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
@@ -216,6 +217,19 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 <p>Creates a new instance of this <a href='https://r6.r-lib.org/reference/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>LearnerClassifCVGlmnet</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
+<p><hr>
+<a id="method-selected_features"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>selected_features()</code></h3>
+<p>Returns the set of selected features as reported by <code><a href='https://glmnet.stanford.edu/reference/predict.glmnet.html'>glmnet::predict.glmnet()</a></code></p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>LearnerClassifCVGlmnet</span><span class='op'>$</span><span class='fu'>selected_features</span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>lambda</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
+Custom <code>lambda</code>, defaults to the active lambda depending on parameter set.with <code>type</code> set to <code>"nonzero"</code>.</p></dd>
+
+</dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>) of feature names.</p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -243,7 +257,7 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 #&gt; * Packages: glmnet
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alignment"        "alpha"            "big"              "devmax"          
+#&gt; * Properties: multiclass, selected_features, twoclass, weights</div><div class='output co'>#&gt;  [1] "alignment"        "alpha"            "big"              "devmax"          
 #&gt;  [5] "dfmax"            "epsnr"            "eps"              "exclude"         
 #&gt;  [9] "exmx"             "fdev"             "foldid"           "gamma"           
 #&gt; [13] "grouped"          "intercept"        "keep"             "lambda.min.ratio"
