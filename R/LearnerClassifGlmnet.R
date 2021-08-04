@@ -74,6 +74,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         pmax             = p_int(0L, tags = "train"),
         pmin             = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
         prec             = p_dbl(default = 1e-10, tags = "train"),
+        predict.gamma    = p_dbl(default = 1, tags = "predict"),
         relax            = p_lgl(default = FALSE, tags = "train"),
         s                = p_dbl(0, default = 0.01, tags = "predict"),
         standardize      = p_lgl(default = TRUE, tags = "train"),
@@ -94,53 +95,48 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_classif.glmnet"
       )
+    },
+
+    #' @description
+    #' Returns the set of selected features as reported by [glmnet::predict.glmnet()]
+    #' @param lambda (`numeric(1)`)\cr
+    #' Custom `lambda`, defaults to the active lambda depending on parameter set.
+    #'
+    #' with `type` set to `"nonzero"`.
+    #' @return (`character()`) of feature names.
+    selected_features = function(lambda = NULL) {
+      glmnet_selected_features(self, lambda)
     }
   ),
 
   private = list(
     .train = function(task) {
-
-      pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = swap_levels(task$truth())
+      pv = self$param_set$get_values(tags = "train")
+      pv$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
       if ("weights" %in% task$properties) {
-        pars$weights = task$weights$weight
-      }
-      pars$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
-
-      saved_ctrl = glmnet::glmnet.control()
-      on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
-      glmnet::glmnet.control(factory = TRUE)
-      is_ctrl_pars = names(pars) %in% names(saved_ctrl)
-
-      if (any(is_ctrl_pars)) {
-        mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
-        pars = pars[!is_ctrl_pars]
+        pv$weights = task$weights$weight
       }
 
-      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, .args = pars)
+      glmnet_invoke(data, target, pv)
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
-
-      # if model was fit with more then one lambda,
-      # set to default such that only one prediction is returned
-      if (is.null(pars$s) & length(self$model$lambda) > 1L) {
-        warning("Multiple lambdas have been fit. For prediction, lambda will be set to 0.01 (see parameter 's').")
-        pars$s = self$param_set$default$s
-      }
+      pv = self$param_set$get_values(tags = "predict")
+      pv = rename(pv, "predict.gamma", "gamma")
+      pv$s = glmnet_get_lambda(self, pv)
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model,
+        response = invoke(predict, self$model,
           newx = newdata, type = "class",
-          .args = pars)
+          .args = pv)
         list(response = drop(response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model,
+        prob = invoke(predict, self$model,
           newx = newdata, type = "response",
-          .args = pars)
+          .args = pv)
 
         if (length(task$class_names) == 2L) {
           # the docs are really not clear here; before we tried to reorder the class
@@ -151,6 +147,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         } else {
           prob = prob[, , 1L]
         }
+
         list(prob = prob)
       }
     }

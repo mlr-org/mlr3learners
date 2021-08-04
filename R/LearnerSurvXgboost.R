@@ -181,12 +181,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         pars$watchlist = list(train = data)
       }
 
-      mlr3misc::invoke(
-        xgboost::xgb.train,
-        data = data,
-        .args = pars
-      )
-
+      invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
     .predict = function(task) {
@@ -194,7 +189,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      lp = log(mlr3misc::invoke(
+      lp = log(invoke(
         predict, model,
         newdata = newdata,
         .args = pars

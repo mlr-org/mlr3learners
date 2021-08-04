@@ -182,7 +182,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pars$watchlist = list(train = data)
       }
 
-      mlr3misc::invoke(xgboost::xgb.train, data = data, .args = pars)
+      invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
     .predict = function(task) {
@@ -199,7 +199,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      pred = mlr3misc::invoke(predict, model, newdata = newdata, .args = pars)
+      pred = invoke(predict, model, newdata = newdata, .args = pars)
 
       if (nlvls == 2L) { # binaryclass
         if (pars$objective == "multi:softprob") {

@@ -83,46 +83,41 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
+    },
+
+    #' @description
+    #' Returns the set of selected features as reported by [glmnet::predict.glmnet()]
+    #' @param lambda (`numeric(1)`)\cr
+    #' Custom `lambda`, defaults to the active lambda depending on parameter set.
+    #'
+    #' with `type` set to `"nonzero"`.
+    #' @return (`character()`) of feature names.
+    selected_features = function(lambda = NULL) {
+      glmnet_selected_features(self, lambda)
     }
   ),
 
   private = list(
     .train = function(task) {
-
-      pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
+      pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars$weights = task$weights$weight
+        pv$weights = task$weights$weight
       }
 
-      saved_ctrl = glmnet::glmnet.control()
-      on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
-      glmnet::glmnet.control(factory = TRUE)
-      is_ctrl_pars = (names(pars) %in% names(saved_ctrl))
-
-      if (any(is_ctrl_pars)) {
-        mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
-        pars = pars[!is_ctrl_pars]
-      }
-
-      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, .args = pars)
+      glmnet_invoke(data, target, pv)
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
+      pv = self$param_set$get_values(tags = "predict")
+      pv = rename(pv, "predict.gamma", "gamma")
+      pv$s = glmnet_get_lambda(self, pv)
 
-      # if model was fit with more then one lambda,
-      # set to default such that only one prediction is returned
-      if (is.null(pars$s) & length(self$model$lambda) > 1L) {
-        warning("Multiple lambdas have been fit. For prediction, lambda will be set to 0.01 (see parameter 's').")
-        pars$s = self$param_set$default$s
-      }
-
-      response = mlr3misc::invoke(predict, self$model,
+      response = invoke(predict, self$model,
         newx = newdata,
-        type = "response", .args = pars)
+        type = "response", .args = pv)
       list(response = drop(response))
     }
   )

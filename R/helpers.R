@@ -13,15 +13,6 @@ ordered_features = function(task, feature_names) {
 }
 
 
-glmnet_feature_names = function(model) {
-  beta = model$beta
-  if (is.null(beta)) {
-    beta = model$glmnet.fit$beta
-  }
-  rownames(if (is.list(beta)) beta[[1L]] else beta)
-}
-
-
 as_numeric_matrix = function(x) { # for svm / #181
   x = as.matrix(x)
   if (is.logical(x)) {
@@ -34,5 +25,13 @@ as_numeric_matrix = function(x) { # for svm / #181
 swap_levels = function(x) {
   factor(x, levels = rev(levels(x)))
 }
+
+
+rename = function(x, old, new) {
+  ii = match(names(x), old, nomatch = 0L)
+  names(x)[ii > 0L] = new[ii]
+  x
+}
+
 
 opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))

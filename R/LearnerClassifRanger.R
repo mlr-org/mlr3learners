@@ -109,7 +109,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
   private = list(
     .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
-      mlr3misc::invoke(ranger::ranger,
+      invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
@@ -121,7 +121,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model,
+      p = invoke(predict, self$model,
         data = newdata,
         predict.type = "response", .args = pars)
 

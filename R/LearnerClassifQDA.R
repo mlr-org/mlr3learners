@@ -52,7 +52,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
 
   private = list(
     .train = function(task) {
-      mlr3misc::invoke(MASS::qda, task$formula(),
+      invoke(MASS::qda, task$formula(),
         data = task$data(),
         .args = self$param_set$get_values(tags = "train"))
     },
@@ -69,7 +69,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
       }
 
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model, newdata = newdata, .args = pars)
+      p = invoke(predict, self$model, newdata = newdata, .args = pars)
 
       if (self$predict_type == "response") {
         list(response = p$class)

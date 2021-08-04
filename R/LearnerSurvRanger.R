@@ -91,7 +91,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
       pv = self$param_set$get_values(tags = "train")
       targets = task$target_names
 
-      mlr3misc::invoke(ranger::ranger,
+      invoke(ranger::ranger,
         formula = NULL,
         dependent.variable.name = targets[1L],
         status.variable.name = targets[2L],

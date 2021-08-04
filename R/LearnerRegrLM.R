@@ -56,7 +56,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      mlr3misc::invoke(stats::lm,
+      invoke(stats::lm,
         formula = task$formula(), data = task$data(),
         .args = pars, .opts = opts_default_contrasts)
     },

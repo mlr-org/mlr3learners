@@ -114,7 +114,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         pars$keep.inbag = TRUE # nolint
       }
 
-      mlr3misc::invoke(ranger::ranger,
+      invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         case.weights = task$weights$weight,
@@ -125,7 +125,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      preds = mlr3misc::invoke(predict, self$model,
+      preds = invoke(predict, self$model,
         data = newdata,
         type = self$predict_type, .args = pars)
       list(response = preds$predictions, se = preds$se)

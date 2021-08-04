@@ -76,7 +76,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
       pars = self$param_set$get_values(tags = "predict")
       newdata = as_numeric_matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
-      p = mlr3misc::invoke(predict, self$model,
+      p = invoke(predict, self$model,
         newdata = newdata,
         probability = (self$predict_type == "prob"), .args = pars)
 

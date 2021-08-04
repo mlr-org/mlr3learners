@@ -50,6 +50,7 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifCVGlmnet$new()}}
+\item \href{#method-selected_features}{\code{LearnerClassifCVGlmnet$selected_features()}}
 \item \href{#method-clone}{\code{LearnerClassifCVGlmnet$clone()}}
 }
 }
@@ -76,6 +77,29 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifCVGlmnet$new()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-selected_features"></a>}}
+\if{latex}{\out{\hypertarget{method-selected_features}{}}}
+\subsection{Method \code{selected_features()}}{
+Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifCVGlmnet$selected_features(lambda = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{lambda}}{(\code{numeric(1)})\cr
+Custom \code{lambda}, defaults to the active lambda depending on parameter set.
+
+with \code{type} set to \code{"nonzero"}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+(\code{character()}) of feature names.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
