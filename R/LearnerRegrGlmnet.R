@@ -87,10 +87,11 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
 
     #' @description
     #' Returns the set of selected features as reported by [glmnet::predict.glmnet()]
+    #' with `type` set to `"nonzero"`.
+    #'
     #' @param lambda (`numeric(1)`)\cr
     #' Custom `lambda`, defaults to the active lambda depending on parameter set.
     #'
-    #' with `type` set to `"nonzero"`.
     #' @return (`character()`) of feature names.
     selected_features = function(lambda = NULL) {
       glmnet_selected_features(self, lambda)

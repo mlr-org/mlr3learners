@@ -5,14 +5,13 @@ glmnet_get_lambda = function(self, pv) {
 
   pv = pv %??%self$param_set$get_values(tags = "predict")
   s = pv$s
-  uses_cv = inherits(self$model, "cv.glmnet")
 
   if (is.character(s)) {
     self$model[[s]]
   } else if (is.numeric(s)) {
     s
   } else { # null / missing
-    if (uses_cv) {
+    if (inherits(self$model, "cv.glmnet")) {
       self$model[["lambda.1se"]]
     } else if (length(self$model$lambda) == 1L) {
       self$model$lambda

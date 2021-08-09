@@ -75,6 +75,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{latex}{\out{\hypertarget{method-selected_features}{}}}
 \subsection{Method \code{selected_features()}}{
 Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
+with \code{type} set to \code{"nonzero"}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerRegrCVGlmnet$selected_features(lambda = NULL)}\if{html}{\out{</div>}}
 }
@@ -83,9 +84,7 @@ Returns the set of selected features as reported by \code{\link[glmnet:predict.g
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{lambda}}{(\code{numeric(1)})\cr
-Custom \code{lambda}, defaults to the active lambda depending on parameter set.
-
-with \code{type} set to \code{"nonzero"}.}
+Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
 }
 \if{html}{\out{</div>}}
 }
