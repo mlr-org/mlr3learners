@@ -209,7 +209,6 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 
 <ul>
 <li><p><a href='#method-new'><code>LearnerClassifGlmnet$new()</code></a></p></li>
-<li><p><a href='#method-selected_features'><code>LearnerClassifGlmnet$selected_features()</code></a></p></li>
 <li><p><a href='#method-clone'><code>LearnerClassifGlmnet$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
@@ -230,20 +229,6 @@ doi: <a href='https://doi.org/10.18637/jss.v033.i01'>10.18637/jss.v033.i01</a>
 <p>Creates a new instance of this <a href='https://r6.r-lib.org/reference/R6Class.html'>R6</a> class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>LearnerClassifGlmnet</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
-<p><hr>
-<a id="method-selected_features"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>selected_features()</code></h3>
-<p>Returns the set of selected features as reported by <code><a href='https://glmnet.stanford.edu/reference/predict.glmnet.html'>glmnet::predict.glmnet()</a></code>
-with <code>type</code> set to <code>"nonzero"</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>LearnerClassifGlmnet</span><span class='op'>$</span><span class='fu'>selected_features</span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>lambda</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
-Custom <code>lambda</code>, defaults to the active lambda depending on parameter set.</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>) of feature names.</p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -278,9 +263,9 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 #&gt; [17] "lambda.min.ratio" "lower.limits"     "maxit"            "mnlam"           
 #&gt; [21] "mxit"             "mxitnr"           "newoffset"        "offset"          
 #&gt; [25] "parallel"         "penalty.factor"   "pmax"             "pmin"            
-#&gt; [29] "prec"             "predict.gamma"    "relax"            "s"               
-#&gt; [33] "standardize"      "thresh"           "trace.it"         "type.logistic"   
-#&gt; [37] "type.multinomial" "upper.limits"    </div></pre>
+#&gt; [29] "prec"             "relax"            "s"                "standardize"     
+#&gt; [33] "thresh"           "trace.it"         "type.logistic"    "type.multinomial"
+#&gt; [37] "upper.limits"    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
