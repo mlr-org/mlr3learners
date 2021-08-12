@@ -74,7 +74,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
       data = task$data()
       data[[tn]] = swap_levels(data[[tn]])
 
-      mlr3misc::invoke(stats::glm,
+      invoke(stats::glm,
         formula = task$formula(), data = data,
         family = "binomial", model = FALSE, .args = pars, .opts = opts_default_contrasts)
     },

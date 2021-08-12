@@ -42,7 +42,7 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     .train = function(task) {
       y = task$truth()
       x = task$data(cols = task$feature_names)
-      mlr3misc::invoke(e1071::naiveBayes,
+      invoke(e1071::naiveBayes,
         x = x, y = y,
         .args = self$param_set$get_values(tags = "train"))
     },
@@ -52,12 +52,12 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model,
+        response = invoke(predict, self$model,
           newdata = newdata,
           type = "class", .args = pars)
         list(response = response)
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata,
+        prob = invoke(predict, self$model, newdata = newdata,
           type = "raw", .args = pars)
         list(prob = prob)
       }

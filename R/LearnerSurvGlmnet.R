@@ -53,6 +53,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
         pmax             = p_int(0L, tags = "train"),
         pmin             = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
         prec             = p_dbl(default = 1e-10, tags = "train"),
+        predict.gamma    = p_dbl(default = 1, tags = "predict"),
         relax            = p_lgl(default = FALSE, tags = "train"),
         s                = p_dbl(0, default = 0.01, tags = "predict"),
         standardize      = p_lgl(default = TRUE, tags = "train"),
@@ -68,49 +69,45 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
         predict_types = c("crank", "lp"),
-        properties = "weights",
+        properties = c("weights", "selected_features"),
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_surv.glmnet"
       )
+    },
+
+    #' @description
+    #' Returns the set of selected features as reported by [glmnet::predict.glmnet()]
+    #' with `type` set to `"nonzero"`.
+    #'
+    #' @param lambda (`numeric(1)`)\cr
+    #' Custom `lambda`, defaults to the active lambda depending on parameter set.
+    #'
+    #' @return (`character()`) of feature names.
+    selected_features = function(lambda = NULL) {
+      glmnet_selected_features(self, lambda)
     }
   ),
 
   private = list(
     .train = function(task) {
-
-      pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = task$truth()
-
+      pv = self$param_set$get_values(tags = "train")
+      pv$family = "cox"
       if ("weights" %in% task$properties) {
-        pars$weights = task$weights$weight
+        pv$weights = task$weights$weight
       }
 
-      saved_ctrl = glmnet::glmnet.control()
-      on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
-      glmnet::glmnet.control(factory = TRUE)
-      is_ctrl_pars = (names(pars) %in% names(saved_ctrl))
-
-      if (any(is_ctrl_pars)) {
-        mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
-        pars = pars[!is_ctrl_pars]
-      }
-
-      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, family = "cox", .args = pars)
+      glmnet_invoke(data, target, pv)
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
+      pv = self$param_set$get_values(tags = "predict")
+      pv = rename(pv, "predict.gamma", "gamma")
+      pv$s = glmnet_get_lambda(self, pv)
 
-      # if model was fit with more then one lambda,
-      # set to default such that only one prediction is returned
-      if (is.null(pars$s) & length(self$model$lambda) > 1L) {
-        warning("Multiple lambdas have been fit. For prediction, lambda will be set to 0.01 (see parameter 's').")
-        pars$s = self$param_set$default$s
-      }
-
-      lp = invoke(predict, self$model, newx = newdata, type = "link", .args = pars)
+      lp = invoke(predict, self$model, newx = newdata, type = "link", .args = pv)
 
       list(crank = lp, lp = lp)
     }
