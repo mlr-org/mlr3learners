@@ -1,4 +1,10 @@
-# mlr3learners 0.4.6
+# mlr3learners 0.5.0
+
+- Fixed internal encoding of the positive class for classification learners
+  based on `glm` and `glmnet` (#199).
+- Reworked handling of `lambda` and `s` for `glmnet` learners (#197).
+- Learners based on `glmnet` now support to extract selected features (#200).
+- Learners based on `kknn` now raise an exception if `k >= n` (#191).
 
 # mlr3learners 0.4.5
 
