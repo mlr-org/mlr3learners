@@ -8,14 +8,18 @@
 #'
 #' @section Custom mlr3 defaults:
 #' - `nrounds`:
-#'   - Actual default: no default
-#'   - Adjusted default: 1
+#'   - Actual default: no default.
+#'   - Adjusted default: 1.
 #'   - Reason for change: Without a default construction of the learner
 #'     would error. Just setting a nonsense default to workaround this.
 #'     `nrounds` needs to be tuned by the user.
+#' - `nthread`:
+#'   - Actual value: Undefined, triggering auto-detection of the number of CPUs.
+#'   - Adjusted value: 1.
+#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #' - `verbose`:
-#'   - Actual default: 1
-#'   - Adjusted default: 0
+#'   - Actual default: 1.
+#'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #'
 #' @template section_dictionary_learner
@@ -36,93 +40,65 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
 
-      ps = ParamSet$new(list(
-        ParamFct$new("booster",
-          default = "gbtree", levels = c("gbtree", "gblinear", "dart"),
-          tags = c("train", "control")),
-        ParamUty$new("watchlist", default = NULL, tags = "train"),
-        ParamDbl$new("eta", default = 0.3, lower = 0, upper = 1, tags = c("train", "control")),
-        ParamDbl$new("gamma", default = 0, lower = 0, tags = c("train", "control")),
-        ParamInt$new("max_depth", default = 6L, lower = 0L, tags = c("train", "control")),
-        ParamDbl$new("min_child_weight", default = 1, lower = 0, tags = c("train", "control")),
-        ParamDbl$new("subsample", default = 1, lower = 0, upper = 1, tags = c("train", "control")),
-        ParamDbl$new("colsample_bytree",
-          default = 1, lower = 0, upper = 1,
-          tags = c("train", "control")),
-        ParamDbl$new("colsample_bylevel", default = 1, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("colsample_bynode", default = 1, lower = 0, upper = 1, tags = "train"),
-        ParamInt$new("num_parallel_tree", default = 1L, lower = 1L, tags = c("train", "control")),
-        ParamDbl$new("lambda", default = 1, lower = 0, tags = "train"),
-        ParamDbl$new("lambda_bias", default = 0, lower = 0, tags = "train"),
-        ParamDbl$new("alpha", default = 0, lower = 0, tags = "train"),
-        ParamUty$new("objective",
-          default = "binary:logistic",
-          tags = c("train", "predict", "control")),
-        ParamUty$new("eval_metric", default = "error", tags = "train"),
-        ParamDbl$new("base_score", default = 0.5, tags = "train"),
-        ParamDbl$new("max_delta_step", lower = 0, default = 0, tags = "train"),
-        ParamDbl$new("missing",
-          default = NA, tags = c("train", "predict"),
-          special_vals = list(NA, NA_real_, NULL)),
-        ParamInt$new("monotone_constraints",
-          default = 0L, lower = -1L, upper = 1L,
-          tags = c("train", "control")),
-        ParamDbl$new("tweedie_variance_power", lower = 1, upper = 2, default = 1.5, tags = "train"),
-        ParamInt$new("nthread", lower = 1L, tags = c("train", "control")),
-        ParamInt$new("nrounds", default = 1, lower = 1L, tags = c("train")),
-        ParamUty$new("feval", default = NULL, tags = "train"),
-        ParamInt$new("verbose", default = 1L, lower = 0L, upper = 2L, tags = "train"),
-        ParamInt$new("print_every_n", default = 1L, lower = 1L, tags = "train"),
-        ParamInt$new("early_stopping_rounds",
-          default = NULL, lower = 1L,
-          special_vals = list(NULL), tags = "train"),
-        ParamLgl$new("maximize", default = NULL, special_vals = list(NULL), tags = "train"),
-        ParamFct$new("sample_type",
-          default = "uniform",
-          levels = c("uniform", "weighted"), tags = "train"),
-        ParamFct$new("normalize_type",
-          default = "tree",
-          levels = c("tree", "forest"), tags = "train"),
-        ParamDbl$new("rate_drop", default = 0, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("skip_drop", default = 0, lower = 0, upper = 1, tags = "train"),
-        ParamLgl$new("one_drop", default = FALSE, tags = "train"),
-        ParamFct$new("tree_method",
-          default = "auto",
-          levels = c("auto", "exact", "approx", "hist", "gpu_hist"), tags = "train"),
-        ParamFct$new("grow_policy",
-          default = "depthwise",
-          levels = c("depthwise", "lossguide"), tags = "train"),
-        ParamInt$new("max_leaves", default = 0L, lower = 0L, tags = "train"),
-        ParamInt$new("max_bin", default = 256L, lower = 2L, tags = "train"),
-        ParamUty$new("callbacks", default = list(), tags = "train"),
-        ParamDbl$new("sketch_eps", default = 0.03, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("scale_pos_weight", default = 1, tags = "train"),
-        ParamUty$new("updater", tags = "train"), # Default depends on the selected booster
-        ParamLgl$new("refresh_leaf", default = TRUE, tags = "train"),
-        ParamFct$new("feature_selector",
-          default = "cyclic",
-          levels = c("cyclic", "shuffle", "random", "greedy", "thrifty"), tags = "train"),
-        ParamInt$new("top_k", default = 0, lower = 0, tags = "train"),
-        ParamFct$new("predictor",
-          default = "cpu_predictor",
-          levels = c("cpu_predictor", "gpu_predictor"), tags = "train"),
-        ParamInt$new("save_period",
-          default = NULL, special_vals = list(NULL),
-          lower = 0, tags = "train"),
-        ParamUty$new("save_name", default = NULL, tags = "train"),
-        ParamUty$new("xgb_model", default = NULL, tags = "train"),
-        ParamUty$new("interaction_constraints", tags = "train"),
-        ParamLgl$new("outputmargin", default = FALSE, tags = "predict"),
-        ParamInt$new("ntreelimit",
-          default = NULL, special_vals = list(NULL),
-          lower = 1, tags = "predict"),
-        ParamLgl$new("predleaf", default = FALSE, tags = "predict"),
-        ParamLgl$new("predcontrib", default = FALSE, tags = "predict"),
-        ParamLgl$new("approxcontrib", default = FALSE, tags = "predict"),
-        ParamLgl$new("predinteraction", default = FALSE, tags = "predict"),
-        ParamLgl$new("reshape", default = FALSE, tags = "predict"),
-        ParamLgl$new("training", default = FALSE, tags = "predict")
-      ))
+      ps = ps(
+        alpha                   = p_dbl(0, default = 0, tags = "train"),
+        approxcontrib           = p_lgl(default = FALSE, tags = "predict"),
+        base_score              = p_dbl(default = 0.5, tags = "train"),
+        booster                 = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = c("train", "control")),
+        callbacks               = p_uty(default = list(), tags = "train"),
+        colsample_bylevel       = p_dbl(0, 1, default = 1, tags = "train"),
+        colsample_bynode        = p_dbl(0, 1, default = 1, tags = "train"),
+        colsample_bytree        = p_dbl(0, 1, default = 1, tags = c("train", "control")),
+        early_stopping_rounds   = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
+        eta                     = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
+        eval_metric             = p_uty(default = "error", tags = "train"),
+        feature_selector        = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
+        feval                   = p_uty(default = NULL, tags = "train"),
+        gamma                   = p_dbl(0, default = 0, tags = c("train", "control")),
+        grow_policy             = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train"),
+        interaction_constraints = p_uty(tags = "train"),
+        lambda                  = p_dbl(0, default = 1, tags = "train"),
+        lambda_bias             = p_dbl(0, default = 0, tags = "train"),
+        max_bin                 = p_int(2L, default = 256L, tags = "train"),
+        max_delta_step          = p_dbl(0, default = 0, tags = "train"),
+        max_depth               = p_int(0L, default = 6L, tags = c("train", "control")),
+        max_leaves              = p_int(0L, default = 0L, tags = "train"),
+        maximize                = p_lgl(default = NULL, special_vals = list(NULL), tags = "train"),
+        min_child_weight        = p_dbl(0, default = 1, tags = c("train", "control")),
+        missing                 = p_dbl(default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
+        monotone_constraints    = p_int(-1L, 1L, default = 0L, tags = c("train", "control")),
+        normalize_type          = p_fct(c("tree", "forest"), default = "tree", tags = "train"),
+        nrounds                 = p_int(1L, default = 1, tags = c("train")),
+        nthread                 = p_int(1L, default = 1L, tags = c("train", "control", "threads")),
+        ntreelimit              = p_int(1L, default = NULL, special_vals = list(NULL), tags = "predict"),
+        num_parallel_tree       = p_int(1L, default = 1L, tags = c("train", "control")),
+        objective               = p_uty(default = "binary:logistic", tags = c("train", "predict", "control")),
+        one_drop                = p_lgl(default = FALSE, tags = "train"),
+        outputmargin            = p_lgl(default = FALSE, tags = "predict"),
+        predcontrib             = p_lgl(default = FALSE, tags = "predict"),
+        predictor               = p_fct(c("cpu_predictor", "gpu_predictor"), default = "cpu_predictor", tags = "train"),
+        predinteraction         = p_lgl(default = FALSE, tags = "predict"),
+        predleaf                = p_lgl(default = FALSE, tags = "predict"),
+        print_every_n           = p_int(1L, default = 1L, tags = "train"),
+        rate_drop               = p_dbl(0, 1, default = 0, tags = "train"),
+        refresh_leaf            = p_lgl(default = TRUE, tags = "train"),
+        reshape                 = p_lgl(default = FALSE, tags = "predict"),
+        sample_type             = p_fct(c("uniform", "weighted"), default = "uniform", tags = "train"),
+        save_name               = p_uty(default = NULL, tags = "train"),
+        save_period             = p_int(0, default = NULL, special_vals = list(NULL), tags = "train"),
+        scale_pos_weight        = p_dbl(default = 1, tags = "train"),
+        sketch_eps              = p_dbl(0, 1, default = 0.03, tags = "train"),
+        skip_drop               = p_dbl(0, 1, default = 0, tags = "train"),
+        subsample               = p_dbl(0, 1, default = 1, tags = c("train", "control")),
+        top_k                   = p_int(0, default = 0, tags = "train"),
+        training                = p_lgl(default = FALSE, tags = "predict"),
+        tree_method             = p_fct(c("auto", "exact", "approx", "hist", "gpu_hist"), default = "auto", tags = "train"),
+        tweedie_variance_power  = p_dbl(1, 2, default = 1.5, tags = "train"),
+        updater                 = p_uty(tags = "train"), # Default depends on the selected booster
+        verbose                 = p_int(0L, 2L, default = 1L, tags = "train"),
+        watchlist               = p_uty(default = NULL, tags = "train"),
+        xgb_model               = p_uty(default = NULL, tags = "train")
+      )
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
       ps$add_dep("print_every_n", "verbose", CondEqual$new(1L))
@@ -141,7 +117,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
 
       # custom defaults
-      ps$values = list(verbose = 0L, nrounds = 1)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
 
       super$initialize(
         id = "classif.xgboost",
@@ -206,7 +182,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pars$watchlist = list(train = data)
       }
 
-      mlr3misc::invoke(xgboost::xgb.train, data = data, .args = pars)
+      invoke(xgboost::xgb.train, data = data, .args = pars)
     },
 
     .predict = function(task) {
@@ -223,7 +199,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      pred = mlr3misc::invoke(predict, model, newdata = newdata, .args = pars)
+      pred = invoke(predict, model, newdata = newdata, .args = pars)
 
       if (nlvls == 2L) { # binaryclass
         if (pars$objective == "multi:softprob") {

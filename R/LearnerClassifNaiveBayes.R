@@ -20,11 +20,11 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamDbl$new("laplace", default = 0, lower = 0, tags = "train"),
-        ParamDbl$new("threshold", default = 0.001, tags = "predict"),
-        ParamDbl$new("eps", default = 0, tags = "predict")
-      ))
+      ps = ps(
+        eps       = p_dbl(default = 0, tags = "predict"),
+        laplace   = p_dbl(0, default = 0, tags = "train"),
+        threshold = p_dbl(default = 0.001, tags = "predict")
+      )
 
       super$initialize(
         id = "classif.naive_bayes",
@@ -42,7 +42,7 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     .train = function(task) {
       y = task$truth()
       x = task$data(cols = task$feature_names)
-      mlr3misc::invoke(e1071::naiveBayes,
+      invoke(e1071::naiveBayes,
         x = x, y = y,
         .args = self$param_set$get_values(tags = "train"))
     },
@@ -52,12 +52,12 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model,
+        response = invoke(predict, self$model,
           newdata = newdata,
           type = "class", .args = pars)
         list(response = response)
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata,
+        prob = invoke(predict, self$model, newdata = newdata,
           type = "raw", .args = pars)
         list(prob = prob)
       }

@@ -14,7 +14,7 @@
 #'
 #' @section Custom mlr3 defaults:
 #' - `size`:
-#'   - Adjusted default: 3L
+#'   - Adjusted default: 3L.
 #'   - Reason for change: no default in `nnet()`.
 #'
 #' @references
@@ -30,28 +30,26 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
 
-      ps = ParamSet$new(
-        params = list(
-          ParamInt$new(id = "size", default = 3L, lower = 0L, tags = "train"),
-          ParamUty$new(id = "subset", tags = "train"),
-          ParamUty$new(id = "na.action", tags = "train"),
-          ParamUty$new(id = "contrasts", default = NULL, tags = "train"),
-          ParamUty$new(id = "Wts", tags = "train"),
-          ParamUty$new(id = "mask", tags = "train"),
-          ParamLgl$new(id = "linout", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "entropy", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "softmax", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "censored", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "skip", default = FALSE, tags = "train"),
-          ParamDbl$new(id = "rang", default = 0.7, tags = "train"),
-          ParamDbl$new(id = "decay", default = 0, tags = "train"),
-          ParamInt$new(id = "maxit", default = 100L, lower = 1L, tags = "train"),
-          ParamLgl$new(id = "Hess", default = FALSE, tags = "train"),
-          ParamLgl$new(id = "trace", default = TRUE, tags = "train"),
-          ParamInt$new(id = "MaxNWts", default = 1000L, lower = 1L, tags = "train"),
-          ParamDbl$new(id = "abstol", default = 1.0e-4, tags = "train"),
-          ParamDbl$new(id = "reltol", default = 1.0e-8, tags = "train")
-        )
+      ps = ps(
+        Hess      = p_lgl(default = FALSE, tags = "train"),
+        MaxNWts   = p_int(1L, default = 1000L, tags = "train"),
+        Wts       = p_uty(tags = "train"),
+        abstol    = p_dbl(default = 1.0e-4, tags = "train"),
+        censored  = p_lgl(default = FALSE, tags = "train"),
+        contrasts = p_uty(default = NULL, tags = "train"),
+        decay     = p_dbl(default = 0, tags = "train"),
+        entropy   = p_lgl(default = FALSE, tags = "train"),
+        linout    = p_lgl(default = FALSE, tags = "train"),
+        mask      = p_uty(tags = "train"),
+        maxit     = p_int(1L, default = 100L, tags = "train"),
+        na.action = p_uty(tags = "train"),
+        rang      = p_dbl(default = 0.7, tags = "train"),
+        reltol    = p_dbl(default = 1.0e-8, tags = "train"),
+        size      = p_int(0L, default = 3L, tags = "train"),
+        skip      = p_lgl(default = FALSE, tags = "train"),
+        softmax   = p_lgl(default = FALSE, tags = "train"),
+        subset    = p_uty(tags = "train"),
+        trace     = p_lgl(default = TRUE, tags = "train")
       )
       ps$values = list(size = 3L)
       ps$add_dep("linout", "entropy", CondEqual$new(FALSE))
@@ -83,21 +81,21 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars = mlr3misc::insert_named(pars, list(weights = task$weights$weight))
+        pars = insert_named(pars, list(weights = task$weights$weight))
       }
       f = task$formula()
       data = task$data()
-      mlr3misc::invoke(nnet::nnet.formula, formula = f, data = data, .args = pars)
+      invoke(nnet::nnet.formula, formula = f, data = data, .args = pars)
     },
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "class")
+        response = invoke(predict, self$model, newdata = newdata, type = "class")
         return(list(response = response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "raw")
+        prob = invoke(predict, self$model, newdata = newdata, type = "raw")
         if (length(self$model$lev) == 2L) {
           prob = cbind(1 - prob, prob)
           colnames(prob) = self$model$lev

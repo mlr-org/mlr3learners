@@ -8,30 +8,36 @@
 eXtreme Gradient Boosting regression.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
+\section{Dictionary}{
+
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.xgboost")
+lrn("regr.xgboost")
+}
+}
+
 \section{Custom mlr3 defaults}{
 
 \itemize{
 \item \code{nrounds}:
 \itemize{
-\item Actual default: no default
-\item Adjusted default: 1
+\item Actual default: no default.
+\item Adjusted default: 1.
 \item Reason for change: Without a default construction of the learner
 would error. Just setting a nonsense default to workaround this.
 \code{nrounds} needs to be tuned by the user.
 }
+\item \code{nthread}:
+\itemize{
+\item Actual value: Undefined, triggering auto-detection of the number of CPUs.
+\item Adjusted value: 1.
+\item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+}
 \item \code{verbose}:
 \itemize{
-\item Actual default: 1
-\item Adjusted default: 0
+\item Actual default: 1.
+\item Adjusted default: 0.
 \item Reason for change: Reduce verbosity.
 }
-}
-}
-
-\section{Dictionary}{
-
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.xgboost")
-lrn("regr.xgboost")
 }
 }
 
@@ -68,6 +74,7 @@ ACM.
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}

@@ -13,11 +13,33 @@ ordered_features = function(task, feature_names) {
 }
 
 
-glmnet_feature_names = function(model) {
-  beta = model$beta
-  if (is.null(beta))
-    beta = model$glmnet.fit$beta
-  rownames(if (is.list(beta)) beta[[1L]] else beta)
+as_numeric_matrix = function(x) { # for svm / #181
+  x = as.matrix(x)
+  if (is.logical(x)) {
+    storage.mode(x) = "double"
+  }
+  x
+}
+
+
+swap_levels = function(x) {
+  factor(x, levels = rev(levels(x)))
+}
+
+
+rename = function(x, old, new) {
+  ii = match(names(x), old, nomatch = 0L)
+  names(x)[ii > 0L] = new[ii]
+  x
+}
+
+
+extract_loglik = function(self) {
+  require_namespaces(self$packages)
+  if (is.null(self$model)) {
+    stopf("Learner '%s' has no model stored", self$id)
+  }
+  stats::logLik(self$model)
 }
 
 

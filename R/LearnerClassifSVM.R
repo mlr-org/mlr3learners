@@ -23,27 +23,23 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamFct$new("type",
-          default = "C-classification",
-          levels = c("C-classification", "nu-classification"), tags = "train"),
-        ParamDbl$new("cost", default = 1, lower = 0, tags = "train"),
-        ParamDbl$new("nu", default = 0.5, tags = "train"),
-        ParamFct$new("kernel",
-          default = "radial",
-          levels = c("linear", "polynomial", "radial", "sigmoid"), tags = "train"),
-        ParamInt$new("degree", default = 3L, lower = 1L, tags = "train"),
-        ParamDbl$new("coef0", default = 0, tags = "train"),
-        ParamDbl$new("gamma", lower = 0, tags = "train"),
-        ParamDbl$new("cachesize", default = 40L, tags = "train"),
-        ParamDbl$new("tolerance", default = 0.001, lower = 0, tags = "train"),
-        ParamLgl$new("shrinking", default = TRUE, tags = "train"),
-        ParamInt$new("cross", default = 0L, lower = 0L, tags = "train"), # tunable = FALSE),
-        ParamLgl$new("fitted", default = TRUE, tags = "train"), # tunable = FALSE),
-        ParamUty$new("scale", default = TRUE, tags = "train"), # , tunable = TRUE)
-        ParamUty$new("class.weights", default = NULL, tags = "train"),
-        ParamLgl$new("decision.values", default = FALSE, tags = "predict")
-      ))
+      ps = ps(
+        cachesize       = p_dbl(default = 40L, tags = "train"),
+        coef0           = p_dbl(default = 0, tags = "train"),
+        cost            = p_dbl(0, default = 1, tags = "train"),
+        cross           = p_int(0L, default = 0L, tags = "train"), # tunable = FALSE),
+        degree          = p_int(1L, default = 3L, tags = "train"),
+        gamma           = p_dbl(0, tags = "train"),
+        kernel          = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
+        nu              = p_dbl(default = 0.5, tags = "train"),
+        shrinking       = p_lgl(default = TRUE, tags = "train"),
+        tolerance       = p_dbl(0, default = 0.001, tags = "train"),
+        type            = p_fct(c("C-classification", "nu-classification"), default = "C-classification", tags = "train"),
+        fitted          = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
+        scale           = p_uty(default = TRUE, tags = "train"), # , tunable = TRUE)
+        class.weights   = p_uty(default = NULL, tags = "train"),
+        decision.values = p_lgl(default = FALSE, tags = "predict")
+      )
       ps$add_dep("cost", "type", CondEqual$new("C-classification"))
       ps$add_dep("nu", "type", CondEqual$new("nu-classification"))
       ps$add_dep("degree", "kernel", CondEqual$new("polynomial"))
@@ -65,7 +61,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
   private = list(
     .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
-      data = as.matrix(task$data(cols = task$feature_names))
+      data = as_numeric_matrix(task$data(cols = task$feature_names))
       self$state$feature_names = colnames(data)
 
       invoke(e1071::svm,
@@ -78,9 +74,9 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
 
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
-      newdata = as.matrix(task$data(cols = task$feature_names))
+      newdata = as_numeric_matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
-      p = mlr3misc::invoke(predict, self$model,
+      p = invoke(predict, self$model,
         newdata = newdata,
         probability = (self$predict_type == "prob"), .args = pars)
 

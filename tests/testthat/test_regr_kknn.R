@@ -28,3 +28,10 @@ test_that("custom model", {
   expect_data_table(mod$data)
   expect_list(mod$pars, names = "unique")
 })
+
+test_that("error for k >= n", {
+  task = tsk("mtcars")$filter(1:3)
+  learner = mlr3::lrn("regr.kknn", k = 4)
+
+  expect_error(learner$train(task))
+})

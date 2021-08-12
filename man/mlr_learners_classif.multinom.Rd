@@ -15,15 +15,6 @@ lrn("classif.multinom")
 }
 }
 
-\examples{
-if (requireNamespace("nnet")) {
-  learner = mlr3::lrn("classif.multinom")
-  print(learner)
-
-  # available parameters:
-learner$param_set$ids()
-}
-}
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
 }
@@ -34,12 +25,14 @@ learner$param_set$ids()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifMultinom$new()}}
+\item \href{#method-loglik}{\code{LearnerClassifMultinom$loglik()}}
 \item \href{#method-clone}{\code{LearnerClassifMultinom$clone()}}
 }
 }
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
@@ -57,6 +50,15 @@ learner$param_set$ids()
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifMultinom$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-loglik"></a>}}
+\if{latex}{\out{\hypertarget{method-loglik}{}}}
+\subsection{Method \code{loglik()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifMultinom$loglik()}\if{html}{\out{</div>}}
 }
 
 }

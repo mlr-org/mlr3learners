@@ -8,13 +8,20 @@
 Classification via logistic regression.
 Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"binomial"}.
 }
+\section{Internal Encoding}{
+
+Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
+model fitting to comply to the \code{\link[stats:glm]{stats::glm()}} convention that the negative class is provided
+as the first factor level.
+}
+
 \section{Custom mlr3 defaults}{
 
 \itemize{
 \item \code{model}:
 \itemize{
-\item Actual default: \code{TRUE}
-\item Adjusted default: \code{FALSE}
+\item Actual default: \code{TRUE}.
+\item Adjusted default: \code{FALSE}.
 \item Reason for change: Save some memory.
 }
 }
@@ -39,15 +46,6 @@ Setting the option \code{"contrasts"} does not have any effect.
 Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to create dummy features.
 }
 
-\examples{
-if (requireNamespace("stats")) {
-  learner = mlr3::lrn("classif.log_reg")
-  print(learner)
-
-  # available parameters:
-learner$param_set$ids()
-}
-}
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
 }
@@ -58,12 +56,14 @@ learner$param_set$ids()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifLogReg$new()}}
+\item \href{#method-loglik}{\code{LearnerClassifLogReg$loglik()}}
 \item \href{#method-clone}{\code{LearnerClassifLogReg$clone()}}
 }
 }
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
@@ -81,6 +81,15 @@ learner$param_set$ids()
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-loglik"></a>}}
+\if{latex}{\out{\hypertarget{method-loglik}{}}}
+\subsection{Method \code{loglik()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$loglik()}\if{html}{\out{</div>}}
 }
 
 }

@@ -23,7 +23,7 @@ lrn("classif.nnet")
 \itemize{
 \item \code{size}:
 \itemize{
-\item Adjusted default: 3L
+\item Adjusted default: 3L.
 \item Reason for change: no default in \code{nnet()}.
 }
 }
@@ -42,7 +42,7 @@ learner$param_set$ids()
 Ripley BD (1996).
 \emph{Pattern Recognition and Neural Networks}.
 Cambridge University Press.
-\doi{10.1017/cbo9780511812651}, \url{https://doi.org/10.1017/cbo9780511812651}.
+\doi{10.1017/cbo9780511812651}.
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
@@ -60,6 +60,7 @@ Cambridge University Press.
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}

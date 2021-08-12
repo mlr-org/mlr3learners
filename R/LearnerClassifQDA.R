@@ -29,17 +29,13 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamUty$new("prior", tags = "train"),
-        ParamFct$new("method",
-          default = "moment", levels = c("moment", "mle", "mve", "t"),
-          tags = "train"),
-        ParamInt$new("nu", tags = "train"),
-        ParamFct$new("predict.method",
-          default = "plug-in",
-          levels = c("plug-in", "predictive", "debiased", "looCV"), tags = "predict"),
-        ParamUty$new("predict.prior", tags = "predict")
-      ))
+      ps = ps(
+        method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
+        nu             = p_int(tags = "train"),
+        predict.method = p_fct(c("plug-in", "predictive", "debiased", "looCV"), default = "plug-in", tags = "predict"),
+        predict.prior  = p_uty(tags = "predict"),
+        prior          = p_uty(tags = "train")
+      )
       ps$add_dep("nu", "method", CondEqual$new("t"))
 
       super$initialize(
@@ -56,7 +52,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
 
   private = list(
     .train = function(task) {
-      mlr3misc::invoke(MASS::qda, task$formula(),
+      invoke(MASS::qda, task$formula(),
         data = task$data(),
         .args = self$param_set$get_values(tags = "train"))
     },
@@ -73,7 +69,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
       }
 
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model, newdata = newdata, .args = pars)
+      p = invoke(predict, self$model, newdata = newdata, .args = pars)
 
       if (self$predict_type == "response") {
         list(response = p$class)
