@@ -1,10 +1,13 @@
 # mlr3learners 0.5.0
 
-- Fixed internal encoding of the positive class for classification learners
-  based on `glm` and `glmnet` (#199).
+- Fixed the internal encoding of the positive class for classification learners
+  based on `glm` and `glmnet` (#199). While predictions in previous versions
+  were correct, the estimated coefficients had the wrong sign.
 - Reworked handling of `lambda` and `s` for `glmnet` learners (#197).
 - Learners based on `glmnet` now support to extract selected features (#200).
 - Learners based on `kknn` now raise an exception if `k >= n` (#191).
+- Multiple learners now support the extraction of the log-likelihood (via method
+  `$loglik()`, allowing to calculate measures like AIC or BIC in `mlr3` (#182).
 
 # mlr3learners 0.4.5
 
