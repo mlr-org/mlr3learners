@@ -83,14 +83,14 @@ Calls xgboost::xgb.train() from package xgboost." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.4.5</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.5.0</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+    <span class="fa fa-file-alt"></span>
      
     Reference
   </a>
@@ -100,7 +100,7 @@ Calls xgboost::xgb.train() from package xgboost." />
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
-    <span class="fa fa fa fa-link"></span>
+    <span class="fa fa-link"></span>
      
     mlr3book
   </a>
@@ -116,7 +116,7 @@ Calls xgboost::xgb.train() from package xgboost." />
 </li>
 <li>
   <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">
-    <span class="fa fa fa fa-comments"></span>
+    <span class="fa fa-comments"></span>
      
   </a>
 </li>
@@ -128,7 +128,7 @@ Calls xgboost::xgb.train() from package xgboost." />
 </li>
 <li>
   <a href="https://mlr-org.com/">
-    <span class="fas fa-rss"></span>
+    <span class="fa fa-rss"></span>
      
   </a>
 </li>
@@ -220,6 +220,7 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>
@@ -269,31 +270,31 @@ doi: <a href='https://doi.org/10.1145/2939672.2939785'>10.1145/2939672.2939785</
 #&gt; * Packages: xgboost
 #&gt; * Predict Type: crank
 #&gt; * Feature types: integer, numeric
-#&gt; * Properties: importance, missings, weights</div><div class='output co'>#&gt;  [1] "booster"                     "watchlist"                  
-#&gt;  [3] "eta"                         "gamma"                      
-#&gt;  [5] "max_depth"                   "min_child_weight"           
-#&gt;  [7] "subsample"                   "colsample_bytree"           
-#&gt;  [9] "colsample_bylevel"           "colsample_bynode"           
-#&gt; [11] "num_parallel_tree"           "lambda"                     
-#&gt; [13] "lambda_bias"                 "alpha"                      
-#&gt; [15] "aft_loss_distribution"       "aft_loss_distribution_scale"
-#&gt; [17] "objective"                   "base_score"                 
-#&gt; [19] "max_delta_step"              "missing"                    
-#&gt; [21] "monotone_constraints"        "tweedie_variance_power"     
-#&gt; [23] "nthread"                     "nrounds"                    
-#&gt; [25] "feval"                       "verbose"                    
-#&gt; [27] "print_every_n"               "early_stopping_rounds"      
-#&gt; [29] "maximize"                    "save_period"                
-#&gt; [31] "save_name"                   "xgb_model"                  
-#&gt; [33] "sample_type"                 "normalize_type"             
-#&gt; [35] "rate_drop"                   "skip_drop"                  
-#&gt; [37] "one_drop"                    "tree_method"                
-#&gt; [39] "grow_policy"                 "max_leaves"                 
-#&gt; [41] "max_bin"                     "callbacks"                  
-#&gt; [43] "sketch_eps"                  "scale_pos_weight"           
-#&gt; [45] "updater"                     "refresh_leaf"               
-#&gt; [47] "feature_selector"            "top_k"                      
-#&gt; [49] "predictor"                   "ntreelimit"                 </div></pre>
+#&gt; * Properties: importance, missings, weights</div><div class='output co'>#&gt;  [1] "aft_loss_distribution"       "aft_loss_distribution_scale"
+#&gt;  [3] "alpha"                       "base_score"                 
+#&gt;  [5] "booster"                     "callbacks"                  
+#&gt;  [7] "colsample_bylevel"           "colsample_bynode"           
+#&gt;  [9] "colsample_bytree"            "early_stopping_rounds"      
+#&gt; [11] "eta"                         "feature_selector"           
+#&gt; [13] "feval"                       "gamma"                      
+#&gt; [15] "grow_policy"                 "lambda"                     
+#&gt; [17] "lambda_bias"                 "max_bin"                    
+#&gt; [19] "max_delta_step"              "max_depth"                  
+#&gt; [21] "max_leaves"                  "maximize"                   
+#&gt; [23] "min_child_weight"            "missing"                    
+#&gt; [25] "monotone_constraints"        "normalize_type"             
+#&gt; [27] "nrounds"                     "nthread"                    
+#&gt; [29] "ntreelimit"                  "num_parallel_tree"          
+#&gt; [31] "objective"                   "one_drop"                   
+#&gt; [33] "predictor"                   "print_every_n"              
+#&gt; [35] "rate_drop"                   "refresh_leaf"               
+#&gt; [37] "sample_type"                 "save_name"                  
+#&gt; [39] "save_period"                 "scale_pos_weight"           
+#&gt; [41] "sketch_eps"                  "skip_drop"                  
+#&gt; [43] "subsample"                   "top_k"                      
+#&gt; [45] "tree_method"                 "tweedie_variance_power"     
+#&gt; [47] "updater"                     "verbose"                    
+#&gt; [49] "watchlist"                   "xgb_model"                  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
