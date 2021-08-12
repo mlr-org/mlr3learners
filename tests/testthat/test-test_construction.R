@@ -19,6 +19,5 @@ test_that("all learners can be constructed without custom args", {
     "regr.lm",
     "regr.ranger",
     "regr.svm",
-    "regr.xgboost"))
-  )
+    "regr.xgboost")))
 })

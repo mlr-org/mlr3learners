@@ -22,20 +22,20 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamLgl$new("x", default = FALSE, tags = "train"),
-        ParamLgl$new("y", default = FALSE, tags = "train"),
-        ParamLgl$new("model", default = TRUE, tags = "train"),
-        ParamLgl$new("qr", default = TRUE, tags = "train"),
-        ParamLgl$new("singular.ok", default = TRUE, tags = "train"),
-        ParamLgl$new("offset", tags = "train"),
-        ParamLgl$new("se.fit", default = FALSE, tags = "predict"),
-        ParamDbl$new("scale", default = NULL, special_vals = list(NULL), tags = "predict"),
-        ParamDbl$new("df", default = Inf, tags = "predict"),
-        ParamFct$new("interval", levels = c("none", "confidence", "prediction"), tags = "predict"),
-        ParamDbl$new("level", default = 0.95, tags = "predict"),
-        ParamUty$new("pred.var", tags = "predict")
-      ))
+      ps = ps(
+        df          = p_dbl(default = Inf, tags = "predict"),
+        interval    = p_fct(c("none", "confidence", "prediction"), tags = "predict"),
+        level       = p_dbl(default = 0.95, tags = "predict"),
+        model       = p_lgl(default = TRUE, tags = "train"),
+        offset      = p_lgl(tags = "train"),
+        pred.var    = p_uty(tags = "predict"),
+        qr          = p_lgl(default = TRUE, tags = "train"),
+        scale       = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
+        se.fit      = p_lgl(default = FALSE, tags = "predict"),
+        singular.ok = p_lgl(default = TRUE, tags = "train"),
+        x           = p_lgl(default = FALSE, tags = "train"),
+        y           = p_lgl(default = FALSE, tags = "train")
+      )
 
       super$initialize(
         id = "regr.lm",
@@ -60,7 +60,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      mlr3misc::invoke(stats::lm,
+      invoke(stats::lm,
         formula = task$formula(), data = task$data(),
         .args = pars, .opts = opts_default_contrasts)
     },

@@ -9,12 +9,24 @@ Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:glmnet]{glmnet::glmnet()}} from package \CRANpkg{glmnet}.
 
 The default for hyperparameter \code{family} is set to \code{"cox"}.
+}
+\details{
+Caution: This learner is different to learners calling \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}
+in that it does not use the internal optimization of parameter \code{lambda}.
+Instead, \code{lambda} needs to be tuned by the user (e.g., via \CRANpkg{mlr3tuning}).
+When \code{lambda} is tuned, the \code{glmnet} will be trained for each tuning iteration.
+While fitting the whole path of \code{lambda}s would be more efficient, as is done
+by default in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}, tuning/selecting the parameter at prediction time
+(using parameter \code{s}) is currently not supported in \CRANpkg{mlr3}
+(at least not in efficient manner).
+Tuning the \code{s} parameter is, therefore, currently discouraged.
 
-Caution: This learner is different to \code{cv_glmnet} in that it does not use the
-internal optimization of lambda. The parameter needs to be tuned by the user.
-Essentially, one needs to tune parameter \code{s} which is used at predict-time.
-
-See \url{https://stackoverflow.com/questions/50995525/} for more information.
+When the data are i.i.d. and efficiency is key, we recommend using the respective
+auto-tuning counterparts in \code{\link[=mlr_learners_classif.cv_glmnet]{mlr_learners_classif.cv_glmnet()}},
+\code{\link[=mlr_learners_regr.cv_glmnet]{mlr_learners_regr.cv_glmnet()}}, or \code{\link[=mlr_learners_surv.cv_glmnet]{mlr_learners_surv.cv_glmnet()}}.
+However, in some situations this is not applicable, usually when data are
+imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
+custom resampling strategies (blocked design, stratification).
 }
 \section{Dictionary}{
 
@@ -48,12 +60,14 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerSurvGlmnet$new()}}
+\item \href{#method-selected_features}{\code{LearnerSurvGlmnet$selected_features()}}
 \item \href{#method-clone}{\code{LearnerSurvGlmnet$clone()}}
 }
 }
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
@@ -73,6 +87,28 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="r">}}\preformatted{LearnerSurvGlmnet$new()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-selected_features"></a>}}
+\if{latex}{\out{\hypertarget{method-selected_features}{}}}
+\subsection{Method \code{selected_features()}}{
+Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
+with \code{type} set to \code{"nonzero"}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerSurvGlmnet$selected_features(lambda = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{lambda}}{(\code{numeric(1)})\cr
+Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+(\code{character()}) of feature names.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

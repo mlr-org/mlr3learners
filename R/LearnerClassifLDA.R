@@ -29,18 +29,15 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamUty$new("prior", tags = "train"),
-        ParamDbl$new("tol", tags = "train"),
-        ParamFct$new("method", default = "moment", levels = c(
-          "moment", "mle", "mve", "t"), tags = "train"),
-        ParamInt$new("nu", tags = "train"),
-        ParamFct$new("predict.method",
-          default = "plug-in",
-          levels = c("plug-in", "predictive", "debiased"), tags = "predict"),
-        ParamUty$new("predict.prior", tags = "predict"),
-        ParamUty$new("dimen", tags = "predict")
-      ))
+      ps = ps(
+        dimen          = p_uty(tags = "predict"),
+        method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
+        nu             = p_int(tags = "train"),
+        predict.method = p_fct(c("plug-in", "predictive", "debiased"), default = "plug-in", tags = "predict"),
+        predict.prior  = p_uty(tags = "predict"),
+        prior          = p_uty(tags = "train"),
+        tol            = p_dbl(tags = "train")
+      )
       ps$add_dep("nu", "method", CondEqual$new("t"))
 
       super$initialize(
@@ -58,7 +55,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
   private = list(
     .train = function(task) {
       formula = task$formula()
-      mlr3misc::invoke(MASS::lda, formula,
+      invoke(MASS::lda, formula,
         data = task$data(),
         .args = self$param_set$get_values(tags = "train"))
     },
@@ -74,7 +71,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
         pars$predict.prior = NULL
       }
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model,
+      p = invoke(predict, self$model,
         newdata = newdata,
         .args = self$param_set$get_values(tags = "predict"))
 
