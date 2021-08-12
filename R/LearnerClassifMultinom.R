@@ -38,10 +38,14 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = c("weights", "twoclass", "multiclass", "loglik"),
         packages = "nnet",
         man = "mlr3learners::mlr_learners_classif.multinom"
       )
+    },
+
+    loglik = function() {
+      extract_loglik(self)
     }
   ),
 
