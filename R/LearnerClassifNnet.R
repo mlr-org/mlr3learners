@@ -81,21 +81,21 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars = mlr3misc::insert_named(pars, list(weights = task$weights$weight))
+        pars = insert_named(pars, list(weights = task$weights$weight))
       }
       f = task$formula()
       data = task$data()
-      mlr3misc::invoke(nnet::nnet.formula, formula = f, data = data, .args = pars)
+      invoke(nnet::nnet.formula, formula = f, data = data, .args = pars)
     },
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "class")
+        response = invoke(predict, self$model, newdata = newdata, type = "class")
         return(list(response = response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "raw")
+        prob = invoke(predict, self$model, newdata = newdata, type = "raw")
         if (length(self$model$lev) == 2L) {
           prob = cbind(1 - prob, prob)
           colnames(prob) = self$model$lev

@@ -8,3 +8,19 @@ test_that("autotest", {
   result = run_autotest(learner, exclude = "feat_single", check_replicable = FALSE)
   expect_true(result, info = result$error)
 })
+
+test_that("selected_features", {
+  task = tsk("gbcs")
+  learner = lrn("surv.glmnet")
+  learner$train(task)
+
+  expect_equal(
+    learner$selected_features(0),
+    task$feature_names
+  )
+
+  expect_equal(
+    learner$selected_features(Inf),
+    character()
+  )
+})

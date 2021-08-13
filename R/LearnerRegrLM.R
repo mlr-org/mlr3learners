@@ -41,11 +41,15 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         id = "regr.lm",
         param_set = ps,
         predict_types = c("response", "se"),
-        feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = "weights",
+        feature_types = c("logical", "integer", "numeric", "factor", "character"),
+        properties = c("weights", "loglik"),
         packages = "stats",
         man = "mlr3learners::mlr_learners_regr.lm"
       )
+    },
+
+    loglik = function() {
+      extract_loglik(self)
     }
   ),
 
@@ -56,7 +60,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
 
-      mlr3misc::invoke(stats::lm,
+      invoke(stats::lm,
         formula = task$formula(), data = task$data(),
         .args = pars, .opts = opts_default_contrasts)
     },

@@ -38,10 +38,14 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = c("weights", "twoclass", "multiclass", "loglik"),
         packages = "nnet",
         man = "mlr3learners::mlr_learners_classif.multinom"
       )
+    },
+
+    loglik = function() {
+      extract_loglik(self)
     }
   ),
 
@@ -57,7 +61,7 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         pars$summ = as.integer(pars$summ)
       }
 
-      mlr3misc::invoke(nnet::multinom, data = data, .args = pars)
+      invoke(nnet::multinom, data = data, .args = pars)
     },
 
     .predict = function(task) {
@@ -65,10 +69,10 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
       levs = task$class_names
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "class")
+        response = invoke(predict, self$model, newdata = newdata, type = "class")
         list(response = drop(response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "probs")
+        prob = invoke(predict, self$model, newdata = newdata, type = "probs")
         if (length(levs) == 2L) {
           prob = matrix(c(1 - prob, prob), ncol = 2L, byrow = FALSE)
           colnames(prob) = levs

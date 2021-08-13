@@ -32,7 +32,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         holdout                      = p_lgl(default = FALSE, tags = "train"),
         importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
         keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
-        max.depth                    = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
+        max.depth                    = p_int(default = NULL, lower = 0L, special_vals = list(NULL), tags = "train"),
         min.node.size                = p_int(1L, default = 5L, tags = "train"),
         min.prop                     = p_dbl(default = 0.1, tags = "train"),
         minprop                      = p_dbl(default = 0.1, tags = "train"),
@@ -116,7 +116,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         pv$keep.inbag = TRUE # nolint
       }
 
-      mlr3misc::invoke(ranger::ranger,
+      invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         case.weights = task$weights$weight,
@@ -127,6 +127,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
+
       prediction = mlr3misc::invoke(predict, self$model,
         data = newdata,
         type = self$predict_type, .args = pv)

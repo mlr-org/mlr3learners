@@ -93,7 +93,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         pars$nugget = if (ns == 0) 0 else ns * stats::var(truth)
       }
 
-      mlr3misc::invoke(DiceKriging::km,
+      invoke(DiceKriging::km,
         response = task$truth(),
         design = data,
         control = pars$control,
@@ -110,7 +110,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         newdata = newdata + stats::rnorm(length(newdata), mean = 0, sd = jitter)
       }
 
-      p = mlr3misc::invoke(DiceKriging::predict.km,
+      p = invoke(DiceKriging::predict.km,
         self$model,
         newdata = newdata,
         type = if (is.null(pars$type)) "SK" else pars$type,

@@ -55,7 +55,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
   private = list(
     .train = function(task) {
       formula = task$formula()
-      mlr3misc::invoke(MASS::lda, formula,
+      invoke(MASS::lda, formula,
         data = task$data(),
         .args = self$param_set$get_values(tags = "train"))
     },
@@ -71,7 +71,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
         pars$predict.prior = NULL
       }
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model,
+      p = invoke(predict, self$model,
         newdata = newdata,
         .args = self$param_set$get_values(tags = "predict"))
 

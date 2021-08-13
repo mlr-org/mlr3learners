@@ -39,3 +39,20 @@ test_that("same label ordering as in glm() / log_reg", {
       info = sprintf("positive label = %s", pos))
   }
 })
+
+
+test_that("selected_features", {
+  task = tsk("iris")
+  learner = lrn("classif.cv_glmnet")
+  learner$train(task)
+
+  expect_equal(
+    learner$selected_features(0),
+    task$feature_names
+  )
+
+  expect_equal(
+    learner$selected_features(Inf),
+    character()
+  )
+})
