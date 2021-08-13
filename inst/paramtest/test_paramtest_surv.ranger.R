@@ -16,7 +16,8 @@ test_that("surv.ranger", {
     "dependent.variable.name", # handled via mlr3
     "status.variable.name", # handled via mlr3
     "classification", # handled via mlr3
-    "quantreg" # regression only
+    "quantreg", # regression only
+    "mtry.ratio" # custom hyperpar
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
