@@ -13,7 +13,7 @@
 #'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #' - `mtry`:
 #'   - This hyperparameter can alternatively be set via our hyperparameter `mtry.ratio`
-#'     as `mtry = floor(mtry.ratio * n_features)`.
+#'     as `mtry = max(floor(mtry.ratio * n_features), 1)`.
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
 #'
@@ -46,7 +46,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         min.node.size                = p_int(1L, default = 1L, tags = "train"),
         min.prop                     = p_dbl(default = 0.1, tags = "train"),
         minprop                      = p_dbl(default = 0.1, tags = "train"),
-        mtry                         = p_int(1L, tags = "train"),
+        mtry                         = p_int(lower = 1L, tags = "train"),
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
@@ -114,27 +114,29 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
+      pv = ranger_get_mtry(pv, task)
+
       mlr3misc::invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
         case.weights = task$weights$weight,
-        .args = pars
+        .args = pv
       )
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      p = mlr3misc::invoke(predict, self$model,
-        data = newdata,
-        predict.type = "response", .args = pars)
+      prediction = mlr3misc::invoke(predict,
+        self$model, data = newdata,
+        predict.type = "response", .args = pv)
 
       if (self$predict_type == "response") {
-        list(response = p$predictions)
+        list(response = prediction$predictions)
       } else {
-        list(prob = p$predictions)
+        list(prob = prediction$predictions)
       }
     }
   )
