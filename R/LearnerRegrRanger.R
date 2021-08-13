@@ -128,7 +128,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
 
-      prediction = mlr3misc::invoke(predict, self$model,
+      prediction = invoke(predict, self$model,
         data = newdata,
         type = self$predict_type, .args = pv)
       list(response = prediction$predictions, se = prediction$se)

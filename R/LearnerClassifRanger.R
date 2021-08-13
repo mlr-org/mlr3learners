@@ -129,7 +129,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
 
-      prediction = mlr3misc::invoke(predict,
+      prediction = invoke(predict,
         self$model, data = newdata,
         predict.type = "response", .args = pv)
 
