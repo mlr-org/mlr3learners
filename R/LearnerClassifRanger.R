@@ -11,6 +11,11 @@
 #'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
 #'   - Adjusted value: 1.
 #'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+#' - `mtry`:
+#'   - This hyperparameter can alternatively be set via our hyperparameter `mtry.ratio`
+#'     as `mtry = floor(mtry.ratio * n_features)`.
+#'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
+#'
 #'
 #' @template section_dictionary_learner
 #' @templateVar id classif.ranger
@@ -42,6 +47,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         min.prop                     = p_dbl(default = 0.1, tags = "train"),
         minprop                      = p_dbl(default = 0.1, tags = "train"),
         mtry                         = p_int(1L, tags = "train"),
+        mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
         num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
