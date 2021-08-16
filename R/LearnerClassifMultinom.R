@@ -44,6 +44,8 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
       )
     },
 
+    #' @description
+    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
     loglik = function() {
       extract_loglik(self)
     }
@@ -51,17 +53,17 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars$weights = task$weights$weight
+        pv$weights = task$weights$weight
       }
-      if (!is.null(pars$summ)) {
-        pars$summ = as.integer(pars$summ)
+      if (!is.null(pv$summ)) {
+        pv$summ = as.integer(pv$summ)
       }
 
-      invoke(nnet::multinom, data = data, .args = pars)
+      invoke(nnet::multinom, data = data, .args = pv)
     },
 
     .predict = function(task) {

@@ -18,7 +18,7 @@ test_that("custom model", {
   expect_null(mod$kknn)
   expect_formula(mod$formula)
   expect_data_table(mod$data)
-  expect_list(mod$pars, names = "unique")
+  expect_list(mod$pv, names = "unique")
 
   learner$predict(task)
   mod = learner$model
@@ -26,7 +26,7 @@ test_that("custom model", {
   expect_s3_class(mod$kknn, "kknn")
   expect_formula(mod$formula)
   expect_data_table(mod$data)
-  expect_list(mod$pars, names = "unique")
+  expect_list(mod$pv, names = "unique")
 })
 
 test_that("error for k >= n", {

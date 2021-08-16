@@ -3,7 +3,7 @@ glmnet_get_lambda = function(self, pv) {
     stopf("Learner '%s' has no model stored", self$id)
   }
 
-  pv = pv %??%self$param_set$get_values(tags = "predict")
+  pv = pv %??% self$param_set$get_values(tags = "predict")
   s = pv$s
 
   if (is.character(s)) {

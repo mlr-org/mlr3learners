@@ -145,10 +145,10 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
   private = list(
     .train = function(task) {
 
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
 
-      if (is.null(pars$objective)) {
-        pars$objective = "survival:cox"
+      if (is.null(pv$objective)) {
+        pv$objective = "survival:cox"
       }
 
       data = task$data(cols = task$feature_names)
@@ -157,14 +157,14 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       label = target[[targets[1]]]
       status = target[[targets[2]]]
 
-      if (pars$objective == "survival:cox") {
-        pars$eval_metric = "cox-nloglik"
+      if (pv$objective == "survival:cox") {
+        pv$eval_metric = "cox-nloglik"
         label[status != 1] = -1L * label[status != 1]
         data = xgboost::xgb.DMatrix(
           data = as.matrix(data),
           label = label)
       } else {
-        pars$eval_metric = "aft-nloglik"
+        pv$eval_metric = "aft-nloglik"
         y_lower_bound = y_upper_bound = label
         y_upper_bound[status == 0] = Inf
 
@@ -177,25 +177,25 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pars$watchlist)) {
-        pars$watchlist = list(train = data)
+      if (is.null(pv$watchlist)) {
+        pv$watchlist = list(train = data)
       }
 
-      invoke(xgboost::xgb.train, data = data, .args = pars)
+      invoke(xgboost::xgb.train, data = data, .args = pv)
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
       lp = log(invoke(
         predict, model,
         newdata = newdata,
-        .args = pars
+        .args = pv
       ))
 
-      if (!is.null(pars$objective) && pars$objective == "survival:aft") {
+      if (!is.null(pv$objective) && pv$objective == "survival:aft") {
         lp = -lp
       }
 

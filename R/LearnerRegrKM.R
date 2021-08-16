@@ -78,34 +78,34 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
   private = list(
     .train = function(task) {
 
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
-      if (!is.null(pars$optim.method)) {
-        if (pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
+      if (!is.null(pv$optim.method)) {
+        if (pv$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
           stop("The 'rgenoud' package is required for optimization method 'gen'.")
         }
       }
 
-      ns = pars$nugget.stability
+      ns = pv$nugget.stability
       if (!is.null(ns)) {
-        pars$nugget = if (ns == 0) 0 else ns * stats::var(truth)
+        pv$nugget = if (ns == 0) 0 else ns * stats::var(truth)
       }
 
       invoke(DiceKriging::km,
         response = task$truth(),
         design = data,
-        control = pars$control,
-        .args = remove_named(pars, c("control", "nugget.stability"))
+        control = pv$control,
+        .args = remove_named(pv, c("control", "nugget.stability"))
       )
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
-      jitter = pars$jitter
+      jitter = pv$jitter
       if (!is.null(jitter) && jitter > 0) {
         newdata = newdata + stats::rnorm(length(newdata), mean = 0, sd = jitter)
       }
@@ -113,9 +113,9 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
       p = invoke(DiceKriging::predict.km,
         self$model,
         newdata = newdata,
-        type = if (is.null(pars$type)) "SK" else pars$type,
+        type = if (is.null(pv$type)) "SK" else pv$type,
         se.compute = self$predict_type == "se",
-        .args = remove_named(pars, "jitter")
+        .args = remove_named(pv, "jitter")
       )
 
       list(response = p$mean, se = p$sd)

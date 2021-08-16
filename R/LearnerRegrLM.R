@@ -48,6 +48,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       )
     },
 
+    #' @description
+    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
     loglik = function() {
       extract_loglik(self)
     }
@@ -55,14 +57,14 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars = insert_named(pars, list(weights = task$weights$weight))
+        pv = insert_named(pv, list(weights = task$weights$weight))
       }
 
       invoke(stats::lm,
         formula = task$formula(), data = task$data(),
-        .args = pars, .opts = opts_default_contrasts)
+        .args = pv, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {

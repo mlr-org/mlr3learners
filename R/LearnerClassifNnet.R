@@ -79,13 +79,13 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars = insert_named(pars, list(weights = task$weights$weight))
+        pv = insert_named(pv, list(weights = task$weights$weight))
       }
       f = task$formula()
       data = task$data()
-      invoke(nnet::nnet.formula, formula = f, data = data, .args = pars)
+      invoke(nnet::nnet.formula, formula = f, data = data, .args = pv)
     },
 
     .predict = function(task) {

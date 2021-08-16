@@ -15,7 +15,7 @@ Therefore, \verb{$model} returns a list with the following elements:
 \itemize{
 \item \code{formula}: Formula for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
 \item \code{data}: Training data for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
-\item \code{pars}: Training parameters for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
+\item \code{pv}: Training parameters for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
 \item \code{kknn}: Model as returned by \code{\link[kknn:kknn]{kknn::kknn()}}, only available \strong{after} \verb{$predict()} has been called.
 }
 }

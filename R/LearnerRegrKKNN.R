@@ -56,7 +56,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
       list(
         formula = task$formula(),
         data = task$data(),
-        pars = pv,
+        pv = pv,
         kknn = NULL
       )
     },
@@ -68,7 +68,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn,
           formula = model$formula, train = model$data,
-          test = newdata, .args = model$pars)
+          test = newdata, .args = model$pv)
       })
 
       self$state$model$kknn = p

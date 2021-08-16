@@ -46,6 +46,15 @@ Setting the option \code{"contrasts"} does not have any effect.
 Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to create dummy features.
 }
 
+\examples{
+if (requireNamespace("stats")) {
+  learner = mlr3::lrn("classif.log_reg")
+  print(learner)
+
+  # available parameters:
+learner$param_set$ids()
+}
+}
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
 }
@@ -88,6 +97,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<a id="method-loglik"></a>}}
 \if{latex}{\out{\hypertarget{method-loglik}{}}}
 \subsection{Method \code{loglik()}}{
+Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}} from the fitted model.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$loglik()}\if{html}{\out{</div>}}
 }

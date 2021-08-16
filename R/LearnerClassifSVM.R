@@ -60,7 +60,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       self$state$feature_names = colnames(data)
 
@@ -68,17 +68,17 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
         x = data,
         y = task$truth(),
         probability = (self$predict_type == "prob"),
-        .args = pars
+        .args = pv
       )
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       newdata = as_numeric_matrix(task$data(cols = task$feature_names))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
       p = invoke(predict, self$model,
         newdata = newdata,
-        probability = (self$predict_type == "prob"), .args = pars)
+        probability = (self$predict_type == "prob"), .args = pv)
 
       list(
         response = as.character(p),

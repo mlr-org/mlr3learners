@@ -48,17 +48,17 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model,
           newdata = newdata,
-          type = "class", .args = pars)
+          type = "class", .args = pv)
         list(response = response)
       } else {
         prob = invoke(predict, self$model, newdata = newdata,
-          type = "raw", .args = pars)
+          type = "raw", .args = pv)
         list(prob = prob)
       }
     }

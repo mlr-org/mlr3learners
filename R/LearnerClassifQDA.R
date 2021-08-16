@@ -58,18 +58,18 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
-      if (!is.null(pars$predict.method)) {
-        pars$method = pars$predict.method
-        pars$predict.method = NULL
+      pv = self$param_set$get_values(tags = "predict")
+      if (!is.null(pv$predict.method)) {
+        pv$method = pv$predict.method
+        pv$predict.method = NULL
       }
-      if (!is.null(pars$predict.prior)) {
-        pars$prior = pars$predict.prior
-        pars$predict.prior = NULL
+      if (!is.null(pv$predict.prior)) {
+        pv$prior = pv$predict.prior
+        pv$predict.prior = NULL
       }
 
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model, newdata = newdata, .args = pars)
+      p = invoke(predict, self$model, newdata = newdata, .args = pv)
 
       if (self$predict_type == "response") {
         list(response = p$class)

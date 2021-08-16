@@ -5,5 +5,5 @@
 #'
 #' * `formula`: Formula for calling [kknn::kknn()] during `$predict()`.
 #' * `data`: Training data for calling [kknn::kknn()] during `$predict()`.
-#' * `pars`: Training parameters for calling [kknn::kknn()] during `$predict()`.
+#' * `pv`: Training parameters for calling [kknn::kknn()] during `$predict()`.
 #' * `kknn`: Model as returned by [kknn::kknn()], only available **after** `$predict()` has been called.

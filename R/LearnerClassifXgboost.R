@@ -152,22 +152,22 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
   private = list(
     .train = function(task) {
 
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
       nlvls = length(lvls)
 
-      if (is.null(pars$objective)) {
-        pars$objective = if (nlvls == 2L) "binary:logistic" else "multi:softprob"
+      if (is.null(pv$objective)) {
+        pv$objective = if (nlvls == 2L) "binary:logistic" else "multi:softprob"
       }
 
-      if (self$predict_type == "prob" && pars$objective == "multi:softmax") {
+      if (self$predict_type == "prob" && pv$objective == "multi:softmax") {
         stop("objective = 'multi:softmax' does not work with predict_type = 'prob'")
       }
 
       # if we use softprob or softmax as objective we have to add the number of classes 'num_class'
-      if (pars$objective %in% c("multi:softprob", "multi:softmax")) {
-        pars$num_class = nlvls
+      if (pv$objective %in% c("multi:softprob", "multi:softmax")) {
+        pv$num_class = nlvls
       }
 
       data = task$data(cols = task$feature_names)
@@ -180,38 +180,38 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pars$watchlist)) {
-        pars$watchlist = list(train = data)
+      if (is.null(pv$watchlist)) {
+        pv$watchlist = list(train = data)
       }
 
-      invoke(xgboost::xgb.train, data = data, .args = pars)
+      invoke(xgboost::xgb.train, data = data, .args = pv)
     },
 
     .predict = function(task) {
 
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL
       lvls = rev(task$class_names)
       nlvls = length(lvls)
 
-      if (is.null(pars$objective)) {
-        pars$objective = ifelse(nlvls == 2L, "binary:logistic", "multi:softprob")
+      if (is.null(pv$objective)) {
+        pv$objective = ifelse(nlvls == 2L, "binary:logistic", "multi:softprob")
       }
 
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      pred = invoke(predict, model, newdata = newdata, .args = pars)
+      pred = invoke(predict, model, newdata = newdata, .args = pv)
 
       if (nlvls == 2L) { # binaryclass
-        if (pars$objective == "multi:softprob") {
+        if (pv$objective == "multi:softprob") {
           prob = matrix(pred, ncol = nlvls, byrow = TRUE)
           colnames(prob) = lvls
         } else {
           prob = pvec2mat(pred, lvls)
         }
       } else { # multiclass
-        if (pars$objective == "multi:softmax") {
+        if (pv$objective == "multi:softmax") {
           response = lvls[pred + 1L]
         } else {
           prob = matrix(pred, ncol = nlvls, byrow = TRUE)

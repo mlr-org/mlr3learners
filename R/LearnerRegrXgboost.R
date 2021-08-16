@@ -136,10 +136,10 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
   private = list(
     .train = function(task) {
 
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
 
-      if (is.null(pars$objective)) {
-        pars$objective = "reg:linear"
+      if (is.null(pv$objective)) {
+        pv$objective = "reg:linear"
       }
 
       data = task$data(cols = task$feature_names)
@@ -150,19 +150,19 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pars$watchlist)) {
-        pars$watchlist = list(train = data)
+      if (is.null(pv$watchlist)) {
+        pv$watchlist = list(train = data)
       }
 
-      invoke(xgboost::xgb.train, data = data, .args = pars)
+      invoke(xgboost::xgb.train, data = data, .args = pv)
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       model = self$model
       newdata = data.matrix(task$data(cols = task$feature_names))
       newdata = newdata[, model$feature_names, drop = FALSE]
-      response = invoke(predict, model, newdata = newdata, .args = pars)
+      response = invoke(predict, model, newdata = newdata, .args = pv)
 
       list(response = response)
     }
