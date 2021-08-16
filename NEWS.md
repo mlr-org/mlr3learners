@@ -6,6 +6,8 @@
 - Reworked handling of `lambda` and `s` for `glmnet` learners (#197).
 - Learners based on `glmnet` now support to extract selected features (#200).
 - Learners based on `kknn` now raise an exception if `k >= n` (#191).
+- Learners based on `ranger` now come with a virtual hyperparameter `mtry.ratio`
+  to set the hyperparameter `mtry` based on the proportion of features to use.
 - Multiple learners now support the extraction of the log-likelihood (via method
   `$loglik()`, allowing to calculate measures like AIC or BIC in `mlr3` (#182).
 
