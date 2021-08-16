@@ -17,6 +17,12 @@ Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger
 \item Adjusted value: 1.
 \item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 }
+\item \code{mtry}:
+\itemize{
+\item This hyperparameter can alternatively be set via our hyperparameter \code{mtry.ratio}
+as \code{mtry = max(floor(mtry.ratio * n_features), 1)}.
+Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
+}
 }
 }
 

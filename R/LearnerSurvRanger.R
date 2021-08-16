@@ -32,7 +32,8 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
         max.depth                    = p_int(default = NULL, lower = 0L, special_vals = list(NULL), tags = "train"),
         min.node.size                = p_int(1L, default = 5L, tags = "train"),
         minprop                      = p_dbl(default = 0.1, tags = "train"),
-        mtry                         = p_int(1L, tags = "train"),
+        mtry                         = p_int(lower = 1L, tags = "train"),
+        mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
         num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
@@ -89,6 +90,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
+      pv = ranger_get_mtry(pv, task)
       targets = task$target_names
 
       invoke(ranger::ranger,
@@ -102,9 +104,10 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     },
 
     .predict = function(task) {
+      pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      fit = predict(object = self$model, data = newdata)
-      mlr3proba::.surv_return(times = fit$unique.death.times, surv = fit$survival)
+      prediction = predict(object = self$model, data = newdata)
+      mlr3proba::.surv_return(times = prediction$unique.death.times, surv = prediction$survival)
     }
   )
 )

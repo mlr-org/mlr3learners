@@ -6,3 +6,21 @@ test_that("autotest", {
   result = run_autotest(learner, N = 50L)
   expect_true(result, info = result$error)
 })
+
+test_that("mtry.ratio", {
+  task = mlr3::tsk("mtcars")
+  learner = mlr3::lrn("regr.ranger", mtry.ratio = 0.5)
+
+  res = ranger_get_mtry(learner$param_set$values, task)
+  expect_equal(
+    res$mtry,
+    5
+  )
+  expect_null(res$mtry.ratio)
+
+  learner$train(task)
+  expect_equal(
+    learner$model$mtry,
+    5
+  )
+})

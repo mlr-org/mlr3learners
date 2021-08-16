@@ -15,7 +15,8 @@ test_that("regr.ranger", {
     "inbag", # handled via mlr3 stratification
     "dependent.variable.name", # handled via mlr3
     "status.variable.name", # handled via mlr3
-    "classification" # handled via mlr3
+    "classification", # handled via mlr3
+    "mtry.ratio" # custom hyperpar
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

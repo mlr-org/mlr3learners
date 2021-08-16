@@ -6,10 +6,10 @@
 #' Random regression forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
+#' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
+#'
 #' @templateVar id regr.ranger
 #' @template section_dictionary_learner
-#'
-#' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
 #'
 #' @references
 #' `r format_bib("wright_2017", "breiman_2001")`
@@ -36,7 +36,8 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         min.node.size                = p_int(1L, default = 5L, tags = "train"),
         min.prop                     = p_dbl(default = 0.1, tags = "train"),
         minprop                      = p_dbl(default = 0.1, tags = "train"),
-        mtry                         = p_int(1L, tags = "train"),
+        mtry                         = p_int(lower = 1L, tags = "train"),
+        mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
         num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
@@ -108,27 +109,29 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
+      pv = ranger_get_mtry(pv, task)
 
       if (self$predict_type == "se") {
-        pars$keep.inbag = TRUE # nolint
+        pv$keep.inbag = TRUE # nolint
       }
 
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         case.weights = task$weights$weight,
-        .args = pars
+        .args = pv
       )
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      preds = invoke(predict, self$model,
+
+      prediction = invoke(predict, self$model,
         data = newdata,
-        type = self$predict_type, .args = pars)
-      list(response = preds$predictions, se = preds$se)
+        type = self$predict_type, .args = pv)
+      list(response = prediction$predictions, se = prediction$se)
     }
   )
 )
