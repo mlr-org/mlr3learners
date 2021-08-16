@@ -49,7 +49,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
       # https://github.com/mlr-org/mlr3learners/issues/191
       pv = self$param_set$get_values(tags = "train")
       if (pv$k >= task$nrow) {
-        stopf("Parameter k = %i must be smaller than the number of observations (n = %i)",
+        stopf("Parameter k = %i must be smaller than the number of observations n = %i",
           pv$k, task$nrow)
       }
 

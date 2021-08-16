@@ -14,7 +14,8 @@ test_that("classif.logreg", {
     "y", # handled by mlr3
     "method", # we always use glm()
     "control", # handled by glm.control
-    "contrasts" # causes lots of troubles just when setting the default
+    "contrasts", # causes lots of troubles just when setting the default
+    "se.fit" # not supported for log reg
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

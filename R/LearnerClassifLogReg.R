@@ -41,7 +41,6 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         model       = p_lgl(default = TRUE, tags = "train"),
         mustart     = p_uty(tags = "train"),
         offset      = p_uty(tags = "train"),
-        se.fit      = p_lgl(default = FALSE, tags = "predict"),
         singular.ok = p_lgl(default = TRUE, tags = "train"),
         start       = p_uty(default = NULL, tags = "train"),
         trace       = p_lgl(default = FALSE, tags = c("train", "control")),
@@ -86,10 +85,11 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     },
 
     .predict = function(task) {
+      pv = self$param_set$get_values(tags = "predict")
       lvls = c(task$negative, task$positive)
       newdata = task$data(cols = task$feature_names)
 
-      p = unname(predict(self$model, newdata = newdata, type = "response"))
+      p = unname(invoke(predict, object = self$model, newdata = newdata, type = "response", .args = pv))
 
       if (self$predict_type == "response") {
         list(response = ifelse(p < 0.5, lvls[1L], lvls[2L]))

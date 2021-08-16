@@ -31,7 +31,6 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         pred.var    = p_uty(tags = "predict"),
         qr          = p_lgl(default = TRUE, tags = "train"),
         scale       = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
-        se.fit      = p_lgl(default = FALSE, tags = "predict"),
         singular.ok = p_lgl(default = TRUE, tags = "train"),
         x           = p_lgl(default = FALSE, tags = "train"),
         y           = p_lgl(default = FALSE, tags = "train")
@@ -68,14 +67,15 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     },
 
     .predict = function(task) {
+      pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
+      se_fit = self$predict_type == "se"
+      prediction = invoke(predict, object = self$model, newdata = newdata, se.fit = se_fit, .args = pv)
 
-      if (self$predict_type == "response") {
-        response = predict(self$model, newdata = newdata, se.fit = FALSE)
-        list(response = response)
+      if (se_fit) {
+        list(response = unname(prediction$fit), se = unname(prediction$se.fit))
       } else {
-        pred = predict(self$model, newdata = newdata, se.fit = TRUE)
-        list(response = pred$fit, se = pred$se.fit)
+        list(response = unname(prediction))
       }
     }
   )

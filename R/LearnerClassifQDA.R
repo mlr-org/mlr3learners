@@ -32,7 +32,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
       ps = ps(
         method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
         nu             = p_int(tags = "train"),
-        predict.method = p_fct(c("plug-in", "predictive", "debiased", "looCV"), default = "plug-in", tags = "predict"),
+        predict.method = p_fct(c("plug-in", "predictive", "debiased"), default = "plug-in", tags = "predict"),
         predict.prior  = p_uty(tags = "predict"),
         prior          = p_uty(tags = "train")
       )
@@ -59,14 +59,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      if (!is.null(pv$predict.method)) {
-        pv$method = pv$predict.method
-        pv$predict.method = NULL
-      }
-      if (!is.null(pv$predict.prior)) {
-        pv$prior = pv$predict.prior
-        pv$predict.prior = NULL
-      }
+      pv = rename(pv, c("predict.method", "predict.prior"), c("method", "prior"))
 
       newdata = task$data(cols = task$feature_names)
       p = invoke(predict, self$model, newdata = newdata, .args = pv)

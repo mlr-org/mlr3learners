@@ -68,17 +68,20 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
-      levs = task$class_names
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newdata = newdata, type = "class")
         list(response = drop(response))
       } else {
-        prob = invoke(predict, self$model, newdata = newdata, type = "probs")
-        if (length(levs) == 2L) {
-          prob = matrix(c(1 - prob, prob), ncol = 2L, byrow = FALSE)
-          colnames(prob) = levs
+        lvls = self$model$lev
+        prob = unname(invoke(predict, self$model, newdata = newdata, type = "probs"))
+
+        if (length(lvls) == 2L) {
+          prob = pvec2mat(prob, lvls)
+        } else {
+          colnames(prob) = lvls
         }
+
         list(prob = prob)
       }
     }

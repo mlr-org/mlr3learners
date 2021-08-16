@@ -54,31 +54,22 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
 
   private = list(
     .train = function(task) {
+      pv = self$param_set$get_values(tags = "train")
       formula = task$formula()
-      invoke(MASS::lda, formula,
-        data = task$data(),
-        .args = self$param_set$get_values(tags = "train"))
+      invoke(MASS::lda, formula, data = task$data(), .args = pv)
     },
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      if (!is.null(pv$predict.method)) {
-        pv$method = pv$predict.method
-        pv$predict.method = NULL
-      }
-      if (!is.null(pv$predict.prior)) {
-        pv$prior = pv$predict.prior
-        pv$predict.prior = NULL
-      }
+      pv = rename(pv, c("predict.method", "predict.prior"), c("method", "prior"))
       newdata = task$data(cols = task$feature_names)
-      p = invoke(predict, self$model,
-        newdata = newdata,
-        .args = self$param_set$get_values(tags = "predict"))
+
+      p = invoke(predict, self$model, newdata = newdata, .args = pv)
 
       if (self$predict_type == "response") {
-        list(response = p$class)
+        list(response = p[["class"]])
       } else {
-        list(response = p$class, prob = p$posterior)
+        list(response = p[["class"]], prob = p[["posterior"]])
       }
     }
   )

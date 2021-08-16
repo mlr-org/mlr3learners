@@ -28,8 +28,10 @@ swap_levels = function(x) {
 
 
 rename = function(x, old, new) {
-  ii = match(names(x), old, nomatch = 0L)
-  names(x)[ii > 0L] = new[ii]
+  if (length(x)) {
+    ii = match(names(x), old, nomatch = 0L)
+    names(x)[ii > 0L] = new[ii]
+  }
   x
 }
 
