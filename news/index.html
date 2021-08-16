@@ -155,6 +155,7 @@
 <li>Reworked handling of <code>lambda</code> and <code>s</code> for <code>glmnet</code> learners (<a href='https://github.com/mlr-org/mlr3learners/issues/197'>#197</a>).</li>
 <li>Learners based on <code>glmnet</code> now support to extract selected features (<a href='https://github.com/mlr-org/mlr3learners/issues/200'>#200</a>).</li>
 <li>Learners based on <code>kknn</code> now raise an exception if <code>k &gt;= n</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/191'>#191</a>).</li>
+<li>Learners based on <code>ranger</code> now come with a virtual hyperparameter <code>mtry.ratio</code> to set the hyperparameter <code>mtry</code> based on the proportion of features to use.</li>
 <li>Multiple learners now support the extraction of the log-likelihood (via method <code>$loglik()</code>, allowing to calculate measures like AIC or BIC in <code>mlr3</code> (<a href='https://github.com/mlr-org/mlr3learners/issues/182'>#182</a>).</li>
 </ul>
 </div>
