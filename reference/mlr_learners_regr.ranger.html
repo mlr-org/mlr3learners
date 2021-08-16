@@ -175,6 +175,11 @@ Calls <code><a href='https://rdrr.io/pkg/ranger/man/ranger.html'>ranger::ranger(
 <li><p>Adjusted value: 1.</p></li>
 <li><p>Reason for change: Conflicting with parallelization via <a href='https://CRAN.R-project.org/package=future'><span class="pkg">future</span></a>.</p></li>
 </ul></li>
+<li><p><code>mtry</code>:</p><ul>
+<li><p>This hyperparameter can alternatively be set via our hyperparameter <code>mtry.ratio</code>
+as <code>mtry = max(floor(mtry.ratio * n_features), 1)</code>.
+Note that <code>mtry</code> and <code>mtry.ratio</code> are mutually exclusive.</p></li>
+</ul></li>
 </ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -272,15 +277,16 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 #&gt;  [5] "keep.inbag"                   "max.depth"                   
 #&gt;  [7] "min.node.size"                "min.prop"                    
 #&gt;  [9] "minprop"                      "mtry"                        
-#&gt; [11] "num.random.splits"            "num.threads"                 
-#&gt; [13] "num.trees"                    "oob.error"                   
-#&gt; [15] "quantreg"                     "regularization.factor"       
-#&gt; [17] "regularization.usedepth"      "replace"                     
-#&gt; [19] "respect.unordered.factors"    "sample.fraction"             
-#&gt; [21] "save.memory"                  "scale.permutation.importance"
-#&gt; [23] "se.method"                    "seed"                        
-#&gt; [25] "split.select.weights"         "splitrule"                   
-#&gt; [27] "verbose"                      "write.forest"                </div></pre>
+#&gt; [11] "mtry.ratio"                   "num.random.splits"           
+#&gt; [13] "num.threads"                  "num.trees"                   
+#&gt; [15] "oob.error"                    "quantreg"                    
+#&gt; [17] "regularization.factor"        "regularization.usedepth"     
+#&gt; [19] "replace"                      "respect.unordered.factors"   
+#&gt; [21] "sample.fraction"              "save.memory"                 
+#&gt; [23] "scale.permutation.importance" "se.method"                   
+#&gt; [25] "seed"                         "split.select.weights"        
+#&gt; [27] "splitrule"                    "verbose"                     
+#&gt; [29] "write.forest"                </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
