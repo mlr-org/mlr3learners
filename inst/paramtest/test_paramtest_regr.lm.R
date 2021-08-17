@@ -10,8 +10,7 @@ test_that("regr.lm", {
     "na.action", # handled via mlr3
     "method", # handled via mlr3
     "subset", # handled via mlr3
-    "contrasts", # handled via mlr3
-    "se.fit" # controlled via predict type
+    "contrasts" # handled via mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
@@ -29,7 +28,8 @@ test_that("predict regr.lm", {
     "type", # handled via mlr3
     "na.action", # handled via mlr3
     "terms", # not supported by mlr3 learner
-    "weights" # handled via mlr3
+    "weights", # handled via mlr3
+    "se.fit" # controlled via predict type
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

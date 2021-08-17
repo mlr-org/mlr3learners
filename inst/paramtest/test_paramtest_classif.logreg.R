@@ -14,8 +14,7 @@ test_that("classif.logreg", {
     "y", # handled by mlr3
     "method", # we always use glm()
     "control", # handled by glm.control
-    "contrasts", # causes lots of troubles just when setting the default
-    "se.fit" # not supported for log reg
+    "contrasts" # causes lots of troubles just when setting the default
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
@@ -44,7 +43,8 @@ test_that("predict classif.log_reg", {
     "newdata", # handled via mlr3
     "type", # handled via mlr3
     "terms", # handled via mlr3 type arg
-    "na.action" # handled via mlr3
+    "na.action", # handled via mlr3
+    "se.fit" # not supported for log reg
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)
