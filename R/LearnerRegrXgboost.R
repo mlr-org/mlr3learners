@@ -59,7 +59,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         nthread                 = p_int(1L, default = 1L, tags = c("train", "threads")),
         ntreelimit              = p_int(1, default = NULL, special_vals = list(NULL), tags = "predict"),
         num_parallel_tree       = p_int(1L, default = 1L, tags = "train"),
-        objective               = p_uty(default = "reg:linear", tags = c("train", "predict")),
+        objective               = p_uty(default = "reg:squarederror", tags = c("train", "predict")),
         one_drop                = p_lgl(default = FALSE, tags = "train"),
         outputmargin            = p_lgl(default = FALSE, tags = "predict"),
         predcontrib             = p_lgl(default = FALSE, tags = "predict"),
@@ -139,7 +139,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       pv = self$param_set$get_values(tags = "train")
 
       if (is.null(pv$objective)) {
-        pv$objective = "reg:linear"
+        pv$objective = "reg:squarederror"
       }
 
       data = task$data(cols = task$feature_names)
