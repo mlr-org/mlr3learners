@@ -27,7 +27,7 @@ lrn("regr.ranger")
 \item \code{mtry}:
 \itemize{
 \item This hyperparameter can alternatively be set via our hyperparameter \code{mtry.ratio}
-as \code{mtry = max(floor(mtry.ratio * n_features), 1)}.
+as \code{mtry = max(round(mtry.ratio * n_features), 1)}.
 Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 }

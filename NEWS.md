@@ -1,4 +1,7 @@
-# mlr3learners 0.5.0-9000
+# mlr3learners 0.5.1
+
+- Improved how the added hyperparameter `mtry.ratio` is converted to `mtry` to
+  simplify tuning.
 
 # mlr3learners 0.5.0
 

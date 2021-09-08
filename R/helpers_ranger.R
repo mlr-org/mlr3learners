@@ -9,7 +9,7 @@ ranger_get_mtry = function(pv, task) {
     pv,
 
     # !mtry && mtry.ratio
-    remove_named(insert_named(pv, list(mtry = max(as.integer(pv[["mtry.ratio"]] * length(task$feature_names)), 1L))),
+    remove_named(insert_named(pv, list(mtry = as.integer(max(round(pv[["mtry.ratio"]] * length(task$feature_names)), 1)))),
       "mtry.ratio"),
 
     # mtry && !mtry.ratio
