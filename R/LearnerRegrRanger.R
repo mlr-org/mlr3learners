@@ -110,7 +110,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      pv = ranger_get_mtry(pv, task)
+      pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
 
       if (self$predict_type == "se") {
         pv$keep.inbag = TRUE # nolint

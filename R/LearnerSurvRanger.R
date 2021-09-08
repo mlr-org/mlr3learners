@@ -90,7 +90,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      pv = ranger_get_mtry(pv, task)
+      pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
       targets = task$target_names
 
       invoke(ranger::ranger,

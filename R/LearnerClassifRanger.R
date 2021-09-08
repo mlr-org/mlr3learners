@@ -13,7 +13,7 @@
 #'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #' - `mtry`:
 #'   - This hyperparameter can alternatively be set via our hyperparameter `mtry.ratio`
-#'     as `mtry = max(round(mtry.ratio * n_features), 1)`.
+#'     as `mtry = min(floor(mtry.ratio * n_features + 1), n_features)`.
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
 #'
@@ -115,7 +115,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      pv = ranger_get_mtry(pv, task)
+      pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
