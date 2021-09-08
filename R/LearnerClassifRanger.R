@@ -13,7 +13,7 @@
 #'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #' - `mtry`:
 #'   - This hyperparameter can alternatively be set via our hyperparameter `mtry.ratio`
-#'     as `mtry = min(floor(mtry.ratio * n_features + 1), n_features)`.
+#'     as `mtry = max(ceiling(mtry.ratio * n_features), 1)`.
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
 #'

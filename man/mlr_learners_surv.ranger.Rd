@@ -27,7 +27,7 @@ lrn("surv.ranger")
 \item \code{mtry}:
 \itemize{
 \item This hyperparameter can alternatively be set via our hyperparameter \code{mtry.ratio}
-as \code{mtry = min(floor(mtry.ratio * n_features + 1), n_features)}.
+as \code{mtry = max(ceiling(mtry.ratio * n_features), 1)}.
 Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 }
