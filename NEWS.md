@@ -1,3 +1,22 @@
+# mlr3learners 0.5.1
+
+- Improved how the added hyperparameter `mtry.ratio` is converted to `mtry` to
+  simplify tuning.
+
+# mlr3learners 0.5.0
+
+- Fixed the internal encoding of the positive class for classification learners
+  based on `glm` and `glmnet` (#199). While predictions in previous versions
+  were correct, the estimated coefficients had the wrong sign.
+- Reworked handling of `lambda` and `s` for `glmnet` learners (#197).
+- Learners based on `glmnet` now support to extract selected features (#200).
+- Learners based on `kknn` now raise an exception if `k >= n` (#191).
+- Learners based on `ranger` now come with the virtual hyperparameter
+  `mtry.ratio` to set the hyperparameter `mtry` based on the proportion of
+  features to use.
+- Multiple learners now support the extraction of the log-likelihood (via method
+  `$loglik()`), allowing to calculate measures like AIC or BIC in `mlr3` (#182).
+
 # mlr3learners 0.4.5
 
 - Fixed SVM learners for new release of package `e1071`.
@@ -15,7 +34,7 @@
 
 - Fixed stochastic test failures on solaris.
 - Fixed `surv.ranger`, c.f. https://github.com/mlr-org/mlr3proba/issues/165.
-- Added `classif.nnet` learner (moved from mlr3extralearners).
+- Added `classif.nnet` learner (moved from `mlr3extralearners`).
 
 # mlr3learners 0.4.2
 

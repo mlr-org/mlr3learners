@@ -42,22 +42,21 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LearnerSurvCVGlmnet$new()}}
+\item \href{#method-selected_features}{\code{LearnerSurvCVGlmnet$selected_features()}}
 \item \href{#method-clone}{\code{LearnerSurvCVGlmnet$clone()}}
 }
 }
 \if{html}{
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
+\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="is_retrainable">}\href{../../mlr3/html/Learner.html#method-is_retrainable}{\code{mlr3::Learner$is_retrainable()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="retrain">}\href{../../mlr3/html/Learner.html#method-retrain}{\code{mlr3::Learner$retrain()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="which_retrain">}\href{../../mlr3/html/Learner.html#method-which_retrain}{\code{mlr3::Learner$which_retrain()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -70,6 +69,28 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<div class="r">}}\preformatted{LearnerSurvCVGlmnet$new()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-selected_features"></a>}}
+\if{latex}{\out{\hypertarget{method-selected_features}{}}}
+\subsection{Method \code{selected_features()}}{
+Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
+with \code{type} set to \code{"nonzero"}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerSurvCVGlmnet$selected_features(lambda = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{lambda}}{(\code{numeric(1)})\cr
+Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+(\code{character()}) of feature names.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

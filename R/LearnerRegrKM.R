@@ -31,38 +31,36 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamFct$new("covtype",
-          default = "matern5_2",
-          levels = c("gauss", "matern5_2", "matern3_2", "exp", "powexp"), tags = "train"),
-        ParamUty$new("coef.trend", default = NULL, tags = "train"),
-        ParamUty$new("coef.cov", default = NULL, tags = "train"),
-        ParamUty$new("coef.var", default = NULL, tags = "train"),
-        ParamDbl$new("nugget", tags = "train"),
-        ParamLgl$new("nugget.estim", default = FALSE, tags = "train"),
-        ParamDbl$new("nugget.stability", default = 0, lower = 0, tags = "train"),
-        ParamUty$new("noise.var", default = NULL, tags = "train"),
-        ParamFct$new("estim.method", default = "MLE", levels = c("MLE", "LOO"), tags = "train"),
-        ParamUty$new("penalty", default = NULL, tags = "train"),
-        ParamFct$new("optim.method", default = "BFGS", levels = c("BFGS", "gen"), tags = "train"),
-        ParamUty$new("parinit", default = NULL, tags = "train"),
-        ParamInt$new("multistart", default = 1, tags = "train"),
-        ParamUty$new("lower", default = NULL, tags = "train"),
-        ParamUty$new("upper", default = NULL, tags = "train"),
-        ParamLgl$new("gr", default = TRUE, tags = "train"),
-        ParamLgl$new("iso", default = FALSE, tags = "train"),
-        ParamLgl$new("scaling", default = FALSE, tags = "train"),
-        ParamUty$new("knots", default = NULL, tags = "train"),
-        ParamUty$new("kernel", default = NULL, tags = "train"),
-        ParamFct$new("type", default = "SK", levels = c("SK", "UK"), tags = "predict"),
-        ParamDbl$new("jitter", default = 0, lower = 0, tags = "predict"),
-        ParamUty$new("control", default = NULL, tags = "train"),
-        ParamLgl$new("se.compute", default = TRUE, tags = "predict"),
-        ParamLgl$new("cov.compute", default = TRUE, tags = "predict"),
-        ParamLgl$new("light.return", default = FALSE, tags = "predict"),
-        ParamLgl$new("bias.correct", default = FALSE, tags = "predict"),
-        ParamLgl$new("checkNames", default = TRUE, tags = "predict")
-      ))
+      ps = ps(
+        bias.correct     = p_lgl(default = FALSE, tags = "predict"),
+        checkNames       = p_lgl(default = TRUE, tags = "predict"),
+        coef.cov         = p_uty(default = NULL, tags = "train"),
+        coef.trend       = p_uty(default = NULL, tags = "train"),
+        coef.var         = p_uty(default = NULL, tags = "train"),
+        control          = p_uty(default = NULL, tags = "train"),
+        cov.compute      = p_lgl(default = TRUE, tags = "predict"),
+        covtype          = p_fct(c("gauss", "matern5_2", "matern3_2", "exp", "powexp"), default = "matern5_2", tags = "train"),
+        estim.method     = p_fct(c("MLE", "LOO"), default = "MLE", tags = "train"),
+        gr               = p_lgl(default = TRUE, tags = "train"),
+        iso              = p_lgl(default = FALSE, tags = "train"),
+        jitter           = p_dbl(0, default = 0, tags = "predict"),
+        kernel           = p_uty(default = NULL, tags = "train"),
+        knots            = p_uty(default = NULL, tags = "train"),
+        light.return     = p_lgl(default = FALSE, tags = "predict"),
+        lower            = p_uty(default = NULL, tags = "train"),
+        multistart       = p_int(default = 1, tags = "train"),
+        noise.var        = p_uty(default = NULL, tags = "train"),
+        nugget           = p_dbl(tags = "train"),
+        nugget.estim     = p_lgl(default = FALSE, tags = "train"),
+        nugget.stability = p_dbl(0, default = 0, tags = "train"),
+        optim.method     = p_fct(c("BFGS", "gen"), default = "BFGS", tags = "train"),
+        parinit          = p_uty(default = NULL, tags = "train"),
+        penalty          = p_uty(default = NULL, tags = "train"),
+        scaling          = p_lgl(default = FALSE, tags = "train"),
+        se.compute       = p_lgl(default = TRUE, tags = "predict"),
+        type             = p_fct(c("SK", "UK"), default = "SK", tags = "predict"),
+        upper            = p_uty(default = NULL, tags = "train")
+      )
       ps$add_dep("multistart", "optim.method", CondEqual$new("BFGS"))
       ps$add_dep("knots", "scaling", CondEqual$new(TRUE))
 
@@ -80,44 +78,44 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
   private = list(
     .train = function(task) {
 
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
-      if (!is.null(pars$optim.method)) {
-        if (pars$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
+      if (!is.null(pv$optim.method)) {
+        if (pv$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
           stop("The 'rgenoud' package is required for optimization method 'gen'.")
         }
       }
 
-      ns = pars$nugget.stability
+      ns = pv$nugget.stability
       if (!is.null(ns)) {
-        pars$nugget = if (ns == 0) 0 else ns * stats::var(truth)
+        pv$nugget = if (ns == 0) 0 else ns * stats::var(truth)
       }
 
-      mlr3misc::invoke(DiceKriging::km,
+      invoke(DiceKriging::km,
         response = task$truth(),
         design = data,
-        control = pars$control,
-        .args = remove_named(pars, c("control", "nugget.stability"))
+        control = pv$control,
+        .args = remove_named(pv, c("control", "nugget.stability"))
       )
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
+      pv = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(task$data(cols = task$feature_names))
 
-      jitter = pars$jitter
+      jitter = pv$jitter
       if (!is.null(jitter) && jitter > 0) {
         newdata = newdata + stats::rnorm(length(newdata), mean = 0, sd = jitter)
       }
 
-      p = mlr3misc::invoke(DiceKriging::predict.km,
+      p = invoke(DiceKriging::predict.km,
         self$model,
         newdata = newdata,
-        type = if (is.null(pars$type)) "SK" else pars$type,
+        type = if (is.null(pv$type)) "SK" else pv$type,
         se.compute = self$predict_type == "se",
-        .args = remove_named(pars, "jitter")
+        .args = remove_named(pv, "jitter")
       )
 
       list(response = p$mean, se = p$sd)

@@ -24,3 +24,21 @@ test_that("retrain", {
   expect_error(learner$retrain(task, list(num.trees = 2000L), allow_train = FALSE),
     regexp = "is not retrainable")
 })
+
+test_that("mtry.ratio", {
+  task = mlr3::tsk("mtcars")
+  learner = mlr3::lrn("regr.ranger", mtry.ratio = 0.5)
+
+  res = convert_ratio(learner$param_set$values, "mtry", "mtry.ratio", length(task$feature_names))
+  expect_equal(
+    res$mtry,
+    5
+  )
+  expect_null(res$mtry.ratio)
+
+  learner$train(task)
+  expect_equal(
+    learner$model$mtry,
+    5
+  )
+})

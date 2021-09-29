@@ -36,6 +36,8 @@ jobs:
       PARAMTEST: ${{ matrix.config.paramtest }}
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
+      # use GITHUB_TOKEN from GitHub to workaround rate limits in {remotes}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -61,7 +63,7 @@ jobs:
 
       - name: "[Cache] Cache R packages"
         if: runner.os != 'Windows'
-        uses: pat-s/always-upload-cache@v1.1.4
+        uses: pat-s/always-upload-cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}-1
@@ -69,7 +71,7 @@ jobs:
 
       - name: "[Cache] Cache ccache"
         if: runner.os != 'Windows'
-        uses: pat-s/always-upload-cache@v1.1.4
+        uses: pat-s/always-upload-cache@v2
         with:
           path: ${{ env.CCACHE_DIR}}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}

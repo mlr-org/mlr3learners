@@ -1,11 +1,6 @@
-format_bib = function(...) {
-  str = vapply(list(...), function(entry) tools::toRd(bibentries[[entry]]), FUN.VALUE = "")
-  paste0(str, collapse = "\n\n")
-}
-
 #' @importFrom utils bibentry
 bibentries = c( # nolint start
-  breiman_2001       = bibentry("article",
+  breiman_2001 = bibentry("article",
     title            = "Random Forests",
     author           = "Breiman, Leo",
     year             = "2001",
@@ -16,7 +11,7 @@ bibentries = c( # nolint start
     doi              = "10.1023/A:1010933404324",
     issn             = "1573-0565"
   ),
-  chen_2016          = bibentry("inproceedings",
+  chen_2016 = bibentry("inproceedings",
     title            = "Xgboost: A scalable tree boosting system",
     author           = "Chen, Tianqi and Guestrin, Carlos",
     year             = "2016",
@@ -25,7 +20,7 @@ bibentries = c( # nolint start
     doi              = "10.1145/2939672.2939785",
     organization     = "ACM"
   ),
-  cortes_1995        = bibentry("article",
+  cortes_1995 = bibentry("article",
     title            = "Support-vector networks",
     author           = "Cortes, Corinna and Vapnik, Vladimir",
     year             = "1995",
@@ -37,7 +32,7 @@ bibentries = c( # nolint start
     pages            = "273--297",
     doi              = "10.1007/BF00994018"
   ),
-  cover_1967         = bibentry("article",
+  cover_1967 = bibentry("article",
     title            = "Nearest neighbor pattern classification",
     author           = "Cover, Thomas and Hart, Peter",
     year             = "1967",
@@ -48,7 +43,7 @@ bibentries = c( # nolint start
     pages            = "21--27",
     doi              = "10.1109/TIT.1967.1053964"
   ),
-  friedman_2010      = bibentry("article",
+  friedman_2010 = bibentry("article",
     title            = "Regularization Paths for Generalized Linear Models via Coordinate Descent",
     author           = "Jerome Friedman and Trevor Hastie and Robert Tibshirani",
     year             = "2010",
@@ -66,7 +61,7 @@ bibentries = c( # nolint start
     doi              = "10.5282/ubm/epub.1769",
     institution      = "Ludwig-Maximilians University Munich"
   ),
-  ripley_1996        = bibentry("book",
+  ripley_1996 = bibentry("book",
     doi              = "10.1017/cbo9780511812651",
     year             = "1996",
     month            = "jan",
@@ -74,7 +69,7 @@ bibentries = c( # nolint start
     author           = "Brian D. Ripley",
     title            = "Pattern Recognition and Neural Networks"
   ),
-  roustant_2012      = bibentry("article",
+  roustant_2012 = bibentry("article",
     title            = "{DiceKriging}, {DiceOptim}: Two {R} Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization",
     author           = "Olivier Roustant and David Ginsbourger and Yves Deville",
     year             = "2012",
@@ -84,7 +79,7 @@ bibentries = c( # nolint start
     pages            = "1--55",
     doi              = "10.18637/jss.v051.i01"
   ),
-  samworth_2012      = bibentry("article",
+  samworth_2012 = bibentry("article",
     title            = "Optimal weighted nearest neighbour classifiers",
     author           = "Samworth, Richard J",
     year             = "2012",
@@ -94,7 +89,7 @@ bibentries = c( # nolint start
     pages            = "2733--2763",
     doi              = "10.1214/12-AOS1049"
   ),
-  venables_2002      = bibentry("book",
+  venables_2002 = bibentry("book",
     title            = "Modern Applied Statistics with S",
     author           = "W. N. Venables and B. D. Ripley",
     year             = "2002",
@@ -104,7 +99,7 @@ bibentries = c( # nolint start
     note             = "ISBN 0-387-95457-0",
     edition          = "Fourth"
   ),
-  wright_2017        = bibentry("article",
+  wright_2017 = bibentry("article",
     title            = "{ranger}: A Fast Implementation of Random Forests for High Dimensional Data in {C++} and {R}",
     author           = "Wright, Marvin N. and Ziegler, Andreas",
     year             = "2017",

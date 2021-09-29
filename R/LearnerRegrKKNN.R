@@ -24,17 +24,15 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamInt$new("k", default = 7L, lower = 1L, tags = "train"),
-        ParamDbl$new("distance", default = 2, lower = 0, tags = "train"),
-        ParamFct$new("kernel",
-          levels = c(
-            "rectangular", "triangular", "epanechnikov", "biweight",
-            "triweight", "cos", "inv", "gaussian", "rank", "optimal"),
-          default = "optimal", tags = "train"),
-        ParamLgl$new("scale", default = TRUE, tags = "train"),
-        ParamUty$new("ykernel", default = NULL, tags = "train")
-      ))
+      ps = ps(
+        k        = p_int(default = 7L, lower = 1L, tags = c("required", "train")),
+        distance = p_dbl(0, default = 2, tags = "train"),
+        kernel   = p_fct(c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
+        scale    = p_lgl(default = TRUE, tags = "train"),
+        ykernel  = p_uty(default = NULL, tags = "train")
+      )
+
+      ps$values = list(k = 7L)
 
       super$initialize(
         id = "regr.kknn",
@@ -48,10 +46,17 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
 
   private = list(
     .train = function(task) {
+      # https://github.com/mlr-org/mlr3learners/issues/191
+      pv = self$param_set$get_values(tags = "train")
+      if (pv$k >= task$nrow) {
+        stopf("Parameter k = %i must be smaller than the number of observations n = %i",
+          pv$k, task$nrow)
+      }
+
       list(
         formula = task$formula(),
         data = task$data(),
-        pars = self$param_set$get_values(tags = "train"),
+        pv = pv,
         kknn = NULL
       )
     },
@@ -63,7 +68,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn,
           formula = model$formula, train = model$data,
-          test = newdata, .args = model$pars)
+          test = newdata, .args = model$pv)
       })
 
       self$state$model$kknn = p

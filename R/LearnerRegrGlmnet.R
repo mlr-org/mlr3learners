@@ -8,11 +8,7 @@
 #'
 #' The default for hyperparameter `family` is set to `"gaussian"`.
 #'
-#' Caution: This learner is different to `cv_glmnet` in that it does not use the
-#' internal optimization of lambda. The parameter needs to be tuned by the user.
-#' Essentially, one needs to tune parameter `s` which is used at predict-time.
-#'
-#' See \url{https://stackoverflow.com/questions/50995525/} for more information.
+#' @inherit mlr_learners_classif.glmnet details
 #'
 #' @templateVar id regr.glmnet
 #' @template section_dictionary_learner
@@ -31,53 +27,49 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamFct$new("family",
-          default = "gaussian", levels = c("gaussian", "poisson"),
-          tags = "train"),
-        ParamUty$new("offset", default = NULL, tags = "train"),
-        ParamDbl$new("alpha", default = 1, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("s", lower = 0, default = 0.01, tags = "predict"),
-        ParamInt$new("nlambda", default = 100L, lower = 1L, tags = "train"),
-        ParamDbl$new("lambda.min.ratio", lower = 0, upper = 1, tags = "train"),
-        ParamUty$new("lambda", tags = "train"),
-        ParamLgl$new("standardize", default = TRUE, tags = "train"),
-        ParamLgl$new("intercept", default = TRUE, tags = "train"),
-        ParamDbl$new("thresh", default = 1e-07, lower = 0, tags = "train"),
-        ParamInt$new("dfmax", lower = 0L, tags = "train"),
-        ParamInt$new("pmax", lower = 0L, tags = "train"),
-        ParamInt$new("exclude", lower = 1L, tags = "train"),
-        ParamUty$new("penalty.factor", tags = "train"),
-        ParamUty$new("lower.limits", tags = "train"),
-        ParamUty$new("upper.limits", tags = "train"),
-        ParamInt$new("maxit", default = 100000L, lower = 1L, tags = "train"),
-        ParamFct$new("type.gaussian", levels = c("covariance", "naive"), tags = "train"),
-        ParamFct$new("type.logistic", levels = c("Newton", "modified.Newton"), tags = "train"),
-        ParamFct$new("type.multinomial", levels = c("ungrouped", "grouped"), tags = "train"),
-        ParamLgl$new("keep", default = FALSE, tags = "train"),
-        ParamLgl$new("parallel", default = FALSE, tags = "train"),
-        ParamInt$new("trace.it", default = 0, lower = 0, upper = 1, tags = "train"),
-        ParamFct$new("alignment",
-          default = "lambda",
-          levels = c("lambda", "fraction"), tags = "train"),
-        ParamLgl$new("grouped", default = TRUE, tags = "train"),
-        ParamLgl$new("relax", default = FALSE, tags = "train"),
-        ParamDbl$new("fdev", default = 1.0e-5, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("devmax", default = 0.999, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("eps", default = 1.0e-6, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("epsnr", default = 1.0e-8, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("big", default = 9.9e35, tags = "train"),
-        ParamInt$new("mnlam", default = 5L, lower = 1L, tags = "train"),
-        ParamDbl$new("pmin", default = 1.0e-9, lower = 0, upper = 1, tags = "train"),
-        ParamDbl$new("exmx", default = 250.0, tags = "train"),
-        ParamDbl$new("prec", default = 1e-10, tags = "train"),
-        ParamInt$new("mxit", default = 100L, lower = 1L, tags = "train"),
-        ParamInt$new("mxitnr", default = 25L, lower = 1L, tags = "train"),
-        ParamUty$new("newoffset", tags = "predict"),
-        ParamDbl$new("predict.gamma", default = 1, tags = "predict"),
-        ParamLgl$new("exact", default = FALSE, tags = "predict"),
-        ParamDbl$new("gamma", default = 1, tags = "predict")
-      ))
+      ps = ps(
+        alignment        = p_fct(c("lambda", "fraction"), default = "lambda", tags = "train"),
+        alpha            = p_dbl(0, 1, default = 1, tags = "train"),
+        big              = p_dbl(default = 9.9e35, tags = "train"),
+        devmax           = p_dbl(0, 1, default = 0.999, tags = "train"),
+        dfmax            = p_int(0L, tags = "train"),
+        eps              = p_dbl(0, 1, default = 1.0e-6, tags = "train"),
+        epsnr            = p_dbl(0, 1, default = 1.0e-8, tags = "train"),
+        exact            = p_lgl(default = FALSE, tags = "predict"),
+        exclude          = p_int(1L, tags = "train"),
+        exmx             = p_dbl(default = 250.0, tags = "train"),
+        family           = p_fct(c("gaussian", "poisson"), default = "gaussian", tags = "train"),
+        fdev             = p_dbl(0, 1, default = 1.0e-5, tags = "train"),
+        gamma            = p_dbl(default = 1, tags = "predict"),
+        grouped          = p_lgl(default = TRUE, tags = "train"),
+        intercept        = p_lgl(default = TRUE, tags = "train"),
+        keep             = p_lgl(default = FALSE, tags = "train"),
+        lambda           = p_uty(tags = "train"),
+        lambda.min.ratio = p_dbl(0, 1, tags = "train"),
+        lower.limits     = p_uty(tags = "train"),
+        maxit            = p_int(1L, default = 100000L, tags = "train"),
+        mnlam            = p_int(1L, default = 5L, tags = "train"),
+        mxit             = p_int(1L, default = 100L, tags = "train"),
+        mxitnr           = p_int(1L, default = 25L, tags = "train"),
+        newoffset        = p_uty(tags = "predict"),
+        nlambda          = p_int(1L, default = 100L, tags = "train"),
+        offset           = p_uty(default = NULL, tags = "train"),
+        parallel         = p_lgl(default = FALSE, tags = "train"),
+        penalty.factor   = p_uty(tags = "train"),
+        pmax             = p_int(0L, tags = "train"),
+        pmin             = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
+        prec             = p_dbl(default = 1e-10, tags = "train"),
+        predict.gamma    = p_dbl(default = 1, tags = "predict"),
+        relax            = p_lgl(default = FALSE, tags = "train"),
+        s                = p_dbl(0, default = 0.01, tags = "predict"),
+        standardize      = p_lgl(default = TRUE, tags = "train"),
+        thresh           = p_dbl(0, default = 1e-07, tags = "train"),
+        trace.it         = p_int(0, 1, default = 0, tags = "train"),
+        type.gaussian    = p_fct(c("covariance", "naive"), tags = "train"),
+        type.logistic    = p_fct(c("Newton", "modified.Newton"), tags = "train"),
+        type.multinomial = p_fct(c("ungrouped", "grouped"), tags = "train"),
+        upper.limits     = p_uty(tags = "train")
+      )
       ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
       ps$add_dep("type.gaussian", "family", CondEqual$new("gaussian"))
 
@@ -91,44 +83,42 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         packages = "glmnet",
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
+    },
+
+    #' @description
+    #' Returns the set of selected features as reported by [glmnet::predict.glmnet()]
+    #' with `type` set to `"nonzero"`.
+    #'
+    #' @param lambda (`numeric(1)`)\cr
+    #' Custom `lambda`, defaults to the active lambda depending on parameter set.
+    #'
+    #' @return (`character()`) of feature names.
+    selected_features = function(lambda = NULL) {
+      glmnet_selected_features(self, lambda)
     }
   ),
 
   private = list(
     .train = function(task) {
-
-      pars = self$param_set$get_values(tags = "train")
       data = as.matrix(task$data(cols = task$feature_names))
       target = as.matrix(task$data(cols = task$target_names))
+      pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars$weights = task$weights$weight
+        pv$weights = task$weights$weight
       }
 
-      saved_ctrl = glmnet::glmnet.control()
-      on.exit(mlr3misc::invoke(glmnet::glmnet.control, .args = saved_ctrl))
-      glmnet::glmnet.control(factory = TRUE)
-      is_ctrl_pars = (names(pars) %in% names(saved_ctrl))
-
-      if (any(is_ctrl_pars)) {
-        mlr3misc::invoke(glmnet::glmnet.control, .args = pars[is_ctrl_pars])
-        pars = pars[!is_ctrl_pars]
-      }
-
-      mlr3misc::invoke(glmnet::glmnet, x = data, y = target, .args = pars)
+      glmnet_invoke(data, target, pv)
     },
 
     .predict = function(task) {
-      pars = self$param_set$get_values(tags = "predict")
       newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
+      pv = self$param_set$get_values(tags = "predict")
+      pv = rename(pv, "predict.gamma", "gamma")
+      pv$s = glmnet_get_lambda(self, pv)
 
-      # only predict for one instance of 's' and not for 100
-      if (is.null(pars$s)) {
-        pars$s = self$param_set$default$s
-      }
-
-      response = mlr3misc::invoke(predict, self$model,
+      response = invoke(predict, self$model,
         newx = newdata,
-        type = "response", .args = pars)
+        type = "response", .args = pv)
       list(response = drop(response))
     }
   )

@@ -43,7 +43,8 @@ test_that("predict classif.log_reg", {
     "newdata", # handled via mlr3
     "type", # handled via mlr3
     "terms", # handled via mlr3 type arg
-    "na.action" # handled via mlr3
+    "na.action", # handled via mlr3
+    "se.fit" # not supported for log reg
   )
 
   ParamTest = run_paramtest(learner, fun, exclude)

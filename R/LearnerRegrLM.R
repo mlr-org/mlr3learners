@@ -22,54 +22,60 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamLgl$new("x", default = FALSE, tags = "train"),
-        ParamLgl$new("y", default = FALSE, tags = "train"),
-        ParamLgl$new("model", default = TRUE, tags = "train"),
-        ParamLgl$new("qr", default = TRUE, tags = "train"),
-        ParamLgl$new("singular.ok", default = TRUE, tags = "train"),
-        ParamLgl$new("offset", tags = "train"),
-        ParamLgl$new("se.fit", default = FALSE, tags = "predict"),
-        ParamDbl$new("scale", default = NULL, special_vals = list(NULL), tags = "predict"),
-        ParamDbl$new("df", default = Inf, tags = "predict"),
-        ParamFct$new("interval", levels = c("none", "confidence", "prediction"), tags = "predict"),
-        ParamDbl$new("level", default = 0.95, tags = "predict"),
-        ParamUty$new("pred.var", tags = "predict")
-      ))
+      ps = ps(
+        df          = p_dbl(default = Inf, tags = "predict"),
+        interval    = p_fct(c("none", "confidence", "prediction"), tags = "predict"),
+        level       = p_dbl(default = 0.95, tags = "predict"),
+        model       = p_lgl(default = TRUE, tags = "train"),
+        offset      = p_lgl(tags = "train"),
+        pred.var    = p_uty(tags = "predict"),
+        qr          = p_lgl(default = TRUE, tags = "train"),
+        scale       = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
+        singular.ok = p_lgl(default = TRUE, tags = "train"),
+        x           = p_lgl(default = FALSE, tags = "train"),
+        y           = p_lgl(default = FALSE, tags = "train")
+      )
 
       super$initialize(
         id = "regr.lm",
         param_set = ps,
         predict_types = c("response", "se"),
-        feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = "weights",
+        feature_types = c("logical", "integer", "numeric", "factor", "character"),
+        properties = c("weights", "loglik"),
         packages = "stats",
         man = "mlr3learners::mlr_learners_regr.lm"
       )
+    },
+
+    #' @description
+    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
+    loglik = function() {
+      extract_loglik(self)
     }
   ),
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pars = insert_named(pars, list(weights = task$weights$weight))
+        pv = insert_named(pv, list(weights = task$weights$weight))
       }
 
-      mlr3misc::invoke(stats::lm,
+      invoke(stats::lm,
         formula = task$formula(), data = task$data(),
-        .args = pars, .opts = opts_default_contrasts)
+        .args = pv, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {
+      pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
+      se_fit = self$predict_type == "se"
+      prediction = invoke(predict, object = self$model, newdata = newdata, se.fit = se_fit, .args = pv)
 
-      if (self$predict_type == "response") {
-        response = predict(self$model, newdata = newdata, se.fit = FALSE)
-        list(response = response)
+      if (se_fit) {
+        list(response = unname(prediction$fit), se = unname(prediction$se.fit))
       } else {
-        pred = predict(self$model, newdata = newdata, se.fit = TRUE)
-        list(response = pred$fit, se = pred$se.fit)
+        list(response = unname(prediction))
       }
     }
   )

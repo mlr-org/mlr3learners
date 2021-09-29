@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.4.5
+Version: 0.5.1
 Authors@R:
     c(person(given = "Michel",
              family = "Lang",
@@ -36,12 +36,12 @@ Depends:
     R (>= 3.1.0),
     mlr3 (>= 0.11.0)
 Imports:
+    checkmate,
     data.table,
-    mlr3misc (>= 0.5.0),
+    mlr3misc (>= 0.9.4),
     paradox,
     R6
 Suggests:
-    checkmate,
     DiceKriging,
     distr6,
     e1071,
@@ -64,4 +64,4 @@ Encoding: UTF-8
 NeedsCompilation: no
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

@@ -20,59 +20,68 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      ps = ParamSet$new(list(
-        ParamLgl$new("Hess", default = FALSE, tags = "train"),
-        ParamFct$new("summ", default = "0", levels = c("0", "1", "2", "3"), tags = "train"),
-        ParamLgl$new("censored", default = FALSE, tags = "train"),
-        ParamLgl$new("model", default = FALSE, tags = "train"),
-        ParamDbl$new("rang", default = 0.7, tags = "train"),
-        ParamDbl$new("decay", default = 0, tags = "train"),
-        ParamInt$new("maxit", default = 100L, lower = 1L, tags = "train"),
-        ParamLgl$new("trace", default = TRUE, tags = "train"),
-        ParamDbl$new("abstol", default = 1.0e-4, tags = "train"),
-        ParamDbl$new("reltol", default = 1.0e-8, tags = "train")
-      ))
+      ps = ps(
+        Hess     = p_lgl(default = FALSE, tags = "train"),
+        abstol   = p_dbl(default = 1.0e-4, tags = "train"),
+        censored = p_lgl(default = FALSE, tags = "train"),
+        decay    = p_dbl(default = 0, tags = "train"),
+        maxit    = p_int(1L, default = 100L, tags = "train"),
+        model    = p_lgl(default = FALSE, tags = "train"),
+        rang     = p_dbl(default = 0.7, tags = "train"),
+        reltol   = p_dbl(default = 1.0e-8, tags = "train"),
+        summ     = p_fct(c("0", "1", "2", "3"), default = "0", tags = "train"),
+        trace    = p_lgl(default = TRUE, tags = "train")
+      )
 
       super$initialize(
         id = "classif.multinom",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = c("weights", "twoclass", "multiclass", "loglik"),
         packages = "nnet",
         man = "mlr3learners::mlr_learners_classif.multinom"
       )
+    },
+
+    #' @description
+    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
+    loglik = function() {
+      extract_loglik(self)
     }
   ),
 
   private = list(
     .train = function(task) {
-      pars = self$param_set$get_values(tags = "train")
+      pv = self$param_set$get_values(tags = "train")
       data = task$data()
 
       if ("weights" %in% task$properties) {
-        pars$weights = task$weights$weight
+        pv$weights = task$weights$weight
       }
-      if (!is.null(pars$summ)) {
-        pars$summ = as.integer(pars$summ)
+      if (!is.null(pv$summ)) {
+        pv$summ = as.integer(pv$summ)
       }
 
-      mlr3misc::invoke(nnet::multinom, data = data, .args = pars)
+      invoke(nnet::multinom, data = data, .args = pv)
     },
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
-      levs = task$class_names
 
       if (self$predict_type == "response") {
-        response = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "class")
+        response = invoke(predict, self$model, newdata = newdata, type = "class")
         list(response = drop(response))
       } else {
-        prob = mlr3misc::invoke(predict, self$model, newdata = newdata, type = "probs")
-        if (length(levs) == 2L) {
-          prob = matrix(c(1 - prob, prob), ncol = 2L, byrow = FALSE)
-          colnames(prob) = levs
+        lvls = self$model$lev
+        prob = unname(invoke(predict, self$model, newdata = newdata, type = "probs"))
+
+        if (length(lvls) == 2L) {
+          prob = pvec2mat(prob, lvls)
+        } else {
+          colnames(prob) = lvls
         }
+
         list(prob = prob)
       }
     }
