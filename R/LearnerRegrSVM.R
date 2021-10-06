@@ -38,7 +38,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
         fitted    = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
         scale     = p_uty(default = TRUE, tags = "train") # , tunable = TRUE)
       )
-      ps$add_dep("cost", "type", CondEqual$new("eps-regression"))
+      ps$add_dep("cost", "type", CondAnyOf$new(c("eps-regression", "nu-regression")))
       ps$add_dep("nu", "type", CondEqual$new("nu-regression"))
       ps$add_dep("degree", "kernel", CondEqual$new("polynomial"))
       ps$add_dep("coef0", "kernel", CondAnyOf$new(c("polynomial", "sigmoid")))
