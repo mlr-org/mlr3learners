@@ -194,6 +194,75 @@ would error. Just setting a nonsense default to workaround this.
 <span class='fu'>lrn</span><span class='op'>(</span><span class='st'>"surv.xgboost"</span><span class='op'>)</span>
 </pre>
 
+    <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
+
+    
+
+<ul>
+<li><p>Task type: &#8220;surv&#8221;</p></li>
+<li><p>Predict Types: &#8220;crank&#8221;, &#8220;lp&#8221;</p></li>
+<li><p>Feature Types: &#8220;integer&#8221;, &#8220;numeric&#8221;</p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
+
+    
+<table class='table'>
+<tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr>
+<tr><td>aft_loss_distribution</td><td>character</td><td>normal</td><td>normal, logistic, extreme</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>aft_loss_distribution_scale</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>alpha</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>base_score</td><td>numeric</td><td>0.5</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>booster</td><td>character</td><td>gbtree</td><td>gbtree, gblinear, dart</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>callbacks</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>feval</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>grow_policy</td><td>character</td><td>depthwise</td><td>depthwise, lossguide</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>lambda</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>lambda_bias</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>max_bin</td><td>integer</td><td>256</td><td></td><td>\([2, \infty)\)</td></tr>
+<tr><td>max_delta_step</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>max_depth</td><td>integer</td><td>6</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>max_leaves</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>maximize</td><td>logical</td><td>NULL</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>min_child_weight</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>missing</td><td>numeric</td><td>NA</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>monotone_constraints</td><td>integer</td><td>0</td><td></td><td>\([-1, 1]\)</td></tr>
+<tr><td>normalize_type</td><td>character</td><td>tree</td><td>tree, forest</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>nrounds</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>nthread</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>ntreelimit</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>num_parallel_tree</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>objective</td><td>character</td><td>survival:cox</td><td>survival:cox, survival:aft</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>one_drop</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>predictor</td><td>character</td><td>cpu_predictor</td><td>cpu_predictor, gpu_predictor</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>save_name</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>save_period</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>sketch_eps</td><td>numeric</td><td>0.03</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>tree_method</td><td>character</td><td>auto</td><td>auto, exact, approx, hist, gpu_hist</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>tweedie_variance_power</td><td>numeric</td><td>1.5</td><td></td><td>\([1, 2]\)</td></tr>
+<tr><td>updater</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>verbose</td><td>integer</td><td>1</td><td></td><td>\([0, 2]\)</td></tr>
+<tr><td>watchlist</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>xgb_model</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+</table>
+
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Chen, Tianqi, Guestrin, Carlos (2016).
