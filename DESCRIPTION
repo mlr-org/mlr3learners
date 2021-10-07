@@ -58,6 +58,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     xgboost
+Remotes:
+    mlr-org/mlr3@train_adapt
 Encoding: UTF-8
 NeedsCompilation: no
 Config/testthat/edition: 3

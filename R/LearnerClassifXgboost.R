@@ -39,7 +39,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-
       ps = ps(
         alpha                   = p_dbl(0, default = 0, tags = "train"),
         approxcontrib           = p_lgl(default = FALSE, tags = "predict"),
@@ -70,7 +69,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
                                     checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE)
                                   }),
         normalize_type          = p_fct(c("tree", "forest"), default = "tree", tags = "train"),
-        nrounds                 = p_int(1L, default = 1, tags = c("train")),
+        nrounds                 = p_int(1L, default = 1, tags = c("train", "hotstart")),
         nthread                 = p_int(1L, default = 1L, tags = c("train", "control", "threads")),
         ntreelimit              = p_int(1L, default = NULL, special_vals = list(NULL), tags = "predict"),
         num_parallel_tree       = p_int(1L, default = 1L, tags = c("train", "control")),
@@ -126,7 +125,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward"),
         packages = "xgboost",
         man = "mlr3learners::mlr_learners_classif.xgboost"
       )
@@ -227,6 +226,24 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       } else {
         list(prob = prob)
       }
+    },
+
+    .hotstart = function(task) {
+      model = self$model
+      pars = self$param_set$get_values(tags = "train")
+      pars_train = self$state$param_vals
+
+      # Calculate additional boosting iterations
+      # niter in model and nrounds in ps should be equal after train and continue
+      pars$nrounds = pars$nrounds - pars_train$nrounds
+
+      # Construct data
+      nlvls = length(task$class_names)
+      data = task$data(cols = task$feature_names)
+      label = nlvls - as.integer(task$truth())
+      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
+
+      invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
     }
   )
 )
