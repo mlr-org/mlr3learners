@@ -7,7 +7,7 @@
 #' Calls [nnet::multinom()] from package \CRANpkg{nnet}.
 #'
 #' @templateVar id classif.multinom
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @export
 #' @template seealso_learner

@@ -8,8 +8,8 @@
 #'
 #' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
-#' @template section_dictionary_learner
 #' @templateVar id regr.xgboost
+#' @template learner
 #'
 #' @references
 #' `r format_bib("chen_2016")`

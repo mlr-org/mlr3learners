@@ -28,7 +28,7 @@
 #' @inheritSection mlr_learners_classif.log_reg Internal Encoding
 #'
 #' @templateVar id classif.glmnet
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("friedman_2010")`

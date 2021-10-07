@@ -15,6 +15,25 @@ lrn("classif.naive_bayes")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{classif}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}
+\item Required Packages: \CRANpkg{e1071}
+}
+}
+
+\section{Parameters}{
+\tabular{llll}{
+   Id \tab Type \tab Default \tab Range \cr
+   eps \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   laplace \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   threshold \tab numeric \tab 0.001 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \examples{
 if (requireNamespace("e1071")) {
   learner = mlr3::lrn("classif.naive_bayes")
@@ -25,8 +44,48 @@ learner$param_set$ids()
 }
 }
 \seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\itemize{
+\item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
+\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
+\item Extension packages for additional task types:
+\itemize{
+\item \CRANpkg{mlr3proba} for probabilistic supervised regression and survival analysis.
+\item \CRANpkg{mlr3cluster} for unsupervised clustering.
 }
+\item \CRANpkg{mlr3tuning} for tuning of hyperparameters, \CRANpkg{mlr3tuningspaces}
+for established default tuning spaces.
+}
+
+Other Learner: 
+\code{\link{mlr_learners_classif.cv_glmnet}},
+\code{\link{mlr_learners_classif.glmnet}},
+\code{\link{mlr_learners_classif.kknn}},
+\code{\link{mlr_learners_classif.lda}},
+\code{\link{mlr_learners_classif.log_reg}},
+\code{\link{mlr_learners_classif.multinom}},
+\code{\link{mlr_learners_classif.nnet}},
+\code{\link{mlr_learners_classif.qda}},
+\code{\link{mlr_learners_classif.ranger}},
+\code{\link{mlr_learners_classif.svm}},
+\code{\link{mlr_learners_classif.xgboost}},
+\code{\link{mlr_learners_regr.cv_glmnet}},
+\code{\link{mlr_learners_regr.glmnet}},
+\code{\link{mlr_learners_regr.kknn}},
+\code{\link{mlr_learners_regr.km}},
+\code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.ranger}},
+\code{\link{mlr_learners_regr.svm}},
+\code{\link{mlr_learners_regr.xgboost}},
+\code{\link{mlr_learners_surv.cv_glmnet}},
+\code{\link{mlr_learners_surv.glmnet}},
+\code{\link{mlr_learners_surv.ranger}},
+\code{\link{mlr_learners_surv.xgboost}}
+}
+\concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerClassif]{mlr3::LearnerClassif}} -> \code{LearnerClassifNaiveBayes}
 }

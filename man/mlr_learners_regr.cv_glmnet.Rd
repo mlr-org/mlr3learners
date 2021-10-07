@@ -17,6 +17,64 @@ lrn("regr.cv_glmnet")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{glmnet}
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alignment \tab character \tab lambda \tab lambda, fraction \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   dfmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   epsnr \tab numeric \tab 1e-08 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   exclude \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   family \tab character \tab gaussian \tab gaussian, poisson \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   foldid \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   gamma \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   lambda \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   lower.limits \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   newoffset \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nfolds \tab integer \tab 10 \tab  \tab \eqn{[3, \infty)}{[3, Inf)} \cr
+   offset \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   penalty.factor \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predict.gamma \tab numeric \tab gamma.1se \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   s \tab numeric \tab lambda.1se \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   type.gaussian \tab character \tab - \tab covariance, naive \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   type.logistic \tab character \tab - \tab Newton, modified.Newton \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   type.measure \tab character \tab deviance \tab deviance, class, auc, mse, mae \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   type.multinomial \tab character \tab - \tab ungrouped, grouped \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   upper.limits \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \examples{
 if (requireNamespace("glmnet")) {
   learner = mlr3::lrn("regr.cv_glmnet")
@@ -33,8 +91,48 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \doi{10.18637/jss.v033.i01}.
 }
 \seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\itemize{
+\item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
+\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
+\item Extension packages for additional task types:
+\itemize{
+\item \CRANpkg{mlr3proba} for probabilistic supervised regression and survival analysis.
+\item \CRANpkg{mlr3cluster} for unsupervised clustering.
 }
+\item \CRANpkg{mlr3tuning} for tuning of hyperparameters, \CRANpkg{mlr3tuningspaces}
+for established default tuning spaces.
+}
+
+Other Learner: 
+\code{\link{mlr_learners_classif.cv_glmnet}},
+\code{\link{mlr_learners_classif.glmnet}},
+\code{\link{mlr_learners_classif.kknn}},
+\code{\link{mlr_learners_classif.lda}},
+\code{\link{mlr_learners_classif.log_reg}},
+\code{\link{mlr_learners_classif.multinom}},
+\code{\link{mlr_learners_classif.naive_bayes}},
+\code{\link{mlr_learners_classif.nnet}},
+\code{\link{mlr_learners_classif.qda}},
+\code{\link{mlr_learners_classif.ranger}},
+\code{\link{mlr_learners_classif.svm}},
+\code{\link{mlr_learners_classif.xgboost}},
+\code{\link{mlr_learners_regr.glmnet}},
+\code{\link{mlr_learners_regr.kknn}},
+\code{\link{mlr_learners_regr.km}},
+\code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.ranger}},
+\code{\link{mlr_learners_regr.svm}},
+\code{\link{mlr_learners_regr.xgboost}},
+\code{\link{mlr_learners_surv.cv_glmnet}},
+\code{\link{mlr_learners_surv.glmnet}},
+\code{\link{mlr_learners_surv.ranger}},
+\code{\link{mlr_learners_surv.xgboost}}
+}
+\concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerRegr]{mlr3::LearnerRegr}} -> \code{LearnerRegrCVGlmnet}
 }

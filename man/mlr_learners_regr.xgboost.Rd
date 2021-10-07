@@ -15,6 +15,79 @@ lrn("regr.xgboost")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{xgboost}
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   callbacks \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   eval_metric \tab list \tab rmse \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   feval \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   interaction_constraints \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
+   max_delta_step \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   max_depth \tab integer \tab 6 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   max_leaves \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   maximize \tab logical \tab NULL \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   min_child_weight \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   missing \tab numeric \tab NA \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   monotone_constraints \tab list \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   normalize_type \tab character \tab tree \tab tree, forest \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   objective \tab list \tab reg:squarederror \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   refresh_leaf \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   reshape \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   sample_type \tab character \tab uniform \tab uniform, weighted \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   save_name \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   training \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
+   updater \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
+   watchlist \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   xgb_model \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \section{Custom mlr3 defaults}{
 
 \itemize{
@@ -58,8 +131,48 @@ ACM.
 \doi{10.1145/2939672.2939785}.
 }
 \seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\itemize{
+\item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
+\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
+\item Extension packages for additional task types:
+\itemize{
+\item \CRANpkg{mlr3proba} for probabilistic supervised regression and survival analysis.
+\item \CRANpkg{mlr3cluster} for unsupervised clustering.
 }
+\item \CRANpkg{mlr3tuning} for tuning of hyperparameters, \CRANpkg{mlr3tuningspaces}
+for established default tuning spaces.
+}
+
+Other Learner: 
+\code{\link{mlr_learners_classif.cv_glmnet}},
+\code{\link{mlr_learners_classif.glmnet}},
+\code{\link{mlr_learners_classif.kknn}},
+\code{\link{mlr_learners_classif.lda}},
+\code{\link{mlr_learners_classif.log_reg}},
+\code{\link{mlr_learners_classif.multinom}},
+\code{\link{mlr_learners_classif.naive_bayes}},
+\code{\link{mlr_learners_classif.nnet}},
+\code{\link{mlr_learners_classif.qda}},
+\code{\link{mlr_learners_classif.ranger}},
+\code{\link{mlr_learners_classif.svm}},
+\code{\link{mlr_learners_classif.xgboost}},
+\code{\link{mlr_learners_regr.cv_glmnet}},
+\code{\link{mlr_learners_regr.glmnet}},
+\code{\link{mlr_learners_regr.kknn}},
+\code{\link{mlr_learners_regr.km}},
+\code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.ranger}},
+\code{\link{mlr_learners_regr.svm}},
+\code{\link{mlr_learners_surv.cv_glmnet}},
+\code{\link{mlr_learners_surv.glmnet}},
+\code{\link{mlr_learners_surv.ranger}},
+\code{\link{mlr_learners_surv.xgboost}}
+}
+\concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerRegr]{mlr3::LearnerRegr}} -> \code{LearnerRegrXgboost}
 }

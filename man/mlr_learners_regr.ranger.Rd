@@ -15,6 +15,51 @@ lrn("regr.ranger")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}, \dQuote{se}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{ranger}
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   always.split.variables \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   min.node.size \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   quantreg \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   regularization.factor \tab list \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   replace \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   se.method \tab character \tab infjack \tab jack, infjack \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   split.select.weights \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \section{Custom mlr3 defaults}{
 
 \itemize{
@@ -54,8 +99,48 @@ Breiman, Leo (2001).
 ISSN 1573-0565, \doi{10.1023/A:1010933404324}.
 }
 \seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\itemize{
+\item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
+\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
+\item Extension packages for additional task types:
+\itemize{
+\item \CRANpkg{mlr3proba} for probabilistic supervised regression and survival analysis.
+\item \CRANpkg{mlr3cluster} for unsupervised clustering.
 }
+\item \CRANpkg{mlr3tuning} for tuning of hyperparameters, \CRANpkg{mlr3tuningspaces}
+for established default tuning spaces.
+}
+
+Other Learner: 
+\code{\link{mlr_learners_classif.cv_glmnet}},
+\code{\link{mlr_learners_classif.glmnet}},
+\code{\link{mlr_learners_classif.kknn}},
+\code{\link{mlr_learners_classif.lda}},
+\code{\link{mlr_learners_classif.log_reg}},
+\code{\link{mlr_learners_classif.multinom}},
+\code{\link{mlr_learners_classif.naive_bayes}},
+\code{\link{mlr_learners_classif.nnet}},
+\code{\link{mlr_learners_classif.qda}},
+\code{\link{mlr_learners_classif.ranger}},
+\code{\link{mlr_learners_classif.svm}},
+\code{\link{mlr_learners_classif.xgboost}},
+\code{\link{mlr_learners_regr.cv_glmnet}},
+\code{\link{mlr_learners_regr.glmnet}},
+\code{\link{mlr_learners_regr.kknn}},
+\code{\link{mlr_learners_regr.km}},
+\code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.svm}},
+\code{\link{mlr_learners_regr.xgboost}},
+\code{\link{mlr_learners_surv.cv_glmnet}},
+\code{\link{mlr_learners_surv.glmnet}},
+\code{\link{mlr_learners_surv.ranger}},
+\code{\link{mlr_learners_surv.xgboost}}
+}
+\concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerRegr]{mlr3::LearnerRegr}} -> \code{LearnerRegrRanger}
 }

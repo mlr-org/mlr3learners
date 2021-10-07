@@ -18,7 +18,7 @@
 #'   - Reason for change: Save some memory.
 #'
 #' @templateVar id classif.log_reg
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @template section_contrasts
 #'

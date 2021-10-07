@@ -8,8 +8,8 @@
 #'
 #' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
 #'
-#' @template section_dictionary_learner
 #' @templateVar id surv.ranger
+#' @template learner
 #'
 #' @references
 #' `r format_bib("wright_2017", "breiman_2001")`

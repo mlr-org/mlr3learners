@@ -22,8 +22,8 @@
 #'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #'
-#' @template section_dictionary_learner
 #' @templateVar id classif.xgboost
+#' @template learner
 #'
 #' @references
 #' `r format_bib("chen_2016")`

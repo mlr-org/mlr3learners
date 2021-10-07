@@ -15,6 +15,37 @@ lrn("classif.svm")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{classif}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{e1071}
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   cachesize \tab numeric \tab 40 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   coef0 \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   cost \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   cross \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   degree \tab integer \tab 3 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   gamma \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab character \tab radial \tab linear, polynomial, radial, sigmoid \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nu \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   shrinking \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   tolerance \tab numeric \tab 0.001 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   type \tab character \tab C-classification \tab C-classification, nu-classification \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   fitted \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale \tab list \tab TRUE \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   class.weights \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   decision.values \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \examples{
 if (requireNamespace("e1071")) {
   learner = mlr3::lrn("classif.svm")
@@ -31,8 +62,48 @@ Cortes, Corinna, Vapnik, Vladimir (1995).
 \doi{10.1007/BF00994018}.
 }
 \seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\itemize{
+\item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
+\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
+\item Extension packages for additional task types:
+\itemize{
+\item \CRANpkg{mlr3proba} for probabilistic supervised regression and survival analysis.
+\item \CRANpkg{mlr3cluster} for unsupervised clustering.
 }
+\item \CRANpkg{mlr3tuning} for tuning of hyperparameters, \CRANpkg{mlr3tuningspaces}
+for established default tuning spaces.
+}
+
+Other Learner: 
+\code{\link{mlr_learners_classif.cv_glmnet}},
+\code{\link{mlr_learners_classif.glmnet}},
+\code{\link{mlr_learners_classif.kknn}},
+\code{\link{mlr_learners_classif.lda}},
+\code{\link{mlr_learners_classif.log_reg}},
+\code{\link{mlr_learners_classif.multinom}},
+\code{\link{mlr_learners_classif.naive_bayes}},
+\code{\link{mlr_learners_classif.nnet}},
+\code{\link{mlr_learners_classif.qda}},
+\code{\link{mlr_learners_classif.ranger}},
+\code{\link{mlr_learners_classif.xgboost}},
+\code{\link{mlr_learners_regr.cv_glmnet}},
+\code{\link{mlr_learners_regr.glmnet}},
+\code{\link{mlr_learners_regr.kknn}},
+\code{\link{mlr_learners_regr.km}},
+\code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.ranger}},
+\code{\link{mlr_learners_regr.svm}},
+\code{\link{mlr_learners_regr.xgboost}},
+\code{\link{mlr_learners_surv.cv_glmnet}},
+\code{\link{mlr_learners_surv.glmnet}},
+\code{\link{mlr_learners_surv.ranger}},
+\code{\link{mlr_learners_surv.xgboost}}
+}
+\concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerClassif]{mlr3::LearnerClassif}} -> \code{LearnerClassifSVM}
 }
