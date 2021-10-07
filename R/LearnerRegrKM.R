@@ -14,8 +14,8 @@
 #'   `N(0, [jitter])`-distributed noise to the data before prediction to avoid
 #'   perfect interpolation. We recommend a value of `1e-12`.
 #'
-#' @template section_dictionary_learner
 #' @templateVar id regr.km
+#' @template section_dictionary_learner
 #'
 #' @references
 #' `r format_bib("roustant_2012")`

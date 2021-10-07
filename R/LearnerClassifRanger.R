@@ -17,8 +17,8 @@
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
 #'
-#' @template section_dictionary_learner
 #' @templateVar id classif.ranger
+#' @template section_dictionary_learner
 #'
 #' @references
 #' `r format_bib("wright_2017", "breiman_2001")`

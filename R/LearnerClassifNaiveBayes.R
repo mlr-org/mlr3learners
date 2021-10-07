@@ -6,8 +6,8 @@
 #' Naive Bayes classification.
 #' Calls [e1071::naiveBayes()] from package \CRANpkg{e1071}.
 #'
-#' @template section_dictionary_learner
 #' @templateVar id classif.naive_bayes
+#' @template section_dictionary_learner
 #'
 #' @export
 #' @template seealso_learner

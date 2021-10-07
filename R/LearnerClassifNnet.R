@@ -9,8 +9,8 @@
 #' Note that modern neural networks with multiple layers are connected
 #' via package [mlr3keras](https://github.com/mlr-org/mlr3keras).
 #'
-#' @template section_dictionary_learner
 #' @templateVar id classif.nnet
+#' @template section_dictionary_learner
 #'
 #' @section Custom mlr3 defaults:
 #' - `size`:

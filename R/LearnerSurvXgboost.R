@@ -26,8 +26,8 @@
 #'   - Adjusted default: `survival:cox`
 #'   - Reason for change: Changed to a survival objective.
 #'
-#' @template section_dictionary_learner
 #' @templateVar id surv.xgboost
+#' @template section_dictionary_learner
 #'
 #' @references
 #' `r format_bib("chen_2016")`
