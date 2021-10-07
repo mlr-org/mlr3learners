@@ -15,6 +15,33 @@ lrn("regr.lm")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}, \dQuote{se}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{character}
+\item Required Packages: 'stats'
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   df \tab numeric \tab Inf \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   interval \tab character \tab - \tab none, confidence, prediction \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   level \tab numeric \tab 0.95 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   model \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   offset \tab logical \tab - \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   pred.var \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   qr \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale \tab numeric \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   x \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   y \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \section{Contrasts}{
 
 To ensure reproducibility, this learner always uses the default contrasts:

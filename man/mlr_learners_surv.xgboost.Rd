@@ -47,6 +47,72 @@ lrn("surv.xgboost")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{surv}
+\item Predict Types: \dQuote{crank}, \dQuote{lp}
+\item Feature Types: \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{xgboost}
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   aft_loss_distribution \tab character \tab normal \tab normal, logistic, extreme \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   aft_loss_distribution_scale \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   callbacks \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   feval \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
+   max_delta_step \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   max_depth \tab integer \tab 6 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   max_leaves \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   maximize \tab logical \tab NULL \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   min_child_weight \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   missing \tab numeric \tab NA \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   monotone_constraints \tab integer \tab 0 \tab  \tab \eqn{[-1, 1]}{[-1, 1]} \cr
+   normalize_type \tab character \tab tree \tab tree, forest \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   ntreelimit \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   objective \tab character \tab survival:cox \tab survival:cox, survival:aft \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   refresh_leaf \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   sample_type \tab character \tab uniform \tab uniform, weighted \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   save_name \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   save_period \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
+   updater \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
+   watchlist \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   xgb_model \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \examples{
 if (requireNamespace("xgboost")) {
   learner = mlr3::lrn("surv.xgboost")

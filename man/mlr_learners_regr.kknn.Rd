@@ -26,6 +26,27 @@ lrn("regr.kknn")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{kknn}
+}
+}
+
+\section{Parameters}{
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   k \tab integer \tab 7 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   distance \tab numeric \tab 2 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   ykernel \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \examples{
 if (requireNamespace("kknn")) {
   learner = mlr3::lrn("regr.kknn")

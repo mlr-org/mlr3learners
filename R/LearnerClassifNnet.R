@@ -10,7 +10,7 @@
 #' via package [mlr3keras](https://github.com/mlr-org/mlr3keras).
 #'
 #' @templateVar id classif.nnet
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @section Custom mlr3 defaults:
 #' - `size`:

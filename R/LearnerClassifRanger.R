@@ -18,7 +18,7 @@
 #'
 #'
 #' @templateVar id classif.ranger
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("wright_2017", "breiman_2001")`

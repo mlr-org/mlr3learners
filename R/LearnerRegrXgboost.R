@@ -9,7 +9,7 @@
 #' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
 #' @templateVar id regr.xgboost
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("chen_2016")`

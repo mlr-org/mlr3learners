@@ -9,7 +9,7 @@
 #' The default for hyperparameter `family` is set to `"cox"`.
 #'
 #' @templateVar id surv.cv_glmnet
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("friedman_2010")`

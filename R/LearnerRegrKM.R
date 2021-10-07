@@ -15,7 +15,7 @@
 #'   perfect interpolation. We recommend a value of `1e-12`.
 #'
 #' @templateVar id regr.km
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("roustant_2012")`

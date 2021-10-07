@@ -15,6 +15,25 @@ lrn("classif.naive_bayes")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Task type: \dQuote{classif}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}
+\item Required Packages: \CRANpkg{e1071}
+}
+}
+
+\section{Parameters}{
+\tabular{llll}{
+   Id \tab Type \tab Default \tab Range \cr
+   eps \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   laplace \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   threshold \tab numeric \tab 0.001 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
 \examples{
 if (requireNamespace("e1071")) {
   learner = mlr3::lrn("classif.naive_bayes")

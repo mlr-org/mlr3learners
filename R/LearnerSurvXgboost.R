@@ -27,7 +27,7 @@
 #'   - Reason for change: Changed to a survival objective.
 #'
 #' @templateVar id surv.xgboost
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("chen_2016")`

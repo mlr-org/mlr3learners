@@ -23,7 +23,7 @@
 #'   - Reason for change: Reduce verbosity.
 #'
 #' @templateVar id classif.xgboost
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("chen_2016")`

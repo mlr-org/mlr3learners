@@ -7,7 +7,7 @@
 #' Calls [stats::lm()].
 #'
 #' @templateVar id regr.lm
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @template section_contrasts
 #'

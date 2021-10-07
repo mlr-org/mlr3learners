@@ -11,7 +11,7 @@
 #' @inherit mlr_learners_classif.glmnet details
 #'
 #' @templateVar id surv.glmnet
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("friedman_2010")`

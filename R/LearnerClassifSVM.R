@@ -7,7 +7,7 @@
 #' Calls [e1071::svm()] from package \CRANpkg{e1071}.
 #'
 #' @templateVar id classif.svm
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("cortes_1995")`

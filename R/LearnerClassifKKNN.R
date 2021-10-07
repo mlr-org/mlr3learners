@@ -9,7 +9,7 @@
 #' @template note_kknn
 #'
 #' @templateVar id classif.kknn
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("hechenbichler_2004", "samworth_2012", "cover_1967")`

@@ -13,7 +13,7 @@
 #' respectively.
 #'
 #' @templateVar id classif.qda
-#' @template section_dictionary_learner
+#' @template learner
 #'
 #' @references
 #' `r format_bib("venables_2002")`
