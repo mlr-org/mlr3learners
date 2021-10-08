@@ -67,7 +67,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       newdata = as_numeric_matrix(task$data(cols = task$feature_names))
-      newdata = newdata[, self$state$feature_names, drop = FALSE]
+      newdata = newdata[, self$state$train_task$feature_names, drop = FALSE]
       response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pv)
       list(response = response)
     }
