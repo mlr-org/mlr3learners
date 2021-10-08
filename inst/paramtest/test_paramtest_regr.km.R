@@ -9,10 +9,13 @@ test_that("regr.km", {
     "response" # handled via mlr3
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })
 
 test_that("predict regr.km", {
@@ -23,8 +26,11 @@ test_that("predict regr.km", {
     "newdata" # handled via mlr3
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })

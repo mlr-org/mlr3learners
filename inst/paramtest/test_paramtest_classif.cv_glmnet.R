@@ -2,32 +2,22 @@ library(mlr3learners)
 
 test_that("classif.cv_glmnet", {
   learner = lrn("classif.cv_glmnet")
-  fun = glmnet::cv.glmnet
+  fun = list(glmnet::cv.glmnet, glmnet::glmnet.control)
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
-    "weights" # handled by mlr3
-  )
-
-  ParamTest = run_paramtest(learner, fun, exclude)
-  expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
-})
-
-# example for checking a "control" function of a learner
-test_that("classif.cv_glmnet", {
-  learner = lrn("classif.cv_glmnet")
-  fun = glmnet::glmnet.control
-  exclude = c(
+    "weights", # handled by mlr3
     "itrace", # supported via param trace.it
     "factory" # only used in scripts, no effect within mlr3
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })
 
 test_that("predict classif.cv_glmnet", {
@@ -38,8 +28,11 @@ test_that("predict classif.cv_glmnet", {
     "newx" # handled via mlr3
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })

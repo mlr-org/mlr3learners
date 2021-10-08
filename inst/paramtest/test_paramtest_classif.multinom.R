@@ -12,10 +12,13 @@ test_that("classif.multinom", {
     "contrasts" # handled via mlr3
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })
 
 # no extra args for predict.multinom

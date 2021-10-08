@@ -2,7 +2,7 @@ library(mlr3learners)
 
 test_that("classif.logreg", {
   learner = lrn("classif.log_reg")
-  fun = stats::glm
+  fun = list(stats::glm, stats::glm.control)
   exclude = c(
     "x", # handled by mlr3
     "formula", # handled by mlr3
@@ -17,22 +17,13 @@ test_that("classif.logreg", {
     "contrasts" # causes lots of troubles just when setting the default
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
-})
-
-# example for checking a "control" function of a learner
-test_that("classif.log_reg", {
-  learner = lrn("classif.log_reg")
-  fun = stats::glm.control
-  exclude = c()
-
-  ParamTest = run_paramtest(learner, fun, exclude)
-  expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })
 
 test_that("predict classif.log_reg", {
@@ -47,8 +38,11 @@ test_that("predict classif.log_reg", {
     "se.fit" # not supported for log reg
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or actually defined in additional control function:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+  )
 })
