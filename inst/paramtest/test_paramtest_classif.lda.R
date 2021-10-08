@@ -2,9 +2,11 @@ library(mlr3learners)
 
 test_that("classif.lda", {
   learner = lrn("classif.lda")
-  fun = MASS::lda
+  fun = list(MASS::lda, MASS:::lda.default)
   exclude = c(
-    "x" # handled by mlr3
+    "x", # handled by mlr3
+    "grouping", # handled by mlr3
+    "CV" # handled by mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -23,7 +25,9 @@ test_that("predict classif.lda", {
     "object", # handled via mlr3
     "newdata", # handled via mlr3
     "method", # renamed to predict.method, see help page
-    "prior" # renamed to predict.prior, see help page
+    "predict.method", # renamed from method, see help page
+    "prior", # renamed from predict.prior, see help page
+    "predict.prior" # renamed from prior, see help page
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
