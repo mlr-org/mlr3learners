@@ -38,8 +38,6 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         censored  = p_lgl(default = FALSE, tags = "train"),
         contrasts = p_uty(default = NULL, tags = "train"),
         decay     = p_dbl(default = 0, tags = "train"),
-        entropy   = p_lgl(default = FALSE, tags = "train"),
-        linout    = p_lgl(default = FALSE, tags = "train"),
         mask      = p_uty(tags = "train"),
         maxit     = p_int(1L, default = 100L, tags = "train"),
         na.action = p_uty(tags = "train"),
@@ -47,23 +45,10 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         reltol    = p_dbl(default = 1.0e-8, tags = "train"),
         size      = p_int(0L, default = 3L, tags = "train"),
         skip      = p_lgl(default = FALSE, tags = "train"),
-        softmax   = p_lgl(default = FALSE, tags = "train"),
         subset    = p_uty(tags = "train"),
         trace     = p_lgl(default = TRUE, tags = "train")
       )
       ps$values = list(size = 3L)
-      ps$add_dep("linout", "entropy", CondEqual$new(FALSE))
-      ps$add_dep("linout", "softmax", CondEqual$new(FALSE))
-      ps$add_dep("linout", "censored", CondEqual$new(FALSE))
-      ps$add_dep("entropy", "linout", CondEqual$new(FALSE))
-      ps$add_dep("entropy", "softmax", CondEqual$new(FALSE))
-      ps$add_dep("entropy", "censored", CondEqual$new(FALSE))
-      ps$add_dep("softmax", "linout", CondEqual$new(FALSE))
-      ps$add_dep("softmax", "entropy", CondEqual$new(FALSE))
-      ps$add_dep("softmax", "censored", CondEqual$new(FALSE))
-      ps$add_dep("censored", "linout", CondEqual$new(FALSE))
-      ps$add_dep("censored", "entropy", CondEqual$new(FALSE))
-      ps$add_dep("censored", "softmax", CondEqual$new(FALSE))
 
       super$initialize(
         id = "classif.nnet",
