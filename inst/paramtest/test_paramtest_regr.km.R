@@ -6,7 +6,8 @@ test_that("regr.km", {
   exclude = c(
     "formula", # handled via mlr3
     "design", # handled via mlr3
-    "response" # handled via mlr3
+    "response", # handled via mlr3
+    "nugget.stability" # custom param from mlr3, see help page
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -23,7 +24,8 @@ test_that("predict regr.km", {
   fun = DiceKriging::predict.km
   exclude = c(
     "object", # handled via mlr3
-    "newdata" # handled via mlr3
+    "newdata", # handled via mlr3
+    "jitter" # custom param from mlr3, see help page
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
