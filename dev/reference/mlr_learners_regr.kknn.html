@@ -83,7 +83,7 @@ Calls kknn::kknn() from package kknn." />
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.5.0-9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.5.0.9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -176,6 +176,30 @@ Therefore, <code>$model</code> returns a list with the following elements:</p><u
 <span class='fu'>lrn</span><span class='op'>(</span><span class='st'>"regr.kknn"</span><span class='op'>)</span>
 </pre>
 
+    <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
+
+    
+
+<ul>
+<li><p>Task type: &#8220;regr&#8221;</p></li>
+<li><p>Predict Types: &#8220;response&#8221;</p></li>
+<li><p>Feature Types: &#8220;logical&#8221;, &#8220;integer&#8221;, &#8220;numeric&#8221;, &#8220;factor&#8221;, &#8220;ordered&#8221;</p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=kknn'><span class="pkg">kknn</span></a></p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
+
+    
+<table class='table'>
+<tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr>
+<tr><td>k</td><td>integer</td><td>7</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>distance</td><td>numeric</td><td>2</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>kernel</td><td>character</td><td>optimal</td><td>rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>scale</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>ykernel</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+</table>
+
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Hechenbichler, Klaus, Schliep, Klaus (2004).
@@ -195,7 +219,46 @@ doi: <a href='https://doi.org/10.1109/TIT.1967.1053964'>10.1109/TIT.1967.1053964
 .</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>Dictionary</a> of <a href='https://mlr3.mlr-org.com/reference/Learner.html'>Learners</a>: <a href='https://mlr3.mlr-org.com/reference/mlr_learners.html'>mlr3::mlr_learners</a></p></div>
+    <div class='dont-index'>
+<ul>
+<li><p>Chapter in the <a href='https://mlr3book.mlr-org.com/'>mlr3book</a>:
+<a href='https://mlr3book.mlr-org.com/basics.html#learners'>https://mlr3book.mlr-org.com/basics.html#learners</a></p></li>
+<li><p>Package <a href='https://github.com/mlr-org/mlr3extralearners'>mlr3extralearners</a> for more learners.</p></li>
+<li><p><a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>Dictionary</a> of Learners: mlr_learners</p></li>
+<li><p><code>as.data.table(mlr_learners)</code> for a table of available Learners in the running session (depending on the loaded packages).</p></li>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3pipelines'><span class="pkg">mlr3pipelines</span></a> to combine learners with pre- and postprocessing steps.</p></li>
+<li><p>Extension packages for additional task types:</p><ul>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3proba'><span class="pkg">mlr3proba</span></a> for probabilistic supervised regression and survival analysis.</p></li>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3cluster'><span class="pkg">mlr3cluster</span></a> for unsupervised clustering.</p></li>
+</ul></li>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a> for tuning of hyperparameters, <a href='https://CRAN.R-project.org/package=mlr3tuningspaces'><span class="pkg">mlr3tuningspaces</span></a>
+for established default tuning spaces.</p></li>
+</ul>
+
+<p>Other Learner: 
+<code><a href='mlr_learners_classif.cv_glmnet.html'>mlr_learners_classif.cv_glmnet</a></code>,
+<code><a href='mlr_learners_classif.glmnet.html'>mlr_learners_classif.glmnet</a></code>,
+<code><a href='mlr_learners_classif.kknn.html'>mlr_learners_classif.kknn</a></code>,
+<code><a href='mlr_learners_classif.lda.html'>mlr_learners_classif.lda</a></code>,
+<code><a href='mlr_learners_classif.log_reg.html'>mlr_learners_classif.log_reg</a></code>,
+<code><a href='mlr_learners_classif.multinom.html'>mlr_learners_classif.multinom</a></code>,
+<code><a href='mlr_learners_classif.naive_bayes.html'>mlr_learners_classif.naive_bayes</a></code>,
+<code><a href='mlr_learners_classif.nnet.html'>mlr_learners_classif.nnet</a></code>,
+<code><a href='mlr_learners_classif.qda.html'>mlr_learners_classif.qda</a></code>,
+<code><a href='mlr_learners_classif.ranger.html'>mlr_learners_classif.ranger</a></code>,
+<code><a href='mlr_learners_classif.svm.html'>mlr_learners_classif.svm</a></code>,
+<code><a href='mlr_learners_classif.xgboost.html'>mlr_learners_classif.xgboost</a></code>,
+<code><a href='mlr_learners_regr.cv_glmnet.html'>mlr_learners_regr.cv_glmnet</a></code>,
+<code><a href='mlr_learners_regr.glmnet.html'>mlr_learners_regr.glmnet</a></code>,
+<code><a href='mlr_learners_regr.km.html'>mlr_learners_regr.km</a></code>,
+<code><a href='mlr_learners_regr.lm.html'>mlr_learners_regr.lm</a></code>,
+<code><a href='mlr_learners_regr.ranger.html'>mlr_learners_regr.ranger</a></code>,
+<code><a href='mlr_learners_regr.svm.html'>mlr_learners_regr.svm</a></code>,
+<code><a href='mlr_learners_regr.xgboost.html'>mlr_learners_regr.xgboost</a></code>,
+<code><a href='mlr_learners_surv.cv_glmnet.html'>mlr_learners_surv.cv_glmnet</a></code>,
+<code><a href='mlr_learners_surv.glmnet.html'>mlr_learners_surv.glmnet</a></code>,
+<code><a href='mlr_learners_surv.ranger.html'>mlr_learners_surv.ranger</a></code>,
+<code><a href='mlr_learners_surv.xgboost.html'>mlr_learners_surv.xgboost</a></code></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
     <p><code><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></code> -&gt; <code><a href='https://mlr3.mlr-org.com/reference/LearnerRegr.html'>mlr3::LearnerRegr</a></code> -&gt; <code>LearnerRegrKKNN</code></p>

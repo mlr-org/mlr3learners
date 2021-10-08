@@ -92,7 +92,7 @@ perfect interpolation. We recommend a value of 1e-12.
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.5.0-9000</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3learners <small>v0.5.0.9000</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -183,6 +183,53 @@ perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
 <span class='fu'>lrn</span><span class='op'>(</span><span class='st'>"regr.km"</span><span class='op'>)</span>
 </pre>
 
+    <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
+
+    
+
+<ul>
+<li><p>Task type: &#8220;regr&#8221;</p></li>
+<li><p>Predict Types: &#8220;response&#8221;, &#8220;se&#8221;</p></li>
+<li><p>Feature Types: &#8220;logical&#8221;, &#8220;integer&#8221;, &#8220;numeric&#8221;</p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=DiceKriging'><span class="pkg">DiceKriging</span></a></p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
+
+    
+<table class='table'>
+<tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr>
+<tr><td>bias.correct</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>checkNames</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>coef.cov</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>coef.trend</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>coef.var</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>control</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>cov.compute</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>covtype</td><td>character</td><td>matern5_2</td><td>gauss, matern5_2, matern3_2, exp, powexp</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>estim.method</td><td>character</td><td>MLE</td><td>MLE, LOO</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>gr</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>iso</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>jitter</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>kernel</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>knots</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>light.return</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>lower</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>multistart</td><td>integer</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>noise.var</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>nugget</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>nugget.estim</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>nugget.stability</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>optim.method</td><td>character</td><td>BFGS</td><td>BFGS, gen</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>parinit</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>penalty</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>scaling</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>se.compute</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>type</td><td>character</td><td>SK</td><td>SK, UK</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>upper</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+</table>
+
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Roustant O, Ginsbourger D, Deville Y (2012).
@@ -192,7 +239,46 @@ doi: <a href='https://doi.org/10.18637/jss.v051.i01'>10.18637/jss.v051.i01</a>
 .</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>Dictionary</a> of <a href='https://mlr3.mlr-org.com/reference/Learner.html'>Learners</a>: <a href='https://mlr3.mlr-org.com/reference/mlr_learners.html'>mlr3::mlr_learners</a></p></div>
+    <div class='dont-index'>
+<ul>
+<li><p>Chapter in the <a href='https://mlr3book.mlr-org.com/'>mlr3book</a>:
+<a href='https://mlr3book.mlr-org.com/basics.html#learners'>https://mlr3book.mlr-org.com/basics.html#learners</a></p></li>
+<li><p>Package <a href='https://github.com/mlr-org/mlr3extralearners'>mlr3extralearners</a> for more learners.</p></li>
+<li><p><a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>Dictionary</a> of Learners: mlr_learners</p></li>
+<li><p><code>as.data.table(mlr_learners)</code> for a table of available Learners in the running session (depending on the loaded packages).</p></li>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3pipelines'><span class="pkg">mlr3pipelines</span></a> to combine learners with pre- and postprocessing steps.</p></li>
+<li><p>Extension packages for additional task types:</p><ul>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3proba'><span class="pkg">mlr3proba</span></a> for probabilistic supervised regression and survival analysis.</p></li>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3cluster'><span class="pkg">mlr3cluster</span></a> for unsupervised clustering.</p></li>
+</ul></li>
+<li><p><a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a> for tuning of hyperparameters, <a href='https://CRAN.R-project.org/package=mlr3tuningspaces'><span class="pkg">mlr3tuningspaces</span></a>
+for established default tuning spaces.</p></li>
+</ul>
+
+<p>Other Learner: 
+<code><a href='mlr_learners_classif.cv_glmnet.html'>mlr_learners_classif.cv_glmnet</a></code>,
+<code><a href='mlr_learners_classif.glmnet.html'>mlr_learners_classif.glmnet</a></code>,
+<code><a href='mlr_learners_classif.kknn.html'>mlr_learners_classif.kknn</a></code>,
+<code><a href='mlr_learners_classif.lda.html'>mlr_learners_classif.lda</a></code>,
+<code><a href='mlr_learners_classif.log_reg.html'>mlr_learners_classif.log_reg</a></code>,
+<code><a href='mlr_learners_classif.multinom.html'>mlr_learners_classif.multinom</a></code>,
+<code><a href='mlr_learners_classif.naive_bayes.html'>mlr_learners_classif.naive_bayes</a></code>,
+<code><a href='mlr_learners_classif.nnet.html'>mlr_learners_classif.nnet</a></code>,
+<code><a href='mlr_learners_classif.qda.html'>mlr_learners_classif.qda</a></code>,
+<code><a href='mlr_learners_classif.ranger.html'>mlr_learners_classif.ranger</a></code>,
+<code><a href='mlr_learners_classif.svm.html'>mlr_learners_classif.svm</a></code>,
+<code><a href='mlr_learners_classif.xgboost.html'>mlr_learners_classif.xgboost</a></code>,
+<code><a href='mlr_learners_regr.cv_glmnet.html'>mlr_learners_regr.cv_glmnet</a></code>,
+<code><a href='mlr_learners_regr.glmnet.html'>mlr_learners_regr.glmnet</a></code>,
+<code><a href='mlr_learners_regr.kknn.html'>mlr_learners_regr.kknn</a></code>,
+<code><a href='mlr_learners_regr.lm.html'>mlr_learners_regr.lm</a></code>,
+<code><a href='mlr_learners_regr.ranger.html'>mlr_learners_regr.ranger</a></code>,
+<code><a href='mlr_learners_regr.svm.html'>mlr_learners_regr.svm</a></code>,
+<code><a href='mlr_learners_regr.xgboost.html'>mlr_learners_regr.xgboost</a></code>,
+<code><a href='mlr_learners_surv.cv_glmnet.html'>mlr_learners_surv.cv_glmnet</a></code>,
+<code><a href='mlr_learners_surv.glmnet.html'>mlr_learners_surv.glmnet</a></code>,
+<code><a href='mlr_learners_surv.ranger.html'>mlr_learners_surv.ranger</a></code>,
+<code><a href='mlr_learners_surv.xgboost.html'>mlr_learners_surv.xgboost</a></code></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
     <p><code><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></code> -&gt; <code><a href='https://mlr3.mlr-org.com/reference/LearnerRegr.html'>mlr3::LearnerRegr</a></code> -&gt; <code>LearnerRegrKM</code></p>
