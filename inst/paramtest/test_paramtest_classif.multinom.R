@@ -2,8 +2,10 @@ library(mlr3learners)
 
 test_that("classif.multinom", {
   learner = lrn("classif.multinom")
-  fun = nnet::multinom
+  fun = list(nnet::multinom, nnet::nnet.default)
   exclude = c(
+    "x", # handled via mlr3
+    "y", # handled via mlr3
     "formula", # handled via mlr3
     "data", # handled via mlr3
     "weights", # handled via mlr3

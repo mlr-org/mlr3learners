@@ -2,9 +2,10 @@ library(mlr3learners)
 
 test_that("classif.naive_bayes", {
   learner = lrn("classif.naive_bayes")
-  fun = e1071::naiveBayes
+  fun = list(e1071::naiveBayes, e1071:::naiveBayes.default)
   exclude = c(
-    "x" # handled via mlr3
+    "x", # handled via mlr3
+    "y" # handled via mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
