@@ -11,7 +11,7 @@ test_that("classif.svm", {
   expect_true(ParamTest, info = paste0(
     "\nMissing parameters in mlr3 param set:\n",
     paste0("- ", ParamTest$missing, "\n", collapse = ""),
-    "\nOutdated param or actually defined in additional control function:\n",
+    "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
     paste0("- ", ParamTest$extra, "\n", collapse = ""))
     )
 })
@@ -30,7 +30,7 @@ test_that("classif.svm", {
   expect_true(ParamTest, info = paste0(
     "\nMissing parameters in mlr3 param set:\n",
     paste0("- ", ParamTest$missing, "\n", collapse = ""),
-    "\nOutdated param or actually defined in additional control function:\n",
+    "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
     paste0("- ", ParamTest$extra, "\n", collapse = ""))
     )
 })
