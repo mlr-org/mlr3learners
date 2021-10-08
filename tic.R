@@ -13,6 +13,7 @@ if (!ci_has_env("PARAMTEST")) {
     # source helper_autotest.R from mlr3
     add_code_step(lapply(list.files(system.file("testthat", package = "mlr3"),
       pattern = "helper_autotest", full.names = TRUE), source)) %>%
+    add_code_step(run_paramtest) %>%
     add_code_step(testthat::test_dir(system.file("paramtest", package = "mlr3learners"),
       stop_on_failure = TRUE))
 }
