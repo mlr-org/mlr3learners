@@ -61,6 +61,10 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
+      - name: "[Custom Stage] [Linux] Install system libs for learners"
+        if: runner.os == 'Linux'
+        run: sudo apt install libglpk-dev
+
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
