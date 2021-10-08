@@ -4,7 +4,7 @@ skip_on_os("solaris")
 
 test_that("classif.glmnet", {
   learner = lrn("classif.glmnet")
-  fun = list(glmnet::cv.glmnet, glmnet::glmnet.control)
+  fun = list(glmnet::glmnet, glmnet::glmnet.control)
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
@@ -12,6 +12,7 @@ test_that("classif.glmnet", {
     "nfolds", # not used by learner
     "foldid", # not used by learner
     "type.measure", # only used by cv.glmnet
+    "family", # handled by mlr3
     "itrace", # supported via param trace.it
     "factory" # only used in scripts, no effect within mlr3
   )
@@ -27,7 +28,7 @@ test_that("classif.glmnet", {
 
 test_that("predict classif.glmnet", {
   learner = lrn("classif.glmnet")
-  fun = glmnet::predict.glmnet
+  fun = list(glmnet::predict.glmnet, glmnet::predict.relaxed)
   exclude = c(
     "object", # handled via mlr3
     "newx", # handled via mlr3
