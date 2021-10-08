@@ -16,7 +16,8 @@ test_that("regr.ranger", {
     "dependent.variable.name", # handled via mlr3
     "status.variable.name", # handled via mlr3
     "classification", # handled via mlr3
-    "mtry.ratio" # custom hyperpar
+    "mtry.ratio", # custom hyperpar
+    "min.prop" # renamed to minprop in upstream package
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
