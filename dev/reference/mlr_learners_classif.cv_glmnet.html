@@ -154,7 +154,7 @@ depending on the number of classes." />
 
     <div class="ref-description">
     <p>Generalized linear models with elastic net regularization.
-Calls <code><a href='https://rdrr.io/pkg/glmnet/man/cv.glmnet.html'>glmnet::cv.glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
+Calls <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmnet::cv.glmnet()</a></code> from package <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a>.</p>
 <p>The default for hyperparameter <code>family</code> is set to <code>"binomial"</code> or <code>"multinomial"</code>,
 depending on the number of classes.</p>
     </div>
@@ -317,7 +317,7 @@ for established default tuning spaces.</p></li>
 
 <p><hr>
 <a id="method-selected_features"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>selected_features()</code></h3>
-<p>Returns the set of selected features as reported by <code><a href='https://rdrr.io/pkg/glmnet/man/predict.glmnet.html'>glmnet::predict.glmnet()</a></code>
+<p>Returns the set of selected features as reported by <code><a href='https://glmnet.stanford.edu/reference/predict.glmnet.html'>glmnet::predict.glmnet()</a></code>
 with <code>type</code> set to <code>"nonzero"</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>LearnerClassifCVGlmnet</span><span class='op'>$</span><span class='fu'>selected_features</span><span class='op'>(</span>lambda <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
