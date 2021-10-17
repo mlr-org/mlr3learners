@@ -1,8 +1,8 @@
 library(mlr3learners)
 
 test_that("surv.glmnet", {
-  learner = mlr3learners::LearnerSurvGlmnet$new()
-  fun = list(glmnet::glmnet, glmnet::glmnet.control)
+  learner = lrn("surv.glmnet")
+  fun = list(glmnet::glmnet, glmnet::cv.glmnet, glmnet::glmnet.control)
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
@@ -11,6 +11,7 @@ test_that("surv.glmnet", {
     "foldid", # not used by learner
     "family", # only coxnet available
     "type.gaussian", # not used by learner
+    "type.measure", # only used by cv.glmnet
     "standardize.response", # for 'mgaussian' only
     "itrace", # supported via param trace.it
     "factory" # only used in scripts, no effect within mlr3
@@ -26,12 +27,13 @@ test_that("surv.glmnet", {
 })
 
 test_that("predict surv.glmnet", {
-  learner = mlr3learners::LearnerSurvGlmnet$new()
+  learner = lrn("surv.glmnet")
   fun = glmnet::predict.glmnet
   exclude = c(
     "object", # handled via mlr3
     "newx", # handled via mlr3
-    "type" # handled via mlr3
+    "type", # handled via mlr3
+    "predict.gamma" # renamed from gamma
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")

@@ -27,7 +27,8 @@ test_that("predict regr.cv_glmnet", {
   fun = glmnet:::predict.cv.glmnet
   exclude = c(
     "object", # handled via mlr3
-    "newx" # handled via mlr3
+    "newx", # handled via mlr3
+    "predict.gamma" # renamed from gamma
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")

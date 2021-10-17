@@ -40,3 +40,4 @@ test_that("predict regr.glmnet", {
     paste0("- ", ParamTest$extra, "\n", collapse = ""))
     )
 })
+

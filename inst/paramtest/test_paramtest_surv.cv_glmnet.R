@@ -2,13 +2,14 @@ library(mlr3learners)
 
 test_that("surv.cv_glmnet", {
   learner = lrn("surv.cv_glmnet")
-  fun = list(glmnet::cv.glmnet, glmnet::glmnet.control)
+  fun = list(glmnet::cv.glmnet, glmnet::glmnet.control, glmnet::glmnet)
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
     "weights", # handled by mlr3
     "itrace", # supported via param trace.it
-    "factory" # only used in scripts, no effect within mlr3
+    "factory", # only used in scripts, no effect within mlr3
+    "family" # handled by mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -25,7 +26,8 @@ test_that("predict surv.cv_glmnet", {
   fun = glmnet:::predict.cv.glmnet
   exclude = c(
     "object", # handled via mlr3
-    "newx" # handled via mlr3
+    "newx", # handled via mlr3
+    "predict.gamma" # renamed from gamma
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
