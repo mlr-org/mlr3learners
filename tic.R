@@ -11,8 +11,7 @@ if (!ci_has_env("PARAMTEST")) {
     add_step(step_session_info())
 
   get_stage("script") %>%
-    # source helper_autotest.R from mlr3o
-    add_step(step_install_github("mlr-org/mlr3@update-paramtest")) %>% # remove when mlr3 0.13 is on CRAN
+    # source helper_autotest.R from mlr3
     add_step(step_install_cran("rvest")) %>% # for scraping xgboost params
     add_step(step_install_cran("magrittr")) %>% # for scraping xgboost params
     add_code_step(devtools::install()) %>%
