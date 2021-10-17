@@ -48,7 +48,7 @@ lrn("classif.ranger")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    always.split.variables \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   class.weights \tab numeric \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   class.weights \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
