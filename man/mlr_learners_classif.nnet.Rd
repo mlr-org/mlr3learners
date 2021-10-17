@@ -38,8 +38,6 @@ lrn("classif.nnet")
    censored \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    contrasts \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   entropy \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   linout \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    mask \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    na.action \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -47,7 +45,6 @@ lrn("classif.nnet")
    reltol \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    size \tab integer \tab 3 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    skip \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   softmax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    subset \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    trace \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
 }

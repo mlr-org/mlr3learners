@@ -61,7 +61,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train"),
         se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
-        split.select.weights         = p_dbl(0, 1, tags = "train"),
+        split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("gini", "extratrees"), default = "gini", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
         write.forest                 = p_lgl(default = TRUE, tags = "train")

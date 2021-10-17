@@ -53,7 +53,7 @@ lrn("regr.ranger")
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    se.method \tab character \tab infjack \tab jack, infjack \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   split.select.weights \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
