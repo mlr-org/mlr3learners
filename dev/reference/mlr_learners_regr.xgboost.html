@@ -189,6 +189,7 @@ Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xg
 <tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>eval_metric</td><td>list</td><td>rmse</td><td></td><td>\((-\infty, \infty)\)</td></tr>
@@ -220,15 +221,19 @@ Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xg
 <tr><td>predinteraction</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>predleaf</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>process_type</td><td>character</td><td>default</td><td>default, update</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>reshape</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>save_name</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>save_period</td><td>integer</td><td>NULL</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>sketch_eps</td><td>numeric</td><td>0.03</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>single_precision_histogram</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>training</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>

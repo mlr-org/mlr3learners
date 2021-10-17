@@ -206,8 +206,8 @@ Calls <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmne
 <tr><td>mnlam</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>mxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>mxitnr</td><td>integer</td><td>25</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>newoffset</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>nfolds</td><td>integer</td><td>10</td><td></td><td>\([3, \infty)\)</td></tr>
+<tr><td>nlambda</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>offset</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>parallel</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>penalty.factor</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
@@ -218,6 +218,7 @@ Calls <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmne
 <tr><td>relax</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>s</td><td>numeric</td><td>lambda.1se</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>standardize</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>standardize.response</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>thresh</td><td>numeric</td><td>1e-07</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>trace.it</td><td>integer</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>type.gaussian</td><td>character</td><td>-</td><td>covariance, naive</td><td>\((-\infty, \infty)\)</td></tr>
@@ -356,14 +357,14 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 #&gt; [13] "gamma"                "grouped"              "intercept"           
 #&gt; [16] "keep"                 "lambda"               "lambda.min.ratio"    
 #&gt; [19] "lower.limits"         "maxit"                "mnlam"               
-#&gt; [22] "mxit"                 "mxitnr"               "newoffset"           
-#&gt; [25] "nfolds"               "nlambda"              "offset"              
-#&gt; [28] "parallel"             "penalty.factor"       "pmax"                
-#&gt; [31] "pmin"                 "prec"                 "predict.gamma"       
-#&gt; [34] "relax"                "s"                    "standardize"         
-#&gt; [37] "standardize.response" "thresh"               "trace.it"            
-#&gt; [40] "type.gaussian"        "type.logistic"        "type.measure"        
-#&gt; [43] "type.multinomial"     "upper.limits"        </div></pre>
+#&gt; [22] "mxit"                 "mxitnr"               "nfolds"              
+#&gt; [25] "nlambda"              "offset"               "parallel"            
+#&gt; [28] "penalty.factor"       "pmax"                 "pmin"                
+#&gt; [31] "prec"                 "predict.gamma"        "relax"               
+#&gt; [34] "s"                    "standardize"          "standardize.response"
+#&gt; [37] "thresh"               "trace.it"             "type.gaussian"       
+#&gt; [40] "type.logistic"        "type.measure"         "type.multinomial"    
+#&gt; [43] "upper.limits"        </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
