@@ -53,8 +53,8 @@ lrn("classif.cv_glmnet")
    mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   newoffset \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    nfolds \tab integer \tab 10 \tab  \tab \eqn{[3, \infty)}{[3, Inf)} \cr
+   nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    offset \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    penalty.factor \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -65,8 +65,10 @@ lrn("classif.cv_glmnet")
    relax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    s \tab numeric \tab lambda.1se \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   type.gaussian \tab character \tab - \tab covariance, naive \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    type.logistic \tab character \tab - \tab Newton, modified.Newton \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    type.measure \tab character \tab deviance \tab deviance, class, auc, mse, mae \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    type.multinomial \tab character \tab - \tab ungrouped, grouped \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr

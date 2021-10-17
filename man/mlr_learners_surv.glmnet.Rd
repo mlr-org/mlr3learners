@@ -48,6 +48,7 @@ lrn("surv.glmnet")
 \section{Parameters}{
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alignment \tab character \tab lambda \tab lambda, fraction \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
@@ -58,7 +59,10 @@ lrn("surv.glmnet")
    exclude \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   gamma \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    lambda \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    lower.limits \tab list \tab -Inf \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -69,11 +73,12 @@ lrn("surv.glmnet")
    newoffset \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    offset \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    penalty.factor \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predict.gamma \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predict.gamma \tab numeric \tab gamma.1se \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    relax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr

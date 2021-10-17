@@ -64,8 +64,10 @@ lrn("surv.cv_glmnet")
    relax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    s \tab numeric \tab lambda.1se \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   type.gaussian \tab character \tab - \tab covariance, naive \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    type.logistic \tab character \tab Newton \tab Newton, modified.Newton \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    type.measure \tab character \tab deviance \tab deviance, C \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    type.multinomial \tab character \tab ungrouped \tab ungrouped, grouped \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr

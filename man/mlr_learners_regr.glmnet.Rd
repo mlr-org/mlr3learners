@@ -79,10 +79,10 @@ lrn("regr.glmnet")
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predict.gamma \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    relax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    type.gaussian \tab character \tab - \tab covariance, naive \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
