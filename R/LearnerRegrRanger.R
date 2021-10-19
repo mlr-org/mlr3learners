@@ -25,7 +25,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-
       ps = ps(
         alpha                        = p_dbl(default = 0.5, tags = "train"),
         always.split.variables       = p_uty(tags = "train"),
@@ -40,7 +39,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
-        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
+        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict", "hotstart")),
         oob.error                    = p_lgl(default = TRUE, tags = "train"),
         quantreg                     = p_lgl(default = FALSE, tags = "train"),
         regularization.factor        = p_uty(default = 1, tags = "train"),
@@ -72,7 +71,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "importance", "oob_error"),
+        properties = c("weights", "importance", "oob_error", "hotstart_backward"),
         packages = "ranger",
         man = "mlr3learners::mlr_learners_regr.ranger"
       )
@@ -128,10 +127,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
 
-      prediction = invoke(predict, self$model,
-        data = newdata,
-        type = self$predict_type, .args = pv)
+      prediction = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pv)
       list(response = prediction$predictions, se = prediction$se)
+    },
+
+    .hotstart = function(task) {
+      model = self$model
+      model$num.trees = self$param_set$values$num.trees
+      model
     }
   )
 )

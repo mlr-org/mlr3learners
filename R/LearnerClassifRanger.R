@@ -50,7 +50,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
-        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
+        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict", "hotstart")),
         oob.error                    = p_lgl(default = TRUE, tags = "train"),
         regularization.factor        = p_uty(default = 1, tags = "train"),
         regularization.usedepth      = p_lgl(default = FALSE, tags = "train"),
@@ -77,7 +77,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error"),
+        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error", "hotstart_backward"),
         packages = "ranger",
         man = "mlr3learners::mlr_learners_classif.ranger"
       )
@@ -138,6 +138,12 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       } else {
         list(prob = prediction$predictions)
       }
+    },
+
+    .hotstart = function(task) {
+      model = self$model
+      model$num.trees = self$param_set$values$num.trees
+      model
     }
   )
 )
