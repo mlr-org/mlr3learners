@@ -38,7 +38,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         # FIXME: only works if predict_type == "se". How to set dependency?
         alpha                        = p_dbl(default = 0.5, tags = "train"),
         always.split.variables       = p_uty(tags = "train"),
-        class.weights                = p_dbl(default = NULL, special_vals = list(NULL), tags = "train"),
+        class.weights                = p_uty(default = NULL, tags = "train"),
         holdout                      = p_lgl(default = FALSE, tags = "train"),
         importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
         keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
