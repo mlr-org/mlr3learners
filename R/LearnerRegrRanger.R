@@ -51,7 +51,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train"),
         se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"), # FIXME: only works if predict_type == "se". How to set dependency?
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
-        split.select.weights         = p_dbl(0, 1, tags = "train"),
+        split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
         write.forest                 = p_lgl(default = TRUE, tags = "train")
