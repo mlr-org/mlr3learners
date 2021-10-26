@@ -187,14 +187,14 @@ Calls <code><a href='https://rdrr.io/pkg/e1071/man/svm.html'>e1071::svm()</a></c
 <tr><td>cross</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>degree</td><td>integer</td><td>3</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>epsilon</td><td>numeric</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>fitted</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>kernel</td><td>character</td><td>radial</td><td>linear, polynomial, radial, sigmoid</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>nu</td><td>numeric</td><td>0.5</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>scale</td><td>list</td><td>TRUE</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>shrinking</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>tolerance</td><td>numeric</td><td>0.001</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>type</td><td>character</td><td>eps-regression</td><td>eps-regression, nu-regression</td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>fitted</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>scale</td><td>list</td><td>TRUE</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 </table>
 
 
@@ -305,8 +305,8 @@ for established default tuning spaces.</p></li>
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
 #&gt; * Properties: -</div><div class='output co'>#&gt;  [1] "cachesize" "coef0"     "cost"      "cross"     "degree"    "epsilon"  
-#&gt;  [7] "gamma"     "kernel"    "nu"        "shrinking" "tolerance" "type"     
-#&gt; [13] "fitted"    "scale"    </div></pre>
+#&gt;  [7] "fitted"    "gamma"     "kernel"    "nu"        "scale"     "shrinking"
+#&gt; [13] "tolerance" "type"     </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

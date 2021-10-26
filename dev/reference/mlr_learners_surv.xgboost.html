@@ -219,12 +219,14 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feval</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>grow_policy</td><td>character</td><td>depthwise</td><td>depthwise, lossguide</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>interaction_constraints</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>lambda</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>lambda_bias</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>max_bin</td><td>integer</td><td>256</td><td></td><td>\([2, \infty)\)</td></tr>
@@ -244,14 +246,18 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>one_drop</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>predictor</td><td>character</td><td>cpu_predictor</td><td>cpu_predictor, gpu_predictor</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>process_type</td><td>character</td><td>default</td><td>default, update</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>save_name</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>save_period</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>sketch_eps</td><td>numeric</td><td>0.03</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>single_precision_histogram</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>tree_method</td><td>character</td><td>auto</td><td>auto, exact, approx, hist, gpu_hist</td><td>\((-\infty, \infty)\)</td></tr>
@@ -382,27 +388,30 @@ for established default tuning spaces.</p></li>
 #&gt;  [3] "alpha"                       "base_score"                 
 #&gt;  [5] "booster"                     "callbacks"                  
 #&gt;  [7] "colsample_bylevel"           "colsample_bynode"           
-#&gt;  [9] "colsample_bytree"            "early_stopping_rounds"      
-#&gt; [11] "eta"                         "feature_selector"           
-#&gt; [13] "feval"                       "gamma"                      
-#&gt; [15] "grow_policy"                 "lambda"                     
-#&gt; [17] "lambda_bias"                 "max_bin"                    
-#&gt; [19] "max_delta_step"              "max_depth"                  
-#&gt; [21] "max_leaves"                  "maximize"                   
-#&gt; [23] "min_child_weight"            "missing"                    
-#&gt; [25] "monotone_constraints"        "normalize_type"             
-#&gt; [27] "nrounds"                     "nthread"                    
-#&gt; [29] "ntreelimit"                  "num_parallel_tree"          
-#&gt; [31] "objective"                   "one_drop"                   
-#&gt; [33] "predictor"                   "print_every_n"              
-#&gt; [35] "rate_drop"                   "refresh_leaf"               
-#&gt; [37] "sample_type"                 "save_name"                  
-#&gt; [39] "save_period"                 "scale_pos_weight"           
-#&gt; [41] "sketch_eps"                  "skip_drop"                  
-#&gt; [43] "subsample"                   "top_k"                      
-#&gt; [45] "tree_method"                 "tweedie_variance_power"     
-#&gt; [47] "updater"                     "verbose"                    
-#&gt; [49] "watchlist"                   "xgb_model"                  </div></pre>
+#&gt;  [9] "colsample_bytree"            "disable_default_eval_metric"
+#&gt; [11] "early_stopping_rounds"       "eta"                        
+#&gt; [13] "feature_selector"            "feval"                      
+#&gt; [15] "gamma"                       "grow_policy"                
+#&gt; [17] "interaction_constraints"     "lambda"                     
+#&gt; [19] "lambda_bias"                 "max_bin"                    
+#&gt; [21] "max_delta_step"              "max_depth"                  
+#&gt; [23] "max_leaves"                  "maximize"                   
+#&gt; [25] "min_child_weight"            "missing"                    
+#&gt; [27] "monotone_constraints"        "normalize_type"             
+#&gt; [29] "nrounds"                     "nthread"                    
+#&gt; [31] "ntreelimit"                  "num_parallel_tree"          
+#&gt; [33] "objective"                   "one_drop"                   
+#&gt; [35] "predictor"                   "print_every_n"              
+#&gt; [37] "process_type"                "rate_drop"                  
+#&gt; [39] "refresh_leaf"                "sampling_method"            
+#&gt; [41] "sample_type"                 "save_name"                  
+#&gt; [43] "save_period"                 "scale_pos_weight"           
+#&gt; [45] "seed_per_iteration"          "sketch_eps"                 
+#&gt; [47] "skip_drop"                   "single_precision_histogram" 
+#&gt; [49] "subsample"                   "top_k"                      
+#&gt; [51] "tree_method"                 "tweedie_variance_power"     
+#&gt; [53] "updater"                     "verbose"                    
+#&gt; [55] "watchlist"                   "xgb_model"                  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

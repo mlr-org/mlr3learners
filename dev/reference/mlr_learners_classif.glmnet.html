@@ -198,7 +198,6 @@ custom resampling strategies (blocked design, stratification).</p>
     
 <table class='table'>
 <tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr>
-<tr><td>alignment</td><td>character</td><td>lambda</td><td>lambda, fraction</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>alpha</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>big</td><td>numeric</td><td>9.9e+35</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>devmax</td><td>numeric</td><td>0.999</td><td></td><td>\([0, 1]\)</td></tr>
@@ -210,9 +209,7 @@ custom resampling strategies (blocked design, stratification).</p>
 <tr><td>exmx</td><td>numeric</td><td>250</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>fdev</td><td>numeric</td><td>1e-05</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>grouped</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>intercept</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>keep</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>lambda</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>lambda.min.ratio</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>lower.limits</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
@@ -220,19 +217,20 @@ custom resampling strategies (blocked design, stratification).</p>
 <tr><td>mnlam</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>mxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>mxitnr</td><td>integer</td><td>25</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>nlambda</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>newoffset</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>offset</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>parallel</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>penalty.factor</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>pmax</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>pmin</td><td>numeric</td><td>1e-09</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>prec</td><td>numeric</td><td>1e-10</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>predict.gamma</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>relax</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>s</td><td>numeric</td><td>0.01</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>standardize</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>standardize.response</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>thresh</td><td>numeric</td><td>1e-07</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>trace.it</td><td>integer</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>type.gaussian</td><td>character</td><td>-</td><td>covariance, naive</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>type.logistic</td><td>character</td><td>-</td><td>Newton, modified.Newton</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>type.multinomial</td><td>character</td><td>-</td><td>ungrouped, grouped</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>upper.limits</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
@@ -367,16 +365,18 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 #&gt; * Packages: glmnet
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alignment"        "alpha"            "big"              "devmax"          
-#&gt;  [5] "dfmax"            "eps"              "epsnr"            "exact"           
-#&gt;  [9] "exclude"          "exmx"             "fdev"             "gamma"           
-#&gt; [13] "grouped"          "intercept"        "keep"             "lambda"          
-#&gt; [17] "lambda.min.ratio" "lower.limits"     "maxit"            "mnlam"           
-#&gt; [21] "mxit"             "mxitnr"           "newoffset"        "offset"          
-#&gt; [25] "parallel"         "penalty.factor"   "pmax"             "pmin"            
-#&gt; [29] "prec"             "predict.gamma"    "relax"            "s"               
-#&gt; [33] "standardize"      "thresh"           "trace.it"         "type.logistic"   
-#&gt; [37] "type.multinomial" "upper.limits"    </div></pre>
+#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alpha"                "big"                  "devmax"              
+#&gt;  [4] "dfmax"                "eps"                  "epsnr"               
+#&gt;  [7] "exact"                "exclude"              "exmx"                
+#&gt; [10] "fdev"                 "gamma"                "intercept"           
+#&gt; [13] "lambda"               "lambda.min.ratio"     "lower.limits"        
+#&gt; [16] "maxit"                "mnlam"                "mxit"                
+#&gt; [19] "mxitnr"               "nlambda"              "newoffset"           
+#&gt; [22] "offset"               "penalty.factor"       "pmax"                
+#&gt; [25] "pmin"                 "prec"                 "relax"               
+#&gt; [28] "s"                    "standardize"          "standardize.response"
+#&gt; [31] "thresh"               "trace.it"             "type.gaussian"       
+#&gt; [34] "type.logistic"        "type.multinomial"     "upper.limits"        </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

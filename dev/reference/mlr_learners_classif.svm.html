@@ -182,20 +182,21 @@ Calls <code><a href='https://rdrr.io/pkg/e1071/man/svm.html'>e1071::svm()</a></c
 <table class='table'>
 <tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr>
 <tr><td>cachesize</td><td>numeric</td><td>40</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>class.weights</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>coef0</td><td>numeric</td><td>0</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>cost</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>cross</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>decision.values</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>degree</td><td>integer</td><td>3</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>epsilon</td><td>numeric</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
+<tr><td>fitted</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>kernel</td><td>character</td><td>radial</td><td>linear, polynomial, radial, sigmoid</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>nu</td><td>numeric</td><td>0.5</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>scale</td><td>list</td><td>TRUE</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>shrinking</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>tolerance</td><td>numeric</td><td>0.001</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>type</td><td>character</td><td>C-classification</td><td>C-classification, nu-classification</td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>fitted</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>scale</td><td>list</td><td>TRUE</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>class.weights</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>decision.values</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 </table>
 
 
@@ -305,10 +306,10 @@ for established default tuning spaces.</p></li>
 #&gt; * Packages: e1071
 #&gt; * Predict Type: response
 #&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: multiclass, twoclass</div><div class='output co'>#&gt;  [1] "cachesize"       "coef0"           "cost"            "cross"          
-#&gt;  [5] "degree"          "gamma"           "kernel"          "nu"             
-#&gt;  [9] "shrinking"       "tolerance"       "type"            "fitted"         
-#&gt; [13] "scale"           "class.weights"   "decision.values"</div></pre>
+#&gt; * Properties: multiclass, twoclass</div><div class='output co'>#&gt;  [1] "cachesize"       "class.weights"   "coef0"           "cost"           
+#&gt;  [5] "cross"           "decision.values" "degree"          "epsilon"        
+#&gt;  [9] "fitted"          "gamma"           "kernel"          "nu"             
+#&gt; [13] "scale"           "shrinking"       "tolerance"       "type"           </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
