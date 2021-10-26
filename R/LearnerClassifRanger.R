@@ -50,7 +50,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
-        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict")),
+        num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict", "hotstart")),
         oob.error                    = p_lgl(default = TRUE, tags = "train"),
         regularization.factor        = p_uty(default = 1, tags = "train"),
         regularization.usedepth      = p_lgl(default = FALSE, tags = "train"),
@@ -61,7 +61,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train"),
         se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
-        split.select.weights         = p_dbl(0, 1, tags = "train"),
+        split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("gini", "extratrees"), default = "gini", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
         write.forest                 = p_lgl(default = TRUE, tags = "train")
@@ -77,7 +77,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error"),
+        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error", "hotstart_backward"),
         packages = "ranger",
         man = "mlr3learners::mlr_learners_classif.ranger"
       )
@@ -138,6 +138,12 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       } else {
         list(prob = prediction$predictions)
       }
+    },
+
+    .hotstart = function(task) {
+      model = self$model
+      model$num.trees = self$param_set$values$num.trees
+      model
     }
   )
 )
