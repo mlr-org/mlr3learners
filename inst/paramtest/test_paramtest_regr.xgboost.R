@@ -1,19 +1,53 @@
 library(mlr3learners)
+library(rvest)
+library(magrittr)
+
+add_params_xgboost = read_html("https://xgboost.readthedocs.io/en/latest/parameter.html") %>%
+  html_elements(c("li", "p")) %>%
+  html_text2() %>%
+  grep("default=", ., value = T) %>%
+  strsplit(., split = " ") %>%
+  mlr3misc::map_chr(., function(x) x[1]) %>%
+  gsub(",", replacement = "", .) %>%
+  ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
+  append(values = c("colsample_bylevel", "colsample_bynode")) %>%
+  # valyes which do not match regex
+  append(values = c("interaction_constraints", "monotone_constraints")) %>%
+  # only defined in help page but not in signature or website
+  append(values = c("lambda_bias"))
 
 test_that("regr.xgboost", {
   learner = lrn("regr.xgboost", nrounds = 1)
-  fun = xgboost::xgb.train
+  fun = list(xgboost::xgb.train, xgboost::xgboost, add_params_xgboost)
   exclude = c(
     "x", # handled by mlr3
     "params", # handled by mlr3
     "data", # handled by mlr3
-    "obj" # handled via type parameter
+    "obj", # handled via type parameter
+    "verbosity", # handled by mlr3
+    "seed", # not available in R package
+    "train", # handled by mlr3
+    "task", # handled by mlr3
+    "model_in", # handled by mlr3
+    "model_out", # handled by mlr3
+    "model_dir", # handled by mlr3
+    "dump_format", # CLI parameter, not for R package
+    "name_dump", # CLI parameter, not for R package
+    "name_pred", # CLI parameter, not for R package
+    "pred_margin", # CLI parameter, not for R package
+    "eval_metric", # handled by mlr3
+    "label", # handled by mlr3
+    "weight", # handled by mlr3
+    "nthread" # handled by mlr3
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })
 
 test_that("predict regr.xgboost", {
@@ -21,11 +55,15 @@ test_that("predict regr.xgboost", {
   fun = xgboost:::predict.xgb.Booster
   exclude = c(
     "object", # handled by mlr3
-    "newdata" # handled by mlr3
+    "newdata", # handled by mlr3
+    "objective" # defined in xgboost::xgboost and already in param set
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })

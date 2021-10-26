@@ -25,12 +25,20 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         abstol   = p_dbl(default = 1.0e-4, tags = "train"),
         censored = p_lgl(default = FALSE, tags = "train"),
         decay    = p_dbl(default = 0, tags = "train"),
+        entropy  = p_lgl(default = FALSE, tags = "train"),
+        mask     = p_uty(tags = "train"),
         maxit    = p_int(1L, default = 100L, tags = "train"),
+        MaxNWts  = p_int(1L, default = 1000L, tags = "train"),
         model    = p_lgl(default = FALSE, tags = "train"),
+        linout   = p_lgl(default = FALSE, tags = "train"),
         rang     = p_dbl(default = 0.7, tags = "train"),
         reltol   = p_dbl(default = 1.0e-8, tags = "train"),
+        size     = p_int(1L, tags = "train"),
+        skip     = p_lgl(default = FALSE, tags = "train"),
+        softmax  = p_lgl(default = FALSE, tags = "train"),
         summ     = p_fct(c("0", "1", "2", "3"), default = "0", tags = "train"),
-        trace    = p_lgl(default = TRUE, tags = "train")
+        trace    = p_lgl(default = TRUE, tags = "train"),
+        Wts      = p_uty(tags = "train")
       )
 
       super$initialize(

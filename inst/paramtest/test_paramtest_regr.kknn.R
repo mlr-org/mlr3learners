@@ -11,8 +11,11 @@ test_that("regr.kknn", {
     "contrasts" # causes lots of troubles just when setting the default
   )
 
-  ParamTest = run_paramtest(learner, fun, exclude)
+  ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
   expect_true(ParamTest, info = paste0(
-    "Missing parameters:",
-    paste0("- '", ParamTest$missing, "'", collapse = ",")))
+    "\nMissing parameters in mlr3 param set:\n",
+    paste0("- ", ParamTest$missing, "\n", collapse = ""),
+    "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
+    paste0("- ", ParamTest$extra, "\n", collapse = ""))
+    )
 })

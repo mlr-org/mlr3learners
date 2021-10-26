@@ -7,10 +7,15 @@ if (!ci_has_env("PARAMTEST")) {
 } else {
   # PARAMTEST
   get_stage("install") %>%
-    add_step(step_install_deps())
+    add_step(step_install_deps()) %>%
+    add_step(step_session_info())
 
   get_stage("script") %>%
-    add_code_step(testthat::test_dir(system.file("paramtest", package = "mlr3learners"),
+    # source helper_autotest.R from mlr3
+    add_step(step_install_cran("rvest")) %>% # for scraping xgboost params
+    add_step(step_install_cran("magrittr")) %>% # for scraping xgboost params
+    add_code_step(devtools::install()) %>%
+    add_code_step(testthat::test_dir("inst/paramtest",
       stop_on_failure = TRUE))
 }
 

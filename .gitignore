@@ -102,3 +102,5 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 *.code-workspace
 .vscode
+
+.Rprofile

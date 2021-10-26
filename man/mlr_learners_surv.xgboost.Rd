@@ -69,12 +69,14 @@ lrn("surv.xgboost")
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    feval \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   interaction_constraints \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
@@ -94,14 +96,18 @@ lrn("surv.xgboost")
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   process_type \tab character \tab default \tab default, update \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    refresh_leaf \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    sample_type \tab character \tab uniform \tab uniform, weighted \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    save_name \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    save_period \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   single_precision_histogram \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
