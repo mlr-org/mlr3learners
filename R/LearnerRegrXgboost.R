@@ -106,9 +106,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
       ps$add_dep("single_precision_histogram", "tree_method", CondEqual$new("hist"))
-      ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
-      ps$add_dep("lambda", "booster", CondEqual$new("gblinear"))
-      ps$add_dep("alpha", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
       ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
