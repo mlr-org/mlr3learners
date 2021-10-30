@@ -330,7 +330,7 @@ with <code>type</code> set to <code>"nonzero"</code>.</p><h4 class='hasAnchor' i
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>lambda</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
+<dt><code>lambda</code></dt><dd><p>(<code>numeric(1)</code>)<br />
 Custom <code>lambda</code>, defaults to the active lambda depending on parameter set.</p></dd>
 
 </dl><p></div></p>
@@ -350,29 +350,31 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"surv.glmnet"</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span>
-
-  <span class='co'># available parameters:</span>
-<span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; &lt;LearnerSurvGlmnet:surv.glmnet&gt;
-#&gt; * Model: -
-#&gt; * Parameters: list()
-#&gt; * Packages: glmnet
-#&gt; * Predict Type: crank
-#&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: selected_features, weights</div><div class='output co'>#&gt;  [1] "alignment"        "alpha"            "big"              "devmax"          
-#&gt;  [5] "dfmax"            "eps"              "epsnr"            "exact"           
-#&gt;  [9] "exclude"          "exmx"             "fdev"             "gamma"           
-#&gt; [13] "grouped"          "intercept"        "keep"             "lambda"          
-#&gt; [17] "lambda.min.ratio" "lower.limits"     "maxit"            "mnlam"           
-#&gt; [21] "mxit"             "mxitnr"           "newoffset"        "nlambda"         
-#&gt; [25] "offset"           "parallel"         "penalty.factor"   "pmax"            
-#&gt; [29] "pmin"             "prec"             "predict.gamma"    "relax"           
-#&gt; [33] "s"                "standardize"      "thresh"           "trace.it"        
-#&gt; [37] "type.logistic"    "type.multinomial" "upper.limits"    </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"surv.glmnet"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># available parameters:</span></span>
+<span class='r-in'><span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;LearnerSurvGlmnet:surv.glmnet&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Model: -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Parameters: list()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Packages: glmnet</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Predict Type: crank</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Feature types: logical, integer, numeric</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Properties: selected_features, weights</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "alignment"        "alpha"            "big"              "devmax"          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5] "dfmax"            "eps"              "epsnr"            "exact"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] "exclude"          "exmx"             "fdev"             "gamma"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "grouped"          "intercept"        "keep"             "lambda"          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] "lambda.min.ratio" "lower.limits"     "maxit"            "mnlam"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21] "mxit"             "mxitnr"           "newoffset"        "nlambda"         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "offset"           "parallel"         "penalty.factor"   "pmax"            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [29] "pmin"             "prec"             "predict.gamma"    "relax"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [33] "s"                "standardize"      "thresh"           "trace.it"        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37] "type.logistic"    "type.multinomial" "upper.limits"    </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

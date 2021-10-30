@@ -308,22 +308,24 @@ for established default tuning spaces.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.nnet"</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span>
-
-  <span class='co'># available parameters:</span>
-<span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; &lt;LearnerClassifNnet:classif.nnet&gt;
-#&gt; * Model: -
-#&gt; * Parameters: size=3
-#&gt; * Packages: nnet
-#&gt; * Predict Type: prob
-#&gt; * Feature types: numeric, factor, ordered
-#&gt; * Properties: multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "Hess"      "MaxNWts"   "Wts"       "abstol"    "censored"  "contrasts"
-#&gt;  [7] "decay"     "mask"      "maxit"     "na.action" "rang"      "reltol"   
-#&gt; [13] "size"      "skip"      "subset"    "trace"    </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"nnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.nnet"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># available parameters:</span></span>
+<span class='r-in'><span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;LearnerClassifNnet:classif.nnet&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Model: -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Parameters: size=3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Packages: nnet</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Predict Type: prob</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Feature types: numeric, factor, ordered</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Properties: multiclass, twoclass, weights</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "Hess"      "MaxNWts"   "Wts"       "abstol"    "censored"  "contrasts"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "decay"     "mask"      "maxit"     "na.action" "rang"      "reltol"   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "size"      "skip"      "subset"    "trace"    </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
