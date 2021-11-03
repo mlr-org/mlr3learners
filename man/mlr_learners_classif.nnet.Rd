@@ -62,7 +62,7 @@ lrn("classif.nnet")
 }
 
 \examples{
-if (requireNamespace("nnet")) {
+if (requireNamespace("nnet", quietly = TRUE)) {
   learner = mlr3::lrn("classif.nnet")
   print(learner)
 

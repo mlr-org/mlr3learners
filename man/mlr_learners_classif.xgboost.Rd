@@ -120,7 +120,7 @@ lrn("classif.xgboost")
 }
 
 \examples{
-if (requireNamespace("xgboost")) {
+if (requireNamespace("xgboost", quietly = TRUE)) {
   learner = mlr3::lrn("classif.xgboost")
   print(learner)
 

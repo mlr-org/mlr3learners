@@ -45,7 +45,7 @@ lrn("classif.lda")
 }
 
 \examples{
-if (requireNamespace("MASS")) {
+if (requireNamespace("MASS", quietly = TRUE)) {
   learner = mlr3::lrn("classif.lda")
   print(learner)
 

@@ -84,7 +84,7 @@ as the first factor level.
 }
 
 \examples{
-if (requireNamespace("glmnet")) {
+if (requireNamespace("glmnet", quietly = TRUE)) {
   learner = mlr3::lrn("classif.cv_glmnet")
   print(learner)
 

@@ -91,7 +91,7 @@ lrn("surv.glmnet")
 }
 
 \examples{
-if (requireNamespace("glmnet")) {
+if (requireNamespace("glmnet", quietly = TRUE)) {
   learner = mlr3::lrn("surv.glmnet")
   print(learner)
 

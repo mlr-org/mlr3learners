@@ -3,7 +3,7 @@ lrn = mlr3::lrn(id)
 pkgs = setdiff(lrn$packages, c("mlr3", "mlr3learners"))
 %>
 #' @examples
-#' if (<%= paste0("requireNamespace(\"", pkgs, "\")", collapse = " && ") %>) {
+#' if (<%= paste0("requireNamespace(\"", pkgs, "\", quietly = TRUE)", collapse = " && ") %>) {
 #'   learner = mlr3::lrn("<%= id %>")
 #'   print(learner)
 #'

@@ -120,7 +120,7 @@ would error. Just setting a nonsense default to workaround this.
 }
 
 \examples{
-if (requireNamespace("xgboost")) {
+if (requireNamespace("xgboost", quietly = TRUE)) {
   learner = mlr3::lrn("regr.xgboost")
   print(learner)
 

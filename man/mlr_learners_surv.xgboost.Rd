@@ -120,7 +120,7 @@ lrn("surv.xgboost")
 }
 
 \examples{
-if (requireNamespace("xgboost")) {
+if (requireNamespace("xgboost", quietly = TRUE)) {
   learner = mlr3::lrn("surv.xgboost")
   print(learner)
 

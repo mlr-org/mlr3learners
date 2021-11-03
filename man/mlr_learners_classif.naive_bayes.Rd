@@ -35,7 +35,7 @@ lrn("classif.naive_bayes")
 }
 
 \examples{
-if (requireNamespace("e1071")) {
+if (requireNamespace("e1071", quietly = TRUE)) {
   learner = mlr3::lrn("classif.naive_bayes")
   print(learner)
 

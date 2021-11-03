@@ -79,7 +79,7 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 
 \examples{
-if (requireNamespace("ranger")) {
+if (requireNamespace("ranger", quietly = TRUE)) {
   learner = mlr3::lrn("regr.ranger")
   print(learner)
 

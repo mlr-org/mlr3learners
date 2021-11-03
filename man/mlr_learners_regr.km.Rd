@@ -69,7 +69,7 @@ lrn("regr.km")
 }
 
 \examples{
-if (requireNamespace("DiceKriging")) {
+if (requireNamespace("DiceKriging", quietly = TRUE)) {
   learner = mlr3::lrn("regr.km")
   print(learner)
 

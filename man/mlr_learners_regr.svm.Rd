@@ -46,7 +46,7 @@ lrn("regr.svm")
 }
 
 \examples{
-if (requireNamespace("e1071")) {
+if (requireNamespace("e1071", quietly = TRUE)) {
   learner = mlr3::lrn("regr.svm")
   print(learner)
 
