@@ -21,7 +21,7 @@ lrn("classif.naive_bayes")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}
-\item Required Packages: \CRANpkg{e1071}
+\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{e1071}
 }
 }
 

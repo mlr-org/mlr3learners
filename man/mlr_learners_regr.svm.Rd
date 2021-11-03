@@ -21,7 +21,7 @@ lrn("regr.svm")
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{e1071}
+\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{e1071}
 }
 }
 

@@ -60,7 +60,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
         predict_types = c("distr", "crank"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error"),
-        packages = "ranger",
+        packages = c("mlr3learners", "ranger"),
         man = "mlr3learners::mlr_learners_surv.ranger"
       )
     },

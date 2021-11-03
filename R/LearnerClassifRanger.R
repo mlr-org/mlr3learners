@@ -78,7 +78,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "twoclass", "multiclass", "importance", "oob_error", "hotstart_backward"),
-        packages = "ranger",
+        packages = c("mlr3learners", "ranger"),
         man = "mlr3learners::mlr_learners_classif.ranger"
       )
     },

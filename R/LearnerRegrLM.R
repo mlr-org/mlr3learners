@@ -42,7 +42,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "factor", "character"),
         properties = c("weights", "loglik"),
-        packages = "stats",
+        packages = c("mlr3learners", "stats"),
         man = "mlr3learners::mlr_learners_regr.lm"
       )
     },

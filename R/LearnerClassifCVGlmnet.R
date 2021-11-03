@@ -80,7 +80,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "twoclass", "multiclass", "selected_features"),
-        packages = "glmnet",
+        packages = c("mlr3learners", "glmnet"),
         man = "mlr3learners::mlr_learners_classif.cv_glmnet"
       )
     },

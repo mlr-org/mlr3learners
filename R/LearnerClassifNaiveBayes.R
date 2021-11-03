@@ -32,7 +32,7 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
         predict_types = c("response", "prob"),
         properties = c("twoclass", "multiclass"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        packages = "e1071",
+        packages = c("mlr3learners", "e1071"),
         man = "mlr3learners::mlr_learners_classif.naive_bayes"
       )
     }

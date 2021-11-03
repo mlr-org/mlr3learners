@@ -40,7 +40,7 @@ lrn("classif.log_reg")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: 'stats'
+\item Required Packages: \CRANpkg{mlr3learners}, 'stats'
 }
 }
 

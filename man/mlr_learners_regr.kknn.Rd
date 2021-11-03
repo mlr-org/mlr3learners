@@ -32,7 +32,7 @@ lrn("regr.kknn")
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: \CRANpkg{kknn}
+\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{kknn}
 }
 }
 

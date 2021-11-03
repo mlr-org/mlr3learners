@@ -21,7 +21,7 @@ lrn("surv.ranger")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{distr}, \dQuote{crank}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: \CRANpkg{ranger}
+\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{ranger}
 }
 }
 

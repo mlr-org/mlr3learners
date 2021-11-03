@@ -132,7 +132,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward"),
-        packages = "xgboost",
+        packages = c("mlr3learners", "xgboost"),
         man = "mlr3learners::mlr_learners_classif.xgboost"
       )
     },

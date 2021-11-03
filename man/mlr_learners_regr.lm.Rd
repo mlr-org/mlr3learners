@@ -21,7 +21,7 @@ lrn("regr.lm")
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}, \dQuote{se}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{character}
-\item Required Packages: 'stats'
+\item Required Packages: \CRANpkg{mlr3learners}, 'stats'
 }
 }
 

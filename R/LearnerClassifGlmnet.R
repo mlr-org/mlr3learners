@@ -90,7 +90,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "twoclass", "multiclass"),
-        packages = "glmnet",
+        packages = c("mlr3learners", "glmnet"),
         man = "mlr3learners::mlr_learners_classif.glmnet"
       )
     },
