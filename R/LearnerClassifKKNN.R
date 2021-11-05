@@ -25,7 +25,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        k        = p_int(default = 7L, lower = 1L, tags = c("required", "train")),
+        k        = p_int(default = 7L, lower = 1L, tags = "train"),
         distance = p_dbl(0, default = 2, tags = "train"),
         kernel   = p_fct(c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
         scale    = p_lgl(default = TRUE, tags = "train"),
