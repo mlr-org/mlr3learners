@@ -7,6 +7,15 @@
 \description{
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
+
+If you want to use native early stopping \code{xgboost} implementation
+inside training pipeline, please provide validation rows in the task,
+set \code{early_stopping_rounds} value and left \code{watchlist} as \code{NULL}.
+If \code{xgb.DMatrix}'s in \code{watchlist} is provided and \code{early_stopping_rounds}
+is set, early stopping will also work, but such validation datasets will not
+processed by learner inside training pipeline, so this is a rare choice.
+With \code{watchlist = NULL} and \code{early_stopping_rounds = NULL} training will stop
+after no improvements during 10 rounds on training set.
 }
 \section{Custom mlr3 defaults}{
 
@@ -47,75 +56,75 @@ lrn("classif.xgboost")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 }
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   callbacks \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   eval_metric \tab list \tab error \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   feval \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   interaction_constraints \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
-   max_delta_step \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   max_depth \tab integer \tab 6 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   max_leaves \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   maximize \tab logical \tab NULL \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   min_child_weight \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   missing \tab numeric \tab NA \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   monotone_constraints \tab list \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   normalize_type \tab character \tab tree \tab tree, forest \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   objective \tab list \tab binary:logistic \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   process_type \tab character \tab default \tab default, update \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   refresh_leaf \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   reshape \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   sample_type \tab character \tab uniform \tab uniform, weighted \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   save_name \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   single_precision_histogram \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   training \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
-   updater \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
-   watchlist \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   xgb_model \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   Id \tab Type \tab Default \tab Range \tab Levels \cr
+   alpha \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   approxcontrib \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   base_score \tab numeric \tab 0.5 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   booster \tab character \tab gbtree \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab gbtree, gblinear, dart \cr
+   callbacks \tab list \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   colsample_bylevel \tab numeric \tab 1 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   colsample_bynode \tab numeric \tab 1 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   colsample_bytree \tab numeric \tab 1 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   disable_default_eval_metric \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   early_stopping_rounds \tab integer \tab NULL \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   eta \tab numeric \tab 0.3 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   eval_metric \tab list \tab error \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   feature_selector \tab character \tab cyclic \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab cyclic, shuffle, random, greedy, thrifty \cr
+   feval \tab list \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   gamma \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   grow_policy \tab character \tab depthwise \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab depthwise, lossguide \cr
+   interaction_constraints \tab list \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   lambda \tab numeric \tab 1 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   lambda_bias \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   max_bin \tab integer \tab 256 \tab \eqn{[2, \infty)}{[2, Inf)} \tab - \cr
+   max_delta_step \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   max_depth \tab integer \tab 6 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   max_leaves \tab integer \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   maximize \tab logical \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   min_child_weight \tab numeric \tab 1 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   missing \tab numeric \tab NA \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   monotone_constraints \tab list \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   normalize_type \tab character \tab tree \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab tree, forest \cr
+   nrounds \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   nthread \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   ntreelimit \tab integer \tab NULL \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   num_parallel_tree \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   objective \tab list \tab binary:logistic \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   one_drop \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   outputmargin \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   predcontrib \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   predictor \tab character \tab cpu_predictor \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab cpu_predictor, gpu_predictor \cr
+   predinteraction \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   predleaf \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   print_every_n \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   process_type \tab character \tab default \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab default, update \cr
+   rate_drop \tab numeric \tab 0 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   refresh_leaf \tab logical \tab TRUE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   reshape \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   seed_per_iteration \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   sampling_method \tab character \tab uniform \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab uniform, gradient_based \cr
+   sample_type \tab character \tab uniform \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab uniform, weighted \cr
+   save_name \tab list \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   save_period \tab integer \tab NULL \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   scale_pos_weight \tab numeric \tab 1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   sketch_eps \tab numeric \tab 0.03 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   skip_drop \tab numeric \tab 0 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   single_precision_histogram \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   subsample \tab numeric \tab 1 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   top_k \tab integer \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   training \tab logical \tab FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab TRUE, FALSE \cr
+   tree_method \tab character \tab auto \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab auto, exact, approx, hist, gpu_hist \cr
+   tweedie_variance_power \tab numeric \tab 1.5 \tab \eqn{[1, 2]}{[1, 2]} \tab - \cr
+   updater \tab list \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   verbose \tab integer \tab 1 \tab \eqn{[0, 2]}{[0, 2]} \tab - \cr
+   watchlist \tab list \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   xgb_model \tab list \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
 }
 }
 
