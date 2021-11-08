@@ -49,7 +49,10 @@
 
 <meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost" />
 <meta property="og:description" content="eXtreme Gradient Boosting classification.
-Calls xgboost::xgb.train() from package xgboost." />
+Calls xgboost::xgb.train() from package xgboost.
+If not specified otherwise, the evaluation metric is set to the default &quot;logloss&quot;
+for binary classification problems and set to &quot;mlogloss&quot; for multiclass problems.
+This was necessary to silence a deprecation warning." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -153,6 +156,9 @@ Calls xgboost::xgb.train() from package xgboost." />
     <div class="ref-description">
     <p>eXtreme Gradient Boosting classification.
 Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xgb.train()</a></code> from package <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a>.</p>
+<p>If not specified otherwise, the evaluation metric is set to the default <code>"logloss"</code>
+for binary classification problems and set to <code>"mlogloss"</code> for multiclass problems.
+This was necessary to silence a deprecation warning.</p>
     </div>
 
 
@@ -197,7 +203,7 @@ would error. Just setting a nonsense default to workaround this.
 <li><p>Task type: &#8220;classif&#8221;</p></li>
 <li><p>Predict Types: &#8220;response&#8221;, &#8220;prob&#8221;</p></li>
 <li><p>Feature Types: &#8220;logical&#8221;, &#8220;integer&#8221;, &#8220;numeric&#8221;</p></li>
-<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=mlr3learners'><span class="pkg">mlr3learners</span></a>, <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>, <a href='https://CRAN.R-project.org/package=mlr3learners'><span class="pkg">mlr3learners</span></a>, <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
@@ -216,7 +222,7 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>eval_metric</td><td>list</td><td>error</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>eval_metric</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feval</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
