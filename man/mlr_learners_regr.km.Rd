@@ -30,7 +30,7 @@ lrn("regr.km")
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}, \dQuote{se}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{DiceKriging}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{DiceKriging}
 }
 }
 

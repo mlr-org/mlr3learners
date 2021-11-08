@@ -22,8 +22,8 @@
 #'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #' - `objective`:
-#'   - Actual default: `reg:squarederror`
-#'   - Adjusted default: `survival:cox`
+#'   - Actual default: `reg:squarederror`.
+#'   - Adjusted default: `survival:cox`.
 #'   - Reason for change: Changed to a survival objective.
 #'
 #' @templateVar id surv.xgboost

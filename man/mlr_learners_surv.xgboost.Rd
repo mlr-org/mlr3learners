@@ -33,8 +33,8 @@ would error. Just setting a nonsense default to workaround this.
 }
 \item \code{objective}:
 \itemize{
-\item Actual default: \code{reg:squarederror}
-\item Adjusted default: \code{survival:cox}
+\item Actual default: \code{reg:squarederror}.
+\item Adjusted default: \code{survival:cox}.
 \item Reason for change: Changed to a survival objective.
 }
 }
@@ -53,7 +53,7 @@ lrn("surv.xgboost")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{crank}, \dQuote{lp}
 \item Feature Types: \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 }
 

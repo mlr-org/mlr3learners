@@ -39,7 +39,7 @@ lrn("classif.ranger")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{ranger}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{ranger}
 }
 }
 

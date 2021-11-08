@@ -23,7 +23,7 @@ lrn("surv.cv_glmnet")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{crank}, \dQuote{lp}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
 }
 }
 

@@ -24,7 +24,7 @@ lrn("classif.nnet")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{prob}, \dQuote{response}
 \item Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{nnet}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
 }
 }
 

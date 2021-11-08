@@ -24,7 +24,7 @@ lrn("classif.cv_glmnet")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
 }
 }
 

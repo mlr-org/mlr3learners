@@ -6,6 +6,10 @@
 #' eXtreme Gradient Boosting classification.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
+#' If not specified otherwise, the evaluation metric is set to the default `"logloss"`
+#' for binary classification problems and set to `"mlogloss"` for multiclass problems.
+#' This was necessary to silence a deprecation warning.
+#'
 #' @section Custom mlr3 defaults:
 #' - `nrounds`:
 #'   - Actual default: no default.
@@ -51,7 +55,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
-        eval_metric                 = p_uty(default = "error", tags = "train"),
+        eval_metric                 = p_uty(tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
         feval                       = p_uty(default = NULL, tags = "train"),
         gamma                       = p_dbl(0, default = 0, tags = c("train", "control")),
@@ -170,14 +174,25 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         stop("objective = 'multi:softmax' does not work with predict_type = 'prob'")
       }
 
-      # if we use softprob or softmax as objective we have to add the number of classes 'num_class'
-      if (pv$objective %in% c("multi:softprob", "multi:softmax")) {
-        pv$num_class = nlvls
-      }
+      switch(pv$objective,
+        "multi:softprob" =,
+        "multi:softmax" = {
+          # add the number of classes 'num_class'
+          pv$num_class = nlvls
+
+          # we have to set this to avoid a deprecation warning
+          pv$eval_metric = pv$eval_metric %??% "mlogloss"
+        },
+
+        "binary:logistic" = {
+          pv$eval_metric = pv$eval_metric %??% "logloss"
+        }
+      )
+
 
       data = task$data(cols = task$feature_names)
       # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
-      # task$truth() is guaranteed to have the factor levels in the right order
+      # note that task$truth() is guaranteed to have the factor levels in the right order
       label = nlvls - as.integer(task$truth())
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
 
