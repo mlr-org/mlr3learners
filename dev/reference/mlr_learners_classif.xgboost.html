@@ -49,10 +49,7 @@
 
 <meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost" />
 <meta property="og:description" content="eXtreme Gradient Boosting classification.
-Calls xgboost::xgb.train() from package xgboost.
-If not specified otherwise, the evaluation metric is set to the default &quot;logloss&quot;
-for binary classification problems and set to &quot;mlogloss&quot; for multiclass problems.
-This was necessary to silence a deprecation warning." />
+Calls xgboost::xgb.train() from package xgboost." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -156,9 +153,6 @@ This was necessary to silence a deprecation warning." />
     <div class="ref-description">
     <p>eXtreme Gradient Boosting classification.
 Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xgb.train()</a></code> from package <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a>.</p>
-<p>If not specified otherwise, the evaluation metric is set to the default <code>"logloss"</code>
-for binary classification problems and set to <code>"mlogloss"</code> for multiclass problems.
-This was necessary to silence a deprecation warning.</p>
     </div>
 
 
@@ -203,7 +197,7 @@ would error. Just setting a nonsense default to workaround this.
 <li><p>Task type: &#8220;classif&#8221;</p></li>
 <li><p>Predict Types: &#8220;response&#8221;, &#8220;prob&#8221;</p></li>
 <li><p>Feature Types: &#8220;logical&#8221;, &#8220;integer&#8221;, &#8220;numeric&#8221;</p></li>
-<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>, <a href='https://CRAN.R-project.org/package=mlr3learners'><span class="pkg">mlr3learners</span></a>, <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=mlr3learners'><span class="pkg">mlr3learners</span></a>, <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
@@ -222,7 +216,7 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>eval_metric</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>eval_metric</td><td>list</td><td>error</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feval</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
@@ -401,30 +395,29 @@ for established default tuning spaces.</p></li>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [11] "eta"                         "eval_metric"                </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "feature_selector"            "feval"                      </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [15] "gamma"                       "grow_policy"                </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] "interaction_constraints"     "iterationrange"             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "lambda"                      "lambda_bias"                </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [21] "max_bin"                     "max_delta_step"             </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [23] "max_depth"                   "max_leaves"                 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "maximize"                    "min_child_weight"           </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [27] "missing"                     "monotone_constraints"       </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [29] "normalize_type"              "nrounds"                    </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [31] "nthread"                     "ntreelimit"                 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [33] "num_parallel_tree"           "objective"                  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [35] "one_drop"                    "outputmargin"               </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [37] "predcontrib"                 "predictor"                  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [39] "predinteraction"             "predleaf"                   </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [41] "print_every_n"               "process_type"               </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [43] "rate_drop"                   "refresh_leaf"               </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [45] "reshape"                     "seed_per_iteration"         </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [47] "sampling_method"             "sample_type"                </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [49] "save_name"                   "save_period"                </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [51] "scale_pos_weight"            "sketch_eps"                 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [53] "skip_drop"                   "single_precision_histogram" </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [55] "strict_shape"                "subsample"                  </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [57] "top_k"                       "training"                   </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [59] "tree_method"                 "tweedie_variance_power"     </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [61] "updater"                     "verbose"                    </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [63] "watchlist"                   "xgb_model"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] "interaction_constraints"     "lambda"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "lambda_bias"                 "max_bin"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21] "max_delta_step"              "max_depth"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23] "max_leaves"                  "maximize"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "min_child_weight"            "missing"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [27] "monotone_constraints"        "normalize_type"             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [29] "nrounds"                     "nthread"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31] "ntreelimit"                  "num_parallel_tree"          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [33] "objective"                   "one_drop"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [35] "outputmargin"                "predcontrib"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37] "predictor"                   "predinteraction"            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [39] "predleaf"                    "print_every_n"              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [41] "process_type"                "rate_drop"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [43] "refresh_leaf"                "reshape"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [45] "seed_per_iteration"          "sampling_method"            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [47] "sample_type"                 "save_name"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [49] "save_period"                 "scale_pos_weight"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [51] "sketch_eps"                  "skip_drop"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [53] "single_precision_histogram"  "subsample"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [55] "top_k"                       "training"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [57] "tree_method"                 "tweedie_variance_power"     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [59] "updater"                     "verbose"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [61] "watchlist"                   "xgb_model"                  </span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
