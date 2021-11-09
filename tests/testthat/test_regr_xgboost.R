@@ -42,4 +42,3 @@ test_that("hotstart", {
   expect_equal(learner_4$param_set$values$nrounds, 5L)
   expect_equal(learner_4$state$param_vals$nrounds, 5L)
 })
-
