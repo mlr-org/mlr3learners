@@ -6,6 +6,15 @@
 #' eXtreme Gradient Boosting regression.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
+#' If you want to use native early stopping `xgboost` implementation
+#' inside training pipeline, please provide validation rows in the task,
+#' set `early_stopping_rounds` value and left `watchlist` as `NULL`.
+#' If `xgb.DMatrix`'s in `watchlist` is provided and `early_stopping_rounds`
+#' is set, early stopping will also work, but such validation datasets will not
+#' processed by learner inside training pipeline, so this is a rare choice.
+#' With `watchlist = NULL` and `early_stopping_rounds = NULL` training will stop
+#' after no improvements during 10 rounds on training set.
+#'
 #' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
 #' @templateVar id regr.xgboost
@@ -149,16 +158,32 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         pv$objective = "reg:squarederror"
       }
 
-      data = task$data(cols = task$feature_names)
-      target = task$data(cols = task$target_names)
+      train_ids = task$row_roles$use
+      data = task$data(rows = train_ids, cols = task$feature_names)
+      target = task$data(rows = train_ids, cols = task$target_names)
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pv$watchlist)) {
+      if (is.null(pv$watchlist) && is.null(pv$early_stopping_rounds)) {
+        # If watchlist & early_stopping_rounds both are not provided by user,
+        # training will stop after reaching maximum quality on train set
+        # (no further improvements during 10 rounds)
+        pv$early_stopping_rounds = 10 # hardcoded arbitrary value
         pv$watchlist = list(train = data)
+      } else if (is.null(pv$watchlist) && !is.null(pv$early_stopping_rounds)) {
+        # If watchlist is not provided as list of xgb.DMatrix's and
+        # early_stopping_rounds is set, early stopping will use task validation
+        # rows to monitor improvements
+        valid_ids = task$row_roles$validation
+        target_valid = task$data(rows = valid_ids, cols = task$target_names)[[1]]
+        data_valid = xgboost::xgb.DMatrix(
+          data = data.matrix(task$data(rows = valid_ids,
+                                       cols = task$feature_names)),
+          label = target_valid)
+        pv$watchlist = list(validation = data_valid)
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
