@@ -155,8 +155,24 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pv$watchlist)) {
+      if (is.null(pv$watchlist) && is.null(pv$early_stopping_rounds)) {
+        # If watchlist & early_stopping_rounds both are not provided by user,
+        # training will stop after reaching maximum quality on train set
+        # (no further improvements during 10 rounds)
+        pv$early_stopping_rounds = 10 # hardcoded arbitrary value
         pv$watchlist = list(train = data)
+      } else if (is.null(pv$watchlist) && !is.null(pv$early_stopping_rounds)) {
+        # If watchlist is not provided as list of xgb.DMatrix's and
+        # early_stopping_rounds is set, early stopping will use task validation
+        # rows to monitor improvements
+        valid_ids = task$row_roles$validation
+        label_valid = nlvls -
+          as.integer(task$data(rows = valid_ids, cols = task$target_names)[[1]])
+        data_valid = xgboost::xgb.DMatrix(
+          data = data.matrix(task$data(rows = valid_ids,
+                                       cols = task$feature_names)),
+          label = label_valid)
+        pv$watchlist = list(validation = data_valid)
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
