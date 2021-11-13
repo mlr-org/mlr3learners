@@ -164,7 +164,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
 
       if ("weights" %in% task$properties) {
-        xgboost::setinfo(data, "weight", task$weights$weight)
+        xgboost::setinfo(data, "weight",
+                         subset(task$weights, row_id %in% train_ids)$weight)
       }
 
       if (is.null(pv$watchlist) && is.null(pv$early_stopping_rounds)) {
@@ -183,6 +184,10 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           data = data.matrix(task$data(rows = valid_ids,
                                        cols = task$feature_names)),
           label = target_valid)
+        if ("weights" %in% task$properties) {
+          xgboost::setinfo(data_valid, "weight",
+                           subset(task$weights, row_id %in% valid_ids)$weight)
+        }
         pv$watchlist = list(validation = data_valid)
       }
 
