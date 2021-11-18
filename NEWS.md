@@ -1,7 +1,10 @@
 # mlr3learners 0.5.1
 
+- `eval_metric()` is now explicitly set for xgboost learners to silence a
+  deprecation warning.
 - Improved how the added hyperparameter `mtry.ratio` is converted to `mtry` to
   simplify tuning.
+- Multiple updates to hyperparameter sets.
 
 # mlr3learners 0.5.0
 
