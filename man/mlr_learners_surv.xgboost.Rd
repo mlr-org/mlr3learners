@@ -77,6 +77,7 @@ lrn("surv.xgboost")
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab list \tab - \tab  \tab - \cr
+   iterationrange \tab list \tab - \tab  \tab - \cr
    lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
@@ -108,6 +109,7 @@ lrn("surv.xgboost")
    sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    single_precision_histogram \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   strict_shape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab - \cr

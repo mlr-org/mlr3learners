@@ -69,18 +69,13 @@ lrn("classif.xgboost")
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-<<<<<<< HEAD
-   eval_metric \tab list \tab error \tab  \tab - \cr
+   eval_metric \tab list \tab - \tab  \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
    feval \tab list \tab NULL \tab  \tab - \cr
-=======
-   eval_metric \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   feval \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
->>>>>>> main
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab list \tab - \tab  \tab - \cr
+   iterationrange \tab list \tab - \tab  \tab - \cr
    lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
@@ -117,6 +112,7 @@ lrn("classif.xgboost")
    sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    single_precision_histogram \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   strict_shape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    training \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
