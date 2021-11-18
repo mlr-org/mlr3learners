@@ -47,11 +47,11 @@ lrn("classif.ranger")
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   always.split.variables \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   class.weights \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   always.split.variables \tab list \tab - \tab  \tab - \cr
+   class.weights \tab list \tab NULL \tab  \tab - \cr
+   holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
+   keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    min.node.size \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -61,20 +61,20 @@ lrn("classif.ranger")
    num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   regularization.factor \tab list \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   replace \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   regularization.factor \tab list \tab 1 \tab  \tab - \cr
+   regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   replace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab - \cr
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   se.method \tab character \tab infjack \tab jack, infjack \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   splitrule \tab character \tab gini \tab gini, extratrees \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   split.select.weights \tab list \tab NULL \tab  \tab - \cr
+   splitrule \tab character \tab gini \tab gini, extratrees \tab - \cr
+   verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
 }
 }
 

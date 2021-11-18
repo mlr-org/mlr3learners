@@ -4,7 +4,7 @@
 #' @import checkmate
 #' @importFrom R6 R6Class
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
-#' @importFrom stats predict
+#' @importFrom stats predict coef tail
 #'
 #' @description
 #' More learners are implemented in the [mlr3extralearners package](https://github.com/mlr-org/mlr3extralearners).
