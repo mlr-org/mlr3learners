@@ -62,7 +62,6 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      data = task$data()
 
       if ("weights" %in% task$properties) {
         pv$weights = task$weights$weight
@@ -71,7 +70,11 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         pv$summ = as.integer(pv$summ)
       }
 
-      invoke(nnet::multinom, data = data, .args = pv)
+      # nnet does not handle formulas without env, we need to create it
+      # here to work with `summary()`.
+      pv$formula = reformulate(".", response = task$target_names)
+
+      invoke(nnet::multinom, data = task$data(), .args = pv)
     },
 
     .predict = function(task) {
