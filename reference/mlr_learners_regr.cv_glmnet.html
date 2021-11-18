@@ -175,7 +175,7 @@ Calls <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmne
 <li><p>Task type: &#8220;regr&#8221;</p></li>
 <li><p>Predict Types: &#8220;response&#8221;</p></li>
 <li><p>Feature Types: &#8220;logical&#8221;, &#8220;integer&#8221;, &#8220;numeric&#8221;</p></li>
-<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a></p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>, <a href='https://CRAN.R-project.org/package=mlr3learners'><span class="pkg">mlr3learners</span></a>, <a href='https://CRAN.R-project.org/package=glmnet'><span class="pkg">glmnet</span></a></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
@@ -206,8 +206,8 @@ Calls <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmne
 <tr><td>mnlam</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>mxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>mxitnr</td><td>integer</td><td>25</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>newoffset</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>nfolds</td><td>integer</td><td>10</td><td></td><td>\([3, \infty)\)</td></tr>
+<tr><td>nlambda</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>offset</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>parallel</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>penalty.factor</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
@@ -218,6 +218,7 @@ Calls <code><a href='https://glmnet.stanford.edu/reference/cv.glmnet.html'>glmne
 <tr><td>relax</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>s</td><td>numeric</td><td>lambda.1se</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>standardize</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>standardize.response</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>thresh</td><td>numeric</td><td>1e-07</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>trace.it</td><td>integer</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>type.gaussian</td><td>character</td><td>-</td><td>covariance, naive</td><td>\((-\infty, \infty)\)</td></tr>
@@ -316,7 +317,7 @@ with <code>type</code> set to <code>"nonzero"</code>.</p><h4 class='hasAnchor' i
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>lambda</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code>)<br />
+<dt><code>lambda</code></dt><dd><p>(<code>numeric(1)</code>)<br />
 Custom <code>lambda</code>, defaults to the active lambda depending on parameter set.</p></dd>
 
 </dl><p></div></p>
@@ -336,30 +337,36 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"regr.cv_glmnet"</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span>
-
-  <span class='co'># available parameters:</span>
-<span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; &lt;LearnerRegrCVGlmnet:regr.cv_glmnet&gt;
-#&gt; * Model: -
-#&gt; * Parameters: family=gaussian
-#&gt; * Packages: glmnet
-#&gt; * Predict Type: response
-#&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: selected_features, weights</div><div class='output co'>#&gt;  [1] "alignment"        "alpha"            "big"              "devmax"          
-#&gt;  [5] "dfmax"            "eps"              "epsnr"            "exclude"         
-#&gt;  [9] "exmx"             "family"           "fdev"             "foldid"          
-#&gt; [13] "gamma"            "grouped"          "intercept"        "keep"            
-#&gt; [17] "lambda"           "lambda.min.ratio" "lower.limits"     "maxit"           
-#&gt; [21] "mnlam"            "mxit"             "mxitnr"           "newoffset"       
-#&gt; [25] "nfolds"           "offset"           "parallel"         "penalty.factor"  
-#&gt; [29] "pmax"             "pmin"             "prec"             "predict.gamma"   
-#&gt; [33] "relax"            "s"                "standardize"      "thresh"          
-#&gt; [37] "trace.it"         "type.gaussian"    "type.logistic"    "type.measure"    
-#&gt; [41] "type.multinomial" "upper.limits"    </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"glmnet"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"regr.cv_glmnet"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># available parameters:</span></span>
+<span class='r-in'><span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;LearnerRegrCVGlmnet:regr.cv_glmnet&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Model: -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Parameters: family=gaussian</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Packages: mlr3, mlr3learners, glmnet</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Predict Type: response</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Feature types: logical, integer, numeric</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Properties: selected_features, weights</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "alignment"            "alpha"                "big"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4] "devmax"               "dfmax"                "eps"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "epsnr"                "exclude"              "exmx"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10] "family"               "fdev"                 "foldid"              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "gamma"                "grouped"              "intercept"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16] "keep"                 "lambda"               "lambda.min.ratio"    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "lower.limits"         "maxit"                "mnlam"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22] "mxit"                 "mxitnr"               "nfolds"              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "nlambda"              "offset"               "parallel"            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [28] "penalty.factor"       "pmax"                 "pmin"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31] "prec"                 "predict.gamma"        "relax"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [34] "s"                    "standardize"          "standardize.response"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37] "thresh"               "trace.it"             "type.gaussian"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [40] "type.logistic"        "type.measure"         "type.multinomial"    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [43] "upper.limits"        </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

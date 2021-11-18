@@ -49,7 +49,10 @@
 
 <meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost" />
 <meta property="og:description" content="eXtreme Gradient Boosting classification.
-Calls xgboost::xgb.train() from package xgboost." />
+Calls xgboost::xgb.train() from package xgboost.
+If not specified otherwise, the evaluation metric is set to the default &quot;logloss&quot;
+for binary classification problems and set to &quot;mlogloss&quot; for multiclass problems.
+This was necessary to silence a deprecation warning." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -153,6 +156,9 @@ Calls xgboost::xgb.train() from package xgboost." />
     <div class="ref-description">
     <p>eXtreme Gradient Boosting classification.
 Calls <code><a href='https://rdrr.io/pkg/xgboost/man/xgb.train.html'>xgboost::xgb.train()</a></code> from package <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a>.</p>
+<p>If not specified otherwise, the evaluation metric is set to the default <code>"logloss"</code>
+for binary classification problems and set to <code>"mlogloss"</code> for multiclass problems.
+This was necessary to silence a deprecation warning.</p>
     </div>
 
 
@@ -197,7 +203,7 @@ would error. Just setting a nonsense default to workaround this.
 <li><p>Task type: &#8220;classif&#8221;</p></li>
 <li><p>Predict Types: &#8220;response&#8221;, &#8220;prob&#8221;</p></li>
 <li><p>Feature Types: &#8220;logical&#8221;, &#8220;integer&#8221;, &#8220;numeric&#8221;</p></li>
-<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
+<li><p>Required Packages: <a href='https://CRAN.R-project.org/package=mlr3'><span class="pkg">mlr3</span></a>, <a href='https://CRAN.R-project.org/package=mlr3learners'><span class="pkg">mlr3learners</span></a>, <a href='https://CRAN.R-project.org/package=xgboost'><span class="pkg">xgboost</span></a></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
@@ -213,9 +219,10 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>eval_metric</td><td>list</td><td>error</td><td></td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>eval_metric</td><td>list</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>feval</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
@@ -232,7 +239,7 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>missing</td><td>numeric</td><td>NA</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>monotone_constraints</td><td>list</td><td>0</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>normalize_type</td><td>character</td><td>tree</td><td>tree, forest</td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>nrounds</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>nrounds</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>nthread</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>ntreelimit</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr>
 <tr><td>num_parallel_tree</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
@@ -244,15 +251,19 @@ would error. Just setting a nonsense default to workaround this.
 <tr><td>predinteraction</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>predleaf</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr>
+<tr><td>process_type</td><td>character</td><td>default</td><td>default, update</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>reshape</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
+<tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>save_name</td><td>list</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>save_period</td><td>integer</td><td>NULL</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>sketch_eps</td><td>numeric</td><td>0.03</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
+<tr><td>single_precision_histogram</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
 <tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
 <tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr>
 <tr><td>training</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>\((-\infty, \infty)\)</td></tr>
@@ -367,48 +378,54 @@ for established default tuning spaces.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"xgboost"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.xgboost"</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span>
-
-  <span class='co'># available parameters:</span>
-<span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: xgboost</span></div><div class='output co'>#&gt; &lt;LearnerClassifXgboost:classif.xgboost&gt;
-#&gt; * Model: -
-#&gt; * Parameters: nrounds=1, nthread=1, verbose=0
-#&gt; * Packages: xgboost
-#&gt; * Predict Type: response
-#&gt; * Feature types: logical, integer, numeric
-#&gt; * Properties: importance, missings, multiclass, twoclass, weights</div><div class='output co'>#&gt;  [1] "alpha"                   "approxcontrib"          
-#&gt;  [3] "base_score"              "booster"                
-#&gt;  [5] "callbacks"               "colsample_bylevel"      
-#&gt;  [7] "colsample_bynode"        "colsample_bytree"       
-#&gt;  [9] "early_stopping_rounds"   "eta"                    
-#&gt; [11] "eval_metric"             "feature_selector"       
-#&gt; [13] "feval"                   "gamma"                  
-#&gt; [15] "grow_policy"             "interaction_constraints"
-#&gt; [17] "lambda"                  "lambda_bias"            
-#&gt; [19] "max_bin"                 "max_delta_step"         
-#&gt; [21] "max_depth"               "max_leaves"             
-#&gt; [23] "maximize"                "min_child_weight"       
-#&gt; [25] "missing"                 "monotone_constraints"   
-#&gt; [27] "normalize_type"          "nrounds"                
-#&gt; [29] "nthread"                 "ntreelimit"             
-#&gt; [31] "num_parallel_tree"       "objective"              
-#&gt; [33] "one_drop"                "outputmargin"           
-#&gt; [35] "predcontrib"             "predictor"              
-#&gt; [37] "predinteraction"         "predleaf"               
-#&gt; [39] "print_every_n"           "rate_drop"              
-#&gt; [41] "refresh_leaf"            "reshape"                
-#&gt; [43] "sample_type"             "save_name"              
-#&gt; [45] "save_period"             "scale_pos_weight"       
-#&gt; [47] "sketch_eps"              "skip_drop"              
-#&gt; [49] "subsample"               "top_k"                  
-#&gt; [51] "training"                "tree_method"            
-#&gt; [53] "tweedie_variance_power"  "updater"                
-#&gt; [55] "verbose"                 "watchlist"              
-#&gt; [57] "xgb_model"              </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"xgboost"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>learner</span> <span class='op'>=</span> <span class='fu'>mlr3</span><span class='fu'>::</span><span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span><span class='op'>(</span><span class='st'>"classif.xgboost"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>learner</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># available parameters:</span></span>
+<span class='r-in'><span class='va'>learner</span><span class='op'>$</span><span class='va'>param_set</span><span class='op'>$</span><span class='fu'>ids</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;LearnerClassifXgboost:classif.xgboost&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Model: -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Parameters: nrounds=1, nthread=1, verbose=0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Packages: mlr3, mlr3learners, xgboost</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Predict Type: response</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Feature types: logical, integer, numeric</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> * Properties: hotstart_forward, importance, missings, multiclass,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   twoclass, weights</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "alpha"                       "approxcontrib"              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3] "base_score"                  "booster"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5] "callbacks"                   "colsample_bylevel"          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "colsample_bynode"            "colsample_bytree"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] "disable_default_eval_metric" "early_stopping_rounds"      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] "eta"                         "eval_metric"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "feature_selector"            "feval"                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15] "gamma"                       "grow_policy"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] "interaction_constraints"     "iterationrange"             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "lambda"                      "lambda_bias"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21] "max_bin"                     "max_delta_step"             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23] "max_depth"                   "max_leaves"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "maximize"                    "min_child_weight"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [27] "missing"                     "monotone_constraints"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [29] "normalize_type"              "nrounds"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31] "nthread"                     "ntreelimit"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [33] "num_parallel_tree"           "objective"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [35] "one_drop"                    "outputmargin"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37] "predcontrib"                 "predictor"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [39] "predinteraction"             "predleaf"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [41] "print_every_n"               "process_type"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [43] "rate_drop"                   "refresh_leaf"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [45] "reshape"                     "seed_per_iteration"         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [47] "sampling_method"             "sample_type"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [49] "save_name"                   "save_period"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [51] "scale_pos_weight"            "sketch_eps"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [53] "skip_drop"                   "single_precision_histogram" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [55] "strict_shape"                "subsample"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [57] "top_k"                       "training"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [59] "tree_method"                 "tweedie_variance_power"     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [61] "updater"                     "verbose"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [63] "watchlist"                   "xgb_model"                  </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
