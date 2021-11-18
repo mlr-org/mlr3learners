@@ -79,7 +79,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         id = "regr.glmnet",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = "weights",
+        properties = c("weights", "selected_features", "importance"),
         packages = c("mlr3learners", "glmnet"),
         man = "mlr3learners::mlr_learners_regr.glmnet"
       )
@@ -95,6 +95,18 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
     #' @return (`character()`) of feature names.
     selected_features = function(lambda = NULL) {
       glmnet_selected_features(self, lambda)
+    },
+
+    #' @description
+    #' Returns importance scores, calculated from the path of lambda values.
+    #' First, the largest `lambda` at which the feature was first included in the model
+    #' with a nonzero coefficient is determined.
+    #' Second, the [rank()] of these lambda values is calculated (using averaging for ties)
+    #' and returned as importance scores.
+    #'
+    #' @return (named `numeric()`) of importance scores.
+    importance = function() {
+      glmnet_importance(self)
     }
   ),
 

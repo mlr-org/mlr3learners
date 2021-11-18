@@ -21,7 +21,7 @@ lrn("regr.xgboost")
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 }
 

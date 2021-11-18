@@ -10,7 +10,7 @@ test_that("autotest", {
   expect_true(result, info = result$error)
 })
 
-test_that("selected_features", {
+test_that("selected_features + importance", {
   task = tsk("mtcars")
   learner = lrn("regr.glmnet")
   learner$train(task)
@@ -23,5 +23,11 @@ test_that("selected_features", {
   expect_equal(
     learner$selected_features(Inf),
     character()
+  )
+
+  expect_numeric(
+    learner$importance(),
+    any.missing = FALSE,
+    names = "unique"
   )
 })

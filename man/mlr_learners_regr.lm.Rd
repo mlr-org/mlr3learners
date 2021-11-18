@@ -21,7 +21,7 @@ lrn("regr.lm")
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}, \dQuote{se}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{character}
-\item Required Packages: \CRANpkg{mlr3learners}, 'stats'
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
 }
 }
 
@@ -114,6 +114,7 @@ Other Learner:
 \itemize{
 \item \href{#method-new}{\code{LearnerRegrLM$new()}}
 \item \href{#method-loglik}{\code{LearnerRegrLM$loglik()}}
+\item \href{#method-importance}{\code{LearnerRegrLM$importance()}}
 \item \href{#method-clone}{\code{LearnerRegrLM$clone()}}
 }
 }
@@ -150,6 +151,21 @@ Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}
 \if{html}{\out{<div class="r">}}\preformatted{LearnerRegrLM$loglik()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-importance}{}}}
+\subsection{Method \code{importance()}}{
+Importance scores as \eqn{-log_{10}()}{-log10()} transformed \eqn{p}-values,
+extracted from \code{\link[=summary]{summary()}}.
+Does not work if the model has been fitted on factor features with more than 2 levels.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerRegrLM$importance()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Named \code{numeric()}.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

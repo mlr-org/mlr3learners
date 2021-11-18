@@ -89,7 +89,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = c("selected_features", "importance", "weights", "twoclass", "multiclass"),
         packages = c("mlr3learners", "glmnet"),
         man = "mlr3learners::mlr_learners_classif.glmnet"
       )
@@ -105,6 +105,18 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
     #' @return (`character()`) of feature names.
     selected_features = function(lambda = NULL) {
       glmnet_selected_features(self, lambda)
+    },
+
+    #' @description
+    #' Returns importance scores, calculated from the path of lambda values.
+    #' First, the largest `lambda` at which the feature was first included in the model
+    #' with a nonzero coefficient is determined.
+    #' Second, the [rank()] of these lambda values is calculated (using averaging for ties)
+    #' and returned as importance scores.
+    #'
+    #' @return (named `numeric()`) of importance scores.
+    importance = function() {
+      glmnet_importance(self)
     }
   ),
 

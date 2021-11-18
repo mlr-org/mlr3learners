@@ -53,6 +53,40 @@ glmnet_selected_features = function(self, lambda = NULL) {
 }
 
 
+glmnet_importance = function(self) {
+  find_lambda = function(M) {
+    pos = apply(M, 1L, function(x) {
+      i = wf(x == 0, use.names = FALSE)
+      if (length(i)) i else Inf
+    })
+  }
+
+  model = self$model$glmnet.fit %??% self$model
+  lambdas = model$lambda
+  M = coef(model)
+
+  if (is.list(M)) {
+    names(M)
+    rownames(M$virginica)
+
+  } else {
+    # * remove intercept row
+    # * reorder with increasing lambda
+    M = M[rownames(M) != "(Intercept)", order(lambdas), drop = FALSE]
+  }
+
+
+
+  # find position of smallest lambda with beta being penalized to 0
+  pos = apply(M, 1L, function(x) {
+    i = wf(x == 0, use.names = FALSE)
+    if (length(i)) i else Inf
+  })
+
+  sort(rank(pos, ties.method = "average"), decreasing = TRUE)
+}
+
+
 glmnet_invoke = function(data, target, pv, cv = FALSE) {
   saved_ctrl = glmnet::glmnet.control()
   on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))

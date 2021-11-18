@@ -53,7 +53,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "loglik"),
+        properties = c("weights", "twoclass", "loglik", "importance"),
         packages = c("mlr3learners", "stats"),
         man = "mlr3learners::mlr_learners_classif.log_reg"
       )
@@ -63,6 +63,15 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
     loglik = function() {
       extract_loglik(self)
+    },
+
+    #' @description
+    #' Importance scores as \eqn{-log_{10}()}{-log10()} transformed \eqn{p}-values,
+    #' extracted from [summary()].
+    #' Does not work if the model has been fitted on factor features with more than 2 levels.
+    #' @return Named `numeric()`.
+    importance = function() {
+      lin_model_importance(self)
     }
   ),
 

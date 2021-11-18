@@ -1,3 +1,5 @@
+opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))
+
 # p = probability for levs[2] => matrix with probs for levs[1] and levs[2]
 pvec2mat = function(p, levs) {
   stopifnot(is.numeric(p))
@@ -43,6 +45,3 @@ extract_loglik = function(self) {
   }
   stats::logLik(self$model)
 }
-
-
-opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))

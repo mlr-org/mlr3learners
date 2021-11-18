@@ -53,7 +53,7 @@ lrn("surv.xgboost")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{crank}, \dQuote{lp}
 \item Feature Types: \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 }
 

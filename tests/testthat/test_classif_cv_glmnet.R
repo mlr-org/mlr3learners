@@ -8,6 +8,10 @@ test_that("autotest", {
   skip_on_os("solaris")
   result = run_autotest(learner, exclude = "feat_single")
   expect_true(result, info = result$error)
+
+
+  learner = result$learner
+  learner$importance()
 })
 
 test_that("prob column reordering (#155)", {

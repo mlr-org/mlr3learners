@@ -24,7 +24,7 @@ lrn("classif.cv_glmnet")
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
 }
 }
 
@@ -149,6 +149,7 @@ Other Learner:
 \itemize{
 \item \href{#method-new}{\code{LearnerClassifCVGlmnet$new()}}
 \item \href{#method-selected_features}{\code{LearnerClassifCVGlmnet$selected_features()}}
+\item \href{#method-importance}{\code{LearnerClassifCVGlmnet$importance()}}
 \item \href{#method-clone}{\code{LearnerClassifCVGlmnet$clone()}}
 }
 }
@@ -196,6 +197,23 @@ Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
 }
 \subsection{Returns}{
 (\code{character()}) of feature names.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-importance}{}}}
+\subsection{Method \code{importance()}}{
+Returns importance scores, calculated from the path of lambda values.
+First, the largest \code{lambda} at which the feature was first included in the model
+with a nonzero coefficient is determined.
+Second, the \code{\link[=rank]{rank()}} of these lambda values is calculated (using averaging for ties)
+and returned as importance scores.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifCVGlmnet$importance()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+(named \code{numeric()}) of importance scores.
 }
 }
 \if{html}{\out{<hr>}}
