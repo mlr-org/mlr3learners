@@ -41,9 +41,9 @@ lrn("regr.kknn")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    k \tab integer \tab 7 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    distance \tab numeric \tab 2 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   scale \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   ykernel \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab - \cr
+   scale \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   ykernel \tab list \tab NULL \tab  \tab - \cr
 }
 }
 
