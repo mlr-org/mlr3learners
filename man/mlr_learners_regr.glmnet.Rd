@@ -48,47 +48,47 @@ lrn("regr.glmnet")
 \section{Parameters}{
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
-   alignment \tab character \tab lambda \tab lambda, fraction \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   alignment \tab character \tab lambda \tab lambda, fraction \tab - \cr
    alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    dfmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    epsnr \tab numeric \tab 1e-08 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   exact \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    exclude \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   family \tab character \tab gaussian \tab gaussian, poisson \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   family \tab character \tab gaussian \tab gaussian, poisson \tab - \cr
    fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    gamma \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   lambda \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   lambda \tab list \tab - \tab  \tab - \cr
    lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   lower.limits \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   lower.limits \tab list \tab - \tab  \tab - \cr
    maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   newoffset \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   newoffset \tab list \tab - \tab  \tab - \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   offset \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   penalty.factor \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   offset \tab list \tab NULL \tab  \tab - \cr
+   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   penalty.factor \tab list \tab - \tab  \tab - \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   type.gaussian \tab character \tab - \tab covariance, naive \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   type.logistic \tab character \tab - \tab Newton, modified.Newton \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   type.multinomial \tab character \tab - \tab ungrouped, grouped \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   upper.limits \tab list \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   type.gaussian \tab character \tab - \tab covariance, naive \tab - \cr
+   type.logistic \tab character \tab - \tab Newton, modified.Newton \tab - \cr
+   type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
+   upper.limits \tab list \tab - \tab  \tab - \cr
 }
 }
 

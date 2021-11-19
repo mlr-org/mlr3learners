@@ -29,21 +29,21 @@ lrn("classif.svm")
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    cachesize \tab numeric \tab 40 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   class.weights \tab list \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   class.weights \tab list \tab NULL \tab  \tab - \cr
    coef0 \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    cost \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    cross \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   decision.values \tab logical \tab FALSE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   decision.values \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    degree \tab integer \tab 3 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    epsilon \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   fitted \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   fitted \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    gamma \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   kernel \tab character \tab radial \tab linear, polynomial, radial, sigmoid \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   kernel \tab character \tab radial \tab linear, polynomial, radial, sigmoid \tab - \cr
    nu \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   scale \tab list \tab TRUE \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   shrinking \tab logical \tab TRUE \tab TRUE, FALSE \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale \tab list \tab TRUE \tab  \tab - \cr
+   shrinking \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    tolerance \tab numeric \tab 0.001 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   type \tab character \tab C-classification \tab C-classification, nu-classification \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   type \tab character \tab C-classification \tab C-classification, nu-classification \tab - \cr
 }
 }
 
