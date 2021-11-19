@@ -169,14 +169,14 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         pv$eval_metric = "cox-nloglik"
         label[status != 1] = -1L * label[status != 1]
         data = xgboost::xgb.DMatrix(
-          data = as.matrix(data),
+          data = as_numeric_matrix(data),
           label = label)
       } else {
         pv$eval_metric = "aft-nloglik"
         y_lower_bound = y_upper_bound = label
         y_upper_bound[status == 0] = Inf
 
-        data = xgboost::xgb.DMatrix(as.matrix(data))
+        data = xgboost::xgb.DMatrix(as_numeric_matrix(data))
         xgboost::setinfo(data, "label_lower_bound", y_lower_bound)
         xgboost::setinfo(data, "label_upper_bound", y_upper_bound)
       }
@@ -195,8 +195,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
-      newdata = data.matrix(task$data(cols = task$feature_names))
-      newdata = newdata[, model$feature_names, drop = FALSE]
+      newdata = as_numeric_matrix(ordered_features(task, self))
       lp = log(invoke(
         predict, model,
         newdata = newdata,

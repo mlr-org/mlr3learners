@@ -196,7 +196,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
       # note that task$truth() is guaranteed to have the factor levels in the right order
       label = nlvls - as.integer(task$truth())
-      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
+      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(data, "weight", task$weights$weight)
@@ -221,8 +221,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$objective = ifelse(nlvls == 2L, "binary:logistic", "multi:softprob")
       }
 
-      newdata = data.matrix(task$data(cols = task$feature_names))
-      newdata = newdata[, model$feature_names, drop = FALSE]
+      newdata = as_numeric_matrix(ordered_features(task, self))
       pred = invoke(predict, model, newdata = newdata, .args = pv)
 
       if (nlvls == 2L) { # binaryclass
@@ -264,7 +263,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       nlvls = length(task$class_names)
       data = task$data(cols = task$feature_names)
       label = nlvls - as.integer(task$truth())
-      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = label)
+      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
     }

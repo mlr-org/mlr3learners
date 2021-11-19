@@ -63,7 +63,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
 
     .predict = function(task) {
       model = self$model
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn,

@@ -75,7 +75,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      newdata = as_numeric_matrix(task$data(cols = task$feature_names))
+      newdata = as_numeric_matrix(ordered_features(task, self))
       newdata = newdata[, self$state$feature_names, drop = FALSE]
       p = invoke(predict, self$model,
         newdata = newdata,

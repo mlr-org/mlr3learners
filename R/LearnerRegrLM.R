@@ -68,7 +68,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
       se_fit = self$predict_type == "se"
       prediction = invoke(predict, object = self$model, newdata = newdata, se.fit = se_fit, .args = pv)
 

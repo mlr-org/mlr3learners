@@ -151,7 +151,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
+      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(data, "weight", task$weights$weight)
@@ -167,8 +167,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
-      newdata = data.matrix(task$data(cols = task$feature_names))
-      newdata = newdata[, model$feature_names, drop = FALSE]
+      newdata = as_numeric_matrix(ordered_features(task, self))
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
       list(response = response)
@@ -186,7 +185,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       # Construct data
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
+      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
     }

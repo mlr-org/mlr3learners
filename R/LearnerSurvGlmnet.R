@@ -107,7 +107,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
     },
 
     .predict = function(task) {
-      newdata = as.matrix(ordered_features(task, glmnet_feature_names(self$model)))
+      newdata = as.matrix(ordered_features(task, self))
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, "predict.gamma", "gamma")
       pv$s = glmnet_get_lambda(self, pv)
