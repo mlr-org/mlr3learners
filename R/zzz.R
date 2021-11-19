@@ -4,7 +4,7 @@
 #' @import checkmate
 #' @importFrom R6 R6Class
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
-#' @importFrom stats predict coef
+#' @importFrom stats predict coef reformulate
 #' @importFrom utils tail
 #'
 #' @description
