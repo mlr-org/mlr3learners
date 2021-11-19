@@ -62,7 +62,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, c("predict.method", "predict.prior"), c("method", "prior"))
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
 
       p = invoke(predict, self$model, newdata = newdata, .args = pv)
 

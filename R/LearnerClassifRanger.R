@@ -127,7 +127,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
 
       prediction = invoke(predict,
         self$model, data = newdata,
