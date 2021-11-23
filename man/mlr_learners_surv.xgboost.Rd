@@ -8,6 +8,11 @@
 eXtreme Gradient Boosting regression.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 }
+\note{
+To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
+against CUDA.
+See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
+}
 \section{Custom mlr3 defaults}{
 
 \itemize{

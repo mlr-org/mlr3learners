@@ -10,6 +10,7 @@
 #' for binary classification problems and set to `"mlogloss"` for multiclass problems.
 #' This was necessary to silence a deprecation warning.
 #'
+#' @template note_xgboost
 #' @section Custom mlr3 defaults:
 #' - `nrounds`:
 #'   - Actual default: no default.

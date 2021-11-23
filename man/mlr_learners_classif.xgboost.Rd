@@ -12,6 +12,11 @@ If not specified otherwise, the evaluation metric is set to the default \code{"l
 for binary classification problems and set to \code{"mlogloss"} for multiclass problems.
 This was necessary to silence a deprecation warning.
 }
+\note{
+To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
+against CUDA.
+See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
+}
 \section{Custom mlr3 defaults}{
 
 \itemize{

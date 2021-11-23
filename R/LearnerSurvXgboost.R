@@ -6,6 +6,8 @@
 #' eXtreme Gradient Boosting regression.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
+#' @template note_xgboost
+#'
 #' @section Custom mlr3 defaults:
 #' - `nrounds`:
 #'   - Actual default: no default.
