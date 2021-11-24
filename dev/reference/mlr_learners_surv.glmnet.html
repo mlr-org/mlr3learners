@@ -199,46 +199,46 @@ custom resampling strategies (blocked design, stratification).</p>
 
     
 <table class='table'>
-<tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr>
-<tr><td>alignment</td><td>character</td><td>lambda</td><td>lambda, fraction</td><td>-</td></tr>
-<tr><td>alpha</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>big</td><td>numeric</td><td>9.9e+35</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>devmax</td><td>numeric</td><td>0.999</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>dfmax</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
-<tr><td>eps</td><td>numeric</td><td>1e-06</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>epsnr</td><td>numeric</td><td>1e-08</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>exact</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>exclude</td><td>list</td><td>-</td><td></td><td>-</td></tr>
-<tr><td>exmx</td><td>numeric</td><td>250</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>fdev</td><td>numeric</td><td>1e-05</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>gamma</td><td>list</td><td>-</td><td></td><td>-</td></tr>
-<tr><td>grouped</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>intercept</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>keep</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>lambda</td><td>list</td><td>-</td><td></td><td>-</td></tr>
-<tr><td>lambda.min.ratio</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>lower.limits</td><td>list</td><td>-Inf</td><td></td><td>-</td></tr>
-<tr><td>maxit</td><td>integer</td><td>100000</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>mnlam</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>mxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>mxitnr</td><td>integer</td><td>25</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>newoffset</td><td>list</td><td>-</td><td></td><td>-</td></tr>
-<tr><td>nlambda</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr>
-<tr><td>offset</td><td>list</td><td>NULL</td><td></td><td>-</td></tr>
-<tr><td>parallel</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>penalty.factor</td><td>list</td><td>-</td><td></td><td>-</td></tr>
-<tr><td>pmax</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr>
-<tr><td>pmin</td><td>numeric</td><td>1e-09</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>prec</td><td>numeric</td><td>1e-10</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>predict.gamma</td><td>numeric</td><td>gamma.1se</td><td></td><td>\((-\infty, \infty)\)</td></tr>
-<tr><td>relax</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>s</td><td>numeric</td><td>0.01</td><td></td><td>\([0, \infty)\)</td></tr>
-<tr><td>standardize</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr>
-<tr><td>thresh</td><td>numeric</td><td>1e-07</td><td></td><td>\([0, \infty)\)</td></tr>
-<tr><td>trace.it</td><td>integer</td><td>0</td><td></td><td>\([0, 1]\)</td></tr>
-<tr><td>type.logistic</td><td>character</td><td>Newton</td><td>Newton, modified.Newton</td><td>-</td></tr>
-<tr><td>type.multinomial</td><td>character</td><td>ungrouped</td><td>ungrouped, grouped</td><td>-</td></tr>
-<tr><td>upper.limits</td><td>list</td><td>Inf</td><td></td><td>-</td></tr>
+<tr><td>Id</td><td>Type</td><td>Default</td><td>Range</td><td>Levels</td></tr>
+<tr><td>alignment</td><td>character</td><td>lambda</td><td>-</td><td>lambda, fraction</td></tr>
+<tr><td>alpha</td><td>numeric</td><td>1</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>big</td><td>numeric</td><td>9.9e+35</td><td>\((-\infty, \infty)\)</td><td>-</td></tr>
+<tr><td>devmax</td><td>numeric</td><td>0.999</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>dfmax</td><td>integer</td><td>-</td><td>\([0, \infty)\)</td><td>-</td></tr>
+<tr><td>eps</td><td>numeric</td><td>1e-06</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>epsnr</td><td>numeric</td><td>1e-08</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>exact</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>exclude</td><td>list</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>exmx</td><td>numeric</td><td>250</td><td>\((-\infty, \infty)\)</td><td>-</td></tr>
+<tr><td>fdev</td><td>numeric</td><td>1e-05</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>gamma</td><td>list</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>grouped</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>intercept</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>keep</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>lambda</td><td>list</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>lambda.min.ratio</td><td>numeric</td><td>-</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>lower.limits</td><td>list</td><td>-Inf</td><td>-</td><td>-</td></tr>
+<tr><td>maxit</td><td>integer</td><td>100000</td><td>\([1, \infty)\)</td><td>-</td></tr>
+<tr><td>mnlam</td><td>integer</td><td>5</td><td>\([1, \infty)\)</td><td>-</td></tr>
+<tr><td>mxit</td><td>integer</td><td>100</td><td>\([1, \infty)\)</td><td>-</td></tr>
+<tr><td>mxitnr</td><td>integer</td><td>25</td><td>\([1, \infty)\)</td><td>-</td></tr>
+<tr><td>newoffset</td><td>list</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>nlambda</td><td>integer</td><td>100</td><td>\([1, \infty)\)</td><td>-</td></tr>
+<tr><td>offset</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr>
+<tr><td>parallel</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>penalty.factor</td><td>list</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>pmax</td><td>integer</td><td>-</td><td>\([0, \infty)\)</td><td>-</td></tr>
+<tr><td>pmin</td><td>numeric</td><td>1e-09</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>prec</td><td>numeric</td><td>1e-10</td><td>\((-\infty, \infty)\)</td><td>-</td></tr>
+<tr><td>predict.gamma</td><td>numeric</td><td>gamma.1se</td><td>\((-\infty, \infty)\)</td><td>-</td></tr>
+<tr><td>relax</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>s</td><td>numeric</td><td>0.01</td><td>\([0, \infty)\)</td><td>-</td></tr>
+<tr><td>standardize</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr>
+<tr><td>thresh</td><td>numeric</td><td>1e-07</td><td>\([0, \infty)\)</td><td>-</td></tr>
+<tr><td>trace.it</td><td>integer</td><td>0</td><td>\([0, 1]\)</td><td>-</td></tr>
+<tr><td>type.logistic</td><td>character</td><td>Newton</td><td>-</td><td>Newton, modified.Newton</td></tr>
+<tr><td>type.multinomial</td><td>character</td><td>ungrouped</td><td>-</td><td>ungrouped, grouped</td></tr>
+<tr><td>upper.limits</td><td>list</td><td>Inf</td><td>-</td><td>-</td></tr>
 </table>
 
 
