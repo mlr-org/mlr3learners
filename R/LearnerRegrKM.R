@@ -103,12 +103,16 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      newdata = as.matrix(task$data(cols = task$feature_names))
+      newdata = as.matrix(ordered_features(task, self))
 
       jitter = pv$jitter
       if (!is.null(jitter) && jitter > 0) {
         newdata = newdata + stats::rnorm(length(newdata), mean = 0, sd = jitter)
       }
+
+      # this is required to allow utf8 names
+      # alternatively, we could set checkNames = FALSE
+      colnames(newdata) = make.names(colnames(newdata), unique = TRUE)
 
       p = invoke(DiceKriging::predict.km,
         self$model,

@@ -79,7 +79,7 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     },
 
     .predict = function(task) {
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newdata = newdata, type = "class")

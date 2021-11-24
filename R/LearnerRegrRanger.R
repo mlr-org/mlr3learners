@@ -125,7 +125,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
 
       prediction = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pv)
       list(response = prediction$predictions, se = prediction$se)

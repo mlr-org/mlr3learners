@@ -61,7 +61,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, c("predict.method", "predict.prior"), c("method", "prior"))
 
-      newdata = task$data(cols = task$feature_names)
+      newdata = ordered_features(task, self)
       p = invoke(predict, self$model, newdata = newdata, .args = pv)
 
       if (self$predict_type == "response") {

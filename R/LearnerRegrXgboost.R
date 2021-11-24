@@ -6,6 +6,10 @@
 #' eXtreme Gradient Boosting regression.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
+#' To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
+#' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
+#'
+#' @template note_xgboost
 #' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
 #' @templateVar id regr.xgboost
@@ -95,7 +99,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps$add_dep("print_every_n", "verbose", CondEqual$new(1L))
       ps$add_dep("sampling_method", "booster", CondEqual$new("gbtree"))
       ps$add_dep("sample_type", "booster", CondEqual$new("dart"))
-      ps$add_dep("normalize_type", "booster", CondEqual$new("gbtree"))
+      ps$add_dep("normalize_type", "booster", CondEqual$new("dart"))
       ps$add_dep("rate_drop", "booster", CondEqual$new("dart"))
       ps$add_dep("skip_drop", "booster", CondEqual$new("dart"))
       ps$add_dep("one_drop", "booster", CondEqual$new("dart"))
@@ -151,7 +155,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
+      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(data, "weight", task$weights$weight)
@@ -167,8 +171,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
-      newdata = data.matrix(task$data(cols = task$feature_names))
-      newdata = newdata[, model$feature_names, drop = FALSE]
+      newdata = as_numeric_matrix(ordered_features(task, self))
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
       list(response = response)
@@ -186,7 +189,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       # Construct data
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      data = xgboost::xgb.DMatrix(data = data.matrix(data), label = data.matrix(target))
+      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
     }
