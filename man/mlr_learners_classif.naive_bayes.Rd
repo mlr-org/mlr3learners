@@ -26,11 +26,11 @@ lrn("classif.naive_bayes")
 }
 
 \section{Parameters}{
-\tabular{llll}{
-   Id \tab Type \tab Default \tab Range \cr
-   eps \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   laplace \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   threshold \tab numeric \tab 0.001 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Range \tab Levels \cr
+   eps \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   laplace \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   threshold \tab numeric \tab 0.001 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
 }
 }
 

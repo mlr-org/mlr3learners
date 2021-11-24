@@ -27,36 +27,36 @@ lrn("regr.ranger")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   always.split.variables \tab list \tab - \tab  \tab - \cr
-   holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
-   keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   min.node.size \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   quantreg \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   regularization.factor \tab list \tab 1 \tab  \tab - \cr
-   regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   replace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab - \cr
-   sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
-   seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab list \tab NULL \tab  \tab - \cr
-   splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab - \cr
-   verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   Id \tab Type \tab Default \tab Range \tab Levels \cr
+   alpha \tab numeric \tab 0.5 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   always.split.variables \tab list \tab - \tab - \tab - \cr
+   holdout \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   importance \tab character \tab - \tab - \tab none, impurity, impurity_corrected, permutation \cr
+   keep.inbag \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   max.depth \tab integer \tab NULL \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
+   min.node.size \tab integer \tab 5 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   min.prop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   minprop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   mtry \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   mtry.ratio \tab numeric \tab - \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   num.random.splits \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   num.threads \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   num.trees \tab integer \tab 500 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   oob.error \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
+   quantreg \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   regularization.factor \tab list \tab 1 \tab - \tab - \cr
+   regularization.usedepth \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   replace \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
+   respect.unordered.factors \tab character \tab ignore \tab - \tab ignore, order, partition \cr
+   sample.fraction \tab numeric \tab - \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
+   save.memory \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   scale.permutation.importance \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   se.method \tab character \tab infjack \tab - \tab jack, infjack \cr
+   seed \tab integer \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   split.select.weights \tab list \tab NULL \tab - \tab - \cr
+   splitrule \tab character \tab variance \tab - \tab variance, extratrees, maxstat \cr
+   verbose \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
+   write.forest \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
 }
 }
 

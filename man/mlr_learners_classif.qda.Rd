@@ -33,12 +33,12 @@ lrn("classif.qda")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   method \tab character \tab moment \tab moment, mle, mve, t \tab - \cr
-   nu \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predict.method \tab character \tab plug-in \tab plug-in, predictive, debiased \tab - \cr
-   predict.prior \tab list \tab - \tab  \tab - \cr
-   prior \tab list \tab - \tab  \tab - \cr
+   Id \tab Type \tab Default \tab Range \tab Levels \cr
+   method \tab character \tab moment \tab - \tab moment, mle, mve, t \cr
+   nu \tab integer \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   predict.method \tab character \tab plug-in \tab - \tab plug-in, predictive, debiased \cr
+   predict.prior \tab list \tab - \tab - \tab - \cr
+   prior \tab list \tab - \tab - \tab - \cr
 }
 }
 
