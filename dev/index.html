@@ -33,6 +33,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,7 +47,7 @@
       </button>
 
       <div class="navbar-brand-container">
-        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
+        <a href="https://mlr-org.com" class="external-link"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/reference/figures/logo.png" id="hexlogo" alt="mlr-org"></a>
         <a class="navbar-brand" href="index.html">mlr3learners <small>v0.5.1-9000</small></a>
       </div>
     </div>
@@ -62,35 +64,35 @@
   <a href="news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://mlr3book.mlr-org.com">
+  <a href="https://mlr3book.mlr-org.com" class="external-link">
     <span class="fa fa-link"></span>
      
     mlr3book
   </a>
 </li>
 <li>
-  <a href="https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html">Additional Learners</a>
+  <a href="https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html" class="external-link">Additional Learners</a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3learners/">
+  <a href="https://github.com/mlr-org/mlr3learners/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/">
+  <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/" class="external-link">
     <span class="fa fa-comments"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://stackoverflow.com/questions/tagged/mlr">
+  <a href="https://stackoverflow.com/questions/tagged/mlr" class="external-link">
     <span class="fab fa-stack-overflow"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://mlr-org.com/">
+  <a href="https://mlr-org.com/" class="external-link">
     <span class="fa fa-rss"></span>
      
   </a>
@@ -107,35 +109,35 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="mlr3learners" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#mlr3learners" class="anchor"></a>mlr3learners</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="mlr3learners">mlr3learners<a class="anchor" aria-label="anchor" href="#mlr3learners"></a>
+</h1></div>
 <p>Package website: <a href="https://mlr3learners.mlr-org.com/">release</a> | <a href="https://mlr3learners.mlr-org.com/dev/">dev</a></p>
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com">mlr3</a>, maintained by the mlr-org team. Additional learners can be found in the <a href="https://github.com/mlr-org/mlr3extralearners">mlr3extralearners</a> package on GitHub. Request additional learners over there.</p>
-<p><span class="emoji" data-emoji="point_right">👉</span> <a href="https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html">Table of all learners</a></p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com" class="external-link">mlr3</a>, maintained by the mlr-org team. Additional learners can be found in the <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link">mlr3extralearners</a> package on GitHub. Request additional learners over there.</p>
+<p><span class="emoji" data-emoji="point_right">👉</span> <a href="https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html" class="external-link">Table of all learners</a></p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># CRAN version:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mlr3learners"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mlr3learners"</span><span class="op">)</span>
 
 <span class="co"># Development version:</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span><span class="op">)</span></code></pre></div>
 <p>If you also want to install all packages of the connected learners, set <code>dependencies = TRUE</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># CRAN version:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># Development version:</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"mlr-org/mlr3learners"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="classification-learners" class="section level2">
-<h2 class="hasAnchor">
-<a href="#classification-learners" class="anchor"></a>Classification Learners</h2>
+<div class="section level2">
+<h2 id="classification-learners">Classification Learners<a class="anchor" aria-label="anchor" href="#classification-learners"></a>
+</h2>
 <table class="table">
 <thead><tr class="header">
 <th align="left">ID</th>
@@ -146,22 +148,22 @@
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.cv_glmnet.html">classif.cv_glmnet</a></td>
 <td align="left">Penalized Logistic Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html">classif.glmnet</a></td>
 <td align="left">Penalized Logistic Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html">classif.kknn</a></td>
 <td align="left">k-Nearest Neighbors</td>
-<td align="left"><a href="https://cran.r-project.org/package=kknn">kknn</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=kknn" class="external-link">kknn</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.lda.html">classif.lda</a></td>
 <td align="left">LDA</td>
-<td align="left"><a href="https://cran.r-project.org/package=MASS">MASS</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=MASS" class="external-link">MASS</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.log_reg.html">classif.log_reg</a></td>
@@ -171,44 +173,44 @@
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.multinom.html">classif.multinom</a></td>
 <td align="left">Multinomial log-linear model</td>
-<td align="left"><a href="https://cran.r-project.org/package=nnet">nnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=nnet" class="external-link">nnet</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html">classif.naive_bayes</a></td>
 <td align="left">Naive Bayes</td>
-<td align="left"><a href="https://cran.r-project.org/package=e1071">e1071</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=e1071" class="external-link">e1071</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.nnet.html">classif.nnet</a></td>
 <td align="left">Single Layer Neural Network</td>
-<td align="left"><a href="https://cran.r-project.org/package=nnet">nnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=nnet" class="external-link">nnet</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.qda.html">classif.qda</a></td>
 <td align="left">QDA</td>
-<td align="left"><a href="https://cran.r-project.org/package=MASS">MASS</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=MASS" class="external-link">MASS</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html">classif.ranger</a></td>
 <td align="left">Random Forest</td>
-<td align="left"><a href="https://cran.r-project.org/package=ranger">ranger</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=ranger" class="external-link">ranger</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html">classif.svm</a></td>
 <td align="left">SVM</td>
-<td align="left"><a href="https://cran.r-project.org/package=e1071">e1071</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=e1071" class="external-link">e1071</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html">classif.xgboost</a></td>
 <td align="left">Gradient Boosting</td>
-<td align="left"><a href="https://cran.r-project.org/package=xgboost">xgboost</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=xgboost" class="external-link">xgboost</a></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="regression-learners" class="section level2">
-<h2 class="hasAnchor">
-<a href="#regression-learners" class="anchor"></a>Regression Learners</h2>
+<div class="section level2">
+<h2 id="regression-learners">Regression Learners<a class="anchor" aria-label="anchor" href="#regression-learners"></a>
+</h2>
 <table class="table">
 <thead><tr class="header">
 <th align="left">ID</th>
@@ -219,22 +221,22 @@
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.cv_glmnet.html">regr.cv_glmnet</a></td>
 <td align="left">Penalized Linear Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html">regr.glmnet</a></td>
 <td align="left">Penalized Linear Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html">regr.kknn</a></td>
 <td align="left">k-Nearest Neighbors</td>
-<td align="left"><a href="https://cran.r-project.org/package=kknn">kknn</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=kknn" class="external-link">kknn</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html">regr.km</a></td>
 <td align="left">Kriging</td>
-<td align="left"><a href="https://cran.r-project.org/package=DiceKriging">DiceKriging</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=DiceKriging" class="external-link">DiceKriging</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html">regr.lm</a></td>
@@ -244,24 +246,24 @@
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html">regr.ranger</a></td>
 <td align="left">Random Forest</td>
-<td align="left"><a href="https://cran.r-project.org/package=ranger">ranger</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=ranger" class="external-link">ranger</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html">regr.svm</a></td>
 <td align="left">SVM</td>
-<td align="left"><a href="https://cran.r-project.org/package=e1071">e1071</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=e1071" class="external-link">e1071</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html">regr.xgboost</a></td>
 <td align="left">Gradient Boosting</td>
-<td align="left"><a href="https://cran.r-project.org/package=xgboost">xgboost</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=xgboost" class="external-link">xgboost</a></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="survival-learners-via-mlr3proba" class="section level2">
-<h2 class="hasAnchor">
-<a href="#survival-learners-via-mlr3proba" class="anchor"></a>Survival Learners (via <a href="https://mlr3proba.mlr-org.com">mlr3proba</a>)</h2>
+<div class="section level2">
+<h2 id="survival-learners-via-mlr3proba">Survival Learners (via <a href="https://mlr3proba.mlr-org.com" class="external-link">mlr3proba</a>)<a class="anchor" aria-label="anchor" href="#survival-learners-via-mlr3proba"></a>
+</h2>
 <table class="table">
 <thead><tr class="header">
 <th align="left">ID</th>
@@ -272,22 +274,22 @@
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html">surv.cv_glmnet</a></td>
 <td align="left">Penalized Cox Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html">surv.glmnet</a></td>
 <td align="left">Penalized Cox Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet">glmnet</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html">surv.ranger</a></td>
 <td align="left">Random Forest</td>
-<td align="left"><a href="https://cran.r-project.org/package=ranger">ranger</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=ranger" class="external-link">ranger</a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html">surv.xgboost</a></td>
 <td align="left">Gradient Boosting</td>
-<td align="left"><a href="https://cran.r-project.org/package=xgboost">xgboost</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=xgboost" class="external-link">xgboost</a></td>
 </tr>
 </tbody>
 </table>
@@ -297,53 +299,63 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=mlr3learners">https://​cloud.r-project.org/​package=mlr3learners</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/mlr-org/mlr3learners/">https://​github.com/​mlr-org/​mlr3learners/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/mlr-org/mlr3learners/issues">https://​github.com/​mlr-org/​mlr3learners/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/LGPL-3">LGPL-3</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Michel Lang <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0001-9754-0393" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Quay Au <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5252-8902" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Stefan Coors <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7465-2146" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>
-<a href="https://pat-s.me">Patrick Schratz</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0748-6624" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=mlr3learners" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/mlr-org/mlr3learners/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/mlr-org/mlr3learners/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/mlr-org/mlr3learners/actions"><img src="https://github.com/mlr-org/mlr3learners/workflows/tic/badge.svg?branch=main" alt="tic"></a></li>
-<li><a href="https://github.com/mlr-org/mlr3learners/actions"><img src="https://github.com/mlr-org/mlr3learners/workflows/Parameter%20Check/badge.svg?branch=main" alt="Parameter Check"></a></li>
-<li><a href="https://cran.r-project.org/package=mlr3learners"><img src="https://www.r-pkg.org/badges/version-ago/mlr3learners" alt="CRAN Status"></a></li>
-<li><a href="https://stackoverflow.com/questions/tagged/mlr3"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a></li>
-<li><a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/"><img src="https://img.shields.io/badge/chat-mattermost-orange.svg" alt="Mattermost"></a></li>
+<li><a href="https://www.r-project.org/Licenses/LGPL-3" class="external-link">LGPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing mlr3learners</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Michel Lang <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0001-9754-0393" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Quay Au <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5252-8902" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Stefan Coors <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7465-2146" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://pat-s.me" class="external-link">Patrick Schratz</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0748-6624" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/mlr-org/mlr3learners/actions" class="external-link"><img src="https://github.com/mlr-org/mlr3learners/workflows/tic/badge.svg?branch=main" alt="tic"></a></li>
+<li><a href="https://github.com/mlr-org/mlr3learners/actions" class="external-link"><img src="https://github.com/mlr-org/mlr3learners/workflows/Parameter%20Check/badge.svg?branch=main" alt="Parameter Check"></a></li>
+<li><a href="https://cran.r-project.org/package=mlr3learners" class="external-link"><img src="https://www.r-pkg.org/badges/version-ago/mlr3learners" alt="CRAN Status"></a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/mlr3" class="external-link"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a></li>
+<li><a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/" class="external-link"><img src="https://img.shields.io/badge/chat-mattermost-orange.svg" alt="Mattermost"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Michel Lang, Quay Au, Stefan Coors, <a href="https://pat-s.me">Patrick Schratz</a>.</p>
+  <p></p>
+<p>Developed by Michel Lang, Quay Au, Stefan Coors, <a href="https://pat-s.me" class="external-link">Patrick Schratz</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
       </footer>
@@ -351,6 +363,8 @@
 
   
 
+
+  
 
   </body>
 </html>
