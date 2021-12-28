@@ -213,8 +213,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         test_label = nlvls - as.integer(task$truth(rows = task$row_roles$validation))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
-        pv$use_test_set = NULL
       }
+      pv$use_test_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
