@@ -73,9 +73,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
 
       self$state$model$kknn = p
 
-      result = list(response = p$fitted.values)
-      attr(result, "update_state") = TRUE
-      result
+      list(response = p$fitted.values)
     }
   )
 )
