@@ -8,7 +8,8 @@ pvec2mat = function(p, levs) {
 
 
 ordered_features = function(task, learner) {
-  task$data(cols = intersect(names(learner$state$task_prototype), task$feature_names))
+  cols = names(learner$state$task_prototype %??% learner$state$data_prototype)
+  task$data(cols = intersect(cols, task$feature_names))
 }
 
 

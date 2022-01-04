@@ -100,8 +100,8 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
 
   private = list(
     .train = function(task) {
-      data = as.matrix(task$data(cols = task$feature_names))
-      target = as.matrix(task$data(cols = task$target_names))
+      data = as_numeric_matrix(task$data(cols = task$feature_names))
+      target = as_numeric_matrix(task$data(cols = task$target_names))
       pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
         pv$weights = task$weights$weight
@@ -111,7 +111,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
     },
 
     .predict = function(task) {
-      newdata = as.matrix(ordered_features(task, self))
+      newdata = as_numeric_matrix(ordered_features(task, self))
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, "predict.gamma", "gamma")
 

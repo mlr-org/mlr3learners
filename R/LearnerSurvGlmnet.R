@@ -95,7 +95,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
 
   private = list(
     .train = function(task) {
-      data = as.matrix(task$data(cols = task$feature_names))
+      data = as_numeric_matrix(task$data(cols = task$feature_names))
       target = task$truth()
       pv = self$param_set$get_values(tags = "train")
       pv$family = "cox"
@@ -107,7 +107,7 @@ LearnerSurvGlmnet = R6Class("LearnerSurvGlmnet",
     },
 
     .predict = function(task) {
-      newdata = as.matrix(ordered_features(task, self))
+      newdata = as_numeric_matrix(ordered_features(task, self))
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, "predict.gamma", "gamma")
       pv$s = glmnet_get_lambda(self, pv)

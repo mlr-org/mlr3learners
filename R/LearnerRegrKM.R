@@ -79,7 +79,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
     .train = function(task) {
 
       pv = self$param_set$get_values(tags = "train")
-      data = as.matrix(task$data(cols = task$feature_names))
+      data = as_numeric_matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
       if (!is.null(pv$optim.method)) {
@@ -103,7 +103,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
-      newdata = as.matrix(ordered_features(task, self))
+      newdata = as_numeric_matrix(ordered_features(task, self))
 
       jitter = pv$jitter
       if (!is.null(jitter) && jitter > 0) {
