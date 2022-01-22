@@ -1,3 +1,9 @@
+# mlr3learners 0.5.2
+
+- Most learners now reorder the columns in the predict task according to the
+  order of columns in the training task.
+- Removed workaround for old mlr3 versions.
+
 # mlr3learners 0.5.1
 
 - `eval_metric()` is now explicitly set for xgboost learners to silence a
