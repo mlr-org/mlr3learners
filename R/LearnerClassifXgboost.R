@@ -109,7 +109,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
         watchlist                   = p_uty(default = NULL, tags = "train"),
         xgb_model                   = p_uty(default = NULL, tags = "train"),
-        use_test_set                = p_lgl(default = FALSE, tags = "train")
+        early_stopping_test_set     = p_lgl(default = FALSE, tags = "train")
       )
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
@@ -132,7 +132,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, use_test_set = FALSE)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_test_set = FALSE)
 
       super$initialize(
         id = "classif.xgboost",
@@ -208,13 +208,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$watchlist = list(train = data)
       }
 
-      if (pv$use_test_set) {
+      if (pv$early_stopping_test_set) {
         test_data = task$data(rows = task$row_roles$validation, cols = task$feature_names)
         test_label = nlvls - as.integer(task$truth(rows = task$row_roles$validation))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
-      pv$use_test_set = NULL
+      pv$early_stopping_test_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
