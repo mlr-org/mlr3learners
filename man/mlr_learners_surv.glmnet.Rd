@@ -156,6 +156,7 @@ Other Learner:
 \itemize{
 \item \href{#method-new}{\code{LearnerSurvGlmnet$new()}}
 \item \href{#method-selected_features}{\code{LearnerSurvGlmnet$selected_features()}}
+\item \href{#method-importance}{\code{LearnerSurvGlmnet$importance()}}
 \item \href{#method-clone}{\code{LearnerSurvGlmnet$clone()}}
 }
 }
@@ -203,6 +204,23 @@ Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
 }
 \subsection{Returns}{
 (\code{character()}) of feature names.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-importance}{}}}
+\subsection{Method \code{importance()}}{
+Returns importance scores, calculated from the path of lambda values.
+First, the largest \code{lambda} at which the feature was first included in the model
+with a nonzero coefficient is determined.
+Second, the \code{\link[=rank]{rank()}} of these lambda values is calculated (using averaging for ties)
+and returned as importance scores.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LearnerSurvGlmnet$importance()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+(named \code{numeric()}) of importance scores.
 }
 }
 \if{html}{\out{<hr>}}

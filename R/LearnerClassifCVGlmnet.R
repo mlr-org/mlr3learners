@@ -79,7 +79,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "twoclass", "multiclass", "selected_features"),
+        properties = c("importance", "selected_features", "weights", "twoclass", "multiclass"),
         packages = c("mlr3learners", "glmnet"),
         man = "mlr3learners::mlr_learners_classif.cv_glmnet"
       )
@@ -95,6 +95,18 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
     #' @return (`character()`) of feature names.
     selected_features = function(lambda = NULL) {
       glmnet_selected_features(self, lambda)
+    },
+
+    #' @description
+    #' Returns importance scores, calculated from the path of lambda values.
+    #' First, the largest `lambda` at which the feature was first included in the model
+    #' with a nonzero coefficient is determined.
+    #' Second, the [rank()] of these lambda values is calculated (using averaging for ties)
+    #' and returned as importance scores.
+    #'
+    #' @return (named `numeric()`) of importance scores.
+    importance = function() {
+      glmnet_importance(self)
     }
   ),
 

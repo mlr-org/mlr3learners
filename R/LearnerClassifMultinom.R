@@ -66,6 +66,7 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
       if ("weights" %in% task$properties) {
         pv$weights = task$weights$weight
       }
+
       if (!is.null(pv$summ)) {
         pv$summ = as.integer(pv$summ)
       }
