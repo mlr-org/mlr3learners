@@ -58,7 +58,7 @@ lrn("surv.xgboost")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{crank}, \dQuote{lp}
 \item Feature Types: \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3proba}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 }
 
@@ -127,7 +127,7 @@ lrn("surv.xgboost")
 }
 
 \examples{
-if (requireNamespace("xgboost", quietly = TRUE)) {
+if (requireNamespace("mlr3proba", quietly = TRUE) && requireNamespace("xgboost", quietly = TRUE)) {
   learner = mlr3::lrn("surv.xgboost")
   print(learner)
 

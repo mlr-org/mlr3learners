@@ -21,7 +21,7 @@ lrn("surv.ranger")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{distr}, \dQuote{crank}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{ranger}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3proba}, \CRANpkg{mlr3learners}, \CRANpkg{ranger}
 }
 }
 
@@ -34,7 +34,7 @@ lrn("surv.ranger")
    importance \tab character \tab - \tab - \tab none, impurity, impurity_corrected, permutation \cr
    keep.inbag \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
    max.depth \tab integer \tab NULL \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   min.node.size \tab integer \tab 5 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   min.node.size \tab integer \tab 3 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
    minprop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
    mtry \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
    mtry.ratio \tab numeric \tab - \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
@@ -76,7 +76,7 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 
 \examples{
-if (requireNamespace("ranger", quietly = TRUE)) {
+if (requireNamespace("mlr3proba", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE)) {
   learner = mlr3::lrn("surv.ranger")
   print(learner)
 

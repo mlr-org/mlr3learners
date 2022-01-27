@@ -63,13 +63,14 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     },
 
     .predict = function(task) {
+      pv = self$param_set$get_values(tags = "predict")
       model = self$state$model
       newdata = ordered_features(task, self)
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn,
           formula = model$formula, train = model$data,
-          test = newdata, .args = model$pv)
+          test = newdata, .args = insert_named(model$pv, pv))
       })
 
       self$state$model$kknn = p

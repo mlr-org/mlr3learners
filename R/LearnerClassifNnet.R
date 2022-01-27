@@ -74,15 +74,16 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     },
 
     .predict = function(task) {
+      pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newdata = newdata, type = "class")
+        response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pv)
         return(list(response = response))
       } else {
-        lvls = self$model$lev
-        prob = invoke(predict, self$model, newdata = newdata, type = "raw")
+        prob = invoke(predict, self$model, newdata = newdata, type = "raw", .args = pv)
 
+        lvls = self$model$lev
         if (length(lvls) == 2L) {
           prob = pvec2mat(prob[, 1L], lvls)
         }

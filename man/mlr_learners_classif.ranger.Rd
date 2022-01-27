@@ -53,7 +53,7 @@ lrn("classif.ranger")
    importance \tab character \tab - \tab - \tab none, impurity, impurity_corrected, permutation \cr
    keep.inbag \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
    max.depth \tab integer \tab NULL \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   min.node.size \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
+   min.node.size \tab integer \tab NULL \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
    min.prop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
    minprop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
    mtry \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr

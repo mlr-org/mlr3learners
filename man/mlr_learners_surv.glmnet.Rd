@@ -41,7 +41,7 @@ lrn("surv.glmnet")
 \item Task type: \dQuote{surv}
 \item Predict Types: \dQuote{crank}, \dQuote{lp}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3proba}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
 }
 }
 
@@ -91,7 +91,7 @@ lrn("surv.glmnet")
 }
 
 \examples{
-if (requireNamespace("glmnet", quietly = TRUE)) {
+if (requireNamespace("mlr3proba", quietly = TRUE) && requireNamespace("glmnet", quietly = TRUE)) {
   learner = mlr3::lrn("surv.glmnet")
   print(learner)
 
