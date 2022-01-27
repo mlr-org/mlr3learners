@@ -106,7 +106,8 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
-      prediction = predict(object = self$model, data = newdata)
+
+      prediction = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pv)
       mlr3proba::.surv_return(times = prediction$unique.death.times, surv = prediction$survival)
     }
   )
