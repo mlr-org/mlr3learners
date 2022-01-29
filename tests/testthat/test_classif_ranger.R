@@ -74,3 +74,17 @@ test_that("convert_ratio", {
   learner$param_set$values$mtry = 10
   expect_equal(learner$train(task)$model$mtry, 10)
 })
+
+test_that("default_values", {
+  learner = lrn("classif.ranger")
+  search_space = ps(
+    replace = p_lgl(),
+    sample.fraction = p_dbl(0.1, 1),
+    num.trees = p_int(1, 2000),
+    mtry.ratio = p_dbl(0, 1)
+  )
+  task = tsk("pima")
+
+  values = default_values(learner, search_space, task)
+  expect_names(names(values), permutation.of =  c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
+})

@@ -147,3 +147,15 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     }
   )
 )
+
+#' @export
+default_values.LearnerClassifRanger = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    mtry = floor(sqrt(length(task$feature_names))),
+    mtry.ratio = floor(sqrt(length(task$feature_names))) / length(task$feature_names),
+    min.node.size = if (x$predict_type == "response") 5 else 10,
+    sample.fraction = 1
+  )
+  defaults = insert_named(x$param_set$default, special_defaults)
+  defaults[search_space$ids()]
+}
