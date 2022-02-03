@@ -52,3 +52,17 @@ test_that("mtry.ratio", {
     5
   )
 })
+
+test_that("default_values", {
+  learner = lrn("regr.ranger")
+  search_space = ps(
+    replace = p_lgl(),
+    sample.fraction = p_dbl(0.1, 1),
+    num.trees = p_int(1, 2000),
+    mtry.ratio = p_dbl(0, 1)
+  )
+  task = tsk("pima")
+
+  values = default_values(learner, search_space, task)
+  expect_names(names(values), permutation.of =  c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
+})
