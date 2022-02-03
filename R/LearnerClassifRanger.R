@@ -156,6 +156,6 @@ default_values.LearnerClassifRanger = function(x, search_space, task, ...) { # n
     min.node.size = if (x$predict_type == "response") 5 else 10,
     sample.fraction = 1
   )
-  defaults = insert_named(x$param_set$default, special_defaults)
+  defaults = insert_named(default_values(x$param_set), special_defaults)
   defaults[search_space$ids()]
 }

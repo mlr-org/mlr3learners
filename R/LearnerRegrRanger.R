@@ -138,3 +138,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     }
   )
 )
+
+#' @export
+default_values.LearnerRegrRanger = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    mtry = floor(sqrt(length(task$feature_names))),
+    mtry.ratio = floor(sqrt(length(task$feature_names))) / length(task$feature_names),
+    sample.fraction = 1
+  )
+  defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[search_space$ids()]
+}
