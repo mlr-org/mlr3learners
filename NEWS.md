@@ -1,3 +1,7 @@
+# mlr3learners 0.5.2.9000
+
+-  Added `default_values()` function for ranger and svm learners.
+
 # mlr3learners 0.5.2
 
 - Most learners now reorder the columns in the predict task according to the
