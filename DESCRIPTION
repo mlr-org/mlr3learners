@@ -48,7 +48,8 @@ Suggests:
     testthat (>= 3.0.0),
     xgboost
 Remotes:
-    mlr-org/mlr3@default_hyperparameter
+    mlr-org/mlr3@default_hyperparameter,
+    mlr-org/paradox@default_hyperparameter
 Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no
