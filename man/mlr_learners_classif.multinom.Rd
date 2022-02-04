@@ -27,25 +27,25 @@ lrn("classif.multinom")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   Hess \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   abstol \tab numeric \tab 1e-04 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   censored \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   decay \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   entropy \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   mask \tab list \tab - \tab - \tab - \cr
-   maxit \tab integer \tab 100 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   MaxNWts \tab integer \tab 1000 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   model \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   linout \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   rang \tab numeric \tab 0.7 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   reltol \tab numeric \tab 1e-08 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   size \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   skip \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   softmax \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   summ \tab character \tab 0 \tab - \tab 0, 1, 2, 3 \cr
-   trace \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   Wts \tab list \tab - \tab - \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   Hess \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   abstol \tab numeric \tab 1e-04 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   censored \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   entropy \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   mask \tab untyped \tab - \tab  \tab - \cr
+   maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   MaxNWts \tab integer \tab 1000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   model \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   linout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   rang \tab numeric \tab 0.7 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   reltol \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   size \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   skip \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   softmax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   summ \tab character \tab 0 \tab 0, 1, 2, 3 \tab - \cr
+   trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   Wts \tab untyped \tab - \tab  \tab - \cr
 }
 }
 

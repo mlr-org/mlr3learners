@@ -47,46 +47,46 @@ lrn("surv.glmnet")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   alignment \tab character \tab lambda \tab - \tab lambda, fraction \cr
-   alpha \tab numeric \tab 1 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   big \tab numeric \tab 9.9e+35 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   devmax \tab numeric \tab 0.999 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   dfmax \tab integer \tab - \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   eps \tab numeric \tab 1e-06 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   epsnr \tab numeric \tab 1e-08 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   exact \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   exclude \tab list \tab - \tab - \tab - \cr
-   exmx \tab numeric \tab 250 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   fdev \tab numeric \tab 1e-05 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   gamma \tab list \tab - \tab - \tab - \cr
-   grouped \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   intercept \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   keep \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   lambda \tab list \tab - \tab - \tab - \cr
-   lambda.min.ratio \tab numeric \tab - \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   lower.limits \tab list \tab -Inf \tab - \tab - \cr
-   maxit \tab integer \tab 100000 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   mnlam \tab integer \tab 5 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   mxit \tab integer \tab 100 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   mxitnr \tab integer \tab 25 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   newoffset \tab list \tab - \tab - \tab - \cr
-   nlambda \tab integer \tab 100 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   offset \tab list \tab NULL \tab - \tab - \cr
-   parallel \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   penalty.factor \tab list \tab - \tab - \tab - \cr
-   pmax \tab integer \tab - \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   pmin \tab numeric \tab 1e-09 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   prec \tab numeric \tab 1e-10 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   predict.gamma \tab numeric \tab gamma.1se \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   relax \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   s \tab numeric \tab 0.01 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   standardize \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   thresh \tab numeric \tab 1e-07 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   trace.it \tab integer \tab 0 \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   type.logistic \tab character \tab Newton \tab - \tab Newton, modified.Newton \cr
-   type.multinomial \tab character \tab ungrouped \tab - \tab ungrouped, grouped \cr
-   upper.limits \tab list \tab Inf \tab - \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alignment \tab character \tab lambda \tab lambda, fraction \tab - \cr
+   alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   dfmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   epsnr \tab numeric \tab 1e-08 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   exclude \tab untyped \tab - \tab  \tab - \cr
+   exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   gamma \tab untyped \tab - \tab  \tab - \cr
+   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   lambda \tab untyped \tab - \tab  \tab - \cr
+   lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   lower.limits \tab untyped \tab -  , Inf \tab  \tab - \cr
+   maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   newoffset \tab untyped \tab - \tab  \tab - \cr
+   nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   offset \tab untyped \tab  \tab  \tab - \cr
+   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   penalty.factor \tab untyped \tab - \tab  \tab - \cr
+   pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predict.gamma \tab numeric \tab gamma.1se \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   type.logistic \tab character \tab Newton \tab Newton, modified.Newton \tab - \cr
+   type.multinomial \tab character \tab ungrouped \tab ungrouped, grouped \tab - \cr
+   upper.limits \tab untyped \tab Inf \tab  \tab - \cr
 }
 }
 

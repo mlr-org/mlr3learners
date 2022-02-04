@@ -9,7 +9,7 @@ test_that("autotest", {
 
 test_that("custom model", {
   task = tsk("iris")
-  learner = mlr3::lrn("classif.kknn")
+  learner = mlr3::lrn("classif.kknn", store_model = TRUE)
   expect_null(learner$model)
 
   learner$train(task)
@@ -27,6 +27,10 @@ test_that("custom model", {
   expect_formula(mod$formula)
   expect_data_table(mod$data)
   expect_list(mod$pv, names = "unique")
+
+  learner$param_set$values = list(k = 3, store_model = FALSE)
+  learner$train(task)$predict(task)
+  expect_null(learner$model$kknn)
 })
 
 test_that("error for k >= n", {

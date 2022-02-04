@@ -36,35 +36,35 @@ lrn("regr.km")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   bias.correct \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   checkNames \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   coef.cov \tab list \tab NULL \tab - \tab - \cr
-   coef.trend \tab list \tab NULL \tab - \tab - \cr
-   coef.var \tab list \tab NULL \tab - \tab - \cr
-   control \tab list \tab NULL \tab - \tab - \cr
-   cov.compute \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   covtype \tab character \tab matern5_2 \tab - \tab gauss, matern5_2, matern3_2, exp, powexp \cr
-   estim.method \tab character \tab MLE \tab - \tab MLE, LOO \cr
-   gr \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   iso \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   jitter \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   kernel \tab list \tab NULL \tab - \tab - \cr
-   knots \tab list \tab NULL \tab - \tab - \cr
-   light.return \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   lower \tab list \tab NULL \tab - \tab - \cr
-   multistart \tab integer \tab 1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   noise.var \tab list \tab NULL \tab - \tab - \cr
-   nugget \tab numeric \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   nugget.estim \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   nugget.stability \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   optim.method \tab character \tab BFGS \tab - \tab BFGS, gen \cr
-   parinit \tab list \tab NULL \tab - \tab - \cr
-   penalty \tab list \tab NULL \tab - \tab - \cr
-   scaling \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   se.compute \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   type \tab character \tab SK \tab - \tab SK, UK \cr
-   upper \tab list \tab NULL \tab - \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   bias.correct \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   checkNames \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   coef.cov \tab untyped \tab  \tab  \tab - \cr
+   coef.trend \tab untyped \tab  \tab  \tab - \cr
+   coef.var \tab untyped \tab  \tab  \tab - \cr
+   control \tab untyped \tab  \tab  \tab - \cr
+   cov.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   covtype \tab character \tab matern5_2 \tab gauss, matern5_2, matern3_2, exp, powexp \tab - \cr
+   estim.method \tab character \tab MLE \tab MLE, LOO \tab - \cr
+   gr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   iso \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   jitter \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab untyped \tab  \tab  \tab - \cr
+   knots \tab untyped \tab  \tab  \tab - \cr
+   light.return \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   lower \tab untyped \tab  \tab  \tab - \cr
+   multistart \tab integer \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   noise.var \tab untyped \tab  \tab  \tab - \cr
+   nugget \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nugget.estim \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   nugget.stability \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   optim.method \tab character \tab BFGS \tab BFGS, gen \tab - \cr
+   parinit \tab untyped \tab  \tab  \tab - \cr
+   penalty \tab untyped \tab  \tab  \tab - \cr
+   scaling \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   se.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   type \tab character \tab SK \tab SK, UK \tab - \cr
+   upper \tab untyped \tab  \tab  \tab - \cr
 }
 }
 

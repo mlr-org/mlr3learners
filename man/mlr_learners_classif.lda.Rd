@@ -33,14 +33,14 @@ lrn("classif.lda")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   dimen \tab list \tab - \tab - \tab - \cr
-   method \tab character \tab moment \tab - \tab moment, mle, mve, t \cr
-   nu \tab integer \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   predict.method \tab character \tab plug-in \tab - \tab plug-in, predictive, debiased \cr
-   predict.prior \tab list \tab - \tab - \tab - \cr
-   prior \tab list \tab - \tab - \tab - \cr
-   tol \tab numeric \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   dimen \tab untyped \tab - \tab  \tab - \cr
+   method \tab character \tab moment \tab moment, mle, mve, t \tab - \cr
+   nu \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predict.method \tab character \tab plug-in \tab plug-in, predictive, debiased \tab - \cr
+   predict.prior \tab untyped \tab - \tab  \tab - \cr
+   prior \tab untyped \tab - \tab  \tab - \cr
+   tol \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
 }
 }
 

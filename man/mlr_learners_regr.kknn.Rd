@@ -17,8 +17,19 @@ Therefore, \verb{$model} returns a list with the following elements:
 \item \code{data}: Training data for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
 \item \code{pv}: Training parameters for calling \code{\link[kknn:kknn]{kknn::kknn()}} during \verb{$predict()}.
 \item \code{kknn}: Model as returned by \code{\link[kknn:kknn]{kknn::kknn()}}, only available \strong{after} \verb{$predict()} has been called.
+This is not stored by default, you must set hyperparameter \code{store_model} to \code{TRUE}.
 }
 }
+\section{Custom mlr3 defaults}{
+
+\itemize{
+\item \code{store_model}:
+\itemize{
+\item See note.
+}
+}
+}
+
 \section{Dictionary}{
 
 This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.kknn")
@@ -38,12 +49,12 @@ lrn("regr.kknn")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   k \tab integer \tab 7 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   distance \tab numeric \tab 2 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   kernel \tab character \tab optimal \tab - \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \cr
-   scale \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   ykernel \tab list \tab NULL \tab - \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   k \tab integer \tab 7 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   distance \tab numeric \tab 2 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab - \cr
+   scale \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   ykernel \tab untyped \tab  \tab  \tab - \cr
 }
 }
 

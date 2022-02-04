@@ -27,21 +27,21 @@ lrn("regr.svm")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   cachesize \tab numeric \tab 40 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   coef0 \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   cost \tab numeric \tab 1 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   cross \tab integer \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   degree \tab integer \tab 3 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   epsilon \tab numeric \tab - \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   fitted \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   gamma \tab numeric \tab - \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   kernel \tab character \tab radial \tab - \tab linear, polynomial, radial, sigmoid \cr
-   nu \tab numeric \tab 0.5 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   scale \tab list \tab TRUE \tab - \tab - \cr
-   shrinking \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   tolerance \tab numeric \tab 0.001 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   type \tab character \tab eps-regression \tab - \tab eps-regression, nu-regression \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   cachesize \tab numeric \tab 40 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   coef0 \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   cost \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   cross \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   degree \tab integer \tab 3 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   epsilon \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   fitted \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   gamma \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab character \tab radial \tab linear, polynomial, radial, sigmoid \tab - \cr
+   nu \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale \tab untyped \tab TRUE \tab  \tab - \cr
+   shrinking \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   tolerance \tab numeric \tab 0.001 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   type \tab character \tab eps-regression \tab eps-regression, nu-regression \tab - \cr
 }
 }
 

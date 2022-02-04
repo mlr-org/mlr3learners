@@ -27,18 +27,18 @@ lrn("regr.lm")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   df \tab numeric \tab Inf \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   interval \tab character \tab - \tab - \tab none, confidence, prediction \cr
-   level \tab numeric \tab 0.95 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   model \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   offset \tab logical \tab - \tab - \tab TRUE, FALSE \cr
-   pred.var \tab list \tab - \tab - \tab - \cr
-   qr \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   scale \tab numeric \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   singular.ok \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   x \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   y \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   df \tab numeric \tab Inf \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   interval \tab character \tab - \tab none, confidence, prediction \tab - \cr
+   level \tab numeric \tab 0.95 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   model \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
+   pred.var \tab untyped \tab - \tab  \tab - \cr
+   qr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   scale \tab numeric \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   y \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

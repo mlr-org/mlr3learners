@@ -6,6 +6,10 @@
 #' k-Nearest-Neighbor classification.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
+#' @section Custom mlr3 defaults:
+#' - `store_model`:
+#'   - See note.
+#'
 #' @template note_kknn
 #'
 #' @templateVar id classif.kknn
@@ -25,11 +29,12 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        k        = p_int(default = 7L, lower = 1L, tags = "train"),
-        distance = p_dbl(0, default = 2, tags = "train"),
-        kernel   = p_fct(c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
-        scale    = p_lgl(default = TRUE, tags = "train"),
-        ykernel  = p_uty(default = NULL, tags = "train")
+        k           = p_int(default = 7L, lower = 1L, tags = "train"),
+        distance    = p_dbl(0, default = 2, tags = "train"),
+        kernel      = p_fct(c("rectangular", "triangular", "epanechnikov", "biweight", "triweight", "cos", "inv", "gaussian", "rank", "optimal"), default = "optimal", tags = "train"),
+        scale       = p_lgl(default = TRUE, tags = "train"),
+        ykernel     = p_uty(default = NULL, tags = "train"),
+        store_model = p_lgl(default = FALSE, tags = "train")
       )
       ps$values = list(k = 7L)
 
@@ -63,17 +68,19 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     },
 
     .predict = function(task) {
-      pv = self$param_set$get_values(tags = "predict")
       model = self$state$model
       newdata = ordered_features(task, self)
+      pv = insert_named(model$pv, self$param_set$get_values(tags = "predict"))
 
       with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
         p = invoke(kknn::kknn,
           formula = model$formula, train = model$data,
-          test = newdata, .args = insert_named(model$pv, pv))
+          test = newdata, .args = remove_named(pv, "store_model"))
       })
 
-      self$state$model$kknn = p
+      if (isTRUE(pv$store_model)) {
+        self$state$model$kknn = p
+      }
 
       if (self$predict_type == "response") {
         list(response = p$fitted.values)
