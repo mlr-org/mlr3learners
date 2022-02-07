@@ -8,7 +8,8 @@ test_that("classif.kknn", {
     "test", # handled via mlr3
     "na.action", # handled via mlr3
     "formula", # handled via mlr3
-    "contrasts" # causes lots of troubles just when setting the default
+    "contrasts", # causes lots of troubles just when setting the default,
+    "store_model" # our parameter
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
