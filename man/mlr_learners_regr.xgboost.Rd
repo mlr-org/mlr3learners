@@ -46,6 +46,7 @@ lrn("regr.xgboost")
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   early_stopping_test_set \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    eval_metric \tab untyped \tab rmse \tab  \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
@@ -127,6 +128,14 @@ would error. Just setting a nonsense default to workaround this.
 \item Reason for change: Reduce verbosity.
 }
 }
+}
+
+\section{Early stopping}{
+
+While tuning, the test sets can be used to find the optimal number of boosting rounds.
+If \code{early_stopping_test_set} is set to \code{TRUE} and \code{early_stopping_rounds} is set, the xgboost model will train until the score on the test set drops.
+The upper limit is defined by \code{nrounds}.
+The metric must be set with \code{eval_metric}.
 }
 
 \examples{
