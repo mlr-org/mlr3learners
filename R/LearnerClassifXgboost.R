@@ -27,6 +27,12 @@
 #'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #'
+#' @section Early stopping:
+#' While tuning, the test sets can be used to find the optimal number of boosting rounds.
+#' If `early_stopping_test_set` is set to `TRUE` and `early_stopping_rounds` is set, the xgboost model will train until the score on the test set drops.
+#' The upper limit is defined by `nrounds`.
+#' The metric must be set with `eval_metric`.
+#'
 #' @templateVar id classif.xgboost
 #' @template learner
 #'
@@ -55,6 +61,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         colsample_bytree            = p_dbl(0, 1, default = 1, tags = c("train", "control")),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
+        early_stopping_test_set     = p_lgl(default = FALSE, tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
         eval_metric                 = p_uty(tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
@@ -109,6 +116,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
         watchlist                   = p_uty(default = NULL, tags = "train"),
         xgb_model                   = p_uty(default = NULL, tags = "train")
+
       )
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
@@ -131,7 +139,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_test_set = FALSE)
 
       super$initialize(
         id = "classif.xgboost",
@@ -206,6 +214,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (is.null(pv$watchlist)) {
         pv$watchlist = list(train = data)
       }
+
+      if (pv$early_stopping_test_set && !is.null(task$row_roles$test)) {
+        test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
+        test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
+        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
+        pv$watchlist = c(pv$watchlist, list(test = test_data))
+      }
+      pv$early_stopping_test_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },

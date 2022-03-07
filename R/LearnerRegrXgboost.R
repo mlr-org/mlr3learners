@@ -10,7 +10,7 @@
 #' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 #'
 #' @template note_xgboost
-#' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
+#' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults Early stopping
 #'
 #' @templateVar id regr.xgboost
 #' @template learner
@@ -39,6 +39,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         colsample_bytree            = p_dbl(0, 1, default = 1, tags = "train"),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
+        early_stopping_test_set     = p_lgl(default = FALSE, tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
         eval_metric                 = p_uty(default = "rmse", tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
@@ -115,7 +116,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_test_set = FALSE)
 
       super$initialize(
         id = "regr.xgboost",
@@ -164,6 +165,14 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       if (is.null(pv$watchlist)) {
         pv$watchlist = list(train = data)
       }
+
+      if (pv$early_stopping_test_set) {
+        test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
+        test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
+        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
+        pv$watchlist = c(pv$watchlist, list(test = test_data))
+      }
+      pv$early_stopping_test_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
