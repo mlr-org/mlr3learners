@@ -55,6 +55,7 @@ lrn("regr.kknn")
    kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab - \cr
    scale \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    ykernel \tab untyped \tab  \tab  \tab - \cr
+   store_model \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

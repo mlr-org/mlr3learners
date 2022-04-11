@@ -58,7 +58,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         colsample_bytree            = p_dbl(0, 1, default = 1, tags = "train"),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
-        early_stopping_test_set     = p_lgl(default = FALSE, tags = "train"),
+        early_stopping_set          = p_fct(c("none", "train", "test"), default = "none", tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
         feval                       = p_uty(default = NULL, tags = "train"),
@@ -125,7 +125,7 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
       ps$add_dep("aft_loss_distribution", "objective", CondEqual$new("survival:aft"))
       ps$add_dep("aft_loss_distribution_scale", "objective", CondEqual$new("survival:aft"))
 
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_test_set = FALSE)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_set = "none")
 
       super$initialize(
         id = "surv.xgboost",
@@ -194,13 +194,13 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
         pv$watchlist = list(train = data)
       }
 
-      if (pv$early_stopping_test_set) {
+      if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
         test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
-      pv$early_stopping_test_set = NULL
+      pv$early_stopping_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
