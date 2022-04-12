@@ -12,6 +12,8 @@
 #' @template note_xgboost
 #' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
+#' @inheritSection mlr_learners_classif.xgboost Early stopping
+#'
 #' @templateVar id regr.xgboost
 #' @template learner
 #'
@@ -163,6 +165,13 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       if (is.null(pv$watchlist)) {
         pv$watchlist = list(train = data)
+      }
+
+      if (length(task$row_roles$early_stopping)) {
+        early_stopping_data = task$data(rows = task$row_roles$early_stopping, cols = task$feature_names)
+        early_stopping_target = task$truth(rows = task$row_roles$early_stopping)
+        early_stopping_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(early_stopping_data), label = data.matrix(early_stopping_target))
+        pv$watchlist = c(pv$watchlist, list(early_stopping = early_stopping_data))
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)

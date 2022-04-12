@@ -61,3 +61,12 @@ test_that("hotstart", {
   expect_equal(learner_4$param_set$values$nrounds, 5L)
   expect_equal(learner_4$state$param_vals$nrounds, 5L)
 })
+
+test_that("early_stopping", {
+  task = tsk("pima")
+  task$set_row_roles(seq(40), roles = "early_stopping")
+  learner = lrn("classif.xgboost", early_stopping_rounds = 10, nrounds = 100)
+
+  learner$train(task)
+  expect_names(names(learner$model$evaluation_log), must.include = "early_stopping_logloss")
+})

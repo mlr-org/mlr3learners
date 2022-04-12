@@ -27,6 +27,12 @@
 #'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #'
+#' @section Early stopping:
+#' Early stopping can be used to find the optimal number of trees.
+#' Observation in the [mlr3::Task] with the row role `"early_stopping"` are used as a validation set.
+#' The range in which which the performance must increase is set with `early_stopping_rounds` and the maximum number of boosting rounds with `nrounds`.
+#' See also our [gallery post](https://mlr-org.com/gallery/2022-04-06-early-stopping-with-xgboost/) on early stopping with XGBoost.
+#'
 #' @templateVar id classif.xgboost
 #' @template learner
 #'
@@ -192,7 +198,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         }
       )
 
-
       data = task$data(cols = task$feature_names)
       # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
       # note that task$truth() is guaranteed to have the factor levels in the right order
@@ -205,6 +210,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       if (is.null(pv$watchlist)) {
         pv$watchlist = list(train = data)
+      }
+
+      if (length(task$row_roles$early_stopping)) {
+        early_stopping_data = task$data(rows = task$row_roles$early_stopping, cols = task$feature_names)
+        early_stopping_label = nlvls - as.integer(task$truth(rows = task$row_roles$early_stopping))
+        early_stopping_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(early_stopping_data), label = early_stopping_label)
+        pv$watchlist = c(pv$watchlist, list(early_stopping = early_stopping_data))
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)

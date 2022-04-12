@@ -129,6 +129,14 @@ would error. Just setting a nonsense default to workaround this.
 }
 }
 
+\section{Early stopping}{
+
+Early stopping can be used to find the optimal number of trees.
+Observation in the \link[mlr3:Task]{mlr3::Task} with the row role \code{"early_stopping"} are used as a validation set.
+The range in which which the performance must increase is set with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
+See also our \href{https://mlr-org.com/gallery/2022-04-06-early-stopping-with-xgboost/}{gallery post} on early stopping with XGBoost.
+}
+
 \examples{
 if (requireNamespace("xgboost", quietly = TRUE)) {
   learner = mlr3::lrn("regr.xgboost")

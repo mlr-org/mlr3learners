@@ -28,6 +28,8 @@
 #'   - Adjusted default: `survival:cox`.
 #'   - Reason for change: Changed to a survival objective.
 #'
+#' @inheritSection mlr_learners_classif.xgboost Early stopping
+#'
 #' @templateVar id surv.xgboost
 #' @template learner
 #'
@@ -189,6 +191,29 @@ LearnerSurvXgboost = R6Class("LearnerSurvXgboost",
 
       if (is.null(pv$watchlist)) {
         pv$watchlist = list(train = data)
+      }
+
+      if (length(task$row_roles$early_stopping)) {
+        early_stopping_data = task$data(rows = task$row_roles$early_stopping, cols = task$feature_names)
+        early_stopping_target = task$data(rows = task$row_roles$early_stopping, cols = task$target_names)
+        early_stopping_targets = task$target_names
+        early_stopping_label = early_stopping_target[[early_stopping_targets[1]]]
+        early_stopping_status = early_stopping_target[[early_stopping_targets[2]]]
+
+        if (pv$objective == "survival:cox") {
+          early_stopping_label[early_stopping_status != 1] = -1L * early_stopping_label[early_stopping_status != 1]
+          early_stopping_data = xgboost::xgb.DMatrix(
+            data = as_numeric_matrix(early_stopping_data),
+            label = early_stopping_label)
+        } else {
+          y_lower_bound = y_upper_bound = early_stopping_label
+          y_upper_bound[early_stopping_status == 0] = Inf
+
+          early_stopping_data = xgboost::xgb.DMatrix(as_numeric_matrix(early_stopping_data))
+          xgboost::setinfo(early_stopping_data, "label_lower_bound", y_lower_bound)
+          xgboost::setinfo(early_stopping_data, "label_upper_bound", y_upper_bound)
+        }
+        pv$watchlist = c(pv$watchlist, list(early_stopping = early_stopping_data))
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)

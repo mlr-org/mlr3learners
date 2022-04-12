@@ -22,7 +22,7 @@ lrn("classif.nnet")
 
 \itemize{
 \item Task type: \dQuote{classif}
-\item Predict Types: \dQuote{prob}, \dQuote{response}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
 \item Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
 \item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
 }

@@ -18,3 +18,13 @@ test_that("manual aft", {
   expect_true(inherits(p, "PredictionSurv"))
   expect_true(p$score() >= 0.5)
 })
+
+test_that("early_stopping", {
+  skip_on_cran()
+  task = tsk("gbcs")
+  task$set_row_roles(seq(40), roles = "early_stopping")
+  learner = lrn("surv.xgboost", early_stopping_rounds = 10, nrounds = 100)
+
+  learner$train(task)
+  expect_names(names(learner$model$evaluation_log), must.include = "early_stopping_cox_nloglik")
+})
