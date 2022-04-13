@@ -28,10 +28,12 @@
 #'   - Reason for change: Reduce verbosity.
 #'
 #' @section Early stopping:
-#' Early stopping can be used to find the optimal number of trees.
-#' Observation in the [mlr3::Task] with the row role `"early_stopping"` are used as a validation set.
-#' The range in which which the performance must increase is set with `early_stopping_rounds` and the maximum number of boosting rounds with `nrounds`.
-#' See also our [gallery post](https://mlr-org.com/gallery/2022-04-06-early-stopping-with-xgboost/) on early stopping with XGBoost.
+#' Early stopping is a technique to estimate the optimal number of trees.
+#' While training, the learner monitors its performance on a validation set and stops when the performance decreases.
+#' The validation set has the row role `"early_stopping"` in the [mlr3::Task].
+#' The `early_stopping_rounds` parameter specifies the number of rounds in which the performance needs to improve to continue training.
+#' The `nrounds` parameter sets the maximum number of boosting rounds.
+#' See also our [gallery post](https://mlr-org.com/gallery/2022-04-06-early-stopping-with-xgboost/) on early stopping.
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
