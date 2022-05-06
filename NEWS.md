@@ -1,3 +1,9 @@
+# mlr3learners 0.5.3
+
+- Survival learners have been moved to mlr3extralearners (maintained on Github):
+  https://github.com/mlr-org/mlr3extralearners
+
+
 # mlr3learners 0.5.2
 
 - Most learners now reorder the columns in the predict task according to the

@@ -67,12 +67,3 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
-
-## Survival Learners (via [mlr3proba](https://mlr3proba.mlr-org.com))
-
-| ID                                                                                            | Learner                     | Package                                                       |
-| :-------------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
-| [surv.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html) | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
-| [surv.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html)       | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
-| [surv.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
-| [surv.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
