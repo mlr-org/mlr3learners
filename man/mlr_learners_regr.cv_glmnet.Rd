@@ -12,68 +12,21 @@ The default for hyperparameter \code{family} is set to \code{"gaussian"}.
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.cv_glmnet")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.cv_glmnet")
 lrn("regr.cv_glmnet")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
 
-\itemize{
-\item Task type: \dQuote{regr}
-\item Predict Types: \dQuote{response}
-\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
-}
+, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
 }
 
 \section{Parameters}{
-\tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   alignment \tab character \tab lambda \tab lambda, fraction \tab - \cr
-   alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   dfmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   epsnr \tab numeric \tab 1e-08 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   exclude \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   family \tab character \tab gaussian \tab gaussian, poisson \tab - \cr
-   fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   foldid \tab untyped \tab  \tab  \tab - \cr
-   gamma \tab untyped \tab - \tab  \tab - \cr
-   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   lambda \tab untyped \tab - \tab  \tab - \cr
-   lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   lower.limits \tab untyped \tab - \tab  \tab - \cr
-   maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   nfolds \tab integer \tab 10 \tab  \tab \eqn{[3, \infty)}{[3, Inf)} \cr
-   nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   offset \tab untyped \tab  \tab  \tab - \cr
-   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   penalty.factor \tab untyped \tab - \tab  \tab - \cr
-   pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   predict.gamma \tab numeric \tab gamma.1se \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   s \tab numeric \tab lambda.1se \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   type.gaussian \tab character \tab - \tab covariance, naive \tab - \cr
-   type.logistic \tab character \tab - \tab Newton, modified.Newton \tab - \cr
-   type.measure \tab character \tab deviance \tab deviance, class, auc, mse, mae \tab - \cr
-   type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
-   upper.limits \tab untyped \tab - \tab  \tab - \cr
-}
+
+, |Id                   |Type      |Default    |Levels                         |Range                                |, |:--------------------|:---------|:----------|:------------------------------|:------------------------------------|, |alignment            |character |lambda     |lambda, fraction               |-                                    |, |alpha                |numeric   |1          |                               |\eqn{[0, 1]}{[0, 1]}                 |, |big                  |numeric   |9.9e+35    |                               |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |devmax               |numeric   |0.999      |                               |\eqn{[0, 1]}{[0, 1]}                 |, |dfmax                |integer   |-          |                               |\eqn{[0, \infty)}{[0, Inf)}          |, |eps                  |numeric   |1e-06      |                               |\eqn{[0, 1]}{[0, 1]}                 |, |epsnr                |numeric   |1e-08      |                               |\eqn{[0, 1]}{[0, 1]}                 |, |exclude              |integer   |-          |                               |\eqn{[1, \infty)}{[1, Inf)}          |, |exmx                 |numeric   |250        |                               |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |family               |character |gaussian   |gaussian, poisson              |-                                    |, |fdev                 |numeric   |1e-05      |                               |\eqn{[0, 1]}{[0, 1]}                 |, |foldid               |untyped   |           |                               |-                                    |, |gamma                |untyped   |-          |                               |-                                    |, |grouped              |logical   |TRUE       |TRUE, FALSE                    |-                                    |, |intercept            |logical   |TRUE       |TRUE, FALSE                    |-                                    |, |keep                 |logical   |FALSE      |TRUE, FALSE                    |-                                    |, |lambda               |untyped   |-          |                               |-                                    |, |lambda.min.ratio     |numeric   |-          |                               |\eqn{[0, 1]}{[0, 1]}                 |, |lower.limits         |untyped   |-          |                               |-                                    |, |maxit                |integer   |100000     |                               |\eqn{[1, \infty)}{[1, Inf)}          |, |mnlam                |integer   |5          |                               |\eqn{[1, \infty)}{[1, Inf)}          |, |mxit                 |integer   |100        |                               |\eqn{[1, \infty)}{[1, Inf)}          |, |mxitnr               |integer   |25         |                               |\eqn{[1, \infty)}{[1, Inf)}          |, |nfolds               |integer   |10         |                               |\eqn{[3, \infty)}{[3, Inf)}          |, |nlambda              |integer   |100        |                               |\eqn{[1, \infty)}{[1, Inf)}          |, |offset               |untyped   |           |                               |-                                    |, |parallel             |logical   |FALSE      |TRUE, FALSE                    |-                                    |, |penalty.factor       |untyped   |-          |                               |-                                    |, |pmax                 |integer   |-          |                               |\eqn{[0, \infty)}{[0, Inf)}          |, |pmin                 |numeric   |1e-09      |                               |\eqn{[0, 1]}{[0, 1]}                 |, |prec                 |numeric   |1e-10      |                               |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |predict.gamma        |numeric   |gamma.1se  |                               |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |relax                |logical   |FALSE      |TRUE, FALSE                    |-                                    |, |s                    |numeric   |lambda.1se |                               |\eqn{[0, \infty)}{[0, Inf)}          |, |standardize          |logical   |TRUE       |TRUE, FALSE                    |-                                    |, |standardize.response |logical   |FALSE      |TRUE, FALSE                    |-                                    |, |thresh               |numeric   |1e-07      |                               |\eqn{[0, \infty)}{[0, Inf)}          |, |trace.it             |integer   |0          |                               |\eqn{[0, 1]}{[0, 1]}                 |, |type.gaussian        |character |-          |covariance, naive              |-                                    |, |type.logistic        |character |-          |Newton, modified.Newton        |-                                    |, |type.measure         |character |deviance   |deviance, class, auc, mse, mae |-                                    |, |type.multinomial     |character |-          |ungrouped, grouped             |-                                    |, |upper.limits         |untyped   |-          |                               |-                                    |
 }
 
 \examples{
@@ -136,28 +89,28 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerRegrCVGlmnet$new()}}
-\item \href{#method-selected_features}{\code{LearnerRegrCVGlmnet$selected_features()}}
-\item \href{#method-clone}{\code{LearnerRegrCVGlmnet$clone()}}
+\item \href{#method-LearnerRegrCVGlmnet-new}{\code{LearnerRegrCVGlmnet$new()}}
+\item \href{#method-LearnerRegrCVGlmnet-selected_features}{\code{LearnerRegrCVGlmnet$selected_features()}}
+\item \href{#method-LearnerRegrCVGlmnet-clone}{\code{LearnerRegrCVGlmnet$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerRegrCVGlmnet-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrCVGlmnet-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -166,8 +119,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-selected_features"></a>}}
-\if{latex}{\out{\hypertarget{method-selected_features}{}}}
+\if{html}{\out{<a id="method-LearnerRegrCVGlmnet-selected_features"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrCVGlmnet-selected_features}{}}}
 \subsection{Method \code{selected_features()}}{
 Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
 with \code{type} set to \code{"nonzero"}.
@@ -188,8 +141,8 @@ Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerRegrCVGlmnet-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrCVGlmnet-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -18,89 +18,21 @@ See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-s
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.xgboost")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.xgboost")
 lrn("regr.xgboost")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
 
-\itemize{
-\item Task type: \dQuote{regr}
-\item Predict Types: \dQuote{response}
-\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
-}
+, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 
 \section{Parameters}{
-\tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
-   callbacks \tab untyped \tab list \tab  \tab - \cr
-   colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   eval_metric \tab untyped \tab rmse \tab  \tab - \cr
-   feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
-   feval \tab untyped \tab  \tab  \tab - \cr
-   gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
-   interaction_constraints \tab untyped \tab - \tab  \tab - \cr
-   iterationrange \tab untyped \tab - \tab  \tab - \cr
-   lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
-   max_delta_step \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   max_depth \tab integer \tab 6 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   max_leaves \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   maximize \tab logical \tab NULL \tab TRUE, FALSE \tab - \cr
-   min_child_weight \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   missing \tab numeric \tab NA \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   monotone_constraints \tab untyped \tab 0 \tab  \tab - \cr
-   normalize_type \tab character \tab tree \tab tree, forest \tab - \cr
-   nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   objective \tab untyped \tab reg:squarederror \tab  \tab - \cr
-   one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab - \cr
-   predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   process_type \tab character \tab default \tab default, update \tab - \cr
-   rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   refresh_leaf \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   reshape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab - \cr
-   sample_type \tab character \tab uniform \tab uniform, weighted \tab - \cr
-   save_name \tab untyped \tab  \tab  \tab - \cr
-   save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   sketch_eps \tab numeric \tab 0.03 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   single_precision_histogram \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   strict_shape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   training \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab - \cr
-   tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
-   updater \tab untyped \tab - \tab  \tab - \cr
-   verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
-   watchlist \tab untyped \tab  \tab  \tab - \cr
-   xgb_model \tab untyped \tab  \tab  \tab - \cr
-}
+
+, |Id                          |Type      |Default          |Levels                                   |Range                                |, |:---------------------------|:---------|:----------------|:----------------------------------------|:------------------------------------|, |alpha                       |numeric   |0                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |approxcontrib               |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |base_score                  |numeric   |0.5              |                                         |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |booster                     |character |gbtree           |gbtree, gblinear, dart                   |-                                    |, |callbacks                   |untyped   |list             |                                         |-                                    |, |colsample_bylevel           |numeric   |1                |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |colsample_bynode            |numeric   |1                |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |colsample_bytree            |numeric   |1                |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |disable_default_eval_metric |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |early_stopping_rounds       |integer   |NULL             |                                         |\eqn{[1, \infty)}{[1, Inf)}          |, |eta                         |numeric   |0.3              |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |eval_metric                 |untyped   |rmse             |                                         |-                                    |, |feature_selector            |character |cyclic           |cyclic, shuffle, random, greedy, thrifty |-                                    |, |feval                       |untyped   |                 |                                         |-                                    |, |gamma                       |numeric   |0                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |grow_policy                 |character |depthwise        |depthwise, lossguide                     |-                                    |, |interaction_constraints     |untyped   |-                |                                         |-                                    |, |iterationrange              |untyped   |-                |                                         |-                                    |, |lambda                      |numeric   |1                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |lambda_bias                 |numeric   |0                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |max_bin                     |integer   |256              |                                         |\eqn{[2, \infty)}{[2, Inf)}          |, |max_delta_step              |numeric   |0                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |max_depth                   |integer   |6                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |max_leaves                  |integer   |0                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |maximize                    |logical   |NULL             |TRUE, FALSE                              |-                                    |, |min_child_weight            |numeric   |1                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |missing                     |numeric   |NA               |                                         |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |monotone_constraints        |untyped   |0                |                                         |-                                    |, |normalize_type              |character |tree             |tree, forest                             |-                                    |, |nrounds                     |integer   |-                |                                         |\eqn{[1, \infty)}{[1, Inf)}          |, |nthread                     |integer   |1                |                                         |\eqn{[1, \infty)}{[1, Inf)}          |, |ntreelimit                  |integer   |NULL             |                                         |\eqn{[1, \infty)}{[1, Inf)}          |, |num_parallel_tree           |integer   |1                |                                         |\eqn{[1, \infty)}{[1, Inf)}          |, |objective                   |untyped   |reg:squarederror |                                         |-                                    |, |one_drop                    |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |outputmargin                |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |predcontrib                 |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |predictor                   |character |cpu_predictor    |cpu_predictor, gpu_predictor             |-                                    |, |predinteraction             |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |predleaf                    |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |print_every_n               |integer   |1                |                                         |\eqn{[1, \infty)}{[1, Inf)}          |, |process_type                |character |default          |default, update                          |-                                    |, |rate_drop                   |numeric   |0                |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |refresh_leaf                |logical   |TRUE             |TRUE, FALSE                              |-                                    |, |reshape                     |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |sampling_method             |character |uniform          |uniform, gradient_based                  |-                                    |, |sample_type                 |character |uniform          |uniform, weighted                        |-                                    |, |save_name                   |untyped   |                 |                                         |-                                    |, |save_period                 |integer   |NULL             |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |scale_pos_weight            |numeric   |1                |                                         |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |seed_per_iteration          |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |sketch_eps                  |numeric   |0.03             |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |skip_drop                   |numeric   |0                |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |strict_shape                |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |subsample                   |numeric   |1                |                                         |\eqn{[0, 1]}{[0, 1]}                 |, |top_k                       |integer   |0                |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |training                    |logical   |FALSE            |TRUE, FALSE                              |-                                    |, |tree_method                 |character |auto             |auto, exact, approx, hist, gpu_hist      |-                                    |, |tweedie_variance_power      |numeric   |1.5              |                                         |\eqn{[1, 2]}{[1, 2]}                 |, |updater                     |untyped   |-                |                                         |-                                    |, |verbose                     |integer   |1                |                                         |\eqn{[0, 2]}{[0, 2]}                 |, |watchlist                   |untyped   |                 |                                         |-                                    |, |xgb_model                   |untyped   |                 |                                         |-                                    |
 }
 
 \section{Custom mlr3 defaults}{
@@ -190,28 +122,28 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerRegrXgboost$new()}}
-\item \href{#method-importance}{\code{LearnerRegrXgboost$importance()}}
-\item \href{#method-clone}{\code{LearnerRegrXgboost$clone()}}
+\item \href{#method-LearnerRegrXgboost-new}{\code{LearnerRegrXgboost$new()}}
+\item \href{#method-LearnerRegrXgboost-importance}{\code{LearnerRegrXgboost$importance()}}
+\item \href{#method-LearnerRegrXgboost-clone}{\code{LearnerRegrXgboost$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerRegrXgboost-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrXgboost-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -220,8 +152,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-importance"></a>}}
-\if{latex}{\out{\hypertarget{method-importance}{}}}
+\if{html}{\out{<a id="method-LearnerRegrXgboost-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrXgboost-importance}{}}}
 \subsection{Method \code{importance()}}{
 The importance scores are calculated with \code{\link[xgboost:xgb.importance]{xgboost::xgb.importance()}}.
 \subsection{Usage}{
@@ -233,8 +165,8 @@ Named \code{numeric()}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerRegrXgboost-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrXgboost-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -82,7 +82,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         seed_per_iteration          = p_lgl(default = FALSE, tags = "train"),
         sketch_eps                  = p_dbl(0, 1, default = 0.03, tags = "train"),
         skip_drop                   = p_dbl(0, 1, default = 0, tags = "train"),
-        single_precision_histogram  = p_lgl(default = FALSE, tags = "train"),
         strict_shape                = p_lgl(default = FALSE, tags = "predict"),
         subsample                   = p_dbl(0, 1, default = 1, tags = "train"),
         top_k                       = p_int(0, default = 0, tags = "train"),
@@ -111,7 +110,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps$add_dep("feature_selector", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "booster", CondEqual$new("gblinear"))
       ps$add_dep("top_k", "feature_selector", CondAnyOf$new(c("greedy", "thrifty")))
-      ps$add_dep("single_precision_histogram", "tree_method", CondEqual$new("hist"))
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
