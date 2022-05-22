@@ -185,7 +185,7 @@ for established default tuning spaces.</p></li>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
-    <p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code><a href="https://mlr3proba.mlr-org.com/reference/LearnerSurv.html" class="external-link">mlr3proba::LearnerSurv</a></code> -&gt; <code>LearnerSurvXgboost</code></p>
+    <p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code>mlr3proba::LearnerSurv</code> -&gt; <code>LearnerSurvXgboost</code></p>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
@@ -253,42 +253,6 @@ for established default tuning spaces.</p></li>
 <span class="r-in">  <span class="co"># available parameters:</span></span>
 <span class="r-in"><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">ids</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerSurvXgboost:surv.xgboost&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: nrounds=1, nthread=1, verbose=0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3proba, mlr3learners, xgboost</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Type: crank</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature types: integer, numeric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: importance, missings, weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "aft_loss_distribution"       "aft_loss_distribution_scale"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "alpha"                       "base_score"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "booster"                     "callbacks"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "colsample_bylevel"           "colsample_bynode"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "colsample_bytree"            "disable_default_eval_metric"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "early_stopping_rounds"       "eta"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "feature_selector"            "feval"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] "gamma"                       "grow_policy"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "interaction_constraints"     "iterationrange"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "lambda"                      "lambda_bias"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "max_bin"                     "max_delta_step"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [23] "max_depth"                   "max_leaves"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "maximize"                    "min_child_weight"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [27] "missing"                     "monotone_constraints"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [29] "normalize_type"              "nrounds"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "nthread"                     "ntreelimit"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [33] "num_parallel_tree"           "objective"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [35] "one_drop"                    "predictor"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "print_every_n"               "process_type"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [39] "rate_drop"                   "refresh_leaf"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] "sampling_method"             "sample_type"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "save_name"                   "save_period"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [45] "scale_pos_weight"            "seed_per_iteration"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [47] "sketch_eps"                  "skip_drop"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [49] "single_precision_histogram"  "strict_shape"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] "subsample"                   "top_k"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [53] "tree_method"                 "tweedie_variance_power"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [55] "updater"                     "verbose"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [57] "watchlist"                   "xgb_model"                  </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

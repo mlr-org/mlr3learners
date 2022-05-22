@@ -158,7 +158,7 @@ for established default tuning spaces.</p></li>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
-    <p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code><a href="https://mlr3proba.mlr-org.com/reference/LearnerSurv.html" class="external-link">mlr3proba::LearnerSurv</a></code> -&gt; <code>LearnerSurvCVGlmnet</code></p>
+    <p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code>mlr3proba::LearnerSurv</code> -&gt; <code>LearnerSurvCVGlmnet</code></p>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
@@ -236,27 +236,6 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 <span class="r-in">  <span class="co"># available parameters:</span></span>
 <span class="r-in"><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">ids</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerSurvCVGlmnet:surv.cv_glmnet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3proba, mlr3learners, glmnet</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Type: crank</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature types: logical, integer, numeric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: selected_features, weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "alignment"            "alpha"                "big"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "devmax"               "dfmax"                "eps"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "epsnr"                "exclude"              "exmx"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "fdev"                 "foldid"               "gamma"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "grouped"              "intercept"            "keep"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "lambda"               "lambda.min.ratio"     "lower.limits"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "maxit"                "mnlam"                "mxit"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "mxitnr"               "nfolds"               "nlambda"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "offset"               "parallel"             "penalty.factor"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "pmax"                 "pmin"                 "prec"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "predict.gamma"        "relax"                "s"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [34] "standardize"          "standardize.response" "thresh"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "trace.it"             "type.gaussian"        "type.logistic"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [40] "type.measure"         "type.multinomial"     "upper.limits"        </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
