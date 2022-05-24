@@ -16,7 +16,7 @@ This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), 
 Additional learners can be found in the [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners) package on GitHub.
 Request additional learners over there.
 
-:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html)
+:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/test_overview.html)
 
 ## Installation
 
