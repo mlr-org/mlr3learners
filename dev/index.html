@@ -5,8 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Recommended Learners for mlr3. Extends mlr3 and
-    mlr3proba with interfaces to essential machine learning packages on
+<meta name="description" content="Recommended Learners for mlr3. Extends mlr3
+    with interfaces to essential machine learning packages on
     CRAN.  This includes, but is not limited to: (penalized) linear and
     logistic regression, linear and quadratic discriminant analysis,
     k-nearest neighbors, naive Bayes, support vector machines, and
@@ -26,8 +26,8 @@
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Recommended Learners for mlr3">
-<meta property="og:description" content="Recommended Learners for mlr3. Extends mlr3 and
-    mlr3proba with interfaces to essential machine learning packages on
+<meta property="og:description" content="Recommended Learners for mlr3. Extends mlr3
+    with interfaces to essential machine learning packages on
     CRAN.  This includes, but is not limited to: (penalized) linear and
     logistic regression, linear and quadratic discriminant analysis,
     k-nearest neighbors, naive Bayes, support vector machines, and
@@ -118,7 +118,7 @@
 <p>Package website: <a href="https://mlr3learners.mlr-org.com/">release</a> | <a href="https://mlr3learners.mlr-org.com/dev/">dev</a></p>
 <!-- badges: start -->
 <!-- badges: end --><p>This packages provides essential learners for <a href="https://mlr3.mlr-org.com" class="external-link">mlr3</a>, maintained by the mlr-org team. Additional learners can be found in the <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link">mlr3extralearners</a> package on GitHub. Request additional learners over there.</p>
-<p><span class="emoji" data-emoji="point_right">👉</span> <a href="https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html" class="external-link">Table of all learners</a></p>
+<p><span class="emoji" data-emoji="point_right">👉</span> <a href="https://mlr3extralearners.mlr-org.com/articles/learners/test_overview.html" class="external-link">Table of all learners</a></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -256,39 +256,6 @@
 </tr>
 <tr class="even">
 <td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html">regr.xgboost</a></td>
-<td align="left">Gradient Boosting</td>
-<td align="left"><a href="https://cran.r-project.org/package=xgboost" class="external-link">xgboost</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section level2">
-<h2 id="survival-learners-via-mlr3proba">Survival Learners (via <a href="https://mlr3proba.mlr-org.com" class="external-link">mlr3proba</a>)<a class="anchor" aria-label="anchor" href="#survival-learners-via-mlr3proba"></a>
-</h2>
-<table class="table">
-<thead><tr class="header">
-<th align="left">ID</th>
-<th align="left">Learner</th>
-<th align="left">Package</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html">surv.cv_glmnet</a></td>
-<td align="left">Penalized Cox Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html">surv.glmnet</a></td>
-<td align="left">Penalized Cox Regression</td>
-<td align="left"><a href="https://cran.r-project.org/package=glmnet" class="external-link">glmnet</a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html">surv.ranger</a></td>
-<td align="left">Random Forest</td>
-<td align="left"><a href="https://cran.r-project.org/package=ranger" class="external-link">ranger</a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html">surv.xgboost</a></td>
 <td align="left">Gradient Boosting</td>
 <td align="left"><a href="https://cran.r-project.org/package=xgboost" class="external-link">xgboost</a></td>
 </tr>

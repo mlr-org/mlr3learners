@@ -78,16 +78,4 @@
   <url>
     <loc>https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_regr.xgboost.html</loc>
   </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_surv.cv_glmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_surv.glmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_surv.ranger.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_surv.xgboost.html</loc>
-  </url>
 </urlset>

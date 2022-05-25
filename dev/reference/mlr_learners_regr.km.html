@@ -113,23 +113,21 @@ perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
     
 
-<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><div class="sourceCode"><pre><code><span class="va">mlr_learners</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"regr.km"</span><span class="op">)</span>
-<span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.km"</span><span class="op">)</span></code></pre></div>
-
+<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
+<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<ul><li><p>Task type: “regr”</p></li>
-<li><p>Predict Types: “response”, “se”</p></li>
-<li><p>Feature Types: “logical”, “integer”, “numeric”</p></li>
-<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=DiceKriging" class="external-link"><span class="pkg">DiceKriging</span></a></p></li>
-</ul></div>
+<p>, * Task type: “regr”, * Predict Types: “response”, “se”, * Feature Types: “logical”, “integer”, “numeric”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=DiceKriging" class="external-link"><span class="pkg">DiceKriging</span></a></p>
+    </div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>bias.correct</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>checkNames</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>coef.cov</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>coef.trend</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>coef.var</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>control</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>cov.compute</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>covtype</td><td>character</td><td>matern5_2</td><td>gauss, matern5_2, matern3_2, exp, powexp</td><td>-</td></tr><tr><td>estim.method</td><td>character</td><td>MLE</td><td>MLE, LOO</td><td>-</td></tr><tr><td>gr</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>iso</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>jitter</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>kernel</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>knots</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>light.return</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>lower</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>multistart</td><td>integer</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>noise.var</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>nugget</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>nugget.estim</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>nugget.stability</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>optim.method</td><td>character</td><td>BFGS</td><td>BFGS, gen</td><td>-</td></tr><tr><td>parinit</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>penalty</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>scaling</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>se.compute</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>type</td><td>character</td><td>SK</td><td>SK, UK</td><td>-</td></tr><tr><td>upper</td><td>untyped</td><td></td><td></td><td>-</td></tr></table></div>
+
+<p>, |Id               |Type      |Default   |Levels                                   |Range                                |, |:----------------|:---------|:---------|:----------------------------------------|:------------------------------------|, |bias.correct     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |checkNames       |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |coef.cov         |untyped   |          |                                         |-                                    |, |coef.trend       |untyped   |          |                                         |-                                    |, |coef.var         |untyped   |          |                                         |-                                    |, |control          |untyped   |          |                                         |-                                    |, |cov.compute      |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |covtype          |character |matern5_2 |gauss, matern5_2, matern3_2, exp, powexp |-                                    |, |estim.method     |character |MLE       |MLE, LOO                                 |-                                    |, |gr               |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |iso              |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |jitter           |numeric   |0         |                                         |\([0, \infty)\)          |, |kernel           |untyped   |          |                                         |-                                    |, |knots            |untyped   |          |                                         |-                                    |, |light.return     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |lower            |untyped   |          |                                         |-                                    |, |multistart       |integer   |1         |                                         |\((-\infty, \infty)\) |, |noise.var        |untyped   |          |                                         |-                                    |, |nugget           |numeric   |-         |                                         |\((-\infty, \infty)\) |, |nugget.estim     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |nugget.stability |numeric   |0         |                                         |\([0, \infty)\)          |, |optim.method     |character |BFGS      |BFGS, gen                                |-                                    |, |parinit          |untyped   |          |                                         |-                                    |, |penalty          |untyped   |          |                                         |-                                    |, |scaling          |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |se.compute       |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |type             |character |SK        |SK, UK                                   |-                                    |, |upper            |untyped   |          |                                         |-                                    |</p>
+    </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Roustant O, Ginsbourger D, Deville Y (2012).
@@ -171,11 +169,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.ranger.html">mlr_learners_regr.ranger</a></code>,
 <code><a href="mlr_learners_regr.svm.html">mlr_learners_regr.svm</a></code>,
-<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code>,
-<code><a href="mlr_learners_surv.cv_glmnet.html">mlr_learners_surv.cv_glmnet</a></code>,
-<code><a href="mlr_learners_surv.glmnet.html">mlr_learners_surv.glmnet</a></code>,
-<code><a href="mlr_learners_surv.ranger.html">mlr_learners_surv.ranger</a></code>,
-<code><a href="mlr_learners_surv.xgboost.html">mlr_learners_surv.xgboost</a></code></p></div>
+<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
@@ -187,17 +181,17 @@ for established default tuning spaces.</p></li>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>LearnerRegrKM$new()</code></a></p></li>
-<li><p><a href="#method-clone"><code>LearnerRegrKM$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-LearnerRegrKM-new"><code>LearnerRegrKM$new()</code></a></p></li>
+<li><p><a href="#method-LearnerRegrKM-clone"><code>LearnerRegrKM$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerRegrKM-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -205,7 +199,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-LearnerRegrKM-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>

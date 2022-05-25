@@ -97,8 +97,8 @@ by default in <code><a href="https://glmnet.stanford.edu/reference/glmnet.html" 
 (at least not in efficient manner).
 Tuning the <code>s</code> parameter is, therefore, currently discouraged.</p>
 <p>When the data are i.i.d. and efficiency is key, we recommend using the respective
-auto-tuning counterparts in <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet()</a></code>,
-<code><a href="mlr_learners_regr.cv_glmnet.html">mlr_learners_regr.cv_glmnet()</a></code>, or <code><a href="mlr_learners_surv.cv_glmnet.html">mlr_learners_surv.cv_glmnet()</a></code>.
+auto-tuning counterparts in <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet()</a></code> or
+<code><a href="mlr_learners_regr.cv_glmnet.html">mlr_learners_regr.cv_glmnet()</a></code>.
 However, in some situations this is not applicable, usually when data are
 imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
 custom resampling strategies (blocked design, stratification).</p>
@@ -107,23 +107,21 @@ custom resampling strategies (blocked design, stratification).</p>
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
     
 
-<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><div class="sourceCode"><pre><code><span class="va">mlr_learners</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"classif.glmnet"</span><span class="op">)</span>
-<span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.glmnet"</span><span class="op">)</span></code></pre></div>
-
+<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
+<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<ul><li><p>Task type: “classif”</p></li>
-<li><p>Predict Types: “response”, “prob”</p></li>
-<li><p>Feature Types: “logical”, “integer”, “numeric”</p></li>
-<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=glmnet" class="external-link"><span class="pkg">glmnet</span></a></p></li>
-</ul></div>
+<p>, * Task type: “classif”, * Predict Types: “response”, “prob”, * Feature Types: “logical”, “integer”, “numeric”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=glmnet" class="external-link"><span class="pkg">glmnet</span></a></p>
+    </div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>alpha</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>big</td><td>numeric</td><td>9.9e+35</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>devmax</td><td>numeric</td><td>0.999</td><td></td><td>\([0, 1]\)</td></tr><tr><td>dfmax</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>eps</td><td>numeric</td><td>1e-06</td><td></td><td>\([0, 1]\)</td></tr><tr><td>epsnr</td><td>numeric</td><td>1e-08</td><td></td><td>\([0, 1]\)</td></tr><tr><td>exact</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>exclude</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>exmx</td><td>numeric</td><td>250</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>fdev</td><td>numeric</td><td>1e-05</td><td></td><td>\([0, 1]\)</td></tr><tr><td>gamma</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>intercept</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>lambda</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>lambda.min.ratio</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr><tr><td>lower.limits</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>integer</td><td>100000</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mnlam</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mxitnr</td><td>integer</td><td>25</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>nlambda</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>newoffset</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>offset</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>penalty.factor</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>pmax</td><td>integer</td><td>-</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>pmin</td><td>numeric</td><td>1e-09</td><td></td><td>\([0, 1]\)</td></tr><tr><td>prec</td><td>numeric</td><td>1e-10</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>relax</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>s</td><td>numeric</td><td>0.01</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>standardize</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>standardize.response</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>thresh</td><td>numeric</td><td>1e-07</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>trace.it</td><td>integer</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>type.gaussian</td><td>character</td><td>-</td><td>covariance, naive</td><td>-</td></tr><tr><td>type.logistic</td><td>character</td><td>-</td><td>Newton, modified.Newton</td><td>-</td></tr><tr><td>type.multinomial</td><td>character</td><td>-</td><td>ungrouped, grouped</td><td>-</td></tr><tr><td>upper.limits</td><td>untyped</td><td>-</td><td></td><td>-</td></tr></table></div>
+
+<p>, |Id                   |Type      |Default |Levels                  |Range                                |, |:--------------------|:---------|:-------|:-----------------------|:------------------------------------|, |alpha                |numeric   |1       |                        |\([0, 1]\)                 |, |big                  |numeric   |9.9e+35 |                        |\((-\infty, \infty)\) |, |devmax               |numeric   |0.999   |                        |\([0, 1]\)                 |, |dfmax                |integer   |-       |                        |\([0, \infty)\)          |, |eps                  |numeric   |1e-06   |                        |\([0, 1]\)                 |, |epsnr                |numeric   |1e-08   |                        |\([0, 1]\)                 |, |exact                |logical   |FALSE   |TRUE, FALSE             |-                                    |, |exclude              |integer   |-       |                        |\([1, \infty)\)          |, |exmx                 |numeric   |250     |                        |\((-\infty, \infty)\) |, |fdev                 |numeric   |1e-05   |                        |\([0, 1]\)                 |, |gamma                |numeric   |1       |                        |\((-\infty, \infty)\) |, |intercept            |logical   |TRUE    |TRUE, FALSE             |-                                    |, |lambda               |untyped   |-       |                        |-                                    |, |lambda.min.ratio     |numeric   |-       |                        |\([0, 1]\)                 |, |lower.limits         |untyped   |-       |                        |-                                    |, |maxit                |integer   |100000  |                        |\([1, \infty)\)          |, |mnlam                |integer   |5       |                        |\([1, \infty)\)          |, |mxit                 |integer   |100     |                        |\([1, \infty)\)          |, |mxitnr               |integer   |25      |                        |\([1, \infty)\)          |, |nlambda              |integer   |100     |                        |\([1, \infty)\)          |, |newoffset            |untyped   |-       |                        |-                                    |, |offset               |untyped   |        |                        |-                                    |, |penalty.factor       |untyped   |-       |                        |-                                    |, |pmax                 |integer   |-       |                        |\([0, \infty)\)          |, |pmin                 |numeric   |1e-09   |                        |\([0, 1]\)                 |, |prec                 |numeric   |1e-10   |                        |\((-\infty, \infty)\) |, |relax                |logical   |FALSE   |TRUE, FALSE             |-                                    |, |s                    |numeric   |0.01    |                        |\([0, \infty)\)          |, |standardize          |logical   |TRUE    |TRUE, FALSE             |-                                    |, |standardize.response |logical   |FALSE   |TRUE, FALSE             |-                                    |, |thresh               |numeric   |1e-07   |                        |\([0, \infty)\)          |, |trace.it             |integer   |0       |                        |\([0, 1]\)                 |, |type.gaussian        |character |-       |covariance, naive       |-                                    |, |type.logistic        |character |-       |Newton, modified.Newton |-                                    |, |type.multinomial     |character |-       |ungrouped, grouped      |-                                    |, |upper.limits         |untyped   |-       |                        |-                                    |</p>
+    </div>
     <div class="section level2">
     <h2 id="internal-encoding">Internal Encoding<a class="anchor" aria-label="anchor" href="#internal-encoding"></a></h2>
     
@@ -173,11 +171,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.ranger.html">mlr_learners_regr.ranger</a></code>,
 <code><a href="mlr_learners_regr.svm.html">mlr_learners_regr.svm</a></code>,
-<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code>,
-<code><a href="mlr_learners_surv.cv_glmnet.html">mlr_learners_surv.cv_glmnet</a></code>,
-<code><a href="mlr_learners_surv.glmnet.html">mlr_learners_surv.glmnet</a></code>,
-<code><a href="mlr_learners_surv.ranger.html">mlr_learners_surv.ranger</a></code>,
-<code><a href="mlr_learners_surv.xgboost.html">mlr_learners_surv.xgboost</a></code></p></div>
+<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
@@ -189,18 +183,18 @@ for established default tuning spaces.</p></li>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>LearnerClassifGlmnet$new()</code></a></p></li>
-<li><p><a href="#method-selected_features"><code>LearnerClassifGlmnet$selected_features()</code></a></p></li>
-<li><p><a href="#method-clone"><code>LearnerClassifGlmnet$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-LearnerClassifGlmnet-new"><code>LearnerClassifGlmnet$new()</code></a></p></li>
+<li><p><a href="#method-LearnerClassifGlmnet-selected_features"><code>LearnerClassifGlmnet$selected_features()</code></a></p></li>
+<li><p><a href="#method-LearnerClassifGlmnet-clone"><code>LearnerClassifGlmnet$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerClassifGlmnet-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -208,7 +202,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 
-</div><p></p><hr><a id="method-selected_features"></a><div class="section">
+</div><p></p><hr><a id="method-LearnerClassifGlmnet-selected_features"></a><div class="section">
 <h3 id="method-selected-features-">Method <code>selected_features()</code><a class="anchor" aria-label="anchor" href="#method-selected-features-"></a></h3>
 <p>Returns the set of selected features as reported by <code><a href="https://glmnet.stanford.edu/reference/predict.glmnet.html" class="external-link">glmnet::predict.glmnet()</a></code>
 with <code>type</code> set to <code>"nonzero"</code>.</p><div class="section">
@@ -230,7 +224,7 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 <p>(<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>) of feature names.</p>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-LearnerClassifGlmnet-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>

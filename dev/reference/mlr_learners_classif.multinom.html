@@ -89,23 +89,21 @@ Calls <code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
     
 
-<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><div class="sourceCode"><pre><code><span class="va">mlr_learners</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"classif.multinom"</span><span class="op">)</span>
-<span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.multinom"</span><span class="op">)</span></code></pre></div>
-
+<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
+<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<ul><li><p>Task type: “classif”</p></li>
-<li><p>Predict Types: “response”, “prob”</p></li>
-<li><p>Feature Types: “logical”, “integer”, “numeric”, “factor”</p></li>
-<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=nnet" class="external-link"><span class="pkg">nnet</span></a></p></li>
-</ul></div>
+<p>, * Task type: “classif”, * Predict Types: “response”, “prob”, * Feature Types: “logical”, “integer”, “numeric”, “factor”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=nnet" class="external-link"><span class="pkg">nnet</span></a></p>
+    </div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>Hess</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>abstol</td><td>numeric</td><td>1e-04</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>censored</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>decay</td><td>numeric</td><td>0</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>entropy</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mask</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>MaxNWts</td><td>integer</td><td>1000</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>linout</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>rang</td><td>numeric</td><td>0.7</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>reltol</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>size</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>skip</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>softmax</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>summ</td><td>character</td><td>0</td><td>0, 1, 2, 3</td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>Wts</td><td>untyped</td><td>-</td><td></td><td>-</td></tr></table></div>
+
+<p>, |Id       |Type      |Default |Levels      |Range                                |, |:--------|:---------|:-------|:-----------|:------------------------------------|, |Hess     |logical   |FALSE   |TRUE, FALSE |-                                    |, |abstol   |numeric   |1e-04   |            |\((-\infty, \infty)\) |, |censored |logical   |FALSE   |TRUE, FALSE |-                                    |, |decay    |numeric   |0       |            |\((-\infty, \infty)\) |, |entropy  |logical   |FALSE   |TRUE, FALSE |-                                    |, |mask     |untyped   |-       |            |-                                    |, |maxit    |integer   |100     |            |\([1, \infty)\)          |, |MaxNWts  |integer   |1000    |            |\([1, \infty)\)          |, |model    |logical   |FALSE   |TRUE, FALSE |-                                    |, |linout   |logical   |FALSE   |TRUE, FALSE |-                                    |, |rang     |numeric   |0.7     |            |\((-\infty, \infty)\) |, |reltol   |numeric   |1e-08   |            |\((-\infty, \infty)\) |, |size     |integer   |-       |            |\([1, \infty)\)          |, |skip     |logical   |FALSE   |TRUE, FALSE |-                                    |, |softmax  |logical   |FALSE   |TRUE, FALSE |-                                    |, |summ     |character |0       |0, 1, 2, 3  |-                                    |, |trace    |logical   |TRUE    |TRUE, FALSE |-                                    |, |Wts      |untyped   |-       |            |-                                    |</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
@@ -139,11 +137,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.ranger.html">mlr_learners_regr.ranger</a></code>,
 <code><a href="mlr_learners_regr.svm.html">mlr_learners_regr.svm</a></code>,
-<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code>,
-<code><a href="mlr_learners_surv.cv_glmnet.html">mlr_learners_surv.cv_glmnet</a></code>,
-<code><a href="mlr_learners_surv.glmnet.html">mlr_learners_surv.glmnet</a></code>,
-<code><a href="mlr_learners_surv.ranger.html">mlr_learners_surv.ranger</a></code>,
-<code><a href="mlr_learners_surv.xgboost.html">mlr_learners_surv.xgboost</a></code></p></div>
+<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
@@ -155,18 +149,18 @@ for established default tuning spaces.</p></li>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>LearnerClassifMultinom$new()</code></a></p></li>
-<li><p><a href="#method-loglik"><code>LearnerClassifMultinom$loglik()</code></a></p></li>
-<li><p><a href="#method-clone"><code>LearnerClassifMultinom$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-LearnerClassifMultinom-new"><code>LearnerClassifMultinom$new()</code></a></p></li>
+<li><p><a href="#method-LearnerClassifMultinom-loglik"><code>LearnerClassifMultinom$loglik()</code></a></p></li>
+<li><p><a href="#method-LearnerClassifMultinom-clone"><code>LearnerClassifMultinom$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerClassifMultinom-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -174,7 +168,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 
-</div><p></p><hr><a id="method-loglik"></a><div class="section">
+</div><p></p><hr><a id="method-LearnerClassifMultinom-loglik"></a><div class="section">
 <h3 id="method-loglik-">Method <code>loglik()</code><a class="anchor" aria-label="anchor" href="#method-loglik-"></a></h3>
 <p>Extract the log-likelihood (e.g., via <code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">stats::logLik()</a></code> from the fitted model.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
@@ -182,7 +176,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-LearnerClassifMultinom-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
