@@ -9,7 +9,7 @@ The additional hyperparameter jitter can be set to add
 N(0, [jitter])-distributed noise to the data before prediction to avoid
 perfect interpolation. We recommend a value of 1e-12.
 
-'><title>Kriging Regression Learner — mlr_learners_regr.km • mlr3learners</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.0/font.css" rel="stylesheet"><link href="../deps/_JetBrains%20Mono-0.4.0/font.css" rel="stylesheet"><link href="../deps/_Roboto%20Slab-0.4.0/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Kriging Regression Learner — mlr_learners_regr.km"><meta property="og:description" content='Kriging regression.
+'><title>Kriging Regression Learner — mlr_learners_regr.km • mlr3learners</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto-0.4.1/font.css" rel="stylesheet"><link href="../deps/_JetBrains%20Mono-0.4.1/font.css" rel="stylesheet"><link href="../deps/_Roboto%20Slab-0.4.1/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Kriging Regression Learner — mlr_learners_regr.km"><meta property="og:description" content='Kriging regression.
 Calls DiceKriging::km() from package DiceKriging.
 The predict type hyperparameter "type" defaults to "sk" (simple kriging).
 The additional hyperparameter nugget.stability is used to overwrite the
@@ -30,7 +30,7 @@ perfect interpolation. We recommend a value of 1e-12.
     
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,29 +113,27 @@ perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
     
 
-<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p><div class="sourceCode"><pre><code><span class="va">mlr_learners</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"regr.km"</span><span class="op">)</span>
-<span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.km"</span><span class="op">)</span></code></pre></div>
-
+<p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
+<p></p><div class="sourceCode"><pre><code></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<ul><li><p>Task type: “regr”</p></li>
-<li><p>Predict Types: “response”, “se”</p></li>
-<li><p>Feature Types: “logical”, “integer”, “numeric”</p></li>
-<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=DiceKriging" class="external-link"><span class="pkg">DiceKriging</span></a></p></li>
-</ul></div>
+<p>, * Task type: “regr”, * Predict Types: “response”, “se”, * Feature Types: “logical”, “integer”, “numeric”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=DiceKriging" class="external-link"><span class="pkg">DiceKriging</span></a></p>
+    </div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Range</td><td>Levels</td></tr><tr><td>bias.correct</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>checkNames</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>coef.cov</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>coef.trend</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>coef.var</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>control</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>cov.compute</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>covtype</td><td>character</td><td>matern5_2</td><td>-</td><td>gauss, matern5_2, matern3_2, exp, powexp</td></tr><tr><td>estim.method</td><td>character</td><td>MLE</td><td>-</td><td>MLE, LOO</td></tr><tr><td>gr</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>iso</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>jitter</td><td>numeric</td><td>0</td><td>\([0, \infty)\)</td><td>-</td></tr><tr><td>kernel</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>knots</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>light.return</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>lower</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>multistart</td><td>integer</td><td>1</td><td>\((-\infty, \infty)\)</td><td>-</td></tr><tr><td>noise.var</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>nugget</td><td>numeric</td><td>-</td><td>\((-\infty, \infty)\)</td><td>-</td></tr><tr><td>nugget.estim</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>nugget.stability</td><td>numeric</td><td>0</td><td>\([0, \infty)\)</td><td>-</td></tr><tr><td>optim.method</td><td>character</td><td>BFGS</td><td>-</td><td>BFGS, gen</td></tr><tr><td>parinit</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>penalty</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr><tr><td>scaling</td><td>logical</td><td>FALSE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>se.compute</td><td>logical</td><td>TRUE</td><td>-</td><td>TRUE, FALSE</td></tr><tr><td>type</td><td>character</td><td>SK</td><td>-</td><td>SK, UK</td></tr><tr><td>upper</td><td>list</td><td>NULL</td><td>-</td><td>-</td></tr></table></div>
+
+<p>, |Id               |Type      |Default   |Levels                                   |Range                                |, |:----------------|:---------|:---------|:----------------------------------------|:------------------------------------|, |bias.correct     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |checkNames       |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |coef.cov         |untyped   |          |                                         |-                                    |, |coef.trend       |untyped   |          |                                         |-                                    |, |coef.var         |untyped   |          |                                         |-                                    |, |control          |untyped   |          |                                         |-                                    |, |cov.compute      |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |covtype          |character |matern5_2 |gauss, matern5_2, matern3_2, exp, powexp |-                                    |, |estim.method     |character |MLE       |MLE, LOO                                 |-                                    |, |gr               |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |iso              |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |jitter           |numeric   |0         |                                         |\([0, \infty)\)          |, |kernel           |untyped   |          |                                         |-                                    |, |knots            |untyped   |          |                                         |-                                    |, |light.return     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |lower            |untyped   |          |                                         |-                                    |, |multistart       |integer   |1         |                                         |\((-\infty, \infty)\) |, |noise.var        |untyped   |          |                                         |-                                    |, |nugget           |numeric   |-         |                                         |\((-\infty, \infty)\) |, |nugget.estim     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |nugget.stability |numeric   |0         |                                         |\([0, \infty)\)          |, |optim.method     |character |BFGS      |BFGS, gen                                |-                                    |, |parinit          |untyped   |          |                                         |-                                    |, |penalty          |untyped   |          |                                         |-                                    |, |scaling          |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |se.compute       |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |type             |character |SK        |SK, UK                                   |-                                    |, |upper            |untyped   |          |                                         |-                                    |</p>
+    </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Roustant O, Ginsbourger D, Deville Y (2012).
 “DiceKriging, DiceOptim: Two R Packages for the Analysis of Computer Experiments by Kriging-Based Metamodeling and Optimization.”
 <em>Journal of Statistical Software</em>, <b>51</b>(1), 1--55.
-doi: <a href="https://doi.org/10.18637/jss.v051.i01" class="external-link">10.18637/jss.v051.i01</a>
+<a href="https://doi.org/10.18637/jss.v051.i01" class="external-link">doi:10.18637/jss.v051.i01</a>
 .</p>
     </div>
     <div class="section level2">
@@ -171,11 +169,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.ranger.html">mlr_learners_regr.ranger</a></code>,
 <code><a href="mlr_learners_regr.svm.html">mlr_learners_regr.svm</a></code>,
-<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code>,
-<code><a href="mlr_learners_surv.cv_glmnet.html">mlr_learners_surv.cv_glmnet</a></code>,
-<code><a href="mlr_learners_surv.glmnet.html">mlr_learners_surv.glmnet</a></code>,
-<code><a href="mlr_learners_surv.ranger.html">mlr_learners_surv.ranger</a></code>,
-<code><a href="mlr_learners_surv.xgboost.html">mlr_learners_surv.xgboost</a></code></p></div>
+<code><a href="mlr_learners_regr.xgboost.html">mlr_learners_regr.xgboost</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
@@ -187,17 +181,17 @@ for established default tuning spaces.</p></li>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>LearnerRegrKM$new()</code></a></p></li>
-<li><p><a href="#method-clone"><code>LearnerRegrKM$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-LearnerRegrKM-new"><code>LearnerRegrKM$new()</code></a></p></li>
+<li><p><a href="#method-LearnerRegrKM-clone"><code>LearnerRegrKM$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerRegrKM-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -205,7 +199,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-LearnerRegrKM-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
@@ -259,7 +253,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
