@@ -10,36 +10,21 @@ Calls \code{\link[stats:lm]{stats::lm()}}.
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.lm")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.lm")
 lrn("regr.lm")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
 
-\itemize{
-\item Task type: \dQuote{regr}
-\item Predict Types: \dQuote{response}, \dQuote{se}
-\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{character}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
-}
+, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, \dQuote{se}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{character}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
 }
 
 \section{Parameters}{
-\tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   df \tab numeric \tab Inf \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   interval \tab character \tab - \tab none, confidence, prediction \tab - \cr
-   level \tab numeric \tab 0.95 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   model \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
-   pred.var \tab untyped \tab - \tab  \tab - \cr
-   qr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   scale \tab numeric \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   y \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-}
+
+, |Id          |Type      |Default |Levels                       |Range                                |, |:-----------|:---------|:-------|:----------------------------|:------------------------------------|, |df          |numeric   |Inf     |                             |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |interval    |character |-       |none, confidence, prediction |-                                    |, |level       |numeric   |0.95    |                             |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |model       |logical   |TRUE    |TRUE, FALSE                  |-                                    |, |offset      |logical   |-       |TRUE, FALSE                  |-                                    |, |pred.var    |untyped   |-       |                             |-                                    |, |qr          |logical   |TRUE    |TRUE, FALSE                  |-                                    |, |scale       |numeric   |NULL    |                             |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |singular.ok |logical   |TRUE    |TRUE, FALSE                  |-                                    |, |x           |logical   |FALSE   |TRUE, FALSE                  |-                                    |, |y           |logical   |FALSE   |TRUE, FALSE                  |-                                    |
 }
 
 \section{Contrasts}{
@@ -99,11 +84,7 @@ Other Learner:
 \code{\link{mlr_learners_regr.km}},
 \code{\link{mlr_learners_regr.ranger}},
 \code{\link{mlr_learners_regr.svm}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -112,28 +93,28 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerRegrLM$new()}}
-\item \href{#method-loglik}{\code{LearnerRegrLM$loglik()}}
-\item \href{#method-clone}{\code{LearnerRegrLM$clone()}}
+\item \href{#method-LearnerRegrLM-new}{\code{LearnerRegrLM$new()}}
+\item \href{#method-LearnerRegrLM-loglik}{\code{LearnerRegrLM$loglik()}}
+\item \href{#method-LearnerRegrLM-clone}{\code{LearnerRegrLM$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerRegrLM-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrLM-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -142,8 +123,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-loglik"></a>}}
-\if{latex}{\out{\hypertarget{method-loglik}{}}}
+\if{html}{\out{<a id="method-LearnerRegrLM-loglik"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrLM-loglik}{}}}
 \subsection{Method \code{loglik()}}{
 Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}} from the fitted model.
 \subsection{Usage}{
@@ -152,8 +133,8 @@ Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerRegrLM-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrLM-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

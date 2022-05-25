@@ -13,41 +13,21 @@ via package \href{https://github.com/mlr-org/mlr3keras}{mlr3keras}.
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.nnet")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.nnet")
 lrn("classif.nnet")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
 
-\itemize{
-\item Task type: \dQuote{classif}
-\item Predict Types: \dQuote{prob}, \dQuote{response}
-\item Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
-\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
-}
+, * Task type: \dQuote{classif}, * Predict Types: \dQuote{prob}, \dQuote{response}, * Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
 }
 
 \section{Parameters}{
-\tabular{lllll}{
-   Id \tab Type \tab Default \tab Levels \tab Range \cr
-   Hess \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   MaxNWts \tab integer \tab 1000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   Wts \tab untyped \tab - \tab  \tab - \cr
-   abstol \tab numeric \tab 1e-04 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   censored \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   contrasts \tab untyped \tab  \tab  \tab - \cr
-   decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   mask \tab untyped \tab - \tab  \tab - \cr
-   maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   na.action \tab untyped \tab - \tab  \tab - \cr
-   rang \tab numeric \tab 0.7 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   reltol \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   size \tab integer \tab 3 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   skip \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   subset \tab untyped \tab - \tab  \tab - \cr
-   trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-}
+
+, |Id        |Type    |Default |Levels      |Range                                |, |:---------|:-------|:-------|:-----------|:------------------------------------|, |Hess      |logical |FALSE   |TRUE, FALSE |-                                    |, |MaxNWts   |integer |1000    |            |\eqn{[1, \infty)}{[1, Inf)}          |, |Wts       |untyped |-       |            |-                                    |, |abstol    |numeric |1e-04   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |censored  |logical |FALSE   |TRUE, FALSE |-                                    |, |contrasts |untyped |        |            |-                                    |, |decay     |numeric |0       |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |mask      |untyped |-       |            |-                                    |, |maxit     |integer |100     |            |\eqn{[1, \infty)}{[1, Inf)}          |, |na.action |untyped |-       |            |-                                    |, |rang      |numeric |0.7     |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |reltol    |numeric |1e-08   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |size      |integer |3       |            |\eqn{[0, \infty)}{[0, Inf)}          |, |skip      |logical |FALSE   |TRUE, FALSE |-                                    |, |subset    |untyped |-       |            |-                                    |, |trace     |logical |TRUE    |TRUE, FALSE |-                                    |
 }
 
 \section{Custom mlr3 defaults}{
@@ -112,11 +92,7 @@ Other Learner:
 \code{\link{mlr_learners_regr.lm}},
 \code{\link{mlr_learners_regr.ranger}},
 \code{\link{mlr_learners_regr.svm}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -125,27 +101,27 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerClassifNnet$new()}}
-\item \href{#method-clone}{\code{LearnerClassifNnet$clone()}}
+\item \href{#method-LearnerClassifNnet-new}{\code{LearnerClassifNnet$new()}}
+\item \href{#method-LearnerClassifNnet-clone}{\code{LearnerClassifNnet$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerClassifNnet-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifNnet-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -154,8 +130,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerClassifNnet-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifNnet-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
