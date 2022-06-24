@@ -6,7 +6,7 @@
 #' k-Nearest-Neighbor regression.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
-#' @section Custom mlr3 defaults:
+#' @section Parameter Changes:
 #' - `store_model`:
 #'   - See note.
 #'

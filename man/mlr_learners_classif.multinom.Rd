@@ -19,12 +19,36 @@ lrn("classif.multinom")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{classif}, * Predict Types: \dQuote{response}, \dQuote{prob}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
+\itemize{
+\item Task type: \dQuote{classif}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
+}
 }
 
 \section{Parameters}{
-
-, |Id       |Type      |Default |Levels      |Range                                |, |:--------|:---------|:-------|:-----------|:------------------------------------|, |Hess     |logical   |FALSE   |TRUE, FALSE |-                                    |, |abstol   |numeric   |1e-04   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |censored |logical   |FALSE   |TRUE, FALSE |-                                    |, |decay    |numeric   |0       |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |entropy  |logical   |FALSE   |TRUE, FALSE |-                                    |, |mask     |untyped   |-       |            |-                                    |, |maxit    |integer   |100     |            |\eqn{[1, \infty)}{[1, Inf)}          |, |MaxNWts  |integer   |1000    |            |\eqn{[1, \infty)}{[1, Inf)}          |, |model    |logical   |FALSE   |TRUE, FALSE |-                                    |, |linout   |logical   |FALSE   |TRUE, FALSE |-                                    |, |rang     |numeric   |0.7     |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |reltol   |numeric   |1e-08   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |size     |integer   |-       |            |\eqn{[1, \infty)}{[1, Inf)}          |, |skip     |logical   |FALSE   |TRUE, FALSE |-                                    |, |softmax  |logical   |FALSE   |TRUE, FALSE |-                                    |, |summ     |character |0       |0, 1, 2, 3  |-                                    |, |trace    |logical   |TRUE    |TRUE, FALSE |-                                    |, |Wts      |untyped   |-       |            |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   Hess \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   abstol \tab numeric \tab 1e-04 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   censored \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   entropy \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   mask \tab untyped \tab - \tab  \tab - \cr
+   maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   MaxNWts \tab integer \tab 1000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   model \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   linout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   rang \tab numeric \tab 0.7 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   reltol \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   size \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   skip \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   softmax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   summ \tab character \tab 0 \tab 0, 1, 2, 3 \tab - \cr
+   trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   Wts \tab untyped \tab - \tab  \tab - \cr
+}
 }
 
 \examples{

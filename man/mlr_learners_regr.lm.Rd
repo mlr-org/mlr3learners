@@ -19,12 +19,29 @@ lrn("regr.lm")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, \dQuote{se}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{character}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}, \dQuote{se}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
+}
 }
 
 \section{Parameters}{
-
-, |Id          |Type      |Default |Levels                       |Range                                |, |:-----------|:---------|:-------|:----------------------------|:------------------------------------|, |df          |numeric   |Inf     |                             |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |interval    |character |-       |none, confidence, prediction |-                                    |, |level       |numeric   |0.95    |                             |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |model       |logical   |TRUE    |TRUE, FALSE                  |-                                    |, |offset      |logical   |-       |TRUE, FALSE                  |-                                    |, |pred.var    |untyped   |-       |                             |-                                    |, |qr          |logical   |TRUE    |TRUE, FALSE                  |-                                    |, |scale       |numeric   |NULL    |                             |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |singular.ok |logical   |TRUE    |TRUE, FALSE                  |-                                    |, |x           |logical   |FALSE   |TRUE, FALSE                  |-                                    |, |y           |logical   |FALSE   |TRUE, FALSE                  |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   df \tab numeric \tab Inf \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   interval \tab character \tab - \tab none, confidence, prediction \tab - \cr
+   level \tab numeric \tab 0.95 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   model \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
+   pred.var \tab untyped \tab - \tab  \tab - \cr
+   qr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   scale \tab numeric \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   y \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+}
 }
 
 \section{Contrasts}{

@@ -11,7 +11,7 @@
 #' model fitting to comply to the [stats::glm()] convention that the negative class is provided
 #' as the first factor level.
 #'
-#' @section Custom mlr3 defaults:
+#' @section Parameter Changes:
 #' - `model`:
 #'   - Actual default: `TRUE`.
 #'   - Adjusted default: `FALSE`.

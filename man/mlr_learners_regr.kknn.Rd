@@ -20,7 +20,7 @@ Therefore, \verb{$model} returns a list with the following elements:
 This is not stored by default, you must set hyperparameter \code{store_model} to \code{TRUE}.
 }
 }
-\section{Custom mlr3 defaults}{
+\section{Parameter Changes}{
 
 \itemize{
 \item \code{store_model}:
@@ -41,12 +41,24 @@ lrn("regr.kknn")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{kknn}
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{kknn}
+}
 }
 
 \section{Parameters}{
-
-, |Id          |Type      |Default |Levels                                                                                        |Range                       |, |:-----------|:---------|:-------|:---------------------------------------------------------------------------------------------|:---------------------------|, |k           |integer   |7       |                                                                                              |\eqn{[1, \infty)}{[1, Inf)} |, |distance    |numeric   |2       |                                                                                              |\eqn{[0, \infty)}{[0, Inf)} |, |kernel      |character |optimal |rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal |-                           |, |scale       |logical   |TRUE    |TRUE, FALSE                                                                                   |-                           |, |ykernel     |untyped   |        |                                                                                              |-                           |, |store_model |logical   |FALSE   |TRUE, FALSE                                                                                   |-                           |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   k \tab integer \tab 7 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   distance \tab numeric \tab 2 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab - \cr
+   scale \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   ykernel \tab untyped \tab  \tab  \tab - \cr
+   store_model \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+}
 }
 
 \examples{

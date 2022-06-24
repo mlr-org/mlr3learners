@@ -19,15 +19,50 @@ lrn("regr.ranger")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, \dQuote{se}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{ranger}
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}, \dQuote{se}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{ranger}
+}
 }
 
 \section{Parameters}{
-
-, |Id                           |Type      |Default  |Levels                                          |Range                                |, |:----------------------------|:---------|:--------|:-----------------------------------------------|:------------------------------------|, |alpha                        |numeric   |0.5      |                                                |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |always.split.variables       |untyped   |-        |                                                |-                                    |, |holdout                      |logical   |FALSE    |TRUE, FALSE                                     |-                                    |, |importance                   |character |-        |none, impurity, impurity_corrected, permutation |-                                    |, |keep.inbag                   |logical   |FALSE    |TRUE, FALSE                                     |-                                    |, |max.depth                    |integer   |NULL     |                                                |\eqn{[0, \infty)}{[0, Inf)}          |, |min.node.size                |integer   |5        |                                                |\eqn{[1, \infty)}{[1, Inf)}          |, |min.prop                     |numeric   |0.1      |                                                |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |minprop                      |numeric   |0.1      |                                                |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |mtry                         |integer   |-        |                                                |\eqn{[1, \infty)}{[1, Inf)}          |, |mtry.ratio                   |numeric   |-        |                                                |\eqn{[0, 1]}{[0, 1]}                 |, |num.random.splits            |integer   |1        |                                                |\eqn{[1, \infty)}{[1, Inf)}          |, |num.threads                  |integer   |1        |                                                |\eqn{[1, \infty)}{[1, Inf)}          |, |num.trees                    |integer   |500      |                                                |\eqn{[1, \infty)}{[1, Inf)}          |, |oob.error                    |logical   |TRUE     |TRUE, FALSE                                     |-                                    |, |quantreg                     |logical   |FALSE    |TRUE, FALSE                                     |-                                    |, |regularization.factor        |untyped   |1        |                                                |-                                    |, |regularization.usedepth      |logical   |FALSE    |TRUE, FALSE                                     |-                                    |, |replace                      |logical   |TRUE     |TRUE, FALSE                                     |-                                    |, |respect.unordered.factors    |character |ignore   |ignore, order, partition                        |-                                    |, |sample.fraction              |numeric   |-        |                                                |\eqn{[0, 1]}{[0, 1]}                 |, |save.memory                  |logical   |FALSE    |TRUE, FALSE                                     |-                                    |, |scale.permutation.importance |logical   |FALSE    |TRUE, FALSE                                     |-                                    |, |se.method                    |character |infjack  |jack, infjack                                   |-                                    |, |seed                         |integer   |NULL     |                                                |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |split.select.weights         |untyped   |         |                                                |-                                    |, |splitrule                    |character |variance |variance, extratrees, maxstat                   |-                                    |, |verbose                      |logical   |TRUE     |TRUE, FALSE                                     |-                                    |, |write.forest                 |logical   |TRUE     |TRUE, FALSE                                     |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   always.split.variables \tab untyped \tab - \tab  \tab - \cr
+   holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
+   keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   min.node.size \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   quantreg \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   regularization.factor \tab untyped \tab 1 \tab  \tab - \cr
+   regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   replace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab - \cr
+   sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
+   seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   split.select.weights \tab untyped \tab  \tab  \tab - \cr
+   splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab - \cr
+   verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+}
 }
 
-\section{Custom mlr3 defaults}{
+\section{Parameter Changes}{
 
 \itemize{
 \item \code{num.threads}:

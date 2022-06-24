@@ -15,7 +15,7 @@ model fitting to comply to the \code{\link[stats:glm]{stats::glm()}} convention 
 as the first factor level.
 }
 
-\section{Custom mlr3 defaults}{
+\section{Parameter Changes}{
 
 \itemize{
 \item \code{model}:
@@ -38,12 +38,30 @@ lrn("classif.log_reg")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{classif}, * Predict Types: \dQuote{response}, \dQuote{prob}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
+\itemize{
+\item Task type: \dQuote{classif}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, 'stats'
+}
 }
 
 \section{Parameters}{
-
-, |Id          |Type    |Default |Levels      |Range                                |, |:-----------|:-------|:-------|:-----------|:------------------------------------|, |dispersion  |untyped |        |            |-                                    |, |epsilon     |numeric |1e-08   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |etastart    |untyped |-       |            |-                                    |, |maxit       |numeric |25      |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |model       |logical |TRUE    |TRUE, FALSE |-                                    |, |mustart     |untyped |-       |            |-                                    |, |offset      |untyped |-       |            |-                                    |, |singular.ok |logical |TRUE    |TRUE, FALSE |-                                    |, |start       |untyped |        |            |-                                    |, |trace       |logical |FALSE   |TRUE, FALSE |-                                    |, |x           |logical |FALSE   |TRUE, FALSE |-                                    |, |y           |logical |TRUE    |TRUE, FALSE |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   dispersion \tab untyped \tab  \tab  \tab - \cr
+   epsilon \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   etastart \tab untyped \tab - \tab  \tab - \cr
+   maxit \tab numeric \tab 25 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   model \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   mustart \tab untyped \tab - \tab  \tab - \cr
+   offset \tab untyped \tab - \tab  \tab - \cr
+   singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   start \tab untyped \tab  \tab  \tab - \cr
+   trace \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   y \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+}
 }
 
 \section{Contrasts}{

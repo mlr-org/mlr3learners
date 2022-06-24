@@ -6,7 +6,7 @@
 #' Random regression forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
-#' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
+#' @inheritSection mlr_learners_classif.ranger Parameter Changes
 #'
 #' @templateVar id regr.ranger
 #' @template learner

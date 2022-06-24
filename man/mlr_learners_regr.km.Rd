@@ -28,12 +28,46 @@ lrn("regr.km")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, \dQuote{se}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{DiceKriging}
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}, \dQuote{se}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{DiceKriging}
+}
 }
 
 \section{Parameters}{
-
-, |Id               |Type      |Default   |Levels                                   |Range                                |, |:----------------|:---------|:---------|:----------------------------------------|:------------------------------------|, |bias.correct     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |checkNames       |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |coef.cov         |untyped   |          |                                         |-                                    |, |coef.trend       |untyped   |          |                                         |-                                    |, |coef.var         |untyped   |          |                                         |-                                    |, |control          |untyped   |          |                                         |-                                    |, |cov.compute      |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |covtype          |character |matern5_2 |gauss, matern5_2, matern3_2, exp, powexp |-                                    |, |estim.method     |character |MLE       |MLE, LOO                                 |-                                    |, |gr               |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |iso              |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |jitter           |numeric   |0         |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |kernel           |untyped   |          |                                         |-                                    |, |knots            |untyped   |          |                                         |-                                    |, |light.return     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |lower            |untyped   |          |                                         |-                                    |, |multistart       |integer   |1         |                                         |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |noise.var        |untyped   |          |                                         |-                                    |, |nugget           |numeric   |-         |                                         |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |nugget.estim     |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |nugget.stability |numeric   |0         |                                         |\eqn{[0, \infty)}{[0, Inf)}          |, |optim.method     |character |BFGS      |BFGS, gen                                |-                                    |, |parinit          |untyped   |          |                                         |-                                    |, |penalty          |untyped   |          |                                         |-                                    |, |scaling          |logical   |FALSE     |TRUE, FALSE                              |-                                    |, |se.compute       |logical   |TRUE      |TRUE, FALSE                              |-                                    |, |type             |character |SK        |SK, UK                                   |-                                    |, |upper            |untyped   |          |                                         |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   bias.correct \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   checkNames \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   coef.cov \tab untyped \tab  \tab  \tab - \cr
+   coef.trend \tab untyped \tab  \tab  \tab - \cr
+   coef.var \tab untyped \tab  \tab  \tab - \cr
+   control \tab untyped \tab  \tab  \tab - \cr
+   cov.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   covtype \tab character \tab matern5_2 \tab gauss, matern5_2, matern3_2, exp, powexp \tab - \cr
+   estim.method \tab character \tab MLE \tab MLE, LOO \tab - \cr
+   gr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   iso \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   jitter \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab untyped \tab  \tab  \tab - \cr
+   knots \tab untyped \tab  \tab  \tab - \cr
+   light.return \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   lower \tab untyped \tab  \tab  \tab - \cr
+   multistart \tab integer \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   noise.var \tab untyped \tab  \tab  \tab - \cr
+   nugget \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nugget.estim \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   nugget.stability \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   optim.method \tab character \tab BFGS \tab BFGS, gen \tab - \cr
+   parinit \tab untyped \tab  \tab  \tab - \cr
+   penalty \tab untyped \tab  \tab  \tab - \cr
+   scaling \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   se.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   type \tab character \tab SK \tab SK, UK \tab - \cr
+   upper \tab untyped \tab  \tab  \tab - \cr
+}
 }
 
 \examples{

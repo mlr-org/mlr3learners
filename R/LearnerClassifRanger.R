@@ -6,7 +6,7 @@
 #' Random classification forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
-#' @section Custom mlr3 defaults:
+#' @section Parameter Changes:
 #' - `num.threads`:
 #'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
 #'   - Adjusted value: 1.
