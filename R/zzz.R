@@ -36,6 +36,7 @@ register_mlr3 = function() {
   x$add("regr.kknn", LearnerRegrKKNN)
   x$add("regr.km", LearnerRegrKM)
   x$add("regr.lm", LearnerRegrLM)
+  x$add("regr.nnet", LearnerRegrNnet)
   x$add("regr.ranger", LearnerRegrRanger)
   x$add("regr.svm", LearnerRegrSVM)
   x$add("regr.xgboost", LearnerRegrXgboost)
