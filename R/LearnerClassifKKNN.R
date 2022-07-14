@@ -6,7 +6,7 @@
 #' k-Nearest-Neighbor classification.
 #' Calls [kknn::kknn()] from package \CRANpkg{kknn}.
 #'
-#' @section Parameter Changes:
+#' @section Custom mlr3 defaults:
 #' - `store_model`:
 #'   - See note.
 #'

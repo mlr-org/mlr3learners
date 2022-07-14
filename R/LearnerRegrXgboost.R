@@ -10,7 +10,7 @@
 #' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 #'
 #' @template note_xgboost
-#' @inheritSection mlr_learners_classif.xgboost Parameter Changes
+#' @inheritSection mlr_learners_classif.xgboost Custom mlr3 defaults
 #'
 #' @templateVar id regr.xgboost
 #' @template learner
