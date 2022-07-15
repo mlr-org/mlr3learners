@@ -64,6 +64,7 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html)           | k-Nearest Neighbors         | [kknn](https://cran.r-project.org/package=kknn)               |
 | [regr.km](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html)               | Kriging                     | [DiceKriging](https://cran.r-project.org/package=DiceKriging) |
 | [regr.lm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html)               | Linear Regression           | stats                                                         |
+| [regr.nnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.nnet.html)           | Single Layer Neural Network | nnet                                                          |
 | [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |

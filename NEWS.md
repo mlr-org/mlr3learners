@@ -1,3 +1,7 @@
+# mlr3learners 0.5.4
+
+- Added `regr.nnet` learner.
+
 # mlr3learners 0.5.3
 
 - Survival learners have been moved to mlr3extralearners (maintained on Github):
