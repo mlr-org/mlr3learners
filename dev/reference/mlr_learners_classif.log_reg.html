@@ -94,7 +94,7 @@ model fitting to comply to the <code><a href="https://rdrr.io/r/stats/glm.html" 
 as the first factor level.</p>
     </div>
     <div class="section level2">
-    <h2 id="custom-mlr-defaults">Custom mlr3 defaults<a class="anchor" aria-label="anchor" href="#custom-mlr-defaults"></a></h2>
+    <h2 id="parameter-changes">Parameter Changes<a class="anchor" aria-label="anchor" href="#parameter-changes"></a></h2>
     
 
 <ul><li><p><code>model</code>:</p><ul><li><p>Actual default: <code>TRUE</code>.</p></li>
@@ -114,14 +114,15 @@ as the first factor level.</p>
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<p>, * Task type: “classif”, * Predict Types: “response”, “prob”, * Feature Types: “logical”, “integer”, “numeric”, “character”, “factor”, “ordered”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, 'stats'</p>
-    </div>
+<ul><li><p>Task type: “classif”</p></li>
+<li><p>Predict Types: “response”, “prob”</p></li>
+<li><p>Feature Types: “logical”, “integer”, “numeric”, “character”, “factor”, “ordered”</p></li>
+<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, 'stats'</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-
-<p>, |Id          |Type    |Default |Levels      |Range                                |, |:-----------|:-------|:-------|:-----------|:------------------------------------|, |dispersion  |untyped |        |            |-                                    |, |epsilon     |numeric |1e-08   |            |\((-\infty, \infty)\) |, |etastart    |untyped |-       |            |-                                    |, |maxit       |numeric |25      |            |\((-\infty, \infty)\) |, |model       |logical |TRUE    |TRUE, FALSE |-                                    |, |mustart     |untyped |-       |            |-                                    |, |offset      |untyped |-       |            |-                                    |, |singular.ok |logical |TRUE    |TRUE, FALSE |-                                    |, |start       |untyped |        |            |-                                    |, |trace       |logical |FALSE   |TRUE, FALSE |-                                    |, |x           |logical |FALSE   |TRUE, FALSE |-                                    |, |y           |logical |TRUE    |TRUE, FALSE |-                                    |</p>
-    </div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>offset</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="contrasts">Contrasts<a class="anchor" aria-label="anchor" href="#contrasts"></a></h2>
     

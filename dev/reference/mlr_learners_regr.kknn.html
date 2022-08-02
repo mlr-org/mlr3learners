@@ -96,7 +96,7 @@ Therefore, <code>$model</code> returns a list with the following elements:</p><u
 This is not stored by default, you must set hyperparameter <code>store_model</code> to <code>TRUE</code>.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="custom-mlr-defaults">Custom mlr3 defaults<a class="anchor" aria-label="anchor" href="#custom-mlr-defaults"></a></h2>
+    <h2 id="parameter-changes">Parameter Changes<a class="anchor" aria-label="anchor" href="#parameter-changes"></a></h2>
     
 
 <ul><li><p><code>store_model</code>:</p><ul><li><p>See note.</p></li>
@@ -114,14 +114,15 @@ This is not stored by default, you must set hyperparameter <code>store_model</co
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<p>, * Task type: “regr”, * Predict Types: “response”, * Feature Types: “logical”, “integer”, “numeric”, “factor”, “ordered”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=kknn" class="external-link"><span class="pkg">kknn</span></a></p>
-    </div>
+<ul><li><p>Task type: “regr”</p></li>
+<li><p>Predict Types: “response”</p></li>
+<li><p>Feature Types: “logical”, “integer”, “numeric”, “factor”, “ordered”</p></li>
+<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=kknn" class="external-link"><span class="pkg">kknn</span></a></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-
-<p>, |Id          |Type      |Default |Levels                                                                                        |Range                       |, |:-----------|:---------|:-------|:---------------------------------------------------------------------------------------------|:---------------------------|, |k           |integer   |7       |                                                                                              |\([1, \infty)\) |, |distance    |numeric   |2       |                                                                                              |\([0, \infty)\) |, |kernel      |character |optimal |rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal |-                           |, |scale       |logical   |TRUE    |TRUE, FALSE                                                                                   |-                           |, |ykernel     |untyped   |        |                                                                                              |-                           |, |store_model |logical   |FALSE   |TRUE, FALSE                                                                                   |-                           |</p>
-    </div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>k</td><td>integer</td><td>7</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>distance</td><td>numeric</td><td>2</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>kernel</td><td>character</td><td>optimal</td><td>rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal</td><td>-</td></tr><tr><td>scale</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>ykernel</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>store_model</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Hechenbichler, Klaus, Schliep, Klaus (2004).

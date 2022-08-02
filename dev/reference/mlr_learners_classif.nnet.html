@@ -103,16 +103,17 @@ via package <a href="https://github.com/mlr-org/mlr3keras" class="external-link"
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
     
 
-<p>, * Task type: “classif”, * Predict Types: “prob”, “response”, * Feature Types: “numeric”, “factor”, “ordered”, * Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=nnet" class="external-link"><span class="pkg">nnet</span></a></p>
-    </div>
+<ul><li><p>Task type: “classif”</p></li>
+<li><p>Predict Types: “response”, “prob”</p></li>
+<li><p>Feature Types: “numeric”, “factor”, “ordered”</p></li>
+<li><p>Required Packages: <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>, <a href="https://CRAN.R-project.org/package=mlr3learners" class="external-link"><span class="pkg">mlr3learners</span></a>, <a href="https://CRAN.R-project.org/package=nnet" class="external-link"><span class="pkg">nnet</span></a></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-
-<p>, |Id        |Type    |Default |Levels      |Range                                |, |:---------|:-------|:-------|:-----------|:------------------------------------|, |Hess      |logical |FALSE   |TRUE, FALSE |-                                    |, |MaxNWts   |integer |1000    |            |\([1, \infty)\)          |, |Wts       |untyped |-       |            |-                                    |, |abstol    |numeric |1e-04   |            |\((-\infty, \infty)\) |, |censored  |logical |FALSE   |TRUE, FALSE |-                                    |, |contrasts |untyped |        |            |-                                    |, |decay     |numeric |0       |            |\((-\infty, \infty)\) |, |mask      |untyped |-       |            |-                                    |, |maxit     |integer |100     |            |\([1, \infty)\)          |, |na.action |untyped |-       |            |-                                    |, |rang      |numeric |0.7     |            |\((-\infty, \infty)\) |, |reltol    |numeric |1e-08   |            |\((-\infty, \infty)\) |, |size      |integer |3       |            |\([0, \infty)\)          |, |skip      |logical |FALSE   |TRUE, FALSE |-                                    |, |subset    |untyped |-       |            |-                                    |, |trace     |logical |TRUE    |TRUE, FALSE |-                                    |</p>
-    </div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>Hess</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>MaxNWts</td><td>integer</td><td>1000</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>Wts</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>abstol</td><td>numeric</td><td>1e-04</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>censored</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>contrasts</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>decay</td><td>numeric</td><td>0</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>mask</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>integer</td><td>100</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>na.action</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>rang</td><td>numeric</td><td>0.7</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>reltol</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>size</td><td>integer</td><td>3</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>skip</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>subset</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
-    <h2 id="custom-mlr-defaults">Custom mlr3 defaults<a class="anchor" aria-label="anchor" href="#custom-mlr-defaults"></a></h2>
+    <h2 id="parameter-changes">Parameter Changes<a class="anchor" aria-label="anchor" href="#parameter-changes"></a></h2>
     
 
 <ul><li><p><code>size</code>:</p><ul><li><p>Adjusted default: 3L.</p></li>
