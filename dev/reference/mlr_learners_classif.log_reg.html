@@ -94,7 +94,14 @@ model fitting to comply to the <code><a href="https://rdrr.io/r/stats/glm.html" 
 as the first factor level.</p>
     </div>
     <div class="section level2">
-    <h2 id="parameter-changes">Parameter Changes<a class="anchor" aria-label="anchor" href="#parameter-changes"></a></h2>
+    <h2 id="weights">Weights<a class="anchor" aria-label="anchor" href="#weights"></a></h2>
+    
+
+<p>It is not advisable to change the weights of a logistic regression.
+For more details, see this question on <a href="https://stats.stackexchange.com/questions/386675/what-are-weights-in-a-binary-glm-and-how-to-calculate-them" class="external-link">Cross Validated</a>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="custom-mlr-defaults">Custom mlr3 defaults<a class="anchor" aria-label="anchor" href="#custom-mlr-defaults"></a></h2>
     
 
 <ul><li><p><code>model</code>:</p><ul><li><p>Actual default: <code>TRUE</code>.</p></li>
@@ -240,7 +247,7 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, stats</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, character, factor, ordered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: loglik, twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: loglik, twoclass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "dispersion"  "epsilon"     "etastart"    "maxit"       "model"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "mustart"     "offset"      "singular.ok" "start"       "trace"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] "x"           "y"          </span>
