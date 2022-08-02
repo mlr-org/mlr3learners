@@ -39,12 +39,59 @@ lrn("regr.glmnet")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{glmnet}
+}
 }
 
 \section{Parameters}{
-
-, |Id                   |Type      |Default  |Levels                  |Range                                |, |:--------------------|:---------|:--------|:-----------------------|:------------------------------------|, |alignment            |character |lambda   |lambda, fraction        |-                                    |, |alpha                |numeric   |1        |                        |\eqn{[0, 1]}{[0, 1]}                 |, |big                  |numeric   |9.9e+35  |                        |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |devmax               |numeric   |0.999    |                        |\eqn{[0, 1]}{[0, 1]}                 |, |dfmax                |integer   |-        |                        |\eqn{[0, \infty)}{[0, Inf)}          |, |eps                  |numeric   |1e-06    |                        |\eqn{[0, 1]}{[0, 1]}                 |, |epsnr                |numeric   |1e-08    |                        |\eqn{[0, 1]}{[0, 1]}                 |, |exact                |logical   |FALSE    |TRUE, FALSE             |-                                    |, |exclude              |integer   |-        |                        |\eqn{[1, \infty)}{[1, Inf)}          |, |exmx                 |numeric   |250      |                        |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |family               |character |gaussian |gaussian, poisson       |-                                    |, |fdev                 |numeric   |1e-05    |                        |\eqn{[0, 1]}{[0, 1]}                 |, |gamma                |numeric   |1        |                        |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |grouped              |logical   |TRUE     |TRUE, FALSE             |-                                    |, |intercept            |logical   |TRUE     |TRUE, FALSE             |-                                    |, |keep                 |logical   |FALSE    |TRUE, FALSE             |-                                    |, |lambda               |untyped   |-        |                        |-                                    |, |lambda.min.ratio     |numeric   |-        |                        |\eqn{[0, 1]}{[0, 1]}                 |, |lower.limits         |untyped   |-        |                        |-                                    |, |maxit                |integer   |100000   |                        |\eqn{[1, \infty)}{[1, Inf)}          |, |mnlam                |integer   |5        |                        |\eqn{[1, \infty)}{[1, Inf)}          |, |mxit                 |integer   |100      |                        |\eqn{[1, \infty)}{[1, Inf)}          |, |mxitnr               |integer   |25       |                        |\eqn{[1, \infty)}{[1, Inf)}          |, |newoffset            |untyped   |-        |                        |-                                    |, |nlambda              |integer   |100      |                        |\eqn{[1, \infty)}{[1, Inf)}          |, |offset               |untyped   |         |                        |-                                    |, |parallel             |logical   |FALSE    |TRUE, FALSE             |-                                    |, |penalty.factor       |untyped   |-        |                        |-                                    |, |pmax                 |integer   |-        |                        |\eqn{[0, \infty)}{[0, Inf)}          |, |pmin                 |numeric   |1e-09    |                        |\eqn{[0, 1]}{[0, 1]}                 |, |prec                 |numeric   |1e-10    |                        |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |relax                |logical   |FALSE    |TRUE, FALSE             |-                                    |, |s                    |numeric   |0.01     |                        |\eqn{[0, \infty)}{[0, Inf)}          |, |standardize          |logical   |TRUE     |TRUE, FALSE             |-                                    |, |standardize.response |logical   |FALSE    |TRUE, FALSE             |-                                    |, |thresh               |numeric   |1e-07    |                        |\eqn{[0, \infty)}{[0, Inf)}          |, |trace.it             |integer   |0        |                        |\eqn{[0, 1]}{[0, 1]}                 |, |type.gaussian        |character |-        |covariance, naive       |-                                    |, |type.logistic        |character |-        |Newton, modified.Newton |-                                    |, |type.multinomial     |character |-        |ungrouped, grouped      |-                                    |, |upper.limits         |untyped   |-        |                        |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alignment \tab character \tab lambda \tab lambda, fraction \tab - \cr
+   alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   dfmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   epsnr \tab numeric \tab 1e-08 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   exclude \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   family \tab character \tab gaussian \tab gaussian, poisson \tab - \cr
+   fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   gamma \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   grouped \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   keep \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   lambda \tab untyped \tab - \tab  \tab - \cr
+   lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   lower.limits \tab untyped \tab - \tab  \tab - \cr
+   maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   newoffset \tab untyped \tab - \tab  \tab - \cr
+   nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   offset \tab untyped \tab  \tab  \tab - \cr
+   parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   penalty.factor \tab untyped \tab - \tab  \tab - \cr
+   pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   type.gaussian \tab character \tab - \tab covariance, naive \tab - \cr
+   type.logistic \tab character \tab - \tab Newton, modified.Newton \tab - \cr
+   type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
+   upper.limits \tab untyped \tab - \tab  \tab - \cr
+}
 }
 
 \examples{

@@ -25,12 +25,25 @@ lrn("classif.lda")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{classif}, * Predict Types: \dQuote{response}, \dQuote{prob}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{MASS}
+\itemize{
+\item Task type: \dQuote{classif}
+\item Predict Types: \dQuote{response}, \dQuote{prob}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{MASS}
+}
 }
 
 \section{Parameters}{
-
-, |Id             |Type      |Default |Levels                        |Range                                |, |:--------------|:---------|:-------|:-----------------------------|:------------------------------------|, |dimen          |untyped   |-       |                              |-                                    |, |method         |character |moment  |moment, mle, mve, t           |-                                    |, |nu             |integer   |-       |                              |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |predict.method |character |plug-in |plug-in, predictive, debiased |-                                    |, |predict.prior  |untyped   |-       |                              |-                                    |, |prior          |untyped   |-       |                              |-                                    |, |tol            |numeric   |-       |                              |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   dimen \tab untyped \tab - \tab  \tab - \cr
+   method \tab character \tab moment \tab moment, mle, mve, t \tab - \cr
+   nu \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   predict.method \tab character \tab plug-in \tab plug-in, predictive, debiased \tab - \cr
+   predict.prior \tab untyped \tab - \tab  \tab - \cr
+   prior \tab untyped \tab - \tab  \tab - \cr
+   tol \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
 }
 
 \examples{

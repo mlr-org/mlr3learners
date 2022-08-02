@@ -19,12 +19,32 @@ lrn("regr.svm")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, * Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{e1071}
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{e1071}
+}
 }
 
 \section{Parameters}{
-
-, |Id        |Type      |Default        |Levels                              |Range                                |, |:---------|:---------|:--------------|:-----------------------------------|:------------------------------------|, |cachesize |numeric   |40             |                                    |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |coef0     |numeric   |0              |                                    |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |cost      |numeric   |1              |                                    |\eqn{[0, \infty)}{[0, Inf)}          |, |cross     |integer   |0              |                                    |\eqn{[0, \infty)}{[0, Inf)}          |, |degree    |integer   |3              |                                    |\eqn{[1, \infty)}{[1, Inf)}          |, |epsilon   |numeric   |-              |                                    |\eqn{[0, \infty)}{[0, Inf)}          |, |fitted    |logical   |TRUE           |TRUE, FALSE                         |-                                    |, |gamma     |numeric   |-              |                                    |\eqn{[0, \infty)}{[0, Inf)}          |, |kernel    |character |radial         |linear, polynomial, radial, sigmoid |-                                    |, |nu        |numeric   |0.5            |                                    |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |scale     |untyped   |TRUE           |                                    |-                                    |, |shrinking |logical   |TRUE           |TRUE, FALSE                         |-                                    |, |tolerance |numeric   |0.001          |                                    |\eqn{[0, \infty)}{[0, Inf)}          |, |type      |character |eps-regression |eps-regression, nu-regression       |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   cachesize \tab numeric \tab 40 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   coef0 \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   cost \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   cross \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   degree \tab integer \tab 3 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   epsilon \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   fitted \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   gamma \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab character \tab radial \tab linear, polynomial, radial, sigmoid \tab - \cr
+   nu \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   scale \tab untyped \tab TRUE \tab  \tab - \cr
+   shrinking \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   tolerance \tab numeric \tab 0.001 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   type \tab character \tab eps-regression \tab eps-regression, nu-regression \tab - \cr
+}
 }
 
 \examples{
