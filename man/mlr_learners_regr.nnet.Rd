@@ -22,12 +22,34 @@ lrn("regr.nnet")
 
 \section{Meta Information}{
 
-, * Task type: \dQuote{regr}, * Predict Types: \dQuote{response}, * Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}, * Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
+\itemize{
+\item Task type: \dQuote{regr}
+\item Predict Types: \dQuote{response}
+\item Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
+\item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
+}
 }
 
 \section{Parameters}{
-
-, |Id        |Type    |Default |Levels      |Range                                |, |:---------|:-------|:-------|:-----------|:------------------------------------|, |Hess      |logical |FALSE   |TRUE, FALSE |-                                    |, |MaxNWts   |integer |1000    |            |\eqn{[1, \infty)}{[1, Inf)}          |, |Wts       |untyped |-       |            |-                                    |, |abstol    |numeric |1e-04   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |censored  |logical |FALSE   |TRUE, FALSE |-                                    |, |contrasts |untyped |        |            |-                                    |, |decay     |numeric |0       |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |mask      |untyped |-       |            |-                                    |, |maxit     |integer |100     |            |\eqn{[1, \infty)}{[1, Inf)}          |, |na.action |untyped |-       |            |-                                    |, |rang      |numeric |0.7     |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |reltol    |numeric |1e-08   |            |\eqn{(-\infty, \infty)}{(-Inf, Inf)} |, |size      |integer |3       |            |\eqn{[0, \infty)}{[0, Inf)}          |, |skip      |logical |FALSE   |TRUE, FALSE |-                                    |, |subset    |untyped |-       |            |-                                    |, |trace     |logical |TRUE    |TRUE, FALSE |-                                    |
+\tabular{lllll}{
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   Hess \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   MaxNWts \tab integer \tab 1000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   Wts \tab untyped \tab - \tab  \tab - \cr
+   abstol \tab numeric \tab 1e-04 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   censored \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   contrasts \tab untyped \tab  \tab  \tab - \cr
+   decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   mask \tab untyped \tab - \tab  \tab - \cr
+   maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   na.action \tab untyped \tab - \tab  \tab - \cr
+   rang \tab numeric \tab 0.7 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   reltol \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   size \tab integer \tab 3 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   skip \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   subset \tab untyped \tab - \tab  \tab - \cr
+   trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+}
 }
 
 \section{Custom mlr3 defaults}{
@@ -109,14 +131,14 @@ Other Learner:
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
 </ul>
 </details>
 }}
