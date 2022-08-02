@@ -1,6 +1,7 @@
 # mlr3learners 0.5.4
 
 - Added `regr.nnet` learner.
+- Removed the option to use weights in `classif.log_reg`.
 
 # mlr3learners 0.5.3
 
