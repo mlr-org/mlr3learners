@@ -1,15 +1,17 @@
 library(mlr3learners)
 
-test_that("classif.kknn", {
-  learner = lrn("classif.kknn")
-  fun = kknn::kknn
+test_that("regr.nnet", {
+  learner = lrn("regr.nnet")
+  fun = list(nnet::nnet.default, nnet::nnet.formula)
   exclude = c(
-    "train", # handled via mlr3
-    "test", # handled via mlr3
-    "na.action", # handled via mlr3
+    "x", # handled via mlr3
+    "y", # handled via mlr3
+    "weights", # handled via mlr3
     "formula", # handled via mlr3
-    "contrasts", # causes lots of troubles just when setting the default,
-    "store_model" # our parameter
+    "data", # handled via mlr3
+    "linout", # automatically set to TRUE, since it's the regression learner
+    "entropy", # mutually exclusive with linout
+    "softmax" # mutually exclusive with linout
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")

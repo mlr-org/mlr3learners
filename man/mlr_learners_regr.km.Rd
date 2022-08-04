@@ -19,9 +19,11 @@ perfect interpolation. We recommend a value of \code{1e-12}.
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.km")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.km")
 lrn("regr.km")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
@@ -36,35 +38,35 @@ lrn("regr.km")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   bias.correct \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   checkNames \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   coef.cov \tab list \tab NULL \tab - \tab - \cr
-   coef.trend \tab list \tab NULL \tab - \tab - \cr
-   coef.var \tab list \tab NULL \tab - \tab - \cr
-   control \tab list \tab NULL \tab - \tab - \cr
-   cov.compute \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   covtype \tab character \tab matern5_2 \tab - \tab gauss, matern5_2, matern3_2, exp, powexp \cr
-   estim.method \tab character \tab MLE \tab - \tab MLE, LOO \cr
-   gr \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   iso \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   jitter \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   kernel \tab list \tab NULL \tab - \tab - \cr
-   knots \tab list \tab NULL \tab - \tab - \cr
-   light.return \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   lower \tab list \tab NULL \tab - \tab - \cr
-   multistart \tab integer \tab 1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   noise.var \tab list \tab NULL \tab - \tab - \cr
-   nugget \tab numeric \tab - \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   nugget.estim \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   nugget.stability \tab numeric \tab 0 \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   optim.method \tab character \tab BFGS \tab - \tab BFGS, gen \cr
-   parinit \tab list \tab NULL \tab - \tab - \cr
-   penalty \tab list \tab NULL \tab - \tab - \cr
-   scaling \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   se.compute \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   type \tab character \tab SK \tab - \tab SK, UK \cr
-   upper \tab list \tab NULL \tab - \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   bias.correct \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   checkNames \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   coef.cov \tab untyped \tab  \tab  \tab - \cr
+   coef.trend \tab untyped \tab  \tab  \tab - \cr
+   coef.var \tab untyped \tab  \tab  \tab - \cr
+   control \tab untyped \tab  \tab  \tab - \cr
+   cov.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   covtype \tab character \tab matern5_2 \tab gauss, matern5_2, matern3_2, exp, powexp \tab - \cr
+   estim.method \tab character \tab MLE \tab MLE, LOO \tab - \cr
+   gr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   iso \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   jitter \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   kernel \tab untyped \tab  \tab  \tab - \cr
+   knots \tab untyped \tab  \tab  \tab - \cr
+   light.return \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   lower \tab untyped \tab  \tab  \tab - \cr
+   multistart \tab integer \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   noise.var \tab untyped \tab  \tab  \tab - \cr
+   nugget \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   nugget.estim \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   nugget.stability \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   optim.method \tab character \tab BFGS \tab BFGS, gen \tab - \cr
+   parinit \tab untyped \tab  \tab  \tab - \cr
+   penalty \tab untyped \tab  \tab  \tab - \cr
+   scaling \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   se.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   type \tab character \tab SK \tab SK, UK \tab - \cr
+   upper \tab untyped \tab  \tab  \tab - \cr
 }
 }
 
@@ -117,13 +119,10 @@ Other Learner:
 \code{\link{mlr_learners_regr.glmnet}},
 \code{\link{mlr_learners_regr.kknn}},
 \code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.nnet}},
 \code{\link{mlr_learners_regr.ranger}},
 \code{\link{mlr_learners_regr.svm}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -132,27 +131,27 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerRegrKM$new()}}
-\item \href{#method-clone}{\code{LearnerRegrKM$clone()}}
+\item \href{#method-LearnerRegrKM-new}{\code{LearnerRegrKM$new()}}
+\item \href{#method-LearnerRegrKM-clone}{\code{LearnerRegrKM$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerRegrKM-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrKM-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -161,8 +160,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerRegrKM-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrKM-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

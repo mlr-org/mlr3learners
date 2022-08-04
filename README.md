@@ -16,7 +16,7 @@ This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), 
 Additional learners can be found in the [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners) package on GitHub.
 Request additional learners over there.
 
-:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/learner_status.html)
+:point_right: [Table of all learners](https://mlr3extralearners.mlr-org.com/articles/learners/test_overview.html)
 
 ## Installation
 
@@ -64,15 +64,7 @@ remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
 | [regr.kknn](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html)           | k-Nearest Neighbors         | [kknn](https://cran.r-project.org/package=kknn)               |
 | [regr.km](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html)               | Kriging                     | [DiceKriging](https://cran.r-project.org/package=DiceKriging) |
 | [regr.lm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html)               | Linear Regression           | stats                                                         |
+| [regr.nnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.nnet.html)           | Single Layer Neural Network | nnet                                                          |
 | [regr.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
 | [regr.svm](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html)             | SVM                         | [e1071](https://cran.r-project.org/package=e1071)             |
 | [regr.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |
-
-## Survival Learners (via [mlr3proba](https://mlr3proba.mlr-org.com))
-
-| ID                                                                                            | Learner                     | Package                                                       |
-| :-------------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------ |
-| [surv.cv_glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.cv_glmnet.html) | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
-| [surv.glmnet](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.glmnet.html)       | Penalized Cox Regression    | [glmnet](https://cran.r-project.org/package=glmnet)           |
-| [surv.ranger](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.ranger.html)       | Random Forest               | [ranger](https://cran.r-project.org/package=ranger)           |
-| [surv.xgboost](https://mlr3learners.mlr-org.com/reference/mlr_learners_surv.xgboost.html)     | Gradient Boosting           | [xgboost](https://cran.r-project.org/package=xgboost)         |

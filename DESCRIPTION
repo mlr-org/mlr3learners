@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.5.2-9000
+Version: 0.5.3-9000
 Authors@R: c(
     person("Michel", "Lang", , "michellang@gmail.com", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-9754-0393")),
@@ -11,8 +11,8 @@ Authors@R: c(
     person("Patrick", "Schratz", , "patrick.schratz@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0003-0748-6624"))
   )
-Description: Recommended Learners for 'mlr3'. Extends 'mlr3' and
-    'mlr3proba' with interfaces to essential machine learning packages on
+Description: Recommended Learners for 'mlr3'. Extends 'mlr3'
+    with interfaces to essential machine learning packages on
     CRAN.  This includes, but is not limited to: (penalized) linear and
     logistic regression, linear and quadratic discriminant analysis,
     k-nearest neighbors, naive Bayes, support vector machines, and
@@ -22,7 +22,7 @@ URL: https://mlr3learners.mlr-org.com,
     https://github.com/mlr-org/mlr3learners
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:
-    mlr3 (>= 0.13.1),
+    mlr3 (>= 0.13.4-9000),
     R (>= 3.1.0)
 Imports:
     checkmate,
@@ -39,19 +39,17 @@ Suggests:
     knitr,
     lgr,
     MASS,
-    mlr3proba (>= 0.2.5),
     nnet,
     pracma,
     ranger,
     rgenoud,
     rmarkdown,
     testthat (>= 3.0.0),
-    xgboost
+    xgboost (>= 1.6.0)
 Remotes:
-    mlr-org/mlr3@default_hyperparameter,
-    mlr-org/paradox@default_hyperparameter
+    mlr-org/mlr3
 Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

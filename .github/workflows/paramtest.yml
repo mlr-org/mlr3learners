@@ -32,7 +32,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-r@master
         with:
@@ -55,7 +55,7 @@ jobs:
 
       - name: "[Cache] Cache R packages"
         if: runner.os != 'Windows'
-        uses: pat-s/always-upload-cache@v2
+        uses: pat-s/always-upload-cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
@@ -63,7 +63,7 @@ jobs:
 
       - name: "[Custom Stage] [Linux] Install system libs for learners"
         if: runner.os == 'Linux'
-        run: sudo apt install libglpk-dev libcurl4-openssl-dev
+        run: sudo apt install libglpk-dev libcurl4-openssl-dev libfribidi-dev libharfbuzz-dev
 
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"

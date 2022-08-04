@@ -1,6 +1,14 @@
-# mlr3learners 0.5.2.9000
+# mlr3learners 0.5.4
 
--  Added `default_values()` function for ranger and svm learners.
+- Added `regr.nnet` learner.
+- Removed the option to use weights in `classif.log_reg`.
+- Added `default_values()` function for ranger and svm learners.
+
+# mlr3learners 0.5.3
+
+- Survival learners have been moved to mlr3extralearners (maintained on Github):
+  https://github.com/mlr-org/mlr3extralearners
+
 
 # mlr3learners 0.5.2
 

@@ -10,9 +10,11 @@ Calls \code{\link[nnet:multinom]{nnet::multinom()}} from package \CRANpkg{nnet}.
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.multinom")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.multinom")
 lrn("classif.multinom")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
@@ -27,25 +29,25 @@ lrn("classif.multinom")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   Hess \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   abstol \tab numeric \tab 1e-04 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   censored \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   decay \tab numeric \tab 0 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   entropy \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   mask \tab list \tab - \tab - \tab - \cr
-   maxit \tab integer \tab 100 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   MaxNWts \tab integer \tab 1000 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   model \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   linout \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   rang \tab numeric \tab 0.7 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   reltol \tab numeric \tab 1e-08 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   size \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   skip \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   softmax \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   summ \tab character \tab 0 \tab - \tab 0, 1, 2, 3 \cr
-   trace \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   Wts \tab list \tab - \tab - \tab - \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   Hess \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   abstol \tab numeric \tab 1e-04 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   censored \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   entropy \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   mask \tab untyped \tab - \tab  \tab - \cr
+   maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   MaxNWts \tab integer \tab 1000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   model \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   linout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   rang \tab numeric \tab 0.7 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   reltol \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   size \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   skip \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   softmax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   summ \tab character \tab 0 \tab 0, 1, 2, 3 \tab - \cr
+   trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   Wts \tab untyped \tab - \tab  \tab - \cr
 }
 }
 
@@ -92,13 +94,10 @@ Other Learner:
 \code{\link{mlr_learners_regr.kknn}},
 \code{\link{mlr_learners_regr.km}},
 \code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.nnet}},
 \code{\link{mlr_learners_regr.ranger}},
 \code{\link{mlr_learners_regr.svm}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -107,28 +106,28 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerClassifMultinom$new()}}
-\item \href{#method-loglik}{\code{LearnerClassifMultinom$loglik()}}
-\item \href{#method-clone}{\code{LearnerClassifMultinom$clone()}}
+\item \href{#method-LearnerClassifMultinom-new}{\code{LearnerClassifMultinom$new()}}
+\item \href{#method-LearnerClassifMultinom-loglik}{\code{LearnerClassifMultinom$loglik()}}
+\item \href{#method-LearnerClassifMultinom-clone}{\code{LearnerClassifMultinom$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerClassifMultinom-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifMultinom-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -137,8 +136,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-loglik"></a>}}
-\if{latex}{\out{\hypertarget{method-loglik}{}}}
+\if{html}{\out{<a id="method-LearnerClassifMultinom-loglik"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifMultinom-loglik}{}}}
 \subsection{Method \code{loglik()}}{
 Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}} from the fitted model.
 \subsection{Usage}{
@@ -147,8 +146,8 @@ Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerClassifMultinom-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifMultinom-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

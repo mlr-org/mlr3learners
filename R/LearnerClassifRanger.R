@@ -6,16 +6,17 @@
 #' Random classification forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
-#' @section Custom mlr3 defaults:
-#' - `num.threads`:
-#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
-#'   - Adjusted value: 1.
-#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+#' @section Custom mlr3 parameters:
 #' - `mtry`:
 #'   - This hyperparameter can alternatively be set via our hyperparameter `mtry.ratio`
 #'     as `mtry = max(ceiling(mtry.ratio * n_features), 1)`.
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
+#' @section Custom mlr3 defaults:
+#' - `num.threads`:
+#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
+#'   - Adjusted value: 1.
+#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #'
 #' @templateVar id classif.ranger
 #' @template learner
@@ -62,7 +63,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
-        splitrule                    = p_fct(c("gini", "extratrees"), default = "gini", tags = "train"),
+        splitrule                    = p_fct(c("gini", "extratrees", "hellinger"), default = "gini", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
         write.forest                 = p_lgl(default = TRUE, tags = "train")
       )

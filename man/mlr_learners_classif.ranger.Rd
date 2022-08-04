@@ -8,15 +8,9 @@
 Random classification forest.
 Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
 }
-\section{Custom mlr3 defaults}{
+\section{Custom mlr3 parameters}{
 
 \itemize{
-\item \code{num.threads}:
-\itemize{
-\item Actual default: \code{NULL}, triggering auto-detection of the number of CPUs.
-\item Adjusted value: 1.
-\item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
-}
 \item \code{mtry}:
 \itemize{
 \item This hyperparameter can alternatively be set via our hyperparameter \code{mtry.ratio}
@@ -26,11 +20,25 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 }
 
+\section{Custom mlr3 defaults}{
+
+\itemize{
+\item \code{num.threads}:
+\itemize{
+\item Actual default: \code{NULL}, triggering auto-detection of the number of CPUs.
+\item Adjusted value: 1.
+\item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+}
+}
+}
+
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.ranger")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.ranger")
 lrn("classif.ranger")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
@@ -45,36 +53,36 @@ lrn("classif.ranger")
 
 \section{Parameters}{
 \tabular{lllll}{
-   Id \tab Type \tab Default \tab Range \tab Levels \cr
-   alpha \tab numeric \tab 0.5 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   always.split.variables \tab list \tab - \tab - \tab - \cr
-   class.weights \tab list \tab NULL \tab - \tab - \cr
-   holdout \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   importance \tab character \tab - \tab - \tab none, impurity, impurity_corrected, permutation \cr
-   keep.inbag \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   max.depth \tab integer \tab NULL \tab \eqn{[0, \infty)}{[0, Inf)} \tab - \cr
-   min.node.size \tab integer \tab NULL \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   min.prop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   minprop \tab numeric \tab 0.1 \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   mtry \tab integer \tab - \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   mtry.ratio \tab numeric \tab - \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   num.random.splits \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   num.threads \tab integer \tab 1 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   num.trees \tab integer \tab 500 \tab \eqn{[1, \infty)}{[1, Inf)} \tab - \cr
-   oob.error \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   regularization.factor \tab list \tab 1 \tab - \tab - \cr
-   regularization.usedepth \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   replace \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   respect.unordered.factors \tab character \tab ignore \tab - \tab ignore, order, partition \cr
-   sample.fraction \tab numeric \tab - \tab \eqn{[0, 1]}{[0, 1]} \tab - \cr
-   save.memory \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   scale.permutation.importance \tab logical \tab FALSE \tab - \tab TRUE, FALSE \cr
-   se.method \tab character \tab infjack \tab - \tab jack, infjack \cr
-   seed \tab integer \tab NULL \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \tab - \cr
-   split.select.weights \tab list \tab NULL \tab - \tab - \cr
-   splitrule \tab character \tab gini \tab - \tab gini, extratrees \cr
-   verbose \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
-   write.forest \tab logical \tab TRUE \tab - \tab TRUE, FALSE \cr
+   Id \tab Type \tab Default \tab Levels \tab Range \cr
+   alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   always.split.variables \tab untyped \tab - \tab  \tab - \cr
+   class.weights \tab untyped \tab  \tab  \tab - \cr
+   holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
+   keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   min.node.size \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   regularization.factor \tab untyped \tab 1 \tab  \tab - \cr
+   regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   replace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab - \cr
+   sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
+   seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   split.select.weights \tab untyped \tab  \tab  \tab - \cr
+   splitrule \tab character \tab gini \tab gini, extratrees, hellinger \tab - \cr
+   verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
 }
 }
 
@@ -132,13 +140,10 @@ Other Learner:
 \code{\link{mlr_learners_regr.kknn}},
 \code{\link{mlr_learners_regr.km}},
 \code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.nnet}},
 \code{\link{mlr_learners_regr.ranger}},
 \code{\link{mlr_learners_regr.svm}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -147,29 +152,29 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerClassifRanger$new()}}
-\item \href{#method-importance}{\code{LearnerClassifRanger$importance()}}
-\item \href{#method-oob_error}{\code{LearnerClassifRanger$oob_error()}}
-\item \href{#method-clone}{\code{LearnerClassifRanger$clone()}}
+\item \href{#method-LearnerClassifRanger-new}{\code{LearnerClassifRanger$new()}}
+\item \href{#method-LearnerClassifRanger-importance}{\code{LearnerClassifRanger$importance()}}
+\item \href{#method-LearnerClassifRanger-oob_error}{\code{LearnerClassifRanger$oob_error()}}
+\item \href{#method-LearnerClassifRanger-clone}{\code{LearnerClassifRanger$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerClassifRanger-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifRanger-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -178,8 +183,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-importance"></a>}}
-\if{latex}{\out{\hypertarget{method-importance}{}}}
+\if{html}{\out{<a id="method-LearnerClassifRanger-importance"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifRanger-importance}{}}}
 \subsection{Method \code{importance()}}{
 The importance scores are extracted from the model slot \code{variable.importance}.
 Parameter \code{importance.mode} must be set to \code{"impurity"}, \code{"impurity_corrected"}, or
@@ -193,8 +198,8 @@ Named \code{numeric()}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-oob_error"></a>}}
-\if{latex}{\out{\hypertarget{method-oob_error}{}}}
+\if{html}{\out{<a id="method-LearnerClassifRanger-oob_error"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifRanger-oob_error}{}}}
 \subsection{Method \code{oob_error()}}{
 The out-of-bag error, extracted from model slot \code{prediction.error}.
 \subsection{Usage}{
@@ -206,8 +211,8 @@ The out-of-bag error, extracted from model slot \code{prediction.error}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerClassifRanger-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifRanger-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
