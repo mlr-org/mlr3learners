@@ -31,7 +31,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
         cross           = p_int(0L, default = 0L, tags = "train"),
         decision.values = p_lgl(default = FALSE, tags = "predict"),
         degree          = p_int(1L, default = 3L, tags = "train"),
-        epsilon         = p_dbl(0, tags = "train"),
+        epsilon         = p_dbl(0, default = 0.1, tags = "train"),
         fitted          = p_lgl(default = TRUE, tags = "train"),
         gamma           = p_dbl(0, tags = "train"),
         kernel          = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
@@ -86,3 +86,12 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
     }
   )
 )
+
+#' @export
+default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    gamma = 1 / length(task$feature_names)
+  )
+  defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[search_space$ids()]
+}
