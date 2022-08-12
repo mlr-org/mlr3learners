@@ -32,7 +32,6 @@ Imports:
     R6
 Suggests:
     DiceKriging,
-    distr6,
     e1071,
     glmnet,
     kknn,
