@@ -3,6 +3,7 @@
 - Added `regr.nnet` learner.
 - Removed the option to use weights in `classif.log_reg`.
 - Added `default_values()` function for ranger and svm learners.
+- Improved documentation.
 
 # mlr3learners 0.5.3
 
