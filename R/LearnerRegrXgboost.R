@@ -133,7 +133,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       }
 
       imp = xgboost::xgb.importance(
-        feature_names = self$model$features,
         model = self$model
       )
       set_names(imp$Gain, imp$Feature)
