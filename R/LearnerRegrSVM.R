@@ -28,7 +28,7 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
         cost      = p_dbl(0, default = 1, tags = "train"),
         cross     = p_int(0L, default = 0L, tags = "train"), # tunable = FALSE),
         degree    = p_int(1L, default = 3L, tags = "train"),
-        epsilon   = p_dbl(0, tags = "train"),
+        epsilon   = p_dbl(0, default = 0.1, tags = "train"),
         fitted    = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
         gamma     = p_dbl(0, tags = "train"),
         kernel    = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
@@ -71,3 +71,12 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
     }
   )
 )
+
+#' @export
+default_values.LearnerRegrSVM = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    gamma = 1 / length(task$feature_names)
+  )
+  defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[search_space$ids()]
+}

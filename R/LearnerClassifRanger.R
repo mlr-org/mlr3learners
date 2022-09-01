@@ -6,16 +6,17 @@
 #' Random classification forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
-#' @section Custom mlr3 defaults:
-#' - `num.threads`:
-#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
-#'   - Adjusted value: 1.
-#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
+#' @section Custom mlr3 parameters:
 #' - `mtry`:
 #'   - This hyperparameter can alternatively be set via our hyperparameter `mtry.ratio`
 #'     as `mtry = max(ceiling(mtry.ratio * n_features), 1)`.
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
+#' @section Custom mlr3 defaults:
+#' - `num.threads`:
+#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
+#'   - Adjusted value: 1.
+#'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #'
 #' @templateVar id classif.ranger
 #' @template learner
@@ -147,3 +148,15 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     }
   )
 )
+
+#' @export
+default_values.LearnerClassifRanger = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    mtry = floor(sqrt(length(task$feature_names))),
+    mtry.ratio = floor(sqrt(length(task$feature_names))) / length(task$feature_names),
+    min.node.size = if (x$predict_type == "response") 5 else 10,
+    sample.fraction = 1
+  )
+  defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[search_space$ids()]
+}

@@ -6,6 +6,7 @@
 #' Random regression forest.
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
+#' @inheritSection mlr_learners_classif.ranger Custom mlr3 parameters
 #' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
 #'
 #' @templateVar id regr.ranger
@@ -138,3 +139,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     }
   )
 )
+
+#' @export
+default_values.LearnerRegrRanger = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    mtry = floor(sqrt(length(task$feature_names))),
+    mtry.ratio = floor(sqrt(length(task$feature_names))) / length(task$feature_names),
+    sample.fraction = 1
+  )
+  defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[search_space$ids()]
+}

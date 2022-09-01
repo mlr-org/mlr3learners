@@ -10,9 +10,11 @@ Calls \code{\link[e1071:svm]{e1071::svm()}} from package \CRANpkg{e1071}.
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("regr.svm")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.svm")
 lrn("regr.svm")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
@@ -33,7 +35,7 @@ lrn("regr.svm")
    cost \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    cross \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    degree \tab integer \tab 3 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   epsilon \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   epsilon \tab numeric \tab 0.1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    fitted \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    gamma \tab numeric \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    kernel \tab character \tab radial \tab linear, polynomial, radial, sigmoid \tab - \cr
@@ -95,12 +97,9 @@ Other Learner:
 \code{\link{mlr_learners_regr.kknn}},
 \code{\link{mlr_learners_regr.km}},
 \code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.nnet}},
 \code{\link{mlr_learners_regr.ranger}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -109,27 +108,27 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerRegrSVM$new()}}
-\item \href{#method-clone}{\code{LearnerRegrSVM$clone()}}
+\item \href{#method-LearnerRegrSVM-new}{\code{LearnerRegrSVM$new()}}
+\item \href{#method-LearnerRegrSVM-clone}{\code{LearnerRegrSVM$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerRegrSVM-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrSVM-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -138,8 +137,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerRegrSVM-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerRegrSVM-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

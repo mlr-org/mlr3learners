@@ -20,17 +20,19 @@ by default in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}, tuning/selecting th
 Tuning the \code{s} parameter is, therefore, currently discouraged.
 
 When the data are i.i.d. and efficiency is key, we recommend using the respective
-auto-tuning counterparts in \code{\link[=mlr_learners_classif.cv_glmnet]{mlr_learners_classif.cv_glmnet()}},
-\code{\link[=mlr_learners_regr.cv_glmnet]{mlr_learners_regr.cv_glmnet()}}, or \code{\link[=mlr_learners_surv.cv_glmnet]{mlr_learners_surv.cv_glmnet()}}.
+auto-tuning counterparts in \code{\link[=mlr_learners_classif.cv_glmnet]{mlr_learners_classif.cv_glmnet()}} or
+\code{\link[=mlr_learners_regr.cv_glmnet]{mlr_learners_regr.cv_glmnet()}}.
 However, in some situations this is not applicable, usually when data are
 imbalanced or not i.i.d. (longitudinal, time-series) and tuning requires
 custom resampling strategies (blocked design, stratification).
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.glmnet")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.glmnet")
 lrn("classif.glmnet")
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Meta Information}{
@@ -141,13 +143,10 @@ Other Learner:
 \code{\link{mlr_learners_regr.kknn}},
 \code{\link{mlr_learners_regr.km}},
 \code{\link{mlr_learners_regr.lm}},
+\code{\link{mlr_learners_regr.nnet}},
 \code{\link{mlr_learners_regr.ranger}},
 \code{\link{mlr_learners_regr.svm}},
-\code{\link{mlr_learners_regr.xgboost}},
-\code{\link{mlr_learners_surv.cv_glmnet}},
-\code{\link{mlr_learners_surv.glmnet}},
-\code{\link{mlr_learners_surv.ranger}},
-\code{\link{mlr_learners_surv.xgboost}}
+\code{\link{mlr_learners_regr.xgboost}}
 }
 \concept{Learner}
 \section{Super classes}{
@@ -156,28 +155,28 @@ Other Learner:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LearnerClassifGlmnet$new()}}
-\item \href{#method-selected_features}{\code{LearnerClassifGlmnet$selected_features()}}
-\item \href{#method-clone}{\code{LearnerClassifGlmnet$clone()}}
+\item \href{#method-LearnerClassifGlmnet-new}{\code{LearnerClassifGlmnet$new()}}
+\item \href{#method-LearnerClassifGlmnet-selected_features}{\code{LearnerClassifGlmnet$selected_features()}}
+\item \href{#method-LearnerClassifGlmnet-clone}{\code{LearnerClassifGlmnet$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner">}\href{../../mlr3/html/Learner.html#method-base_learner}{\code{mlr3::Learner$base_learner()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format">}\href{../../mlr3/html/Learner.html#method-format}{\code{mlr3::Learner$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help">}\href{../../mlr3/html/Learner.html#method-help}{\code{mlr3::Learner$help()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict">}\href{../../mlr3/html/Learner.html#method-predict}{\code{mlr3::Learner$predict()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata">}\href{../../mlr3/html/Learner.html#method-predict_newdata}{\code{mlr3::Learner$predict_newdata()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print">}\href{../../mlr3/html/Learner.html#method-print}{\code{mlr3::Learner$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset">}\href{../../mlr3/html/Learner.html#method-reset}{\code{mlr3::Learner$reset()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train">}\href{../../mlr3/html/Learner.html#method-train}{\code{mlr3::Learner$train()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LearnerClassifGlmnet-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifGlmnet-new}{}}}
 \subsection{Method \code{new()}}{
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
@@ -186,8 +185,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-selected_features"></a>}}
-\if{latex}{\out{\hypertarget{method-selected_features}{}}}
+\if{html}{\out{<a id="method-LearnerClassifGlmnet-selected_features"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifGlmnet-selected_features}{}}}
 \subsection{Method \code{selected_features()}}{
 Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
 with \code{type} set to \code{"nonzero"}.
@@ -208,8 +207,8 @@ Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LearnerClassifGlmnet-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifGlmnet-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
