@@ -33,7 +33,6 @@
 #' While resampling, the test set is automatically applied from the [mlr3::Resampling].
 #' Set the `early_stopping_set` parameter to `"test"` so that the performance of the model is monitored on the test set while training.
 #' Additionally, define the range in which the performance must increase with `early_stopping_rounds` and the maximum number of boosting rounds with `nrounds`.
-#' See also the [gallery post](https://mlr-org.com/gallery/2022-04-06-early-stopping-with-xgboost/) on early stopping with XGBoost.
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
