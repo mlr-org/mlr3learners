@@ -12,7 +12,7 @@
 #' @templateVar id classif.nnet
 #' @template learner
 #'
-#' @section Custom mlr3 defaults:
+#' @section Initial parameter values:
 #' - `size`:
 #'   - Adjusted default: 3L.
 #'   - Reason for change: no default in `nnet()`.

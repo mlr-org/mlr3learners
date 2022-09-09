@@ -74,7 +74,7 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 }
 
-\section{Custom mlr3 defaults}{
+\section{Initial parameter values}{
 
 \itemize{
 \item \code{num.threads}:
