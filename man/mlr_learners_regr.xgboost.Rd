@@ -103,7 +103,7 @@ lrn("regr.xgboost")
 }
 }
 
-\section{Custom mlr3 defaults}{
+\section{Initial parameter values}{
 
 \itemize{
 \item \code{nrounds}:

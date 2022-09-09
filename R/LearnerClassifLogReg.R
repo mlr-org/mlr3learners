@@ -15,7 +15,7 @@
 #' It is not advisable to change the weights of a logistic regression.
 #' For more details, see this question on [Cross Validated](https://stats.stackexchange.com/questions/386675/what-are-weights-in-a-binary-glm-and-how-to-calculate-them).
 #'
-#' @section Custom mlr3 defaults:
+#' @section Initial parameter values:
 #' - `model`:
 #'   - Actual default: `TRUE`.
 #'   - Adjusted default: `FALSE`.
