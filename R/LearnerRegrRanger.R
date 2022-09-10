@@ -7,7 +7,7 @@
 #' Calls [ranger::ranger()] from package \CRANpkg{ranger}.
 #'
 #' @inheritSection mlr_learners_classif.ranger Custom mlr3 parameters
-#' @inheritSection mlr_learners_classif.ranger Custom mlr3 defaults
+#' @inheritSection mlr_learners_classif.ranger Initial parameter values
 #'
 #' @templateVar id regr.ranger
 #' @template learner

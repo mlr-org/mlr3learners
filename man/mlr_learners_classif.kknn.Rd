@@ -20,7 +20,7 @@ Therefore, \verb{$model} returns a list with the following elements:
 This is not stored by default, you must set hyperparameter \code{store_model} to \code{TRUE}.
 }
 }
-\section{Custom mlr3 defaults}{
+\section{Initial parameter values}{
 
 \itemize{
 \item \code{store_model}:

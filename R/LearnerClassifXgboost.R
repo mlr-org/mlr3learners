@@ -11,7 +11,7 @@
 #' This was necessary to silence a deprecation warning.
 #'
 #' @template note_xgboost
-#' @section Custom mlr3 defaults:
+#' @section Initial parameter values:
 #' - `nrounds`:
 #'   - Actual default: no default.
 #'   - Adjusted default: 1.

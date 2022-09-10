@@ -12,7 +12,7 @@
 #'     as `mtry = max(ceiling(mtry.ratio * n_features), 1)`.
 #'     Note that `mtry` and `mtry.ratio` are mutually exclusive.
 #'
-#' @section Custom mlr3 defaults:
+#' @section Initial parameter values:
 #' - `num.threads`:
 #'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
 #'   - Adjusted value: 1.

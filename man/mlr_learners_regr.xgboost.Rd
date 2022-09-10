@@ -104,7 +104,16 @@ lrn("regr.xgboost")
 }
 }
 
-\section{Custom mlr3 defaults}{
+\section{Early stopping}{
+
+Early stopping can be used to find the optimal number of trees.
+The test set for early stopping can be set with the \code{"test"} row role in the \link[mlr3:Task]{mlr3::Task}.
+While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
+Set the \code{early_stopping_set} parameter to \code{"test"} so that the performance of the model is monitored on the test set while training.
+Additionally, define the range in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
+}
+
+\section{Initial parameter values}{
 
 \itemize{
 \item \code{nrounds}:
@@ -128,15 +137,6 @@ would error. Just setting a nonsense default to workaround this.
 \item Reason for change: Reduce verbosity.
 }
 }
-}
-
-\section{Early stopping}{
-
-Early stopping can be used to find the optimal number of trees.
-The test set for early stopping can be set with the \code{"test"} row role in the \link[mlr3:Task]{mlr3::Task}.
-While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
-Set the \code{early_stopping_set} parameter to \code{"test"} so that the performance of the model is monitored on the test set while training.
-Additionally, define the range in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
 }
 
 \examples{
