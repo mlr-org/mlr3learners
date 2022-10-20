@@ -22,6 +22,24 @@
 #' @export
 #' @template seealso_learner
 #' @template example
+#' @examples
+#'
+#' # Train learner with early stopping on spam data set
+#' task = tsk("mtcars")
+#'
+#' # Split task into training and test set
+#' split = partition(task, ratio = 0.8)
+#' task$set_row_roles(split$test, "test")
+#'
+#' # Set early stopping parameter
+#' learner = lrn("regr.xgboost",
+#'   nrounds = 1000,
+#'   early_stopping_rounds = 100,
+#'   early_stopping_set = "test"
+#' )
+#'
+#' # Train learner with early stopping
+#' learner$train(task)
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
   inherit = LearnerRegr,
   public = list(
@@ -164,8 +182,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
-        test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
-        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
+        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data))
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
       pv$early_stopping_set = NULL

@@ -45,11 +45,12 @@ would error. Just setting a nonsense default to workaround this.
 
 \section{Early stopping}{
 
-Early stopping can be used to find the optimal number of trees.
+Early stopping can be used to find the optimal number of boosting rounds.
 The test set for early stopping can be set with the \code{"test"} row role in the \link[mlr3:Task]{mlr3::Task}.
-While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
 Set the \code{early_stopping_set} parameter to \code{"test"} so that the performance of the model is monitored on the test set while training.
 Additionally, define the range in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
+See example on early stopping.
+While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
 }
 
 \section{Dictionary}{
@@ -148,6 +149,23 @@ if (requireNamespace("xgboost", quietly = TRUE)) {
   # available parameters:
 learner$param_set$ids()
 }
+
+# Train learner with early stopping on spam data set
+task = tsk("spam")
+
+# Split task into training and test set
+split = partition(task, ratio = 0.8)
+task$set_row_roles(split$test, "test")
+
+# Set early stopping parameter
+learner = lrn("classif.xgboost",
+  nrounds = 1000,
+  early_stopping_rounds = 100,
+  early_stopping_set = "test"
+)
+
+# Train learner with early stopping
+learner$train(task)
 }
 \references{
 Chen, Tianqi, Guestrin, Carlos (2016).
