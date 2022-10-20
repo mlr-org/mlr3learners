@@ -11,8 +11,8 @@ add_params_xgboost = read_html("https://xgboost.readthedocs.io/en/latest/paramet
   gsub(",", replacement = "", .) %>%
   ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
   append(values = c("colsample_bylevel", "colsample_bynode")) %>%
-  # valyes which do not match regex
-  append(values = c("interaction_constraints", "monotone_constraints")) %>%
+  # values which do not match regex
+  append(values = c("interaction_constraints", "monotone_constraints", "base_score")) %>%
   # only defined in help page but not in signature or website
   append(values = c("lambda_bias"))
 
