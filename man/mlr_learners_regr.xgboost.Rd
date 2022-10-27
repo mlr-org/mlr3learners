@@ -112,6 +112,7 @@ Set the \code{early_stopping_set} parameter to \code{"test"} so that the perform
 Additionally, define the range in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
 See example on early stopping.
 While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
+Not that using the test set for early stopping can potentially bias the performance scores.
 }
 
 \section{Initial parameter values}{

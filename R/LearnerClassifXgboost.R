@@ -29,11 +29,13 @@
 #'
 #' @section Early stopping:
 #' Early stopping can be used to find the optimal number of boosting rounds.
+#' The `early_stopping_set` parameter controls which set is used to monitor the performance.
+#' Set `early_stopping_set = "test"` to monitor the performance of the model on the test set while training.
 #' The test set for early stopping can be set with the `"test"` row role in the [mlr3::Task].
-#' Set the `early_stopping_set` parameter to `"test"` so that the performance of the model is monitored on the test set while training.
-#' Additionally, define the range in which the performance must increase with `early_stopping_rounds` and the maximum number of boosting rounds with `nrounds`.
-#' See example on early stopping.
+#' Additionally, the range must be set in which the performance must increase with `early_stopping_rounds` and the maximum number of boosting rounds with `nrounds`.
 #' While resampling, the test set is automatically applied from the [mlr3::Resampling].
+#' Not that using the test set for early stopping can potentially bias the performance scores.
+#' See the section on early stopping in the examples.
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
