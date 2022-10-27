@@ -182,7 +182,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
-        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data))
+        test_target =  task$data(rows = task$row_roles$test, cols = task$target_names)
+        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
       pv$early_stopping_set = NULL
