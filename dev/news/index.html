@@ -86,7 +86,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.3" id="mlr3learners-053">mlr3learners 0.5.3<a class="anchor" aria-label="anchor" href="#mlr3learners-053"></a></h2><p class="text-muted">CRAN release: 2022-05-25</p>
 <ul><li>Survival learners have been moved to mlr3extralearners (maintained on Github): <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link uri">https://github.com/mlr-org/mlr3extralearners</a>
-</li></ul></div>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="mlr3learners-052">mlr3learners 0.5.2<a class="anchor" aria-label="anchor" href="#mlr3learners-052"></a></h2><p class="text-muted">CRAN release: 2022-01-22</p>
 <ul><li>Most learners now reorder the columns in the predict task according to the order of columns in the training task.</li>
@@ -110,7 +111,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.5" id="mlr3learners-045">mlr3learners 0.4.5<a class="anchor" aria-label="anchor" href="#mlr3learners-045"></a></h2><p class="text-muted">CRAN release: 2021-03-18</p>
-<ul><li>Fixed SVM learners for new release of package <code>e1071</code>.</li></ul></div>
+<ul><li>Fixed SVM learners for new release of package <code>e1071</code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.4" id="mlr3learners-044">mlr3learners 0.4.4<a class="anchor" aria-label="anchor" href="#mlr3learners-044"></a></h2><p class="text-muted">CRAN release: 2021-03-15</p>
 <ul><li>Changed hyperparameters of all learners to make them run sequentially in their defaults. The new function <code>set_threads()</code> in mlr3 provides a generic way to set the respective hyperparameter to the desired number of parallel threads.</li>
@@ -126,7 +128,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.2" id="mlr3learners-042">mlr3learners 0.4.2<a class="anchor" aria-label="anchor" href="#mlr3learners-042"></a></h2><p class="text-muted">CRAN release: 2020-11-11</p>
-<ul><li>Fixed a bug in the survival random forest <code>LearnerSurvRanger</code>.</li></ul></div>
+<ul><li>Fixed a bug in the survival random forest <code>LearnerSurvRanger</code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="mlr3learners-041">mlr3learners 0.4.1<a class="anchor" aria-label="anchor" href="#mlr3learners-041"></a></h2><p class="text-muted">CRAN release: 2020-10-07</p>
 <ul><li>Disabled some <code>glmnet</code> tests on solaris.</li>
@@ -165,11 +168,13 @@
 <li>Move Learner*Glmnet to Learner*CVGlmnet and add Learner*Glmnet (without internal tuning) (<a href="https://github.com/mlr-org/mlr3learners/issues/90" class="external-link">#90</a>)</li>
 </ul><div class="section level3">
 <h3 id="xgboost-0-1-6-9000">XGBoost<a class="anchor" aria-label="anchor" href="#xgboost-0-1-6-9000"></a></h3>
-<ul><li>Add parameter <code>interaction_constraints</code> (<a href="https://github.com/mlr-org/mlr3learners/issues/95" class="external-link">#95</a>)</li></ul></div>
+<ul><li>Add parameter <code>interaction_constraints</code> (<a href="https://github.com/mlr-org/mlr3learners/issues/95" class="external-link">#95</a>)</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.6" id="mlr3learners-016">mlr3learners 0.1.6<a class="anchor" aria-label="anchor" href="#mlr3learners-016"></a></h2><p class="text-muted">CRAN release: 2020-02-10</p>
-<ul><li>Added missing feature type <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical()</a></code> to multiple learners.</li></ul></div>
+<ul><li>Added missing feature type <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical()</a></code> to multiple learners.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.5" id="mlr3learners-015">mlr3learners 0.1.5<a class="anchor" aria-label="anchor" href="#mlr3learners-015"></a></h2><p class="text-muted">CRAN release: 2019-11-25</p>
 <ul><li>Added parameter and parameter dependencies to <code>regr.glmnet</code>, <code>regr.km</code>, <code>regr.ranger</code>, <code>regr.svm</code>, <code>regr.xgboost</code>, <code>classif.glmnet</code>, <code>classif.lda</code>, <code>classif.naivebayes</code>, <code>classif.qda</code>, <code>classif.ranger</code> and <code>classif.svm</code>.</li>
@@ -180,7 +185,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.4" id="mlr3learners-014">mlr3learners 0.1.4<a class="anchor" aria-label="anchor" href="#mlr3learners-014"></a></h2><p class="text-muted">CRAN release: 2019-10-29</p>
-<ul><li>Fixed a bug in <code>*.xgboost</code> and <code>*.svm</code> which was triggered if columns were reordered between <code>$train()</code> and <code>$predict()</code>.</li></ul></div>
+<ul><li>Fixed a bug in <code>*.xgboost</code> and <code>*.svm</code> which was triggered if columns were reordered between <code>$train()</code> and <code>$predict()</code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.3" id="mlr3learners-013">mlr3learners 0.1.3<a class="anchor" aria-label="anchor" href="#mlr3learners-013"></a></h2><p class="text-muted">CRAN release: 2019-09-17</p>
 <ul><li><p>Changes to work with new <code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> API.</p></li>
@@ -191,10 +197,12 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.2" id="mlr3learners-012">mlr3learners 0.1.2<a class="anchor" aria-label="anchor" href="#mlr3learners-012"></a></h2><p class="text-muted">CRAN release: 2019-08-26</p>
-<ul><li>Maintenance release.</li></ul></div>
+<ul><li>Maintenance release.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="mlr3learners-011">mlr3learners 0.1.1<a class="anchor" aria-label="anchor" href="#mlr3learners-011"></a></h2><p class="text-muted">CRAN release: 2019-08-05</p>
-<ul><li>Initial upload to CRAN.</li></ul></div>
+<ul><li>Initial upload to CRAN.</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
