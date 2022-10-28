@@ -228,8 +228,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pv$watchlist)) {
-        pv$watchlist = list(train = data)
+      if (pv$early_stopping_set != "none") {
+        pv$watchlist = c(pv$watchlist, list(train = data))
       }
 
       if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
@@ -288,6 +288,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       model = self$model
       pars = self$param_set$get_values(tags = "train")
       pars_train = self$state$param_vals
+      if (!is.null(pars_train$early_stopping_rounds)) {
+        stop("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
+      }
+      pars$early_stopping_set = NULL
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
