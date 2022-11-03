@@ -42,3 +42,17 @@ test_that("hotstart", {
   expect_equal(learner_4$param_set$values$nrounds, 5L)
   expect_equal(learner_4$state$param_vals$nrounds, 5L)
 })
+
+test_that("early stopping on the test set works", {
+  task = tsk("mtcars")
+  split = partition(task, ratio = 0.8)
+  task$set_row_roles(split$test, "test")
+  learner = lrn("regr.xgboost",
+    nrounds = 1000,
+    early_stopping_rounds = 100,
+    early_stopping_set = "test"
+  )
+
+  learner$train(task)
+  expect_named(learner$model$evaluation_log, c("iter", "train_rmse", "test_rmse"))
+})

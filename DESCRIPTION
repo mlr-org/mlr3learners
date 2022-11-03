@@ -22,7 +22,7 @@ URL: https://mlr3learners.mlr-org.com,
     https://github.com/mlr-org/mlr3learners
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:
-    mlr3 (>= 0.14.0),
+    mlr3 (>= 0.14.1),
     R (>= 3.1.0)
 Imports:
     checkmate,

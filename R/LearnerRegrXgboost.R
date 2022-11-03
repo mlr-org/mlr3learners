@@ -10,6 +10,7 @@
 #' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 #'
 #' @template note_xgboost
+#' @inheritSection mlr_learners_classif.xgboost Early stopping
 #' @inheritSection mlr_learners_classif.xgboost Initial parameter values
 #'
 #' @templateVar id regr.xgboost
@@ -21,6 +22,24 @@
 #' @export
 #' @template seealso_learner
 #' @template example
+#' @examples
+#'
+#' # Train learner with early stopping on spam data set
+#' task = tsk("mtcars")
+#'
+#' # Split task into training and test set
+#' split = partition(task, ratio = 0.8)
+#' task$set_row_roles(split$test, "test")
+#'
+#' # Set early stopping parameter
+#' learner = lrn("regr.xgboost",
+#'   nrounds = 1000,
+#'   early_stopping_rounds = 100,
+#'   early_stopping_set = "test"
+#' )
+#'
+#' # Train learner with early stopping
+#' learner$train(task)
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
   inherit = LearnerRegr,
   public = list(
@@ -39,6 +58,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         colsample_bytree            = p_dbl(0, 1, default = 1, tags = "train"),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
+        early_stopping_set          = p_fct(c("none", "train", "test"), default = "none", tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
         eval_metric                 = p_uty(default = "rmse", tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
@@ -111,7 +131,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_set = "none")
 
       super$initialize(
         id = "regr.xgboost",
@@ -156,9 +176,17 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (is.null(pv$watchlist)) {
-        pv$watchlist = list(train = data)
+      if (pv$early_stopping_set != "none") {
+        pv$watchlist = c(pv$watchlist, list(train = data))
       }
+
+      if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
+        test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
+        test_target =  task$data(rows = task$row_roles$test, cols = task$target_names)
+        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
+        pv$watchlist = c(pv$watchlist, list(test = test_data))
+      }
+      pv$early_stopping_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
@@ -176,6 +204,10 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       model = self$model
       pars = self$param_set$get_values(tags = "train")
       pars_train = self$state$param_vals
+      if (!is.null(pars_train$early_stopping_rounds)) {
+        stop("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
+      }
+      pars$early_stopping_set = NULL
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
