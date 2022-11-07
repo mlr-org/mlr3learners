@@ -1,3 +1,8 @@
+# mlr3learners 0.5.5
+
+- Enable new early stopping mechanism for xgboost.
+- Improved documentation.
+
 # mlr3learners 0.5.4
 
 - Added `regr.nnet` learner.
