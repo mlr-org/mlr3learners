@@ -1,5 +1,5 @@
 test_that("unloading leaves no trace", {
-  library(mlr3leaners)
+  library(mlr3leanrers)
   n_learners = length(learners)
   n_total = length(mlr_learners$keys())
   unloadNamespace("mlr3learners")
