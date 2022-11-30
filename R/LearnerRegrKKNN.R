@@ -85,3 +85,5 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
     }
   )
 )
+
+learners[["regr.kknn"]] = LearnerRegrKKNN

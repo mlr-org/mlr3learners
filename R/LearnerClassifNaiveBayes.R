@@ -64,3 +64,6 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     }
   )
 )
+
+
+learners[["classif.naive_bayes"]] = LearnerClassifNaiveBayes

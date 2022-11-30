@@ -74,3 +74,5 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
     }
   )
 )
+
+learners[["classif.lda"]] = LearnerClassifLDA

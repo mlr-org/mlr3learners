@@ -99,3 +99,5 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     }
   )
 )
+
+learners[["classif.multinom"]] = LearnerClassifMultinom

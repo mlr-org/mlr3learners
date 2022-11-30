@@ -92,3 +92,5 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     }
   )
 )
+
+learners[["classif.nnet"]] = LearnerClassifNnet

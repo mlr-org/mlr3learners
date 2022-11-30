@@ -83,3 +83,5 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
     }
   )
 )
+
+learners[["regr.nnet"]] = LearnerRegrNnet

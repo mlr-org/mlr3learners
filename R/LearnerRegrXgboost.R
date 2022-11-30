@@ -9,6 +9,9 @@
 #' To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 #' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 #'
+#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [`Learner`] in a
+#' `mlr3pipelines` `GraphLearner` as the preprocessing steps will not be applied to the data in the watchlist.
+#'
 #' @template note_xgboost
 #' @inheritSection mlr_learners_classif.xgboost Early stopping
 #' @inheritSection mlr_learners_classif.xgboost Initial parameter values
@@ -180,6 +183,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         pv$watchlist = c(pv$watchlist, list(train = data))
       }
 
+      # the last element in the watchlist is used as the early stopping set
+
       if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
         test_target =  task$data(rows = task$row_roles$test, cols = task$target_names)
@@ -222,3 +227,5 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
     }
   )
 )
+
+learners[["regr.xgboost"]] = LearnerRegrXgboost

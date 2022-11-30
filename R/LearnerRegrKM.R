@@ -126,3 +126,5 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
     }
   )
 )
+
+learners[["regr.km"]] = LearnerRegrKM

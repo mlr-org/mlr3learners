@@ -10,6 +10,9 @@
 #' for binary classification problems and set to `"mlogloss"` for multiclass problems.
 #' This was necessary to silence a deprecation warning.
 #'
+#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [`Learner`] in a
+#' `mlr3pipelines` `GraphLearner` as the preprocessing steps will not be applied to the data in the watchlist.
+#'
 #' @template note_xgboost
 #' @section Initial parameter values:
 #' - `nrounds`:
@@ -232,6 +235,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$watchlist = c(pv$watchlist, list(train = data))
       }
 
+      # the last element in the watchlist is used as the early stopping set
+
       if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
         test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
@@ -307,3 +312,4 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     }
   )
 )
+learners[["classif.xgboost"]] = LearnerClassifXgboost

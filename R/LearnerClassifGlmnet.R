@@ -152,3 +152,6 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
     }
   )
 )
+
+learners[["classif.glmnet"]] = LearnerClassifGlmnet
+

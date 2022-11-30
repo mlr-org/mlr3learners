@@ -1,3 +1,6 @@
+# mlr3learners 0.5.4-9000
+* fix: unloading `mlr3learners` removes learners from dictionary.
+
 # mlr3learners 0.5.4
 
 - Added `regr.nnet` learner.

@@ -90,3 +90,5 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     }
   )
 )
+
+learners[["classif.kknn"]] = LearnerClassifKKNN

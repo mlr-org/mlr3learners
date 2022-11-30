@@ -95,3 +95,5 @@ default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # noli
   defaults = insert_named(default_values(x$param_set), special_defaults)
   defaults[search_space$ids()]
 }
+
+learners[["classif.svm"]] = LearnerClassifSVM

@@ -121,3 +121,6 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
     }
   )
 )
+
+learners[["regr.cv_glmnet"]] = LearnerRegrCVGlmnet
+

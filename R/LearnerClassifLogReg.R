@@ -100,3 +100,5 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     }
   )
 )
+learners[["classif.log_reg"]] = LearnerClassifLogReg
+

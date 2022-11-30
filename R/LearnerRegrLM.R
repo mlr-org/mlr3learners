@@ -80,3 +80,5 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     }
   )
 )
+
+learners[["regr.lm"]] = LearnerRegrLM
