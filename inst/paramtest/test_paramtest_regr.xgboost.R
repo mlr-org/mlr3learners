@@ -1,6 +1,6 @@
 library(mlr3learners)
+library(magrittr, exclude = c("equals", "is_less_than", "not"))
 library(rvest)
-library(magrittr)
 
 add_params_xgboost = read_html("https://xgboost.readthedocs.io/en/latest/parameter.html") %>%
   html_elements(c("li", "p")) %>%
