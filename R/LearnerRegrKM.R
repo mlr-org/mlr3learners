@@ -127,4 +127,5 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
   )
 )
 
+#' @include aaa.R
 learners[["regr.km"]] = LearnerRegrKM

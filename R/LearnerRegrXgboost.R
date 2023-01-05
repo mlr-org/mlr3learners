@@ -228,4 +228,5 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
   )
 )
 
+#' @include aaa.R
 learners[["regr.xgboost"]] = LearnerRegrXgboost

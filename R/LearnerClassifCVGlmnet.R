@@ -143,4 +143,5 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
   )
 )
 
+#' @include aaa.R
 learners[["classif.cv_glmnet"]] = LearnerClassifCVGlmnet

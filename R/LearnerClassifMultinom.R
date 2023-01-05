@@ -100,4 +100,5 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
   )
 )
 
+#' @include aaa.R
 learners[["classif.multinom"]] = LearnerClassifMultinom

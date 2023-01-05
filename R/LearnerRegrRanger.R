@@ -151,4 +151,5 @@ default_values.LearnerRegrRanger = function(x, search_space, task, ...) { # noli
   defaults[search_space$ids()]
 }
 
+#' @include aaa.R
 learners[["regr.ranger"]] = LearnerRegrRanger

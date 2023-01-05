@@ -86,4 +86,5 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
   )
 )
 
+#' @include aaa.R
 learners[["regr.kknn"]] = LearnerRegrKKNN

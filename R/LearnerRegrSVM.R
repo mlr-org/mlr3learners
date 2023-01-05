@@ -81,4 +81,5 @@ default_values.LearnerRegrSVM = function(x, search_space, task, ...) { # nolint
   defaults[search_space$ids()]
 }
 
+#' @include aaa.R
 learners[["regr.svm"]] = LearnerRegrSVM

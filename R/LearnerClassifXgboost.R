@@ -312,4 +312,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     }
   )
 )
+
+#' @include aaa.R
 learners[["classif.xgboost"]] = LearnerClassifXgboost

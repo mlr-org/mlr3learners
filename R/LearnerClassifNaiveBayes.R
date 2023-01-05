@@ -65,5 +65,5 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
   )
 )
 
-
+#' @include aaa.R
 learners[["classif.naive_bayes"]] = LearnerClassifNaiveBayes

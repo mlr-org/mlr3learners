@@ -100,5 +100,6 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     }
   )
 )
-learners[["classif.log_reg"]] = LearnerClassifLogReg
 
+#' @include aaa.R
+learners[["classif.log_reg"]] = LearnerClassifLogReg

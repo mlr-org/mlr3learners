@@ -161,4 +161,5 @@ default_values.LearnerClassifRanger = function(x, search_space, task, ...) { # n
   defaults[search_space$ids()]
 }
 
+#' @include aaa.R
 learners[["classif.ranger"]] = LearnerClassifRanger

@@ -153,5 +153,5 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
   )
 )
 
+#' @include aaa.R
 learners[["classif.glmnet"]] = LearnerClassifGlmnet
-
