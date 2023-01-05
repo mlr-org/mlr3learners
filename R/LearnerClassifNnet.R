@@ -92,3 +92,6 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     }
   )
 )
+
+#' @include aaa.R
+learners[["classif.nnet"]] = LearnerClassifNnet

@@ -123,3 +123,6 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
     }
   )
 )
+
+#' @include aaa.R
+learners[["regr.glmnet"]] = LearnerRegrGlmnet
