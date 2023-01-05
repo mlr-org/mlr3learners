@@ -88,6 +88,11 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         lvls = self$model$lev
         prob = unname(invoke(predict, self$model, newdata = newdata, type = "probs", .args = pv))
 
+        # fix dimensions being dropped for n == 1 (https://github.com/mlr-org/mlr3/issues/883)
+        if (task$nrow == 1L) {
+          prob = matrix(prob, nrow = 1L)
+        }
+
         if (length(lvls) == 2L) {
           prob = pvec2mat(prob, lvls)
         } else {
