@@ -90,3 +90,6 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
     }
   )
 )
+
+#' @include aaa.R
+learners[["classif.kknn"]] = LearnerClassifKKNN

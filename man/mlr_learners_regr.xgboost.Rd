@@ -10,6 +10,9 @@ Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpk
 
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
+
+Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
+\code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
 }
 \note{
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
@@ -107,12 +110,13 @@ lrn("regr.xgboost")
 \section{Early stopping}{
 
 Early stopping can be used to find the optimal number of boosting rounds.
+The \code{early_stopping_set} parameter controls which set is used to monitor the performance.
+Set \code{early_stopping_set = "test"} to monitor the performance of the model on the test set while training.
 The test set for early stopping can be set with the \code{"test"} row role in the \link[mlr3:Task]{mlr3::Task}.
-Set the \code{early_stopping_set} parameter to \code{"test"} so that the performance of the model is monitored on the test set while training.
-Additionally, define the range in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
-See example on early stopping.
+Additionally, the range must be set in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
 While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
 Not that using the test set for early stopping can potentially bias the performance scores.
+See the section on early stopping in the examples.
 }
 
 \section{Initial parameter values}{

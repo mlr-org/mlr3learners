@@ -80,3 +80,6 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     }
   )
 )
+
+#' @include aaa.R
+learners[["regr.lm"]] = LearnerRegrLM

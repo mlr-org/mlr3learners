@@ -160,3 +160,6 @@ default_values.LearnerClassifRanger = function(x, search_space, task, ...) { # n
   defaults = insert_named(default_values(x$param_set), special_defaults)
   defaults[search_space$ids()]
 }
+
+#' @include aaa.R
+learners[["classif.ranger"]] = LearnerClassifRanger

@@ -74,3 +74,6 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
     }
   )
 )
+
+#' @include aaa.R
+learners[["classif.lda"]] = LearnerClassifLDA

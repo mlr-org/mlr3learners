@@ -80,3 +80,6 @@ default_values.LearnerRegrSVM = function(x, search_space, task, ...) { # nolint
   defaults = insert_named(default_values(x$param_set), special_defaults)
   defaults[search_space$ids()]
 }
+
+#' @include aaa.R
+learners[["regr.svm"]] = LearnerRegrSVM

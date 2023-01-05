@@ -83,3 +83,6 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
     }
   )
 )
+
+#' @include aaa.R
+learners[["regr.nnet"]] = LearnerRegrNnet
