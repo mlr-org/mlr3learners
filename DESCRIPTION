@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.5.4-9000
+Version: 0.5.6
 Authors@R: c(
     person("Michel", "Lang", , "michellang@gmail.com", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-9754-0393")),
@@ -50,7 +50,7 @@ Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Collate: 
+Collate:
     'aaa.R'
     'LearnerClassifCVGlmnet.R'
     'LearnerClassifGlmnet.R'
