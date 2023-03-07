@@ -7,7 +7,6 @@ test_that("regr.nnet", {
     "x", # handled via mlr3
     "y", # handled via mlr3
     "weights", # handled via mlr3
-    "formula", # handled via mlr3
     "data", # handled via mlr3
     "linout", # automatically set to TRUE, since it's the regression learner
     "entropy", # mutually exclusive with linout
