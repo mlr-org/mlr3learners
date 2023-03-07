@@ -25,7 +25,7 @@ lrn("regr.nnet")
 \itemize{
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}
-\item Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
+\item Feature Types: \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
 \item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
 }
 }
