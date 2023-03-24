@@ -1,6 +1,6 @@
 # mlr3learners 0.5.6-9000
 
-* Added formula argument to `nnet` learner
+* Added formula argument to `nnet` learner and support feature type `"integer"`
 
 # mlr3learners 0.5.6
 
