@@ -25,7 +25,7 @@ lrn("regr.nnet")
 \itemize{
 \item Task type: \dQuote{regr}
 \item Predict Types: \dQuote{response}
-\item Feature Types: \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
+\item Feature Types: \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}, \dQuote{ordered}
 \item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{nnet}
 }
 }
@@ -49,6 +49,7 @@ lrn("regr.nnet")
    skip \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    subset \tab untyped \tab - \tab  \tab - \cr
    trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   formula \tab untyped \tab - \tab  \tab - \cr
 }
 }
 
@@ -60,6 +61,13 @@ lrn("regr.nnet")
 \item Adjusted default: 3L.
 \item Reason for change: no default in \code{nnet()}.
 }
+}
+}
+
+\section{Custom mlr3 parameters}{
+
+\itemize{
+\item \code{formula}: if not provided, the formula is set to \code{task$formula()}.
 }
 }
 

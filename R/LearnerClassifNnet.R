@@ -17,6 +17,9 @@
 #'   - Adjusted default: 3L.
 #'   - Reason for change: no default in `nnet()`.
 #'
+#' @section Custom mlr3 parameters:
+#' - `formula`: if not provided, the formula is set to `task$formula()`.
+#'
 #' @references
 #' `r format_bib("ripley_1996")`
 #'
@@ -46,14 +49,15 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         size      = p_int(0L, default = 3L, tags = "train"),
         skip      = p_lgl(default = FALSE, tags = "train"),
         subset    = p_uty(tags = "train"),
-        trace     = p_lgl(default = TRUE, tags = "train")
+        trace     = p_lgl(default = TRUE, tags = "train"),
+        formula   = p_uty(tags = "train")
       )
       ps$values = list(size = 3L)
 
       super$initialize(
         id = "classif.nnet",
         packages = c("mlr3learners", "nnet"),
-        feature_types = c("numeric", "factor", "ordered"),
+        feature_types = c("numeric", "factor", "ordered", "integer"),
         predict_types = c("prob", "response"),
         param_set = ps,
         properties = c("twoclass", "multiclass", "weights"),
@@ -68,9 +72,11 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
       if ("weights" %in% task$properties) {
         pv = insert_named(pv, list(weights = task$weights$weight))
       }
-      f = task$formula()
+      if (is.null(pv$formula)) {
+        pv$formula = task$formula()
+      }
       data = task$data()
-      invoke(nnet::nnet.formula, formula = f, data = data, .args = pv)
+      invoke(nnet::nnet.formula, data = data, .args = pv)
     },
 
     .predict = function(task) {

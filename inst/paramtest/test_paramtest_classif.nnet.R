@@ -7,7 +7,6 @@ test_that("classif.nnet", {
     "x", # handled via mlr3
     "y", # handled via mlr3
     "weights", # handled via mlr3
-    "formula", # handled via mlr3
     "data", # handled via mlr3
     "entropy", # automatically set to TRUE if two-class task
     "softmax", # automatically set to TRUE if multi-class task
