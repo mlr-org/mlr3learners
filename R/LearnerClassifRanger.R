@@ -44,6 +44,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
         keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
         max.depth                    = p_int(default = NULL, lower = 0L, special_vals = list(NULL), tags = "train"),
+        min.bucket                   = p_int(1L, default = 1L, tags = "train"),
         min.node.size                = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         min.prop                     = p_dbl(default = 0.1, tags = "train"),
         minprop                      = p_dbl(default = 0.1, tags = "train"),
@@ -131,8 +132,10 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       newdata = ordered_features(task, self)
 
       prediction = invoke(predict,
-        self$model, data = newdata,
-        predict.type = "response", .args = pv)
+        self$model,
+        data = newdata,
+        predict.type = "response", .args = pv
+      )
 
       if (self$predict_type == "response") {
         list(response = prediction$predictions)
