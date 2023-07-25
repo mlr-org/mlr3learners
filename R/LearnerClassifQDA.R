@@ -45,6 +45,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         properties = c("weights", "twoclass", "multiclass"),
         packages = c("mlr3learners", "MASS"),
+        label = "Quadratic Discriminant Analysis",
         man = "mlr3learners::mlr_learners_classif.qda"
       )
     }

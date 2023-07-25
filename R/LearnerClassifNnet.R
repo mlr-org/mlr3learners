@@ -61,6 +61,7 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         predict_types = c("prob", "response"),
         param_set = ps,
         properties = c("twoclass", "multiclass", "weights"),
+        label = "Single Layer Neural Network",
         man = "mlr3learners::mlr_learners_classif.nnet"
       )
     }

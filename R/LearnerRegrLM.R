@@ -43,6 +43,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         feature_types = c("logical", "integer", "numeric", "factor", "character"),
         properties = c("weights", "loglik"),
         packages = c("mlr3learners", "stats"),
+        label = "Linear Model",
         man = "mlr3learners::mlr_learners_regr.lm"
       )
     },

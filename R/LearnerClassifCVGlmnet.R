@@ -81,6 +81,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "twoclass", "multiclass", "selected_features"),
         packages = c("mlr3learners", "glmnet"),
+        label = "GLM with Elastic Net Regularization",
         man = "mlr3learners::mlr_learners_classif.cv_glmnet"
       )
     },

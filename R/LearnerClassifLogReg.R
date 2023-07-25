@@ -59,6 +59,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("twoclass", "loglik"),
         packages = c("mlr3learners", "stats"),
+        label = "Logistic Regression",
         man = "mlr3learners::mlr_learners_classif.log_reg"
       )
     },
