@@ -23,17 +23,20 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        df          = p_dbl(default = Inf, tags = "predict"),
-        interval    = p_fct(c("none", "confidence", "prediction"), tags = "predict"),
-        level       = p_dbl(default = 0.95, tags = "predict"),
-        model       = p_lgl(default = TRUE, tags = "train"),
-        offset      = p_lgl(tags = "train"),
-        pred.var    = p_uty(tags = "predict"),
-        qr          = p_lgl(default = TRUE, tags = "train"),
-        scale       = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
-        singular.ok = p_lgl(default = TRUE, tags = "train"),
-        x           = p_lgl(default = FALSE, tags = "train"),
-        y           = p_lgl(default = FALSE, tags = "train")
+        df            = p_dbl(default = Inf, tags = "predict"),
+        interval      = p_fct(c("none", "confidence", "prediction"), tags = "predict"),
+        level         = p_dbl(default = 0.95, tags = "predict"),
+        model         = p_lgl(default = TRUE, tags = "train"),
+        offset        = p_lgl(tags = "train"),
+        pred.var      = p_uty(tags = "predict"),
+        qr            = p_lgl(default = TRUE, tags = "train"),
+        scale         = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
+        singular.ok   = p_lgl(default = TRUE, tags = "train"),
+        x             = p_lgl(default = FALSE, tags = "train"),
+        y             = p_lgl(default = FALSE, tags = "train"),
+        rankdeficient = p_fct(c("warnif", "simple", "non-estim", "NA", "NAwarn"), tags = "predict"),
+        tol           = p_dbl(default = 1e-07, tags = "predict"),
+        verbose       = p_lgl(default = FALSE, tags = "predict")
       )
 
       super$initialize(
