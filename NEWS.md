@@ -1,5 +1,6 @@
 # mlr3learners 0.5.6-9000
 
+* Added labels to learners.
 * Added formula argument to `nnet` learner and support feature type `"integer"`
 * Added `min.bucket` parameter to `classif.ranger` and `regr.ranger`.
 
