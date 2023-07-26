@@ -17,3 +17,5 @@ vignettes/learners/
 ^clang-.*
 ^gfortran.*
 ^revdep$
+^cran-comments\.md$
+^CRAN-RELEASE$
