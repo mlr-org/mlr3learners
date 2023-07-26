@@ -48,6 +48,7 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         feature_types = c("logical", "integer", "numeric", "factor"),
         properties = c("weights", "twoclass", "multiclass", "loglik"),
         packages = c("mlr3learners", "nnet"),
+        label = "Multinomial Log-Linear Model",
         man = "mlr3learners::mlr_learners_classif.multinom"
       )
     },

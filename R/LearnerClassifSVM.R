@@ -54,6 +54,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
         feature_types = c("logical", "integer", "numeric"),
         properties = c("twoclass", "multiclass"),
         packages = c("mlr3learners", "e1071"),
+        label = "Support Vector Machine",
         man = "mlr3learners::mlr_learners_classif.svm"
       )
     }

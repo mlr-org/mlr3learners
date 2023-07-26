@@ -75,6 +75,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error", "hotstart_backward"),
         packages = c("mlr3learners", "ranger"),
+        label = "Random Forest",
         man = "mlr3learners::mlr_learners_regr.ranger"
       )
     },

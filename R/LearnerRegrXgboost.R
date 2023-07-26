@@ -142,6 +142,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "missings", "importance", "hotstart_forward"),
         packages = c("mlr3learners", "xgboost"),
+        label = "Extreme Gradient Boosting",
         man = "mlr3learners::mlr_learners_regr.xgboost"
       )
     },

@@ -61,6 +61,7 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
         predict_types = c("response"),
         param_set = ps,
         properties = c("weights"),
+        label = "Single Layer Neural Network",
         man = "mlr3learners::mlr_learners_regr.nnet"
       )
     }
