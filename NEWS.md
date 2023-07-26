@@ -1,4 +1,4 @@
-# mlr3learners 0.5.6-9000
+# mlr3learners 0.5.7
 
 * Added labels to learners.
 * Added formula argument to `nnet` learner and support feature type `"integer"`
