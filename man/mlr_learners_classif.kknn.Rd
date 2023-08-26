@@ -56,7 +56,7 @@ lrn("classif.kknn")
    distance \tab numeric \tab 2 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    kernel \tab character \tab optimal \tab rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal \tab - \cr
    scale \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   ykernel \tab untyped \tab  \tab  \tab - \cr
+   ykernel \tab untyped \tab NULL \tab  \tab - \cr
    store_model \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }

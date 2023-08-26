@@ -36,6 +36,7 @@ lrn("regr.ranger")
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   min.bucket \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    min.node.size \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -55,7 +56,7 @@ lrn("regr.ranger")
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab untyped \tab  \tab  \tab - \cr
+   split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab - \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr

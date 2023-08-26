@@ -69,7 +69,7 @@ lrn("classif.glmnet")
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    newoffset \tab untyped \tab - \tab  \tab - \cr
-   offset \tab untyped \tab  \tab  \tab - \cr
+   offset \tab untyped \tab NULL \tab  \tab - \cr
    penalty.factor \tab untyped \tab - \tab  \tab - \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr

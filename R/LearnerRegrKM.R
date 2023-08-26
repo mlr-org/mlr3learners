@@ -61,8 +61,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         type             = p_fct(c("SK", "UK"), default = "SK", tags = "predict"),
         upper            = p_uty(default = NULL, tags = "train")
       )
-      ps$add_dep("multistart", "optim.method", CondEqual$new("BFGS"))
-      ps$add_dep("knots", "scaling", CondEqual$new(TRUE))
+      ps$add_dep("multistart", "optim.method", CondEqual("BFGS"))
+      ps$add_dep("knots", "scaling", CondEqual(TRUE))
 
       super$initialize(
         id = "regr.km",

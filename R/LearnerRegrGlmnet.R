@@ -40,7 +40,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         exmx                  = p_dbl(default = 250.0, tags = "train"),
         family                = p_fct(c("gaussian", "poisson"), default = "gaussian", tags = "train"),
         fdev                  = p_dbl(0, 1, default = 1.0e-5, tags = "train"),
-        gamma                 = p_dbl(default = 1, tags = "train"),
+        gamma                 = p_dbl(default = 1, tags = "train", depends = relax == TRUE),
         grouped               = p_lgl(default = TRUE, tags = "train"),
         intercept             = p_lgl(default = TRUE, tags = "train"),
         keep                  = p_lgl(default = FALSE, tags = "train"),
@@ -65,13 +65,11 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         standardize.response  = p_lgl(default = FALSE, tags = "train"),
         thresh                = p_dbl(0, default = 1e-07, tags = "train"),
         trace.it              = p_int(0, 1, default = 0, tags = "train"),
-        type.gaussian         = p_fct(c("covariance", "naive"), tags = "train"),
+        type.gaussian         = p_fct(c("covariance", "naive"), tags = "train", depends = family == "gaussian"),
         type.logistic         = p_fct(c("Newton", "modified.Newton"), tags = "train"),
         type.multinomial      = p_fct(c("ungrouped", "grouped"), tags = "train"),
         upper.limits          = p_uty(tags = "train")
       )
-      ps$add_dep("gamma", "relax", CondEqual$new(TRUE))
-      ps$add_dep("type.gaussian", "family", CondEqual$new("gaussian"))
 
       ps$values = list(family = "gaussian")
 

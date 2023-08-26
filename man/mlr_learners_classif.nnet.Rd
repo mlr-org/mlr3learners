@@ -38,7 +38,7 @@ lrn("classif.nnet")
    Wts \tab untyped \tab - \tab  \tab - \cr
    abstol \tab numeric \tab 1e-04 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    censored \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   contrasts \tab untyped \tab  \tab  \tab - \cr
+   contrasts \tab untyped \tab NULL \tab  \tab - \cr
    decay \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    mask \tab untyped \tab - \tab  \tab - \cr
    maxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr

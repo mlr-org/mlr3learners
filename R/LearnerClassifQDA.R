@@ -31,12 +31,11 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
     initialize = function() {
       ps = ps(
         method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
-        nu             = p_int(tags = "train"),
+        nu             = p_int(tags = "train", depends = method == "t"),
         predict.method = p_fct(c("plug-in", "predictive", "debiased"), default = "plug-in", tags = "predict"),
         predict.prior  = p_uty(tags = "predict"),
         prior          = p_uty(tags = "train")
       )
-      ps$add_dep("nu", "method", CondEqual$new("t"))
 
       super$initialize(
         id = "classif.qda",

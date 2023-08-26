@@ -41,6 +41,9 @@ lrn("regr.lm")
    singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    y \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   rankdeficient \tab character \tab - \tab warnif, simple, non-estim, NA, NAwarn \tab - \cr
+   tol \tab numeric \tab 1e-07 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   verbose \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 
