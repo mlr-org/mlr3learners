@@ -88,6 +88,7 @@ lrn("classif.xgboost")
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   device \tab untyped \tab cpu \tab  \tab - \cr
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    early_stopping_set \tab character \tab none \tab none, train, test \tab - \cr
@@ -118,7 +119,6 @@ lrn("classif.xgboost")
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab - \cr
    predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
@@ -148,11 +148,30 @@ lrn("classif.xgboost")
 
 \examples{
 if (requireNamespace("xgboost", quietly = TRUE)) {
-  learner = mlr3::lrn("classif.xgboost")
-  print(learner)
+# Define the Learner and set parameter values
+learner = lrn("classif.xgboost")
+print(learner)
 
-  # available parameters:
-learner$param_set$ids()
+# Define a Task
+task = tsk("sonar")
+
+# Create train and test set
+ids = partition(task)
+
+# Train the learner on the training ids
+learner$train(task, row_ids = ids$train)
+
+# print the model
+print(learner$model)
+
+# importance method
+if("importance" \%in\% learner$properties) print(learner$importance)
+
+# Make predictions for the test rows
+predictions = learner$predict(task, row_ids = ids$test)
+
+# Score the predictions
+predictions$score()
 }
 
 # Train learner with early stopping on spam data set

@@ -61,6 +61,7 @@ lrn("classif.ranger")
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   min.bucket \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    min.node.size \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    min.prop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -88,11 +89,30 @@ lrn("classif.ranger")
 
 \examples{
 if (requireNamespace("ranger", quietly = TRUE)) {
-  learner = mlr3::lrn("classif.ranger")
-  print(learner)
+# Define the Learner and set parameter values
+learner = lrn("classif.ranger")
+print(learner)
 
-  # available parameters:
-learner$param_set$ids()
+# Define a Task
+task = tsk("sonar")
+
+# Create train and test set
+ids = partition(task)
+
+# Train the learner on the training ids
+learner$train(task, row_ids = ids$train)
+
+# print the model
+print(learner$model)
+
+# importance method
+if("importance" \%in\% learner$properties) print(learner$importance)
+
+# Make predictions for the test rows
+predictions = learner$predict(task, row_ids = ids$test)
+
+# Score the predictions
+predictions$score()
 }
 }
 \references{

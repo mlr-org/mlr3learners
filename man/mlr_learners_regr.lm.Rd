@@ -41,6 +41,9 @@ lrn("regr.lm")
    singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    y \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   rankdeficient \tab character \tab - \tab warnif, simple, non-estim, NA, NAwarn \tab - \cr
+   tol \tab numeric \tab 1e-07 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   verbose \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 
@@ -58,11 +61,30 @@ Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to cre
 
 \examples{
 if (requireNamespace("stats", quietly = TRUE)) {
-  learner = mlr3::lrn("regr.lm")
-  print(learner)
+# Define the Learner and set parameter values
+learner = lrn("regr.lm")
+print(learner)
 
-  # available parameters:
-learner$param_set$ids()
+# Define a Task
+task = tsk("mtcars")
+
+# Create train and test set
+ids = partition(task)
+
+# Train the learner on the training ids
+learner$train(task, row_ids = ids$train)
+
+# print the model
+print(learner$model)
+
+# importance method
+if("importance" \%in\% learner$properties) print(learner$importance)
+
+# Make predictions for the test rows
+predictions = learner$predict(task, row_ids = ids$test)
+
+# Score the predictions
+predictions$score()
 }
 }
 \seealso{
