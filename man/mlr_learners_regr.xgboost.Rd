@@ -49,6 +49,7 @@ lrn("regr.xgboost")
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   device \tab untyped \tab cpu \tab  \tab - \cr
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    early_stopping_set \tab character \tab none \tab none, train, test \tab - \cr
@@ -79,7 +80,6 @@ lrn("regr.xgboost")
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predictor \tab character \tab cpu_predictor \tab cpu_predictor, gpu_predictor \tab - \cr
    predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
@@ -181,7 +181,7 @@ ACM.
 \seealso{
 \itemize{
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
-\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
 \item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).

@@ -41,6 +41,9 @@ lrn("regr.lm")
    singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    y \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   rankdeficient \tab character \tab - \tab warnif, simple, non-estim, NA, NAwarn \tab - \cr
+   tol \tab numeric \tab 1e-07 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   verbose \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 
@@ -68,7 +71,7 @@ learner$param_set$ids()
 \seealso{
 \itemize{
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
-\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
 \item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
