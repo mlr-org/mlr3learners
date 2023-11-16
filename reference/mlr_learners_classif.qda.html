@@ -207,11 +207,30 @@ for established default tuning spaces.</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"MASS"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">learner</span> <span class="op">=</span> <span class="fu">mlr3</span><span class="fu">::</span><span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.qda"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.qda"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># available parameters:</span></span></span>
-<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">ids</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define a Task</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"sonar"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create train and test set</span></span></span>
+<span class="r-in"><span><span class="va">ids</span> <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
+<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifQDA:classif.qda&gt;: Quadratic Discriminant Analysis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
@@ -220,8 +239,43 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor, ordered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: multiclass, twoclass, weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "method"         "nu"             "predict.method" "predict.prior" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "prior"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qda(task$formula(), data = task$data())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Prior probabilities of groups:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         M         R </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5323741 0.4676259 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group means:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V1       V10       V11       V12       V13       V14       V15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.03512973 0.2459108 0.2806568 0.2946270 0.3170081 0.3312635 0.3495486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.02159231 0.1490862 0.1702738 0.1873323 0.2125185 0.2567154 0.2914769</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V16       V17       V18       V19         V2       V20       V21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.4031432 0.4431743 0.4924986 0.5862189 0.04409459 0.6592662 0.6970757</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.3485000 0.4006631 0.4271354 0.4289308 0.02917077 0.4703323 0.5323877</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V22       V23       V24       V25       V26       V27       V28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.6988203 0.7018986 0.7074081 0.6971230 0.7067500 0.7038811 0.6976000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.5749785 0.6249477 0.6888800 0.7026031 0.7022615 0.6840646 0.6870631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V29         V3       V30       V31       V32       V33       V34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.6484135 0.04800541 0.5717176 0.4703784 0.4148392 0.3813865 0.3533432</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.6809923 0.03234923 0.6207092 0.5434815 0.4431000 0.4476262 0.4590400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V35       V36       V37       V38       V39         V4       V40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.3191716 0.3081419 0.3099824 0.3288824 0.3464595 0.06286081 0.3151851</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.4617908 0.4504646 0.3919523 0.3161508 0.2777815 0.03857538 0.2834985</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V41       V42       V43       V44       V45       V46       V47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.2900770 0.2983027 0.2735081 0.2430149 0.2380189 0.1920865 0.1455946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.2593123 0.2351292 0.2070338 0.1683677 0.1362400 0.1138677 0.0912000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V48        V49         V5        V50        V51         V52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.10982838 0.06459459 0.09166622 0.02287432 0.01932162 0.015335135</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.06666769 0.03705385 0.05797538 0.01710154 0.01127538 0.009210769</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V53         V54         V55         V56         V57         V58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.011459459 0.012468919 0.009581081 0.008739189 0.007766216 0.008898649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.009238462 0.008650769 0.008489231 0.006821538 0.007496923 0.006309231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V59         V6         V60        V7      V8        V9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.008318919 0.11316757 0.006428378 0.1317595 0.14700 0.2048351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.007098462 0.09303692 0.006038462 0.1121385 0.11568 0.1297292</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3913043 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

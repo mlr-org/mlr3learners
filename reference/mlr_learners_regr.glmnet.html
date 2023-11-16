@@ -245,11 +245,30 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"glmnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">learner</span> <span class="op">=</span> <span class="fu">mlr3</span><span class="fu">::</span><span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"regr.glmnet"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.glmnet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># available parameters:</span></span></span>
-<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">ids</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define a Task</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create train and test set</span></span></span>
+<span class="r-in"><span><span class="va">ids</span> <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
+<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerRegrGlmnet:regr.glmnet&gt;: GLM with Elastic Net Regularization</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
@@ -258,20 +277,104 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "alignment"            "alpha"                "big"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "devmax"               "dfmax"                "eps"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "epsnr"                "exact"                "exclude"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "exmx"                 "family"               "fdev"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "gamma"                "grouped"              "intercept"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "keep"                 "lambda"               "lambda.min.ratio"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "lower.limits"         "maxit"                "mnlam"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "mxit"                 "mxitnr"               "newoffset"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "nlambda"              "offset"               "parallel"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "penalty.factor"       "pmax"                 "pmin"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "prec"                 "relax"                "s"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [34] "standardize"          "standardize.response" "thresh"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "trace.it"             "type.gaussian"        "type.logistic"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [40] "type.multinomial"     "upper.limits"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  (if (cv) glmnet::cv.glmnet else glmnet::glmnet)(x = data, y = target,      family = "gaussian") </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Df  %Dev Lambda</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  0.00 5.3060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2 13.41 4.8340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   2 24.68 4.4050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   2 34.05 4.0140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2 41.82 3.6570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   3 48.48 3.3320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   4 54.53 3.0360</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   4 59.67 2.7660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   4 63.93 2.5210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  4 67.47 2.2970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  4 70.41 2.0930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  4 72.85 1.9070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  3 74.85 1.7370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  3 76.51 1.5830</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  3 77.88 1.4420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  3 79.03 1.3140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  4 80.07 1.1980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  4 81.01 1.0910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  4 81.79 0.9942</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  4 82.43 0.9059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  5 82.99 0.8254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  5 83.52 0.7521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  5 83.95 0.6853</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  5 84.32 0.6244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  6 84.68 0.5689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  6 85.06 0.5184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  7 85.49 0.4723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  6 85.87 0.4304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  6 86.12 0.3921</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  6 86.34 0.3573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  5 86.49 0.3256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  5 86.61 0.2966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  5 86.71 0.2703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  5 86.80 0.2463</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  5 86.87 0.2244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  5 86.93 0.2045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  5 86.97 0.1863</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  6 87.02 0.1697</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  6 87.07 0.1547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  6 87.11 0.1409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  6 87.14 0.1284</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  6 87.17 0.1170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  6 87.19 0.1066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  6 87.21 0.0971</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  6 87.23 0.0885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  6 87.24 0.0806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  6 87.25 0.0735</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  7 87.30 0.0669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  7 87.48 0.0610</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  7 87.62 0.0556</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51  7 87.74 0.0506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52  9 87.85 0.0461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53 10 88.08 0.0420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54 10 88.30 0.0383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55 10 88.48 0.0349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56 10 88.63 0.0318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57 10 88.76 0.0290</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58 10 88.87 0.0264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59 10 88.95 0.0241</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60 10 89.03 0.0219</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61 10 89.09 0.0200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62 10 89.14 0.0182</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63  9 89.17 0.0166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64  9 89.20 0.0151</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65  9 89.22 0.0138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66  9 89.24 0.0126</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67  9 89.25 0.0114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68  9 89.26 0.0104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69  9 89.27 0.0095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70  9 89.28 0.0086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71  9 89.29 0.0079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72 10 89.30 0.0072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73 10 89.31 0.0065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74 10 89.33 0.0060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75 10 89.34 0.0054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76 10 89.34 0.0049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77 10 89.35 0.0045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78 10 89.36 0.0041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79 10 89.36 0.0037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80 10 89.37 0.0034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81 10 89.37 0.0031</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82 10 89.37 0.0028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83 10 89.38 0.0026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84 10 89.38 0.0024</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85 10 89.38 0.0021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86 10 89.38 0.0020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87 10 89.38 0.0018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88 10 89.38 0.0016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89 10 89.38 0.0015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90 10 89.39 0.0013</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91 10 89.39 0.0012</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple lambdas have been fit. Lambda will be set to 0.01 (see parameter 's').</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15.97931 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

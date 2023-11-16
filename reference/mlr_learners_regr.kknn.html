@@ -228,11 +228,30 @@ for established default tuning spaces.</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"kknn"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">learner</span> <span class="op">=</span> <span class="fu">mlr3</span><span class="fu">::</span><span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"regr.kknn"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.kknn"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># available parameters:</span></span></span>
-<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">ids</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define a Task</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create train and test set</span></span></span>
+<span class="r-in"><span><span class="va">ids</span> <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
+<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerRegrKKNN:regr.kknn&gt;: k-Nearest-Neighbor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
@@ -241,8 +260,45 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor, ordered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "k"           "distance"    "kernel"      "scale"       "ykernel"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "store_model"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $formula</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mpg ~ .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      mpg am carb cyl  disp drat gear  hp  qsec vs    wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 21.0  1    4   6 160.0 3.90    4 110 16.46  0 2.620</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 22.8  1    1   4 108.0 3.85    4  93 18.61  1 2.320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 21.4  0    1   6 258.0 3.08    3 110 19.44  1 3.215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 18.7  0    2   8 360.0 3.15    3 175 17.02  0 3.440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 21.5  0    1   4 120.1 3.70    3  97 20.01  1 2.465</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 19.2  0    2   8 400.0 3.08    3 175 17.05  0 3.845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 26.0  1    2   4 120.3 4.43    5  91 16.70  0 2.140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 19.7  1    6   6 145.0 3.62    5 175 15.50  0 2.770</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 21.4  1    2   4 121.0 4.11    4 109 18.60  1 2.780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 18.1  0    1   6 225.0 2.76    3 105 20.22  1 3.460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 17.8  0    4   6 167.6 3.92    4 123 18.90  1 3.440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 16.4  0    3   8 275.8 3.07    3 180 17.40  0 4.070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 17.3  0    3   8 275.8 3.07    3 180 17.60  0 3.730</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 15.2  0    3   8 275.8 3.07    3 180 18.00  0 3.780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 10.4  0    4   8 472.0 2.93    3 205 17.98  0 5.250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 14.7  0    4   8 440.0 3.23    3 230 17.42  0 5.345</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 15.5  0    2   8 318.0 2.76    3 150 16.87  0 3.520</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 15.2  0    2   8 304.0 3.15    3 150 17.30  0 3.435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 30.4  1    2   4  75.7 4.93    4  52 18.52  1 1.615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 33.9  1    1   4  71.1 4.22    4  65 19.90  1 1.835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 30.4  1    2   4  95.1 3.77    5 113 16.90  1 1.513</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      mpg am carb cyl  disp drat gear  hp  qsec vs    wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $pv</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $pv$k</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $kknn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7.158871 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

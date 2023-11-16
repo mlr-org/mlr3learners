@@ -202,11 +202,30 @@ for established default tuning spaces.</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">learner</span> <span class="op">=</span> <span class="fu">mlr3</span><span class="fu">::</span><span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">lrn</a></span><span class="op">(</span><span class="st">"classif.multinom"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.multinom"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># available parameters:</span></span></span>
-<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">ids</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Define a Task</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"sonar"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create train and test set</span></span></span>
+<span class="r-in"><span><span class="va">ids</span> <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
+<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifMultinom:classif.multinom&gt;: Multinomial Log-Linear Model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
@@ -215,9 +234,47 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: loglik, multiclass, twoclass, weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Hess"     "abstol"   "censored" "decay"    "entropy"  "mask"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "maxit"    "MaxNWts"  "model"    "linout"   "rang"     "reltol"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "size"     "skip"     "softmax"  "summ"     "trace"    "Wts"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  62 (61 variable)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 96.347458 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 33.916501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 22.582542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 16.222364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 10.951200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 6.197084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  60 value 0.024268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000069 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> nnet::multinom(formula = Class ~ ., data = task$data())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)          V1         V10         V11         V12         V13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3285.14982  -948.88918 -1389.72315 -3771.55888 -3772.40206  2478.95403 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V14         V15         V16         V17         V18         V19 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -134.21110 -2770.48974  1861.24229  1971.93261   571.55651  -922.23325 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V2         V20         V21         V22         V23         V24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    99.49108 -1814.29763   825.92176 -1296.92718   265.09450   533.82610 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V25         V26         V27         V28         V29          V3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -4039.30000  2220.96322  1540.81689 -3235.34565  3543.84404   407.18276 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V30         V31         V32         V33         V34         V35 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -5346.01629  6750.68797 -3161.38876   732.63599  1069.60877    82.25029 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V36         V37         V38         V39          V4         V40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2503.29584   279.32294  -815.30866  -410.67419 -3885.76153   974.72337 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V41         V42         V43         V44         V45         V46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2869.90473  1776.96030 -1939.67459 -1363.17019 -2042.00767    74.35682 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V47         V48         V49          V5         V50         V51 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1286.60464 -7523.65824 -4716.46108 -3055.83189  2439.53866  -912.50775 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V52         V53         V54         V55         V56         V57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1994.06895 -1057.70693   284.57283  1591.51486   324.67655  -269.69221 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V58         V59          V6         V60          V7          V8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -911.82799  -986.48906   998.79768  -590.22807  2411.70153  4078.96774 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -3182.03815 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001382362 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC: 122.0001 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2173913 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
