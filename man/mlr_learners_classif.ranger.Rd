@@ -89,11 +89,30 @@ lrn("classif.ranger")
 
 \examples{
 if (requireNamespace("ranger", quietly = TRUE)) {
-  learner = mlr3::lrn("classif.ranger")
-  print(learner)
+# Define the Learner and set parameter values
+learner = lrn("classif.ranger")
+print(learner)
 
-  # available parameters:
-learner$param_set$ids()
+# Define a Task
+task = tsk("sonar")
+
+# Create train and test set
+ids = partition(task)
+
+# Train the learner on the training ids
+learner$train(task, row_ids = ids$train)
+
+# print the model
+print(learner$model)
+
+# importance method
+if("importance" \%in\% learner$properties) print(learner$importance)
+
+# Make predictions for the test rows
+predictions = learner$predict(task, row_ids = ids$test)
+
+# Score the predictions
+predictions$score()
 }
 }
 \references{
