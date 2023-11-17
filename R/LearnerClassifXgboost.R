@@ -60,8 +60,8 @@
 #'
 #' # Set early stopping parameter
 #' learner = lrn("classif.xgboost",
-#'   nrounds = 1000,
-#'   early_stopping_rounds = 100,
+#'   nrounds = 100,
+#'   early_stopping_rounds = 10,
 #'   early_stopping_set = "test"
 #' )
 #'
