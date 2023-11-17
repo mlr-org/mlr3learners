@@ -51,6 +51,7 @@
 #' @template example
 #' @examples
 #'
+#' \dontrun{
 #' # Train learner with early stopping on spam data set
 #' task = tsk("spam")
 #'
@@ -67,6 +68,7 @@
 #'
 #' # Train learner with early stopping
 #' learner$train(task)
+#' }
 LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
   inherit = LearnerClassif,
 

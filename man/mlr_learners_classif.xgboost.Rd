@@ -174,6 +174,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 predictions$score()
 }
 
+\dontrun{
 # Train learner with early stopping on spam data set
 task = tsk("spam")
 
@@ -190,6 +191,7 @@ learner = lrn("classif.xgboost",
 
 # Train learner with early stopping
 learner$train(task)
+}
 }
 \references{
 Chen, Tianqi, Guestrin, Carlos (2016).

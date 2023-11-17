@@ -173,6 +173,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 predictions$score()
 }
 
+\dontrun{
 # Train learner with early stopping on spam data set
 task = tsk("mtcars")
 
@@ -189,6 +190,7 @@ learner = lrn("regr.xgboost",
 
 # Train learner with early stopping
 learner$train(task)
+}
 }
 \references{
 Chen, Tianqi, Guestrin, Carlos (2016).
