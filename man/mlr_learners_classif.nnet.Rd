@@ -72,7 +72,6 @@ lrn("classif.nnet")
 }
 
 \examples{
-\dontrun{
 if (requireNamespace("nnet", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.nnet")
@@ -98,7 +97,6 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
 }
 }
 \references{

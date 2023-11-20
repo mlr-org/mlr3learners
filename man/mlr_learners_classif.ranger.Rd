@@ -88,7 +88,6 @@ lrn("classif.ranger")
 }
 
 \examples{
-\dontrun{
 if (requireNamespace("ranger", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.ranger")
@@ -114,7 +113,6 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
 }
 }
 \references{

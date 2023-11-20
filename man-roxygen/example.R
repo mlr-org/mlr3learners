@@ -5,7 +5,6 @@ pkgs = setdiff(lrn$packages, c("mlr3", "mlr3learners"))
 #' <% task_id = if ("LearnerClassif" %in% class(lrn(id))) "sonar" else "mtcars" %>
 #'
 #' @examples
-#' \dontrun{
 #' if (<%= paste0("requireNamespace(\"", pkgs, "\", quietly = TRUE)", collapse = " && ") %>) {
 #' # Define the Learner and set parameter values
 #' <%= sprintf("learner = lrn(\"%s\")", id)%>
@@ -31,5 +30,4 @@ pkgs = setdiff(lrn$packages, c("mlr3", "mlr3learners"))
 #'
 #' # Score the predictions
 #' predictions$score()
-#' }
 #' }

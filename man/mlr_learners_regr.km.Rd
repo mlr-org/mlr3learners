@@ -71,7 +71,6 @@ lrn("regr.km")
 }
 
 \examples{
-\dontrun{
 if (requireNamespace("DiceKriging", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("regr.km")
@@ -97,7 +96,6 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
 }
 }
 \references{

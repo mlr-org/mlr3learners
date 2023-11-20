@@ -60,7 +60,6 @@ Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to cre
 }
 
 \examples{
-\dontrun{
 if (requireNamespace("stats", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("regr.lm")
@@ -86,7 +85,6 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
 }
 }
 \seealso{
