@@ -52,6 +52,7 @@ lrn("classif.multinom")
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("nnet", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.multinom")
@@ -77,6 +78,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 }
 \seealso{

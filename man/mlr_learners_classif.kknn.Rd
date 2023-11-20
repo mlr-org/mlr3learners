@@ -62,6 +62,7 @@ lrn("classif.kknn")
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("kknn", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.kknn")
@@ -87,6 +88,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 }
 \references{

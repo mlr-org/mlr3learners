@@ -147,6 +147,7 @@ lrn("classif.xgboost")
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("xgboost", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.xgboost")
@@ -172,6 +173,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 
 \dontrun{

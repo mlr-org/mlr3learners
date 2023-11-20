@@ -88,6 +88,7 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("ranger", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("regr.ranger")
@@ -113,6 +114,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 }
 \references{

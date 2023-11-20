@@ -146,6 +146,7 @@ would error. Just setting a nonsense default to workaround this.
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("xgboost", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("regr.xgboost")
@@ -171,6 +172,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 
 \dontrun{

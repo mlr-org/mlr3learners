@@ -37,6 +37,7 @@ lrn("classif.naive_bayes")
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("e1071", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.naive_bayes")
@@ -62,6 +63,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 }
 \seealso{

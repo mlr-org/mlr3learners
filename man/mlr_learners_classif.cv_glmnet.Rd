@@ -86,6 +86,7 @@ as the first factor level.
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("glmnet", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.cv_glmnet")
@@ -111,6 +112,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 }
 \references{

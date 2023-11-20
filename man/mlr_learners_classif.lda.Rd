@@ -47,6 +47,7 @@ lrn("classif.lda")
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("MASS", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.lda")
@@ -72,6 +73,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
+}
 }
 }
 \references{
