@@ -220,8 +220,7 @@ for established default tuning spaces.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.nnet"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
@@ -247,7 +246,33 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifNnet:classif.nnet&gt;: Single Layer Neural Network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: size=3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, nnet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  response, [prob]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: integer, numeric, factor, ordered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: multiclass, twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 101.935011 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 44.398546</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 6.799848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 4.959970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 4.861023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 4.860043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  60 value 4.807833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  70 value 4.688089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 4.652074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  90 value 4.576126</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter 100 value 4.522071</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 4.522071 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stopped after 100 iterations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a 60-3-1 network with 187 weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> inputs: V1 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V2 V20 V21 V22 V23 V24 V25 V26 V27 V28 V29 V3 V30 V31 V32 V33 V34 V35 V36 V37 V38 V39 V4 V40 V41 V42 V43 V44 V45 V46 V47 V48 V49 V5 V50 V51 V52 V53 V54 V55 V56 V57 V58 V59 V6 V60 V7 V8 V9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> output(s): Class </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> options were - entropy fitting </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1594203 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

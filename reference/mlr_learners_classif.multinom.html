@@ -201,8 +201,7 @@ for established default tuning spaces.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"nnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.multinom"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
@@ -228,7 +227,58 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifMultinom:classif.multinom&gt;: Multinomial Log-Linear Model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, nnet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: loglik, multiclass, twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  62 (61 variable)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 96.347458 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 41.877677</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 28.382386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 22.665394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 19.126539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 13.821311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  60 value 4.791817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  70 value 0.055771</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 0.000120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 0.000060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 0.000060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000060 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> nnet::multinom(formula = Class ~ ., data = task$data())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)          V1         V10         V11         V12         V13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2397.5720 -14109.0012   7323.4064 -12856.0978  -3327.6395    300.7740 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V14         V15         V16         V17         V18         V19 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4695.2324  -7120.5322   6847.8242   8295.3584  -9500.2375   7382.9275 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V2         V20         V21         V22         V23         V24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -6763.7230  -4583.8226   1292.4530  -4029.2544    966.5472  -2858.0215 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V25         V26         V27         V28         V29          V3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   7050.0787  -8724.3339   6189.3471  -3252.5780   1964.6295   1931.2569 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V30         V31         V32         V33         V34         V35 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -9121.5426  14795.2172  -9627.4432   7513.2548  -3371.4541   3423.8185 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V36         V37         V38         V39          V4         V40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    720.2898   6289.9683  -1956.4717  -2791.5256 -21526.3855   4043.1934 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V41         V42         V43         V44         V45         V46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -6672.5918   -798.2009   7121.2803  -5772.1894  -7069.9363   4434.7328 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V47         V48         V49          V5         V50         V51 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   8722.8661 -21450.0633 -19821.8030  -7052.4266   8343.8906  -6509.3752 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V52         V53         V54         V55         V56         V57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -7134.2962  -4297.1129  -4354.3763   -612.8064   1972.0365    886.9236 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V58         V59          V6         V60          V7          V8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -5427.0951  -7597.0807   1657.4793  -5262.4785   3961.4498   8416.5764 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2320.5994 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001198236 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC: 122.0001 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2463768 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

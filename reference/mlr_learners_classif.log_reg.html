@@ -234,8 +234,7 @@ for established default tuning spaces.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"stats"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"stats"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.log_reg"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
@@ -261,7 +260,48 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifLogReg:classif.log_reg&gt;: Logistic Regression</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, stats</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, character, factor, ordered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: loglik, twoclass</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: algorithm did not converge</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: fitted probabilities numerically 0 or 1 occurred</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = task$formula(), family = "binomial", data = data, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     model = FALSE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)           V1          V10          V11          V12          V13  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -108.5680     345.4477     -55.1899     195.1561      19.8927     -60.1344  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V14          V15          V16          V17          V18          V19  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -61.2034    -173.6783     142.3333    -275.2381     190.7422     -53.5882  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V2          V20          V21          V22          V23          V24  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    674.1000     171.7121    -298.0958     405.8266    -332.1542     323.3540  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V25          V26          V27          V28          V29           V3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -173.5929     -79.9052     164.8195    -220.7734     236.0531    -470.0573  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V30          V31          V32          V33          V34          V35  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -0.3435    -123.0040     -30.2973     112.6074    -157.2739     126.3840  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V36          V37          V38          V39           V4          V40  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -120.5961     -89.1395     -37.1691     123.8051     773.5645     -42.9997  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V41          V42          V43          V44          V45          V46  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     22.9868    -121.6010     243.4841      46.3221    -251.5886     361.8265  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V47          V48          V49           V5          V50          V51  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     32.9543     329.6229     236.9740     265.0943   -3069.5416     576.7379  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V52          V53          V54          V55          V56          V57  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1715.4484   -1245.4723     467.6144    1352.7109     863.8992   -2157.9405  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V58          V59           V6          V60           V7           V8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1227.0245    2389.2008     248.9304   -3048.5758     -89.4572    -374.7413  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V9  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    373.9458  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 138 Total (i.e. Null);  78 Residual</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    192.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 7.678e-09 	AIC: 122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2898551 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
