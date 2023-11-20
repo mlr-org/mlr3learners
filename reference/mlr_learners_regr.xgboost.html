@@ -264,7 +264,8 @@ for established default tuning spaces.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"xgboost"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"xgboost"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.xgboost"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
@@ -290,31 +291,7 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerRegrXgboost:regr.xgboost&gt;: Extreme Gradient Boosting</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: nrounds=1, nthread=1, verbose=0, early_stopping_set=none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, xgboost</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: hotstart_forward, importance, missings, weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 4.8 Kb </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   xgboost::xgb.train(data = data, nrounds = 1L, verbose = 0L, nthread = 1L, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     objective = "reg:squarederror")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> params (as set within xgb.train):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   nthread = "1", objective = "reg:squarederror", validate_parameters = "TRUE"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> xgb.attributes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   niter</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # of features: 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> niter: 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> nfeatures : 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function () </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> .__LearnerRegrXgboost__importance(self = self, private = private, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     super = super)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5587edbc9c38&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 238.9048 </span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Train learner with early stopping on spam data set</span></span></span>

@@ -206,7 +206,8 @@ for established default tuning spaces.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"MASS"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"MASS"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.qda"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
@@ -232,50 +233,7 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifQDA:classif.qda&gt;: Quadratic Discriminant Analysis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, MASS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor, ordered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: multiclass, twoclass, weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> qda(task$formula(), data = task$data())</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Prior probabilities of groups:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         M         R </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5323741 0.4676259 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group means:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           V1       V10       V11       V12       V13       V14       V15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.03467162 0.2638905 0.2950189 0.3066446 0.3178378 0.3164770 0.3280122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.02397846 0.1579954 0.1785446 0.1960877 0.2310738 0.2686123 0.3121262</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V16       V17       V18       V19         V2       V20       V21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.3724622 0.3940392 0.4253811 0.5085959 0.04376486 0.6000595 0.6551635</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.3885877 0.4363185 0.4548169 0.4663862 0.02949385 0.4926508 0.5448138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V22       V23       V24       V25       V26       V27       V28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.6533676 0.6548446 0.6680365 0.6737027 0.7091324 0.7227514 0.7285892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.5666092 0.6070492 0.6401215 0.6676092 0.6904092 0.6969615 0.6886508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V29         V3       V30      V31       V32       V33       V34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.6524365 0.05000811 0.5923257 0.491923 0.4336257 0.3970973 0.3663284</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.6318508 0.03494769 0.5729877 0.526020 0.4441985 0.4244400 0.4457738</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V35       V36       V37       V38       V39         V4       V40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.3384068 0.3092068 0.3202946 0.3315838 0.3263865 0.06593243 0.2904095</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.4762677 0.4814262 0.4264631 0.3637138 0.3358985 0.04081538 0.3364631</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V41       V42       V43       V44       V45       V46        V47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.2876784 0.3008865 0.2795216 0.2469473 0.2494122 0.2113500 0.15534459</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.2929815 0.2565985 0.2277123 0.1872554 0.1498400 0.1208062 0.09706923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V48        V49         V5        V50        V51        V52         V53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.11404054 0.06529324 0.08685000 0.02409595 0.01987297 0.01682027 0.012436486</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.07055077 0.03812154 0.06424462 0.01879077 0.01260000 0.01101846 0.009936923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           V54         V55         V56         V57         V58         V59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.012555405 0.010189189 0.009722973 0.007506757 0.009035135 0.009016216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.009647692 0.008581538 0.007895385 0.007704615 0.007193846 0.007173846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V6         V60        V7        V8        V9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.1066986 0.007267568 0.1251432 0.1518541 0.2220986</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.1013077 0.006063077 0.1234262 0.1255908 0.1385600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3478261 </span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
