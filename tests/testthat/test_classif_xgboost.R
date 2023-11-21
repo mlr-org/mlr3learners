@@ -1,4 +1,5 @@
 skip_if_not_installed("xgboost")
+skip_on_cran()
 
 test_that("autotest", {
   learner = mlr3::lrn("classif.xgboost", nrounds = 5L)
