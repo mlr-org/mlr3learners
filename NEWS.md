@@ -1,4 +1,6 @@
-# mlr3learners (development version)
+# mlr3learners 0.5.8
+
+* Adaption to memory optimization in mlr3 0.17.1.
 
 # mlr3learners 0.5.7
 
