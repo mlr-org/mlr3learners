@@ -147,14 +147,36 @@ lrn("classif.xgboost")
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("xgboost", quietly = TRUE)) {
-  learner = mlr3::lrn("classif.xgboost")
-  print(learner)
+# Define the Learner and set parameter values
+learner = lrn("classif.xgboost")
+print(learner)
 
-  # available parameters:
-learner$param_set$ids()
+# Define a Task
+task = tsk("sonar")
+
+# Create train and test set
+ids = partition(task)
+
+# Train the learner on the training ids
+learner$train(task, row_ids = ids$train)
+
+# print the model
+print(learner$model)
+
+# importance method
+if("importance" \%in\% learner$properties) print(learner$importance)
+
+# Make predictions for the test rows
+predictions = learner$predict(task, row_ids = ids$test)
+
+# Score the predictions
+predictions$score()
+}
 }
 
+\dontrun{
 # Train learner with early stopping on spam data set
 task = tsk("spam")
 
@@ -164,13 +186,14 @@ task$set_row_roles(split$test, "test")
 
 # Set early stopping parameter
 learner = lrn("classif.xgboost",
-  nrounds = 1000,
-  early_stopping_rounds = 100,
+  nrounds = 100,
+  early_stopping_rounds = 10,
   early_stopping_set = "test"
 )
 
 # Train learner with early stopping
 learner$train(task)
+}
 }
 \references{
 Chen, Tianqi, Guestrin, Carlos (2016).
@@ -182,7 +205,7 @@ ACM.
 \seealso{
 \itemize{
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
-\url{https://mlr3book.mlr-org.com/basics.html#learners}
+\url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
 \item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).

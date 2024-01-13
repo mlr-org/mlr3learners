@@ -1,7 +1,13 @@
-# mlr3learners 0.5.6-9000
+# mlr3learners (development version)
+
+# mlr3learners 0.5.8
+
+* Adaption to memory optimization in mlr3 0.17.1.
+
+# mlr3learners 0.5.7
 
 * Added labels to learners.
-* Added formula argument to `nnet` learner and support feature type `"integer"`
+* Added formula argument to `nnet` learner and support feature type `"integer"`.
 * Added `min.bucket` parameter to `classif.ranger` and `regr.ranger`.
 
 # mlr3learners 0.5.6
