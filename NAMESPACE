@@ -2,8 +2,10 @@
 
 S3method(default_values,LearnerClassifRanger)
 S3method(default_values,LearnerClassifSVM)
+S3method(default_values,LearnerClassifXgboost)
 S3method(default_values,LearnerRegrRanger)
 S3method(default_values,LearnerRegrSVM)
+S3method(default_values,LearnerRegrXgboost)
 export(LearnerClassifCVGlmnet)
 export(LearnerClassifGlmnet)
 export(LearnerClassifKKNN)
