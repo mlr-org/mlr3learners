@@ -231,5 +231,15 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
   )
 )
 
+#' @export
+default_values.LearnerRegrXgboost = function(x, search_space, task, ...) { # nolint
+  special_defaults = list(
+    nrounds = 1L
+  )
+  defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[search_space$ids()]
+}
+
+
 #' @include aaa.R
 learners[["regr.xgboost"]] = LearnerRegrXgboost
