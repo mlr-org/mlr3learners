@@ -7,7 +7,7 @@
 #' Calls [nnet::nnet.formula()] from package \CRANpkg{nnet}.
 #'
 #' Note that modern neural networks with multiple layers are connected
-#' via package [mlr3keras](https://github.com/mlr-org/mlr3keras).
+#' via package [mlr3torch](https://github.com/mlr-org/mlr3torch).
 #'
 #' @templateVar id classif.nnet
 #' @template learner
