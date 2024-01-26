@@ -9,7 +9,7 @@ Single Layer Neural Network.
 Calls \code{\link[nnet:nnet]{nnet::nnet.formula()}} from package \CRANpkg{nnet}.
 
 Note that modern neural networks with multiple layers are connected
-via package \href{https://github.com/mlr-org/mlr3keras}{mlr3keras}.
+via package \href{https://github.com/mlr-org/mlr3torch}{mlr3torch}.
 }
 \section{Dictionary}{
 
