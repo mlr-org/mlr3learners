@@ -140,7 +140,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
         verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
         watchlist                   = p_uty(default = NULL, tags = "train"),
-        xgb_model                   = p_uty(default = NULL, tags = "train")
+        xgb_model                   = p_uty(default = NULL, tags = "train"),
+        holdout_task                = p_uty(default = NULL, tags = "train")
 
       )
       # param deps
@@ -247,6 +248,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
       pv$early_stopping_set = NULL
+
+      if (!is.null(pv$holdout_task)) {
+        holdout_data = pv$holdout_task$data(cols = pv$holdout_task$feature_names)
+        holdout_label = nlvls - as.integer(pv$holdout_task$truth())
+        holdout_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(holdout_data), label = holdout_label)
+        pv$watchlist = c(pv$watchlist, list(holdout = holdout_data))
+        pv$holdout_task = NULL
+      }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
