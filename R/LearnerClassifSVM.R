@@ -94,6 +94,7 @@ default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # noli
     gamma = 1 / length(task$feature_names)
   )
   defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[["degree"]] = NULL
   defaults[search_space$ids()]
 }
 
