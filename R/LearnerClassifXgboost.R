@@ -193,6 +193,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
   ),
 
   private = list(
+    .contingent_properties = function() {
+      if (isTRUE(all.equal(self$param_set$values$early_stopping_set, "test"))) {
+        "uses_test_task"
+      } else {
+        character(0)
+      }
+    },
     .train = function(task) {
 
       pv = self$param_set$get_values(tags = "train")
@@ -239,14 +246,23 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       # the last element in the watchlist is used as the early stopping set
-
-      if (pv$early_stopping_set == "test" && !is.null(task$row_roles$test)) {
+      uses_test_set = isTRUE(all.equal(pv$early_stopping_set, "test"))
+      pv$early_stopping_set = NULL
+      if (uses_test_set && !length(task$row_roles$test) && (!exists("test_task", task, inherits = FALSE) || is.null(task$test_task))) {
+        stopf("No test set available for early stopping. Set `early_stopping_set = 'none'` or provide a test set.")
+      }
+      if (uses_test_set && length(task$row_roles$test)) {
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
         test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
+      } else if (uses_test_set) {
+        test_task = task$test_task
+        test_data = test_task$data(cols = test_task$feature_names)
+        test_label = nlvls - as.integer(test_task$truth(rows = test_task$row_roles$test))
+        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
+        pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
-      pv$early_stopping_set = NULL
 
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },

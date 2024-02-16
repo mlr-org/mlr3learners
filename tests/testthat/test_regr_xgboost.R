@@ -45,9 +45,25 @@ test_that("hotstart", {
 })
 
 test_that("early stopping on the test set works", {
+  skip_if(packageVersion("mlr3") > "0.17.2")
   task = tsk("mtcars")
   split = partition(task, ratio = 0.8)
   task$set_row_roles(split$test, "test")
+  learner = lrn("regr.xgboost",
+    nrounds = 1000,
+    early_stopping_rounds = 100,
+    early_stopping_set = "test"
+  )
+
+  learner$train(task)
+  expect_named(learner$model$evaluation_log, c("iter", "train_rmse", "test_rmse"))
+})
+
+test_that("early stopping on the test set works", {
+  skip_if(packageVersion("mlr3") <= "0.17.2")
+  task = tsk("mtcars")
+  split = partition(task, ratio = 0.8)
+  task$partition(split$test, "test")
   learner = lrn("regr.xgboost",
     nrounds = 1000,
     early_stopping_rounds = 100,
