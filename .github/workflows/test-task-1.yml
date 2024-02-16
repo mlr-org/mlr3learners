@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-name: r-cmd-check-paradox
+name: mlr3 change
 
 jobs:
   r-cmd-check:
@@ -24,7 +24,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest,   r: 'devel'}
           - {os: ubuntu-latest,   r: 'release'}
 
     steps:

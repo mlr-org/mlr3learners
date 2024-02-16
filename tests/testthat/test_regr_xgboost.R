@@ -73,3 +73,11 @@ test_that("early stopping on the test set works", {
   learner$train(task)
   expect_named(learner$model$evaluation_log, c("iter", "train_rmse", "test_rmse"))
 })
+
+test_that("uses_test_task property", {
+  skip_if(packageVersion("mlr3") <= "0.17.2")
+  l = lrn("regr.xgboost")
+  expect_false("uses_test_task" %in% l$properties)
+  l$param_set$set_values(early_stopping_set = "test")
+  expect_true("uses_test_task" %in% l$properties)
+})
