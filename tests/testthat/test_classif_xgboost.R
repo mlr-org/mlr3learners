@@ -82,7 +82,7 @@ test_that("early stopping on the test set works", {
   skip_if(packageVersion("mlr3") <= "0.17.2")
   task = tsk("spam")
   split = partition(task, ratio = 0.8)
-  task$partition(split$test, "test")
+  task$divide(split$test, "test")
   learner = lrn("classif.xgboost",
     nrounds = 1000,
     early_stopping_rounds = 100,

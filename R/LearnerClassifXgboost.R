@@ -193,7 +193,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
   ),
 
   private = list(
-    .contingent_properties = function() {
+    .dependent_properties = function() {
       if (isTRUE(all.equal(self$param_set$values$early_stopping_set, "test"))) {
         "uses_test_task"
       } else {
