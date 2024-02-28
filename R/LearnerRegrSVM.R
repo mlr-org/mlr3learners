@@ -73,6 +73,7 @@ default_values.LearnerRegrSVM = function(x, search_space, task, ...) { # nolint
     gamma = 1 / length(task$feature_names)
   )
   defaults = insert_named(default_values(x$param_set), special_defaults)
+  defaults[["degree"]] = NULL
   defaults[search_space$ids()]
 }
 

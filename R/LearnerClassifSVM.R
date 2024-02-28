@@ -89,7 +89,14 @@ default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # noli
     gamma = 1 / length(task$feature_names)
   )
   defaults = insert_named(default_values(x$param_set), special_defaults)
-  defaults[search_space$ids()]
+  # defaults[["degree"]] = NULL
+  defaults = defaults[search_space$ids()]
+
+  # fix dependencies
+  if (!is.null(defaults[["degree"]])) defaults[["degree"]] = NA_real_
+  if (!is.null(defaults[["coef0"]])) defaults[["coef0"]] = NA_real_
+
+  defaults
 }
 
 #' @include aaa.R
