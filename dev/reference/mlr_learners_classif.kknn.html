@@ -107,8 +107,8 @@ This is not stored by default, you must set hyperparameter <code>store_model</co
     
 
 <p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.kknn"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.kknn"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.kknn"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.kknn"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
@@ -122,7 +122,7 @@ This is not stored by default, you must set hyperparameter <code>store_model</co
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
     
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>k</td><td>integer</td><td>7</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>distance</td><td>numeric</td><td>2</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>kernel</td><td>character</td><td>optimal</td><td>rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal</td><td>-</td></tr><tr><td>scale</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>ykernel</td><td>untyped</td><td></td><td></td><td>-</td></tr><tr><td>store_model</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>k</td><td>integer</td><td>7</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>distance</td><td>numeric</td><td>2</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>kernel</td><td>character</td><td>optimal</td><td>rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal</td><td>-</td></tr><tr><td>scale</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>ykernel</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>store_model</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Hechenbichler, Klaus, Schliep, Klaus (2004).
