@@ -41,32 +41,32 @@ lrn("regr.km")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    bias.correct \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    checkNames \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   coef.cov \tab untyped \tab  \tab  \tab - \cr
-   coef.trend \tab untyped \tab  \tab  \tab - \cr
-   coef.var \tab untyped \tab  \tab  \tab - \cr
-   control \tab untyped \tab  \tab  \tab - \cr
+   coef.cov \tab untyped \tab NULL \tab  \tab - \cr
+   coef.trend \tab untyped \tab NULL \tab  \tab - \cr
+   coef.var \tab untyped \tab NULL \tab  \tab - \cr
+   control \tab untyped \tab NULL \tab  \tab - \cr
    cov.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    covtype \tab character \tab matern5_2 \tab gauss, matern5_2, matern3_2, exp, powexp \tab - \cr
    estim.method \tab character \tab MLE \tab MLE, LOO \tab - \cr
    gr \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    iso \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    jitter \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   kernel \tab untyped \tab  \tab  \tab - \cr
-   knots \tab untyped \tab  \tab  \tab - \cr
+   kernel \tab untyped \tab NULL \tab  \tab - \cr
+   knots \tab untyped \tab NULL \tab  \tab - \cr
    light.return \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   lower \tab untyped \tab  \tab  \tab - \cr
+   lower \tab untyped \tab NULL \tab  \tab - \cr
    multistart \tab integer \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   noise.var \tab untyped \tab  \tab  \tab - \cr
+   noise.var \tab untyped \tab NULL \tab  \tab - \cr
    nugget \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    nugget.estim \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    nugget.stability \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    optim.method \tab character \tab BFGS \tab BFGS, gen \tab - \cr
-   parinit \tab untyped \tab  \tab  \tab - \cr
-   penalty \tab untyped \tab  \tab  \tab - \cr
+   parinit \tab untyped \tab NULL \tab  \tab - \cr
+   penalty \tab untyped \tab NULL \tab  \tab - \cr
    scaling \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    se.compute \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    type \tab character \tab SK \tab SK, UK \tab - \cr
-   upper \tab untyped \tab  \tab  \tab - \cr
+   upper \tab untyped \tab NULL \tab  \tab - \cr
 }
 }
 

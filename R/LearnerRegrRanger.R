@@ -27,7 +27,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        alpha                        = p_dbl(default = 0.5, tags = "train"),
+        alpha                        = p_dbl(default = 0.5, tags = "train", depends = splitrule == "maxstat"),
         always.split.variables       = p_uty(tags = "train"),
         holdout                      = p_lgl(default = FALSE, tags = "train"),
         importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
@@ -35,11 +35,11 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         max.depth                    = p_int(default = NULL, lower = 0L, special_vals = list(NULL), tags = "train"),
         min.bucket                   = p_int(1L, default = 1L, tags = "train"),
         min.node.size                = p_int(1L, default = 5L, special_vals = list(NULL), tags = "train"),
-        minprop                      = p_dbl(default = 0.1, tags = "train"),
+        minprop                      = p_dbl(default = 0.1, tags = "train", depends = splitrule == "maxstat"),
         mtry                         = p_int(lower = 1L, special_vals = list(NULL), tags = "train"),
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         node.stats                   = p_lgl(default = FALSE, tags = "train"),
-        num.random.splits            = p_int(1L, default = 1L, tags = "train"),
+        num.random.splits            = p_int(1L, default = 1L, tags = "train", depends = splitrule == "extratrees"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
         num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict", "hotstart")),
         oob.error                    = p_lgl(default = TRUE, tags = "train"),
@@ -50,7 +50,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         respect.unordered.factors    = p_fct(c("ignore", "order", "partition"), default = "ignore", tags = "train"),
         sample.fraction              = p_dbl(0L, 1L, tags = "train"),
         save.memory                  = p_lgl(default = FALSE, tags = "train"),
-        scale.permutation.importance = p_lgl(default = FALSE, tags = "train"),
+        scale.permutation.importance = p_lgl(default = FALSE, tags = "train", depends = importance == "permutation"),
         se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"), # FIXME: only works if predict_type == "se". How to set dependency?
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
@@ -60,13 +60,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       )
 
       ps$values = list(num.threads = 1L)
-
-      # deps
-      ps$add_dep("num.random.splits", "splitrule", CondEqual$new("extratrees"))
-      ps$add_dep("alpha", "splitrule", CondEqual$new("maxstat"))
-      ps$add_dep("minprop", "splitrule", CondEqual$new("maxstat"))
-      ps$add_dep("scale.permutation.importance", "importance", CondEqual$new("permutation"))
-
 
       super$initialize(
         id = "regr.ranger",

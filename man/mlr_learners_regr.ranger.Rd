@@ -56,7 +56,7 @@ lrn("regr.ranger")
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab untyped \tab  \tab  \tab - \cr
+   split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab - \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr

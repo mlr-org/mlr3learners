@@ -56,7 +56,7 @@ lrn("classif.ranger")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    always.split.variables \tab untyped \tab - \tab  \tab - \cr
-   class.weights \tab untyped \tab  \tab  \tab - \cr
+   class.weights \tab untyped \tab NULL \tab  \tab - \cr
    holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -66,8 +66,8 @@ lrn("classif.ranger")
    minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   node.stats \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   node.stats \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
@@ -80,7 +80,7 @@ lrn("classif.ranger")
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab untyped \tab  \tab  \tab - \cr
+   split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab gini \tab gini, extratrees, hellinger \tab - \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
