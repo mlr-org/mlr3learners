@@ -75,7 +75,7 @@ lrn("regr.glmnet")
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    newoffset \tab untyped \tab - \tab  \tab - \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   offset \tab untyped \tab NULL \tab  \tab - \cr
+   offset \tab untyped \tab  \tab  \tab - \cr
    parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    penalty.factor \tab untyped \tab - \tab  \tab - \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
