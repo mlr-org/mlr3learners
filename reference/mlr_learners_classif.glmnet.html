@@ -12,7 +12,7 @@ Calls glmnet::glmnet() from package glmnet."><!-- mathjax --><script src="https:
     
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.8</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,18 +81,18 @@ Calls glmnet::glmnet() from package glmnet."><!-- mathjax --><script src="https:
 
     <div class="ref-description section level2">
     <p>Generalized linear models with elastic net regularization.
-Calls <code><a href="https://glmnet.stanford.edu/reference/glmnet.html" class="external-link">glmnet::glmnet()</a></code> from package <a href="https://CRAN.R-project.org/package=glmnet" class="external-link"><span class="pkg">glmnet</span></a>.</p>
+Calls <code><a href="https://rdrr.io/pkg/glmnet/man/glmnet.html" class="external-link">glmnet::glmnet()</a></code> from package <a href="https://CRAN.R-project.org/package=glmnet" class="external-link"><span class="pkg">glmnet</span></a>.</p>
     </div>
 
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Caution: This learner is different to learners calling <code><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code>
+    <p>Caution: This learner is different to learners calling <code><a href="https://rdrr.io/pkg/glmnet/man/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code>
 in that it does not use the internal optimization of parameter <code>lambda</code>.
 Instead, <code>lambda</code> needs to be tuned by the user (e.g., via <a href="https://CRAN.R-project.org/package=mlr3tuning" class="external-link"><span class="pkg">mlr3tuning</span></a>).
 When <code>lambda</code> is tuned, the <code>glmnet</code> will be trained for each tuning iteration.
 While fitting the whole path of <code>lambda</code>s would be more efficient, as is done
-by default in <code><a href="https://glmnet.stanford.edu/reference/glmnet.html" class="external-link">glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
+by default in <code><a href="https://rdrr.io/pkg/glmnet/man/glmnet.html" class="external-link">glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
 (using parameter <code>s</code>) is currently not supported in <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>
 (at least not in efficient manner).
 Tuning the <code>s</code> parameter is, therefore, currently discouraged.</p>
@@ -108,8 +108,8 @@ custom resampling strategies (blocked design, stratification).</p>
     
 
 <p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.glmnet"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.glmnet"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.glmnet"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.glmnet"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
@@ -207,7 +207,7 @@ for established default tuning spaces.</p></li>
 
 </div><p></p><hr><a id="method-LearnerClassifGlmnet-selected_features"></a><div class="section">
 <h3 id="method-selected-features-">Method <code>selected_features()</code><a class="anchor" aria-label="anchor" href="#method-selected-features-"></a></h3>
-<p>Returns the set of selected features as reported by <code><a href="https://glmnet.stanford.edu/reference/predict.glmnet.html" class="external-link">glmnet::predict.glmnet()</a></code>
+<p>Returns the set of selected features as reported by <code><a href="https://rdrr.io/pkg/glmnet/man/predict.glmnet.html" class="external-link">glmnet::predict.glmnet()</a></code>
 with <code>type</code> set to <code>"nonzero"</code>.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerClassifGlmnet</span><span class="op">$</span><span class="fu">selected_features</span><span class="op">(</span>lambda <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -286,109 +286,109 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:  (if (cv) glmnet::cv.glmnet else glmnet::glmnet)(x = data, y = target,      family = "binomial") </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Df  %Dev   Lambda</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    0  0.00 0.195400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2  2.43 0.178000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    2  4.95 0.162200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    5  8.72 0.147800</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    5 12.17 0.134700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    5 15.15 0.122700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    6 17.77 0.111800</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    6 20.07 0.101900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9    6 22.11 0.092820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   9 24.25 0.084580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   9 26.52 0.077060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   9 28.56 0.070220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  12 30.49 0.063980</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  14 32.35 0.058300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  15 34.08 0.053120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  19 35.99 0.048400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  20 38.32 0.044100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  19 40.57 0.040180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  19 42.57 0.036610</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  20 44.38 0.033360</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  20 46.00 0.030400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  19 47.44 0.027700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  19 48.72 0.025240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  21 50.14 0.022990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  22 51.95 0.020950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  23 53.77 0.019090</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  24 55.45 0.017390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  26 57.19 0.015850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  27 58.94 0.014440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  28 60.64 0.013160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  31 62.36 0.011990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  31 64.12 0.010920</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  31 65.92 0.009953</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  31 67.67 0.009069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  33 69.36 0.008263</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  33 70.99 0.007529</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37  34 72.59 0.006860</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38  35 74.20 0.006251</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39  36 75.79 0.005696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40  35 77.30 0.005190</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41  36 78.72 0.004729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42  37 80.11 0.004309</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43  38 81.42 0.003926</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44  37 82.60 0.003577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45  37 83.72 0.003259</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46  38 84.78 0.002970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47  37 85.78 0.002706</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48  37 86.72 0.002465</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  40 87.64 0.002246</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50  41 88.51 0.002047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51  41 89.36 0.001865</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52  42 90.16 0.001699</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53  43 90.91 0.001548</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54  43 91.63 0.001411</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55  43 92.31 0.001286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56  44 92.94 0.001171</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57  44 93.54 0.001067</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58  45 94.11 0.000972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59  45 94.64 0.000886</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60  46 95.12 0.000807</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61  45 95.56 0.000736</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62  45 95.96 0.000670</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63  45 96.33 0.000611</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64  44 96.66 0.000557</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65  44 96.96 0.000507</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66  44 97.23 0.000462</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67  44 97.48 0.000421</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68  44 97.70 0.000384</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69  44 97.91 0.000349</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70  45 98.09 0.000318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71  45 98.26 0.000290</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72  45 98.42 0.000264</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73  45 98.56 0.000241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74  45 98.69 0.000219</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75  45 98.80 0.000200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76  45 98.91 0.000182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77  45 99.01 0.000166</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78  46 99.10 0.000151</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79  46 99.17 0.000138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80  46 99.25 0.000126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81  46 99.31 0.000114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82  46 99.37 0.000104</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83  46 99.43 0.000095</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84  46 99.48 0.000087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85  46 99.52 0.000079</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86  46 99.57 0.000072</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87  46 99.60 0.000065</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88  46 99.64 0.000060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89  46 99.67 0.000054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90  46 99.70 0.000050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91  46 99.72 0.000045</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92  46 99.75 0.000041</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93  46 99.77 0.000037</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 94  46 99.79 0.000034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95  46 99.81 0.000031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96  46 99.83 0.000028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 97  46 99.84 0.000026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 98  46 99.85 0.000024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99  46 99.87 0.000021</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100 46 99.88 0.000020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    0  0.00 0.207600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    1  2.13 0.189100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    1  3.93 0.172300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    2  5.48 0.157000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    2  7.63 0.143100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    4  9.91 0.130400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    6 12.11 0.118800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    7 14.65 0.108200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    7 17.45 0.098610</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   7 19.91 0.089850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   8 22.16 0.081870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   9 24.38 0.074590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  11 26.77 0.067970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  12 29.63 0.061930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  12 32.21 0.056430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  13 34.58 0.051410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  13 36.88 0.046850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  15 38.99 0.042680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  16 41.06 0.038890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  18 42.99 0.035440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  18 44.75 0.032290</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  19 46.37 0.029420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  20 48.10 0.026810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  20 50.02 0.024430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  22 51.83 0.022260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  23 53.80 0.020280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  24 55.61 0.018480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  26 57.37 0.016840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  27 59.09 0.015340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  29 60.69 0.013980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  30 62.29 0.012740</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  33 63.82 0.011600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  34 65.39 0.010570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  35 66.88 0.009634</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  37 68.35 0.008778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  37 69.77 0.007998</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  37 71.14 0.007288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  38 72.45 0.006640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  37 73.71 0.006050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  38 75.00 0.005513</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  38 76.23 0.005023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  38 77.46 0.004577</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  38 78.65 0.004170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  39 79.90 0.003800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  40 81.14 0.003462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  41 82.38 0.003155</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  42 83.61 0.002874</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  44 84.79 0.002619</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  45 85.95 0.002386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  44 87.07 0.002174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51  45 88.15 0.001981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52  45 89.18 0.001805</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53  45 90.13 0.001645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54  45 91.02 0.001499</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55  45 91.84 0.001366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56  45 92.58 0.001244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57  44 93.24 0.001134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58  44 93.83 0.001033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59  44 94.38 0.000941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60  44 94.88 0.000858</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61  44 95.34 0.000781</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62  44 95.77 0.000712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63  44 96.14 0.000649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64  44 96.48 0.000591</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65  45 96.80 0.000539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66  45 97.08 0.000491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67  45 97.34 0.000447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68  45 97.58 0.000407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69  45 97.79 0.000371</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70  43 97.99 0.000338</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71  43 98.17 0.000308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72  43 98.33 0.000281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73  43 98.48 0.000256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74  43 98.61 0.000233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75  43 98.73 0.000212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76  43 98.85 0.000194</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77  43 98.95 0.000176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78  43 99.04 0.000161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79  43 99.12 0.000146</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80  44 99.20 0.000133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81  44 99.27 0.000122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82  44 99.34 0.000111</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83  44 99.39 0.000101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84  45 99.45 0.000092</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85  45 99.49 0.000084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86  45 99.54 0.000076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87  45 99.58 0.000070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88  45 99.62 0.000063</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89  45 99.65 0.000058</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90  45 99.68 0.000053</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91  45 99.71 0.000048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92  45 99.73 0.000044</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93  45 99.76 0.000040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94  45 99.78 0.000036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95  45 99.80 0.000033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96  45 99.81 0.000030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97  45 99.83 0.000027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98  45 99.84 0.000025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99  45 99.86 0.000023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100 45 99.87 0.000021</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple lambdas have been fit. Lambda will be set to 0.01 (see parameter 's').</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2318841 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1884058 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

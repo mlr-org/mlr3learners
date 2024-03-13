@@ -12,7 +12,7 @@ Calls stats::glm() with family set to "binomial".'><!-- mathjax --><script src="
     
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.8</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,8 +114,8 @@ For more details, see this question on <a href="https://stats.stackexchange.com/
     
 
 <p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.log_reg"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.log_reg"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.log_reg"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.log_reg"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
@@ -275,33 +275,33 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)           V1          V10          V11          V12          V13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       22.21       661.75      -210.01       122.45       193.35        90.80  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -176.26       588.50        52.72       345.46       -87.86       189.40  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V14          V15          V16          V17          V18          V19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -317.41       382.26      -152.81      -510.80       418.63        28.93  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -159.18       158.36       -46.23      -273.22       452.43      -362.29  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V2          V20          V21          V22          V23          V24  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -363.27       -38.30       -28.15        28.85       -68.64       184.48  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -194.86       295.70       -40.53       -54.92       -93.21       406.53  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V25          V26          V27          V28          V29           V3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -124.22      -101.04       171.89       -70.43      -129.42      -989.61  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -455.48       208.07       -19.19       109.75       -29.02      -738.98  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V30          V31          V32          V33          V34          V35  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      316.77      -393.50       207.34       -18.47      -129.38       105.58  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      -13.82        25.10       -98.01       -28.21      -105.71       292.66  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V36          V37          V38          V39           V4          V40  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      -90.91       -13.56        75.13      -119.11       731.18        21.05  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -215.92      -182.32       151.03        77.98       394.23      -317.26  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V41          V42          V43          V44          V45          V46  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      -90.27        95.84      -113.68      -157.71       282.51      -188.27  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      364.23      -273.15        99.74       344.30       -68.79       102.12  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V47          V48          V49           V5          V50          V51  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      499.89      -428.06      1409.02        33.73     -1964.51      1781.19  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      483.67        52.95       789.56       -91.66     -3003.95      -876.98  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V52          V53          V54          V55          V56          V57  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    -1670.73      1523.95       805.15     -1657.70       996.84      -533.89  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -1140.04      2345.33      1860.91      -895.43     -1977.31       413.35  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V58          V59           V6          V60           V7           V8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     2486.44      4522.73        77.63     -6272.75      -331.79      -166.38  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -1492.07      3315.70       299.66      -759.55      -302.51        29.88  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      321.74  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     -299.89  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 138 Total (i.e. Null);  78 Residual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    192.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 5.795e-09 	AIC: 122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 5.845e-09 	AIC: 122</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4202899 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3043478 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

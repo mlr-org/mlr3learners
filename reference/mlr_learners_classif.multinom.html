@@ -12,7 +12,7 @@ Calls nnet::multinom() from package nnet."><!-- mathjax --><script src="https://
     
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.8</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,8 +90,8 @@ Calls <code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external
     
 
 <p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.multinom"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.multinom"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"classif.multinom"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"classif.multinom"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
@@ -236,43 +236,45 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: loglik, multiclass, twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  62 (61 variable)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 96.347458 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 37.369595</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 17.978649</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 6.285862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 0.031555</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000060 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 38.786551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 22.471243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 13.581243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 7.736340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 0.247483</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  60 value 0.000373</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000053 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nnet::multinom(formula = Class ~ ., data = task$data())</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)          V1         V10         V11         V12         V13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1862.03881  -963.16259 -2159.20211   -21.76229  -189.36829  -452.28371 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V14         V15         V16         V17         V18         V19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -334.71322  -177.78733   615.98319   734.38769   759.75995 -1132.30224 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V2         V20         V21         V22         V23         V24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1132.16554  -561.36743   242.51428 -1024.67403   658.09797 -1095.07955 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V25         V26         V27         V28         V29          V3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    97.59405   494.44550  -893.87170   861.63946  -299.95248   448.02528 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V30         V31         V32         V33         V34         V35 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1373.92308  2767.53149 -1546.77251   402.99525   332.80517 -1367.28586 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V36         V37         V38         V39          V4         V40 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1604.14130    76.74422 -1066.81747  -300.03771 -1773.65777  2329.22609 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V41         V42         V43         V44         V45         V46 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -260.81977 -1063.58325  -694.30153  -210.79799  -622.02086   469.05984 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V47         V48         V49          V5         V50         V51 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1665.18153 -3572.48143 -2464.00210  -390.31360  -303.69637 -1214.60616 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V52         V53         V54         V55         V56         V57 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -709.71134  -283.06552  -289.85475   139.76130  -121.35253   149.86052 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         V58         V59          V6         V60          V7          V8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    23.51879  -482.99989  1112.70615  -366.09903  1450.61633  2783.05636 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -2584.00450 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)           V1          V10          V11          V12          V13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1081.161826 -1356.181896  1078.127360 -2385.055112   -29.076346  -210.112377 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V14          V15          V16          V17          V18          V19 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   605.062145   269.065587   178.889236   924.056301 -1136.634534   159.508691 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V2          V20          V21          V22          V23          V24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1431.805191  -262.762888  -453.202414   646.307232  -298.961479 -1237.841911 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V25          V26          V27          V28          V29           V3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1190.395974  -591.152935   157.847356  1217.665983 -1319.670629   772.115941 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V30          V31          V32          V33          V34          V35 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -979.695501  2485.901435 -2084.595660   302.307586  1768.814500 -1382.201262 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V36          V37          V38          V39           V4          V40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1398.090281    30.161110  -108.066689 -1489.245524 -3562.950392  2146.106385 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V41          V42          V43          V44          V45          V46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   481.115652 -1390.270427    -5.979684 -1038.968011 -1973.241727  1514.632577 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V47          V48          V49           V5          V50          V51 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   148.823013 -2954.938647 -1737.648668 -1605.542043  1398.348991 -1390.681420 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V52          V53          V54          V55          V56          V57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1124.294015  -398.799166  -816.731143   -11.730199   -78.529447   334.354179 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V58          V59           V6          V60           V7           V8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -549.981547  -353.167252    61.399793  -165.782124  1454.099928   761.936107 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -944.507513 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001197931 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001060298 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AIC: 122.0001 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2608696 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2463768 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

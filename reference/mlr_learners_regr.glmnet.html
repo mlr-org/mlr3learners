@@ -14,7 +14,7 @@ The default for hyperparameter family is set to "gaussian".'><!-- mathjax --><sc
     
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.8</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,19 +83,19 @@ The default for hyperparameter family is set to "gaussian".'><!-- mathjax --><sc
 
     <div class="ref-description section level2">
     <p>Generalized linear models with elastic net regularization.
-Calls <code><a href="https://glmnet.stanford.edu/reference/glmnet.html" class="external-link">glmnet::glmnet()</a></code> from package <a href="https://CRAN.R-project.org/package=glmnet" class="external-link"><span class="pkg">glmnet</span></a>.</p>
+Calls <code><a href="https://rdrr.io/pkg/glmnet/man/glmnet.html" class="external-link">glmnet::glmnet()</a></code> from package <a href="https://CRAN.R-project.org/package=glmnet" class="external-link"><span class="pkg">glmnet</span></a>.</p>
 <p>The default for hyperparameter <code>family</code> is set to <code>"gaussian"</code>.</p>
     </div>
 
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Caution: This learner is different to learners calling <code><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code>
+    <p>Caution: This learner is different to learners calling <code><a href="https://rdrr.io/pkg/glmnet/man/cv.glmnet.html" class="external-link">glmnet::cv.glmnet()</a></code>
 in that it does not use the internal optimization of parameter <code>lambda</code>.
 Instead, <code>lambda</code> needs to be tuned by the user (e.g., via <a href="https://CRAN.R-project.org/package=mlr3tuning" class="external-link"><span class="pkg">mlr3tuning</span></a>).
 When <code>lambda</code> is tuned, the <code>glmnet</code> will be trained for each tuning iteration.
 While fitting the whole path of <code>lambda</code>s would be more efficient, as is done
-by default in <code><a href="https://glmnet.stanford.edu/reference/glmnet.html" class="external-link">glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
+by default in <code><a href="https://rdrr.io/pkg/glmnet/man/glmnet.html" class="external-link">glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
 (using parameter <code>s</code>) is currently not supported in <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>
 (at least not in efficient manner).
 Tuning the <code>s</code> parameter is, therefore, currently discouraged.</p>
@@ -111,8 +111,8 @@ custom resampling strategies (blocked design, stratification).</p>
     
 
 <p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.glmnet"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.glmnet"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.glmnet"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.glmnet"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
@@ -202,7 +202,7 @@ for established default tuning spaces.</p></li>
 
 </div><p></p><hr><a id="method-LearnerRegrGlmnet-selected_features"></a><div class="section">
 <h3 id="method-selected-features-">Method <code>selected_features()</code><a class="anchor" aria-label="anchor" href="#method-selected-features-"></a></h3>
-<p>Returns the set of selected features as reported by <code><a href="https://glmnet.stanford.edu/reference/predict.glmnet.html" class="external-link">glmnet::predict.glmnet()</a></code>
+<p>Returns the set of selected features as reported by <code><a href="https://rdrr.io/pkg/glmnet/man/predict.glmnet.html" class="external-link">glmnet::predict.glmnet()</a></code>
 with <code>type</code> set to <code>"nonzero"</code>.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrGlmnet</span><span class="op">$</span><span class="fu">selected_features</span><span class="op">(</span>lambda <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -281,102 +281,89 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:  (if (cv) glmnet::cv.glmnet else glmnet::glmnet)(x = data, y = target,      family = "gaussian") </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Df  %Dev Lambda</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  0.00 4.6530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 13.01 4.2400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 23.81 3.8630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1 32.77 3.5200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2 41.02 3.2070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2 48.11 2.9230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   2 54.00 2.6630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   2 58.89 2.4260</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   2 62.94 2.2110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  2 66.31 2.0140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  2 69.11 1.8350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  2 71.43 1.6720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  2 73.36 1.5240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  2 74.96 1.3880</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  2 76.29 1.2650</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  3 77.49 1.1530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  3 78.51 1.0500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  3 79.36 0.9570</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  3 80.06 0.8720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  3 80.64 0.7945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  4 81.13 0.7239</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  4 81.58 0.6596</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  4 81.95 0.6010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  4 82.26 0.5476</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  4 82.52 0.4990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  4 82.74 0.4547</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  4 82.92 0.4143</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  4 83.07 0.3775</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  4 83.19 0.3439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  5 83.33 0.3134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  5 83.48 0.2855</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  5 83.61 0.2602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  5 83.71 0.2371</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  5 83.80 0.2160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  5 83.87 0.1968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  5 83.93 0.1793</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37  5 83.98 0.1634</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38  5 84.02 0.1489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39  6 84.06 0.1357</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40  6 84.12 0.1236</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41  6 84.16 0.1126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42  6 84.20 0.1026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43  6 84.23 0.0935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44  6 84.25 0.0852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45  6 84.28 0.0776</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46  7 84.30 0.0707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47  7 84.35 0.0644</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48  8 84.40 0.0587</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  8 84.66 0.0535</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50  9 84.93 0.0488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51  9 85.27 0.0444</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52  8 85.39 0.0405</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53  8 85.46 0.0369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54  8 85.52 0.0336</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55  8 85.57 0.0306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56  9 85.61 0.0279</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57  9 85.65 0.0254</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58 10 85.69 0.0232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59 10 85.90 0.0211</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60 10 86.09 0.0192</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61 10 86.24 0.0175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62 10 86.37 0.0160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63 10 86.48 0.0146</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64 10 86.57 0.0132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65  9 86.63 0.0121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66  9 86.68 0.0110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67  9 86.71 0.0100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68  9 86.74 0.0091</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69 10 86.78 0.0083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70 10 86.82 0.0076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71 10 86.86 0.0069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72 10 86.88 0.0063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73 10 86.91 0.0057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74 10 86.92 0.0052</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75 10 86.93 0.0048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76 10 86.95 0.0043</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77 10 86.96 0.0040</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78 10 86.97 0.0036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79 10 86.98 0.0033</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80 10 86.98 0.0030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81 10 86.99 0.0027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82 10 87.00 0.0025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83 10 87.00 0.0023</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84 10 87.00 0.0021</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85 10 87.01 0.0019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86 10 87.01 0.0017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87 10 87.01 0.0016</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88 10 87.01 0.0014</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89 10 87.01 0.0013</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90 10 87.02 0.0012</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91  9 87.02 0.0011</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92  9 87.02 0.0010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93  9 87.02 0.0009</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  0.00 5.2860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 13.52 4.8170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 24.74 4.3890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1 34.06 3.9990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2 42.65 3.6440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2 50.35 3.3200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   3 56.76 3.0250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   3 62.08 2.7560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   3 66.49 2.5110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  3 70.16 2.2880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  3 73.20 2.0850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  3 75.73 1.9000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  3 77.83 1.7310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  3 79.57 1.5770</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  3 81.02 1.4370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  3 82.22 1.3090</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  3 83.22 1.1930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  3 84.04 1.0870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  3 84.73 0.9905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  3 85.30 0.9025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  3 85.77 0.8223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  4 86.23 0.7493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  4 86.66 0.6827</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  4 87.02 0.6221</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  4 87.32 0.5668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  4 87.57 0.5165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  4 87.78 0.4706</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  4 87.97 0.4288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  5 88.11 0.3907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  5 88.25 0.3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  5 88.35 0.3244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  6 88.46 0.2955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  6 88.56 0.2693</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  6 88.64 0.2454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  6 88.71 0.2236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  6 88.77 0.2037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  6 88.82 0.1856</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  6 88.86 0.1691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  6 88.89 0.1541</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  6 88.92 0.1404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  6 88.94 0.1279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  7 88.96 0.1166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  7 88.99 0.1062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  7 89.01 0.0968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  7 89.03 0.0882</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  7 89.04 0.0803</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  7 89.05 0.0732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  8 89.18 0.0667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  8 89.34 0.0608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  8 89.47 0.0554</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51  8 89.58 0.0505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52  8 89.68 0.0460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53  8 89.75 0.0419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54  8 89.82 0.0382</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55  8 89.87 0.0348</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56  8 89.91 0.0317</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57  7 89.95 0.0289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58  7 89.98 0.0263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59  7 89.99 0.0240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60  7 90.01 0.0218</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61  7 90.03 0.0199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62  7 90.04 0.0181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63  7 90.05 0.0165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64  7 90.05 0.0151</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65  7 90.06 0.0137</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66  8 90.07 0.0125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67  9 90.08 0.0114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68 10 90.09 0.0104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69 10 90.10 0.0095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70 10 90.11 0.0086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71 10 90.12 0.0078</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72 10 90.13 0.0072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73 10 90.13 0.0065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74 10 90.13 0.0059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75 10 90.14 0.0054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76 10 90.14 0.0049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77 10 90.14 0.0045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78 10 90.14 0.0041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79 10 90.15 0.0037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80 10 90.15 0.0034</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple lambdas have been fit. Lambda will be set to 0.01 (see parameter 's').</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10.67593 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8.759691 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

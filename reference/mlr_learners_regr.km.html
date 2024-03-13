@@ -30,7 +30,7 @@ perfect interpolation. We recommend a value of 1e-12.
     
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.8</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,8 +114,8 @@ perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
     
 
 <p>This Learner can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> mlr_learners or with the associated sugar function <code>lrn()</code>:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.km"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.km"</span>)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.km"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.km"</span>)</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="meta-information">Meta Information<a class="anchor" aria-label="anchor" href="#meta-information"></a></h2>
@@ -268,66 +268,75 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - type :  matern5_2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - nugget : NO</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - parameters lower bounds :  1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - parameters upper bounds :  2 14 8 801.8 3.34 4 540 16.8 2 7.02 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - best initial criterion value(s) :  -57.79403 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - parameters upper bounds :  2 14 8 792.6 4.34 4 566 16.6 2 7.474 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - best initial criterion value(s) :  -57.8379 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> N = 10, M = 5 machine precision = 2.22045e-16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At X0, 0 variables are exactly at the bounds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     0  f=       57.794  |proj g|=       1.3246</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     1  f =       56.904  |proj g|=        1.2886</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     2  f =       56.836  |proj g|=         1.051</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     3  f =       56.746  |proj g|=       0.26453</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     4  f =       56.726  |proj g|=         0.164</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     5  f =       56.705  |proj g|=       0.17504</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     6  f =       56.687  |proj g|=      0.078275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     7  f =       56.673  |proj g|=      0.061519</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     8  f =       56.662  |proj g|=       0.20457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     9  f =       56.654  |proj g|=      0.098085</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    10  f =       56.649  |proj g|=      0.053348</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    11  f =       56.645  |proj g|=      0.055591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    12  f =       56.628  |proj g|=      0.090935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    13  f =       56.602  |proj g|=       0.30537</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    14  f =       56.568  |proj g|=      0.064273</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    15  f =       56.556  |proj g|=       0.02753</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    16  f =       56.555  |proj g|=      0.056951</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    17  f =       56.554  |proj g|=     0.0099057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    18  f =       56.554  |proj g|=     0.0095544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    19  f =       56.554  |proj g|=     0.0095408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    20  f =       56.553  |proj g|=      0.023225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    21  f =       56.553  |proj g|=      0.035619</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    22  f =       56.553  |proj g|=      0.051993</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    23  f =       56.552  |proj g|=      0.030549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    24  f =       56.551  |proj g|=      0.021868</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    25  f =       56.551  |proj g|=       0.01583</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    26  f =       56.551  |proj g|=     0.0081663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    27  f =        56.55  |proj g|=     0.0047142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    28  f =        56.55  |proj g|=      0.010478</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    29  f =        56.55  |proj g|=      0.002182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    30  f =        56.55  |proj g|=      0.001469</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    31  f =        56.55  |proj g|=     0.0018441</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    32  f =        56.55  |proj g|=     0.0027108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    33  f =        56.55  |proj g|=     0.0099313</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    34  f =        56.55  |proj g|=      0.017488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    35  f =        56.55  |proj g|=      0.028093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    36  f =        56.55  |proj g|=      0.030613</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    37  f =        56.55  |proj g|=      0.025549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    38  f =        56.55  |proj g|=     0.0077429</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    39  f =        56.55  |proj g|=     0.0011232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    40  f =        56.55  |proj g|=    0.00075129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    41  f =        56.55  |proj g|=    0.00027934</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    42  f =        56.55  |proj g|=    7.7473e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    43  f =        56.55  |proj g|=    0.00022136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     0  f=       57.838  |proj g|=       1.5217</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     1  f =       55.424  |proj g|=        1.2472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     2  f =       55.134  |proj g|=        1.0806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     3  f =       54.545  |proj g|=       0.13157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     4  f =       54.505  |proj g|=       0.11458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     5  f =       54.467  |proj g|=      0.065399</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     6  f =       54.461  |proj g|=      0.053595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     7  f =       54.446  |proj g|=      0.030217</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     8  f =       54.438  |proj g|=      0.014875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     9  f =       54.433  |proj g|=      0.013621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    10  f =       54.427  |proj g|=      0.038064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    11  f =       54.425  |proj g|=      0.026275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    12  f =       54.424  |proj g|=     0.0097322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    13  f =       54.424  |proj g|=    0.00087228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    14  f =       54.424  |proj g|=    0.00087242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    15  f =       54.424  |proj g|=     0.0024683</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    16  f =       54.424  |proj g|=     0.0049985</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    17  f =       54.424  |proj g|=     0.0093887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    18  f =       54.424  |proj g|=      0.016286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    19  f =       54.424  |proj g|=      0.024972</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    20  f =       54.424  |proj g|=       0.03234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    21  f =       54.423  |proj g|=      0.028491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    22  f =       54.423  |proj g|=     0.0058527</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    23  f =       54.423  |proj g|=     0.0011432</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    24  f =       54.423  |proj g|=     0.0011481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    25  f =       54.423  |proj g|=     0.0017131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    26  f =       54.423  |proj g|=     0.0046563</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    27  f =       54.423  |proj g|=     0.0085276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    28  f =       54.423  |proj g|=      0.014486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    29  f =       54.422  |proj g|=      0.042184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    30  f =       54.421  |proj g|=      0.033722</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    31  f =       54.417  |proj g|=      0.019092</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    32  f =       54.417  |proj g|=      0.016637</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    33  f =       54.416  |proj g|=     0.0047237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    34  f =       54.413  |proj g|=      0.018784</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    35  f =       54.412  |proj g|=     0.0065728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    36  f =       54.402  |proj g|=      0.050257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    37  f =       54.385  |proj g|=       0.11675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    38  f =       54.377  |proj g|=       0.06177</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    39  f =       54.357  |proj g|=      0.055719</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    40  f =       54.345  |proj g|=      0.073742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    41  f =       54.339  |proj g|=      0.042044</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    42  f =       54.336  |proj g|=      0.012098</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    43  f =       54.335  |proj g|=     0.0040635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    44  f =       54.335  |proj g|=     0.0027344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    45  f =       54.335  |proj g|=     0.0037714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    46  f =       54.335  |proj g|=     0.0067015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    47  f =       54.335  |proj g|=     0.0065048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    48  f =       54.335  |proj g|=     0.0016658</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    49  f =       54.335  |proj g|=    0.00037274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    50  f =       54.335  |proj g|=     0.0001953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    51  f =       54.335  |proj g|=    0.00032893</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    52  f =       54.335  |proj g|=    1.0887e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iterations 43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function evaluations 47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> segments explored during Cauchy searches 44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iterations 52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function evaluations 57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> segments explored during Cauchy searches 60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> BFGS updates skipped 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> active bounds at final generalized Cauchy point 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> norm of the final projected gradient 0.00022136</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final function value 56.5497</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> active bounds at final generalized Cauchy point 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> norm of the final projected gradient 1.08874e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final function value 54.3352</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F = 56.5497</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 56.549701 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> F = 54.3352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 54.335217 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
@@ -335,25 +344,25 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Trend  coeff.:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                Estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)    19.7628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)    19.0276</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Covar. type  : matern5_2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Covar. coeff.:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                Estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(am)     0.5973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(carb)     2.3879</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(am)     2.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(carb)    14.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   theta(cyl)     8.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(disp)   479.4501</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(drat)     1.9697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(gear)     2.5653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(hp)   397.1790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(qsec)     1.1452</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(disp)   792.6000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(drat)     4.3400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(gear)     4.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(hp)    58.7707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(qsec)     2.2783</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    theta(vs)     2.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(wt)     7.0200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(wt)     2.1218</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variance estimate: 29.24122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variance estimate: 31.53133</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15.72763 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13.68941 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
