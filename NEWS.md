@@ -1,4 +1,4 @@
-# mlr3learners (development version)
+# mlr3learners 0.6.0
 
 * Adaption to new paradox version 1.0.0.
 

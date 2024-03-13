@@ -55,7 +55,7 @@ lrn("classif.log_reg")
 \section{Parameters}{
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
-   dispersion \tab untyped \tab NULL \tab  \tab - \cr
+   dispersion \tab untyped \tab  \tab  \tab - \cr
    epsilon \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    etastart \tab untyped \tab - \tab  \tab - \cr
    maxit \tab numeric \tab 25 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -63,7 +63,7 @@ lrn("classif.log_reg")
    mustart \tab untyped \tab - \tab  \tab - \cr
    offset \tab untyped \tab - \tab  \tab - \cr
    singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   start \tab untyped \tab NULL \tab  \tab - \cr
+   start \tab untyped \tab  \tab  \tab - \cr
    trace \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    y \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr

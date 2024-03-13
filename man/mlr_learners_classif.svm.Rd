@@ -31,7 +31,7 @@ lrn("classif.svm")
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    cachesize \tab numeric \tab 40 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   class.weights \tab untyped \tab NULL \tab  \tab - \cr
+   class.weights \tab untyped \tab  \tab  \tab - \cr
    coef0 \tab numeric \tab 0 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    cost \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    cross \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr

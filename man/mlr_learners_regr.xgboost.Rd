@@ -45,18 +45,18 @@ lrn("regr.xgboost")
    approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
-   callbacks \tab untyped \tab list() \tab  \tab - \cr
+   callbacks \tab untyped \tab list \tab  \tab - \cr
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   device \tab untyped \tab "cpu" \tab  \tab - \cr
+   device \tab untyped \tab cpu \tab  \tab - \cr
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    early_stopping_set \tab character \tab none \tab none, train, test \tab - \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   eval_metric \tab untyped \tab "rmse" \tab  \tab - \cr
+   eval_metric \tab untyped \tab rmse \tab  \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
-   feval \tab untyped \tab NULL \tab  \tab - \cr
+   feval \tab untyped \tab  \tab  \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab untyped \tab - \tab  \tab - \cr
@@ -76,7 +76,7 @@ lrn("regr.xgboost")
    nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   objective \tab untyped \tab "reg:squarederror" \tab  \tab - \cr
+   objective \tab untyped \tab reg:squarederror \tab  \tab - \cr
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -89,7 +89,7 @@ lrn("regr.xgboost")
    reshape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab - \cr
    sample_type \tab character \tab uniform \tab uniform, weighted \tab - \cr
-   save_name \tab untyped \tab NULL \tab  \tab - \cr
+   save_name \tab untyped \tab  \tab  \tab - \cr
    save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -102,8 +102,8 @@ lrn("regr.xgboost")
    tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
    updater \tab untyped \tab - \tab  \tab - \cr
    verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
-   watchlist \tab untyped \tab NULL \tab  \tab - \cr
-   xgb_model \tab untyped \tab NULL \tab  \tab - \cr
+   watchlist \tab untyped \tab  \tab  \tab - \cr
+   xgb_model \tab untyped \tab  \tab  \tab - \cr
 }
 }
 
