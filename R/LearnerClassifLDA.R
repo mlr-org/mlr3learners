@@ -32,7 +32,7 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
       ps = ps(
         dimen          = p_uty(tags = "predict"),
         method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
-        nu             = p_int(tags = "train", depends = method == "t"),
+        nu             = p_int(tags = "train", depends = quote(method == "t")),
         predict.method = p_fct(c("plug-in", "predictive", "debiased"), default = "plug-in", tags = "predict"),
         predict.prior  = p_uty(tags = "predict"),
         prior          = p_uty(tags = "train"),
