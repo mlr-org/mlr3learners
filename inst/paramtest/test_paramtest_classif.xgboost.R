@@ -3,6 +3,20 @@ library(magrittr, exclude = c("equals", "is_less_than", "not"))
 library(rvest)
 
 add_params_xgboost = read_html("https://xgboost.readthedocs.io/en/latest/parameter.html") %>%
+  html_elements("li") %>%
+  html_elements("p") %>%
+  html_text2() %>%
+  grep("default=", ., value = T) %>%
+  strsplit(., split = " ") %>%
+  mlr3misc::map_chr(., function(x) x[1]) %>%
+  gsub(",", replacement = "", .) %>%
+  ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
+  append(values = c("colsample_bylevel", "colsample_bynode")) %>%
+  # values which do not match regex
+  append(values = c("interaction_constraints", "monotone_constraints", "base_score")) %>%
+  # only defined in help page but not in signature or website
+  append(values = c("lambda_bias"))
+
   html_elements(c("li", "p")) %>%
   html_text2() %>%
   grep("default=", ., value = T) %>%
