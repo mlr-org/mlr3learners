@@ -67,11 +67,11 @@ test_that("early stopping on the test set works", {
   skip_if(packageVersion("mlr3") > "0.17.2")
   task = tsk("spam")
   split = partition(task, ratio = 0.8)
-  task$set_row_roles(split$test, "test")
+  task$set_row_roles(split$test, "validation")
   learner = lrn("classif.xgboost",
     nrounds = 1000,
     early_stopping_rounds = 100,
-    early_stopping_set = "test"
+    early_stopping = TRUE
   )
 
   learner$train(task)
@@ -82,21 +82,21 @@ test_that("early stopping on the test set works", {
   skip_if(packageVersion("mlr3") <= "0.17.2")
   task = tsk("spam")
   split = partition(task, ratio = 0.8)
-  task$divide(split$test, "test")
+  task$divide(split$test, "validation")
   learner = lrn("classif.xgboost",
     nrounds = 1000,
     early_stopping_rounds = 100,
-    early_stopping_set = "test"
+    early_stopping = TRUE
   )
 
   learner$train(task)
   expect_named(learner$model$evaluation_log, c("iter", "train_logloss", "test_logloss"))
 })
 
-test_that("uses_test_task property", {
+test_that("validation property", {
   skip_if(packageVersion("mlr3") <= "0.17.2")
   l = lrn("classif.xgboost")
-  expect_false("uses_test_task" %in% l$properties)
-  l$param_set$set_values(early_stopping_set = "test")
-  expect_true("uses_test_task" %in% l$properties)
+  expect_false("validation" %in% l$properties)
+  l$param_set$set_values(early_stopping = TRUE)
+  expect_true("validation" %in% l$properties)
 })

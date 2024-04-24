@@ -32,9 +32,9 @@
 #'
 #' @section Early stopping:
 #' Early stopping can be used to find the optimal number of boosting rounds.
-#' The `early_stopping_set` parameter controls which set is used to monitor the performance.
-#' Set `early_stopping_set = "test"` to monitor the performance of the model on the test set while training.
-#' The test set for early stopping can be set with the `"test"` row role in the [mlr3::Task].
+#' The `early_stopping` parameter controls which set is used to monitor the performance.
+#' Set `early_stopping = TRUE` to monitor the performance of the model on the validation set while training.
+#' The validation set for early stopping can be set with the `$validation_task` field.
 #' Additionally, the range must be set in which the performance must increase with `early_stopping_rounds` and the maximum number of boosting rounds with `nrounds`.
 #' While resampling, the test set is automatically applied from the [mlr3::Resampling].
 #' Not that using the test set for early stopping can potentially bias the performance scores.
@@ -57,13 +57,13 @@
 #'
 #' # Split task into training and test set
 #' split = partition(task, ratio = 0.8)
-#' task$set_row_roles(split$test, "test")
+#' task$divide(split$test, "validation")
 #'
 #' # Set early stopping parameter
 #' learner = lrn("classif.xgboost",
 #'   nrounds = 100,
 #'   early_stopping_rounds = 10,
-#'   early_stopping_set = "test"
+#'   early_stopping = TRUE
 #' )
 #'
 #' # Train learner with early stopping
@@ -89,7 +89,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         device                      = p_uty(default = "cpu", tags = "train"),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
-        early_stopping_set          = p_fct(c("none", "train", "test"), default = "none", tags = "train"),
+        early_stopping              = p_lgl(tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
         eval_metric                 = p_uty(tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train"),
@@ -109,7 +109,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         missing                     = p_dbl(default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
         monotone_constraints        = p_uty(default = 0, tags = c("train", "control"), custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
         normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train"),
-        nrounds                     = p_int(1L, tags = c("train", "hotstart")),
+        nrounds                     = p_int(1L, tags = c("train", "hotstart", "inner_tuning")),
         nthread                     = p_int(1L, default = 1L, tags = c("train", "control", "threads")),
         ntreelimit                  = p_int(1L, default = NULL, special_vals = list(NULL), tags = "predict"),
         num_parallel_tree           = p_int(1L, default = 1L, tags = c("train", "control")),
@@ -140,8 +140,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
         verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
         watchlist                   = p_uty(default = NULL, tags = "train"),
-        xgb_model                   = p_uty(default = NULL, tags = "train")
-
+        xgb_model                   = p_uty(default = NULL, tags = "train"),
+        early_stopping              = p_lgl(tags = c("train", "required"))
       )
       # param deps
       ps$add_dep("tweedie_variance_power", "objective", CondEqual$new("reg:tweedie"))
@@ -162,14 +162,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       ps$add_dep("lambda_bias", "booster", CondEqual$new("gblinear"))
 
       # custom defaults
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping_set = "none")
+      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L, early_stopping = FALSE)
 
       super$initialize(
         id = "classif.xgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward", "inner_tuning", "validation"),
         packages = c("mlr3learners", "xgboost"),
         label = "Extreme Gradient Boosting",
         man = "mlr3learners::mlr_learners_classif.xgboost"
@@ -191,15 +191,27 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       set_names(imp$Gain, imp$Feature)
     }
   ),
-
-  private = list(
-    .dependent_properties = function() {
-      if (isTRUE(all.equal(self$param_set$values$early_stopping_set, "test"))) {
-        "uses_test_task"
-      } else {
-        character(0)
+  active = list(
+    #' @field inner_valid_scores
+    #' Retrieves the inner validation scores as a named `list()`.
+    inner_valid_scores = function() {
+      assert_ro_binding(rhs)
+      if (is.null(self$state)) {
+        stopf("Learner not trained")
       }
+      self$state$inner_valid_scores
     },
+    #' @field inner_tuned_values
+    #' Retrieves the inner tuned values as a named `list()`.
+    inner_tuned_values = function() {
+      assert_ro_binding(rhs)
+      if (is.null(self$state)) {
+        stopf("Learner not trained")
+      }
+      self$state$inner_tuned_values
+    }
+  ),
+  private = list(
     .train = function(task) {
 
       pv = self$param_set$get_values(tags = "train")
@@ -241,25 +253,26 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
-      if (pv$early_stopping_set != "none") {
+      if (pv$early_stopping) {
         pv$watchlist = c(pv$watchlist, list(train = data))
       }
 
       # the last element in the watchlist is used as the early stopping set
-      uses_test_set = isTRUE(all.equal(pv$early_stopping_set, "test"))
-      pv$early_stopping_set = NULL
-      if (uses_test_set && !length(task$row_roles$test) && (!exists("test_task", task, inherits = FALSE) || is.null(task$test_task))) {
-        stopf("No test set available for early stopping. Set `early_stopping_set = 'none'` or provide a test set.")
+      validation = pv$early_stopping
+      pv$early_stopping = NULL
+      if (validation && !length(task$row_roles$test) && (!exists("validation_task", task, inherits = FALSE) || is.null(task$validation_task))) {
+        stopf("No test set available for early stopping. Set `early_stopping = FALSE` or provide a validation task")
       }
-      if (uses_test_set && length(task$row_roles$test)) {
+      if (validation && length(task$row_roles$test)) {
+        # old version
         test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
         test_label = nlvls - as.integer(task$truth(rows = task$row_roles$test))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
-      } else if (uses_test_set) {
-        test_task = task$test_task
-        test_data = test_task$data(cols = test_task$feature_names)
-        test_label = nlvls - as.integer(test_task$truth(rows = test_task$row_roles$test))
+      } else if (validation) {
+        validation_task = task$validation_task
+        test_data = validation_task$data(cols = validation_task$feature_names)
+        test_label = nlvls - as.integer(validation_task$truth(rows = validation_task$row_roles$test))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
@@ -315,7 +328,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (!is.null(pars_train$early_stopping_rounds)) {
         stop("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
       }
-      pars$early_stopping_set = NULL
+      pars$early_stopping = NULL
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
@@ -328,6 +341,15 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
+    },
+    .extract_inner_tuned_values = function() {
+      if (!isTRUE(self$state$param_vals$early_stopping)) {
+        return(named_lost())
+      }
+      list(nrounds = self$model$best_iteration)
+    },
+    .extract_inner_valid_scores = function() {
+
     }
   )
 )
