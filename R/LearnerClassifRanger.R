@@ -49,8 +49,8 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         minprop                      = p_dbl(default = 0.1, tags = "train"),
         mtry                         = p_int(lower = 1L, special_vals = list(NULL), tags = "train"),
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
+        num.random.splits            = p_int(1L, default = 1L, tags = "train", depends = quote(splitrule == "extratrees")),
         node.stats                   = p_lgl(default = FALSE, tags = "train"),
-        num.random.splits            = p_int(1L, default = 1L, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
         num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict", "hotstart")),
         oob.error                    = p_lgl(default = TRUE, tags = "train"),
@@ -60,7 +60,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         respect.unordered.factors    = p_fct(c("ignore", "order", "partition"), default = "ignore", tags = "train"),
         sample.fraction              = p_dbl(0L, 1L, tags = "train"),
         save.memory                  = p_lgl(default = FALSE, tags = "train"),
-        scale.permutation.importance = p_lgl(default = FALSE, tags = "train"),
+        scale.permutation.importance = p_lgl(default = FALSE, tags = "train", depends = quote(importance == "permutation")),
         se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
@@ -70,9 +70,6 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       )
 
       ps$values = list(num.threads = 1L)
-
-      ps$add_dep("num.random.splits", "splitrule", CondEqual$new("extratrees"))
-      ps$add_dep("scale.permutation.importance", "importance", CondEqual$new("permutation"))
 
       super$initialize(
         id = "classif.ranger",
@@ -112,6 +109,21 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         stopf("No model stored")
       }
       self$model$prediction.error
+    },
+
+    #' @description
+    #' Estimated memory usage of the model in bytes.
+    #' If `num.trees` is not set, it defaults to 500.
+    #'
+    #' @param task [TaskClassif].
+    estimate_memory_usage = function(task) {
+      assert_task(task)
+      pv = self$param_set$get_values()
+
+      # https://github.com/autogluon/autogluon/blob/master/tabular/src/autogluon/tabular/models/rf/rf_model.py
+      num_trees = pv$num.trees %??% 500
+      tree_size = length(task$class_names) * task$nrow  / 60000 * 1e6
+      tree_size * num_trees
     }
   ),
 

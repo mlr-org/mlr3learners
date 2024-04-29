@@ -3,7 +3,8 @@ library(magrittr, exclude = c("equals", "is_less_than", "not"))
 library(rvest)
 
 add_params_xgboost = read_html("https://xgboost.readthedocs.io/en/latest/parameter.html") %>%
-  html_elements(c("li", "p")) %>%
+  html_elements("li") %>%
+  html_elements("p") %>%
   html_text2() %>%
   grep("default=", ., value = T) %>%
   strsplit(., split = " ") %>%

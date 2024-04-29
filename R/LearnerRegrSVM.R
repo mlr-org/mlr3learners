@@ -24,26 +24,20 @@ LearnerRegrSVM = R6Class("LearnerRegrSVM",
     initialize = function() {
       ps = ps(
         cachesize = p_dbl(default = 40L, tags = "train"),
-        coef0     = p_dbl(default = 0, tags = "train"),
-        cost      = p_dbl(0, default = 1, tags = "train"),
+        coef0     = p_dbl(default = 0, tags = "train", depends = quote(kernel %in% c("polynomial", "sigmoid"))),
+        cost      = p_dbl(0, default = 1, tags = "train", depends = quote(type %in% c("eps-regression", "nu-regression"))),
         cross     = p_int(0L, default = 0L, tags = "train"), # tunable = FALSE),
-        degree    = p_int(1L, default = 3L, tags = "train"),
-        epsilon   = p_dbl(0, default = 0.1, tags = "train"),
+        degree    = p_int(1L, default = 3L, tags = "train", depends = quote(kernel == "polynomial")),
+        epsilon   = p_dbl(0, default = 0.1, tags = "train", depends = quote(type == "eps-regression")),
         fitted    = p_lgl(default = TRUE, tags = "train"), # tunable = FALSE),
-        gamma     = p_dbl(0, tags = "train"),
+        gamma     = p_dbl(0, tags = "train", depends = quote(kernel %in% c("polynomial", "radial", "sigmoid"))),
         kernel    = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
-        nu        = p_dbl(default = 0.5, tags = "train"),
+        nu        = p_dbl(default = 0.5, tags = "train", depends = quote(type == "nu-regression")),
         scale     = p_uty(default = TRUE, tags = "train"),
         shrinking = p_lgl(default = TRUE, tags = "train"),
         tolerance = p_dbl(0, default = 0.001, tags = "train"),
         type      = p_fct(c("eps-regression", "nu-regression"), default = "eps-regression", tags = "train")
       )
-      ps$add_dep("cost", "type", CondAnyOf$new(c("eps-regression", "nu-regression")))
-      ps$add_dep("nu", "type", CondEqual$new("nu-regression"))
-      ps$add_dep("degree", "kernel", CondEqual$new("polynomial"))
-      ps$add_dep("coef0", "kernel", CondAnyOf$new(c("polynomial", "sigmoid")))
-      ps$add_dep("gamma", "kernel", CondAnyOf$new(c("polynomial", "radial", "sigmoid")))
-      ps$add_dep("epsilon", "type", CondEqual$new("eps-regression"))
 
       super$initialize(
         id = "regr.svm",

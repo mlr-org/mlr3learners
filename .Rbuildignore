@@ -18,3 +18,4 @@ vignettes/learners/
 ^gfortran.*
 ^revdep$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
