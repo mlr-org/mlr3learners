@@ -146,6 +146,29 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         model = self$model
       )
       set_names(imp$Gain, imp$Feature)
+    },
+
+    #' @description
+    #' Estimated memory usage of the model in bytes.
+    #' If `max_depth` is not set, it defaults to 6.
+    #' If `max_bin` is not set, it defaults to 256.
+    #'
+    #' @param task [TaskClassif].
+    estimate_memory_usage = function(task) {
+      assert_task(task)
+      pv = self$param_set$get_values()
+
+      # https://github.com/autogluon/autogluon/blob/master/tabular/src/autogluon/tabular/models/xgboost/xgboost_model.py
+      # histogram size
+      max_depth = pv$max_depth %??% 6
+      max_bin = pv$max_bin %??% 256
+      if (max_depth < 6) max_depth = 6
+      histogram_size = max_bin * task$ncol * 2^max_depth
+
+      # data size
+      data_size = task$nrow * task$ncol * 8
+
+      histogram_size + data_size
     }
   ),
 

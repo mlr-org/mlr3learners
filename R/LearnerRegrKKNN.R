@@ -47,6 +47,17 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
         label = "k-Nearest-Neighbor",
         man = "mlr3learners::mlr_learners_regr.kknn"
       )
+    },
+
+    #' @description
+    #' Estimated memory usage of the model in bytes.
+    #'
+    #' @param task [TaskClassif].
+    estimate_memory_usage = function(task) {
+      assert_task(task)
+
+      # https://github.com/autogluon/autogluon/blob/master/tabular/src/autogluon/tabular/models/knn/knn_model.py#L104
+      14.4 * task$nrow * task$ncol
     }
   ),
 

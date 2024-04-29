@@ -109,6 +109,21 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         stopf("No model stored")
       }
       self$model$prediction.error
+    },
+
+    #' @description
+    #' Estimated memory usage of the model in bytes.
+    #' If `num.trees` is not set, it defaults to 500.
+    #'
+    #' @param task [TaskClassif].
+    estimate_memory_usage = function(task) {
+      assert_task(task)
+      pv = self$param_set$get_values()
+
+      # https://github.com/autogluon/autogluon/blob/master/tabular/src/autogluon/tabular/models/rf/rf_model.py
+      num_trees = pv$num.trees %??% 500
+      tree_size = length(task$class_names) * task$nrow  / 60000 * 1e6
+      tree_size * num_trees
     }
   ),
 
