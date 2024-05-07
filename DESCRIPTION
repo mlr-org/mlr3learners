@@ -45,11 +45,14 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     xgboost (>= 1.6.0)
+Remotes:
+    mlr-org/paradox@feat/inner_valid,
+    mlr-org/mlr3@feat/inner_valid
 Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3.9000
+RoxygenNote: 7.3.1
 Collate:
     'aaa.R'
     'LearnerClassifCVGlmnet.R'
