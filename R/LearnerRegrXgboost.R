@@ -197,7 +197,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       pars = self$param_set$get_values(tags = "train")
       pars_train = self$state$param_vals
       if (!is.null(pars_train$early_stopping_rounds)) {
-        stop("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
+        stopf("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
       }
       pars$early_stopping_set = NULL
 
