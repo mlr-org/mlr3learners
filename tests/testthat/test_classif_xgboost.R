@@ -94,4 +94,15 @@ test_that("validation and inner tuning", {
   expect_named(learner$model$evaluation_log, c("iter", "test_logloss"))
   expect_list(learner$internal_valid_scores, types = "numeric")
   expect_equal(names(learner$internal_valid_scores), "logloss")
+
+  learner = lrn("classif.xgboost",
+    nrounds = 10,
+    early_stopping_rounds = NULL,
+    validate = 0.2
+  )
+  s = learner$param_set$search_space()
+  expect_error(learner$param_set$convert_internal_search_space(s), "early stopping")
+  learner$param_set$set_values(early_stopping_rounds = 10)
+  learner$param_set$disable_internal_tuning()
+  expect_equal(learner$param_set$values$early_stopping_rounds, NULL)
 })

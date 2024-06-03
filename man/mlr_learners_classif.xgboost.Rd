@@ -51,7 +51,7 @@ would error. Just setting a nonsense default to workaround this.
 Early stopping can be used to find the optimal number of boosting rounds.
 The \code{early_stopping} parameter controls which set is used to monitor the performance.
 Set \code{early_stopping_rounds} to an integer vaulue to monitor the performance of the model on the validation set while training.
-For infomration on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
+For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
 }
 
 \section{Dictionary}{
@@ -254,7 +254,7 @@ Extracted from \code{model$evaluation_log}}
 \item{\code{internal_tuned_values}}{Returns the early stopped iterations if \code{early_stopping_rounds} was set during training.}
 
 \item{\code{validate}}{How to construct the internal validation data. This parameter can be either \code{NULL},
-a ratio, \code{"test"}, or \code{"internal_valid"}.}
+a ratio, \code{"test"}, or \code{"predefined"}.}
 }
 \if{html}{\out{</div>}}
 }

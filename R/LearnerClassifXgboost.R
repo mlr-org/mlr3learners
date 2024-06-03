@@ -34,7 +34,7 @@
 #' Early stopping can be used to find the optimal number of boosting rounds.
 #' The `early_stopping` parameter controls which set is used to monitor the performance.
 #' Set `early_stopping_rounds` to an integer vaulue to monitor the performance of the model on the validation set while training.
-#' For infomration on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
+#' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
@@ -78,11 +78,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-      aggr_nrounds = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv())
-
-      nrounds_tune_fn = crate(function(domain, param_set) {
-        assert_integerish(domain$upper, len = 1L, any.missing = FALSE)
-      }, .parent = topenv())
+      p_nrounds = p_int(1L,
+        tags = c("train", "hotstart", "internal_tuning"),
+        aggr = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv()),
+        in_tune_fn = crate(function(domain, param_vals) {
+          assert_true(!is.null(param_vals$early_stopping), .var.name = "early stopping rounds is set")
+          assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
+        disable_in_tune = list(early_stopping_rounds = NULL)
+      )
 
       ps = ps(
         alpha                       = p_dbl(0, default = 0, tags = "train"),
@@ -115,7 +118,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         missing                     = p_dbl(default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
         monotone_constraints        = p_uty(default = 0, tags = c("train", "control"), custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
         normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train"),
-        nrounds                     = p_int(1L, tags = c("train", "hotstart", "internal_tuning"), aggr = aggr_nrounds, in_tune_fn = nrounds_tune_fn),
+        nrounds                     = p_nrounds,
         nthread                     = p_int(1L, default = 1L, tags = c("train", "control", "threads")),
         ntreelimit                  = p_int(1L, default = NULL, special_vals = list(NULL), tags = "predict"),
         num_parallel_tree           = p_int(1L, default = 1L, tags = c("train", "control")),
@@ -210,7 +213,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     },
     #' @field validate
     #' How to construct the internal validation data. This parameter can be either `NULL`,
-    #' a ratio, `"test"`, or `"internal_valid"`.
+    #' a ratio, `"test"`, or `"predefined"`.
     validate = function(rhs) {
       if (!missing(rhs)) {
         private$.validate = assert_validate(rhs)
@@ -356,13 +359,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     }
   )
 )
-
-
-#' @export
-disable_internal_tuning.LearnerClassifXgboost = function(learner, ids) {
-  if (length(ids)) learner$param_set$set_values(early_stopping_rounds = NULL)
-  invisible(learner)
-}
 
 
 #' @export
