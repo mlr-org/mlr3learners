@@ -28,7 +28,7 @@ Imports:
     checkmate,
     data.table,
     mlr3misc (>= 0.9.4),
-    paradox,
+    paradox (>= 1.0.0),
     R6
 Suggests:
     DiceKriging,
@@ -46,7 +46,6 @@ Suggests:
     testthat (>= 3.0.0),
     xgboost (>= 1.6.0)
 Remotes:
-    mlr-org/paradox@feat/inner_valid,
     mlr-org/mlr3@feat/inner_valid
 Config/testthat/edition: 3
 Encoding: UTF-8
