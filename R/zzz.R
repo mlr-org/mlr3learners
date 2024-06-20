@@ -13,6 +13,8 @@
 #' Feel invited to contribute a missing learner to the \CRANpkg{mlr3} ecosystem!
 "_PACKAGE"
 
+utils::globalVariables(c("patterns"))
+
 #' @include aaa.R
 register_mlr3 = function() {
   x = utils::getFromNamespace("mlr_learners", ns = "mlr3")

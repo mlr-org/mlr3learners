@@ -246,6 +246,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       }
       list(nrounds = self$model$niter)
     },
+
     .extract_internal_valid_scores = function() {
       if (is.null(self$model$evaluation_log)) {
         return(named_list())

@@ -325,12 +325,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
     },
+
     .extract_internal_tuned_values = function() {
       if (is.null(self$state$param_vals$early_stopping_rounds)) {
         return(named_list())
       }
       list(nrounds = self$model$niter)
     },
+
     .extract_internal_valid_scores = function() {
       if (is.null(self$model$evaluation_log)) {
         return(named_list())
