@@ -45,10 +45,10 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         iso              = p_lgl(default = FALSE, tags = "train"),
         jitter           = p_dbl(0, default = 0, tags = "predict"),
         kernel           = p_uty(default = NULL, tags = "train"),
-        knots            = p_uty(default = NULL, tags = "train"),
+        knots            = p_uty(default = NULL, tags = "train", depends = quote(scaling == TRUE)),
         light.return     = p_lgl(default = FALSE, tags = "predict"),
         lower            = p_uty(default = NULL, tags = "train"),
-        multistart       = p_int(default = 1, tags = "train"),
+        multistart       = p_int(default = 1, tags = "train", depends = quote(optim.method == "BFGS")),
         noise.var        = p_uty(default = NULL, tags = "train"),
         nugget           = p_dbl(tags = "train"),
         nugget.estim     = p_lgl(default = FALSE, tags = "train"),
@@ -61,8 +61,6 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         type             = p_fct(c("SK", "UK"), default = "SK", tags = "predict"),
         upper            = p_uty(default = NULL, tags = "train")
       )
-      ps$add_dep("multistart", "optim.method", CondEqual$new("BFGS"))
-      ps$add_dep("knots", "scaling", CondEqual$new(TRUE))
 
       super$initialize(
         id = "regr.km",

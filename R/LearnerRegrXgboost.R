@@ -49,6 +49,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+
       p_nrounds = p_int(1L,
         tags = c("train", "hotstart", "internal_tuning"),
         aggr = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv()),

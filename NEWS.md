@@ -1,7 +1,11 @@
 # mlr3learners (development version)
 
-* feat: `LearnerClassifXgboost` and `LearnerRegrXgboost` now support internal
-  tuning and validation. This now also works in conjunction with `mlr3pipelines`.
+* feat: `LearnerClassifXgboost` and `LearnerRegrXgboost` now support internal tuning and validation.
+  This now also works in conjunction with `mlr3pipelines`.
+
+# mlr3learners 0.6.0
+
+* Adaption to new paradox version 1.0.0.
 
 # mlr3learners 0.5.8
 

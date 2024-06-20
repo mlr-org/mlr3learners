@@ -26,26 +26,21 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
       ps = ps(
         cachesize       = p_dbl(default = 40L, tags = "train"),
         class.weights   = p_uty(default = NULL, tags = "train"),
-        coef0           = p_dbl(default = 0, tags = "train"),
-        cost            = p_dbl(0, default = 1, tags = "train"),
+        coef0           = p_dbl(default = 0, tags = "train", depends = quote(kernel %in% c("polynomial", "sigmoid"))),
+        cost            = p_dbl(0, default = 1, tags = "train", depends = quote(type == "C-classification")),
         cross           = p_int(0L, default = 0L, tags = "train"),
         decision.values = p_lgl(default = FALSE, tags = "predict"),
-        degree          = p_int(1L, default = 3L, tags = "train"),
+        degree          = p_int(1L, default = 3L, tags = "train", depends = quote(kernel == "polynomial")),
         epsilon         = p_dbl(0, default = 0.1, tags = "train"),
         fitted          = p_lgl(default = TRUE, tags = "train"),
-        gamma           = p_dbl(0, tags = "train"),
+        gamma           = p_dbl(0, tags = "train", depends = quote(kernel %in% c("polynomial", "radial", "sigmoid"))),
         kernel          = p_fct(c("linear", "polynomial", "radial", "sigmoid"), default = "radial", tags = "train"),
-        nu              = p_dbl(default = 0.5, tags = "train"),
+        nu              = p_dbl(default = 0.5, tags = "train", depends = quote(type == "nu-classification")),
         scale           = p_uty(default = TRUE, tags = "train"),
         shrinking       = p_lgl(default = TRUE, tags = "train"),
         tolerance       = p_dbl(0, default = 0.001, tags = "train"),
         type            = p_fct(c("C-classification", "nu-classification"), default = "C-classification", tags = "train")
       )
-      ps$add_dep("cost", "type", CondEqual$new("C-classification"))
-      ps$add_dep("nu", "type", CondEqual$new("nu-classification"))
-      ps$add_dep("degree", "kernel", CondEqual$new("polynomial"))
-      ps$add_dep("coef0", "kernel", CondAnyOf$new(c("polynomial", "sigmoid")))
-      ps$add_dep("gamma", "kernel", CondAnyOf$new(c("polynomial", "radial", "sigmoid")))
 
       super$initialize(
         id = "classif.svm",
@@ -94,8 +89,14 @@ default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # noli
     gamma = 1 / length(task$feature_names)
   )
   defaults = insert_named(default_values(x$param_set), special_defaults)
-  defaults[["degree"]] = NULL
-  defaults[search_space$ids()]
+  # defaults[["degree"]] = NULL
+  defaults = defaults[search_space$ids()]
+
+  # fix dependencies
+  if (!is.null(defaults[["degree"]])) defaults[["degree"]] = NA_real_
+  if (!is.null(defaults[["coef0"]])) defaults[["coef0"]] = NA_real_
+
+  defaults
 }
 
 #' @include aaa.R

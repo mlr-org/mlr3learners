@@ -105,8 +105,8 @@ lrn("classif.xgboost")
    min_child_weight \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    missing \tab numeric \tab NA \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    monotone_constraints \tab untyped \tab 0 \tab  \tab - \cr
-   normalize_type \tab character \tab tree \tab tree, forest \tab - \cr
    nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   normalize_type \tab character \tab tree \tab tree, forest \tab - \cr
    nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr

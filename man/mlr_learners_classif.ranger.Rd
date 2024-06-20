@@ -66,8 +66,8 @@ lrn("classif.ranger")
    minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   node.stats \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   node.stats \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
