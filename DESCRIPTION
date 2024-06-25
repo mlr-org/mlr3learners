@@ -22,7 +22,7 @@ URL: https://mlr3learners.mlr-org.com,
     https://github.com/mlr-org/mlr3learners
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:
-    mlr3 (>= 0.17.1),
+    mlr3 (>= 0.20.0),
     R (>= 3.1.0)
 Imports:
     checkmate,
@@ -45,8 +45,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     xgboost (>= 1.6.0)
-Remotes:
-    mlr-org/mlr3
 Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no
