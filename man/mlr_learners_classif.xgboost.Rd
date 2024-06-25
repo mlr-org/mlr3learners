@@ -14,6 +14,7 @@ This was necessary to silence a deprecation warning.
 
 Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
 \code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
+See the section \emph{Early Stopping and Validation} on how to do this.
 }
 \note{
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
@@ -46,12 +47,12 @@ would error. Just setting a nonsense default to workaround this.
 }
 }
 
-\section{Early stopping}{
+\section{Early Stopping and Validation}{
 
-Early stopping can be used to find the optimal number of boosting rounds.
-The \code{early_stopping} parameter controls which set is used to monitor the performance.
-Set \code{early_stopping_rounds} to an integer vaulue to monitor the performance of the model on the validation set while training.
+In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
 For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
+This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}.
 }
 
 \section{Dictionary}{
@@ -175,22 +176,18 @@ predictions$score()
 # Train learner with early stopping on spam data set
 task = tsk("spam")
 
-# Split task into training and validation data
-split = partition(task, ratio = 0.8)
-task$divide(split$test)
-
-task
-
+# use 30 percent for validation
 # Set early stopping parameter
 learner = lrn("classif.xgboost",
   nrounds = 100,
   early_stopping_rounds = 10,
-  validate = "internal_valid"
+  validate = 0.3
 )
 
 # Train learner with early stopping
 learner$train(task)
 
+# Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
 learner$internal_valid_scores
 }
@@ -248,12 +245,17 @@ Other Learner:
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{internal_valid_scores}}{The last observation of the validation scores for all metrics.
-Extracted from \code{model$evaluation_log}}
+\item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
+The validation scores extracted from \code{model$evaluation_log}.
+If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
+otherwise the \code{nrounds} for the final model.}
 
-\item{\code{internal_tuned_values}}{Returns the early stopped iterations if \code{early_stopping_rounds} was set during training.}
+\item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
+If early stopping is activated, this returns a list with \code{nrounds},
+which is extracted from \verb{$best_iteration} of the model and otherwise \code{NULL}.}
 
-\item{\code{validate}}{How to construct the internal validation data. This parameter can be either \code{NULL},
+\item{\code{validate}}{(\code{numeric(1)} or \code{character(1)} or \code{NULL})
+How to construct the internal validation data. This parameter can be either \code{NULL},
 a ratio, \code{"test"}, or \code{"predefined"}.}
 }
 \if{html}{\out{</div>}}

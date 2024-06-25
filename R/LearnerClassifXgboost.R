@@ -12,6 +12,7 @@
 #'
 #' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [`Learner`] in a
 #' `mlr3pipelines` `GraphLearner` as the preprocessing steps will not be applied to the data in the watchlist.
+#' See the section *Early Stopping and Validation* on how to do this.
 #'
 #' @template note_xgboost
 #' @section Initial parameter values:
@@ -30,11 +31,11 @@
 #'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
 #'
-#' @section Early stopping:
-#' Early stopping can be used to find the optimal number of boosting rounds.
-#' The `early_stopping` parameter controls which set is used to monitor the performance.
-#' Set `early_stopping_rounds` to an integer vaulue to monitor the performance of the model on the validation set while training.
+#' @section Early Stopping and Validation:
+#' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
 #' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
+#' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
+#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`.
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
@@ -51,22 +52,18 @@
 #' # Train learner with early stopping on spam data set
 #' task = tsk("spam")
 #'
-#' # Split task into training and validation data
-#' split = partition(task, ratio = 0.8)
-#' task$divide(split$test)
-#'
-#' task
-#'
+#' # use 30 percent for validation
 #' # Set early stopping parameter
 #' learner = lrn("classif.xgboost",
 #'   nrounds = 100,
 #'   early_stopping_rounds = 10,
-#'   validate = "internal_valid"
+#'   validate = 0.3
 #' )
 #'
 #' # Train learner with early stopping
 #' learner$train(task)
 #'
+#' # Inspect optimal nrounds and validation performance
 #' learner$internal_tuned_values
 #' learner$internal_valid_scores
 #' }
@@ -83,7 +80,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         tags = c("train", "hotstart", "internal_tuning"),
         aggr = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv()),
         in_tune_fn = crate(function(domain, param_vals) {
-          assert_true(!is.null(param_vals$early_stopping), .var.name = "early stopping rounds is set")
+          assert_true(!is.null(param_vals$early_stopping_rounds), .var.name = "early stopping rounds is set")
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
         disable_in_tune = list(early_stopping_rounds = NULL)
       )
@@ -184,18 +181,20 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     }
   ),
   active = list(
-    #' @field internal_valid_scores
-    #' The last observation of the validation scores for all metrics.
-    #' Extracted from `model$evaluation_log`
+    #' @field internal_valid_scores (named `list()` or `NULL`)
+    #' The validation scores extracted from `model$evaluation_log`.
+    #' If early stopping is activated, this contains the validation scores of the model for the optimal `nrounds`,
+    #' otherwise the `nrounds` for the final model.
     internal_valid_scores = function() {
       self$state$internal_valid_scores
     },
-    #' @field internal_tuned_values
-    #' Returns the early stopped iterations if `early_stopping_rounds` was set during training.
+    #' @field internal_tuned_values (named `list()` or `NULL`)
+    #' If early stopping is activated, this returns a list with `nrounds`,
+    #' which is extracted from `$best_iteration` of the model and otherwise `NULL`.
     internal_tuned_values = function() {
       self$state$internal_tuned_values
     },
-    #' @field validate
+    #' @field validate (`numeric(1)` or `character(1)` or `NULL`)
     #' How to construct the internal validation data. This parameter can be either `NULL`,
     #' a ratio, `"test"`, or `"predefined"`.
     validate = function(rhs) {
@@ -328,17 +327,18 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
     .extract_internal_tuned_values = function() {
       if (is.null(self$state$param_vals$early_stopping_rounds)) {
-        return(named_list())
+        return(NULL)
       }
-      list(nrounds = self$model$niter)
+      list(nrounds = self$model$best_iteration)
     },
 
     .extract_internal_valid_scores = function() {
       if (is.null(self$model$evaluation_log)) {
-        return(named_list())
+        NULL
       }
+      iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
       as.list(self$model$evaluation_log[
-        get(".N"),
+        iter,
         set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD",)))),
         .SDcols = patterns("^test_")
       ])
