@@ -35,8 +35,8 @@
 #' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
 #' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
 #' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
-#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`.
-#'
+#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the
+#' optimal `nrounds` via `$internal_tuned_values`.
 #' @templateVar id classif.xgboost
 #' @template learner
 #'

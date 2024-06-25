@@ -14,7 +14,7 @@
 #' See the section *Early Stopping and Validation* on how to do this.
 #'
 #' @template note_xgboost
-#' @inheritSection mlr_learners_classif.xgboost Early stopping
+#' @inheritSection mlr_learners_classif.xgboost Early Stopping and Validation
 #' @inheritSection mlr_learners_classif.xgboost Initial parameter values
 #'
 #' @templateVar id regr.xgboost
