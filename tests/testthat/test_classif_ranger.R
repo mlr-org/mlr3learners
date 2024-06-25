@@ -56,7 +56,7 @@ test_that("mtry.ratio", {
 
 test_that("convert_ratio", {
   task = tsk("sonar")
-  learner = lrn("classif.ranger", num.trees = 5, mtry.ratio = .5)
+  learner = lrn("classif.ranger", num.trees = 5, mtry.ratio = 0.5)
   expect_equal(learner$train(task)$model$mtry, 30)
 
   learner$param_set$values$mtry.ratio = 0
