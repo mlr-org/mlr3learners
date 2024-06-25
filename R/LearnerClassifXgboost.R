@@ -32,7 +32,6 @@
 #'
 #' @section Early stopping:
 #' Early stopping can be used to find the optimal number of boosting rounds.
-#' The `early_stopping` parameter controls which set is used to monitor the performance.
 #' Set `early_stopping_rounds` to an integer vaulue to monitor the performance of the model on the validation set while training.
 #' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
 #'
@@ -83,7 +82,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         tags = c("train", "hotstart", "internal_tuning"),
         aggr = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv()),
         in_tune_fn = crate(function(domain, param_vals) {
-          assert_true(!is.null(param_vals$early_stopping), .var.name = "early stopping rounds is set")
+          if (is.null(param_vals$early_stopping_rounds)) {
+            stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
+          }
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
         disable_in_tune = list(early_stopping_rounds = NULL)
       )

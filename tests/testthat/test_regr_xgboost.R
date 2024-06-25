@@ -81,7 +81,7 @@ test_that("validation and inner tuning", {
     validate = 0.2
   )
   s = learner$param_set$search_space()
-  expect_error(learner$param_set$convert_internal_search_space(s), "early stopping")
+  expect_error(learner$param_set$convert_internal_search_space(s), "Parameter")
   learner$param_set$set_values(early_stopping_rounds = 10)
   learner$param_set$disable_internal_tuning("nrounds")
   expect_equal(learner$param_set$values$early_stopping_rounds, NULL)

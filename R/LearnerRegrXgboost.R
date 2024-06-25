@@ -54,7 +54,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         tags = c("train", "hotstart", "internal_tuning"),
         aggr = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv()),
         in_tune_fn = crate(function(domain, param_vals) {
-          assert_true(!is.null(param_vals$early_stopping), .var.name = "early stopping rounds is set")
+          if (is.null(param_vals$early_stopping_rounds)) {
+            stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
+          }
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
         disable_in_tune = list(early_stopping_rounds = NULL)
       )

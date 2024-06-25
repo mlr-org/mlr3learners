@@ -49,7 +49,6 @@ would error. Just setting a nonsense default to workaround this.
 \section{Early stopping}{
 
 Early stopping can be used to find the optimal number of boosting rounds.
-The \code{early_stopping} parameter controls which set is used to monitor the performance.
 Set \code{early_stopping_rounds} to an integer vaulue to monitor the performance of the model on the validation set while training.
 For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
 }
