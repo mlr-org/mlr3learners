@@ -5,13 +5,15 @@ If not specified otherwise, the evaluation metric is set to the default "logloss
 for binary classification problems and set to "mlogloss" for multiclass problems.
 This was necessary to silence a deprecation warning.
 Note that using the watchlist parameter directly will lead to problems when wrapping this Learner in a
-mlr3pipelines GraphLearner as the preprocessing steps will not be applied to the data in the watchlist.'><title>Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost • mlr3learners</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.9/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost"><meta property="og:description" content='eXtreme Gradient Boosting classification.
+mlr3pipelines GraphLearner as the preprocessing steps will not be applied to the data in the watchlist.
+See the section Early Stopping and Validation on how to do this.'><title>Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost • mlr3learners</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.9/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost"><meta property="og:description" content='eXtreme Gradient Boosting classification.
 Calls xgboost::xgb.train() from package xgboost.
 If not specified otherwise, the evaluation metric is set to the default "logloss"
 for binary classification problems and set to "mlogloss" for multiclass problems.
 This was necessary to silence a deprecation warning.
 Note that using the watchlist parameter directly will lead to problems when wrapping this Learner in a
-mlr3pipelines GraphLearner as the preprocessing steps will not be applied to the data in the watchlist.'><meta name="robots" content="noindex"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+mlr3pipelines GraphLearner as the preprocessing steps will not be applied to the data in the watchlist.
+See the section Early Stopping and Validation on how to do this.'><meta name="robots" content="noindex"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body>
@@ -96,7 +98,8 @@ Calls <code><a href="https://rdrr.io/pkg/xgboost/man/xgb.train.html" class="exte
 for binary classification problems and set to <code>"mlogloss"</code> for multiclass problems.
 This was necessary to silence a deprecation warning.</p>
 <p>Note that using the <code>watchlist</code> parameter directly will lead to problems when wrapping this <code>Learner</code> in a
-<code>mlr3pipelines</code> <code>GraphLearner</code> as the preprocessing steps will not be applied to the data in the watchlist.</p>
+<code>mlr3pipelines</code> <code>GraphLearner</code> as the preprocessing steps will not be applied to the data in the watchlist.
+See the section <em>Early Stopping and Validation</em> on how to do this.</p>
     </div>
 
 
@@ -126,12 +129,14 @@ would error. Just setting a nonsense default to workaround this.
 </ul></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="early-stopping">Early stopping<a class="anchor" aria-label="anchor" href="#early-stopping"></a></h2>
+    <h2 id="early-stopping-and-validation">Early Stopping and Validation<a class="anchor" aria-label="anchor" href="#early-stopping-and-validation"></a></h2>
     
 
-<p>Early stopping can be used to find the optimal number of boosting rounds.
-Set <code>early_stopping_rounds</code> to an integer vaulue to monitor the performance of the model on the validation set while training.
-For information on how to configure the valdiation set, see the <em>Validation</em> section of <code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code>.</p>
+<p>In order to monitor the validation performance during the training, you can set the <code>$validate</code> field of the Learner.
+For information on how to configure the valdiation set, see the <em>Validation</em> section of <code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code>.
+This validation data can also be used for early stopping, which can be enabled by setting the <code>early_stopping_rounds</code> parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via <code>$internal_valid_scores</code>, and the
+optimal <code>nrounds</code> via <code>$internal_tuned_values</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
@@ -206,16 +211,21 @@ for established default tuning spaces.</p></li>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
     <p></p><div class="r6-active-bindings"><dl><dt><code>internal_valid_scores</code></dt>
-<dd><p>The last observation of the validation scores for all metrics.
-Extracted from <code>model$evaluation_log</code></p></dd>
+<dd><p>(named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> or <code>NULL</code>)
+The validation scores extracted from <code>model$evaluation_log</code>.
+If early stopping is activated, this contains the validation scores of the model for the optimal <code>nrounds</code>,
+otherwise the <code>nrounds</code> for the final model.</p></dd>
 
 
 <dt><code>internal_tuned_values</code></dt>
-<dd><p>Returns the early stopped iterations if <code>early_stopping_rounds</code> was set during training.</p></dd>
+<dd><p>(named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> or <code>NULL</code>)
+If early stopping is activated, this returns a list with <code>nrounds</code>,
+which is extracted from <code>$best_iteration</code> of the model and otherwise <code>NULL</code>.</p></dd>
 
 
 <dt><code>validate</code></dt>
-<dd><p>How to construct the internal validation data. This parameter can be either <code>NULL</code>,
+<dd><p>(<code>numeric(1)</code> or <code>character(1)</code> or <code>NULL</code>)
+How to construct the internal validation data. This parameter can be either <code>NULL</code>,
 a ratio, <code>"test"</code>, or <code>"predefined"</code>.</p></dd>
 
 
@@ -313,22 +323,18 @@ a ratio, <code>"test"</code>, or <code>"predefined"</code>.</p></dd>
 <span class="r-in"><span><span class="co"># Train learner with early stopping on spam data set</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"spam"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Split task into training and validation data</span></span></span>
-<span class="r-in"><span><span class="va">split</span> <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span><span class="va">task</span>, ratio <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">task</span><span class="op">$</span><span class="fu">divide</span><span class="op">(</span><span class="va">split</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">task</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use 30 percent for validation</span></span></span>
 <span class="r-in"><span><span class="co"># Set early stopping parameter</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.xgboost"</span>,</span></span>
 <span class="r-in"><span>  nrounds <span class="op">=</span> <span class="fl">100</span>,</span></span>
 <span class="r-in"><span>  early_stopping_rounds <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>  validate <span class="op">=</span> <span class="st">"internal_valid"</span></span></span>
+<span class="r-in"><span>  validate <span class="op">=</span> <span class="fl">0.3</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Train learner with early stopping</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Inspect optimal nrounds and validation performance</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_tuned_values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_valid_scores</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
