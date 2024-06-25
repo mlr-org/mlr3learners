@@ -8,10 +8,10 @@ xp = rvest::html_elements(x, "p")
 x = c(rvest::html_text2(xli), rvest::html_text2(xp))
 
 add_params_xgboost = x %>%
-  grep("default=", ., value = T) %>%
-  strsplit(., split = " ") %>%
-  mlr3misc::map_chr(., function(x) x[1]) %>%
-  gsub(",", replacement = "", .) %>%
+  grep("default=", ., value = TRUE) %>%
+  strsplit(., split = " ", fixed = TRUE) %>%
+  mlr3misc::map_chr(1L) %>%
+  gsub(",", replacement = "", ., fixed = TRUE) %>%
   ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
   append(values = c("colsample_bylevel", "colsample_bynode")) %>%
   # values which do not match regex
