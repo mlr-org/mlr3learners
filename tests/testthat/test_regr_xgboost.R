@@ -44,16 +44,45 @@ test_that("hotstart", {
   expect_equal(learner_4$state$param_vals$nrounds, 5L)
 })
 
-test_that("early stopping on the test set works", {
+test_that("validation and inner tuning", {
   task = tsk("mtcars")
-  split = partition(task, ratio = 0.8)
-  task$set_row_roles(split$test, "test")
+
   learner = lrn("regr.xgboost",
-    nrounds = 1000,
-    early_stopping_rounds = 100,
-    early_stopping_set = "test"
+    nrounds = 10,
+    early_stopping_rounds = 1,
+    validate = 0.2
   )
 
   learner$train(task)
-  expect_named(learner$model$evaluation_log, c("iter", "train_rmse", "test_rmse"))
+  expect_named(learner$model$evaluation_log, c("iter", "test_rmse"))
+  expect_list(learner$internal_valid_scores, types = "numeric")
+  expect_equal(names(learner$internal_valid_scores), "rmse")
+  expect_equal(learner$internal_valid_scores$rmse, learner$model$evaluation[get("iter") == 10, "test_rmse"][[1L]])
+
+  expect_list(learner$internal_tuned_values, types = "integerish")
+  expect_equal(names(learner$internal_tuned_values), "nrounds")
+
+  learner$validate = NULL
+  expect_error(learner$train(task), "field 'validate'")
+
+  learner$validate = 0.2
+  task$internal_valid_task = NULL
+  learner$param_set$set_values(
+    early_stopping_rounds = NULL
+  )
+  learner$train(task)
+  expect_equal(learner$internal_tuned_values, named_list())
+  expect_named(learner$model$evaluation_log, c("iter", "test_rmse"))
+  expect_list(learner$internal_valid_scores, types = "numeric")
+  expect_equal(names(learner$internal_valid_scores), "rmse")
+
+  learner = lrn("regr.xgboost",
+    nrounds = to_tune(upper = 1000, internal = TRUE),
+    validate = 0.2
+  )
+  s = learner$param_set$search_space()
+  expect_error(learner$param_set$convert_internal_search_space(s), "Parameter")
+  learner$param_set$set_values(early_stopping_rounds = 10)
+  learner$param_set$disable_internal_tuning("nrounds")
+  expect_equal(learner$param_set$values$early_stopping_rounds, NULL)
 })

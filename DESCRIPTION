@@ -28,7 +28,7 @@ Imports:
     checkmate,
     data.table,
     mlr3misc (>= 0.9.4),
-    paradox,
+    paradox (>= 1.0.0),
     R6
 Suggests:
     DiceKriging,
@@ -45,6 +45,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     xgboost (>= 1.6.0)
+Remotes:
+    mlr-org/mlr3
 Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no

@@ -2,14 +2,16 @@ library(mlr3learners)
 library(magrittr, exclude = c("equals", "is_less_than", "not"))
 library(rvest)
 
-add_params_xgboost = read_html("https://xgboost.readthedocs.io/en/latest/parameter.html") %>%
-  html_elements("li") %>%
-  html_elements("p") %>%
-  html_text2() %>%
-  grep("default=", ., value = TRUE, fixed = TRUE) %>%
-  strsplit(" ", fixed = TRUE) %>%
-  mlr3misc::map_chr(1L) %>%
-  gsub(",", "", ., fixed = TRUE) %>%
+x = rvest::read_html("https://xgboost.readthedocs.io/en/latest/parameter.html")
+xli = rvest::html_elements(x, "li")
+xp = rvest::html_elements(x, "p")
+x = c(rvest::html_text2(xli), rvest::html_text2(xp))
+
+add_params_xgboost = x %>%
+  grep("default=", ., value = T) %>%
+  strsplit(., split = " ") %>%
+  mlr3misc::map_chr(., function(x) x[1]) %>%
+  gsub(",", replacement = "", .) %>%
   ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
   append(values = c("colsample_bylevel", "colsample_bynode")) %>%
   # values which do not match regex
@@ -39,8 +41,7 @@ test_that("regr.xgboost", {
     "eval_metric", # handled by mlr3
     "label", # handled by mlr3
     "weight", # handled by mlr3
-    "nthread", # handled by mlr3
-    "early_stopping_set" # extra parameter of mlr3
+    "nthread" # handled by mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")

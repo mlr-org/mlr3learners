@@ -49,13 +49,8 @@ would error. Just setting a nonsense default to workaround this.
 \section{Early stopping}{
 
 Early stopping can be used to find the optimal number of boosting rounds.
-The \code{early_stopping_set} parameter controls which set is used to monitor the performance.
-Set \code{early_stopping_set = "test"} to monitor the performance of the model on the test set while training.
-The test set for early stopping can be set with the \code{"test"} row role in the \link[mlr3:Task]{mlr3::Task}.
-Additionally, the range must be set in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
-While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
-Not that using the test set for early stopping can potentially bias the performance scores.
-See the section on early stopping in the examples.
+Set \code{early_stopping_rounds} to an integer vaulue to monitor the performance of the model on the validation set while training.
+For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
 }
 
 \section{Dictionary}{
@@ -84,18 +79,17 @@ lrn("classif.xgboost")
    approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
-   callbacks \tab untyped \tab list \tab  \tab - \cr
+   callbacks \tab untyped \tab list() \tab  \tab - \cr
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   device \tab untyped \tab cpu \tab  \tab - \cr
+   device \tab untyped \tab "cpu" \tab  \tab - \cr
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   early_stopping_set \tab character \tab none \tab none, train, test \tab - \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    eval_metric \tab untyped \tab - \tab  \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
-   feval \tab untyped \tab  \tab  \tab - \cr
+   feval \tab untyped \tab NULL \tab  \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab untyped \tab - \tab  \tab - \cr
@@ -110,12 +104,12 @@ lrn("classif.xgboost")
    min_child_weight \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    missing \tab numeric \tab NA \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    monotone_constraints \tab untyped \tab 0 \tab  \tab - \cr
-   normalize_type \tab character \tab tree \tab tree, forest \tab - \cr
    nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   normalize_type \tab character \tab tree \tab tree, forest \tab - \cr
    nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   objective \tab untyped \tab binary:logistic \tab  \tab - \cr
+   objective \tab untyped \tab "binary:logistic" \tab  \tab - \cr
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -129,7 +123,7 @@ lrn("classif.xgboost")
    seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab - \cr
    sample_type \tab character \tab uniform \tab uniform, weighted \tab - \cr
-   save_name \tab untyped \tab  \tab  \tab - \cr
+   save_name \tab untyped \tab NULL \tab  \tab - \cr
    save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
@@ -141,8 +135,8 @@ lrn("classif.xgboost")
    tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
    updater \tab untyped \tab - \tab  \tab - \cr
    verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
-   watchlist \tab untyped \tab  \tab  \tab - \cr
-   xgb_model \tab untyped \tab  \tab  \tab - \cr
+   watchlist \tab untyped \tab NULL \tab  \tab - \cr
+   xgb_model \tab untyped \tab NULL \tab  \tab - \cr
 }
 }
 
@@ -180,19 +174,24 @@ predictions$score()
 # Train learner with early stopping on spam data set
 task = tsk("spam")
 
-# Split task into training and test set
+# Split task into training and validation data
 split = partition(task, ratio = 0.8)
-task$set_row_roles(split$test, "test")
+task$divide(split$test)
+
+task
 
 # Set early stopping parameter
 learner = lrn("classif.xgboost",
   nrounds = 100,
   early_stopping_rounds = 10,
-  early_stopping_set = "test"
+  validate = "internal_valid"
 )
 
 # Train learner with early stopping
 learner$train(task)
+
+learner$internal_tuned_values
+learner$internal_valid_scores
 }
 }
 \references{
@@ -244,6 +243,19 @@ Other Learner:
 \concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerClassif]{mlr3::LearnerClassif}} -> \code{LearnerClassifXgboost}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{internal_valid_scores}}{The last observation of the validation scores for all metrics.
+Extracted from \code{model$evaluation_log}}
+
+\item{\code{internal_tuned_values}}{Returns the early stopped iterations if \code{early_stopping_rounds} was set during training.}
+
+\item{\code{validate}}{How to construct the internal validation data. This parameter can be either \code{NULL},
+a ratio, \code{"test"}, or \code{"predefined"}.}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
