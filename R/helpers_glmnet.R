@@ -54,6 +54,8 @@ glmnet_selected_features = function(self, lambda = NULL) {
 
 
 glmnet_invoke = function(data, target, pv, cv = FALSE) {
+  # glmnet for some reasons sets these parameters globally, therefore
+  # we reset them afterwards
   saved_ctrl = glmnet::glmnet.control()
   on.exit(invoke(glmnet::glmnet.control, .args = saved_ctrl))
   glmnet::glmnet.control(factory = TRUE)
