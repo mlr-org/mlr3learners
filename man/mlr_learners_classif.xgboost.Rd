@@ -12,7 +12,7 @@ If not specified otherwise, the evaluation metric is set to the default \code{"l
 for binary classification problems and set to \code{"mlogloss"} for multiclass problems.
 This was necessary to silence a deprecation warning.
 
-Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
+Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a
 \code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
 See the section \emph{Early Stopping and Validation} on how to do this.
 }

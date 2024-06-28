@@ -10,7 +10,7 @@
 #' for binary classification problems and set to `"mlogloss"` for multiclass problems.
 #' This was necessary to silence a deprecation warning.
 #'
-#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [`Learner`] in a
+#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [mlr3::Learner] in a
 #' `mlr3pipelines` `GraphLearner` as the preprocessing steps will not be applied to the data in the watchlist.
 #' See the section *Early Stopping and Validation* on how to do this.
 #'

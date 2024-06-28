@@ -11,7 +11,7 @@ Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpk
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 
-Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
+Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a
 \code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
 See the section \emph{Early Stopping and Validation} on how to do this.
 }

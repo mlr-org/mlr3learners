@@ -9,7 +9,7 @@
 #' To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 #' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 #'
-#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [`Learner`] in a
+#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [mlr3::Learner] in a
 #' `mlr3pipelines` `GraphLearner` as the preprocessing steps will not be applied to the data in the watchlist.
 #' See the section *Early Stopping and Validation* on how to do this.
 #'
