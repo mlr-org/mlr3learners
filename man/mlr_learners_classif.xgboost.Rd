@@ -12,7 +12,7 @@ If not specified otherwise, the evaluation metric is set to the default \code{"l
 for binary classification problems and set to \code{"mlogloss"} for multiclass problems.
 This was necessary to silence a deprecation warning.
 
-Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
+Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a
 \code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
 See the section \emph{Early Stopping and Validation} on how to do this.
 }
@@ -58,7 +58,7 @@ optimal \code{nrounds} via \verb{$internal_tuned_values}.
 
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.xgboost")
 lrn("classif.xgboost")
@@ -205,8 +205,8 @@ ACM.
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
-\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{
