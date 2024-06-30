@@ -230,11 +230,11 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           pv$num_class = nlvls
 
           # we have to set this to avoid a deprecation warning
-          pv$eval_metric = pv$eval_metric %??% "mlogloss"
+          if (is.null(pv$feval)) pv$eval_metric = pv$eval_metric %??% "mlogloss"
         },
 
         "binary:logistic" = {
-          pv$eval_metric = pv$eval_metric %??% "logloss"
+          if (is.null(pv$feval)) pv$eval_metric = pv$eval_metric %??% "logloss"
         }
       )
 
