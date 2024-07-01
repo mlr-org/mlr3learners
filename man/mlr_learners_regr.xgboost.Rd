@@ -11,8 +11,9 @@ Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpk
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 
-Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
+Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a
 \code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
+See the section \emph{Early Stopping and Validation} on how to do this.
 }
 \note{
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
@@ -21,7 +22,7 @@ See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-s
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.xgboost")
 lrn("regr.xgboost")
@@ -45,18 +46,17 @@ lrn("regr.xgboost")
    approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
-   callbacks \tab untyped \tab list \tab  \tab - \cr
+   callbacks \tab untyped \tab list() \tab  \tab - \cr
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bynode \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    colsample_bytree \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   device \tab untyped \tab cpu \tab  \tab - \cr
+   device \tab untyped \tab "cpu" \tab  \tab - \cr
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   early_stopping_set \tab character \tab none \tab none, train, test \tab - \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   eval_metric \tab untyped \tab rmse \tab  \tab - \cr
+   eval_metric \tab untyped \tab "rmse" \tab  \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
-   feval \tab untyped \tab  \tab  \tab - \cr
+   feval \tab untyped \tab NULL \tab  \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab untyped \tab - \tab  \tab - \cr
@@ -76,7 +76,7 @@ lrn("regr.xgboost")
    nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   objective \tab untyped \tab reg:squarederror \tab  \tab - \cr
+   objective \tab untyped \tab "reg:squarederror" \tab  \tab - \cr
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -89,7 +89,7 @@ lrn("regr.xgboost")
    reshape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab - \cr
    sample_type \tab character \tab uniform \tab uniform, weighted \tab - \cr
-   save_name \tab untyped \tab  \tab  \tab - \cr
+   save_name \tab untyped \tab NULL \tab  \tab - \cr
    save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -102,21 +102,18 @@ lrn("regr.xgboost")
    tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
    updater \tab untyped \tab - \tab  \tab - \cr
    verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
-   watchlist \tab untyped \tab  \tab  \tab - \cr
-   xgb_model \tab untyped \tab  \tab  \tab - \cr
+   watchlist \tab untyped \tab NULL \tab  \tab - \cr
+   xgb_model \tab untyped \tab NULL \tab  \tab - \cr
 }
 }
 
-\section{Early stopping}{
+\section{Early Stopping and Validation}{
 
-Early stopping can be used to find the optimal number of boosting rounds.
-The \code{early_stopping_set} parameter controls which set is used to monitor the performance.
-Set \code{early_stopping_set = "test"} to monitor the performance of the model on the test set while training.
-The test set for early stopping can be set with the \code{"test"} row role in the \link[mlr3:Task]{mlr3::Task}.
-Additionally, the range must be set in which the performance must increase with \code{early_stopping_rounds} and the maximum number of boosting rounds with \code{nrounds}.
-While resampling, the test set is automatically applied from the \link[mlr3:Resampling]{mlr3::Resampling}.
-Not that using the test set for early stopping can potentially bias the performance scores.
-See the section on early stopping in the examples.
+In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
+For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
+This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the
+optimal \code{nrounds} via \verb{$internal_tuned_values}.
 }
 
 \section{Initial parameter values}{
@@ -179,19 +176,20 @@ predictions$score()
 # Train learner with early stopping on spam data set
 task = tsk("mtcars")
 
-# Split task into training and test set
-split = partition(task, ratio = 0.8)
-task$set_row_roles(split$test, "test")
-
+# use 30 percent for validation
 # Set early stopping parameter
 learner = lrn("regr.xgboost",
   nrounds = 100,
   early_stopping_rounds = 10,
-  early_stopping_set = "test"
+  validate = 0.3
 )
 
 # Train learner with early stopping
 learner$train(task)
+
+# Inspect optimal nrounds and validation performance
+learner$internal_tuned_values
+learner$internal_valid_scores
 }
 }
 \references{
@@ -206,8 +204,8 @@ ACM.
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
-\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{
@@ -243,6 +241,25 @@ Other Learner:
 \concept{Learner}
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerRegr]{mlr3::LearnerRegr}} -> \code{LearnerRegrXgboost}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
+The validation scores extracted from \code{model$evaluation_log}.
+If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
+otherwise the \code{nrounds} for the final model.}
+
+\item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
+If early stopping is activated, this returns a list with \code{nrounds},
+which is extracted from \verb{$best_iteration} of the model and otherwise \code{NULL}.}
+
+\item{\code{validate}}{(\code{numeric(1)} or \code{character(1)} or \code{NULL})
+How to construct the internal validation data. This parameter can be either \code{NULL},
+a ratio, \code{"test"}, or \code{"predefined"}.
+Returns the \verb{$best_iteration} when early stopping is activated.}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{

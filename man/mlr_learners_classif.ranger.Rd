@@ -34,7 +34,7 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.ranger")
 lrn("classif.ranger")
@@ -56,7 +56,7 @@ lrn("classif.ranger")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    always.split.variables \tab untyped \tab - \tab  \tab - \cr
-   class.weights \tab untyped \tab  \tab  \tab - \cr
+   class.weights \tab untyped \tab NULL \tab  \tab - \cr
    holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
@@ -80,7 +80,7 @@ lrn("classif.ranger")
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   split.select.weights \tab untyped \tab  \tab  \tab - \cr
+   split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab gini \tab gini, extratrees, hellinger \tab - \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
@@ -131,8 +131,8 @@ ISSN 1573-0565, \doi{10.1023/A:1010933404324}.
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
-\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{

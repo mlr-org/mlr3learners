@@ -3,7 +3,7 @@
 #' @import mlr3misc
 #' @import checkmate
 #' @importFrom R6 R6Class
-#' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr
+#' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr assert_validate
 #' @importFrom stats predict reformulate
 #'
 #' @description
@@ -12,6 +12,8 @@
 #' \url{https://mlr3book.mlr-org.com}.
 #' Feel invited to contribute a missing learner to the \CRANpkg{mlr3} ecosystem!
 "_PACKAGE"
+
+utils::globalVariables(c("patterns"))
 
 #' @include aaa.R
 register_mlr3 = function() {
