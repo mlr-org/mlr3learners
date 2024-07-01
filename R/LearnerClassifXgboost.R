@@ -285,16 +285,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
 
-      if (!is.null(pv$holdout_task)) {
-        holdout_task = pv$holdout_task$clone()
-        holdout_task$select(task$feature_names)
-        holdout_data = holdout_task$data(cols = holdout_task$feature_names)
-        holdout_label = nlvls - as.integer(holdout_task$truth())
-        holdout_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(holdout_data), label = holdout_label)
-        pv$watchlist = c(pv$watchlist, list(holdout = holdout_data))
-        pv$holdout_task = NULL
-      }
-
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
 
@@ -333,7 +323,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         list(response = response)
       } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
-        list(response = factor(colnames(prob)[i], levels = lvls))d
+        list(response = factor(colnames(prob)[i], levels = lvls))
       } else {
         list(prob = prob)
       }
@@ -381,7 +371,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
   )
 )
 
-d
+
 #' @export
 default_values.LearnerClassifXgboost = function(x, search_space, task, ...) { # nolint
   special_defaults = list(

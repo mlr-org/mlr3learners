@@ -241,16 +241,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
 
-      if (!is.null(pv$holdout_task)) {
-        holdout_task = pv$holdout_task$clone()
-        holdout_task$select(task$feature_names)
-        holdout_data = holdout_task$data(cols = holdout_task$feature_names)
-        holdout_label = nlvls - as.integer(holdout_task$truth())
-        holdout_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(holdout_data), label = holdout_label)
-        pv$watchlist = c(pv$watchlist, list(holdout = holdout_data))
-        pv$holdout_task = NULL
-      }
-
       invoke(xgboost::xgb.train, data = data, .args = pv)
     },
     #' Returns the `$best_iteration` when early stopping is activated.
