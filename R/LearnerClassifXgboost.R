@@ -103,7 +103,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
         eval_metric                 = p_uty(tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
-        # feval                       = p_uty(default = NULL, tags = "train"),
         gamma                       = p_dbl(0, default = 0, tags = c("train", "control")),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(tree_method == "hist")),
         interaction_constraints     = p_uty(tags = "train"),
@@ -291,7 +290,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
               response = factor(as.integer(pred > 0))
               measure$fun(truth, response)
             }
-
           } else if (objective == "multi:softprob") {
             # transform raw output to probabilities
             pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
@@ -299,7 +297,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
             prob = pred_exp / rowSums(pred_exp)
             colnames(prob) = levels(truth)
             measure$fun(truth, prob)
-
           } else if (objective == "multi:softmax")  {
             response = factor(max.col(matrix(pred, ncol = n_classes, byrow = TRUE), ties.method = "random") - 1, levels = levels(truth))
             measure$fun(truth, response)
