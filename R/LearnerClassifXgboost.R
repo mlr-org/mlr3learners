@@ -35,8 +35,9 @@
 #' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
 #' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
 #' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
-#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the
-#' optimal `nrounds` via `$internal_tuned_values`.
+#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the optimal `nrounds` via `$internal_tuned_values`.
+#' The internal validation measure can be set via `$internal_valid_measure` that can be a [mlr3::Measure], a function, or a character string to use the internal xgboost measures.
+#'
 #' @templateVar id classif.xgboost
 #' @template learner
 #'
@@ -102,7 +103,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
         eval_metric                 = p_uty(tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
-        feval                       = p_uty(default = NULL, tags = "train"),
+        # feval                       = p_uty(default = NULL, tags = "train"),
         gamma                       = p_dbl(0, default = 0, tags = c("train", "control")),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(tree_method == "hist")),
         interaction_constraints     = p_uty(tags = "train"),
@@ -183,6 +184,15 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     }
   ),
   active = list(
+    #' @field internal_valid_measure ([mlr3::Measure] | `character()`| `function()`)
+    #' The internal validation measure used for early stopping.
+    internal_valid_measure = function(rhs) {
+      if (missing(rhs)) {
+        return(self$param_set$values$eval_metric)
+      }
+      self$param_set$values$eval_metric = rhs
+    },
+
     #' @field internal_valid_scores (named `list()` or `NULL`)
     #' The validation scores extracted from `model$evaluation_log`.
     #' If early stopping is activated, this contains the validation scores of the model for the optimal `nrounds`,
@@ -190,12 +200,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     internal_valid_scores = function() {
       self$state$internal_valid_scores
     },
+
     #' @field internal_tuned_values (named `list()` or `NULL`)
     #' If early stopping is activated, this returns a list with `nrounds`,
     #' which is extracted from `$best_iteration` of the model and otherwise `NULL`.
     internal_tuned_values = function() {
       self$state$internal_tuned_values
     },
+
     #' @field validate (`numeric(1)` or `character(1)` or `NULL`)
     #' How to construct the internal validation data. This parameter can be either `NULL`,
     #' a ratio, `"test"`, or `"predefined"`.
@@ -238,7 +250,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         }
       )
 
-
       data = task$data(cols = task$feature_names)
       # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
       # note that task$truth() is guaranteed to have the factor levels in the right order
@@ -250,16 +261,56 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       # the last element in the watchlist is used as the early stopping set
-
       internal_valid_task = task$internal_valid_task
       if (!is.null(pv$early_stopping_rounds) && is.null(internal_valid_task)) {
         stopf("Learner (%s): Configure field 'validate' to enable early stopping.", self$id)
       }
+
       if (!is.null(internal_valid_task)) {
         test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
         test_label = nlvls - as.integer(internal_valid_task$truth(rows = internal_valid_task$row_roles$test))
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
+      }
+
+      # set internal validation measure
+      if (inherits(self$internal_valid_measure, "Measure")) {
+        n_classes = length(task$class_names)
+        measure = self$internal_valid_measure
+        objective = pv$objective
+
+        pv$eval_metric = mlr3misc::crate({function(pred, dtrain) {
+          truth = factor(xgboost::getinfo(dtrain, "label"))
+
+          scores = if (objective == "binary:logistic") {
+            if (measure$predict_type == "prob") {
+              # transform raw output to probabilities
+              prob = 1 / (1 + exp(-pred))
+              measure$fun(truth, prob, positive = "1")
+            } else {
+              response = factor(as.integer(pred > 0))
+              measure$fun(truth, response)
+            }
+
+          } else if (objective == "multi:softprob") {
+            # transform raw output to probabilities
+            pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
+            pred_exp = exp(pred_mat)
+            prob = pred_exp / rowSums(pred_exp)
+            colnames(prob) = levels(truth)
+            measure$fun(truth, prob)
+
+          } else if (objective == "multi:softmax")  {
+            response = factor(max.col(matrix(pred, ncol = n_classes, byrow = TRUE), ties.method = "random") - 1, levels = levels(truth))
+            measure$fun(truth, response)
+          } else {
+            error("Only 'binary:logistic', 'multi:softprob' and 'multi:softmax' objectives are supported.")
+          }
+
+          list(metric = measure$id, value = scores)
+        }}, n_classes = n_classes, measure = measure, objective = objective)
+
+        pv$maximize = !measure$minimize
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)

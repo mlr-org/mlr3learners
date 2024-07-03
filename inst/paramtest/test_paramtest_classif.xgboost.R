@@ -42,6 +42,7 @@ test_that("classif.xgboost", {
     "label", # handled by mlr3
     "weight", # handled by mlr3
     "nthread" # handled by mlr3
+    "feval" # eval_metric does the same
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
