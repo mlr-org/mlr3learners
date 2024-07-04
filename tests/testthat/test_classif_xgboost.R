@@ -156,7 +156,7 @@ test_that("custom inner validation measure", {
   )
 
   learner$internal_valid_measure = function(preds, dtrain) {
-    labels = getinfo(dtrain, "label")
+    labels = xgboost::getinfo(dtrain, "label")
     err = as.numeric(sum(labels != (preds > 0))) / length(labels)
     return(list(metric = "error", value = err))
   }
