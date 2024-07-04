@@ -53,7 +53,7 @@ In order to monitor the validation performance during the training, you can set 
 For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
 This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
 The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
-The internal validation measure can be set via \verb{$internal_valid_measure} that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string to use the internal xgboost measures.
+The internal validation measure can be set via the \code{eval_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
 }
 
 \section{Dictionary}{
@@ -245,9 +245,6 @@ Other Learner:
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{internal_valid_measure}}{(\link[mlr3:Measure]{mlr3::Measure} | \code{character()}| \verb{function()})
-The internal validation measure used for early stopping.}
-
 \item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
 The validation scores extracted from \code{model$evaluation_log}.
 If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
