@@ -282,8 +282,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           truth = factor(xgboost::getinfo(dtrain, "label"))
 
           scores = if (objective == "binary:logistic") {
+            # pred is a vector of log odds
             if (measure$predict_type == "prob") {
-              # transform raw output to probabilities
+              # transform log odds to probabilities
               prob = 1 / (1 + exp(-pred))
               measure$fun(truth, prob, positive = "1")
             } else {
@@ -291,13 +292,16 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
               measure$fun(truth, response)
             }
           } else if (objective == "multi:softprob") {
-            # transform raw output to probabilities
+            # pred is a vector of log odds for each class
+            # matrix must be filled by row
+            # transform log odds to probabilities
             pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
             pred_exp = exp(pred_mat)
             prob = pred_exp / rowSums(pred_exp)
-            colnames(prob) = levels(truth)
+            colnames(prob) = levels(truth) # FIXME: How handle missing classes?
             measure$fun(truth, prob)
           } else if (objective == "multi:softmax")  {
+            # pred is a vector of log odds for each class
             response = factor(max.col(matrix(pred, ncol = n_classes, byrow = TRUE), ties.method = "random") - 1, levels = levels(truth))
             measure$fun(truth, response)
           } else {
