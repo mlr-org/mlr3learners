@@ -137,7 +137,7 @@ test_that("custom inner validation measure", {
     early_stopping_rounds = 10
   )
 
-  learner$internal_valid_measure = "error"
+  learner$param_set$set_values(eval_metric = "error")
   learner$train(task)
 
   expect_named(learner$model$evaluation_log, c("iter", "test_error"))
@@ -155,11 +155,11 @@ test_that("custom inner validation measure", {
     maximize = FALSE
   )
 
-  learner$internal_valid_measure = function(preds, dtrain) {
+  learner$param_set$set_values(eval_metric = function(preds, dtrain) {
     labels = xgboost::getinfo(dtrain, "label")
     err = as.numeric(sum(labels != (preds > 0))) / length(labels)
     return(list(metric = "error", value = err))
-  }
+  })
   learner$train(task)
 
   expect_named(learner$model$evaluation_log, c("iter", "test_error"))
@@ -176,7 +176,7 @@ test_that("custom inner validation measure", {
     early_stopping_rounds = 10
   )
 
-  learner$internal_valid_measure = msr("classif.ce")
+  learner$param_set$set_values(eval_metric = msr("classif.ce"))
   learner$train(task)
 
   expect_named(learner$model$evaluation_log, c("iter", "test_classif.ce"))
@@ -196,12 +196,12 @@ test_that("mlr3measures are equal to internal measures", {
     early_stopping_rounds = 10
   )
 
-  learner$internal_valid_measure = msr("classif.ce")
+  learner$param_set$set_values(eval_metric = msr("classif.ce"))
   learner$train(task)
   log_mlr3 = learner$model$evaluation_log
 
   set.seed(1)
-  learner$internal_valid_measure = "error"
+  learner$param_set$set_values(eval_metric = "error")
   learner$train(task)
 
   log_internal = learner$model$evaluation_log
@@ -219,12 +219,12 @@ test_that("mlr3measures are equal to internal measures", {
     early_stopping_rounds = 10
   )
 
-  learner$internal_valid_measure = msr("classif.auc")
+  learner$param_set$set_values(eval_metric = msr("classif.auc"))
   learner$train(task)
   log_mlr3 = learner$model$evaluation_log
 
   set.seed(1)
-  learner$internal_valid_measure = "auc"
+  learner$param_set$set_values(eval_metric = "auc")
   learner$train(task)
 
   log_internal = learner$model$evaluation_log
@@ -242,12 +242,12 @@ test_that("mlr3measures are equal to internal measures", {
     early_stopping_rounds = 10
   )
 
-  learner$internal_valid_measure = msr("classif.ce")
+  learner$param_set$set_values(eval_metric = msr("classif.ce"))
   learner$train(task)
   log_mlr3 = learner$model$evaluation_log
 
   set.seed(1)
-  learner$internal_valid_measure = "merror"
+  learner$param_set$set_values(eval_metric = "merror")
   learner$train(task)
 
   log_internal = learner$model$evaluation_log
@@ -265,12 +265,12 @@ test_that("mlr3measures are equal to internal measures", {
     early_stopping_rounds = 10
   )
 
-  learner$internal_valid_measure = msr("classif.logloss")
+  learner$param_set$set_values(eval_metric = msr("classif.logloss"))
   learner$train(task)
   log_mlr3 = learner$model$evaluation_log
 
   set.seed(1)
-  learner$internal_valid_measure = "mlogloss"
+  learner$param_set$set_values(eval_metric = "mlogloss")
   learner$train(task)
 
   log_internal = learner$model$evaluation_log

@@ -36,7 +36,7 @@
 #' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
 #' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
 #' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the optimal `nrounds` via `$internal_tuned_values`.
-#' The internal validation measure can be set via `$internal_valid_measure` that can be a [mlr3::Measure], a function, or a character string to use the internal xgboost measures.
+#' The internal validation measure can be set via the `eval_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
@@ -183,15 +183,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     }
   ),
   active = list(
-    #' @field internal_valid_measure ([mlr3::Measure] | `character()`| `function()`)
-    #' The internal validation measure used for early stopping.
-    internal_valid_measure = function(rhs) {
-      if (missing(rhs)) {
-        return(self$param_set$values$eval_metric)
-      }
-      self$param_set$values$eval_metric = rhs
-    },
-
     #' @field internal_valid_scores (named `list()` or `NULL`)
     #' The validation scores extracted from `model$evaluation_log`.
     #' If early stopping is activated, this contains the validation scores of the model for the optimal `nrounds`,
@@ -273,9 +264,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       # set internal validation measure
-      if (inherits(self$internal_valid_measure, "Measure")) {
+      if (inherits(pv$eval_metric, "Measure")) {
         n_classes = length(task$class_names)
-        measure = self$internal_valid_measure
+        measure = pv$eval_metric
         objective = pv$objective
 
         pv$eval_metric = mlr3misc::crate({function(pred, dtrain) {
