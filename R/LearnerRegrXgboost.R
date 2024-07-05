@@ -224,7 +224,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         }
 
         pv$eval_metric =  mlr3misc::crate({function(pred, dtrain) {
-         # browser()
           truth = xgboost::getinfo(dtrain, "label")
           scores = measure$fun(truth, pred)
           list(metric = measure$id, value = scores)
