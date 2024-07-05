@@ -78,9 +78,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
-        eval_metric                 = p_uty(default = "rmse", tags = "train"),
+        eval_metric                 = p_uty(default = "rmse", tags = "train", custom_check = crate({function(x) check_true(any(is.character(x), is.function(x), inherits(x, "Measure")))})),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
-        feval                       = p_uty(default = NULL, tags = "train"),
         gamma                       = p_dbl(0, default = 0, tags = "train"),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(tree_method == "hist")),
         interaction_constraints     = p_uty(tags = "train"),
@@ -205,7 +204,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       }
 
       # the last element in the watchlist is used as the early stopping set
-
       internal_valid_task = task$internal_valid_task
       if (!is.null(pv$early_stopping_rounds) && is.null(internal_valid_task)) {
         stopf("Learner (%s): Configure field 'validate' to enable early stopping.", self$id)
@@ -215,6 +213,24 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         test_target =  task$data(rows = task$row_roles$test, cols = task$target_names)
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
         pv$watchlist = c(pv$watchlist, list(test = test_data))
+      }
+
+      # set internal validation measure
+      if (inherits(pv$eval_metric, "Measure")) {
+        measure = pv$eval_metric
+
+        if (pv$objective %nin% c("reg:absoluteerror", "reg:squarederror")) {
+          stop("Only 'reg:squarederror' and 'reg:absoluteerror' objectives are supported.")
+        }
+
+        pv$eval_metric =  mlr3misc::crate({function(pred, dtrain) {
+         # browser()
+          truth = xgboost::getinfo(dtrain, "label")
+          scores = measure$fun(truth, pred)
+          list(metric = measure$id, value = scores)
+          }}, measure = measure)
+
+        pv$maximize = !measure$minimize
       }
 
       invoke(xgboost::xgb.train, data = data, .args = pv)

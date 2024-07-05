@@ -166,29 +166,12 @@ test_that("custom inner validation measure", {
   expect_list(learner$internal_valid_scores, types = "numeric")
   expect_equal(names(learner$internal_valid_scores), "error")
 
-  # mlr3 measure
-  task = tsk("sonar")
-
-  learner = lrn("classif.xgboost",
-    nrounds = 10,
-    objective = "binary:logistic",
-    validate = 0.2,
-    early_stopping_rounds = 10
-  )
-
-  learner$param_set$set_values(eval_metric = msr("classif.ce"))
-  learner$train(task)
-
-  expect_named(learner$model$evaluation_log, c("iter", "test_classif.ce"))
-  expect_list(learner$internal_valid_scores, types = "numeric")
-  expect_equal(names(learner$internal_valid_scores), "classif.ce")
 
   # binary task and mlr3 measure binary response
   task = tsk("sonar")
 
   learner = lrn("classif.xgboost",
     nrounds = 10,
-    objective = "binary:logistic",
     validate = 0.2,
     eval_metric = msr("classif.ce")
   )
