@@ -101,7 +101,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
-        eval_metric                 = p_uty(tags = "train"),
+        eval_metric                 = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.character(x), is.function(x), inherits(x, "Measure")))})),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
         gamma                       = p_dbl(0, default = 0, tags = c("train", "control")),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(tree_method == "hist")),
@@ -267,40 +267,25 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (inherits(pv$eval_metric, "Measure")) {
         n_classes = length(task$class_names)
         measure = pv$eval_metric
-        objective = pv$objective
 
-        pv$eval_metric = mlr3misc::crate({function(pred, dtrain) {
-          truth = factor(xgboost::getinfo(dtrain, "label"))
-
-          scores = if (objective == "binary:logistic") {
-            # pred is a vector of log odds
-            if (measure$predict_type == "prob") {
-              # transform log odds to probabilities
-              prob = 1 / (1 + exp(-pred))
-              measure$fun(truth, prob, positive = "1")
-            } else {
-              response = factor(as.integer(pred > 0))
-              measure$fun(truth, response)
-            }
-          } else if (objective == "multi:softprob") {
-            # pred is a vector of log odds for each class
-            # matrix must be filled by row
-            # transform log odds to probabilities
-            pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
-            pred_exp = exp(pred_mat)
-            prob = pred_exp / rowSums(pred_exp)
-            colnames(prob) = levels(truth) # FIXME: How handle missing classes?
-            measure$fun(truth, prob)
-          } else if (objective == "multi:softmax")  {
-            # pred is a vector of log odds for each class
-            response = factor(max.col(matrix(pred, ncol = n_classes, byrow = TRUE), ties.method = "random") - 1, levels = levels(truth))
-            measure$fun(truth, response)
+        fun = if (pv$objective == "binary:logistic" && measure$predict_type == "prob" && inherits(measure, "MeasureBinarySimple")) {
+            xgboost_binary_binary_prob
+          } else if (pv$objective == "binary:logistic" && measure$predict_type == "prob" && inherits(measure, "MeasureClassifSimple")) {
+            xgboost_binary_classif_prob
+          } else if (pv$objective == "binary:logistic" && measure$predict_type == "response") {
+            xgboost_binary_response
+          } else if (pv$objective == "multi:softprob" && measure$predict_type == "prob") {
+            xgboost_multiclass_prob
+          } else if (pv$objective %in% c("multi:softmax", "multi:softprob") && measure$predict_type == "response") {
+            xgboost_multiclass_response
           } else {
-            error("Only 'binary:logistic', 'multi:softprob' and 'multi:softmax' objectives are supported.")
+            stop("Only 'binary:logistic', 'multi:softprob' and 'multi:softmax' objectives are supported.")
           }
 
-          list(metric = measure$id, value = scores)
-        }}, n_classes = n_classes, measure = measure, objective = objective)
+        pv$eval_metric =  mlr3misc::crate({function(pred, dtrain) {
+            scores = fun(pred, dtrain, measure, n_classes)
+             list(metric = measure$id, value = scores)
+          }}, n_classes = n_classes, measure = measure, fun = fun)
 
         pv$maximize = !measure$minimize
       }
@@ -403,3 +388,61 @@ default_values.LearnerClassifXgboost = function(x, search_space, task, ...) { # 
 
 #' @include aaa.R
 learners[["classif.xgboost"]] = LearnerClassifXgboost
+
+# mlr3 measure to custom inner measure functions
+xgboost_binary_binary_prob = mlr3misc::crate({function(pred, dtrain, measure, ...) {
+  # label is a vector of labels (0, 1)
+  truth = factor(xgboost::getinfo(dtrain, "label"), levels = c(0, 1))
+  # pred is a vector of log odds
+  # transform log odds to probabilities
+  pred = 1 / (1 + exp(-pred))
+  measure$fun(truth, pred, positive = "1")
+}})
+
+xgboost_binary_classif_prob = mlr3misc::crate({function(pred, dtrain, measure, ...) {
+  # label is a vector of labels (0, 1)
+  truth = factor(xgboost::getinfo(dtrain, "label"), levels = c(0, 1))
+  # pred is a vector of log odds
+  # transform log odds to probabilities
+  pred = 1 / (1 + exp(-pred))
+  # multiclass measure needs a matrix of probabilities
+  pred_mat = matrix(c(pred, 1 - pred), ncol = 2)
+  colnames(pred_mat) = c("1", "0")
+  measure$fun(truth, pred_mat, positive = "1")
+}})
+
+xgboost_binary_response = mlr3misc::crate({ function(pred, dtrain, measure, ...) {
+  # label is a vector of labels (0, 1)
+  truth = factor(xgboost::getinfo(dtrain, "label"), levels = c(0, 1))
+  # pred is a vector of log odds
+  response = factor(as.integer(pred > 0), levels = c(0, 1))
+  measure$fun(truth, response)
+}})
+
+xgboost_multiclass_prob = mlr3misc::crate({ function(pred, dtrain, measure, n_classes, ...) {
+  # label is a vector of labels (0, 1, ..., n_classes - 1)
+  truth = factor(xgboost::getinfo(dtrain, "label"), levels = seq_len(n_classes) - 1L)
+
+  # pred is a vector of log odds for each class
+  # matrix must be filled by row
+  pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
+  # transform log odds to probabilities
+  pred_exp = exp(pred_mat)
+  pred_mat = pred_exp / rowSums(pred_exp)
+  colnames(pred_mat) = levels(truth) # FIXME: How handle missing classes?
+
+  measure$fun(truth, pred_mat)
+}})
+
+xgboost_multiclass_response = mlr3misc::crate({function(pred, dtrain, measure, n_classes, ...) {
+  # label is a vector of labels (0, 1, ..., n_classes - 1)
+  truth = factor(xgboost::getinfo(dtrain, "label"), levels = seq_len(n_classes) - 1L)
+
+  # pred is a vector of log odds for each class
+  # matrix must be filled by row
+  pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
+
+  response = factor(max.col(pred_mat, ties.method = "random") - 1, levels = levels(truth))  # FIXME: How handle missing classes?
+  measure$fun(truth, response)
+}})
+
