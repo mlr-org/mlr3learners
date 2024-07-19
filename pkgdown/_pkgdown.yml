@@ -2,6 +2,8 @@ url: https://mlr3learners.mlr-org.com
 
 template:
   bootstrap: 5
+  light-switch: true
+  math-rendering: mathjax
   package: mlr3pkgdowntemplate
 
 development:
@@ -12,17 +14,12 @@ development:
 toc:
   depth: 3
 
-authors:
-  Patrick Schratz:
-    href: https://pat-s.me
-
 navbar:
   structure:
-    left:  [reference, news, book, learners]
-    right: [github, mattermost, stackoverflow, rss]
+    left:  [reference, news, book]
+    right: [github, mattermost, stackoverflow, rss, lightswitch]
   components:
     home: ~
-    articles: ~
     reference:
       icon: fa fa-file-alt
       text: Reference
