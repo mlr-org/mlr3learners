@@ -2,7 +2,7 @@ skip_on_os("solaris") # glmnet not working properly on solaris
 skip_if_not_installed("glmnet")
 
 test_that("autotest", {
-  learner = mlr3::lrn("classif.glmnet", lambda = .1)
+  learner = mlr3::lrn("classif.glmnet", lambda = 0.1)
   expect_learner(learner)
 
   skip_on_os("solaris")
@@ -12,7 +12,7 @@ test_that("autotest", {
 
 test_that("prob column reordering (#155)", {
   task = tsk("sonar")
-  learner = mlr3::lrn("classif.glmnet", predict_type = "prob", lambda = .1)
+  learner = mlr3::lrn("classif.glmnet", predict_type = "prob", lambda = 0.1)
 
   task$positive = "M"
   learner$train(task)

@@ -81,10 +81,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       truth = task$truth()
 
-      if (!is.null(pv$optim.method)) {
-        if (pv$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
-          stop("The 'rgenoud' package is required for optimization method 'gen'.")
-        }
+      if (!is.null(pv$optim.method) && pv$optim.method == "gen" && !requireNamespace("rgenoud", quietly = TRUE)) {
+        stopf("The 'rgenoud' package is required for optimization method 'gen'.")
       }
 
       ns = pv$nugget.stability
