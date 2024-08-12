@@ -211,8 +211,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         stopf("Learner (%s): Configure field 'validate' to enable early stopping.", self$id)
       }
       if (!is.null(internal_valid_task)) {
-        test_data = task$data(rows = task$row_roles$test, cols = task$feature_names)
-        test_target =  task$data(rows = task$row_roles$test, cols = task$target_names)
+        test_data = internal_valid_task$data(cols = task$feature_names)
+        test_target = internal_valid_task$data(cols = task$target_names)
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
@@ -263,7 +263,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
       as.list(self$model$evaluation_log[
         iter,
-        set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD",)))),
+        set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),
         .SDcols = patterns("^test_")
       ])
     }
