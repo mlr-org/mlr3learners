@@ -263,7 +263,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
       as.list(self$model$evaluation_log[
         iter,
-        set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD",)))),
+        set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),
         .SDcols = patterns("^test_")
       ])
     }
