@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+# mlr3learners 0.7.0
+
 * feat: `LearnerClassifXgboost` and `LearnerRegrXgboost` now support internal tuning and validation.
   This now also works in conjunction with `mlr3pipelines`.
 

@@ -90,7 +90,7 @@ test_that("validation and inner tuning", {
     early_stopping_rounds = NULL
   )
   learner$train(task)
-  expect_equal(learner$internal_tuned_values, named_list())
+  expect_equal(learner$internal_tuned_values, NULL)
   expect_named(learner$model$evaluation_log, c("iter", "test_logloss"))
   expect_list(learner$internal_valid_scores, types = "numeric")
   expect_equal(names(learner$internal_valid_scores), "logloss")
@@ -104,4 +104,23 @@ test_that("validation and inner tuning", {
   learner$param_set$set_values(early_stopping_rounds = 10)
   learner$param_set$disable_internal_tuning("nrounds")
   expect_equal(learner$param_set$values$early_stopping_rounds, NULL)
+
+  learner = lrn("classif.xgboost",
+    nrounds = 100,
+    early_stopping_rounds = 5,
+    validate = 0.3
+  )
+  learner$train(task)
+  expect_equal(learner$internal_valid_scores$logloss,
+    learner$model$evaluation_log$test_logloss[learner$internal_tuned_values$nrounds])
+
+  learner = lrn("classif.xgboost")
+  learner$train(task)
+  expect_true(is.null(learner$internal_valid_scores))
+  expect_true(is.null(learner$internal_tuned_values))
+
+  learner = lrn("classif.xgboost", validate = 0.3, nrounds = 10)
+  learner$train(task)
+  expect_equal(learner$internal_valid_scores$logloss, learner$model$evaluation_log$test_logloss[10L])
+  expect_true(is.null(learner$internal_tuned_values))
 })

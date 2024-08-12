@@ -11,8 +11,9 @@ Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpk
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 
-Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \code{\link{Learner}} in a
+Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a
 \code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
+See the section \emph{Early Stopping and Validation} on how to do this.
 }
 \note{
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
@@ -21,7 +22,7 @@ See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-s
 }
 \section{Dictionary}{
 
-This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.xgboost")
 lrn("regr.xgboost")
@@ -106,11 +107,13 @@ lrn("regr.xgboost")
 }
 }
 
-\section{Early stopping}{
+\section{Early Stopping and Validation}{
 
-Early stopping can be used to find the optimal number of boosting rounds.
-Set \code{early_stopping_rounds} to an integer vaulue to monitor the performance of the model on the validation set while training.
+In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
 For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
+This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the
+optimal \code{nrounds} via \verb{$internal_tuned_values}.
 }
 
 \section{Initial parameter values}{
@@ -183,6 +186,10 @@ learner = lrn("regr.xgboost",
 
 # Train learner with early stopping
 learner$train(task)
+
+# Inspect optimal nrounds and validation performance
+learner$internal_tuned_values
+learner$internal_valid_scores
 }
 }
 \references{
@@ -197,8 +204,8 @@ ACM.
 \item Chapter in the \href{https://mlr3book.mlr-org.com/}{mlr3book}:
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
-\item \link[mlr3misc:Dictionary]{Dictionary} of \link[=Learner]{Learners}: \link{mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[=Learner]{Learners} in the running session (depending on the loaded packages).
+\item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{
@@ -238,15 +245,19 @@ Other Learner:
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{internal_valid_scores}}{(named \code{list()})\cr
-The last observation of the validation scores for all metrics.
-Extracted from \code{model$evaluation_log}}
+\item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
+The validation scores extracted from \code{model$evaluation_log}.
+If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
+otherwise the \code{nrounds} for the final model.}
 
-\item{\code{internal_tuned_values}}{(named \code{list()})\cr
-Returns the early stopped iterations if \code{early_stopping_rounds} was set during training.}
+\item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
+If early stopping is activated, this returns a list with \code{nrounds},
+which is extracted from \verb{$best_iteration} of the model and otherwise \code{NULL}.}
 
-\item{\code{validate}}{How to construct the internal validation data. This parameter can be either \code{NULL},
-a ratio, \code{"test"}, or \code{"internal_valid"}.}
+\item{\code{validate}}{(\code{numeric(1)} or \code{character(1)} or \code{NULL})
+How to construct the internal validation data. This parameter can be either \code{NULL},
+a ratio, \code{"test"}, or \code{"predefined"}.
+Returns the \verb{$best_iteration} when early stopping is activated.}
 }
 \if{html}{\out{</div>}}
 }
