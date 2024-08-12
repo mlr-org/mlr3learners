@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+* bugfix: validation for learner `lrn("regr.xgboost")` now works properly. Previously the training data was used.
+
 # mlr3learners 0.7.0
 
 * feat: `LearnerClassifXgboost` and `LearnerRegrXgboost` now support internal tuning and validation.

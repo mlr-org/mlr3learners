@@ -51,7 +51,7 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Collate:
     'aaa.R'
     'LearnerClassifCVGlmnet.R'

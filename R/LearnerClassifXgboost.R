@@ -257,7 +257,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
       if (!is.null(internal_valid_task)) {
         test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
-        test_label = nlvls - as.integer(internal_valid_task$truth(rows = internal_valid_task$row_roles$test))
+        test_label = nlvls - as.integer(internal_valid_task$truth())
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
