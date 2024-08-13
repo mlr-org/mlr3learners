@@ -70,7 +70,8 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         type.logistic        = p_fct(c("Newton", "modified.Newton"), tags = "train"),
         type.measure         = p_fct(c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
-        upper.limits         = p_uty(tags = "train")
+        upper.limits         = p_uty(tags = "train"),
+        use_weights          = p_lgl(default = FALSE, tags = "train")
       )
 
       super$initialize(
@@ -104,8 +105,8 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
       target = swap_levels(task$truth())
       pv = self$param_set$get_values(tags = "train")
       pv$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
-      if ("weights" %in% task$properties) {
-        pv$weights = task$weights$weight
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        pv$weights = task$weights_learner$weight
       }
 
       glmnet_invoke(data, target, pv, cv = TRUE)

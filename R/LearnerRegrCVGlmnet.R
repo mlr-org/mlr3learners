@@ -68,7 +68,8 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
         type.logistic        = p_fct(c("Newton", "modified.Newton"), tags = "train"),
         type.measure         = p_fct(c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
-        upper.limits         = p_uty(tags = "train")
+        upper.limits         = p_uty(tags = "train"),
+        use_weights          = p_lgl(default = FALSE, tags = "train")
       )
 
       ps$values = list(family = "gaussian")
@@ -102,8 +103,8 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       target = as_numeric_matrix(task$data(cols = task$target_names))
       pv = self$param_set$get_values(tags = "train")
-      if ("weights" %in% task$properties) {
-        pv$weights = task$weights$weight
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        pv$weights = task$weights_learner$weight
       }
 
       glmnet_invoke(data, target, pv, cv = TRUE)

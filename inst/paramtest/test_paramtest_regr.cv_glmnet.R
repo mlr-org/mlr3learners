@@ -9,6 +9,7 @@ test_that("regr.cv_glmnet", {
     "x", # handled by mlr3
     "y", # handled by mlr3
     "weights", # handled by mlr3
+    "use_weights", # handled by mlr3
     "itrace", # supported via param trace.it
     "factory" # only used in scripts, no effect within mlr3
   )

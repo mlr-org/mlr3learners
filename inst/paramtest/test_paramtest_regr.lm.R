@@ -7,6 +7,7 @@ test_that("regr.lm", {
     "formula", # handled via mlr3
     "data", # handled via mlr3
     "weights", # handled via mlr3
+    "use_weights", # handled by mlr3
     "na.action", # handled via mlr3
     "method", # handled via mlr3
     "subset", # handled via mlr3

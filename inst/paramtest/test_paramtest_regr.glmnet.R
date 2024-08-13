@@ -7,6 +7,7 @@ test_that("regr.glmnet", {
     "x", # handled by mlr3
     "y", # handled by mlr3
     "weights", # handled by mlr3
+    "use_weights", # handled by mlr3
     "nfolds", # not used by learner
     "foldid", # not used by learner
     "type.measure", # only used by cv.glmnet

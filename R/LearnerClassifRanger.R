@@ -66,7 +66,8 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("gini", "extratrees", "hellinger"), default = "gini", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
-        write.forest                 = p_lgl(default = TRUE, tags = "train")
+        write.forest                 = p_lgl(default = TRUE, tags = "train"),
+        use_weights                  = p_lgl(default = FALSE, tags = "train")
       )
 
       ps$values = list(num.threads = 1L)
@@ -116,11 +117,15 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
+
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        pv$case.weights = task$weights_learner$weight
+      }
+
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
-        case.weights = task$weights$weight,
         .args = pv
       )
     },

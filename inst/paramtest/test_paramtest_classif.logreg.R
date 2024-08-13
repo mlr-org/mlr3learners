@@ -8,7 +8,6 @@ test_that("classif.logreg", {
     "formula", # handled by mlr3
     "family", # handled by mlr3
     "data", # handled by mlr3
-    "weights", # handled by mlr3
     "subset", # handled by mlr3
     "na.action", # handled by mlr3
     "y", # handled by mlr3

@@ -84,6 +84,7 @@ lrn("classif.ranger")
    splitrule \tab character \tab gini \tab gini, extratrees, hellinger \tab - \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

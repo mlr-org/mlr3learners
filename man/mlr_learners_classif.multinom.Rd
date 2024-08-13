@@ -48,6 +48,7 @@ lrn("classif.multinom")
    summ \tab character \tab 0 \tab 0, 1, 2, 3 \tab - \cr
    trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    Wts \tab untyped \tab - \tab  \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

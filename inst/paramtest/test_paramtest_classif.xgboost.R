@@ -41,6 +41,7 @@ test_that("classif.xgboost", {
     "eval_metric", # handled by mlr3
     "label", # handled by mlr3
     "weight", # handled by mlr3
+    "use_weights", # handled by mlr3
     "nthread" # handled by mlr3
   )
 

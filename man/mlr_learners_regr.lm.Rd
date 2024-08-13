@@ -44,6 +44,7 @@ lrn("regr.lm")
    rankdeficient \tab character \tab - \tab warnif, simple, non-estim, NA, NAwarn \tab - \cr
    tol \tab numeric \tab 1e-07 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    verbose \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

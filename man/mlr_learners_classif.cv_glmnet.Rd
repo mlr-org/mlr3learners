@@ -75,6 +75,7 @@ lrn("classif.cv_glmnet")
    type.measure \tab character \tab deviance \tab deviance, class, auc, mse, mae \tab - \cr
    type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
    upper.limits \tab untyped \tab - \tab  \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

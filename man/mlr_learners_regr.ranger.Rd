@@ -60,6 +60,7 @@ lrn("regr.ranger")
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat \tab - \cr
    verbose \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    write.forest \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

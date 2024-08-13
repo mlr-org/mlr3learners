@@ -36,7 +36,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         y             = p_lgl(default = FALSE, tags = "train"),
         rankdeficient = p_fct(c("warnif", "simple", "non-estim", "NA", "NAwarn"), tags = "predict"),
         tol           = p_dbl(default = 1e-07, tags = "predict"),
-        verbose       = p_lgl(default = FALSE, tags = "predict")
+        verbose       = p_lgl(default = FALSE, tags = "predict"),
+        use_weights   = p_lgl(default = FALSE, tags = "train")
       )
 
       super$initialize(
@@ -61,8 +62,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      if ("weights" %in% task$properties) {
-        pv = insert_named(pv, list(weights = task$weights$weight))
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        pv = insert_named(pv, list(weights = task$weights_learner$weight))
       }
 
       invoke(stats::lm,

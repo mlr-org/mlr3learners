@@ -104,6 +104,7 @@ lrn("regr.xgboost")
    verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
    watchlist \tab untyped \tab NULL \tab  \tab - \cr
    xgb_model \tab untyped \tab NULL \tab  \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

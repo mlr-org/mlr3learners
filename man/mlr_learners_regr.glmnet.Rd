@@ -91,6 +91,7 @@ lrn("regr.glmnet")
    type.logistic \tab character \tab - \tab Newton, modified.Newton \tab - \cr
    type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
    upper.limits \tab untyped \tab - \tab  \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

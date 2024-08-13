@@ -56,7 +56,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
-        write.forest                 = p_lgl(default = TRUE, tags = "train")
+        write.forest                 = p_lgl(default = TRUE, tags = "train"),
+        use_weights                  = p_lgl(default = FALSE, tags = "train")
+
       )
 
       ps$values = list(num.threads = 1L)
@@ -107,6 +109,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "train")
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
 
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        pv$case.weights = task$weights_learner$weight
+      }
+
       if (self$predict_type == "se") {
         pv$keep.inbag = TRUE # nolint
       }
@@ -114,7 +120,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
-        case.weights = task$weights$weight,
         .args = pv
       )
     },

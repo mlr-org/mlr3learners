@@ -21,24 +21,25 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        Hess     = p_lgl(default = FALSE, tags = "train"),
-        abstol   = p_dbl(default = 1.0e-4, tags = "train"),
-        censored = p_lgl(default = FALSE, tags = "train"),
-        decay    = p_dbl(default = 0, tags = "train"),
-        entropy  = p_lgl(default = FALSE, tags = "train"),
-        mask     = p_uty(tags = "train"),
-        maxit    = p_int(1L, default = 100L, tags = "train"),
-        MaxNWts  = p_int(1L, default = 1000L, tags = "train"),
-        model    = p_lgl(default = FALSE, tags = "train"),
-        linout   = p_lgl(default = FALSE, tags = "train"),
-        rang     = p_dbl(default = 0.7, tags = "train"),
-        reltol   = p_dbl(default = 1.0e-8, tags = "train"),
-        size     = p_int(1L, tags = "train"),
-        skip     = p_lgl(default = FALSE, tags = "train"),
-        softmax  = p_lgl(default = FALSE, tags = "train"),
-        summ     = p_fct(c("0", "1", "2", "3"), default = "0", tags = "train"),
-        trace    = p_lgl(default = TRUE, tags = "train"),
-        Wts      = p_uty(tags = "train")
+        Hess           = p_lgl(default = FALSE, tags = "train"),
+        abstol         = p_dbl(default = 1.0e-4, tags = "train"),
+        censored       = p_lgl(default = FALSE, tags = "train"),
+        decay          = p_dbl(default = 0, tags = "train"),
+        entropy        = p_lgl(default = FALSE, tags = "train"),
+        mask           = p_uty(tags = "train"),
+        maxit          = p_int(1L, default = 100L, tags = "train"),
+        MaxNWts        = p_int(1L, default = 1000L, tags = "train"),
+        model          = p_lgl(default = FALSE, tags = "train"),
+        linout         = p_lgl(default = FALSE, tags = "train"),
+        rang           = p_dbl(default = 0.7, tags = "train"),
+        reltol         = p_dbl(default = 1.0e-8, tags = "train"),
+        size           = p_int(1L, tags = "train"),
+        skip           = p_lgl(default = FALSE, tags = "train"),
+        softmax        = p_lgl(default = FALSE, tags = "train"),
+        summ           = p_fct(c("0", "1", "2", "3"), default = "0", tags = "train"),
+        trace          = p_lgl(default = TRUE, tags = "train"),
+        Wts            = p_uty(tags = "train"),
+        use_weights    = p_lgl(default = FALSE, tags = "train")
       )
 
       super$initialize(
@@ -64,8 +65,8 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
 
-      if ("weights" %in% task$properties) {
-        pv$weights = task$weights$weight
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        pv$weights = task$weights_learner$weight
       }
       if (!is.null(pv$summ)) {
         pv$summ = as.integer(pv$summ)

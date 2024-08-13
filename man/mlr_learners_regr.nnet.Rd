@@ -50,6 +50,7 @@ lrn("regr.nnet")
    subset \tab untyped \tab - \tab  \tab - \cr
    trace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    formula \tab untyped \tab - \tab  \tab - \cr
+   use_weights \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
 }
 }
 

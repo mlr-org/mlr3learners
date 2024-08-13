@@ -127,7 +127,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
         verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
         watchlist                   = p_uty(default = NULL, tags = "train"),
-        xgb_model                   = p_uty(default = NULL, tags = "train")
+        xgb_model                   = p_uty(default = NULL, tags = "train"),
+        use_weights                 = p_lgl(default = FALSE, tags = "train")
+
       )
       # param deps
 
@@ -200,8 +202,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       target = task$data(cols = task$target_names)
       data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
-      if ("weights" %in% task$properties) {
-        xgboost::setinfo(data, "weight", task$weights$weight)
+      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
+        xgboost::setinfo(data, "weight", task$weights_learner$weight)
       }
 
       # the last element in the watchlist is used as the early stopping set
