@@ -62,9 +62,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
-        pv = insert_named(pv, list(weights = task$weights_learner$weight))
-      }
+      pv$weights = get_weights(task, pv)
+      pv = remove_named(pv, "use_weights")
 
       invoke(stats::lm,
         formula = task$formula(), data = task$data(),

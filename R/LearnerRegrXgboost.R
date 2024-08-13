@@ -202,8 +202,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       target = task$data(cols = task$target_names)
       data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
-      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
-        xgboost::setinfo(data, "weight", task$weights_learner$weight)
+      weights = get_weights(task, pv)
+      if (!is.null(weights)) {
+        xgboost::setinfo(data, "weight", weights)
       }
 
       # the last element in the watchlist is used as the early stopping set

@@ -71,9 +71,9 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
-        pv = insert_named(pv, list(weights = task$weights_learner$weight))
-      }
+      pv$weights = get_weights(task, pv)
+      pv = remove_named(pv, "use_weights")
+
       if (is.null(pv$formula)) {
         pv$formula = task$formula()
       }

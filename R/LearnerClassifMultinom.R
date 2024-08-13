@@ -64,10 +64,9 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
+      pv$weights = get_weights(task, pv)
+      pv = remove_named(pv, "use_weights")
 
-      if (isTRUE(pv$use_weights) && "weights_learner" %in% task$properties) {
-        pv$weights = task$weights_learner$weight
-      }
       if (!is.null(pv$summ)) {
         pv$summ = as.integer(pv$summ)
       }

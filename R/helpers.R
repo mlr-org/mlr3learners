@@ -44,5 +44,16 @@ extract_loglik = function(self) {
   stats::logLik(self$model)
 }
 
+get_weights = function(task, pv) {
+  tmp = c("weights", "weights_learner") %in% task$properties
+
+  if (tmp[1L]) { # old mlr3 version, deprecated weights
+    task$weights$weight
+  } else if (tmp[2L] && isTRUE(pv$use_weights)) {
+    task$weights_learner$weight
+  } else {
+    NULL
+  }
+}
 
 opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))
