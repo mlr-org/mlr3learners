@@ -13,7 +13,8 @@ test_that("classif.logreg", {
     "y", # handled by mlr3
     "method", # we always use glm()
     "control", # handled by glm.control
-    "contrasts" # causes lots of troubles just when setting the default
+    "contrasts", # causes lots of troubles just when setting the default
+    "weight" # removed here, not a good idea to set it
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
