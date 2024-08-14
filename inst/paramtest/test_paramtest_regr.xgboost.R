@@ -8,19 +8,19 @@ xp = rvest::html_elements(x, "p")
 x = c(rvest::html_text2(xli), rvest::html_text2(xp))
 
 add_params_xgboost = x %>%
-  grep("default=", ., value = T) %>%
-  strsplit(., split = " ") %>%
-  mlr3misc::map_chr(., function(x) x[1]) %>%
-  gsub(",", replacement = "", .) %>%
+  grep("default=", ., value = TRUE) %>%
+  strsplit(., split = " ", fixed = TRUE) %>%
+  mlr3misc::map_chr(1L) %>%
+  gsub(",", replacement = "", ., fixed = TRUE) %>%
   ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
   append(values = c("colsample_bylevel", "colsample_bynode")) %>%
   # values which do not match regex
   append(values = c("interaction_constraints", "monotone_constraints", "base_score")) %>%
   # only defined in help page but not in signature or website
-  append(values = c("lambda_bias"))
+  append(values = "lambda_bias")
 
 test_that("regr.xgboost", {
-  learner = lrn("regr.xgboost", nrounds = 1)
+  learner = lrn("regr.xgboost", nrounds = 1L)
   fun = list(xgboost::xgb.train, xgboost::xgboost, add_params_xgboost)
   exclude = c(
     "x", # handled by mlr3
