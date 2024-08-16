@@ -246,11 +246,11 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       label = nlvls - as.integer(task$truth())
       data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
-      weights = get_weights(task, pv)
-      if (!is.null(weights)) {
-        xgboost::setinfo(data, "weight", weights)
+      pv = get_weights(task, pv)
+      if (!is.null(pv$weights)) {
+        xgboost::setinfo(data, "weight", pv$weights)
+        pv$weights = NULL
       }
-      pv = remove_named(pv, "use_weights")
 
       # the last element in the watchlist is used as the early stopping set
 

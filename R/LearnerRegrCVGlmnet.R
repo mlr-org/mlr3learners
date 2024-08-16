@@ -103,8 +103,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       target = as_numeric_matrix(task$data(cols = task$target_names))
       pv = self$param_set$get_values(tags = "train")
-      pv$weights = get_weights(task, pv)
-      pv = remove_named(pv, "use_weights")
+      pv = get_weights(task, pv)
 
       glmnet_invoke(data, target, pv, cv = TRUE)
     },
