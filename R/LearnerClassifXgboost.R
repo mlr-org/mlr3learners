@@ -18,10 +18,9 @@
 #' @section Initial parameter values:
 #' - `nrounds`:
 #'   - Actual default: no default.
-#'   - Adjusted default: 1.
-#'   - Reason for change: Without a default construction of the learner
-#'     would error. Just setting a nonsense default to workaround this.
-#'     `nrounds` needs to be tuned by the user.
+#'   - Adjusted default: 1000.
+#'   - Reason for change: Without a default construction of the learner would error.
+#'     The lightgbm learner has a default of 1000, so we use the same here.
 #' - `nthread`:
 #'   - Actual value: Undefined, triggering auto-detection of the number of CPUs.
 #'   - Adjusted value: 1.
@@ -156,7 +155,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       )
 
       # custom defaults
-      ps$values = list(nrounds = 1L, nthread = 1L, verbose = 0L)
+      ps$values = list(nrounds = 1000L, nthread = 1L, verbose = 0L)
 
       super$initialize(
         id = "classif.xgboost",
