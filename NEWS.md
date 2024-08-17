@@ -1,6 +1,8 @@
 # mlr3learners (development version)
 
 * bugfix: validation for learner `lrn("regr.xgboost")` now works properly. Previously the training data was used.
+* feat: add weights for logistic regression again, which were incorrectlu removed
+  in a previous release (#265)
 
 # mlr3learners 0.7.0
 
