@@ -70,10 +70,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-
-      if ("weights" %in% task$properties) {
-        pv = insert_named(pv, list(weights = task$weights$weight))
-      }
+      pv = get_weights(task, pv)
 
       # logreg expects the first label to be the negative class, contrary
       # to the mlr3 convention that the positive class comes first.
