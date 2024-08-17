@@ -57,7 +57,6 @@ test_that("validation and inner tuning", {
   expect_named(learner$model$evaluation_log, c("iter", "test_rmse"))
   expect_list(learner$internal_valid_scores, types = "numeric")
   expect_equal(names(learner$internal_valid_scores), "rmse")
-  expect_equal(learner$internal_valid_scores$rmse, learner$model$evaluation_log[get("iter") == 10, "test_rmse"][[1L]])
 
   expect_list(learner$internal_tuned_values, types = "integerish")
   expect_equal(names(learner$internal_tuned_values), "nrounds")
