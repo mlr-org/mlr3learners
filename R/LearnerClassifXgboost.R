@@ -390,16 +390,16 @@ default_values.LearnerClassifXgboost = function(x, search_space, task, ...) { # 
 learners[["classif.xgboost"]] = LearnerClassifXgboost
 
 # mlr3 measure to custom inner measure functions
-xgboost_binary_binary_prob = mlr3misc::crate({function(pred, dtrain, measure, ...) {
+xgboost_binary_binary_prob = function(pred, dtrain, measure, ...) {
   # label is a vector of labels (0, 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = c(0, 1))
   # pred is a vector of log odds
   # transform log odds to probabilities
   pred = 1 / (1 + exp(-pred))
   measure$fun(truth, pred, positive = "1")
-}})
+}
 
-xgboost_binary_classif_prob = mlr3misc::crate({function(pred, dtrain, measure, ...) {
+xgboost_binary_classif_prob = function(pred, dtrain, measure, ...) {
   # label is a vector of labels (0, 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = c(0, 1))
   # pred is a vector of log odds
@@ -409,17 +409,17 @@ xgboost_binary_classif_prob = mlr3misc::crate({function(pred, dtrain, measure, .
   pred_mat = matrix(c(pred, 1 - pred), ncol = 2)
   colnames(pred_mat) = c("1", "0")
   measure$fun(truth, pred_mat, positive = "1")
-}})
+}
 
-xgboost_binary_response = mlr3misc::crate({ function(pred, dtrain, measure, ...) {
+xgboost_binary_response = function(pred, dtrain, measure, ...) {
   # label is a vector of labels (0, 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = c(0, 1))
   # pred is a vector of log odds
   response = factor(as.integer(pred > 0), levels = c(0, 1))
   measure$fun(truth, response)
-}})
+}
 
-xgboost_multiclass_prob = mlr3misc::crate({ function(pred, dtrain, measure, n_classes, ...) {
+xgboost_multiclass_prob = function(pred, dtrain, measure, n_classes, ...) {
   # label is a vector of labels (0, 1, ..., n_classes - 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = seq_len(n_classes) - 1L)
 
@@ -429,12 +429,12 @@ xgboost_multiclass_prob = mlr3misc::crate({ function(pred, dtrain, measure, n_cl
   # transform log odds to probabilities
   pred_exp = exp(pred_mat)
   pred_mat = pred_exp / rowSums(pred_exp)
-  colnames(pred_mat) = levels(truth) # FIXME: How handle missing classes?
+  colnames(pred_mat) = levels(truth)
 
   measure$fun(truth, pred_mat)
-}})
+}
 
-xgboost_multiclass_response = mlr3misc::crate({function(pred, dtrain, measure, n_classes, ...) {
+xgboost_multiclass_response = function(pred, dtrain, measure, n_classes, ...) {
   # label is a vector of labels (0, 1, ..., n_classes - 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = seq_len(n_classes) - 1L)
 
@@ -442,7 +442,6 @@ xgboost_multiclass_response = mlr3misc::crate({function(pred, dtrain, measure, n
   # matrix must be filled by row
   pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
 
-  response = factor(max.col(pred_mat, ties.method = "random") - 1, levels = levels(truth))  # FIXME: How handle missing classes?
-  measure$fun(truth, response)
-}})
+  response = factor(max.col(pred_mat, ties.method = "random") - 1, levels = levels(truth))
+}
 
