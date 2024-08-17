@@ -11,10 +11,6 @@
 #' model fitting to comply to the [stats::glm()] convention that the negative class is provided
 #' as the first factor level.
 #'
-#' @section Weights:
-#' It is not advisable to change the weights of a logistic regression.
-#' For more details, see this question on [Cross Validated](https://stats.stackexchange.com/questions/386675/what-are-weights-in-a-binary-glm-and-how-to-calculate-them).
-#'
 #' @section Initial parameter values:
 #' - `model`:
 #'   - Actual default: `TRUE`.
@@ -57,7 +53,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("twoclass", "loglik"),
+        properties = c("weights", "twoclass", "loglik"),
         packages = c("mlr3learners", "stats"),
         label = "Logistic Regression",
         man = "mlr3learners::mlr_learners_classif.log_reg"
@@ -74,6 +70,10 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
+
+      if ("weights" %in% task$properties) {
+        pv = insert_named(pv, list(weights = task$weights$weight))
+      }
 
       # logreg expects the first label to be the negative class, contrary
       # to the mlr3 convention that the positive class comes first.

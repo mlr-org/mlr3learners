@@ -15,12 +15,6 @@ model fitting to comply to the \code{\link[stats:glm]{stats::glm()}} convention 
 as the first factor level.
 }
 
-\section{Weights}{
-
-It is not advisable to change the weights of a logistic regression.
-For more details, see this question on \href{https://stats.stackexchange.com/questions/386675/what-are-weights-in-a-binary-glm-and-how-to-calculate-them}{Cross Validated}.
-}
-
 \section{Initial parameter values}{
 
 \itemize{
