@@ -112,8 +112,8 @@ lrn("regr.xgboost")
 In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
 For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
 This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
-The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the
-optimal \code{nrounds} via \verb{$internal_tuned_values}.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
+The internal validation measure can be set via the \code{eval_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
 }
 
 \section{Initial parameter values}{
