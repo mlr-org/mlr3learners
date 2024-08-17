@@ -123,4 +123,21 @@ test_that("validation and inner tuning", {
   learner$train(task)
   expect_equal(learner$internal_valid_scores$logloss, learner$model$evaluation_log$test_logloss[10L])
   expect_true(is.null(learner$internal_tuned_values))
+
+  learner$param_set$set_values(
+    nrounds = to_tune(upper = 100, internal = TRUE),
+    early_stopping_rounds = 10
+  )
+  expect_error(
+    learner$param_set$convert_internal_search_space(learner$param_set$search_space()),
+    "eval_metric"
+  )
+
+  learner$param_set$set_values(
+    eval_metric = "logloss"
+  )
+  expect_error(
+    learner$param_set$convert_internal_search_space(learner$param_set$search_space()),
+    regexp = NA
+  )
 })
