@@ -98,8 +98,8 @@ See <a href="https://xgboost.readthedocs.io/en/stable/build.html#building-with-g
 <p>In order to monitor the validation performance during the training, you can set the <code>$validate</code> field of the Learner.
 For information on how to configure the valdiation set, see the <em>Validation</em> section of <code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code>.
 This validation data can also be used for early stopping, which can be enabled by setting the <code>early_stopping_rounds</code> parameter.
-The final (or in the case of early stopping best) validation scores can be accessed via <code>$internal_valid_scores</code>, and the
-optimal <code>nrounds</code> via <code>$internal_tuned_values</code>.</p>
+The final (or in the case of early stopping best) validation scores can be accessed via <code>$internal_valid_scores</code>, and the optimal <code>nrounds</code> via <code>$internal_tuned_values</code>.
+The internal validation measure can be set via the <code>eval_metric</code> parameter that can be a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>, a function, or a character string for the internal xgboost measures.</p>
     </div>
     <div class="section level2">
     <h2 id="initial-parameter-values">Initial parameter values<a class="anchor" aria-label="anchor" href="#initial-parameter-values"></a></h2>
