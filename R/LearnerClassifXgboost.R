@@ -285,7 +285,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$eval_metric =  mlr3misc::crate({function(pred, dtrain) {
             scores = fun(pred, dtrain, measure, n_classes)
              list(metric = measure$id, value = scores)
-          }}, n_classes = n_classes, measure = measure, fun = fun)
+          }}, n_classes, measure, fun)
 
         pv$maximize = !measure$minimize
       }

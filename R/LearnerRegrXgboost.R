@@ -227,7 +227,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           truth = xgboost::getinfo(dtrain, "label")
           scores = measure$fun(truth, pred)
           list(metric = measure$id, value = scores)
-          }}, measure = measure)
+          }}, measure)
 
         pv$maximize = !measure$minimize
       }
