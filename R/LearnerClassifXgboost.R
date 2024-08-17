@@ -83,6 +83,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           if (is.null(param_vals$early_stopping_rounds)) {
             stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
           }
+          if (is.null(param_vals$eval_metric)) {
+            stop("Parameter 'eval_metric' must be set explicitly when using internal tuning.")
+          }
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
         disable_in_tune = list(early_stopping_rounds = NULL)
       )
@@ -221,7 +224,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       if (self$predict_type == "prob" && pv$objective == "multi:softmax") {
-        stop("objective = 'multi:softmax' does not work with predict_type = 'prob'")
+        stopf("objective = 'multi:softmax' does not work with predict_type = 'prob'")
       }
 
       switch(pv$objective,
@@ -314,7 +317,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       pars = self$param_set$get_values(tags = "train")
       pars_train = self$state$param_vals
       if (!is.null(pars_train$early_stopping_rounds)) {
-        stop("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
+        stopf("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
       }
 
       # Calculate additional boosting iterations
