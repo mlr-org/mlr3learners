@@ -443,5 +443,6 @@ xgboost_multiclass_response = function(pred, dtrain, measure, n_classes, ...) {
   pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
 
   response = factor(max.col(pred_mat, ties.method = "random") - 1, levels = levels(truth))
+  measure$fun(truth, response)
 }
 
