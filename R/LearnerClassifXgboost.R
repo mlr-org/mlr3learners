@@ -32,10 +32,11 @@
 #'
 #' @section Early Stopping and Validation:
 #' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
-#' For information on how to configure the valdiation set, see the *Validation* section of [`mlr3::Learner`].
+#' For information on how to configure the valdiation set, see the *Validation* section of [mlr3::Learner].
 #' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
 #' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the optimal `nrounds` via `$internal_tuned_values`.
 #' The internal validation measure can be set via the `eval_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
+#' Using an [mlr3::Measure] is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
