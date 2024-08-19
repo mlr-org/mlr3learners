@@ -75,8 +75,12 @@ test_that("quantile prediction", {
 
   learner$train(task)
   pred = learner$predict(task)
-  expect_matrix(pred$quantile)
+
+  expect_matrix(pred$quantile, ncol = 3L)
+  expect_true(!any(apply(pred$quantile, 1L, is.unsorted)))
+  expect_equal(pred$response, pred$quantile[, 2L])
+
   tab = as.data.table(pred)
-  expect_names(names(tab), must.include = c("q0.1", "q0.5", "q0.9", "response"))
+  expect_names(names(tab), identical.to = c("row_ids", "truth", "q0.1", "q0.5", "q0.9", "response"))
   expect_equal(tab$response, tab$q0.5)
 })

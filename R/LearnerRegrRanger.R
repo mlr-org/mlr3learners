@@ -126,27 +126,24 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
 
-      type = switch(
-        self$predict_type,
-        response = "response",
-        se = "se",
-        quantile = "quantiles"
-      )
+      prediction = invoke(predict, self$model,
+        data = newdata,
+        type = if (self$predict_type == "quantile") "quantiles" else pv$type,
+        quantiles = private$.quantile,
+        .args = pv)
 
-      prediction = invoke(predict, self$model, data = newdata, type = type, quantiles = private$.quantile, .args = pv)
-
-      if (type == "quantiles") {
-        response = prediction$predictions[, which(private$.quantile == private$.quantile_response)]
+      if (self$predict_type == "quantile") {
         quantile = prediction$predictions
         attr(quantile, "probs") = private$.quantile
-        list(response = response, quantile = quantile)
-      } else {
-        list(response = prediction$predictions, se = prediction$se)
+        attr(quantile, "response") = private$.quantile_response
+        return(list(quantile = quantile))
       }
+
+      list(response = prediction$predictions, se = prediction$se)
     },
 
     .hotstart = function(task) {
-      model = self$model
+      model = self$models
       model$num.trees = self$param_set$values$num.trees
       model
     }
