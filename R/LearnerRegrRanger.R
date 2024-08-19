@@ -63,7 +63,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       super$initialize(
         id = "regr.ranger",
         param_set = ps,
-        predict_types = c("response", "se", "quantile"),
+        predict_types = c("response", "se", "quantiles"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error", "hotstart_backward"),
         packages = c("mlr3learners", "ranger"),
@@ -110,7 +110,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         pv$keep.inbag = TRUE # nolint
       }
 
-      if (self$predict_type == "quantile") {
+      if (self$predict_type == "quantiles") {
         pv$quantreg = TRUE # nolint
       }
 
@@ -128,15 +128,15 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
 
       prediction = invoke(predict, self$model,
         data = newdata,
-        type = if (self$predict_type == "quantile") "quantiles" else pv$type,
-        quantiles = private$.quantile,
+        type = self$predict_type,
+        quantiles = private$.quantiles,
         .args = pv)
 
-      if (self$predict_type == "quantile") {
-        quantile = prediction$predictions
-        attr(quantile, "probs") = private$.quantile
-        attr(quantile, "response") = private$.quantile_response
-        return(list(quantile = quantile))
+      if (self$predict_type == "quantiles") {
+        quantiles = prediction$predictions
+        attr(quantiles, "probs") = private$.quantiles
+        attr(quantiles, "response") = private$.quantile_response
+        return(list(quantiles = quantiles))
       }
 
       list(response = prediction$predictions, se = prediction$se)

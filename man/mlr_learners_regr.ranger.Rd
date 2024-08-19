@@ -21,7 +21,7 @@ lrn("regr.ranger")
 
 \itemize{
 \item Task type: \dQuote{regr}
-\item Predict Types: \dQuote{response}, \dQuote{se}
+\item Predict Types: \dQuote{response}, \dQuote{se}, \dQuote{quantiles}
 \item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{character}, \dQuote{factor}, \dQuote{ordered}
 \item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{ranger}
 }
@@ -46,7 +46,6 @@ lrn("regr.ranger")
    num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num.trees \tab integer \tab 500 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    oob.error \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   quantreg \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    regularization.factor \tab untyped \tab 1 \tab  \tab - \cr
    regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    replace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
