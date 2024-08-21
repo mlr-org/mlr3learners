@@ -72,6 +72,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
+        base_margin                 = p_uty(default = NULL, special_vals = list(NULL), tags = "train"),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = "train"),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -206,6 +207,13 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         xgboost::setinfo(data, "weight", task$weights$weight)
       }
 
+      bm = pv$base_margin
+      pv$base_margin = NULL # silence xgb.train message
+      bm_is_feature = !is.null(bm) && is.character(bm) && (bm %in% task$feature_names)
+      if (bm_is_feature) {
+        xgboost::setinfo(data, "base_margin", task$data(cols = bm)[[1L]])
+      }
+
       # the last element in the watchlist is used as the early stopping set
       internal_valid_task = task$internal_valid_task
       if (!is.null(pv$early_stopping_rounds) && is.null(internal_valid_task)) {
@@ -215,6 +223,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         test_data = internal_valid_task$data(cols = task$feature_names)
         test_target = internal_valid_task$data(cols = task$target_names)
         test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
+        if (bm_is_feature) {
+          xgboost::setinfo(test_data, "base_margin", internal_valid_task$data(cols = bm)[[1L]])
+        }
         pv$watchlist = c(pv$watchlist, list(test = test_data))
       }
 
