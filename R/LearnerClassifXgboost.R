@@ -304,7 +304,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$maximize = !measure$minimize
       }
 
-      invoke(xgboost::xgb.train, data = data, .args = pv)
+      invoke(xgboost::xgb.train, data = xgb_data, .args = pv)
     },
 
     .predict = function(task) {
