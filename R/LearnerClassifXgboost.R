@@ -257,7 +257,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       bm = pv$base_margin
       pv$base_margin = NULL # silence xgb.train message
       bm_is_feature = !is.null(bm) && is.character(bm) && (bm %in% task$feature_names)
-      if (bm_is_feature) {
+      # works only with binary classification objectives
+      obj_is_binary = startsWith(pv$objective, "binary")
+      if (bm_is_feature && obj_is_binary) {
         xgboost::setinfo(xgb_data, "base_margin", data[[bm]])
       }
 
@@ -271,7 +273,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
         test_label = nlvls - as.integer(internal_valid_task$truth())
         xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
-        if (bm_is_feature) {
+        if (bm_is_feature && obj_is_binary) {
           xgboost::setinfo(xgb_test_data, "base_margin", test_data[[bm]])
         }
         pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
