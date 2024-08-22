@@ -1,7 +1,8 @@
 # mlr3learners (development version)
 
+* feat: use `base_margin` in xgboost learners (#205)
 * bugfix: validation for learner `lrn("regr.xgboost")` now works properly. Previously the training data was used.
-* feat: add weights for logistic regression again, which were incorrectlu removed
+* feat: add weights for logistic regression again, which were incorrectly removed
   in a previous release (#265)
 * BREAKING_CHANGE: When using internal tuning for xgboost learners, the `eval_metric` must now be set.
   This achieves that one needs to make the conscious decision which performance metric to use for
