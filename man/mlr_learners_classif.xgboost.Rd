@@ -27,10 +27,9 @@ See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-s
 \item \code{nrounds}:
 \itemize{
 \item Actual default: no default.
-\item Adjusted default: 1.
-\item Reason for change: Without a default construction of the learner
-would error. Just setting a nonsense default to workaround this.
-\code{nrounds} needs to be tuned by the user.
+\item Adjusted default: 1000.
+\item Reason for change: Without a default construction of the learner would error.
+The lightgbm learner has a default of 1000, so we use the same here.
 }
 \item \code{nthread}:
 \itemize{
@@ -50,10 +49,11 @@ would error. Just setting a nonsense default to workaround this.
 \section{Early Stopping and Validation}{
 
 In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
-For information on how to configure the valdiation set, see the \emph{Validation} section of \code{\link[mlr3:Learner]{mlr3::Learner}}.
+For information on how to configure the valdiation set, see the \emph{Validation} section of \link[mlr3:Learner]{mlr3::Learner}.
 This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
-The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the
-optimal \code{nrounds} via \verb{$internal_tuned_values}.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
+The internal validation measure can be set via the \code{eval_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
+Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 }
 
 \section{Dictionary}{
@@ -92,7 +92,6 @@ lrn("classif.xgboost")
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    eval_metric \tab untyped \tab - \tab  \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
-   feval \tab untyped \tab NULL \tab  \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab untyped \tab - \tab  \tab - \cr

@@ -43,7 +43,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
         num.trees                    = p_int(1L, default = 500L, tags = c("train", "predict", "hotstart")),
         oob.error                    = p_lgl(default = TRUE, tags = "train"),
-        quantreg                     = p_lgl(default = FALSE, tags = "train"),
         regularization.factor        = p_uty(default = 1, tags = "train"),
         regularization.usedepth      = p_lgl(default = FALSE, tags = "train"),
         replace                      = p_lgl(default = TRUE, tags = "train"),
@@ -65,7 +64,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       super$initialize(
         id = "regr.ranger",
         param_set = ps,
-        predict_types = c("response", "se"),
+        predict_types = c("response", "se", "quantiles"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error", "hotstart_backward"),
         packages = c("mlr3learners", "ranger"),
@@ -113,6 +112,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         pv$keep.inbag = TRUE # nolint
       }
 
+      if (self$predict_type == "quantiles") {
+        pv$quantreg = TRUE # nolint
+      }
+
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
@@ -124,12 +127,24 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
 
-      prediction = invoke(predict, self$model, data = newdata, type = self$predict_type, .args = pv)
+      prediction = invoke(predict, self$model,
+        data = newdata,
+        type = self$predict_type,
+        quantiles = private$.quantiles,
+        .args = pv)
+
+      if (self$predict_type == "quantiles") {
+        quantiles = prediction$predictions
+        attr(quantiles, "probs") = private$.quantiles
+        attr(quantiles, "response") = private$.quantile_response
+        return(list(quantiles = quantiles))
+      }
+
       list(response = prediction$predictions, se = prediction$se)
     },
 
     .hotstart = function(task) {
-      model = self$model
+      model = self$models
       model$num.trees = self$param_set$values$num.trees
       model
     }

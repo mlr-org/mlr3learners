@@ -42,7 +42,8 @@ test_that("regr.xgboost", {
     "label", # handled by mlr3
     "weight", # handled by mlr3
     "use_weights", # handled by mlr3
-    "nthread" # handled by mlr3
+    "nthread", # handled by mlr3
+    "feval" # handled via eval_metric parameter
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")

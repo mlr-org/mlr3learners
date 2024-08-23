@@ -5,7 +5,8 @@
   in a previous release (#265)
 * BREAKING_CHANGE: When using internal tuning for xgboost learners, the `eval_metric` must now be set.
   This achieves that one needs to make the conscious decision which performance metric to use for
-  early stopping.  
+  early stopping.
+* BREAKING CHANGE: Change xgboost default nrounds from 1 to 1000.
 
 
 # mlr3learners 0.7.0
