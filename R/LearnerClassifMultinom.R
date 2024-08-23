@@ -38,8 +38,7 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         softmax        = p_lgl(default = FALSE, tags = "train"),
         summ           = p_fct(c("0", "1", "2", "3"), default = "0", tags = "train"),
         trace          = p_lgl(default = TRUE, tags = "train"),
-        Wts            = p_uty(tags = "train"),
-        use_weights    = p_lgl(default = FALSE, tags = "train")
+        Wts            = p_uty(tags = "train")
       )
 
       super$initialize(

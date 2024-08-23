@@ -68,8 +68,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         type.gaussian         = p_fct(c("covariance", "naive"), tags = "train", depends = quote(family == "gaussian")),
         type.logistic         = p_fct(c("Newton", "modified.Newton"), tags = "train"),
         type.multinomial      = p_fct(c("ungrouped", "grouped"), tags = "train"),
-        upper.limits          = p_uty(tags = "train"),
-        use_weights           = p_lgl(default = FALSE, tags = "train")
+        upper.limits          = p_uty(tags = "train")
       )
 
       ps$values = list(family = "gaussian")

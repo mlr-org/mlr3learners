@@ -70,8 +70,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         type.logistic        = p_fct(c("Newton", "modified.Newton"), tags = "train"),
         type.measure         = p_fct(c("deviance", "class", "auc", "mse", "mae"), default = "deviance", tags = "train"),
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
-        upper.limits         = p_uty(tags = "train"),
-        use_weights          = p_lgl(default = FALSE, tags = "train")
+        upper.limits         = p_uty(tags = "train")
       )
 
       super$initialize(

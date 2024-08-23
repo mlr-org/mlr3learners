@@ -130,8 +130,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
         verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
         watchlist                   = p_uty(default = NULL, tags = "train"),
-        xgb_model                   = p_uty(default = NULL, tags = "train"),
-        use_weights                 = p_lgl(default = FALSE, tags = "train")
+        xgb_model                   = p_uty(default = NULL, tags = "train")
       )
       # param deps
 

@@ -50,9 +50,7 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         skip        = p_lgl(default = FALSE, tags = "train"),
         subset      = p_uty(tags = "train"),
         trace       = p_lgl(default = TRUE, tags = "train"),
-        formula     = p_uty(tags = "train"),
-        use_weights = p_lgl(default = FALSE, tags = "train")
-
+        formula     = p_uty(tags = "train")
       )
       ps$values = list(size = 3L)
 

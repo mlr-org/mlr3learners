@@ -36,8 +36,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         y             = p_lgl(default = FALSE, tags = "train"),
         rankdeficient = p_fct(c("warnif", "simple", "non-estim", "NA", "NAwarn"), tags = "predict"),
         tol           = p_dbl(default = 1e-07, tags = "predict"),
-        verbose       = p_lgl(default = FALSE, tags = "predict"),
-        use_weights   = p_lgl(default = FALSE, tags = "train")
+        verbose       = p_lgl(default = FALSE, tags = "predict")
       )
 
       super$initialize(

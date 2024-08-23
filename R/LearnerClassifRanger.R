@@ -66,8 +66,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("gini", "extratrees", "hellinger"), default = "gini", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
-        write.forest                 = p_lgl(default = TRUE, tags = "train"),
-        use_weights                  = p_lgl(default = FALSE, tags = "train")
+        write.forest                 = p_lgl(default = TRUE, tags = "train")
       )
 
       ps$values = list(num.threads = 1L)

@@ -56,8 +56,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
-        write.forest                 = p_lgl(default = TRUE, tags = "train"),
-        use_weights                  = p_lgl(default = FALSE, tags = "train")
+        write.forest                 = p_lgl(default = TRUE, tags = "train")
 
       )
 
