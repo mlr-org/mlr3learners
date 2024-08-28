@@ -62,7 +62,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pv = insert_named(pv, list(weights = task$weights$weight))
+        pv = insert_named(pv, list(weights = task$weights_learner))
       }
 
       invoke(stats::lm,

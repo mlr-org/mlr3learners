@@ -117,7 +117,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
-        case.weights = task$weights$weight,
+        case.weights = task$weights_learner,
         .args = pv
       )
     },

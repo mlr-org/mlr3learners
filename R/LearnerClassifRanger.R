@@ -120,7 +120,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
-        case.weights = task$weights$weight,
+        case.weights = task$weights_learner,
         .args = pv
       )
     },
