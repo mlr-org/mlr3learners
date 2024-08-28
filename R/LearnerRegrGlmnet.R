@@ -103,7 +103,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
       target = as_numeric_matrix(task$data(cols = task$target_names))
       pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pv$weights = task$weights$weight
+        pv$weights = task$weights_learner
       }
 
       glmnet_invoke(data, target, pv)

@@ -71,7 +71,7 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
       if ("weights" %in% task$properties) {
-        pv = insert_named(pv, list(weights = task$weights$weight))
+        pv = insert_named(pv, list(weights = task$weights_learner))
       }
       if (is.null(pv$formula)) {
         pv$formula = task$formula()

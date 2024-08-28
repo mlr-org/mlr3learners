@@ -250,7 +250,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
       if ("weights" %in% task$properties) {
-        xgboost::setinfo(data, "weight", task$weights$weight)
+        xgboost::setinfo(data, "weight", task$weights_learner)
       }
 
       # the last element in the watchlist is used as the early stopping set
