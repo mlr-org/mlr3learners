@@ -254,13 +254,15 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(xgb_data, "weight", task$weights$weight)
       }
 
-      bm = pv$base_margin
+      base_margin = pv$base_margin
       pv$base_margin = NULL # silence xgb.train message
-      bm_is_feature = !is.null(bm) && is.character(bm) && (bm %in% task$feature_names)
-      # works only with binary classification objectives
-      obj_is_binary = startsWith(pv$objective, "binary")
-      if (bm_is_feature && obj_is_binary) {
-        xgboost::setinfo(xgb_data, "base_margin", data[[bm]])
+      if (!is.null(base_margin)) {
+        # base_margin must be a task feature and works only with
+        # binary classification objectives
+        assert(check_true(base_margin %in% task$feature_names),
+               check_true(startsWith(pv$objective, "binary")),
+               combine = "and")
+        xgboost::setinfo(xgb_data, "base_margin", data[[base_margin]])
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -273,9 +275,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
         test_label = nlvls - as.integer(internal_valid_task$truth())
         xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
-        if (bm_is_feature && obj_is_binary) {
-          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[bm]])
+        if (!is.null(base_margin)) {
+          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[base_margin]])
         }
+
         pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
       }
 

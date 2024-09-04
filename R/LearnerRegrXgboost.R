@@ -207,11 +207,12 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         xgboost::setinfo(xgb_data, "weight", task$weights$weight)
       }
 
-      bm = pv$base_margin
+      base_margin = pv$base_margin
       pv$base_margin = NULL # silence xgb.train message
-      bm_is_feature = !is.null(bm) && is.character(bm) && (bm %in% task$feature_names)
-      if (bm_is_feature) {
-        xgboost::setinfo(xgb_data, "base_margin", data[[bm]])
+      if (!is.null(base_margin)) {
+        # base_margin must be a task feature
+        assert_true(base_margin %in% task$feature_names)
+        xgboost::setinfo(xgb_data, "base_margin", data[[base_margin]])
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -223,9 +224,10 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         test_data = internal_valid_task$data(cols = task$feature_names)
         test_target = internal_valid_task$data(cols = task$target_names)
         xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
-        if (bm_is_feature) {
-          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[bm]])
+        if (!is.null(base_margin)) {
+          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[base_margin]])
         }
+
         pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
       }
 
