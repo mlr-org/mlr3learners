@@ -226,3 +226,22 @@ test_that("mlr3measures are equal to internal measures", {
 
   expect_equal(log_mlr3, log_internal)
 })
+
+test_that("base_margin", {
+  # input checks
+  expect_error(lrn("regr.xgboost", base_margin = 1), "Must be of type")
+  expect_error(lrn("regr.xgboost", base_margin = ""), "have at least 1 characters")
+  expect_error(lrn("regr.xgboost", base_margin = c("a", "b")), "have length 1")
+
+  # base_margin not a feature
+  task = tsk("mtcars")
+  learner = lrn("regr.xgboost", base_margin = "not_a_feature")
+  expect_error(learner$train(task), "base_margin %in%")
+
+  # predictions change
+  l1 = lrn("regr.xgboost", nrounds = 5)
+  l2 = lrn("regr.xgboost", nrounds = 5, base_margin = "qsec")
+  p1 = l1$train(task)$predict(task)
+  p2 = l2$train(task)$predict(task)
+  expect_false(all(p1$response == p2$response))
+})
