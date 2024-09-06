@@ -42,8 +42,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="mlr3learners-development-version">mlr3learners (development version)<a class="anchor" aria-label="anchor" href="#mlr3learners-development-version"></a></h2>
-<ul><li>bugfix: validation for learner <code>lrn("regr.xgboost")</code> now works properly. Previously the training data was used.</li>
-<li>feat: add weights for logistic regression again, which were incorrectlu removed in a previous release (<a href="https://github.com/mlr-org/mlr3learners/issues/265" class="external-link">#265</a>)</li>
+<ul><li>feat: use <code>base_margin</code> in xgboost learners (<a href="https://github.com/mlr-org/mlr3learners/issues/205" class="external-link">#205</a>)</li>
+<li>bugfix: validation for learner <code>lrn("regr.xgboost")</code> now works properly. Previously the training data was used.</li>
+<li>feat: add weights for logistic regression again, which were incorrectly removed in a previous release (<a href="https://github.com/mlr-org/mlr3learners/issues/265" class="external-link">#265</a>)</li>
 <li>BREAKING_CHANGE: When using internal tuning for xgboost learners, the <code>eval_metric</code> must now be set. This achieves that one needs to make the conscious decision which performance metric to use for early stopping.</li>
 <li>BREAKING CHANGE: Change xgboost default nrounds from 1 to 1000.</li>
 </ul></div>
