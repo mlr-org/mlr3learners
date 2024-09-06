@@ -366,3 +366,28 @@ test_that("mlr3measures are equal to internal measures", {
   expect_equal(log_mlr3$test_classif.ce, log_internal$test_error)
 
 })
+
+
+test_that("base_margin", {
+  # input checks
+  expect_error(lrn("classif.xgboost", base_margin = 1), "Must be of type")
+  expect_error(lrn("classif.xgboost", base_margin = ""), "have at least 1 characters")
+  expect_error(lrn("classif.xgboost", base_margin = c("a", "b")), "have length 1")
+
+  # base_margin not a feature
+  task = tsk("iris")
+  learner = lrn("classif.xgboost", base_margin = "not_a_feature")
+  expect_error(learner$train(task), "base_margin %in%")
+
+  # base_margin is a feature but objective is multiclass
+  learner = lrn("classif.xgboost", base_margin = "Petal.Length")
+  expect_error(learner$train(task), "startsWith")
+
+  # predictions change
+  task = tsk("sonar") # binary classification task
+  l1 = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
+  l2 = lrn("classif.xgboost", nrounds = 5, base_margin = "V9", predict_type = "prob")
+  p1 = l1$train(task)$predict(task)
+  p2 = l2$train(task)$predict(task)
+  expect_false(all(p1$prob[, 1L] == p2$prob[, 1L]))
+})

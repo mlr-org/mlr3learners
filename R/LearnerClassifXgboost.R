@@ -95,6 +95,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
+        base_margin                 = p_uty(default = NULL, tags = "train", custom_check = crate({function(x) check_character(x, len = 1, null.ok = TRUE, min.chars = 1)})),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = c("train", "control")),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -244,13 +245,24 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       )
 
       data = task$data(cols = task$feature_names)
-      # recode to 0:1 to that for the binary case the positive class translates to 1 (#32)
+      # recode to 0:1 so that for the binary case the positive class translates to 1 (#32)
       # note that task$truth() is guaranteed to have the factor levels in the right order
       label = nlvls - as.integer(task$truth())
-      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
+      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
       if ("weights" %in% task$properties) {
-        xgboost::setinfo(data, "weight", task$weights$weight)
+        xgboost::setinfo(xgb_data, "weight", task$weights$weight)
+      }
+
+      base_margin = pv$base_margin
+      pv$base_margin = NULL # silence xgb.train message
+      if (!is.null(base_margin)) {
+        # base_margin must be a task feature and works only with
+        # binary classification objectives
+        assert(check_true(base_margin %in% task$feature_names),
+               check_true(startsWith(pv$objective, "binary")),
+               combine = "and")
+        xgboost::setinfo(xgb_data, "base_margin", data[[base_margin]])
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -262,8 +274,12 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (!is.null(internal_valid_task)) {
         test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
         test_label = nlvls - as.integer(internal_valid_task$truth())
-        test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
-        pv$watchlist = c(pv$watchlist, list(test = test_data))
+        xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
+        if (!is.null(base_margin)) {
+          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[base_margin]])
+        }
+
+        pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
       }
 
       # set internal validation measure
@@ -293,7 +309,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$maximize = !measure$minimize
       }
 
-      invoke(xgboost::xgb.train, data = data, .args = pv)
+      invoke(xgboost::xgb.train, data = xgb_data, .args = pv)
     },
 
     .predict = function(task) {

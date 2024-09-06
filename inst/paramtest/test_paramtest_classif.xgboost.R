@@ -17,7 +17,7 @@ add_params_xgboost = x %>%
   # values which do not match regex
   append(values = c("interaction_constraints", "monotone_constraints", "base_score")) %>%
   # only defined in help page but not in signature or website
-  append(values = "lambda_bias")
+  append(values = c("lambda_bias", "base_margin"))
 
 test_that("classif.xgboost", {
   learner = lrn("classif.xgboost", nrounds = 1L)
