@@ -1,4 +1,4 @@
-# mlr3learners (development version)
+# mlr3learners 0.7.1
 
 * fix: Hyperparameter set of `lrn("classif.ranger")` and `lrn("regr.ranger")`.
   Remove `alpha` and `minprop` hyperparameter.
