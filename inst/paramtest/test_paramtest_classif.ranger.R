@@ -20,8 +20,7 @@ test_that("classif.ranger", {
     "mtry.ratio", # custom hyperpar
     "time.interest", # survival only
     "alpha", # survival only
-    "minprop", # survival only
-    "se.method" # regression only
+    "minprop" # survival only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -43,7 +42,8 @@ test_that("predict classif.ranger", {
     "formula", # handled via mlr3
     "object", # handled via mlr3
     "data", # handled via mlr3
-    "type" # handled via mlr3
+    "type", # handled via mlr3
+    "se.method" # regression only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
