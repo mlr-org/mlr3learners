@@ -18,7 +18,9 @@ test_that("classif.ranger", {
     "status.variable.name", # handled via mlr3
     "classification", # handled via mlr3
     "mtry.ratio", # custom hyperpar
-    "time.interest" # survival only
+    "time.interest", # survival only
+    "alpha", # survival only
+    "minprop" # survival only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
