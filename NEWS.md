@@ -1,14 +1,16 @@
-# mlr3learners (development version)
+# mlr3learners 0.8.0
 
-* feat: use `base_margin` in xgboost learners (#205)
-* bugfix: validation for learner `lrn("regr.xgboost")` now works properly. Previously the training data was used.
-* feat: add weights for logistic regression again, which were incorrectly removed
-  in a previous release (#265)
-* BREAKING_CHANGE: When using internal tuning for xgboost learners, the `eval_metric` must now be set.
-  This achieves that one needs to make the conscious decision which performance metric to use for
-  early stopping.
+* fix: Hyperparameter set of `lrn("classif.ranger")` and `lrn("regr.ranger")`.
+  Remove `alpha` and `minprop` hyperparameter.
+  Remove default of `respect.unordered.factors`.
+  Change lower bound of `max_depth` from 0 to 1.
+  Remove `se.method` from `lrn("classif.ranger")`.
+* feat: use `base_margin` in xgboost learners (#205).
+* fix: validation for learner `lrn("regr.xgboost")` now works properly. Previously the training data was used.
+* feat: add weights for logistic regression again, which were incorrectly removed in a previous release (#265).
+* BREAKING CHANGE: When using internal tuning for xgboost learners, the `eval_metric` must now be set.
+  This achieves that one needs to make the conscious decision which performance metric to use for early stopping.
 * BREAKING CHANGE: Change xgboost default nrounds from 1 to 1000.
-
 
 # mlr3learners 0.7.0
 
