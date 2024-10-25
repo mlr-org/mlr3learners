@@ -20,7 +20,8 @@ test_that("classif.ranger", {
     "mtry.ratio", # custom hyperpar
     "time.interest", # survival only
     "alpha", # survival only
-    "minprop" # survival only
+    "minprop", # survival only
+    "se.method" # regression only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
