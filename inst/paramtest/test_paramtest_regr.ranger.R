@@ -18,7 +18,9 @@ test_that("regr.ranger", {
     "classification", # handled via mlr3
     "mtry.ratio", # custom hyperpar
     "time.interest", # survival only
-    "quantreg" # handled by predict_type
+    "quantreg", # handled by predict_type
+    "alpha", # survival only
+    "minprop" # survival only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
