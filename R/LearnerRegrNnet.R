@@ -57,7 +57,7 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
       super$initialize(
         id = "regr.nnet",
         packages = c("mlr3learners", "nnet"),
-        feature_types = c("numeric", "factor", "ordered", "integer"),
+        feature_types = c("logical", "numeric", "factor", "ordered", "integer"),
         predict_types = "response",
         param_set = ps,
         properties = "weights",
