@@ -1,87 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/404.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr3learners-package.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.cv_glmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.lda.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.log_reg.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.multinom.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.nnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.qda.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.cv_glmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.nnet.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://mlr3learners.mlr-org.com/404.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/LICENSE-text.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/authors.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/index.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/news/index.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/index.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr3learners-package.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.cv_glmnet.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.glmnet.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.kknn.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.lda.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.log_reg.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.multinom.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.naive_bayes.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.nnet.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.qda.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.ranger.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.svm.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_classif.xgboost.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.cv_glmnet.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.glmnet.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.kknn.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.km.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.lm.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.nnet.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.ranger.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.svm.html</loc></url>
+<url><loc>https://mlr3learners.mlr-org.com/reference/mlr_learners_regr.xgboost.html</loc></url>
 </urlset>
+
