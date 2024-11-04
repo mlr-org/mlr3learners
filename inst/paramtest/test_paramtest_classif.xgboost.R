@@ -60,7 +60,8 @@ test_that("predict classif.xgboost", {
   exclude = c(
     "object", # handled by mlr3
     "newdata", # handled by mlr3o
-    "objective" # defined in xgboost::xgboost and already in param set
+    "objective", # defined in xgboost::xgboost and already in param set
+    "base_margin" # it's a column in the task's features so we need to remove it
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
