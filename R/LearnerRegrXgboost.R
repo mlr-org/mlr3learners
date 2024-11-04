@@ -237,7 +237,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
 
         # put the base margin as extra info in the xgboost object
-        if (!is.null(test_bm)) {
+        if (!is.null(base_margin)) {
           xgboost::setinfo(xgb_test_data, "base_margin", test_bm)
         }
 
