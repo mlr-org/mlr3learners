@@ -72,7 +72,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
-        base_margin                 = p_uty(default = NULL, tags = "train", custom_check = crate({function(x) check_character(x, len = 1, null.ok = TRUE, min.chars = 1)})),
+        base_margin                 = p_uty(default = NULL, tags = c("train", "predict"), custom_check = crate({function(x) check_character(x, len = 1, null.ok = TRUE, min.chars = 1)})),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = "train"),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -201,18 +201,23 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
+      base_margin = pv$base_margin # name of feature that acts as base_margin
+      pv$base_margin = NULL # silence xgb.train message
+      if (!is.null(base_margin)) {
+        assert_true(base_margin %in% task$feature_names)
+        bm = data[[base_margin]] # keep the offset/base_margin values
+        data[[base_margin]] = NULL # remove from the data/features of xgboost
+      }
+
       xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
+
+      # put the base margin as extra info in the xgboost object
+      if (!is.null(base_margin)) {
+        xgboost::setinfo(xgb_data, "base_margin", bm)
+      }
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(xgb_data, "weight", task$weights$weight)
-      }
-
-      base_margin = pv$base_margin
-      pv$base_margin = NULL # silence xgb.train message
-      if (!is.null(base_margin)) {
-        # base_margin must be a task feature
-        assert_true(base_margin %in% task$feature_names)
-        xgboost::setinfo(xgb_data, "base_margin", data[[base_margin]])
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -223,9 +228,17 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       if (!is.null(internal_valid_task)) {
         test_data = internal_valid_task$data(cols = task$feature_names)
         test_target = internal_valid_task$data(cols = task$target_names)
-        xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
+
         if (!is.null(base_margin)) {
-          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[base_margin]])
+          test_bm = test_data[[base_margin]] # keep the offset/base_margin values
+          test_data[[base_margin]] = NULL # remove from the data/features of xgboost
+        }
+
+        xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
+
+        # put the base margin as extra info in the xgboost object
+        if (!is.null(test_bm)) {
+          xgboost::setinfo(xgb_test_data, "base_margin", test_bm)
         }
 
         pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
@@ -254,7 +267,17 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
-      newdata = as_numeric_matrix(ordered_features(task, self))
+      data = ordered_features(task, self)
+
+      # remove `base_margin` from input data for prediction
+      base_margin = pv$base_margin
+      if (!is.null(base_margin)) {
+        assert_true(base_margin %in% task$feature_names)
+        data[[base_margin]] = NULL
+      }
+
+      newdata = as_numeric_matrix(data)
+
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
       list(response = response)

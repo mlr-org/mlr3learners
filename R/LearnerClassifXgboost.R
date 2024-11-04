@@ -95,7 +95,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
-        base_margin                 = p_uty(default = NULL, tags = "train", custom_check = crate({function(x) check_character(x, len = 1, null.ok = TRUE, min.chars = 1)})),
+        base_margin                 = p_uty(default = NULL, tags = "train", custom_check = crate({function(x) check_numeric(x, any.missing = FALSE, null.ok = TRUE)})),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = c("train", "control")),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -257,12 +257,12 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       base_margin = pv$base_margin
       pv$base_margin = NULL # silence xgb.train message
       if (!is.null(base_margin)) {
-        # base_margin must be a task feature and works only with
-        # binary classification objectives
-        assert(check_true(base_margin %in% task$feature_names),
+        # has to be same length as number of observations in the task and
+        # works only with binary classification objectives
+        assert(check_true(length(base_margin) == task$nrow),
                check_true(startsWith(pv$objective, "binary")),
                combine = "and")
-        xgboost::setinfo(xgb_data, "base_margin", data[[base_margin]])
+        xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -275,9 +275,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
         test_label = nlvls - as.integer(internal_valid_task$truth())
         xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
-        if (!is.null(base_margin)) {
-          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[base_margin]])
-        }
+        # TODO: doesn't work with base_margin as numeric vector
+        # if (!is.null(base_margin)) {
+        #   xgboost::setinfo(xgb_test_data, "base_margin", base_margin)
+        # }
 
         pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
       }
