@@ -14,7 +14,9 @@
 #'
 #' @section Initial parameter values:
 #' - `num.threads`:
-#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
+#'   - Actual default: `2`, using two threads, while also respecting environment variable
+#'     `R_RANGER_NUM_THREADS`, `options(ranger.num.threads = N)`, or `options(Ncpus = N)`, with
+#'     precedence in that order.
 #'   - Adjusted value: 1.
 #'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #'
