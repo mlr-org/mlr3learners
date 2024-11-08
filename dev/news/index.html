@@ -42,8 +42,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="mlr3learners-development-version">mlr3learners (development version)<a class="anchor" aria-label="anchor" href="#mlr3learners-development-version"></a></h2>
-<p>compatibility: mlr3 0.22.0.</p>
-</div>
+<ul><li>feat: update hyperparameter set of <code>lrn("classif.ranger")</code> and <code>lrn("regr.ranger")</code> for 0.17.0, adding <code>na.action</code> parameter and <code>"missings"</code> property, and <code>poisson</code> splitrule for regression with a new <code>poisson.tau</code> parameter.</li>
+<li>compatibility: mlr3 0.22.0.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0" id="mlr3learners-080">mlr3learners 0.8.0<a class="anchor" aria-label="anchor" href="#mlr3learners-080"></a></h2><p class="text-muted">CRAN release: 2024-10-25</p>
 <ul><li>fix: Hyperparameter set of <code>lrn("classif.ranger")</code> and <code>lrn("regr.ranger")</code>. Remove <code>alpha</code> and <code>minprop</code> hyperparameter. Remove default of <code>respect.unordered.factors</code>. Change lower bound of <code>max_depth</code> from 0 to 1. Remove <code>se.method</code> from <code>lrn("classif.ranger")</code>.</li>
