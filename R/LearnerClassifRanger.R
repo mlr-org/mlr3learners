@@ -14,7 +14,9 @@
 #'
 #' @section Initial parameter values:
 #' - `num.threads`:
-#'   - Actual default: `NULL`, triggering auto-detection of the number of CPUs.
+#'   - Actual default: `2`, using two threads, while also respecting environment variable
+#'     `R_RANGER_NUM_THREADS`, `options(ranger.num.threads = N)`, or `options(Ncpus = N)`, with
+#'     precedence in that order.
 #'   - Adjusted value: 1.
 #'   - Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 #'
@@ -42,10 +44,19 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
         keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
         max.depth                    = p_int(default = NULL, lower = 1L, special_vals = list(NULL), tags = "train"),
-        min.bucket                   = p_int(1L, default = 1L, tags = "train"),
-        min.node.size                = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
+        min.bucket                   = p_uty(default = 1L, tags = "train",
+                                             custom_check = function(x) {
+                                               if (checkmate::test_integerish(x)) return(TRUE)
+                                               "Must be integer of length 1 or greater"
+                                             }),
+        min.node.size                = p_uty(default = NULL, special_vals = list(NULL), tags = "train",
+                                             custom_check = function(x) {
+                                               if (checkmate::test_integerish(x, null.ok = TRUE)) return(TRUE)
+                                               "Must be integer of length 1 or greater"
+                                             }),
         mtry                         = p_int(lower = 1L, special_vals = list(NULL), tags = "train"),
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
+        na.action                    = p_fct(c("na.learn", "na.omit", "na.fail"), default = "na.learn", tags = "train"),
         num.random.splits            = p_int(1L, default = 1L, tags = "train", depends = quote(splitrule == "extratrees")),
         node.stats                   = p_lgl(default = FALSE, tags = "train"),
         num.threads                  = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
@@ -72,7 +83,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error", "hotstart_backward"),
+        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error", "hotstart_backward", "missings"),
         packages = c("mlr3learners", "ranger"),
         label = "Random Forest",
         man = "mlr3learners::mlr_learners_classif.ranger"
