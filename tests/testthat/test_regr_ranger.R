@@ -8,7 +8,7 @@ test_that("autotest", {
 })
 
 test_that("hotstart", {
-  task = tsk("boston_housing")
+  task = tsk("mtcars")
 
   learner_1 = lrn("regr.ranger", num.trees = 1000L)
   learner_1$train(task)
