@@ -14,6 +14,7 @@ test_that("classif.ranger", {
     "class.weights", # handled via mlr3
     "inbag", # handled via mlr3 stratification
     "quantreg", # regression only
+    "poisson.tau", # regression only
     "dependent.variable.name", # handled via mlr3
     "status.variable.name", # handled via mlr3
     "classification", # handled via mlr3
