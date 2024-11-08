@@ -6,7 +6,7 @@ test_that("autotest", {
 })
 
 test_that("contrasts", {
-  task = tsk("boston_housing")
+  task = tsk("mtcars")
   learner = mlr3::lrn("regr.lm")
 
   learner$train(task)

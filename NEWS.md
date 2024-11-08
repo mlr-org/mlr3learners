@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+compatibility: mlr3 0.22.0.
+
 # mlr3learners 0.8.0
 
 * fix: Hyperparameter set of `lrn("classif.ranger")` and `lrn("regr.ranger")`.
