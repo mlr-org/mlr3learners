@@ -44,8 +44,16 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         importance                   = p_fct(c("none", "impurity", "impurity_corrected", "permutation"), tags = "train"),
         keep.inbag                   = p_lgl(default = FALSE, tags = "train"),
         max.depth                    = p_int(default = NULL, lower = 1L, special_vals = list(NULL), tags = "train"),
-        min.bucket                   = p_int(1L, default = 1L, tags = "train"),
-        min.node.size                = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
+        min.bucket                   = p_uty(default = 1L, tags = "train",
+                                             custom_check = function(x) {
+                                               if (checkmate::test_integerish(x)) return(TRUE)
+                                               "Must be integer of length 1 or greater"
+                                             }),
+        min.node.size                = p_uty(default = NULL, special_vals = list(NULL), tags = "train",
+                                             custom_check = function(x) {
+                                               if (checkmate::test_integerish(x, null.ok = TRUE)) return(TRUE)
+                                               "Must be integer of length 1 or greater"
+                                             }),
         mtry                         = p_int(lower = 1L, special_vals = list(NULL), tags = "train"),
         mtry.ratio                   = p_dbl(lower = 0, upper = 1, tags = "train"),
         na.action                    = p_fct(c("na.learn", "na.omit", "na.fail"), default = "na.learn", tags = "train"),

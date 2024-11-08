@@ -62,8 +62,8 @@ lrn("classif.ranger")
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    max.depth \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   min.bucket \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   min.node.size \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   min.bucket \tab untyped \tab 1L \tab  \tab - \cr
+   min.node.size \tab untyped \tab NULL \tab  \tab - \cr
    mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    na.action \tab character \tab na.learn \tab na.learn, na.omit, na.fail \tab - \cr
