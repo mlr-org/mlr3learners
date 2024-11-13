@@ -35,14 +35,4 @@ rename = function(x, old, new) {
   x
 }
 
-
-extract_loglik = function(self) {
-  require_namespaces(self$packages)
-  if (is.null(self$model)) {
-    stopf("Learner '%s' has no model stored", self$id)
-  }
-  stats::logLik(self$model)
-}
-
-
 opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))

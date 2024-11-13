@@ -44,17 +44,11 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "factor", "character"),
-        properties = c("weights", "loglik"),
+        properties = "weights",
         packages = c("mlr3learners", "stats"),
         label = "Linear Model",
         man = "mlr3learners::mlr_learners_regr.lm"
       )
-    },
-
-    #' @description
-    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
-    loglik = function() {
-      extract_loglik(self)
     }
   ),
 

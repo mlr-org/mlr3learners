@@ -53,17 +53,11 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "loglik"),
+        properties = c("weights", "twoclass"),
         packages = c("mlr3learners", "stats"),
         label = "Logistic Regression",
         man = "mlr3learners::mlr_learners_classif.log_reg"
       )
-    },
-
-    #' @description
-    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
-    loglik = function() {
-      extract_loglik(self)
     }
   ),
 
