@@ -9,7 +9,7 @@ test_that("autotest", {
 })
 
 test_that("hotstart", {
-  task = tsk("boston_housing")
+  task = tsk("mtcars")
   task$select(task$feature_names[task$feature_names %nin% c("chas", "town")])
 
   learner_1 = lrn("regr.xgboost", nrounds = 5L)

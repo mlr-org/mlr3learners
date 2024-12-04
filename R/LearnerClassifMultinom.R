@@ -46,17 +46,11 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = c("weights", "twoclass", "multiclass", "loglik"),
+        properties = c("weights", "twoclass", "multiclass"),
         packages = c("mlr3learners", "nnet"),
         label = "Multinomial Log-Linear Model",
         man = "mlr3learners::mlr_learners_classif.multinom"
       )
-    },
-
-    #' @description
-    #' Extract the log-likelihood (e.g., via [stats::logLik()] from the fitted model.
-    loglik = function() {
-      extract_loglik(self)
     }
   ),
 

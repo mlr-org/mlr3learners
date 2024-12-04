@@ -25,7 +25,9 @@ Note that \code{mtry} and \code{mtry.ratio} are mutually exclusive.
 \itemize{
 \item \code{num.threads}:
 \itemize{
-\item Actual default: \code{NULL}, triggering auto-detection of the number of CPUs.
+\item Actual default: \code{2}, using two threads, while also respecting environment variable
+\code{R_RANGER_NUM_THREADS}, \code{options(ranger.num.threads = N)}, or \code{options(Ncpus = N)}, with
+precedence in that order.
 \item Adjusted value: 1.
 \item Reason for change: Conflicting with parallelization via \CRANpkg{future}.
 }
@@ -54,18 +56,17 @@ lrn("classif.ranger")
 \section{Parameters}{
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
-   alpha \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    always.split.variables \tab untyped \tab - \tab  \tab - \cr
    class.weights \tab untyped \tab NULL \tab  \tab - \cr
    holdout \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    importance \tab character \tab - \tab none, impurity, impurity_corrected, permutation \tab - \cr
    keep.inbag \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   max.depth \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   min.bucket \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   min.node.size \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   minprop \tab numeric \tab 0.1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   max.depth \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   min.bucket \tab untyped \tab 1L \tab  \tab - \cr
+   min.node.size \tab untyped \tab NULL \tab  \tab - \cr
    mtry \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mtry.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   na.action \tab character \tab na.learn \tab na.learn, na.omit, na.fail \tab - \cr
    num.random.splits \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    node.stats \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    num.threads \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
@@ -74,11 +75,10 @@ lrn("classif.ranger")
    regularization.factor \tab untyped \tab 1 \tab  \tab - \cr
    regularization.usedepth \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    replace \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   respect.unordered.factors \tab character \tab ignore \tab ignore, order, partition \tab - \cr
+   respect.unordered.factors \tab character \tab - \tab ignore, order, partition \tab - \cr
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab gini \tab gini, extratrees, hellinger \tab - \cr
@@ -182,6 +182,7 @@ Other Learner:
 <details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
