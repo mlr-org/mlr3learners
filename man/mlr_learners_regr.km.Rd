@@ -8,7 +8,7 @@
 Kriging regression.
 Calls \code{\link[DiceKriging:km]{DiceKriging::km()}} from package \CRANpkg{DiceKriging}.
 \itemize{
-\item The predict type hyperparameter "type" defaults to "sk" (simple kriging).
+\item The predict type hyperparameter "type" defaults to "SK" (simple kriging).
 \item The additional hyperparameter \code{nugget.stability} is used to overwrite the
 hyperparameter \code{nugget} with \code{nugget.stability * var(y)} before training to
 improve the numerical stability. We recommend a value of \code{1e-8}.

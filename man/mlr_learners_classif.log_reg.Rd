@@ -151,7 +151,6 @@ Other Learner:
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-LearnerClassifLogReg-new}{\code{LearnerClassifLogReg$new()}}
-\item \href{#method-LearnerClassifLogReg-loglik}{\code{LearnerClassifLogReg$loglik()}}
 \item \href{#method-LearnerClassifLogReg-clone}{\code{LearnerClassifLogReg$clone()}}
 }
 }
@@ -177,16 +176,6 @@ Other Learner:
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$new()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-LearnerClassifLogReg-loglik"></a>}}
-\if{latex}{\out{\hypertarget{method-LearnerClassifLogReg-loglik}{}}}
-\subsection{Method \code{loglik()}}{
-Extract the log-likelihood (e.g., via \code{\link[stats:logLik]{stats::logLik()}} from the fitted model.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifLogReg$loglik()}\if{html}{\out{</div>}}
 }
 
 }
