@@ -86,3 +86,12 @@ test_that("quantile prediction", {
   expect_names(names(tab), identical.to = c("row_ids", "truth", "q0.1", "q0.5", "q0.9", "response"))
   expect_equal(tab$response, tab$q0.5)
 })
+
+test_that("selected_features", {
+  learner = lrn("regr.ranger")
+  expect_error(learner$selected_features())
+
+  task$select(c("am", "cyl", "wt"))
+  learner$train(task)
+  expect_set_equal(learner$selected_features(), c("am", "cyl", "wt"))
+})

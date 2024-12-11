@@ -88,3 +88,12 @@ test_that("default_values", {
   values = default_values(learner, search_space, task)
   expect_names(names(values), permutation.of =  c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
 })
+
+test_that("selected_features", {
+  learner = lrn("classif.ranger")
+  expect_error(learner$selected_features())
+
+  task = tsk("iris")
+  learner$train(task)
+  expect_set_equal(learner$selected_features(), c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+})
