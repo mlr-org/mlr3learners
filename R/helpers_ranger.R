@@ -34,3 +34,26 @@ convert_ratio = function(pv, target, ratio, n) {
     stopf("Hyperparameters '%s' and '%s' are mutually exclusive", target, ratio)
   )
 }
+
+
+
+
+ranger_selected_features = function(self) {
+  if (is.null(self$model)) {
+    stopf("No model stored")
+  }
+
+  splitvars = ranger::treeInfo(object = self$model, tree = 1)$splitvarName
+  i = 2
+  while (i <= self$model$num.trees &&
+      !all(self$state$feature_names %in% splitvars)) {
+    sv = ranger::treeInfo(object = self$model, tree = i)$splitvarName
+    splitvars = union(splitvars, sv)
+    i = i + 1
+  }
+
+  # order the names of the selected features in the same order as in the task
+  self$state$feature_names[self$state$feature_names %in% splitvars]
+}
+
+

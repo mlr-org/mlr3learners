@@ -65,7 +65,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         param_set = ps,
         predict_types = c("response", "se", "quantiles"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "importance", "oob_error", "hotstart_backward", "missings"),
+        properties = c("weights", "importance", "oob_error", "hotstart_backward", "missings", "selected_features"),
         packages = c("mlr3learners", "ranger"),
         label = "Random Forest",
         man = "mlr3learners::mlr_learners_regr.ranger"
@@ -98,6 +98,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         stopf("No model stored")
       }
       self$model$prediction.error
+    }
+
+    #' @description
+    #' The set of features used for node splitting in the forest.
+    #'
+    #' @return `character()`.
+    selected_features = function() {
+      ranger_selected_features(self)
     }
   ),
 
