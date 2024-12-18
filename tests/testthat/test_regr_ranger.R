@@ -91,6 +91,7 @@ test_that("selected_features", {
   learner = lrn("regr.ranger")
   expect_error(learner$selected_features())
 
+  task = tsk("mtcars")
   task$select(c("am", "cyl", "wt"))
   learner$train(task)
   expect_set_equal(learner$selected_features(), c("am", "cyl", "wt"))

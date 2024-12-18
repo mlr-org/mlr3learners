@@ -98,7 +98,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         stopf("No model stored")
       }
       self$model$prediction.error
-    }
+    },
 
     #' @description
     #' The set of features used for node splitting in the forest.
