@@ -238,10 +238,17 @@ test_that("base_margin", {
   learner = lrn("regr.xgboost", base_margin = "not_a_feature")
   expect_error(learner$train(task), "base_margin %in%")
 
-  # predictions change
+  # check that `base_margin` feature is not used in the xgboost model during training
   l1 = lrn("regr.xgboost", nrounds = 5)
+  l1$train(task)
+  expect_in("qsec", l1$model$feature_names) # feature included in the model
+
   l2 = lrn("regr.xgboost", nrounds = 5, base_margin = "qsec")
-  p1 = l1$train(task)$predict(task)
-  p2 = l2$train(task)$predict(task)
+  l2$train(task)
+  expect_false("qsec" %in% l2$model$feature_names) # feature not included in the model
+
+  # different predictions
+  p1 = l1$predict(task)
+  p2 = l2$predict(task)
   expect_false(all(p1$response == p2$response))
 })
