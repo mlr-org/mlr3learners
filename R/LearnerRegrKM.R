@@ -6,7 +6,7 @@
 #' Kriging regression.
 #' Calls [DiceKriging::km()] from package \CRANpkg{DiceKriging}.
 #'
-#' * The predict type hyperparameter "type" defaults to "sk" (simple kriging).
+#' * The predict type hyperparameter "type" defaults to "SK" (simple kriging).
 #' * The additional hyperparameter `nugget.stability` is used to overwrite the
 #'   hyperparameter `nugget` with `nugget.stability * var(y)` before training to
 #'   improve the numerical stability. We recommend a value of `1e-8`.
@@ -91,7 +91,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
       }
 
       invoke(DiceKriging::km,
-        response = task$truth(),
+        response = truth,
         design = data,
         control = pv$control,
         .args = remove_named(pv, c("control", "nugget.stability"))
