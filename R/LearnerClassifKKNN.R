@@ -36,7 +36,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
         ykernel     = p_uty(default = NULL, tags = "train"),
         store_model = p_lgl(default = FALSE, tags = "train")
       )
-      ps$values = list(k = 7L)
+      ps$set_values(k = 7L)
 
       super$initialize(
         id = "classif.kknn",

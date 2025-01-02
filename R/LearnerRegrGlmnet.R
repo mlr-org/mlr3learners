@@ -71,7 +71,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         upper.limits          = p_uty(tags = "train")
       )
 
-      ps$values = list(family = "gaussian")
+      ps$set_values(family = "gaussian")
 
       super$initialize(
         id = "regr.glmnet",

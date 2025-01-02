@@ -37,7 +37,7 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
         store_model = p_lgl(default = FALSE, tags = "train")
       )
 
-      ps$values = list(k = 7L)
+      ps$set_values(k = 7L)
 
       super$initialize(
         id = "regr.kknn",

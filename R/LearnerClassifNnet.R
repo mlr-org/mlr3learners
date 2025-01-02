@@ -52,7 +52,7 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
         trace     = p_lgl(default = TRUE, tags = "train"),
         formula   = p_uty(tags = "train")
       )
-      ps$values = list(size = 3L)
+      ps$set_values(size = 3L)
 
       super$initialize(
         id = "classif.nnet",
