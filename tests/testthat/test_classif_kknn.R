@@ -28,7 +28,7 @@ test_that("custom model", {
   expect_data_table(mod$data)
   expect_list(mod$pv, names = "unique")
 
-  learner$param_set$values = list(k = 3, store_model = FALSE)
+  learner$param_set$set_values(k = 3, store_model = FALSE)
   learner$train(task)$predict(task)
   expect_null(learner$model$kknn)
 })

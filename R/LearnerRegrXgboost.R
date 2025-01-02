@@ -135,7 +135,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       # param deps
 
       # custom defaults
-      ps$values = list(nrounds = 1000L, nthread = 1L, verbose = 0L)
+      ps$set_values(nrounds = 1000L, nthread = 1L, verbose = 0L)
 
       super$initialize(
         id = "regr.xgboost",

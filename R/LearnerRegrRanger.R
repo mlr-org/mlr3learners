@@ -58,7 +58,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         write.forest                 = p_lgl(default = TRUE, tags = "train")
       )
 
-      ps$values = list(num.threads = 1L)
+      ps$set_values(num.threads = 1L)
 
       super$initialize(
         id = "regr.ranger",
