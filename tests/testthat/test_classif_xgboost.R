@@ -391,11 +391,10 @@ test_that("base_margin (offset)", {
   task_offset2$set_col_roles(cols = "V42", roles = "offset")
 
   # add predefined internal validation task
-  valid_ids = sample(task$row_ids, 42)
-  task$internal_valid_task = valid_ids
-  task_offset$internal_valid_task = valid_ids
-  task_offset2$internal_valid_task = valid_ids
-  part = partition(task)
+  part = partition(task, c(0.6, 0.2)) # 60% train, 20% test, 20% validate
+  task$internal_valid_task = part$validation
+  task_offset$internal_valid_task = part$validation
+  task_offset2$internal_valid_task = part$validation
 
   l = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
   l$validate = "predefined"
@@ -403,8 +402,7 @@ test_that("base_margin (offset)", {
   p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # zero offset
   expect_false("zeros" %in% l$model$feature_names) # offset column is not a feature
   p3 = l$train(task_offset2, part$train)$predict(task_offset2, part$test) # non-zero offset
-  expect_false("offset" %in% l$model$feature_names) # offset column is not a feature
-  expect_false("V42" %in% l$model$feature_names) # neither "V42"
+  expect_false("V42" %in% l$model$feature_names) # "V42" column is not a feature
 
   expect_equal(p1$prob, p2$prob) # zero offset => same predictions
   expect_false(all(p1$prob[, 1L] == p3$prob[, 1L])) # non-zero offset => different predictions
