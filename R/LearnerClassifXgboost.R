@@ -95,7 +95,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
-        base_margin                 = p_uty(default = NULL, tags = "train", custom_check = crate({function(x) check_numeric(x, any.missing = FALSE, null.ok = TRUE)})),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = c("train", "control")),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -254,14 +253,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(xgb_data, "weight", task$weights$weight)
       }
 
-      base_margin = pv$base_margin
-      pv$base_margin = NULL # silence xgb.train message
-      if (!is.null(base_margin)) {
-        # has to be same length as number of observations in the task and
-        # works only with binary classification objectives
-        assert(check_true(length(base_margin) == task$nrow),
-               check_true(startsWith(pv$objective, "binary")),
-               combine = "and")
+      # TODO: multiclass
+      if ("offset" %in% task$properties) {
+        base_margin = task$data(cols = task$col_roles$offset)[[1L]]
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
 
@@ -272,15 +266,21 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       if (!is.null(internal_valid_task)) {
-        test_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
-        test_label = nlvls - as.integer(internal_valid_task$truth())
-        xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = test_label)
-        # TODO: doesn't work with base_margin as numeric vector
-        # if (!is.null(base_margin)) {
-        #   xgboost::setinfo(xgb_test_data, "base_margin", base_margin)
-        # }
+        valid_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
+        valid_label = nlvls - as.integer(internal_valid_task$truth())
+        xgb_valid_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(valid_data), label = valid_label)
 
-        pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
+        if ("weights" %in% internal_valid_task$properties) {
+          xgboost::setinfo(xgb_valid_data, "weight", internal_valid_task$weights$weight)
+        }
+
+        # TODO: multiclass
+        if ("offset" %in% internal_valid_task$properties) {
+          base_margin = internal_valid_task$data(cols = internal_valid_task$col_roles$offset)[[1L]]
+          xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
+        }
+
+        pv$watchlist = c(pv$watchlist, list(test = xgb_valid_data))
       }
 
       # set internal validation measure

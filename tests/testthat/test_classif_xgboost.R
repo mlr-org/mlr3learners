@@ -367,25 +367,42 @@ test_that("mlr3measures are equal to internal measures", {
 
 })
 
-test_that("base_margin", {
-  # input checks
-  expect_error(lrn("classif.xgboost", base_margin = ""), "Must be of type")
-  expect_error(lrn("classif.xgboost", base_margin = "foo"), "Must be of type")
-
-  # base_margin is a numeric vector but objective is multiclass
-  task = tsk("iris")
-  learner = lrn("classif.xgboost", base_margin = rnorm(task$nrow))
-  expect_error(learner$train(task), "startsWith")
+test_that("base_margin (offset)", {
+  # # multiclass task
+  # task = tsk("iris")
+  #
+  # # same task with multiclass offset
+  # data = task$data()
+  # set(data, j = "offset_Adelie", value = runif(nrow(data)))
+  # set(data, j = "offset_Chinstrap", value = runif(nrow(data)))
+  # task = as_task_classif(data, target = "species")
 
   # binary classification task
   task = tsk("sonar")
-  l1 = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
-  l2 = lrn("classif.xgboost", nrounds = 5, base_margin = rep(0, task$nrow), predict_type = "prob")
-  l3 = lrn("classif.xgboost", nrounds = 5, base_margin = rnorm(task$nrow), predict_type = "prob")
 
-  p1 = l1$train(task)$predict(task)
-  p2 = l2$train(task)$predict(task)
-  p3 = l3$train(task)$predict(task)
-  expect_equal(p1$prob, p2$prob) # zero base_margin => same predictions
-  expect_false(all(p1$prob[, 1L] == p3$prob[, 1L])) # non-zero base_margin => different predictions
+  # same task with zero offset (should not affect predictions)
+  data = task$data()
+  set(data, j = "zeros", value = rep(0, nrow(data)))
+  task_offset = as_task_classif(data, target = "Class")
+  task_offset$set_col_roles(cols = "zeros", roles = "offset")
+
+  # same task but with a numeric column acting as offset
+  task_offset2 = task$clone()
+  task_offset2$set_col_roles(cols = "V42", roles = "offset")
+
+  # add predefined internal validation task
+  valid_ids = sample(task$row_ids, 42)
+  task$internal_valid_task = valid_ids
+  task_offset$internal_valid_task = valid_ids
+  task_offset2$internal_valid_task = valid_ids
+  part = partition(task)
+
+  l = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
+  l$validate = "predefined"
+  p1 = l$train(task, part$train)$predict(task, part$test) # no offset
+  p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # zero offset
+  p3 = l$train(task_offset2, part$train)$predict(task_offset2, part$test) # non-zero offset
+
+  expect_equal(p1$prob, p2$prob) # zero offset => same predictions
+  expect_false(all(p1$prob[, 1L] == p3$prob[, 1L])) # non-zero offset => different predictions
 })
