@@ -401,7 +401,10 @@ test_that("base_margin (offset)", {
   l$validate = "predefined"
   p1 = l$train(task, part$train)$predict(task, part$test) # no offset
   p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # zero offset
+  expect_false("zeros" %in% l$model$feature_names) # offset column is not a feature
   p3 = l$train(task_offset2, part$train)$predict(task_offset2, part$test) # non-zero offset
+  expect_false("offset" %in% l$model$feature_names) # offset column is not a feature
+  expect_false("V42" %in% l$model$feature_names) # neither "V42"
 
   expect_equal(p1$prob, p2$prob) # zero offset => same predictions
   expect_false(all(p1$prob[, 1L] == p3$prob[, 1L])) # non-zero offset => different predictions
