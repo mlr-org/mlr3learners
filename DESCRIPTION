@@ -11,7 +11,9 @@ Authors@R: c(
     person("Patrick", "Schratz", , "patrick.schratz@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0003-0748-6624")),
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("cre", "aut"),
-           comment = c(ORCID = "0000-0002-8115-0400"))
+           comment = c(ORCID = "0000-0002-8115-0400")),
+    person("John", "Zobolas", , "bblodfon@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0002-3609-8674"))
   )
 Description: Recommended Learners for 'mlr3'. Extends 'mlr3' with
     interfaces to essential machine learning packages on CRAN.  This
