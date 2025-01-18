@@ -253,9 +253,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(xgb_data, "weight", task$weights$weight)
       }
 
-      # TODO: multiclass
       if ("offset" %in% task$properties) {
-        base_margin = task$data(cols = task$col_roles$offset)[[1L]]
+        offset = task$data(cols = task$col_roles$offset)
+        if (startsWith(pv$objective, "binary")) {
+          base_margin = offset[[1L]]
+        } else {
+          # multiclass needs a matrix (n_samples, n_classes)
+          base_margin = as_numeric_matrix(offset)
+        }
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
 
@@ -274,9 +279,15 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           xgboost::setinfo(xgb_valid_data, "weight", internal_valid_task$weights$weight)
         }
 
-        # TODO: multiclass
         if ("offset" %in% internal_valid_task$properties) {
-          base_margin = internal_valid_task$data(cols = internal_valid_task$col_roles$offset)[[1L]]
+          valid_offset = internal_valid_task$data(cols = internal_valid_task$col_roles$offset)
+          if (startsWith(pv$objective, "binary")) {
+            base_margin = valid_offset[[1L]]
+          } else {
+            # multiclass needs a matrix (n_samples, n_classes)
+            base_margin = as_numeric_matrix(valid_offset)
+          }
+
           xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
         }
 

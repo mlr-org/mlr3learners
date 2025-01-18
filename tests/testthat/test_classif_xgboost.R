@@ -368,15 +368,6 @@ test_that("mlr3measures are equal to internal measures", {
 })
 
 test_that("base_margin (offset)", {
-  # # multiclass task
-  # task = tsk("iris")
-  #
-  # # same task with multiclass offset
-  # data = task$data()
-  # set(data, j = "offset_Adelie", value = runif(nrow(data)))
-  # set(data, j = "offset_Chinstrap", value = runif(nrow(data)))
-  # task = as_task_classif(data, target = "species")
-
   # binary classification task
   task = tsk("sonar")
 
@@ -406,4 +397,25 @@ test_that("base_margin (offset)", {
 
   expect_equal(p1$prob, p2$prob) # zero offset => same predictions
   expect_false(all(p1$prob[, 1L] == p3$prob[, 1L])) # non-zero offset => different predictions
+
+  # multiclass task
+  task = tsk("iris")
+
+  # same task with multiclass offset
+  data = task$data()
+  set(data, j = "offset_setosa", value = runif(nrow(data)))
+  set(data, j = "offset_versicolor", value = runif(nrow(data)))
+  set(data, j = "offset_virginica", value = runif(nrow(data)))
+  task_offset = as_task_classif(data, target = "Species")
+  task_offset2 = task_offset$clone()
+  task_offset$set_col_roles(cols = c("offset_setosa", "offset_versicolor", "offset_virginica"), roles = "offset")
+  task_offset2$set_col_roles(cols = c("offset_setosa", "offset_versicolor"), roles = "offset")
+  part = partition(task)
+
+  l = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
+  expect_error(l$train(task_offset2), "Invalid shape of base_margin")
+  p1 = l$train(task, part$train)$predict(task, part$test) # no offset
+  p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # with offset
+
+  expect_false(all(p1$prob == p2$prob))
 })
