@@ -140,7 +140,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         id = "regr.xgboost",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "importance", "hotstart_forward", "internal_tuning", "validation"),
+        properties = c("weights", "missings", "importance", "hotstart_forward", "internal_tuning", "validation", "offset"),
         packages = c("mlr3learners", "xgboost"),
         label = "Extreme Gradient Boosting",
         man = "mlr3learners::mlr_learners_regr.xgboost"
@@ -208,7 +208,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       }
 
       if ("offset" %in% task$properties) {
-        base_margin = task$data(cols = task$col_roles$offset)[[1L]]
+        base_margin = task$offset[[1L]]
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
 
@@ -228,7 +228,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         }
 
         if ("offset" %in% internal_valid_task$properties) {
-          base_margin = internal_valid_task$data(cols = internal_valid_task$col_roles$offset)[[1L]]
+          base_margin = internal_valid_task$offset[[1L]]
           xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
         }
 

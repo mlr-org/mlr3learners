@@ -32,7 +32,7 @@
 #'
 #' @section Early Stopping and Validation:
 #' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
-#' For information on how to configure the valdiation set, see the *Validation* section of [mlr3::Learner].
+#' For information on how to configure the validation set, see the *Validation* section of [mlr3::Learner].
 #' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
 #' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the optimal `nrounds` via `$internal_tuned_values`.
 #' The internal validation measure can be set via the `eval_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
@@ -163,7 +163,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward", "internal_tuning", "validation"),
+        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward", "internal_tuning", "validation", "offset"),
         packages = c("mlr3learners", "xgboost"),
         label = "Extreme Gradient Boosting",
         man = "mlr3learners::mlr_learners_classif.xgboost"
@@ -254,12 +254,19 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       if ("offset" %in% task$properties) {
-        offset = task$data(cols = task$col_roles$offset)
-        if (startsWith(pv$objective, "binary")) {
+        offset = task$offset
+        if (nlvls == 2L) {
+          # binary => vector
           base_margin = offset[[1L]]
         } else {
           # multiclass needs a matrix (n_samples, n_classes)
-          base_margin = as_numeric_matrix(offset)
+          # it seems reasonable to reorder according to label (0,1,2,...)
+          reorder_cols = paste0("offset_", rev(levels(task$truth())))
+          if (length(reorder_cols) != ncol(offset)) {
+            stopf("Task has %i class labels, and only %i offset columns are provided",
+                 nlevels(task$truth()), ncol(offset))
+          }
+          base_margin = as_numeric_matrix(offset)[, reorder_cols]
         }
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
@@ -280,14 +287,16 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         }
 
         if ("offset" %in% internal_valid_task$properties) {
-          valid_offset = internal_valid_task$data(cols = internal_valid_task$col_roles$offset)
-          if (startsWith(pv$objective, "binary")) {
+          valid_offset = internal_valid_task$offset
+          if (nlvls == 2L) {
+            # binary => vector
             base_margin = valid_offset[[1L]]
           } else {
             # multiclass needs a matrix (n_samples, n_classes)
-            base_margin = as_numeric_matrix(valid_offset)
+            # it seems reasonable to reorder according to label (0,1,2,...)
+            reorder_cols = paste0("offset_", rev(levels(internal_valid_task$truth())))
+            base_margin = as_numeric_matrix(valid_offset)[, reorder_cols]
           }
-
           xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
         }
 
