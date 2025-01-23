@@ -404,16 +404,17 @@ test_that("base_margin (offset)", {
   # same task with multiclass offset
   data = task$data()
   set(data, j = "offset_setosa", value = runif(nrow(data)))
-  set(data, j = "offset_versicolor", value = runif(nrow(data)))
   set(data, j = "offset_virginica", value = runif(nrow(data)))
+  set(data, j = "offset_versicolor", value = runif(nrow(data)))
   task_offset = as_task_classif(data, target = "Species")
   task_offset2 = task_offset$clone()
-  task_offset$set_col_roles(cols = c("offset_setosa", "offset_versicolor", "offset_virginica"), roles = "offset")
+  task_offset$set_col_roles(cols = c("offset_setosa", "offset_virginica", "offset_versicolor"), roles = "offset")
   task_offset2$set_col_roles(cols = c("offset_setosa", "offset_versicolor"), roles = "offset")
   part = partition(task)
 
   l = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
-  expect_error(l$train(task_offset2), "Invalid shape of base_margin")
+  # xgboost doesn't work with less offset columns than the class labels
+  expect_error(l$train(task_offset2), "only 2 offset columns are provided")
   p1 = l$train(task, part$train)$predict(task, part$test) # no offset
   p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # with offset
 
