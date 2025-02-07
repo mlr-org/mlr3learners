@@ -255,18 +255,19 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       if ("offset" %in% task$properties) {
         offset = task$offset
-        if (nlvls == 2L) {
-          # binary => vector
-          base_margin = offset[[1L]]
+        if (startsWith(pv$objective, "binary")) {
+          # binary case
+          base_margin = offset[[2L]] # first column is `row_id`
         } else {
           # multiclass needs a matrix (n_samples, n_classes)
           # it seems reasonable to reorder according to label (0,1,2,...)
-          reorder_cols = paste0("offset_", rev(levels(task$truth())))
-          if (length(reorder_cols) != ncol(offset)) {
+          reordered_cols = paste0("offset_", rev(levels(task$truth())))
+          n_offsets = ncol(offset) - 1
+          if (length(reordered_cols) != n_offsets) {
             stopf("Task has %i class labels, and only %i offset columns are provided",
-                 nlevels(task$truth()), ncol(offset))
+                 nlevels(task$truth()), n_offsets)
           }
-          base_margin = as_numeric_matrix(offset)[, reorder_cols]
+          base_margin = as_numeric_matrix(offset)[, reordered_cols]
         }
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
@@ -288,14 +289,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
         if ("offset" %in% internal_valid_task$properties) {
           valid_offset = internal_valid_task$offset
-          if (nlvls == 2L) {
-            # binary => vector
-            base_margin = valid_offset[[1L]]
+          if (startsWith(pv$objective, "binary")) {
+            base_margin = valid_offset[[2L]] # first column is `row_id`
           } else {
             # multiclass needs a matrix (n_samples, n_classes)
             # it seems reasonable to reorder according to label (0,1,2,...)
-            reorder_cols = paste0("offset_", rev(levels(internal_valid_task$truth())))
-            base_margin = as_numeric_matrix(valid_offset)[, reorder_cols]
+            reordered_cols = paste0("offset_", rev(levels(internal_valid_task$truth())))
+            base_margin = as_numeric_matrix(valid_offset)[, reordered_cols]
           }
           xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
         }

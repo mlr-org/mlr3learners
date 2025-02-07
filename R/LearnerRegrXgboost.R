@@ -208,7 +208,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       }
 
       if ("offset" %in% task$properties) {
-        base_margin = task$offset[[1L]]
+        base_margin = task$offset[[2L]] # first column is `row_id`
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
 
@@ -228,7 +228,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         }
 
         if ("offset" %in% internal_valid_task$properties) {
-          base_margin = internal_valid_task$offset[[1L]]
+          base_margin = internal_valid_task$offset[[2L]]
           xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
         }
 
