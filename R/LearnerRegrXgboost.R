@@ -208,8 +208,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       }
 
       if ("offset" %in% task$properties) {
-        base_margin = task$offset[[2L]] # first column is `row_id`
-        xgboost::setinfo(xgb_data, "base_margin", base_margin)
+        xgboost::setinfo(xgb_data, "base_margin", task$offset$offset)
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -228,8 +227,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         }
 
         if ("offset" %in% internal_valid_task$properties) {
-          base_margin = internal_valid_task$offset[[2L]]
-          xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
+          xgboost::setinfo(xgb_valid_data, "base_margin", internal_valid_task$offset$offset)
         }
 
         pv$watchlist = c(pv$watchlist, list(test = xgb_valid_data))

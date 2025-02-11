@@ -255,14 +255,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       if ("offset" %in% task$properties) {
         offset = task$offset
-        if (startsWith(pv$objective, "binary")) {
+        if (nlvls == 2L) {
           # binary case
-          base_margin = offset[[2L]] # first column is `row_id`
+          base_margin = offset$offset
         } else {
           # multiclass needs a matrix (n_samples, n_classes)
           # it seems reasonable to reorder according to label (0,1,2,...)
           reordered_cols = paste0("offset_", rev(levels(task$truth())))
-          n_offsets = ncol(offset) - 1
+          n_offsets = ncol(offset) - 1 # all expect `row_id`
           if (length(reordered_cols) != n_offsets) {
             stopf("Task has %i class labels, and only %i offset columns are provided",
                  nlevels(task$truth()), n_offsets)
@@ -289,8 +289,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
         if ("offset" %in% internal_valid_task$properties) {
           valid_offset = internal_valid_task$offset
-          if (startsWith(pv$objective, "binary")) {
-            base_margin = valid_offset[[2L]] # first column is `row_id`
+          if (nlvls == 2L) {
+            base_margin = valid_offset$offset
           } else {
             # multiclass needs a matrix (n_samples, n_classes)
             # it seems reasonable to reorder according to label (0,1,2,...)
