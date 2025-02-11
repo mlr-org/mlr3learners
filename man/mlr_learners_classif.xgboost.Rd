@@ -49,7 +49,7 @@ The lightgbm learner has a default of 1000, so we use the same here.
 \section{Early Stopping and Validation}{
 
 In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
-For information on how to configure the valdiation set, see the \emph{Validation} section of \link[mlr3:Learner]{mlr3::Learner}.
+For information on how to configure the validation set, see the \emph{Validation} section of \link[mlr3:Learner]{mlr3::Learner}.
 This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
 The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
 The internal validation measure can be set via the \code{eval_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
@@ -81,7 +81,6 @@ lrn("classif.xgboost")
    alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   base_margin \tab untyped \tab NULL \tab  \tab - \cr
    booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
    callbacks \tab untyped \tab list() \tab  \tab - \cr
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
@@ -273,6 +272,7 @@ a ratio, \code{"test"}, or \code{"predefined"}.}
 <details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
@@ -280,6 +280,7 @@ a ratio, \code{"test"}, or \code{"predefined"}.}
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href='../../mlr3/html/Learner.html#method-Learner-selected_features'><code>mlr3::Learner$selected_features()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
 </ul>
 </details>

@@ -10,7 +10,7 @@ test_that("autotest", {
 
 test_that("xgboost with softmax", {
   learner = mlr3::lrn("classif.xgboost", nrounds = 5L, objective = "multi:softmax")
-  result = run_autotest(learner, predict_types = "response")
+  result = run_autotest(learner, predict_types = "response", exclude = "offset_binary")
   expect_true(result, info = result$error)
 })
 
@@ -367,27 +367,56 @@ test_that("mlr3measures are equal to internal measures", {
 
 })
 
+test_that("base_margin (offset)", {
+  # binary classification task
+  task = tsk("sonar")
 
-test_that("base_margin", {
-  # input checks
-  expect_error(lrn("classif.xgboost", base_margin = 1), "Must be of type")
-  expect_error(lrn("classif.xgboost", base_margin = ""), "have at least 1 characters")
-  expect_error(lrn("classif.xgboost", base_margin = c("a", "b")), "have length 1")
+  # same task with zero offset (should not affect predictions)
+  data = task$data()
+  set(data, j = "zeros", value = rep(0, nrow(data)))
+  task_offset = as_task_classif(data, target = "Class")
+  task_offset$set_col_roles(cols = "zeros", roles = "offset")
 
-  # base_margin not a feature
+  # same task but with a numeric column acting as offset
+  task_offset2 = task$clone()
+  task_offset2$set_col_roles(cols = "V42", roles = "offset")
+
+  # add predefined internal validation task
+  part = partition(task, c(0.6, 0.2)) # 60% train, 20% test, 20% validate
+  task$internal_valid_task = part$validation
+  task_offset$internal_valid_task = part$validation
+  task_offset2$internal_valid_task = part$validation
+
+  l = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
+  l$validate = "predefined"
+  p1 = l$train(task, part$train)$predict(task, part$test) # no offset
+  p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # zero offset
+  expect_false("zeros" %in% l$model$feature_names) # offset column is not a feature
+  p3 = l$train(task_offset2, part$train)$predict(task_offset2, part$test) # non-zero offset
+  expect_false("V42" %in% l$model$feature_names) # "V42" column is not a feature
+
+  expect_equal(p1$prob, p2$prob) # zero offset => same predictions
+  expect_false(all(p1$prob[, 1L] == p3$prob[, 1L])) # non-zero offset => different predictions
+
+  # multiclass task
   task = tsk("iris")
-  learner = lrn("classif.xgboost", base_margin = "not_a_feature")
-  expect_error(learner$train(task), "base_margin %in%")
 
-  # base_margin is a feature but objective is multiclass
-  learner = lrn("classif.xgboost", base_margin = "Petal.Length")
-  expect_error(learner$train(task), "startsWith")
+  # same task with multiclass offset
+  data = task$data()
+  set(data, j = "offset_setosa", value = runif(nrow(data)))
+  set(data, j = "offset_virginica", value = runif(nrow(data)))
+  set(data, j = "offset_versicolor", value = runif(nrow(data)))
+  task_offset = as_task_classif(data, target = "Species")
+  task_offset2 = task_offset$clone()
+  task_offset$set_col_roles(cols = c("offset_setosa", "offset_virginica", "offset_versicolor"), roles = "offset")
+  task_offset2$set_col_roles(cols = c("offset_setosa", "offset_versicolor"), roles = "offset")
+  part = partition(task)
 
-  # predictions change
-  task = tsk("sonar") # binary classification task
-  l1 = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
-  l2 = lrn("classif.xgboost", nrounds = 5, base_margin = "V9", predict_type = "prob")
-  p1 = l1$train(task)$predict(task)
-  p2 = l2$train(task)$predict(task)
-  expect_false(all(p1$prob[, 1L] == p2$prob[, 1L]))
+  l = lrn("classif.xgboost", nrounds = 5, predict_type = "prob")
+  # xgboost doesn't work with less offset columns than the class labels
+  expect_error(l$train(task_offset2), "only 2 offset columns are provided")
+  p1 = l$train(task, part$train)$predict(task, part$test) # no offset
+  p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # with offset
+
+  expect_false(all(p1$prob == p2$prob))
 })

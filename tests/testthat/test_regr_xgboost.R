@@ -227,21 +227,34 @@ test_that("mlr3measures are equal to internal measures", {
   expect_equal(log_mlr3, log_internal)
 })
 
-test_that("base_margin", {
-  # input checks
-  expect_error(lrn("regr.xgboost", base_margin = 1), "Must be of type")
-  expect_error(lrn("regr.xgboost", base_margin = ""), "have at least 1 characters")
-  expect_error(lrn("regr.xgboost", base_margin = c("a", "b")), "have length 1")
-
-  # base_margin not a feature
+test_that("base_margin (offset)", {
   task = tsk("mtcars")
-  learner = lrn("regr.xgboost", base_margin = "not_a_feature")
-  expect_error(learner$train(task), "base_margin %in%")
 
-  # predictions change
-  l1 = lrn("regr.xgboost", nrounds = 5)
-  l2 = lrn("regr.xgboost", nrounds = 5, base_margin = "qsec")
-  p1 = l1$train(task)$predict(task)
-  p2 = l2$train(task)$predict(task)
-  expect_false(all(p1$response == p2$response))
+  # same task with 0.5 offset (should not affect predictions)
+  data = task$data()
+  # see https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html
+  set(data, j = "zeros", value = rep(0.5, nrow(data)))
+  task_offset = as_task_regr(data, target = "mpg")
+  task_offset$set_col_roles(cols = "zeros", roles = "offset")
+
+  # same task but with a numeric column acting as offset
+  task_offset2 = task$clone()
+  task_offset2$set_col_roles(cols = "qsec", roles = "offset")
+
+  # add predefined internal validation task
+  part = partition(task, c(0.6, 0.2)) # 60% train, 20% test, 20% validate
+  task$internal_valid_task = part$validation
+  task_offset$internal_valid_task = part$validation
+  task_offset2$internal_valid_task = part$validation
+
+  l = lrn("regr.xgboost", nrounds = 5)
+  l$validate = "predefined"
+  p1 = l$train(task, part$train)$predict(task, part$test) # no offset
+  p2 = l$train(task_offset, part$train)$predict(task_offset, part$test) # zero offset
+  expect_false("zeros" %in% l$model$feature_names) # offset column is not a feature
+  p3 = l$train(task_offset2, part$train)$predict(task_offset2, part$test) # non-zero offset
+  expect_false("qsec" %in% l$model$feature_names) # "qsec" column is not a feature
+
+  expect_equal(p1$response, p2$response) # zero offset => same predictions
+  expect_false(all(p1$response == p3$response)) # non-zero offset => different predictions
 })

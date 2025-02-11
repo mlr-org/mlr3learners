@@ -72,7 +72,6 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
-        base_margin                 = p_uty(default = NULL, tags = "train", custom_check = crate({function(x) check_character(x, len = 1, null.ok = TRUE, min.chars = 1)})),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = "train"),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -141,7 +140,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         id = "regr.xgboost",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "importance", "hotstart_forward", "internal_tuning", "validation"),
+        properties = c("weights", "missings", "importance", "hotstart_forward", "internal_tuning", "validation", "offset"),
         packages = c("mlr3learners", "xgboost"),
         label = "Extreme Gradient Boosting",
         man = "mlr3learners::mlr_learners_regr.xgboost"
@@ -201,18 +200,15 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
+
       xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
       if ("weights" %in% task$properties) {
         xgboost::setinfo(xgb_data, "weight", task$weights$weight)
       }
 
-      base_margin = pv$base_margin
-      pv$base_margin = NULL # silence xgb.train message
-      if (!is.null(base_margin)) {
-        # base_margin must be a task feature
-        assert_true(base_margin %in% task$feature_names)
-        xgboost::setinfo(xgb_data, "base_margin", data[[base_margin]])
+      if ("offset" %in% task$properties) {
+        xgboost::setinfo(xgb_data, "base_margin", task$offset$offset)
       }
 
       # the last element in the watchlist is used as the early stopping set
@@ -221,14 +217,20 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         stopf("Learner (%s): Configure field 'validate' to enable early stopping.", self$id)
       }
       if (!is.null(internal_valid_task)) {
-        test_data = internal_valid_task$data(cols = task$feature_names)
-        test_target = internal_valid_task$data(cols = task$target_names)
-        xgb_test_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(test_data), label = data.matrix(test_target))
-        if (!is.null(base_margin)) {
-          xgboost::setinfo(xgb_test_data, "base_margin", test_data[[base_margin]])
+        valid_data = internal_valid_task$data(cols = task$feature_names)
+        valid_target = internal_valid_task$data(cols = task$target_names)
+
+        xgb_valid_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(valid_data), label = data.matrix(valid_target))
+
+        if ("weights" %in% internal_valid_task$properties) {
+          xgboost::setinfo(xgb_valid_data, "weight", internal_valid_task$weights$weight)
         }
 
-        pv$watchlist = c(pv$watchlist, list(test = xgb_test_data))
+        if ("offset" %in% internal_valid_task$properties) {
+          xgboost::setinfo(xgb_valid_data, "base_margin", internal_valid_task$offset$offset)
+        }
+
+        pv$watchlist = c(pv$watchlist, list(test = xgb_valid_data))
       }
 
       # set internal validation measure
@@ -255,6 +257,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
       newdata = as_numeric_matrix(ordered_features(task, self))
+
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
       list(response = response)
