@@ -256,16 +256,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
-      data = ordered_features(task, self)
-
-      # remove `base_margin` from input data for prediction
-      base_margin = pv$base_margin
-      if (!is.null(base_margin)) {
-        assert_true(base_margin %in% task$feature_names)
-        data[[base_margin]] = NULL
-      }
-
-      newdata = as_numeric_matrix(data)
+      newdata = as_numeric_matrix(ordered_features(task, self))
 
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
