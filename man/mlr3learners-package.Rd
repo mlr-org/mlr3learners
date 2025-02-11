@@ -29,6 +29,7 @@ Authors:
   \item Quay Au \email{quayau@gmail.com} (\href{https://orcid.org/0000-0002-5252-8902}{ORCID})
   \item Stefan Coors \email{mail@stefancoors.de} (\href{https://orcid.org/0000-0002-7465-2146}{ORCID})
   \item Patrick Schratz \email{patrick.schratz@gmail.com} (\href{https://orcid.org/0000-0003-0748-6624}{ORCID})
+  \item John Zobolas \email{bblodfon@gmail.com} (\href{https://orcid.org/0000-0002-3609-8674}{ORCID})
 }
 
 }
