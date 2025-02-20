@@ -72,7 +72,17 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
       se_fit = self$predict_type == "se"
+
+      if ("offset" %in% task$properties) {
+        # apply the offset during predict (TODO: not apply it => set to zero then)
+        newdata[[task$col_roles$offset]] = task$offset$offset
+      }
       prediction = invoke(predict, object = self$model, newdata = newdata, se.fit = se_fit, .args = pv)
+
+      # need to remove NAs for this crazy replication that using offset in lm does
+      if ("offset" %in% task$properties) {
+        prediction = prediction[!is.na(prediction)]
+      }
 
       if (se_fit) {
         list(response = unname(prediction$fit), se = unname(prediction$se.fit))
