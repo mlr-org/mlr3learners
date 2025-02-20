@@ -10,7 +10,8 @@ test_that("regr.lm", {
     "na.action", # handled via mlr3
     "method", # handled via mlr3
     "subset", # handled via mlr3
-    "contrasts" # handled via mlr3
+    "contrasts", # handled via mlr3
+    "offset" # handled via mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
