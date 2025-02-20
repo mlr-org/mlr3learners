@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+* feat: learners such as `xgboost` and `glm` use the `offset` column role from input tasks.
+
 # mlr3learners 0.9.0
 
 * BREAKING CHANGE: Remove ``$loglik()`` method from all learners.
