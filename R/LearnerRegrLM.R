@@ -27,7 +27,6 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         interval      = p_fct(c("none", "confidence", "prediction"), tags = "predict"),
         level         = p_dbl(default = 0.95, tags = "predict"),
         model         = p_lgl(default = TRUE, tags = "train"),
-        offset        = p_lgl(tags = "train"),
         pred.var      = p_uty(tags = "predict"),
         qr            = p_lgl(default = TRUE, tags = "train"),
         scale         = p_dbl(default = NULL, special_vals = list(NULL), tags = "predict"),
@@ -44,7 +43,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         param_set = ps,
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "factor", "character"),
-        properties = "weights",
+        properties = c("weights", "offset"),
         packages = c("mlr3learners", "stats"),
         label = "Linear Model",
         man = "mlr3learners::mlr_learners_regr.lm"
@@ -55,8 +54,13 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
+
       if ("weights" %in% task$properties) {
         pv = insert_named(pv, list(weights = task$weights$weight))
+      }
+
+      if ("offset" %in% task$properties) {
+        pv = insert_named(pv, list(offset = task$offset$offset))
       }
 
       invoke(stats::lm,
