@@ -45,10 +45,10 @@ test_that("offset works", {
   expect_false(all(learner$model$coefficients == learner_offset$model$coefficients))
 
   # check: we get same trained model manually using the formula interface
-  model = lm(y ~ x + offset(offset_col), data = data_with_offset, subset = part$train)
+  model = stats::lm(y ~ x + offset(offset_col), data = data_with_offset, subset = part$train)
   expect_equal(model$coefficients, learner_offset$model$coefficients)
 
-  # predict on test set (no offste is used by default)
+  # predict on test set (no offset is used by default)
   p1 = learner_offset$predict(task_with_offset, part$test)
   # same thing manually
   res = unname(predict(model, newdata = cbind(data[part$test, ], offset_col = 0)))
