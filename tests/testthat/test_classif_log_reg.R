@@ -19,8 +19,8 @@ test_that("class labels are correctly encoded", {
 })
 
 test_that("offset works", {
-  data = data.table(x = 1:10, y = stats::rbinom(10, size = 1, prob = 0.5))
-  offset_col = runif(10)
+  data = data.table(x = 1:30, y = stats::rbinom(30, size = 1, prob = 0.5))
+  offset_col = runif(30)
   data_with_offset = cbind(data, offset_col)
 
   task = as_task_classif(x = data, target = "y", positive = "1")
