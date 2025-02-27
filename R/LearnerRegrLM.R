@@ -6,6 +6,17 @@
 #' Ordinary linear regression.
 #' Calls [stats::lm()].
 #'
+#' @section Offset:
+#'
+#' In the latest mlr3 release (`v22.0.2`), we support an offset column in regression tasks.
+#'
+#' If a `Task` has a column with the role `offset`, it will automatically be used during training.
+#' The offset is incorporated through the formula interface to ensure compatibility with [stats::lm()].
+#' We add it to the model formula as `offset(<column_name>)` and also included it in the training data.
+#'
+#' During prediction, the offset column from the test set will be used only if `use_pred_offset = TRUE`.
+#' By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#'
 #' @templateVar id regr.lm
 #' @template learner
 #'
@@ -35,7 +46,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         y             = p_lgl(default = FALSE, tags = "train"),
         rankdeficient = p_fct(c("warnif", "simple", "non-estim", "NA", "NAwarn"), tags = "predict"),
         tol           = p_dbl(default = 1e-07, tags = "predict"),
-        verbose       = p_lgl(default = FALSE, tags = "predict")
+        verbose       = p_lgl(default = FALSE, tags = "predict"),
+        use_pred_offset = p_lgl(default = FALSE, tags = "predict")
       )
 
       super$initialize(
@@ -60,11 +72,21 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       }
 
       if ("offset" %in% task$properties) {
-        pv = insert_named(pv, list(offset = task$offset$offset))
+        # we use the formula interface since setting `offset` = ... doesn't work during prediction
+        offset_colname = task$col_roles$offset
+        formula_terms = c(task$feature_names, paste0("offset(", offset_colname, ")"))
+        # needs both `env = ...` and `quote = "left"` args to work
+        form = mlr3misc::formulate(lhs = task$target_names, rhs = formula_terms,
+                                   env = environment(), quote = "left")
+        # add offset column to the data
+        data = task$data()[, (offset_colname) := task$offset$offset][]
+      } else {
+        form = task$formula()
+        data = task$data()
       }
 
       invoke(stats::lm,
-        formula = task$formula(), data = task$data(),
+        formula = form, data = data,
         .args = pv, .opts = opts_default_contrasts)
     },
 
@@ -74,9 +96,11 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       se_fit = self$predict_type == "se"
 
       if ("offset" %in% task$properties) {
-        # apply the offset during predict (TODO: not apply it => set to zero then)
-        newdata[[task$col_roles$offset]] = task$offset$offset
+        offset_colname = task$col_roles$offset
+        # add offset column to the test data
+        newdata[, (offset_colname) := if (isTRUE(pv$use_pred_offset)) task$offset$offset else 0]
       }
+
       prediction = invoke(predict, object = self$model, newdata = newdata, se.fit = se_fit, .args = pv)
 
       # need to remove NAs for this crazy replication that using offset in lm does
