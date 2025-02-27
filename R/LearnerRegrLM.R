@@ -71,18 +71,19 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         pv = insert_named(pv, list(weights = task$weights$weight))
       }
 
+      form = task$formula()
+      data = task$data()
+
       if ("offset" %in% task$properties) {
-        # we use the formula interface since setting `offset` = ... doesn't work during prediction
+        # we use the formula interface as `offset` = ... doesn't work during prediction
         offset_colname = task$col_roles$offset
+        # re-write formula
         formula_terms = c(task$feature_names, paste0("offset(", offset_colname, ")"))
         # needs both `env = ...` and `quote = "left"` args to work
         form = mlr3misc::formulate(lhs = task$target_names, rhs = formula_terms,
                                    env = environment(), quote = "left")
         # add offset column to the data
-        data = task$data()[, (offset_colname) := task$offset$offset][]
-      } else {
-        form = task$formula()
-        data = task$data()
+        data = data[, (offset_colname) := task$offset$offset][]
       }
 
       invoke(stats::lm,
@@ -96,8 +97,8 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       se_fit = self$predict_type == "se"
 
       if ("offset" %in% task$properties) {
+        # add offset to the test data
         offset_colname = task$col_roles$offset
-        # add offset column to the test data
         newdata[, (offset_colname) := if (isTRUE(pv$use_pred_offset)) task$offset$offset else 0]
       }
 
