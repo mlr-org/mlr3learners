@@ -40,7 +40,7 @@
 #'
 #' @section Offset:
 #'
-#' In the latest mlr3 release (`v22.0.2`), we support an offset column(s) in classification tasks.
+#' In the latest mlr3 release (`v22.0.2`), the use of offset column(s) is supported.
 #'
 #' If a `Task` has a column with the role `offset` (or multiple columns in case of multiclass), it will automatically be used during training.
 #' The offset is incorporated through the [xgboost::xgb.DMatrix] interface, using the `base_margin` field.

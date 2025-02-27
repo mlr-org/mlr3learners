@@ -8,7 +8,7 @@
 #'
 #' @section Offset:
 #'
-#' In the latest mlr3 release (`v22.0.2`), we support an offset column in regression tasks.
+#' In the latest mlr3 release (`v22.0.2`), the use of offset column(s) is supported.
 #'
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
 #' The offset is incorporated through the formula interface to ensure compatibility with [stats::lm()].

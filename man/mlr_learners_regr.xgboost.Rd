@@ -23,7 +23,7 @@ See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-s
 \section{Offset}{
 
 
-In the latest mlr3 release (\code{v22.0.2}), we support an offset column in regression tasks.
+In the latest mlr3 release (\code{v22.0.2}), the use of offset column(s) is supported.
 
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.

@@ -59,7 +59,7 @@ Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost 
 \section{Offset}{
 
 
-In the latest mlr3 release (\code{v22.0.2}), we support an offset column(s) in classification tasks.
+In the latest mlr3 release (\code{v22.0.2}), the use of offset column(s) is supported.
 
 If a \code{Task} has a column with the role \code{offset} (or multiple columns in case of multiclass), it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
