@@ -53,7 +53,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         mxit                 = p_int(1L, default = 100L, tags = "train"),
         nfolds               = p_int(3L, default = 10L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        offset               = p_uty(default = NULL, tags = "train"),
+        use_pred_offset      = p_lgl(default = FALSE, tags = "predict"),
         parallel             = p_lgl(default = FALSE, tags = "train"),
         penalty.factor       = p_uty(tags = "train"),
         pmax                 = p_int(0L, tags = "train"),
@@ -78,7 +78,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "twoclass", "multiclass", "selected_features"),
+        properties = c("weights", "twoclass", "multiclass", "selected_features", "offset"),
         packages = c("mlr3learners", "glmnet"),
         label = "GLM with Elastic Net Regularization",
         man = "mlr3learners::mlr_learners_classif.cv_glmnet"
@@ -108,6 +108,8 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         pv$weights = task$weights$weight
       }
 
+      pv = glmnet_set_offset(task, "train", pv)
+
       glmnet_invoke(data, target, pv, cv = TRUE)
     },
 
@@ -115,6 +117,8 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
       newdata = as_numeric_matrix(ordered_features(task, self))
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, "predict.gamma", "gamma")
+
+      pv = glmnet_set_offset(task, "predict", pv)
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model,

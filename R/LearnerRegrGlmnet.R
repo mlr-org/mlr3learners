@@ -51,9 +51,8 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         mnlam                 = p_int(1L, default = 5L, tags = "train"),
         mxit                  = p_int(1L, default = 100L, tags = "train"),
         mxitnr                = p_int(1L, default = 25L, tags = "train"),
-        newoffset             = p_uty(tags = "predict"),
+        use_pred_offset       = p_lgl(default = FALSE, tags = "predict"),
         nlambda               = p_int(1L, default = 100L, tags = "train"),
-        offset                = p_uty(default = NULL, tags = "train"),
         parallel              = p_lgl(default = FALSE, tags = "train"),
         penalty.factor        = p_uty(tags = "train"),
         pmax                  = p_int(0L, tags = "train"),
@@ -77,7 +76,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         id = "regr.glmnet",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = "weights",
+        properties = c("weights", "offset"),
         packages = c("mlr3learners", "glmnet"),
         label = "GLM with Elastic Net Regularization",
         man = "mlr3learners::mlr_learners_regr.glmnet"
@@ -106,6 +105,8 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         pv$weights = task$weights$weight
       }
 
+      pv = glmnet_set_offset(task, "train", pv)
+
       glmnet_invoke(data, target, pv)
     },
 
@@ -114,6 +115,8 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, "predict.gamma", "gamma")
       pv$s = glmnet_get_lambda(self, pv)
+
+      pv = glmnet_set_offset(task, "predict", pv)
 
       response = invoke(predict, self$model,
         newx = newdata,
