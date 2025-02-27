@@ -71,3 +71,35 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
     x = data, y = target, .args = pv
   )
 }
+
+glmnet_set_offset = function(task, phase = "train", pv) {
+  assert_choice(phase, c("train", "predict"))
+
+  if ("offset" %nin% task$properties) return(pv)
+
+  use_pred_offset = isTRUE(pv$use_pred_offset)
+  is_train = phase == "train"
+
+  # regression
+  if (task$task_type == "regr") {
+    pv[[if (is_train) "offset" else "newoffset"]] =
+      if (is_train || use_pred_offset) task$offset$offset else rep(0, task$nrow)
+  }
+
+  # classification
+  if (task$task_type == "classif") {
+    is_twoclass = length(task$class_names) == 2L
+    offset_cols = paste0("offset_", task$class_names)
+
+    if (is_twoclass) {
+      pv[[if (is_train) "offset" else "newoffset"]] =
+        if (is_train || use_pred_offset) task$offset$offset else rep(0, task$nrow)
+    } else {
+      pv[[if (is_train) "offset" else "newoffset"]] =
+        if (is_train || use_pred_offset) as_numeric_matrix(task$offset)[, offset_cols]
+      else matrix(0, nrow = task$nrow, ncol = length(task$class_names))
+    }
+  }
+
+  pv
+}
