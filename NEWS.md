@@ -1,6 +1,6 @@
 # mlr3learners (development version)
 
-* feat: learners such as `xgboost` and `glm` use the `offset` column role from input tasks.
+* feat: Support offset during training and prediction in `xgboost`, `glmnet`, `lm` and `glm` learners.
 
 # mlr3learners 0.9.0
 
