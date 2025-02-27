@@ -22,7 +22,7 @@
 #' In the latest mlr3 release (`v22.0.2`), we support an offset column in regression tasks.
 #'
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
-#' The offset is incorporated through the [xgb.DMatrix] interface, using the `base_margin` field.
+#' The offset is incorporated through the [xgboost::xgb.DMatrix] interface, using the `base_margin` field.
 #' No offset is applied during prediction for this learner.
 #'
 #' @templateVar id regr.xgboost
