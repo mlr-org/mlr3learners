@@ -55,7 +55,6 @@ lrn("classif.log_reg")
    maxit \tab numeric \tab 25 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    model \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    mustart \tab untyped \tab - \tab  \tab - \cr
-   offset \tab untyped \tab - \tab  \tab - \cr
    singular.ok \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    start \tab untyped \tab NULL \tab  \tab - \cr
    trace \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
