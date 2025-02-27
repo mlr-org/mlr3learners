@@ -20,6 +20,16 @@ To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and lin
 against CUDA.
 See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 }
+\section{Offset}{
+
+
+In the latest mlr3 release (\code{v22.0.2}), we support an offset column in regression tasks.
+
+If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
+The offset is incorporated through the \link{xgb.DMatrix} interface, using the \code{base_margin} field.
+No offset is applied during prediction for this learner.
+}
+
 \section{Dictionary}{
 
 This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:

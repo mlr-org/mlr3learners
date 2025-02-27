@@ -17,6 +17,14 @@
 #' @inheritSection mlr_learners_classif.xgboost Early Stopping and Validation
 #' @inheritSection mlr_learners_classif.xgboost Initial parameter values
 #'
+#' @section Offset:
+#'
+#' In the latest mlr3 release (`v22.0.2`), we support an offset column in regression tasks.
+#'
+#' If a `Task` has a column with the role `offset`, it will automatically be used during training.
+#' The offset is incorporated through the [xgb.DMatrix] interface, using the `base_margin` field.
+#' No offset is applied during prediction for this learner.
+#'
 #' @templateVar id regr.xgboost
 #' @template learner
 #'
