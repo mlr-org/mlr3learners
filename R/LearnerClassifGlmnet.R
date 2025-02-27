@@ -6,7 +6,6 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#'
 #' @details
 #' Caution: This learner is different to learners calling [glmnet::cv.glmnet()]
 #' in that it does not use the internal optimization of parameter `lambda`.
@@ -26,6 +25,7 @@
 #' custom resampling strategies (blocked design, stratification).
 #'
 #' @inheritSection mlr_learners_classif.log_reg Internal Encoding
+#' @inheritSection mlr_learners_classif.cv_glmnet Offset
 #'
 #' @templateVar id classif.glmnet
 #' @template learner

@@ -11,6 +11,16 @@
 #'
 #' @inheritSection mlr_learners_classif.log_reg Internal Encoding
 #'
+#' @section Offset:
+#'
+#' As of mlr3 version `v22.0.2`, support for offset columns is available.
+#'
+#' If a `Task` contains a column with the `offset` role, it is automatically incorporated during training via the `offset` argument in [glmnet::glmnet()].
+#'
+#' During prediction, the offset column from the test set is used only if `use_pred_offset = TRUE`,
+#' passed via the `newoffset` argument in [glmnet::predict.glmnet()].
+#' By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#'
 #' @templateVar id classif.cv_glmnet
 #' @template learner
 #'

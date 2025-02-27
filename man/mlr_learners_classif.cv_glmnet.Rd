@@ -11,6 +11,18 @@ Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{
 The default for hyperparameter \code{family} is set to \code{"binomial"} or \code{"multinomial"},
 depending on the number of classes.
 }
+\section{Offset}{
+
+
+As of mlr3 version \code{v22.0.2}, support for offset columns is available.
+
+If a \code{Task} contains a column with the \code{offset} role, it is automatically incorporated during training via the \code{offset} argument in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE},
+passed via the \code{newoffset} argument in \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}.
+By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+}
+
 \section{Dictionary}{
 
 This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
@@ -57,7 +69,7 @@ lrn("classif.cv_glmnet")
    mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    nfolds \tab integer \tab 10 \tab  \tab \eqn{[3, \infty)}{[3, Inf)} \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   offset \tab untyped \tab NULL \tab  \tab - \cr
+   use_pred_offset \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    penalty.factor \tab untyped \tab - \tab  \tab - \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr

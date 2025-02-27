@@ -30,7 +30,7 @@ as the first factor level.
 \section{Offset}{
 
 
-In the latest mlr3 release (\code{v22.0.2}), the use of offset column(s) is supported.
+As of mlr3 version \code{v22.0.2}, support for offset columns is available.
 
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the formula interface to ensure compatibility with \code{\link[stats:glm]{stats::glm()}}.

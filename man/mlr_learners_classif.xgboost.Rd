@@ -56,16 +56,6 @@ The internal validation measure can be set via the \code{eval_metric} parameter 
 Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 }
 
-\section{Offset}{
-
-
-In the latest mlr3 release (\code{v22.0.2}), the use of offset column(s) is supported.
-
-If a \code{Task} has a column with the role \code{offset} (or multiple columns in case of multiclass), it will automatically be used during training.
-The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
-No offset is applied during prediction for this learner.
-}
-
 \section{Dictionary}{
 
 This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
@@ -150,6 +140,16 @@ lrn("classif.xgboost")
    watchlist \tab untyped \tab NULL \tab  \tab - \cr
    xgb_model \tab untyped \tab NULL \tab  \tab - \cr
 }
+}
+
+\section{Offset}{
+
+
+As of mlr3 version \code{v22.0.2}, support for offset columns is available.
+
+If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
+The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
+No offset is applied during prediction for this learner.
 }
 
 \examples{

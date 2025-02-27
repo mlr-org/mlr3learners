@@ -9,6 +9,7 @@
 #' The default for hyperparameter `family` is set to `"gaussian"`.
 #'
 #' @inherit mlr_learners_classif.glmnet details
+#' @inheritSection mlr_learners_classif.cv_glmnet Offset
 #'
 #' @templateVar id regr.glmnet
 #' @template learner

@@ -38,13 +38,7 @@
 #' The internal validation measure can be set via the `eval_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
 #' Using an [mlr3::Measure] is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 #'
-#' @section Offset:
-#'
-#' In the latest mlr3 release (`v22.0.2`), the use of offset column(s) is supported.
-#'
-#' If a `Task` has a column with the role `offset` (or multiple columns in case of multiclass), it will automatically be used during training.
-#' The offset is incorporated through the [xgboost::xgb.DMatrix] interface, using the `base_margin` field.
-#' No offset is applied during prediction for this learner.
+#' @inheritSection mlr_learners_regr.xgboost Offset
 #'
 #' @templateVar id classif.xgboost
 #' @template learner
