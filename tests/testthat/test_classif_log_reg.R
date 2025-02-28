@@ -44,22 +44,27 @@ test_that("offset works", {
                      data = data_with_offset, subset = part$train)
   expect_equal(model$coefficients, learner_offset$model$coefficients)
 
-  # predict on test set (no offset is used by default)
+  # predict on test set (offset is used by default)
   p1 = learner_offset$predict(task_with_offset, part$test)
   # same thing manually
   res = unname(predict(model, type = "response",
-                       newdata = cbind(data[part$test, ], offset_col = 0)))
-  expect_equal(p1$prob[, "1"], res)
-  # use offset during predict
-  learner_offset$param_set$set_values(.values = list(use_pred_offset = TRUE))
+                       newdata = data_with_offset[part$test, ]))
+  prob_offset = p1$prob[, "1"]
+  expect_equal(prob_offset, res)
+  # no offset during predict
+  learner_offset$param_set$set_values(.values = list(use_pred_offset = FALSE))
   p2 = learner_offset$predict(task_with_offset, part$test)
+  prob = p2$prob[, "1"]
+  off = offset_col[part$test]
   # predictions are different
-  expect_true(all(p1$prob[, "1"] != p2$prob[, "1"]))
+  expect_true(all(prob_offset != prob))
+  # but connected via:
+  expect_equal(log(prob_offset/(1 - prob_offset)), log(prob/(1 - prob)) + off)
 
   # verify predictions manually
   res = unname(predict(model, type = "response",
-                       newdata = data_with_offset[part$test, ]))
-  expect_equal(p2$prob[, "1"], res)
+                       newdata = cbind(data[part$test, ], offset_col = 0)))
+  expect_equal(prob, res)
 
   # using a task with offset on a learner that didn't use offset during training
   # results in the same prediction: offset is completely ignored

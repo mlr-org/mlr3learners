@@ -48,20 +48,20 @@ test_that("offset works", {
   model = stats::lm(y ~ x + offset(offset_col), data = data_with_offset, subset = part$train)
   expect_equal(model$coefficients, learner_offset$model$coefficients)
 
-  # predict on test set (no offset is used by default)
+  # predict on test set (offset is used by default)
   p1 = learner_offset$predict(task_with_offset, part$test)
   # same thing manually
-  res = unname(predict(model, newdata = cbind(data[part$test, ], offset_col = 0)))
+  res = unname(predict(model, newdata = data_with_offset[part$test, ]))
   expect_equal(p1$response, res)
   # use offset during predict
-  learner_offset$param_set$set_values(.values = list(use_pred_offset = TRUE))
+  learner_offset$param_set$set_values(.values = list(use_pred_offset = FALSE))
   p2 = learner_offset$predict(task_with_offset, part$test)
   # predictions are different
   expect_true(all(p1$response != p2$response))
   # offset was added to the response
-  expect_equal(p1$response + offset_col[part$test], p2$response)
+  expect_equal(p2$response + offset_col[part$test], p1$response)
   # verify predictions manually
-  res = unname(predict(model, newdata = data_with_offset[part$test, ]))
+  res = unname(predict(model, newdata = cbind(data[part$test, ], offset_col = 0)))
   expect_equal(p2$response, res)
 
   # using a task with offset on a learner that didn't use offset during training

@@ -48,13 +48,14 @@ test_that("offset works", {
   expect_false(learner$model$offset) # offset not used
   expect_false(all(learner$model$beta == learner_offset$model$beta))
 
-  # predict on test set (no offset is used by default)
+  # predict on test set (offset is used by default)
   p1 = learner_offset$predict(task_with_offset, part$test)
-  # use offset during predict
-  learner_offset$param_set$set_values(.values = list(use_pred_offset = TRUE))
+  # no offset during predict
+  learner_offset$param_set$set_values(.values = list(use_pred_offset = FALSE))
   p2 = learner_offset$predict(task_with_offset, part$test)
   # predictions are different
   expect_true(all(p1$response != p2$response))
+  expect_equal(p2$response * exp(offset_col[part$test]), p1$response)
 
   # using a task with offset on a learner that didn't use offset during training
   # results in the same prediction: offset is completely ignored
