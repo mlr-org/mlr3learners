@@ -17,9 +17,8 @@
 #'
 #' If a `Task` contains a column with the `offset` role, it is automatically incorporated during training via the `offset` argument in [glmnet::glmnet()].
 #'
-#' During prediction, the offset column from the test set is used only if `use_pred_offset = TRUE`,
-#' passed via the `newoffset` argument in [glmnet::predict.glmnet()].
-#' By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#' During prediction, the offset column from the test set is used only if `use_pred_offset = TRUE` (default), passed via the `newoffset` argument in [glmnet::predict.glmnet()].
+#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 #'
 #' @templateVar id classif.cv_glmnet
 #' @template learner
@@ -63,7 +62,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         mxit                 = p_int(1L, default = 100L, tags = "train"),
         nfolds               = p_int(3L, default = 10L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        use_pred_offset      = p_lgl(default = FALSE, tags = "predict"),
+        use_pred_offset      = p_lgl(default = TRUE, tags = "predict"),
         parallel             = p_lgl(default = FALSE, tags = "train"),
         penalty.factor       = p_uty(tags = "train"),
         pmax                 = p_int(0L, tags = "train"),
@@ -82,6 +81,8 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
         upper.limits         = p_uty(tags = "train")
       )
+
+      ps$set_values(use_pred_offset = TRUE)
 
       super$initialize(
         id = "classif.cv_glmnet",

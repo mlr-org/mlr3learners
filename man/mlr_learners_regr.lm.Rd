@@ -17,8 +17,8 @@ If a \code{Task} has a column with the role \code{offset}, it will automatically
 The offset is incorporated through the formula interface to ensure compatibility with \code{\link[stats:lm]{stats::lm()}}.
 We add it to the model formula as \verb{offset(<column_name>)} and also included it in the training data.
 
-During prediction, the offset column from the test set will be used only if \code{use_pred_offset = TRUE}.
-By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+During prediction, the default behavior is to use the offset column from the test set (enabled by \code{use_pred_offset = TRUE}).
+Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 }
 
 \section{Dictionary}{
@@ -56,7 +56,7 @@ lrn("regr.lm")
    rankdeficient \tab character \tab - \tab warnif, simple, non-estim, NA, NAwarn \tab - \cr
    tol \tab numeric \tab 1e-07 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    verbose \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   use_pred_offset \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   use_pred_offset \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
 }
 }
 

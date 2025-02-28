@@ -65,7 +65,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         mxit                 = p_int(1L, default = 100L, tags = "train"),
         mxitnr               = p_int(1L, default = 25L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        use_pred_offset      = p_lgl(default = FALSE, tags = "predict"),
+        use_pred_offset      = p_lgl(default = TRUE, tags = "predict"),
         penalty.factor       = p_uty(tags = "train"),
         pmax                 = p_int(0L, tags = "train"),
         pmin                 = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
@@ -81,6 +81,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
         upper.limits         = p_uty(tags = "train")
       )
+
+      ps$set_values(use_pred_offset = TRUE)
 
       super$initialize(
         id = "classif.glmnet",

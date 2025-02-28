@@ -25,8 +25,8 @@
 #' The offset is incorporated through the formula interface to ensure compatibility with [stats::glm()].
 #' We add it to the model formula as `offset(<column_name>)` and also included it in the training data.
 #'
-#' During prediction, the offset column from the test set will be used only if `use_pred_offset = TRUE`.
-#' By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#' During prediction, the default behavior is to use the offset column from the test set (enabled by `use_pred_offset = TRUE`).
+#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 #'
 #' @templateVar id classif.log_reg
 #' @template learner
@@ -56,8 +56,10 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         trace       = p_lgl(default = FALSE, tags = c("train", "control")),
         x           = p_lgl(default = FALSE, tags = "train"),
         y           = p_lgl(default = TRUE, tags = "train"),
-        use_pred_offset = p_lgl(default = FALSE, tags = "predict")
+        use_pred_offset = p_lgl(default = TRUE, tags = "predict")
       )
+
+      ps$set_values(use_pred_offset = TRUE)
 
       super$initialize(
         id = "classif.log_reg",

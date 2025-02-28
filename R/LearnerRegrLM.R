@@ -14,8 +14,8 @@
 #' The offset is incorporated through the formula interface to ensure compatibility with [stats::lm()].
 #' We add it to the model formula as `offset(<column_name>)` and also included it in the training data.
 #'
-#' During prediction, the offset column from the test set will be used only if `use_pred_offset = TRUE`.
-#' By default, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#' During prediction, the default behavior is to use the offset column from the test set (enabled by `use_pred_offset = TRUE`).
+#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 #'
 #' @templateVar id regr.lm
 #' @template learner
@@ -47,8 +47,10 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         rankdeficient = p_fct(c("warnif", "simple", "non-estim", "NA", "NAwarn"), tags = "predict"),
         tol           = p_dbl(default = 1e-07, tags = "predict"),
         verbose       = p_lgl(default = FALSE, tags = "predict"),
-        use_pred_offset = p_lgl(default = FALSE, tags = "predict")
+        use_pred_offset = p_lgl(default = TRUE, tags = "predict")
       )
+
+      ps$set_values(use_pred_offset = TRUE)
 
       super$initialize(
         id = "regr.lm",

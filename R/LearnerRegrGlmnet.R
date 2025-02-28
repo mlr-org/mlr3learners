@@ -52,7 +52,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         mnlam                 = p_int(1L, default = 5L, tags = "train"),
         mxit                  = p_int(1L, default = 100L, tags = "train"),
         mxitnr                = p_int(1L, default = 25L, tags = "train"),
-        use_pred_offset       = p_lgl(default = FALSE, tags = "predict"),
+        use_pred_offset       = p_lgl(default = TRUE, tags = "predict"),
         nlambda               = p_int(1L, default = 100L, tags = "train"),
         parallel              = p_lgl(default = FALSE, tags = "train"),
         penalty.factor        = p_uty(tags = "train"),
@@ -71,7 +71,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         upper.limits          = p_uty(tags = "train")
       )
 
-      ps$set_values(family = "gaussian")
+      ps$set_values(family = "gaussian", use_pred_offset = TRUE)
 
       super$initialize(
         id = "regr.glmnet",
