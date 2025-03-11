@@ -29,13 +29,9 @@ as the first factor level.
 
 \section{Offset}{
 
-
-As of mlr3 version \code{v22.0.2}, support for offset columns is available.
-
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the formula interface to ensure compatibility with \code{\link[stats:glm]{stats::glm()}}.
-We add it to the model formula as \verb{offset(<column_name>)} and also included it in the training data.
-
+We add it to the model formula as \verb{offset(<column_name>)} and also include it in the training data.
 During prediction, the default behavior is to use the offset column from the test set (enabled by \code{use_pred_offset = TRUE}).
 Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 }
@@ -73,7 +69,7 @@ lrn("classif.log_reg")
    trace \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    y \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   use_pred_offset \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   use_pred_offset \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
 }
 }
 

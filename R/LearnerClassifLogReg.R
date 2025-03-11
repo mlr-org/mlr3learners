@@ -18,13 +18,9 @@
 #'   - Reason for change: Save some memory.
 #'
 #' @section Offset:
-#'
-#' As of mlr3 version `v22.0.2`, support for offset columns is available.
-#'
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
 #' The offset is incorporated through the formula interface to ensure compatibility with [stats::glm()].
-#' We add it to the model formula as `offset(<column_name>)` and also included it in the training data.
-#'
+#' We add it to the model formula as `offset(<column_name>)` and also include it in the training data.
 #' During prediction, the default behavior is to use the offset column from the test set (enabled by `use_pred_offset = TRUE`).
 #' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 #'
@@ -45,17 +41,17 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ps(
-        dispersion  = p_uty(default = NULL, tags = "predict"),
-        epsilon     = p_dbl(default = 1e-8, tags = c("train", "control")),
-        etastart    = p_uty(tags = "train"),
-        maxit       = p_dbl(default = 25, tags = c("train", "control")),
-        model       = p_lgl(default = TRUE, tags = "train"),
-        mustart     = p_uty(tags = "train"),
-        singular.ok = p_lgl(default = TRUE, tags = "train"),
-        start       = p_uty(default = NULL, tags = "train"),
-        trace       = p_lgl(default = FALSE, tags = c("train", "control")),
-        x           = p_lgl(default = FALSE, tags = "train"),
-        y           = p_lgl(default = TRUE, tags = "train"),
+        dispersion      = p_uty(default = NULL, tags = "predict"),
+        epsilon         = p_dbl(default = 1e-8, tags = c("train", "control")),
+        etastart        = p_uty(tags = "train"),
+        maxit           = p_dbl(default = 25, tags = c("train", "control")),
+        model           = p_lgl(default = TRUE, tags = "train"),
+        mustart         = p_uty(tags = "train"),
+        singular.ok     = p_lgl(default = TRUE, tags = "train"),
+        start           = p_uty(default = NULL, tags = "train"),
+        trace           = p_lgl(default = FALSE, tags = c("train", "control")),
+        x               = p_lgl(default = FALSE, tags = "train"),
+        y               = p_lgl(default = TRUE, tags = "train"),
         use_pred_offset = p_lgl(default = TRUE, tags = "predict")
       )
 
@@ -91,8 +87,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         # re-write formula
         formula_terms = c(task$feature_names, paste0("offset(", offset_colname, ")"))
         # needs both `env = ...` and `quote = "left"` args to work
-        form = mlr3misc::formulate(lhs = task$target_names, rhs = formula_terms,
-                                   env = environment(), quote = "left")
+        form = mlr3misc::formulate(lhs = task$target_names, rhs = formula_terms, env = environment(), quote = "left")
         # add offset column to the data
         data = data[, (offset_colname) := task$offset$offset][]
       }

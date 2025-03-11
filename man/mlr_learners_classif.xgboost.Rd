@@ -144,9 +144,6 @@ lrn("classif.xgboost")
 
 \section{Offset}{
 
-
-As of mlr3 version \code{v22.0.2}, support for offset columns is available.
-
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
 No offset is applied during prediction for this learner.

@@ -7,13 +7,9 @@
 #' Calls [stats::lm()].
 #'
 #' @section Offset:
-#'
-#' As of mlr3 version `v22.0.2`, support for offset columns is available.
-#'
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
 #' The offset is incorporated through the formula interface to ensure compatibility with [stats::lm()].
-#' We add it to the model formula as `offset(<column_name>)` and also included it in the training data.
-#'
+#' We add it to the model formula as `offset(<column_name>)` and also include it in the training data.
 #' During prediction, the default behavior is to use the offset column from the test set (enabled by `use_pred_offset = TRUE`).
 #' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 #'
