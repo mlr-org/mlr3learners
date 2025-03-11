@@ -142,6 +142,13 @@ lrn("classif.xgboost")
 }
 }
 
+\section{Offset}{
+
+If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
+The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
+No offset is applied during prediction for this learner.
+}
+
 \examples{
 \dontrun{
 if (requireNamespace("xgboost", quietly = TRUE)) {

@@ -73,9 +73,8 @@ lrn("regr.glmnet")
    mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   newoffset \tab untyped \tab - \tab  \tab - \cr
+   use_pred_offset \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   offset \tab untyped \tab NULL \tab  \tab - \cr
    parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    penalty.factor \tab untyped \tab - \tab  \tab - \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
@@ -92,6 +91,13 @@ lrn("regr.glmnet")
    type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
    upper.limits \tab untyped \tab - \tab  \tab - \cr
 }
+}
+
+\section{Offset}{
+
+If a \code{Task} contains a column with the \code{offset} role, it is automatically incorporated during training via the \code{offset} argument in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default), passed via the \code{newoffset} argument in \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}.
+Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied, effectively disabling the offset adjustment during prediction.
 }
 
 \examples{

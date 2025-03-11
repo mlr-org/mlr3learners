@@ -17,6 +17,11 @@
 #' @inheritSection mlr_learners_classif.xgboost Early Stopping and Validation
 #' @inheritSection mlr_learners_classif.xgboost Initial parameter values
 #'
+#' @section Offset:
+#' If a `Task` has a column with the role `offset`, it will automatically be used during training.
+#' The offset is incorporated through the [xgboost::xgb.DMatrix] interface, using the `base_margin` field.
+#' No offset is applied during prediction for this learner.
+#'
 #' @templateVar id regr.xgboost
 #' @template learner
 #'

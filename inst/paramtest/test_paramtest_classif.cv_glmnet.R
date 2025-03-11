@@ -9,7 +9,8 @@ test_that("classif.cv_glmnet", {
     "weights", # handled by mlr3
     "itrace", # supported via param trace.it
     "factory", # only used in scripts, no effect within mlr3
-    "family" # handled by mlr3
+    "family", # handled by mlr3
+    "offset" # handled by mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -27,7 +28,8 @@ test_that("predict classif.cv_glmnet", {
   exclude = c(
     "object", # handled via mlr3
     "newx", # handled via mlr3
-    "predict.gamma" # renamed from gamma
+    "predict.gamma", # renamed from gamma
+    "use_pred_offset" # handled by mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")

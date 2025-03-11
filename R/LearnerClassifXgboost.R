@@ -38,6 +38,8 @@
 #' The internal validation measure can be set via the `eval_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
 #' Using an [mlr3::Measure] is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 #'
+#' @inheritSection mlr_learners_regr.xgboost Offset
+#'
 #' @templateVar id classif.xgboost
 #' @template learner
 #'

@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+* feat: Support offset during training and prediction in `xgboost`, `glmnet`, `lm` and `glm` learners.
+
 # mlr3learners 0.9.0
 
 * BREAKING CHANGE: Remove ``$loglik()`` method from all learners.

@@ -6,7 +6,6 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#'
 #' @details
 #' Caution: This learner is different to learners calling [glmnet::cv.glmnet()]
 #' in that it does not use the internal optimization of parameter `lambda`.
@@ -26,6 +25,7 @@
 #' custom resampling strategies (blocked design, stratification).
 #'
 #' @inheritSection mlr_learners_classif.log_reg Internal Encoding
+#' @inheritSection mlr_learners_classif.cv_glmnet Offset
 #'
 #' @templateVar id classif.glmnet
 #' @template learner
@@ -65,8 +65,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         mxit                 = p_int(1L, default = 100L, tags = "train"),
         mxitnr               = p_int(1L, default = 25L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        newoffset            = p_uty(tags = "predict"),
-        offset               = p_uty(default = NULL, tags = "train"),
+        use_pred_offset      = p_lgl(default = TRUE, tags = "predict"),
         penalty.factor       = p_uty(tags = "train"),
         pmax                 = p_int(0L, tags = "train"),
         pmin                 = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
@@ -83,12 +82,14 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         upper.limits         = p_uty(tags = "train")
       )
 
+      ps$set_values(use_pred_offset = TRUE)
+
       super$initialize(
         id = "classif.glmnet",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "twoclass", "multiclass"),
+        properties = c("weights", "twoclass", "multiclass", "offset"),
         packages = c("mlr3learners", "glmnet"),
         label = "GLM with Elastic Net Regularization",
         man = "mlr3learners::mlr_learners_classif.glmnet"
@@ -114,9 +115,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       target = swap_levels(task$truth())
       pv = self$param_set$get_values(tags = "train")
       pv$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
+
       if ("weights" %in% task$properties) {
         pv$weights = task$weights$weight
       }
+
+      pv = glmnet_set_offset(task, "train", pv)
 
       glmnet_invoke(data, target, pv)
     },
@@ -126,6 +130,8 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       pv = self$param_set$get_values(tags = "predict")
       pv = rename(pv, "predict.gamma", "gamma")
       pv$s = glmnet_get_lambda(self, pv)
+
+      pv = glmnet_set_offset(task, "predict", pv)
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model,
