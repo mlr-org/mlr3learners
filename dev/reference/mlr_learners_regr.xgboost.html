@@ -71,6 +71,14 @@ against CUDA.
 See <a href="https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support" class="external-link">https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support</a>.</p>
     </div>
     <div class="section level2">
+    <h2 id="offset">Offset<a class="anchor" aria-label="anchor" href="#offset"></a></h2>
+
+
+<p>If a <code>Task</code> has a column with the role <code>offset</code>, it will automatically be used during training.
+The offset is incorporated through the <a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgboost::xgb.DMatrix</a> interface, using the <code>base_margin</code> field.
+No offset is applied during prediction for this learner.</p>
+    </div>
+    <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 

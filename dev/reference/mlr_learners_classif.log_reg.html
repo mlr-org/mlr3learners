@@ -67,6 +67,16 @@ as the first factor level.</p>
 </ul></li>
 </ul></div>
     <div class="section level2">
+    <h2 id="offset">Offset<a class="anchor" aria-label="anchor" href="#offset"></a></h2>
+
+
+<p>If a <code>Task</code> has a column with the role <code>offset</code>, it will automatically be used during training.
+The offset is incorporated through the formula interface to ensure compatibility with <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code>.
+We add it to the model formula as <code>offset(&lt;column_name&gt;)</code> and also include it in the training data.
+During prediction, the default behavior is to use the offset column from the test set (enabled by <code>use_pred_offset = TRUE</code>).
+Otherwise, if the user sets <code>use_pred_offset = FALSE</code>, a zero offset is applied, effectively disabling the offset adjustment during prediction.</p>
+    </div>
+    <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 
@@ -86,7 +96,7 @@ as the first factor level.</p>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
 
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>offset</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>use_pred_offset</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="contrasts">Contrasts<a class="anchor" aria-label="anchor" href="#contrasts"></a></h2>
 
@@ -213,15 +223,15 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifLogReg:classif.log_reg&gt;: Logistic Regression</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: use_pred_offset=TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, stats</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, character, factor, ordered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: offset, twoclass, weights</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: algorithm did not converge</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: fitted probabilities numerically 0 or 1 occurred</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = task$formula(), family = "binomial", data = data, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = form, family = "binomial", data = data, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     model = FALSE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
