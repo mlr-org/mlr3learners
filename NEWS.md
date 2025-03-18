@@ -1,6 +1,7 @@
 # mlr3learners (development version)
 
 * feat: Support offset during training and prediction in `xgboost`, `glmnet`, `lm` and `glm` learners.
+* feat: Add `$selected_features()` method to `classif.ranger` and `regr.ranger` learners.
 
 # mlr3learners 0.9.0
 
