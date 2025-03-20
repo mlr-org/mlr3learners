@@ -9,7 +9,7 @@ Calls stats::glm() with family set to "binomial".'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,16 @@ as the first factor level.</p>
 </ul></li>
 </ul></div>
     <div class="section level2">
+    <h2 id="offset">Offset<a class="anchor" aria-label="anchor" href="#offset"></a></h2>
+
+
+<p>If a <code>Task</code> has a column with the role <code>offset</code>, it will automatically be used during training.
+The offset is incorporated through the formula interface to ensure compatibility with <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code>.
+We add it to the model formula as <code>offset(&lt;column_name&gt;)</code> and also include it in the training data.
+During prediction, the default behavior is to use the offset column from the test set (enabled by <code>use_pred_offset = TRUE</code>).
+Otherwise, if the user sets <code>use_pred_offset = FALSE</code>, a zero offset is applied, effectively disabling the offset adjustment during prediction.</p>
+    </div>
+    <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 
@@ -86,7 +96,7 @@ as the first factor level.</p>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
 
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>offset</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>use_pred_offset</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="contrasts">Contrasts<a class="anchor" aria-label="anchor" href="#contrasts"></a></h2>
 
@@ -143,9 +153,9 @@ for established default tuning spaces.</p></li>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-LearnerClassifLogReg-new"><code>LearnerClassifLogReg$new()</code></a></p></li>
-<li><p><a href="#method-LearnerClassifLogReg-loglik"><code>LearnerClassifLogReg$loglik()</code></a></p></li>
 <li><p><a href="#method-LearnerClassifLogReg-clone"><code>LearnerClassifLogReg$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
@@ -153,6 +163,7 @@ for established default tuning spaces.</p></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-selected_features"><code>mlr3::Learner$selected_features()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
 </ul></details></p><hr><a id="method-LearnerClassifLogReg-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -162,18 +173,10 @@ for established default tuning spaces.</p></li>
 </div>
 
 
-</div><p></p><hr><a id="method-LearnerClassifLogReg-loglik"></a><div class="section">
-<h3 id="method-loglik-">Method <code>loglik()</code><a class="anchor" aria-label="anchor" href="#method-loglik-"></a></h3>
-<p>Extract the log-likelihood (e.g., via <code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">stats::logLik()</a></code> from the fitted model.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerClassifLogReg</span><span class="op">$</span><span class="fu">loglik</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-
 </div><p></p><hr><a id="method-LearnerClassifLogReg-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerClassifLogReg</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -220,15 +223,15 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifLogReg:classif.log_reg&gt;: Logistic Regression</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: use_pred_offset=TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, stats</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, character, factor, ordered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: offset, twoclass, weights</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: algorithm did not converge</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: fitted probabilities numerically 0 or 1 occurred</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = task$formula(), family = "binomial", data = data, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = form, family = "binomial", data = data, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     model = FALSE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
@@ -267,7 +270,7 @@ for established default tuning spaces.</p></li>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Michel Lang, Quay Au, Stefan Coors, Patrick Schratz, Marc Becker.</p>
+  <p>Developed by Michel Lang, Quay Au, Stefan Coors, Patrick Schratz, Marc Becker, John Zobolas.</p>
 </div>
 
 <div class="pkgdown-footer-right">
