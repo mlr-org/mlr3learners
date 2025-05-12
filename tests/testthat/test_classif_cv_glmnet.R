@@ -6,7 +6,7 @@ test_that("autotest", {
   expect_learner(learner)
 
   skip_on_os("solaris")
-  result = run_autotest(learner, exclude = "feat_single")
+  result = run_autotest(learner, exclude = "feat_single", N = 100L)
   expect_true(result, info = result$error)
 })
 
