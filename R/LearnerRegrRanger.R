@@ -113,6 +113,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
+      pv$case.weights = private$.get_weights(task)
 
       if (self$predict_type == "se") {
         pv$keep.inbag = TRUE # nolint
@@ -125,7 +126,6 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
-        case.weights = task$weights$weight,
         .args = pv
       )
     },
