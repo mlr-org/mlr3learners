@@ -64,7 +64,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      pv$weights = private$.get_weights(task)
+      pv$weights = get_weights(task, private)
 
       form = task$formula()
       data = task$data()

@@ -36,3 +36,11 @@ rename = function(x, old, new) {
 }
 
 opts_default_contrasts = list(contrasts = c("contr.treatment", "contr.poly"))
+
+get_weights = function(task, private) {
+  if (packageVersion("mlr3") > "0.23.0") {
+    private$.get_weights(task)
+  } else {
+    task$weights$weight
+  }
+}
