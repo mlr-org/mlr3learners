@@ -115,7 +115,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       target = swap_levels(task$truth())
       pv = self$param_set$get_values(tags = "train")
       pv$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
-      pv$weights = private$.get_weights(task)
+      pv$weights = get_weights(task, private)
       pv = glmnet_set_offset(task, "train", pv)
 
       glmnet_invoke(data, target, pv)

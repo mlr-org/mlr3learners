@@ -251,7 +251,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       label = nlvls - as.integer(task$truth())
       xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
-      weights = private$.get_weights(task)
+      weights = get_weights(task, private)
       if (!is.null(weights)) {
         xgboost::setinfo(xgb_data, "weight", weights)
       }
@@ -286,7 +286,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         valid_label = nlvls - as.integer(internal_valid_task$truth())
         xgb_valid_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(valid_data), label = valid_label)
 
-        weights = private$.get_weights(internal_valid_task)
+        weights = get_weights(internal_valid_task, private)
 
         if (!is.null(weights)) {
           xgboost::setinfo(xgb_valid_data, "weight", weights)
