@@ -1,5 +1,8 @@
 # mlr3learners (development version)
 
+* BREAKING CHANGE: The `kknn` package was removed from CRAN.
+  The `classif.kknn` and `regr.kknn` learners are now removed from mlr3learners.
+
 # mlr3learners 0.10.0
 
 * feat: Support offset during training and prediction in `xgboost`, `glmnet`, `lm` and `glm` learners.
