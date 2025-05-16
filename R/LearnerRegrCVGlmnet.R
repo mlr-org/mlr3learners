@@ -104,9 +104,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       target = as_numeric_matrix(task$data(cols = task$target_names))
       pv = self$param_set$get_values(tags = "train")
-      if ("weights" %in% task$properties) {
-        pv$weights = task$weights$weight
-      }
+      pv$weights = private$.get_weights(task)
 
       pv = glmnet_set_offset(task, "train", pv)
 
