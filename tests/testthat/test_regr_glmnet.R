@@ -27,10 +27,11 @@ test_that("selected_features", {
 })
 
 test_that("offset works", {
-  data = data.table(x = 1:50, z = runif(50), y = stats::rpois(50, lambda = 5))
-  offset_col = runif(50)
-
-  data_with_offset = cbind(data, offset_col)
+  with_seed(7832, {
+    data = data.table(x = 1:50, z = runif(50), y = stats::rpois(50, lambda = 5))
+    offset_col = runif(50)
+    data_with_offset = cbind(data, offset_col)
+  })
 
   task = as_task_regr(x = data, target = "y")
   task_with_offset = as_task_regr(x = data_with_offset, target = "y")

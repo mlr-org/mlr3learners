@@ -1,7 +1,8 @@
-# mlr3learners (development version)
+# mlr3learners 0.11.0
 
 * BREAKING CHANGE: The `kknn` package was removed from CRAN.
   The `classif.kknn` and `regr.kknn` learners are now removed from mlr3learners.
+* compatibility: mlr3 1.0.0
 
 # mlr3learners 0.10.0
 

@@ -24,9 +24,11 @@ test_that("contrasts", {
 })
 
 test_that("offset works", {
-  data = data.table(x = 1:10, y = stats::rpois(10, lambda = 5))
-  offset_col = runif(10)
-  data_with_offset = cbind(data, offset_col)
+  with_seed(7832, {
+    data = data.table(x = 1:10, y = stats::rpois(10, lambda = 5))
+    offset_col = runif(10)
+    data_with_offset = cbind(data, offset_col)
+  })
 
   task = as_task_regr(x = data, target = "y")
   task_with_offset = as_task_regr(x = data_with_offset, target = "y")
