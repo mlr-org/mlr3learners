@@ -38,6 +38,7 @@ Suggests:
     DiceKriging,
     e1071,
     glmnet,
+    kknn,
     knitr,
     lgr,
     MASS,
@@ -57,6 +58,7 @@ Collate:
     'aaa.R'
     'LearnerClassifCVGlmnet.R'
     'LearnerClassifGlmnet.R'
+    'LearnerClassifKKNN.R'
     'LearnerClassifLDA.R'
     'LearnerClassifLogReg.R'
     'LearnerClassifMultinom.R'
@@ -68,6 +70,7 @@ Collate:
     'LearnerClassifXgboost.R'
     'LearnerRegrCVGlmnet.R'
     'LearnerRegrGlmnet.R'
+    'LearnerRegrKKNN.R'
     'LearnerRegrKM.R'
     'LearnerRegrLM.R'
     'LearnerRegrNnet.R'

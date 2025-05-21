@@ -154,6 +154,7 @@ for established default tuning spaces.
 Other Learner: 
 \code{\link{mlr_learners_classif.cv_glmnet}},
 \code{\link{mlr_learners_classif.glmnet}},
+\code{\link{mlr_learners_classif.kknn}},
 \code{\link{mlr_learners_classif.lda}},
 \code{\link{mlr_learners_classif.log_reg}},
 \code{\link{mlr_learners_classif.multinom}},
@@ -164,6 +165,7 @@ Other Learner:
 \code{\link{mlr_learners_classif.svm}},
 \code{\link{mlr_learners_classif.xgboost}},
 \code{\link{mlr_learners_regr.cv_glmnet}},
+\code{\link{mlr_learners_regr.kknn}},
 \code{\link{mlr_learners_regr.km}},
 \code{\link{mlr_learners_regr.lm}},
 \code{\link{mlr_learners_regr.nnet}},
