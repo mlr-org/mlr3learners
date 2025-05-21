@@ -93,6 +93,7 @@ for established default tuning spaces.</p></li>
 </ul><p>Other Learner:
 <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet</a></code>,
 <code><a href="mlr_learners_classif.glmnet.html">mlr_learners_classif.glmnet</a></code>,
+<code><a href="mlr_learners_classif.kknn.html">mlr_learners_classif.kknn</a></code>,
 <code><a href="mlr_learners_classif.lda.html">mlr_learners_classif.lda</a></code>,
 <code><a href="mlr_learners_classif.log_reg.html">mlr_learners_classif.log_reg</a></code>,
 <code><a href="mlr_learners_classif.multinom.html">mlr_learners_classif.multinom</a></code>,
@@ -103,6 +104,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_classif.xgboost.html">mlr_learners_classif.xgboost</a></code>,
 <code><a href="mlr_learners_regr.cv_glmnet.html">mlr_learners_regr.cv_glmnet</a></code>,
 <code><a href="mlr_learners_regr.glmnet.html">mlr_learners_regr.glmnet</a></code>,
+<code><a href="mlr_learners_regr.kknn.html">mlr_learners_regr.kknn</a></code>,
 <code><a href="mlr_learners_regr.km.html">mlr_learners_regr.km</a></code>,
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.nnet.html">mlr_learners_regr.nnet</a></code>,
@@ -205,311 +207,311 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A-priori probabilities:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         M         R </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5467626 0.4532374 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5035971 0.4964029 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Conditional probabilities:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.03659868 0.02881526</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.02226984 0.01534410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.03576143 0.02684351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.02209565 0.01559364</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2537408 0.1432212</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1598825 0.1145141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2726129 0.1421090</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1588696 0.1185101</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2933934 0.1295908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1697016 0.1102064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3043686 0.1361172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1724275 0.1171354</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2963711 0.1329264</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1815048 0.1266172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3100729 0.1301461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1840812 0.1321283</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3155118 0.1319998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2227254 0.1324149</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3244829 0.1396395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2238464 0.1393880</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3277776 0.1719368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2735889 0.1693501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3332643 0.1766075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2611797 0.1673167</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3414671 0.2015929</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3182365 0.2332807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3422671 0.2084315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2911377 0.2162335</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3997447 0.2142237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3821095 0.2653616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3821657 0.2314869</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3597014 0.2464136</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4388461 0.2409092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4243063 0.2934994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4003786 0.2602862</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3879000 0.2829729</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4840842 0.2573992</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4459016 0.2792161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4338314 0.2669955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4174826 0.2629652</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.5634539 0.2552687</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4522175 0.2567824</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.5156686 0.2657469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4363855 0.2472369</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.04620789 0.03768943</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.03152857 0.02731283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.04520857 0.03243771</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.03037391 0.02639112</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6413316 0.2440549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4718730 0.2501717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.5974200 0.2725917</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4626855 0.2485295</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6874539 0.2360864</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5101460 0.2397255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6437671 0.2733279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4987290 0.2413938</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6934289 0.2356615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5424810 0.2652952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6464457 0.2514303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5333333 0.2673713</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6974382 0.2617835</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5957317 0.2576077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6484114 0.2654438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5817986 0.2564723</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V24</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.7032092 0.2572790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6366317 0.2433061</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6641671 0.2584230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6187058 0.2446702</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6993237 0.2442564</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6531333 0.2654540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6623857 0.2485371</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6287870 0.2645679</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V26</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.7135395 0.2385443</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6798603 0.2574258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.7076943 0.2330708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6625348 0.2469941</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]     [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.7020171 0.270011</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6849222 0.218604</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.7195943 0.2597404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6733986 0.2273145</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V28</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6998408 0.2591949</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6801968 0.2002442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.7141914 0.2524030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6753275 0.2076381</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V29</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6382289 0.2455870</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6365698 0.2188409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.6535357 0.2350319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6370029 0.2426187</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.05224079 0.04936588</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.03634127 0.03197055</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.05095714 0.03566286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.03528261 0.03073139</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.5650961 0.2063894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6003730 0.2286606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.5830171 0.2029212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.6036870 0.2251306</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4581158 0.2248302</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5457762 0.2081064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4908371 0.2245753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5530855 0.1932639</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4030737 0.2158952</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4564476 0.2247358</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4405857 0.2229313</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4626159 0.2098553</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3831289 0.1967728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4403968 0.2215777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.4132214 0.2045360</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4520246 0.2101155</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V34</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3562789 0.2131055</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4417000 0.2596013</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3652014 0.2111059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4513464 0.2464201</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V35</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3338197 0.2455073</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4746254 0.2725691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3269557 0.2453314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4705870 0.2602240</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V36</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3081039 0.2530332</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.5062349 0.2696295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3052214 0.2436184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4893899 0.2529661</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V37</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3041671 0.2336066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4673492 0.2496501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3047500 0.2272292</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.4426101 0.2468271</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3256842 0.2136099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3766111 0.2337873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3258229 0.2036651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3810652 0.2318662</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V39</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3331605 0.1908970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3264921 0.2134573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3363629 0.1857309</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3444217 0.2273772</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.06776711 0.06021911</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.04004603 0.03017559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.06339286 0.03778774</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.04149855 0.03131444</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2982658 0.1680850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3261397 0.1877699</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.3010771 0.1652422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3480333 0.2052403</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2924882 0.1591821</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2972206 0.1718814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2797414 0.1670650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.3106986 0.1877347</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]     [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2988105 0.165741</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2589206 0.160986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2920700 0.1697089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2650203 0.1774334</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V43</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2648947 0.1385687</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2032000 0.1114314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2768086 0.1482344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.2154884 0.1404886</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V44</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2381763 0.1412598</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1662032 0.0933718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2538214 0.1531734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1726913 0.1145143</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2435224 0.17031012</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1422476 0.08374238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2477743 0.1839631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1440551 0.1054603</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.1929039 0.15227628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1109016 0.08772178</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2031357 0.1604962</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1198101 0.1015279</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V47</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.14319211 0.09729098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.09283333 0.06601754</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.16128429 0.10599481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.09678696 0.07508253</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.10978289 0.07051110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.07220476 0.05278246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]       [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.1258614 0.07319167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.0715913 0.05264197</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V49</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.06429342 0.03636069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.03929683 0.03453875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.07143286 0.03871689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.03937246 0.03389372</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.08917500 0.06638451</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.05626032 0.03939153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.08451143 0.05083893</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.06198551 0.04737666</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.02262895 0.01414265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01699206 0.01234525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.02507571 0.01465077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01812464 0.01339883</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.01935263 0.013511758</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01213968 0.008907509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.02130857 0.01533759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01250000 0.00940061</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V52</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.01570132 0.011229776</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01052540 0.007329194</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.01616714 0.010879668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01099565 0.007860576</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.01245789 0.008213327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01003333 0.006642119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.011864286 0.007562571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.009981159 0.006709306</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.01339868 0.009153833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.01040000 0.005560634</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.013040000 0.008841542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.009675362 0.005728166</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V55</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.010355263 0.008836883</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.008833333 0.005088951</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.010202857 0.009150750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.008584058 0.005399717</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V56</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.009147368 0.006877140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.007404762 0.004709785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.009448571 0.006855395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.007128986 0.004714748</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V57</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.008071053 0.006117425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.007303175 0.006196538</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.008214286 0.006693048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.007617391 0.005784105</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V58</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.009315789 0.007664795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.006734921 0.004977082</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.010165714 0.008554055</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.006963768 0.005151983</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V59</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.008877632 0.006726854</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.007176190 0.005224623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.009668571 0.007351891</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.008030435 0.005618177</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y         [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.11675789 0.05415151</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.09202857 0.06273976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.11148571 0.05276747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.09168406 0.06398966</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y      [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.00675 0.005177889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.00590 0.003704270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y          [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.006977143 0.006143930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.006447826 0.003817976</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.1323474 0.06141017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1124016 0.06387180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.1342243 0.06446209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1105913 0.06909169</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.1506145 0.08914587</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1175063 0.07656196</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.1565043 0.09010940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1163783 0.08433947</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]     [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2131645 0.122966</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1396333 0.102536</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y        [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M 0.2251914 0.1227192</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   R 0.1316116 0.1031606</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2608696 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3913043 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

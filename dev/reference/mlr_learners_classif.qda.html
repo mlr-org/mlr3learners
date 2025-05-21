@@ -107,6 +107,7 @@ for established default tuning spaces.</p></li>
 </ul><p>Other Learner:
 <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet</a></code>,
 <code><a href="mlr_learners_classif.glmnet.html">mlr_learners_classif.glmnet</a></code>,
+<code><a href="mlr_learners_classif.kknn.html">mlr_learners_classif.kknn</a></code>,
 <code><a href="mlr_learners_classif.lda.html">mlr_learners_classif.lda</a></code>,
 <code><a href="mlr_learners_classif.log_reg.html">mlr_learners_classif.log_reg</a></code>,
 <code><a href="mlr_learners_classif.multinom.html">mlr_learners_classif.multinom</a></code>,
@@ -117,6 +118,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_classif.xgboost.html">mlr_learners_classif.xgboost</a></code>,
 <code><a href="mlr_learners_regr.cv_glmnet.html">mlr_learners_regr.cv_glmnet</a></code>,
 <code><a href="mlr_learners_regr.glmnet.html">mlr_learners_regr.glmnet</a></code>,
+<code><a href="mlr_learners_regr.kknn.html">mlr_learners_regr.kknn</a></code>,
 <code><a href="mlr_learners_regr.km.html">mlr_learners_regr.km</a></code>,
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.nnet.html">mlr_learners_regr.nnet</a></code>,
@@ -210,7 +212,43 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor, ordered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: multiclass, twoclass</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in qda.default(x, grouping, ...):</span> some group is too small for 'qda'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qda(task$formula(), data = task$data())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Prior probabilities of groups:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         M         R </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5467626 0.4532374 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group means:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V1       V10       V11       V12       V13       V14       V15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.03695789 0.2530645 0.2926500 0.2950513 0.3143513 0.3260289 0.3438368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.02142857 0.1508635 0.1662968 0.1801683 0.2220095 0.2510492 0.2852016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V16       V17       V18       V19         V2       V20       V21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.3880829 0.4216592 0.4541868 0.5251434 0.04836053 0.6101474 0.6707592</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.3511127 0.3870873 0.4263571 0.4429921 0.02782857 0.4890063 0.5484762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V22       V23       V24       V25       V26       V27       V28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.6607947 0.6540829 0.6697421 0.6653105 0.6938342 0.6941026 0.7033684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.5660730 0.6081571 0.6668333 0.6860429 0.7030937 0.7018079 0.6975873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V29         V3       V30       V31       V32       V33       V34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.6515776 0.05545526 0.5902329 0.4798132 0.4287382 0.3997329 0.3712829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.6587063 0.03294603 0.5855429 0.5102556 0.4251968 0.4389365 0.4470968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V35       V36       V37       V38       V39         V4       V40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.3550553 0.3400329 0.3254553 0.3410303 0.3417224 0.07388158 0.3035711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.4568794 0.4538587 0.3979254 0.3297492 0.2964762 0.04109206 0.3129460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         V41       V42       V43       V44       V45       V46       V47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.2886816 0.2940092 0.2646237 0.2408276 0.2472868 0.1962053 0.1417316</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.2892429 0.2552270 0.2103667 0.1648810 0.1346921 0.1118000 0.0875000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V48        V49         V5        V50        V51        V52         V53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.10839079 0.06232237 0.09072763 0.02162895 0.02020395 0.01690921 0.012292105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.06727619 0.03707778 0.06094127 0.01745238 0.01138254 0.00967619 0.009249206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V54         V55         V56         V57         V58         V59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.01222368 0.010247368 0.009053947 0.008336842 0.009419737 0.009213158</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.00987619 0.008638095 0.007193651 0.007939683 0.006093651 0.006473016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V6         V60        V7        V8        V9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> M 0.1185855 0.007480263 0.1344053 0.1589842 0.2191711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R 0.0971746 0.005744444 0.1140365 0.1131921 0.1324000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4202899 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
