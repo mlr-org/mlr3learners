@@ -15,7 +15,7 @@ Calls nnet::multinom() from package nnet."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.11.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.12.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@ Calls nnet::multinom() from package nnet."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Multinomial log-linear learner via neural networks</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3learners/blob/v0.11.0/R/LearnerClassifMultinom.R" class="external-link"><code>R/LearnerClassifMultinom.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3learners/blob/main/R/LearnerClassifMultinom.R" class="external-link"><code>R/LearnerClassifMultinom.R</code></a></small>
       <div class="d-none name"><code>mlr_learners_classif.multinom.Rd</code></div>
     </div>
 
@@ -93,6 +93,7 @@ for established default tuning spaces.</p></li>
 </ul><p>Other Learner:
 <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet</a></code>,
 <code><a href="mlr_learners_classif.glmnet.html">mlr_learners_classif.glmnet</a></code>,
+<code><a href="mlr_learners_classif.kknn.html">mlr_learners_classif.kknn</a></code>,
 <code><a href="mlr_learners_classif.lda.html">mlr_learners_classif.lda</a></code>,
 <code><a href="mlr_learners_classif.log_reg.html">mlr_learners_classif.log_reg</a></code>,
 <code><a href="mlr_learners_classif.naive_bayes.html">mlr_learners_classif.naive_bayes</a></code>,
@@ -103,6 +104,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_classif.xgboost.html">mlr_learners_classif.xgboost</a></code>,
 <code><a href="mlr_learners_regr.cv_glmnet.html">mlr_learners_regr.cv_glmnet</a></code>,
 <code><a href="mlr_learners_regr.glmnet.html">mlr_learners_regr.glmnet</a></code>,
+<code><a href="mlr_learners_regr.kknn.html">mlr_learners_regr.kknn</a></code>,
 <code><a href="mlr_learners_regr.km.html">mlr_learners_regr.km</a></code>,
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.nnet.html">mlr_learners_regr.nnet</a></code>,
@@ -198,44 +200,42 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: multiclass, twoclass, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  62 (61 variable)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 96.347458 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 34.493266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 18.176887</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 8.648033</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 0.715127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 0.002201</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000073 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 28.060727</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 1.899489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 0.003516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000058 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nnet::multinom(formula = Class ~ ., data = task$data())</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)          V1         V10         V11         V12         V13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2097.13367   -10.13592  1005.77345 -3854.82360 -1466.56419   592.56659 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   606.48499  -292.62216  -142.11791  -588.13233   -88.06081  -314.66330 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V14         V15         V16         V17         V18         V19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   442.23378 -1123.46149  1876.38719   342.06048  -687.57517  -727.00100 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -134.59359   380.41387   -93.35268   203.69452    83.21463    30.36906 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V2         V20         V21         V22         V23         V24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1849.26102  1223.06119  -652.48836  -576.03750   257.87191 -1713.02699 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -208.73362  -213.45852  -335.38329   104.26954   -54.17037  -522.82205 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V25         V26         V27         V28         V29          V3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1698.18930  -376.96332    73.84237  -853.92979  1464.98963   501.76998 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   700.21783  -201.29489  -279.93755   276.00581  -122.70963   -55.82210 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V30         V31         V32         V33         V34         V35 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -2334.58385  2705.08528 -1807.15404   582.75845 -1420.47860  1583.00330 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    39.08240    57.62629   -86.84656  -265.38407   345.24797  -149.54434 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V36         V37         V38         V39          V4         V40 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1306.49796  -523.96715  -247.02138 -1434.75307 -5409.93436  3213.79522 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   165.80103   677.99313  -323.04585  -410.21814  -506.70203   468.79101 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V41         V42         V43         V44         V45         V46 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1305.20218  2368.74231 -1622.73228 -3082.70586   320.29202   357.64632 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -74.72936  -118.46404  -278.18165  -225.21560  -453.56885  -472.40222 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V47         V48         V49          V5         V50         V51 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -2536.71072 -3150.48232 -2047.08477 -3306.70053  1097.59431  -784.12268 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    29.90197  -336.13828  -343.42369  -451.68864   137.03675  -117.66505 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V52         V53         V54         V55         V56         V57 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -830.56460  -628.10632  -552.90204   199.40404  -162.45651   -96.09266 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -92.13127   -31.72623   -40.72676    44.68332    46.71611    53.03701 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V58         V59          V6         V60          V7          V8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1095.03249 -1058.94526   603.99882  -409.35664  1438.16383 -2717.39783 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -34.35565   -51.57852  -168.28882    10.24126   163.11532   640.56455 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   528.29397 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -57.59101 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001456437 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001159859 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AIC: 122.0001 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2318841 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2463768 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

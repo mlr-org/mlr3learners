@@ -19,7 +19,7 @@ via package mlr3torch."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.11.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.12.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ via package mlr3torch."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Neural Network Regression Learner</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3learners/blob/v0.11.0/R/LearnerRegrNnet.R" class="external-link"><code>R/LearnerRegrNnet.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3learners/blob/main/R/LearnerRegrNnet.R" class="external-link"><code>R/LearnerRegrNnet.R</code></a></small>
       <div class="d-none name"><code>mlr_learners_regr.nnet.Rd</code></div>
     </div>
 
@@ -121,6 +121,7 @@ for established default tuning spaces.</p></li>
 </ul><p>Other Learner:
 <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet</a></code>,
 <code><a href="mlr_learners_classif.glmnet.html">mlr_learners_classif.glmnet</a></code>,
+<code><a href="mlr_learners_classif.kknn.html">mlr_learners_classif.kknn</a></code>,
 <code><a href="mlr_learners_classif.lda.html">mlr_learners_classif.lda</a></code>,
 <code><a href="mlr_learners_classif.log_reg.html">mlr_learners_classif.log_reg</a></code>,
 <code><a href="mlr_learners_classif.multinom.html">mlr_learners_classif.multinom</a></code>,
@@ -132,6 +133,7 @@ for established default tuning spaces.</p></li>
 <code><a href="mlr_learners_classif.xgboost.html">mlr_learners_classif.xgboost</a></code>,
 <code><a href="mlr_learners_regr.cv_glmnet.html">mlr_learners_regr.cv_glmnet</a></code>,
 <code><a href="mlr_learners_regr.glmnet.html">mlr_learners_regr.glmnet</a></code>,
+<code><a href="mlr_learners_regr.kknn.html">mlr_learners_regr.kknn</a></code>,
 <code><a href="mlr_learners_regr.km.html">mlr_learners_regr.km</a></code>,
 <code><a href="mlr_learners_regr.lm.html">mlr_learners_regr.lm</a></code>,
 <code><a href="mlr_learners_regr.ranger.html">mlr_learners_regr.ranger</a></code>,
@@ -225,15 +227,25 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor, ordered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 10098.580051 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 823.102857 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 8445.242250 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 346.375403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 176.439132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 158.345415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 139.968094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 82.148219</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  60 value 34.713929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  70 value 34.119941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 34.108462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 34.108462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  80 value 34.108462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 34.108462 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a 10-3-1 network with 37 weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> inputs: am carb cyl disp drat gear hp qsec vs wt </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> output(s): mpg </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> options were - linear output units </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28.52173 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11.74087 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
