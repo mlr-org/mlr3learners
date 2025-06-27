@@ -142,8 +142,8 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
 
       if (self$predict_type == "quantiles") {
         quantiles = prediction$predictions
-        attr(quantiles, "probs") = private$.quantiles
-        attr(quantiles, "response") = private$.quantile_response
+        setattr(quantiles, "probs", private$.quantiles)
+        setattr(quantiles, "response", private$.quantile_response)
         return(list(quantiles = quantiles))
       }
 
