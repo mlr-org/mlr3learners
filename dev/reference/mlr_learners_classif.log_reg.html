@@ -229,13 +229,16 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifLogReg:classif.log_reg&gt;: Logistic Regression</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: use_pred_offset=TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, stats</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, character, factor, ordered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: offset, twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerClassifLogReg&gt;</span><span style="font-weight: bold;"> (classif.log_reg): Logistic Regression</span> <span style="color: #00BBBB;">───────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: use_pred_offset=TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">stats</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response] and prob</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, numeric, character, factor, and ordered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: offset, twoclass, and weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: algorithm did not converge</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: fitted probabilities numerically 0 or 1 occurred</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -244,33 +247,33 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)           V1          V10          V11          V12          V13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    -218.269      447.294     -101.657       57.785      238.149       76.659  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -285.756     -677.894     -138.149     -256.903      518.509      -95.833  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V14          V15          V16          V17          V18          V19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    -147.612       73.619     -124.589       10.025       76.102      -20.279  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       5.969       88.531     -317.354      127.805       73.806     -146.011  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V2          V20          V21          V22          V23          V24  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -17.516      -89.098      136.322      -21.343       -9.840      204.983  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1042.352      258.374     -233.810      407.294     -305.507      388.313  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V25          V26          V27          V28          V29           V3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    -317.268      279.089     -173.946      168.871     -286.918     -819.898  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -295.362      -67.455      220.419      -15.845     -171.077     -592.316  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V30          V31          V32          V33          V34          V35  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     464.489     -403.653      275.932     -227.678      183.149       25.895  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     366.534     -363.831      176.149      -62.702       89.860       53.869  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V36          V37          V38          V39           V4          V40  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    -264.215       67.057      167.517       50.848      173.382     -143.493  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -126.325     -105.908       -4.911      504.074      146.961     -543.467  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V41          V42          V43          V44          V45          V46  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -31.279       -6.487       16.469      260.527      -99.417     -363.118  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     307.564     -245.771       50.703      528.297     -947.786      853.212  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V47          V48          V49           V5          V50          V51  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1021.223     -328.349      307.948      428.923    -1749.079     -494.081  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    -368.984     1132.261      582.159       80.766    -4700.025     2208.161  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V52          V53          V54          V55          V56          V57  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1741.766      946.441      152.633    -2309.507    -2846.633     -143.526  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     682.343     1965.509    -1969.410    -5174.850    -1851.471    -2349.680  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V58          V59           V6          V60           V7           V8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4298.927     1961.737     -190.439      706.957        4.573      323.417  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    6718.001     2307.788      135.176     2462.877        4.320      123.704  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      10.981  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     175.307  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 138 Total (i.e. Null);  78 Residual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    190.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 5.789e-09 	AIC: 122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    192.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 8.973e-09 	AIC: 122</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2898551 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3043478 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

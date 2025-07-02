@@ -193,51 +193,56 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerClassifMultinom:classif.multinom&gt;: Multinomial Log-Linear Model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, nnet</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response], prob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric, factor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: multiclass, twoclass, weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerClassifMultinom&gt;</span><span style="font-weight: bold;"> (classif.multinom): Multinomial Log-Linear Model</span> <span style="color: #00BBBB;">───</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">nnet</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response] and prob</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, numeric, and factor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: multiclass, twoclass, and weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # weights:  62 (61 variable)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> initial  value 96.347458 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 28.060727</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 1.899489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 0.003516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000058 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  10 value 29.798498</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  20 value 11.198546</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  30 value 5.075010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  40 value 0.275305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iter  50 value 0.002855</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 0.000057 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nnet::multinom(formula = Class ~ ., data = task$data())</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)          V1         V10         V11         V12         V13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   606.48499  -292.62216  -142.11791  -588.13233   -88.06081  -314.66330 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1665.10612 -1881.84170 -1012.45299 -1544.70196 -1579.26284  -237.57831 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V14         V15         V16         V17         V18         V19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -134.59359   380.41387   -93.35268   203.69452    83.21463    30.36906 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1965.84311   923.95870    45.30015  1976.62242    58.04681   633.93594 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V2         V20         V21         V22         V23         V24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -208.73362  -213.45852  -335.38329   104.26954   -54.17037  -522.82205 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -448.94781  -811.92042 -1438.30926  -446.14325   533.76321 -3600.95559 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V25         V26         V27         V28         V29          V3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   700.21783  -201.29489  -279.93755   276.00581  -122.70963   -55.82210 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4691.39151  -701.57480 -1552.72546  1629.63646  -412.61476   777.61673 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V30         V31         V32         V33         V34         V35 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    39.08240    57.62629   -86.84656  -265.38407   345.24797  -149.54434 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -294.99085   572.61023  -708.39364  -794.78207  1966.38381 -1802.32843 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V36         V37         V38         V39          V4         V40 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   165.80103   677.99313  -323.04585  -410.21814  -506.70203   468.79101 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1373.19784  3169.37153 -1213.36662 -1595.59491 -3248.85121  1578.02919 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V41         V42         V43         V44         V45         V46 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -74.72936  -118.46404  -278.18165  -225.21560  -453.56885  -472.40222 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1608.74882  1248.58616 -1831.67228 -2137.74375  -531.31338 -3161.98597 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V47         V48         V49          V5         V50         V51 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    29.90197  -336.13828  -343.42369  -451.68864   137.03675  -117.66505 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   589.26086 -2785.01296 -1697.40005 -1424.51982   674.63525  -856.48427 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V52         V53         V54         V55         V56         V57 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -92.13127   -31.72623   -40.72676    44.68332    46.71611    53.03701 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -45.65690  -161.85493  -209.51030   540.77070   285.13956   199.97640 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         V58         V59          V6         V60          V7          V8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -34.35565   -51.57852  -168.28882    10.24126   163.11532   640.56455 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -201.92567  -591.57092   920.87997  -570.09044  1987.50407  4093.80125 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          V9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -57.59101 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1361.00540 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001159859 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 0.0001144722 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AIC: 122.0001 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2463768 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2318841 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
