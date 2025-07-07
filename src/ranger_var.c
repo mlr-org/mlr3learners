@@ -5,6 +5,7 @@
 /* 
 //FIXME:
     * make most funs static
+    * use the 1e-8 trick for variance = 0? check paper again
 */
 
 // Debug printer system - can be switched on/off
@@ -60,8 +61,13 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_ta
     
     double *res = REAL(s_mu_sigma2_mat);
     for (int i = 1; i <= n_terms; i++) {
-      res[i-1]           = means[i];                    
-      res[i-1 + n_terms] = m2s[i] / (counts[i] - 1);
+      res[i-1]           = means[i];         
+      // if we only have one observation in a terminal node, we set sigma2 to 0
+      if (counts[i] > 1) {
+        res[i-1 + n_terms] = m2s[i] / (counts[i] - 1);
+      } else {
+        res[i-1 + n_terms] = 0;
+      }
     }
     SET_VECTOR_ELT(s_res, j_tree, s_mu_sigma2_mat);
     UNPROTECT(3); // s_mu_sigma2_mat, s_dimnames, s_colnames
@@ -139,6 +145,8 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mat, SEXP s_method) {
       // for "simple" the unbiased estimator is used, but this is how it was in lennarts code
       // and maybe in smac
       se[i] = sqrt(mu_m2 / (n_trees ) + sigma2_sum / n_trees);
+      DEBUG_PRINT("mu_m2: %f, sigma2_sum: %f, n_trees: %d\n", mu_m2, sigma2_sum, n_trees);
+      DEBUG_PRINT("i: %d, se: %f\n", i, se[i]);
     }
   }
   
