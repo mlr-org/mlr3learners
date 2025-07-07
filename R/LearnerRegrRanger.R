@@ -131,7 +131,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       )
 
       if (isTRUE(self$param_set$values$se.method %in% c("simple", "law_of_total_variance"))) {
-        data = mlr3learners:::ordered_features(task, self)
+        data = ordered_features(task, self)
         prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
         storage.mode(prediction_nodes$predictions) = "integer"
         mu_sigma = .Call("c_ranger_mu_sigma", model, prediction_nodes$predictions, task$truth())
