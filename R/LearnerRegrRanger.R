@@ -50,7 +50,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         sample.fraction              = p_dbl(0L, 1L, tags = "train"),
         save.memory                  = p_lgl(default = FALSE, tags = "train"),
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train", depends = quote(importance == "permutation")),
-        se.method                    = p_fct(c("jack", "infjack"), default = "infjack", tags = "predict"), # FIXME: only works if predict_type == "se". How to set dependency?
+        se.method                    = p_fct(c("jack", "infjack", "simple", "law_of_total_variance"), default = "infjack", tags = "predict"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("variance", "extratrees", "maxstat", "beta", "poisson"), default = "variance", tags = "train"),
@@ -113,6 +113,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
+      pv$se.method = NULL
       pv$case.weights = get_weights(task, private)
 
       if (self$predict_type == "se") {
@@ -123,31 +124,44 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         pv$quantreg = TRUE # nolint
       }
 
-      invoke(ranger::ranger,
+      model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         .args = pv
       )
+
+      if (isTRUE(self$param_set$values$se.method %in% c("simple", "law_of_total_variance"))) {
+        data = mlr3learners:::ordered_features(task, self)
+        prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
+        storage.mode(prediction_nodes$predictions) = "integer"
+        mu_sigma = .Call("c_ranger_mu_sigma", model, prediction_nodes$predictions, task$truth())
+        list(model = model, mu_sigma = mu_sigma)
+      } else {
+        list(model = model)
+      }
     },
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
 
-      prediction = invoke(predict, self$model,
-        data = newdata,
-        type = self$predict_type,
-        quantiles = private$.quantiles,
-        .args = pv)
+      if (isTRUE(pv$se.method %in% c("simple", "law_of_total_variance"))) {
+        prediction_nodes = mlr3misc::invoke(predict, self$model$model, data = newdata, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
+        storage.mode(prediction_nodes$predictions) = "integer"
+        method = if (pv$se.method == "simple") 0 else 1
+        .Call("c_ranger_var", prediction_nodes$predictions, self$model$mu_sigma, method)
+      } else {
+        prediction = mlr3misc::invoke(predict, self$model$model, data = newdata, type = self$predict_type, quantiles = private$.quantiles, .args = pv)
 
-      if (self$predict_type == "quantiles") {
-        quantiles = prediction$predictions
-        setattr(quantiles, "probs", private$.quantiles)
-        setattr(quantiles, "response", private$.quantile_response)
-        return(list(quantiles = quantiles))
+        if (self$predict_type == "quantiles") {
+          quantiles = prediction$predictions
+          setattr(quantiles, "probs", private$.quantiles)
+          setattr(quantiles, "response", private$.quantile_response)
+          return(list(quantiles = quantiles))
+        }
+
+        list(response = prediction$predictions, se = prediction$se)
       }
-
-      list(response = prediction$predictions, se = prediction$se)
     },
 
     .hotstart = function(task) {

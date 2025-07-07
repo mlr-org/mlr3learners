@@ -53,7 +53,7 @@ lrn("regr.ranger")
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack, simple, law_of_total_variance \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat, beta, poisson \tab - \cr
