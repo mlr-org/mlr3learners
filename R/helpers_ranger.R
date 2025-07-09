@@ -39,15 +39,15 @@ convert_ratio = function(pv, target, ratio, n) {
 
 
 ranger_selected_features = function(self) {
-  if (is.null(self$model)) {
+  if (is.null(self$model$model)) {
     stopf("No model stored")
   }
 
-  splitvars = ranger::treeInfo(object = self$model, tree = 1)$splitvarName
+  splitvars = ranger::treeInfo(object = self$model$model, tree = 1)$splitvarName
   i = 2
-  while (i <= self$model$num.trees &&
+  while (i <= self$model$model$num.trees &&
       !all(self$state$feature_names %in% splitvars)) {
-    sv = ranger::treeInfo(object = self$model, tree = i)$splitvarName
+    sv = ranger::treeInfo(object = self$model$model, tree = i)$splitvarName
     splitvars = union(splitvars, sv)
     i = i + 1
   }

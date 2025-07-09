@@ -1,8 +1,5 @@
 skip_if_not_installed("ranger")
 
-
-
-
 test_that("autotest", {
   learner = mlr3::lrn("regr.ranger", num.trees = 100, importance = "impurity")
   expect_learner(learner)

@@ -79,14 +79,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #'
     #' @return Named `numeric()`.
     importance = function() {
-      if (is.null(self$model)) {
+      if (is.null(self$model$model)) {
         stopf("No model stored")
       }
-      if (self$model$importance.mode == "none") {
+      if (self$model$model$importance.mode == "none") {
         stopf("No importance stored")
       }
 
-      sort(self$model$variable.importance, decreasing = TRUE)
+      sort(self$model$model$variable.importance, decreasing = TRUE)
     },
 
     #' @description
@@ -94,10 +94,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #'
     #' @return `numeric(1)`.
     oob_error = function() {
-      if (is.null(self$model)) {
+      if (is.null(self$model$model)) {
         stopf("No model stored")
       }
-      self$model$prediction.error
+      self$model$model$prediction.error
     },
 
     #' @description
@@ -165,9 +165,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     },
 
     .hotstart = function(task) {
-      model = self$models
+      model = self$model$model
       model$num.trees = self$param_set$values$num.trees
-      model
+      list(model = model)
     }
   )
 )
