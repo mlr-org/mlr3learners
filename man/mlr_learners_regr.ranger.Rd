@@ -6,7 +6,13 @@
 \title{Ranger Regression Learner}
 \description{
 Random regression forest.
-Calls \code{\link[ranger:ranger]{ranger::ranger()}} from package \CRANpkg{ranger}.
+Calls \code{ranger()} from package \CRANpkg{ranger}.
+}
+\details{
+Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a simple and law of total variance uncertainty estimation.
+Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
+The simple method calculates the variance of the mean of the leaf nodes.
+The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
 }
 \section{Dictionary}{
 
@@ -53,7 +59,7 @@ lrn("regr.ranger")
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   se.method \tab character \tab infjack \tab jack, infjack \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack, simple, law_of_total_variance \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat, beta, poisson \tab - \cr

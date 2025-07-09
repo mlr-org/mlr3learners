@@ -13,14 +13,14 @@ test_that("hotstart", {
   learner_1 = lrn("regr.ranger", num.trees = 1000L)
   learner_1$train(task)
   expect_equal(learner_1$state$param_vals$num.trees, 1000L)
-  expect_equal(learner_1$model$num.trees, 1000L)
+  expect_equal(learner_1$model$model$num.trees, 1000L)
 
   hot = HotstartStack$new(learner_1)
 
   learner_2 = lrn("regr.ranger", num.trees = 500L)
   expect_equal(hot$start_cost(learner_2, task$hash), 0L)
   learner_2$train(task)
-  expect_equal(learner_2$model$num.trees, 500L)
+  expect_equal(learner_2$model$model$num.trees, 500L)
   expect_equal(learner_2$param_set$values$num.trees, 500L)
   expect_equal(learner_2$state$param_vals$num.trees, 500L)
 
@@ -30,7 +30,7 @@ test_that("hotstart", {
   learner_4 = lrn("regr.ranger", num.trees = 1000L)
   expect_equal(hot$start_cost(learner_4, task$hash), -1L)
   learner_4$train(task)
-  expect_equal(learner_4$model$num.trees, 1000L)
+  expect_equal(learner_4$model$model$num.trees, 1000L)
   expect_equal(learner_4$param_set$values$num.trees, 1000L)
   expect_equal(learner_4$state$param_vals$num.trees, 1000L)
 })
@@ -48,7 +48,7 @@ test_that("mtry.ratio", {
 
   learner$train(task)
   expect_equal(
-    learner$model$mtry,
+    learner$model$model$mtry,
     5
   )
 })
@@ -95,4 +95,57 @@ test_that("selected_features", {
   task$select(c("am", "cyl", "wt"))
   learner$train(task)
   expect_set_equal(learner$selected_features(), c("am", "cyl", "wt"))
+})
+
+test_that("se.method works", {
+  learner = lrn("regr.ranger", se.method = "simple", predict_type = "se")
+  task = tsk("mtcars")
+  learner$train(task)
+  pred = learner$predict(task)
+  expect_numeric(pred$se, any.missing = FALSE)
+
+  learner = lrn("regr.ranger", se.method = "law_of_total_variance", predict_type = "se")
+  learner$train(task)
+  pred = learner$predict(task)
+  expect_numeric(pred$se, any.missing = FALSE)
+
+  learner = lrn("regr.ranger", se.method = "infjack", predict_type = "se")
+  learner$train(task)
+  pred = learner$predict(task)
+  expect_numeric(pred$se, any.missing = FALSE)
+
+  learner = lrn("regr.ranger", se.method = "jack", predict_type = "se")
+  learner$train(task)
+  pred = learner$predict(task)
+  expect_numeric(pred$se, any.missing = FALSE)
+})
+
+test_that("simple se method works", {
+  learner = lrn("regr.ranger", se.method = "simple", predict_type = "se")
+  task = tsk("mtcars")
+  learner$train(task)
+
+  # calculate with R functions
+  mu_sigma = compute_mu_sigma2(learner$model$model, task)
+  simple_response = simple_var(learner, task$data(), mu_sigma$mu_sigma2_per_node_per_tree)
+
+  # compare with C functions
+  pred = learner$predict(task)
+  expect_equal(pred$response, simple_response$response)
+  expect_equal(pred$se, simple_response$se)
+})
+
+test_that("law of total variance se method works", {
+  learner = lrn("regr.ranger", se.method = "law_of_total_variance", predict_type = "se")
+  task = tsk("mtcars")
+  learner$train(task)
+
+  # calculate with R functions
+  mu_sigma = compute_mu_sigma2(learner$model$model, task)
+  ltv_response = ltv(learner, task$data(), mu_sigma$mu_sigma2_per_node_per_tree)
+
+  # compare with C functions
+  pred = learner$predict(task)
+  expect_equal(pred$response, ltv_response$response)
+  expect_equal(pred$se, ltv_response$se)
 })
