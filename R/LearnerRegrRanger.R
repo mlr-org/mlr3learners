@@ -146,6 +146,9 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       newdata = ordered_features(task, self)
 
       if (isTRUE(pv$se.method %in% c("simple", "law_of_total_variance"))) {
+
+        print("simple2")
+
         prediction_nodes = mlr3misc::invoke(predict, self$model$model, data = newdata, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
         storage.mode(prediction_nodes$predictions) = "integer"
         method = if (pv$se.method == "simple") 0 else 1
