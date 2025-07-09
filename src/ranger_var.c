@@ -2,14 +2,14 @@
 #include <Rinternals.h>
 #include <math.h>
 
-/* 
+/*
 //FIXME:
     * make most funs static
     * use the 1e-8 trick for variance = 0? check paper again
 */
 
 // Debug printer system - can be switched on/off
-#define DEBUG_ENABLED 0  // Set to 1 to enable debug output
+#define DEBUG_ENABLED 1  // Set to 1 to enable debug output
 
 #if DEBUG_ENABLED
 #define DEBUG_PRINT(fmt, ...) Rprintf(fmt, ##__VA_ARGS__)
@@ -24,7 +24,7 @@
 void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_tab, double *y, SEXP s_res) {
     DEBUG_PRINT("tree: %d\n", j_tree);
     int n_terms = 0; // FIXME: careful some ids might be missing
-    int term; 
+    int term;
     // get max term-node id, we need to know the size of the arrays
     for (int i = 0; i < n_obs; i++) {
       term = pred_tab[i + j_tree * n_obs];
@@ -32,8 +32,8 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_ta
     }
     DEBUG_PRINT("n_terms: %d\n", n_terms);
     // +1 because our C arrays are 0-indexed
-    int counts[n_terms + 1]; // 
-    double means[n_terms + 1]; // 
+    int counts[n_terms + 1]; //
+    double means[n_terms + 1]; //
     double m2s[n_terms + 1]; //
     memset(counts, 0, sizeof(counts));
     memset(means, 0, sizeof(means));
@@ -55,13 +55,13 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_ta
     SEXP s_dimnames = PROTECT(allocVector(VECSXP, 2));
     SEXP s_colnames = PROTECT(allocVector(STRSXP, 2));
     SET_STRING_ELT(s_colnames, 0, mkChar("mu"));
-    SET_STRING_ELT(s_colnames, 1, mkChar("sigma2")); 
+    SET_STRING_ELT(s_colnames, 1, mkChar("sigma2"));
     SET_VECTOR_ELT(s_dimnames, 1, s_colnames);
     setAttrib(s_mu_sigma2_mat, R_DimNamesSymbol, s_dimnames);
-    
+
     double *res = REAL(s_mu_sigma2_mat);
     for (int i = 1; i <= n_terms; i++) {
-      res[i-1]           = means[i];         
+      res[i-1]           = means[i];
       // if we only have one observation in a terminal node, we set sigma2 to 0
       if (counts[i] > 1) {
         res[i-1 + n_terms] = m2s[i] / (counts[i] - 1);
@@ -123,9 +123,9 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mat, SEXP s_method) {
 
   for (int i = 0; i < n_obs; ++i) {
     // Welford's variance algorithm (numerically stable)
-    double mu_mean, mu_m2 = 0, sigma2_sum = 0;
+    double mu_mean = 0, mu_m2 = 0, sigma2_sum = 0;
     for (int j = 0; j < n_trees; ++j) {
-      SEXP s_mu_sigma2_mat_j = VECTOR_ELT(s_mu_sigma2_mat, j); // n_terms x 2 
+      SEXP s_mu_sigma2_mat_j = VECTOR_ELT(s_mu_sigma2_mat, j); // n_terms x 2
       int n_terms = Rf_nrows(s_mu_sigma2_mat_j);
       double *mu_sigma2_mat = REAL(s_mu_sigma2_mat_j);
       int term = pred_tab[i + j * n_obs];
@@ -149,7 +149,7 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mat, SEXP s_method) {
       DEBUG_PRINT("i: %d, se: %f\n", i, se[i]);
     }
   }
-  
+
   // store response and se in result list
   SEXP s_names = PROTECT(allocVector(STRSXP, 2));
   SET_STRING_ELT(s_names, 0, mkChar("response"));
