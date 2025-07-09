@@ -9,7 +9,7 @@
 */
 
 // Debug printer system - can be switched on/off
-#define DEBUG_ENABLED 1  // Set to 1 to enable debug output
+#define DEBUG_ENABLED 0  // Set to 1 to enable debug output
 
 #if DEBUG_ENABLED
 #define DEBUG_PRINT(fmt, ...) Rprintf(fmt, ##__VA_ARGS__)
