@@ -35,9 +35,6 @@ convert_ratio = function(pv, target, ratio, n) {
   )
 }
 
-
-
-
 ranger_selected_features = function(self) {
   if (is.null(self$model$model)) {
     stopf("No model stored")
@@ -55,5 +52,4 @@ ranger_selected_features = function(self) {
   # order the names of the selected features in the same order as in the task
   self$state$feature_names[self$state$feature_names %in% splitvars]
 }
-
 
