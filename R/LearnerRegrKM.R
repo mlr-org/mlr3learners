@@ -116,7 +116,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         newdata = newdata,
         type = if (is.null(pv$type)) "SK" else pv$type,
         se.compute = self$predict_type == "se",
-        .args = remove_named(pv, "jitter")
+        .args = remove_named(pv, "jitter"),
+        .opts = list(warnPartialMatchArgs = FALSE)
       )
 
       list(response = p$mean, se = p$sd)
