@@ -37,6 +37,7 @@ Imports:
 Suggests:
     DiceKriging,
     e1071,
+    future,
     glmnet,
     kknn,
     knitr,
