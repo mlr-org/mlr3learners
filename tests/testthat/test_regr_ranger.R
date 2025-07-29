@@ -78,7 +78,7 @@ test_that("quantile prediction", {
   learner$train(task)
   pred = learner$predict(task)
 
-  expect_matrix(pred$quantiles, ncol = 3L)
+  expect_matrix(pred$quantiles, ncols = 3L)
   expect_true(!any(apply(pred$quantiles, 1L, is.unsorted)))
   expect_equal(pred$response, pred$quantiles[, 2L])
 
