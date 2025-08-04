@@ -141,6 +141,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         .args = pv)
 
       if (self$predict_type == "quantiles") {
+        assert_quantiles(self, quantile_response = TRUE)
         quantiles = prediction$predictions
         setattr(quantiles, "probs", private$.quantiles)
         setattr(quantiles, "response", private$.quantile_response)
