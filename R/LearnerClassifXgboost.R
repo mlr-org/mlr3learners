@@ -351,7 +351,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       newdata = as_numeric_matrix(ordered_features(task, self))
-      browser()
       pred = invoke(predict, model, newdata = newdata, .args = pv)
 
       if (nlvls == 2L) { # binaryclass
