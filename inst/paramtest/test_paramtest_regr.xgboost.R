@@ -60,7 +60,11 @@ test_that("predict regr.xgboost", {
   exclude = c(
     "object", # handled by mlr3
     "newdata", # handled by mlr3
-    "objective" # defined in xgboost::xgboost and already in param set
+    "objective", # defined in xgboost::xgboost and already in param set
+    "outputmargin", # not supported
+    "predcontrib", # not supported
+    "predinteraction", # not supported
+    "predleaf" # not supported
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")

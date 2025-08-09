@@ -3,7 +3,7 @@
 #' @import mlr3misc
 #' @import checkmate
 #' @importFrom R6 R6Class
-#' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr assert_validate
+#' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr assert_validate assert_quantiles
 #' @importFrom stats predict reformulate
 #' @importFrom utils packageVersion
 #'

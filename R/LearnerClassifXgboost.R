@@ -129,10 +129,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         num_parallel_tree           = p_int(1L, default = 1L, tags = c("train", "control")),
         objective                   = p_uty(default = "binary:logistic", tags = c("train", "predict", "control")),
         one_drop                    = p_lgl(default = FALSE, tags = "train", depends = quote(booster == "dart")),
-        outputmargin                = p_lgl(default = FALSE, tags = "predict"),
-        predcontrib                 = p_lgl(default = FALSE, tags = "predict"),
-        predinteraction             = p_lgl(default = FALSE, tags = "predict"),
-        predleaf                    = p_lgl(default = FALSE, tags = "predict"),
         print_every_n               = p_int(1L, default = 1L, tags = "train", depends = quote(verbose == 1L)),
         process_type                = p_fct(c("default", "update"), default = "default", tags = "train"),
         rate_drop                   = p_dbl(0, 1, default = 0, tags = "train", depends = quote(booster == "dart")),
@@ -221,6 +217,10 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       lvls = task$class_names
       nlvls = length(lvls)
+
+      if (isTRUE(pv$predcontrib) || isTRUE(pv$predinteraction) || isTRUE(pv$predleaf)) {
+        warningf("Predicting contributions, interactions, or leaf values with $predict() is not supported. ")
+      }
 
       if (is.null(pv$objective)) {
         pv$objective = if (nlvls == 2L) "binary:logistic" else "multi:softprob"
