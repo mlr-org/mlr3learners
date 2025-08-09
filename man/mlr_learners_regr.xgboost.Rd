@@ -87,10 +87,6 @@ lrn("regr.xgboost")
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    objective \tab untyped \tab "reg:squarederror" \tab  \tab - \cr
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    process_type \tab character \tab default \tab default, update \tab - \cr
    rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
