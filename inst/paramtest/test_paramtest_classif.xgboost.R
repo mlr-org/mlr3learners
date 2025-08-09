@@ -65,6 +65,7 @@ test_that("predict classif.xgboost", {
     "predcontrib", # not supported
     "predinteraction", # not supported
     "predleaf" # not supported
+  )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
   expect_true(ParamTest, info = paste0(
