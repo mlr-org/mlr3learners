@@ -42,11 +42,7 @@ test_that("regr.xgboost", {
     "label", # handled by mlr3
     "weight", # handled by mlr3
     "nthread", # handled by mlr3
-    "feval", # handled via eval_metric parameter
-    "outputmargin", # not supported
-    "predcontrib", # not supported
-    "predinteraction", # not supported
-    "predleaf" # not supported
+    "feval" # handled via eval_metric parameter
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -64,7 +60,11 @@ test_that("predict regr.xgboost", {
   exclude = c(
     "object", # handled by mlr3
     "newdata", # handled by mlr3
-    "objective" # defined in xgboost::xgboost and already in param set
+    "objective", # defined in xgboost::xgboost and already in param set
+    "outputmargin", # not supported
+    "predcontrib", # not supported
+    "predinteraction", # not supported
+    "predleaf" # not supported
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
