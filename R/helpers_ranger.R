@@ -35,3 +35,18 @@ convert_ratio = function(pv, target, ratio, n) {
   )
 }
 
+ranger_selected_features = function(model, feature_names) {
+  if (is.null(model)) {
+    stopf("No model stored")
+  }
+
+  splitvars = ranger::treeInfo(object = model, tree = 1)$splitvarName
+  i = 2
+  while (i <= model$num.trees && !all(feature_names %in% splitvars)) {
+    sv = ranger::treeInfo(object = model, tree = i)$splitvarName
+    splitvars = union(splitvars, sv)
+    i = i + 1
+  }
+
+  splitvars[!is.na(splitvars)]
+}
