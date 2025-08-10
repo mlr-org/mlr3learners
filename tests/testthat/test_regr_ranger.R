@@ -96,3 +96,12 @@ test_that("selected_features", {
   learner$train(task)
   expect_set_equal(learner$selected_features(), c("am", "cyl", "wt"))
 })
+
+test_that("oob_error available without stored model", {
+  task = tsk("mtcars")
+  learner = lrn("regr.ranger")
+
+  rr = resample(task, learner, rsmp("holdout"), store_models = FALSE)
+
+  expect_number(rr$aggregate(msr("oob_error")))
+})

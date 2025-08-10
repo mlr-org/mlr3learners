@@ -92,12 +92,17 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #' @description
     #' The out-of-bag error, extracted from model slot `prediction.error`.
     #'
-    #' @return `numeric(1)`.
+    #' @return `numeric(1)`
     oob_error = function() {
-      if (is.null(self$model)) {
-        stopf("No model stored")
+      if (!is.null(self$state$oob_error)) {
+        return(self$state$oob_error)
       }
-      self$model$prediction.error
+
+      if (!is.null(self$model)) {
+        return(self$model$prediction.error)
+      }
+
+      stopf("No model stored")
     },
 
     #' @description
@@ -155,6 +160,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       model = self$models
       model$num.trees = self$param_set$values$num.trees
       model
+    },
+
+    .extract_oob_error = function() {
+      self$model$prediction.error
     }
   )
 )
