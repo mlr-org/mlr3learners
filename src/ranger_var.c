@@ -51,7 +51,7 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_ta
     }
 
     // Create result array with dimensions [n_terms, 2] for mu and sigma^2
-    SEXP s_mu_sigma2_mat = PROTECT(allocMatrix(REALSXP, n_terms, 2));
+    SEXP s_mu_sigma2_mat = PROTECT(allocMatrix(REALSXP, n_terms + 1, 2));
     SEXP s_dimnames = PROTECT(allocVector(VECSXP, 2));
     SEXP s_colnames = PROTECT(allocVector(STRSXP, 2));
     SET_STRING_ELT(s_colnames, 0, mkChar("mu"));
@@ -59,14 +59,15 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_ta
     SET_VECTOR_ELT(s_dimnames, 1, s_colnames);
     setAttrib(s_mu_sigma2_mat, R_DimNamesSymbol, s_dimnames);
 
+    // iterate terminal nodes
     double *res = REAL(s_mu_sigma2_mat);
-    for (int i = 1; i <= n_terms; i++) {
-      res[i-1]           = means[i];
+    for (int i = 0; i <= n_terms; i++) {
+      res[i] = means[i];
       // if we only have one observation in a terminal node, we set sigma2 to 0
       if (counts[i] > 1) {
-        res[i-1 + n_terms] = m2s[i] / (counts[i] - 1);
+        res[i + n_terms + 1] = m2s[i] / (counts[i] - 1);
       } else {
-        res[i-1 + n_terms] = 0;
+        res[i + n_terms + 1] = 0;
       }
     }
     SET_VECTOR_ELT(s_res, j_tree, s_mu_sigma2_mat);
@@ -75,7 +76,7 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, int *pred_ta
 
 // computes a list of matrices, one for each tree, each matrix has 2 columns: mu and sigma^2 for each term-node, term-nodes are rows
 // we simply call c_ranger_mu_sigma_per_tree for each tree for each tree
-SEXP c_ranger_mu_sigma(SEXP s_ranger, SEXP s_pred_tab, SEXP s_y) {
+SEXP c_ranger_mu_sigma(SEXP s_pred_tab, SEXP s_y) {
   int n_obs = Rf_nrows(s_pred_tab);
   int n_trees = Rf_ncols(s_pred_tab);
   int *pred_tab = INTEGER(s_pred_tab); // n_obs x n_trees, column-major
@@ -129,11 +130,11 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mat, SEXP s_method) {
       int n_terms = Rf_nrows(s_mu_sigma2_mat_j);
       double *mu_sigma2_mat = REAL(s_mu_sigma2_mat_j);
       int term = pred_tab[i + j * n_obs];
-      double mu = mu_sigma2_mat[term - 1];
+      double mu = mu_sigma2_mat[term];
       double mu_delta = mu - mu_mean;
       mu_mean += mu_delta / (j + 1);
       mu_m2 += mu_delta * (mu - mu_mean);
-      double sigma2 = mu_sigma2_mat[term - 1 + n_terms];
+      double sigma2 = mu_sigma2_mat[term + n_terms];
       sigma2_sum += sigma2;
       DEBUG_PRINT("i: %d, j: %d, term: %d, mu: %f, delta: %f, mean: %f, m2: %f\n", i, j, term, mu, mu_delta, mu_mean, mu_m2);
     }

@@ -140,7 +140,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         data = ordered_features(task, self)
         prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
         storage.mode(prediction_nodes$predictions) = "integer"
-        mu_sigma = .Call("c_ranger_mu_sigma", model, prediction_nodes$predictions, task$truth())
+        mu_sigma = .Call("c_ranger_mu_sigma", prediction_nodes$predictions, task$truth())
         list(model = model, mu_sigma = mu_sigma)
       } else {
         list(model = model)
