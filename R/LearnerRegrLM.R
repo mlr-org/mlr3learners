@@ -54,9 +54,7 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
         predict_types = c("response", "se"),
         feature_types = c("logical", "integer", "numeric", "factor", "character"),
         properties = c("weights", "offset"),
-        packages = c("mlr3learners", "stats"),
-        label = "Linear Model",
-        man = "mlr3learners::mlr_learners_regr.lm"
+        packages = "stats"
       )
     }
   ),

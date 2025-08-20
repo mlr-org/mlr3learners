@@ -51,7 +51,8 @@ Suggests:
     testthat (>= 3.0.0),
     xgboost (>= 1.6.0)
 Remotes:
-    mlr-org/mlr3
+    mlr-org/mlr3@common_baseclass,
+    mlr-org/mlr3misc@common_baseclass
 Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: no

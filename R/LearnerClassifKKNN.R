@@ -44,9 +44,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "factor", "ordered"),
         properties = c("twoclass", "multiclass"),
-        packages = c("mlr3learners", "kknn"),
-        label = "k-Nearest-Neighbor",
-        man = "mlr3learners::mlr_learners_classif.kknn"
+        packages = "kknn"
       )
     }
   ),

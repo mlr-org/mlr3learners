@@ -56,13 +56,11 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
 
       super$initialize(
         id = "classif.nnet",
-        packages = c("mlr3learners", "nnet"),
+        packages = "nnet",
         feature_types = c("logical", "numeric", "factor", "ordered", "integer"),
         predict_types = c("prob", "response"),
         param_set = ps,
-        properties = c("twoclass", "multiclass", "weights"),
-        label = "Single Layer Neural Network",
-        man = "mlr3learners::mlr_learners_classif.nnet"
+        properties = c("twoclass", "multiclass", "weights")
       )
     }
   ),

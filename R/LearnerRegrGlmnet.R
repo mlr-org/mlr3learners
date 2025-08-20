@@ -78,9 +78,7 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "offset"),
-        packages = c("mlr3learners", "glmnet"),
-        label = "GLM with Elastic Net Regularization",
-        man = "mlr3learners::mlr_learners_regr.glmnet"
+        packages = "glmnet"
       )
     },
 
