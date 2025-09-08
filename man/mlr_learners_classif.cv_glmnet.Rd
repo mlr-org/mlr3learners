@@ -93,7 +93,7 @@ as the first factor level.
 }
 
 \examples{
-if (requireNamespace("glmnet", quietly = TRUE)) {
+\dontshow{if (mlr3misc::require_namespaces(lrn("classif.cv_glmnet")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.cv_glmnet")
 print(learner)
@@ -107,18 +107,18 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 
-# print the model
+# Print the model
 print(learner$model)
 
-# importance method
-if("importance" \%in\% learner$properties) print(learner$importance)
+# Importance method
+if ("importance" \%in\% learner$properties) print(learner$importance)
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 Friedman J, Hastie T, Tibshirani R (2010).
