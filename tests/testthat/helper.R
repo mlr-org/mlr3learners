@@ -32,7 +32,7 @@ simple_var = function(learner, newdata, mu_sigma2_per_node_per_tree) {
     })
     mus = sapply(mu_sigma2_per_tree, "[[", 1)
     response[i] = mean(mus)
-    se[i] = sqrt(var(mus))
+    se[i] = if (length(mus) > 1) sqrt(var(mus)) else 0
   }
   list(response = response, se = se)
 }

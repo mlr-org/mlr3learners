@@ -11,7 +11,7 @@
 #' Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
 #' The simple method calculates the variance of the mean of the leaf nodes.
 #' The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
-#' Formulas for the simple and law of total variance method are given in `r format_bib("hutter_2015")`.
+#' Formulas for the simple and law of total variance method are given in Hutter et al. (2015).
 #'
 #' For these 2 methods, the parameter `sigma2.threshold` can be used to set a threshold for the variance of the leaf nodes,
 #' this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value
@@ -126,6 +126,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "train")
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
       pv$se.method = NULL
+      sigma2_threshold = pv$sigma2.threshold
       pv$sigma2.threshold = NULL
       pv$case.weights = get_weights(task, private)
 
@@ -147,7 +148,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         # num.threads is the only thing from the param set we want to pass here and not set manually
         prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", predict.all = TRUE, num.threads = pv$num.threads)
         storage.mode(prediction_nodes$predictions) = "integer"
-        mu_sigma = .Call("c_ranger_mu_sigma", prediction_nodes$predictions, task$truth(), pv$sigma2.threshold)
+        mu_sigma = .Call("c_ranger_mu_sigma", prediction_nodes$predictions, task$truth(), sigma2_threshold)
         list(model = model, mu_sigma = mu_sigma)
       } else {
         list(model = model)

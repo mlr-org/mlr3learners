@@ -1,6 +1,8 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <math.h>
+#include <R_ext/Memory.h>
+#include <string.h>
 
 
 // Debug printer system - can be switched on/off
@@ -62,12 +64,12 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, const int *p
     // these are the rows of the result objects, 1 per terminal node
     // +1 because our C arrays are 0-indexed
     int n_term_rows = max_term_id + 1;
-    int counts[n_term_rows]; //
-    double means[n_term_rows]; //
-    double m2s[n_term_rows]; //
-    memset(counts, 0, sizeof(counts));
-    memset(means, 0, sizeof(means));
-    memset(m2s, 0, sizeof(m2s));
+    int *counts = (int*) R_alloc(n_term_rows, sizeof(int));
+    double *means = (double*) R_alloc(n_term_rows, sizeof(double));
+    double *m2s = (double*) R_alloc(n_term_rows, sizeof(double));
+    memset(counts, 0, n_term_rows * sizeof(int));
+    memset(means, 0, n_term_rows * sizeof(double));
+    memset(m2s, 0, n_term_rows * sizeof(double));
 
     // Welford's variance algorithm (numerically stable)
     // we iterate over all observations
@@ -95,16 +97,10 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, const int *p
     // iterate terminal nodes
     double *res = REAL(s_mu_sigma2_mat);
     for (int i = 0; i < n_term_rows; i++) {
+      DEBUG_PRINT("i: %d, means: %f, counts: %d, m2s: %f\n", i, means[i], counts[i], m2s[i]);
       res[i] = means[i];
-      // if we only have one observation in a terminal node, we set sigma2 to 0
-      if (counts[i] > 1) {
-        res[i + n_term_rows] = m2s[i] / (counts[i] - 1);
-      } else {
-        res[i + n_term_rows] = 0;
-      }
-      if (res[i + n_term_rows] < sigma2_threshold) {
-        res[i + n_term_rows] = sigma2_threshold;
-      }
+      double var = (counts[i] > 1) ? (m2s[i] / (counts[i] - 1)) : 0.0;
+      res[i + n_term_rows] = fmax(var, sigma2_threshold);
     }
     SET_VECTOR_ELT(s_res, j_tree, s_mu_sigma2_mat);
     UNPROTECT(3); // s_mu_sigma2_mat, s_dimnames, s_colnames
@@ -120,7 +116,7 @@ for further details see function above
 SEXP c_ranger_mu_sigma(SEXP s_pred_tab, SEXP s_y, SEXP s_sigma2_threshold) {
   int n_obs = Rf_nrows(s_pred_tab);
   int n_trees = Rf_ncols(s_pred_tab);
-  int *pred_tab = INTEGER(s_pred_tab); // n_obs x n_trees, column-major
+  const int *pred_tab = INTEGER(s_pred_tab); // n_obs x n_trees, column-major
   double *y = REAL(s_y);
   double sigma2_threshold = asReal(s_sigma2_threshold);
   DEBUG_PRINT("n_obs: %d, n_trees: %d, sigma2_threshold: %f\n", n_obs, n_trees, sigma2_threshold);
@@ -181,34 +177,60 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mats, SEXP s_method) {
 
   int method = asInteger(s_method);
 
-  for (int i = 0; i < n_obs; ++i) {
-    // Welford's variance algorithm (numerically stable)
-    double mu_mean = 0, mu_m2 = 0, sigma2_sum = 0;
-    for (int j = 0; j < n_trees; ++j) {
-      SEXP s_mu_sigma2_mat_j = VECTOR_ELT(s_mu_sigma2_mats, j); // n_terms x 2
-      int n_term_rows = Rf_nrows(s_mu_sigma2_mat_j);
-      double *mu_sigma2_mat_j = REAL(s_mu_sigma2_mat_j);
+
+  // Pre-compute per-tree matrix pointers and row counts
+  int *n_term_rows = (int*) R_alloc(n_trees, sizeof(int));
+  double **mu_ptr = (double**) R_alloc(n_trees, sizeof(double*));
+  double **sig_ptr = (double**) R_alloc(n_trees, sizeof(double*));
+  for (int j = 0; j < n_trees; ++j) {
+    SEXP s_mu_sigma2_mat = VECTOR_ELT(s_mu_sigma2_mats, j);
+    n_term_rows[j] = Rf_nrows(s_mu_sigma2_mat);
+    double *base = REAL(s_mu_sigma2_mat);
+    mu_ptr[j] = base;
+    sig_ptr[j] = base + n_term_rows[j];
+  }
+
+  // Per-observation accumulators (improves cache locality)
+  double *mu_mean_acc = (double*) R_alloc(n_obs, sizeof(double));
+  double *mu_m2_acc   = (double*) R_alloc(n_obs, sizeof(double));
+  memset(mu_mean_acc, 0, n_obs * sizeof(double));
+  memset(mu_m2_acc,   0, n_obs * sizeof(double));
+  double *sigma2_sum_acc = NULL;
+  if (method != 0) {
+    sigma2_sum_acc = (double*) R_alloc(n_obs, sizeof(double));
+    memset(sigma2_sum_acc, 0, n_obs * sizeof(double));
+  }
+
+   // Welford's variance algorithm (numerically stable)
+  for (int j = 0; j < n_trees; ++j) {
+    int n_term_rows_j = n_term_rows[j];
+    double *mu_j = mu_ptr[j];
+    double *sig_j = sig_ptr[j];
+    for (int i = 0; i < n_obs; ++i) {
       int term = pred_tab[i + j * n_obs];
-      double mu = mu_sigma2_mat_j[term];
-      double mu_delta = mu - mu_mean;
-      mu_mean += mu_delta / (j + 1);
-      mu_m2 += mu_delta * (mu - mu_mean);
-      sigma2_sum += mu_sigma2_mat_j[term + n_term_rows];
-      DEBUG_PRINT("i: %d, j: %d, term: %d, mu: %f, delta: %f, mean: %f, m2: %f\n", i, j, term, mu, mu_delta, mu_mean, mu_m2);
+      // Assumes 0 <= term < nrows_j as produced by training
+      double mu_val = mu_j[term];
+      double delta = mu_val - mu_mean_acc[i];
+      mu_mean_acc[i] += delta / (j + 1);
+      mu_m2_acc[i]   += delta * (mu_val - mu_mean_acc[i]);
+      if (method != 0) {
+        sigma2_sum_acc[i] += sig_j[term];
+      }
     }
-    response[i] = mu_mean;
+  }
+
+  for (int i = 0; i < n_obs; ++i) {
+    response[i] = mu_mean_acc[i];
     if (method == 0) {
-      se[i] = sqrt(mu_m2 / (n_trees - 1));
+      se[i] = (n_trees > 1) ? sqrt(mu_m2_acc[i] / (n_trees - 1)) : 0.0;
     } else {
-      // FIXME: it is somewhat weird if the biased estimator is used here
+      // FIXME (?): it is somewhat weird if the biased estimator is used here
       // for "simple" the unbiased estimator is used, but this is how it was in lennarts code
       // and maybe in smac
       // but i checked paper; and thats what is used there
       // Algorithm Runtime Prediction: Methods & Evaluation
       // https://arxiv.org/pdf/1211.0906
-      se[i] = sqrt(mu_m2 / (n_trees ) + sigma2_sum / n_trees);
-      DEBUG_PRINT("mu_m2: %f, sigma2_sum: %f, n_trees: %d\n", mu_m2, sigma2_sum, n_trees);
-      DEBUG_PRINT("i: %d, se: %f\n", i, se[i]);
+      se[i] = (n_trees > 0) ? sqrt(mu_m2_acc[i] / n_trees + sigma2_sum_acc[i] / n_trees) : 0.0;
     }
   }
 

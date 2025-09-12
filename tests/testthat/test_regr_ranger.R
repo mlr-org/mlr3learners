@@ -126,7 +126,7 @@ test_that("c_ranger_mu_sigma works with one tree", {
   # one terminal node and one observation
   term_ids = matrix(c(0L)) # terminal nodes are zero-indexed
   truth = c(1)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)[[1]]
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)[[1]]
   expect_matrix(res, nrow = 1, ncol = 2)
   expect_equal(unname(res[1, 1]), 1)
   expect_equal(unname(res[1, 2]), 0)
@@ -134,7 +134,7 @@ test_that("c_ranger_mu_sigma works with one tree", {
   # one terminal node and two observations
   term_ids = matrix(c(0L, 0L))
   truth = c(1, 2)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)[[1]]
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)[[1]]
   expect_matrix(res, nrow = 1, ncol = 2)
   expect_equal(unname(res[1, 1]), 1.5)
   expect_equal(unname(res[1, 2]), 0.5)
@@ -142,7 +142,7 @@ test_that("c_ranger_mu_sigma works with one tree", {
   # two terminal nodes and four observations
   term_ids = matrix(c(0L, 0L, 1L, 1L))
   truth = c(1, 1, 2, 2) # truth[1] and truth[2] are in the same terminal node
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)[[1]]
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)[[1]]
   expect_matrix(res, nrow = 2, ncol = 2)
   expect_equal(unname(res[1, 1]), 1)
   expect_equal(unname(res[1, 2]), 0)
@@ -152,7 +152,7 @@ test_that("c_ranger_mu_sigma works with one tree", {
   # four terminal nodes and eight observations
   term_ids = matrix(c(0L, 0L, 1L, 1L, 2L, 2L, 3L, 3L))
   truth = c(1, 1, 2, 2, 3, 3, 4, 4)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)[[1]]
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)[[1]]
   expect_matrix(res, nrow = 4, ncol = 2)
   expect_equal(unname(res[1, 1]), 1)
   expect_equal(unname(res[1, 2]), 0)
@@ -168,7 +168,7 @@ test_that("c_ranger_mu_sigma works with two trees", {
   # two trees, one terminal node per tree
   term_ids = matrix(c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L), nrow = 4, ncol = 2)
   truth = c(1, 1, 2, 2)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
   assert_list(res, len = 2)
   expect_matrix(res[[1]], nrow = 1, ncol = 2)
   expect_equal(unname(res[[1]][1, 1]), 1.5)
@@ -180,7 +180,7 @@ test_that("c_ranger_mu_sigma works with two trees", {
   # two trees, first tree has one terminal node, second tree has two terminal nodes
   term_ids = matrix(c(0L, 0L, 0L, 0L, 1L, 1L, 1L, 1L), nrow = 4, ncol = 2)
   truth = c(1, 1, 2, 2)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
   assert_list(res, len = 2)
   expect_matrix(res[[1]], nrow = 1, ncol = 2)
   expect_equal(unname(res[[1]][1, 1]), 1.5)
@@ -196,7 +196,7 @@ test_that("c_ranger_mu_sigma variance calculation works", {
   # one terminal node and one tree
   term_ids = matrix(c(0L, 0L, 0L, 0L, 0L), nrow = 5, ncol = 1)
   truth = c(1, 2, 3, 4, 5)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
   assert_list(res, len = 1)
   expect_matrix(res[[1]], nrow = 1, ncol = 2)
   expect_equal(unname(res[[1]][1, 1]), 3)
@@ -205,7 +205,7 @@ test_that("c_ranger_mu_sigma variance calculation works", {
   # two terminal nodes and one tree
   term_ids = matrix(c(0L, 0L, 1L, 1L, 1L), nrow = 5, ncol = 1)
   truth = c(1, 2, 3, 4, 5)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
   assert_list(res, len = 1)
   expect_matrix(res[[1]], nrow = 2, ncol = 2)
   expect_equal(unname(res[[1]][1, 1]), 1.5)
@@ -218,7 +218,7 @@ test_that("c_ranger_mu_sigma variance calculation works", {
   # observations that are in terminal node 1 in the first tree and are in terminal node 0 in the second tree
   term_ids = matrix(c(0L, 0L, 1L, 1L, 0L, 0L, 1L, 1L, 1L, 1L, 0L, 0L, 1L, 1L, 0L, 0L), nrow = 8, ncol = 2)
   truth = c(1, 2, 4, 5, 3, 7, 8, 9)
-  res = .Call("c_ranger_mu_sigma", term_ids, truth)
+  res = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
   assert_list(res, len = 2)
   expect_matrix(res[[1]], nrow = 2, ncol = 2)
   expect_equal(unname(res[[1]][1, 1]), mean(c(1, 2, 3, 7)))
@@ -237,39 +237,39 @@ test_that("c_ranger_var simple works with one tree", {
   # one terminal node, one training observation and one test observation
   term_ids = matrix(c(0L)) # terminal nodes are zero-indexed
   truth = c(1)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L))
   res = .Call("c_ranger_var", term_ids, mu_sigma, 0)
   expect_equal(res$response, 1)
-  expect_equal(res$se, NaN)
+  expect_equal(res$se, 0)
 
   # one terminal node, two training observations and one test observation
   term_ids = matrix(c(0L, 0L))
   truth = c(1, 2)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L))
   res = .Call("c_ranger_var", term_ids, mu_sigma, 0)
   expect_equal(res$response, 1.5)
-  expect_equal(res$se, NaN)
+  expect_equal(res$se, 0)
 
   # one terminal node, two training observations and two test observations
   term_ids = matrix(c(0L, 0L))
   truth = c(1, 2)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L, 0L))
   res = .Call("c_ranger_var", term_ids, mu_sigma, 0)
   expect_equal(res$response, c(1.5, 1.5))
-  expect_equal(res$se, c(NaN, NaN))
+  expect_equal(res$se, c(0, 0))
 })
 
 test_that("c_ranger_var simple works with two trees", {
   # one terminal node, five training observation and one test observation
   term_ids = matrix(c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L), nrow = 5, ncol = 2)
   truth = c(1, 2, 3, 4, 5)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L, 0L), ncol = 2)
   res = .Call("c_ranger_var", term_ids, mu_sigma, 0)
@@ -361,7 +361,7 @@ test_that("c_ranger_var ltv works with one tree", {
   # one terminal node, one training observation and one test observation
   term_ids = matrix(c(0L)) # terminal nodes are zero-indexed
   truth = c(1)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L))
   res = .Call("c_ranger_var", term_ids, mu_sigma, 1)
@@ -371,7 +371,7 @@ test_that("c_ranger_var ltv works with one tree", {
   # one terminal node, two training observations and one test observation
   term_ids = matrix(c(0L, 0L))
   truth = c(1, 2)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L))
   res = .Call("c_ranger_var", term_ids, mu_sigma, 1)
@@ -381,7 +381,7 @@ test_that("c_ranger_var ltv works with one tree", {
   # one terminal node, two training observations and two test observations
   term_ids = matrix(c(0L, 0L))
   truth = c(1, 2)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L, 0L))
   res = .Call("c_ranger_var", term_ids, mu_sigma, 1)
@@ -393,7 +393,7 @@ test_that("c_ranger_var ltv works with two trees", {
   # one terminal node per tree, five training observation and one test observation
   term_ids = matrix(c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L), nrow = 4, ncol = 2)
   truth = c(1, 1, 1, 1)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L, 0L), ncol = 2)
   res = .Call("c_ranger_var", term_ids, mu_sigma, 1)
@@ -403,7 +403,7 @@ test_that("c_ranger_var ltv works with two trees", {
   # one terminal node per tree, five training observation and one test observation
   term_ids = matrix(c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L), nrow = 5, ncol = 2)
   truth = c(1, 2, 3, 4, 5)
-  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth)
+  mu_sigma = .Call("c_ranger_mu_sigma", term_ids, truth, 0)
 
   term_ids = matrix(c(0L, 0L), ncol = 2)
   res = .Call("c_ranger_var", term_ids, mu_sigma, 1)
@@ -412,7 +412,7 @@ test_that("c_ranger_var ltv works with two trees", {
 })
 
 test_that("law of total variance se method works", {
-  learner = lrn("regr.ranger", se.method = "law_of_total_variance", predict_type = "se")
+  learner = lrn("regr.ranger", se.method = "law_of_total_variance", predict_type = "se", sigma2.threshold = 0)
   task = tsk("mtcars")
   learner$train(task)
 
