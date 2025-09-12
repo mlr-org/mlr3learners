@@ -129,16 +129,16 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       if (self$predict_type == "quantiles") {
         pv$quantreg = TRUE # nolint
       }
-
+      data = task$data()
       model = invoke(ranger::ranger,
         dependent.variable.name = task$target_names,
-        data = task$data(),
+        data = data,
         .args = pv
       )
 
       if (isTRUE(self$param_set$values$se.method %in% c("simple", "law_of_total_variance"))) {
-        data = ordered_features(task, self)
-        prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
+        # num.threads is the only thing from the param set we want to pass here and not set manually
+        prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", predict.all = TRUE, num.threads = pv$num.threads)
         storage.mode(prediction_nodes$predictions) = "integer"
         mu_sigma = .Call("c_ranger_mu_sigma", prediction_nodes$predictions, task$truth())
         list(model = model, mu_sigma = mu_sigma)
