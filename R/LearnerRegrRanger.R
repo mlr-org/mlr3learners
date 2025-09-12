@@ -11,6 +11,11 @@
 #' Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
 #' The simple method calculates the variance of the mean of the leaf nodes.
 #' The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
+#' Formulas for the simple and law of total variance method are given in `r format_bib("hutter_2015")`.
+#'
+#' For these 2 methods, the parameter `sigma2.threshold` can be used to set a threshold for the variance of the leaf nodes,
+#' this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value
+#' (as described in the paper). Default is 1e-2.
 #'
 #' @inheritSection mlr_learners_classif.ranger Custom mlr3 parameters
 #' @inheritSection mlr_learners_classif.ranger Initial parameter values
@@ -19,7 +24,7 @@
 #' @template learner
 #'
 #' @references
-#' `r format_bib("wright_2017", "breiman_2001")`
+#' `r format_bib("wright_2017", "breiman_2001", "hutter_2015")`
 #'
 #' @export
 #' @template seealso_learner
@@ -57,6 +62,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         save.memory                  = p_lgl(default = FALSE, tags = "train"),
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train", depends = quote(importance == "permutation")),
         se.method                    = p_fct(c("jack", "infjack", "simple", "law_of_total_variance"), default = "infjack", tags = "predict"),
+        sigma2.threshold             = p_dbl(default = 1e-2, tags = "train"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("variance", "extratrees", "maxstat", "beta", "poisson"), default = "variance", tags = "train"),
@@ -64,7 +70,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         write.forest                 = p_lgl(default = TRUE, tags = "train")
       )
 
-      ps$set_values(num.threads = 1L)
+      ps$set_values(num.threads = 1L, sigma2.threshold = 1e-2)
 
       super$initialize(
         id = "regr.ranger",
@@ -120,6 +126,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "train")
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
       pv$se.method = NULL
+      pv$sigma2.threshold = NULL
       pv$case.weights = get_weights(task, private)
 
       if (self$predict_type == "se") {
@@ -140,7 +147,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         # num.threads is the only thing from the param set we want to pass here and not set manually
         prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", predict.all = TRUE, num.threads = pv$num.threads)
         storage.mode(prediction_nodes$predictions) = "integer"
-        mu_sigma = .Call("c_ranger_mu_sigma", prediction_nodes$predictions, task$truth())
+        mu_sigma = .Call("c_ranger_mu_sigma", prediction_nodes$predictions, task$truth(), pv$sigma2.threshold)
         list(model = model, mu_sigma = mu_sigma)
       } else {
         list(model = model)

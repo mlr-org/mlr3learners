@@ -2,10 +2,6 @@
 #include <Rinternals.h>
 #include <math.h>
 
-/*
-//FIXME:
-    * use the 1e-8 trick for variance = 0? check paper again
-*/
 
 // Debug printer system - can be switched on/off
 #define DEBUG_ENABLED 0  // Set to 1 to enable debug output
@@ -39,6 +35,7 @@ n_obs: int, number of observations
 n_trees: int, number of trees
 pred_tab: flat int-matrix, n_obs x n_trees, see above
 y: double-array(n_obs) of responses
+sigma2_threshold: double, threshold for sigma2
 s_res: result list where to store the j_tree-th matrix as jth element
 
 result: set in s_res, see above.
@@ -50,7 +47,9 @@ present as a node id. such rows will be 0, but this shouldnt even matter
 as you should not access them as the node doesnt exist.
 
 */
-void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, const int *pred_tab, const double *y, SEXP s_res) {
+void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, const int *pred_tab,
+    const double *y, double sigma2_threshold, SEXP s_res) {
+
     DEBUG_PRINT("tree: %d\n", j_tree);
     int max_term_id = 0;
     int term;
@@ -103,6 +102,9 @@ void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, const int *p
       } else {
         res[i + n_term_rows] = 0;
       }
+      if (res[i + n_term_rows] < sigma2_threshold) {
+        res[i + n_term_rows] = sigma2_threshold;
+      }
     }
     SET_VECTOR_ELT(s_res, j_tree, s_mu_sigma2_mat);
     UNPROTECT(3); // s_mu_sigma2_mat, s_dimnames, s_colnames
@@ -115,17 +117,18 @@ we simply call c_ranger_mu_sigma_per_tree for each tree
 for further details see function above
 */
 
-SEXP c_ranger_mu_sigma(SEXP s_pred_tab, SEXP s_y) {
+SEXP c_ranger_mu_sigma(SEXP s_pred_tab, SEXP s_y, SEXP s_sigma2_threshold) {
   int n_obs = Rf_nrows(s_pred_tab);
   int n_trees = Rf_ncols(s_pred_tab);
   int *pred_tab = INTEGER(s_pred_tab); // n_obs x n_trees, column-major
   double *y = REAL(s_y);
-  DEBUG_PRINT("n_obs: %d, n_trees: %d\n", n_obs, n_trees);
+  double sigma2_threshold = asReal(s_sigma2_threshold);
+  DEBUG_PRINT("n_obs: %d, n_trees: %d, sigma2_threshold: %f\n", n_obs, n_trees, sigma2_threshold);
 
   SEXP s_res = PROTECT(allocVector(VECSXP, n_trees));
 
   for (int j_tree = 0; j_tree < n_trees; j_tree++) {
-    c_ranger_mu_sigma_per_tree(j_tree, n_obs, n_trees, pred_tab, y, s_res);
+    c_ranger_mu_sigma_per_tree(j_tree, n_obs, n_trees, pred_tab, y, sigma2_threshold, s_res);
   }
 
   UNPROTECT(1); // s_res
@@ -200,6 +203,9 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mats, SEXP s_method) {
       // FIXME: it is somewhat weird if the biased estimator is used here
       // for "simple" the unbiased estimator is used, but this is how it was in lennarts code
       // and maybe in smac
+      // but i checked paper; and thats what is used there
+      // Algorithm Runtime Prediction: Methods & Evaluation
+      // https://arxiv.org/pdf/1211.0906
       se[i] = sqrt(mu_m2 / (n_trees ) + sigma2_sum / n_trees);
       DEBUG_PRINT("mu_m2: %f, sigma2_sum: %f, n_trees: %d\n", mu_m2, sigma2_sum, n_trees);
       DEBUG_PRINT("i: %d, se: %f\n", i, se[i]);
