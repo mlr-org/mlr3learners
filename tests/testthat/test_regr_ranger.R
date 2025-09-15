@@ -98,7 +98,7 @@ test_that("selected_features", {
 })
 
 test_that("se.method works", {
-  learner = lrn("regr.ranger", se.method = "simple", predict_type = "se")
+  learner = lrn("regr.ranger", se.method = "ensemble_standard_deviation", predict_type = "se")
   task = tsk("mtcars")
   learner$train(task)
   pred = learner$predict(task)
@@ -120,7 +120,7 @@ test_that("se.method works", {
   expect_numeric(pred$se, any.missing = FALSE)
 })
 
-# simple se method -------------------------------------------------------------
+# ensemble standard deviation -------------------------------------------------------------
 
 test_that("c_ranger_mu_sigma works with one tree", {
   # one terminal node and one observation
@@ -277,8 +277,8 @@ test_that("c_ranger_var simple works with two trees", {
   expect_equal(res$se, 0)
 })
 
-test_that("simple se method works", {
-  learner = lrn("regr.ranger", se.method = "simple", predict_type = "se")
+test_that("ensemble standard deviation se method works", {
+  learner = lrn("regr.ranger", se.method = "ensemble_standard_deviation", predict_type = "se")
   task = tsk("mtcars")
   learner$train(task)
 
@@ -292,9 +292,9 @@ test_that("simple se method works", {
   expect_equal(pred$se, simple_response$se)
 })
 
-test_that("simple se method works with single tree", {
+test_that("ensemble standard deviation se method works with single tree", {
   learner = lrn("regr.ranger",
-    se.method = "simple",
+    se.method = "ensemble_standard_deviation",
     predict_type = "se",
     num.trees = 1,
     seed = 1
@@ -313,9 +313,9 @@ test_that("simple se method works with single tree", {
   expect_equal(pred$se, simple_response$se)
 })
 
-test_that("simple se method works with stump trees", {
+test_that("ensemble standard deviation se method works with stump trees", {
   learner = lrn("regr.ranger",
-    se.method = "simple",
+    se.method = "ensemble_standard_deviation",
     predict_type = "se",
     num.trees = 2,
     max.depth = 1,
@@ -334,9 +334,9 @@ test_that("simple se method works with stump trees", {
   expect_equal(pred$se, simple_response$se)
 })
 
-test_that("simple se method works with single stump tree", {
+test_that("ensemble standard deviation se method works with single stump tree", {
   learner = lrn("regr.ranger",
-    se.method = "simple",
+    se.method = "ensemble_standard_deviation",
     predict_type = "se",
     num.trees = 1,
     max.depth = 1,
