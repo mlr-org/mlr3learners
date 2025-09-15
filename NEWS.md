@@ -1,6 +1,6 @@
 # mlr3learners (development version)
 
-* feat: Add new uncertainty estimation methods `ensemble_standard_deviation` and `law_of_total_variance` to `regr.ranger` learners.
+* feat: Add new uncertainty estimation methods `ensemble_standard_deviation` and `law_of_total_variance` to `regr.ranger` learner.
 
 # mlr3learners 0.12.0
 
