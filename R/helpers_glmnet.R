@@ -62,13 +62,13 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
   is_ctrl_pars = names(pv) %in% names(saved_ctrl)
 
   if (any(is_ctrl_pars)) {
-    invoke(glmnet::glmnet.control, .args = pv[is_ctrl_pars])
+    invoke(glmnet::glmnet.control, .args = pv[is_ctrl_pars], opts = list(warnPartialMatchArgs = FALSE))
     pv = pv[!is_ctrl_pars]
   }
 
   invoke(
     if (cv) glmnet::cv.glmnet else glmnet::glmnet,
-    x = data, y = target, .args = pv
+    x = data, y = target, .args = pv, opts = list(warnPartialMatchArgs = FALSE)
   )
 }
 
