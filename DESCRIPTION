@@ -43,6 +43,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
+    mirai,
     nnet,
     pracma,
     ranger,
