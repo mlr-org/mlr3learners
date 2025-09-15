@@ -9,10 +9,15 @@ Random regression forest.
 Calls \code{ranger()} from package \CRANpkg{ranger}.
 }
 \details{
-Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a simple and law of total variance uncertainty estimation.
+Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a ensemble variance and law of total variance uncertainty estimation.
 Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
-The simple method calculates the variance of the mean of the leaf nodes.
+The ensemble variance method calculates the variance of the mean of the leaf nodes.
 The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
+Formulas for the ensemble variance and law of total variance method are given in Hutter et al. (2015).
+
+For these 2 methods, the parameter \code{sigma2.threshold} can be used to set a threshold for the variance of the leaf nodes,
+this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value (as described in the paper).
+Default is 1e-2.
 }
 \section{Dictionary}{
 
@@ -59,7 +64,8 @@ lrn("regr.ranger")
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   se.method \tab character \tab infjack \tab jack, infjack, simple, law_of_total_variance \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack, ensemble_variance, law_of_total_variance \tab - \cr
+   sigma2.threshold \tab numeric \tab 0.01 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab variance \tab variance, extratrees, maxstat, beta, poisson \tab - \cr
@@ -132,6 +138,11 @@ Breiman, Leo (2001).
 \dQuote{Random Forests.}
 \emph{Machine Learning}, \bold{45}(1), 5--32.
 ISSN 1573-0565, \doi{10.1023/A:1010933404324}.
+
+Hutter, Frank, Xu, Lin, Hoos, H. H, Leyton-Brown, Kevin (2015).
+\dQuote{Algorithm runtime prediction: methods and evaluation.}
+In \emph{Proceedings of the 24th International Conference on Artificial Intelligence},  series IJCAI'15, 4197--4201.
+\doi{10.5555/2832747.2832840}.
 }
 \seealso{
 \itemize{

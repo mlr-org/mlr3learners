@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+* feat: Add new uncertainty estimation methods `ensemble_variance` and `law_of_total_variance` to `regr.ranger` learners.
+
 # mlr3learners 0.12.0
 
 * feat: Add `classif.kknn` and `regr.kknn` learners.

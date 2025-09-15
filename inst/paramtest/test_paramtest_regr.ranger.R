@@ -43,7 +43,7 @@ test_that("predict regr.ranger", {
     "formula", # handled via mlr3
     "object", # handled via mlr3
     "data", # handled via mlr3
-    "type" # handled via mlr3
+    "type", # handled via mlr3
     "sigma2.threshold" # added by mlr3
   )
 

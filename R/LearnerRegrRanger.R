@@ -7,15 +7,15 @@
 #' Calls `ranger()` from package \CRANpkg{ranger}.
 #'
 #' @details
-#' Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a simple and law of total variance uncertainty estimation.
+#' Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a ensemble variance and law of total variance uncertainty estimation.
 #' Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
-#' The simple method calculates the variance of the mean of the leaf nodes.
+#' The ensemble variance method calculates the variance of the mean of the leaf nodes.
 #' The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
-#' Formulas for the simple and law of total variance method are given in Hutter et al. (2015).
+#' Formulas for the ensemble variance and law of total variance method are given in Hutter et al. (2015).
 #'
 #' For these 2 methods, the parameter `sigma2.threshold` can be used to set a threshold for the variance of the leaf nodes,
-#' this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value
-#' (as described in the paper). Default is 1e-2.
+#' this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value (as described in the paper).
+#' Default is 1e-2.
 #'
 #' @inheritSection mlr_learners_classif.ranger Custom mlr3 parameters
 #' @inheritSection mlr_learners_classif.ranger Initial parameter values
@@ -61,7 +61,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         sample.fraction              = p_dbl(0L, 1L, tags = "train"),
         save.memory                  = p_lgl(default = FALSE, tags = "train"),
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train", depends = quote(importance == "permutation")),
-        se.method                    = p_fct(c("jack", "infjack", "simple", "law_of_total_variance"), default = "infjack", tags = "predict"),
+        se.method                    = p_fct(c("jack", "infjack", "ensemble_variance", "law_of_total_variance"), default = "infjack", tags = "predict"),
         sigma2.threshold             = p_dbl(default = 1e-2, tags = "train"),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
@@ -149,7 +149,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         .args = pv
       )
 
-      if (isTRUE(self$param_set$values$se.method %in% c("simple", "law_of_total_variance"))) {
+      if (isTRUE(self$param_set$values$se.method %in% c("ensemble_variance", "law_of_total_variance"))) {
         # num.threads is the only thing from the param set we want to pass here and not set manually
         prediction_nodes = mlr3misc::invoke(predict, model, data = data, type = "terminalNodes", predict.all = TRUE, num.threads = pv$num.threads)
         storage.mode(prediction_nodes$predictions) = "integer"
@@ -164,10 +164,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
 
-      if (isTRUE(pv$se.method %in% c("simple", "law_of_total_variance"))) {
+      if (isTRUE(pv$se.method %in% c("ensemble_variance", "law_of_total_variance"))) {
         prediction_nodes = mlr3misc::invoke(predict, self$model$model, data = newdata, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
         storage.mode(prediction_nodes$predictions) = "integer"
-        method = if (pv$se.method == "simple") 0 else 1
+        method = if (pv$se.method == "ensemble_variance") 0 else 1
         .Call("c_ranger_var", prediction_nodes$predictions, self$model$mu_sigma, method)
       } else {
         prediction = mlr3misc::invoke(predict, self$model$model, data = newdata, type = self$predict_type, quantiles = private$.quantiles, .args = pv)
