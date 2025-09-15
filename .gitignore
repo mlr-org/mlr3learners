@@ -181,3 +181,4 @@ revdep/
 
 # misc
 Meta/
+.clangd

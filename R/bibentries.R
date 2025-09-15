@@ -108,5 +108,16 @@ bibentries = c( # nolint start
     number           = "1",
     pages            = "1--17",
     doi              = "10.18637/jss.v077.i01"
-  )
+  ),
+  hutter_2015 = bibentry("inproceedings",
+    title            = "Algorithm runtime prediction: methods and evaluation",
+    author           = "Hutter, Frank and Xu, Lin and Hoos, Holger H. and Leyton-Brown, Kevin",
+    year             = "2015",
+    publisher        = "AAAI Press",
+    booktitle        = "Proceedings of the 24th International Conference on Artificial Intelligence",
+    pages            = "4197--4201",
+    series           = "IJCAI'15",
+    doi              = "10.5555/2832747.2832840"
+)
+
 ) # nolint end

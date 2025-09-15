@@ -12,3 +12,6 @@ old_threshold = lg$threshold
 old_plan = future::plan()
 lg$set_threshold(0)
 future::plan("sequential")
+
+mirai::daemons(1, .compute = "mlr3_encapsulation")
+

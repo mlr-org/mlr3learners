@@ -128,7 +128,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
     #'
     #' @return `character()`.
     selected_features = function() {
-      ranger_selected_features(self)
+      ranger_selected_features(self$model, self$state$feature_names)
     }
   ),
 

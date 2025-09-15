@@ -43,6 +43,7 @@ Suggests:
     knitr,
     lgr,
     MASS,
+    mirai,
     nnet,
     pracma,
     ranger,
@@ -54,7 +55,7 @@ Remotes:
     mlr-org/mlr3
 Config/testthat/edition: 3
 Encoding: UTF-8
-NeedsCompilation: no
+NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Collate:

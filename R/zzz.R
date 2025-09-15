@@ -6,6 +6,7 @@
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr assert_validate assert_quantiles
 #' @importFrom stats predict reformulate
 #' @importFrom utils packageVersion
+#' @useDynLib mlr3learners c_ranger_mu_sigma c_ranger_var
 #'
 #' @description
 #' More learners are implemented in the [mlr3extralearners package](https://github.com/mlr-org/mlr3extralearners).
