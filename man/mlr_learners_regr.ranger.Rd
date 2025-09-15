@@ -95,7 +95,7 @@ precedence in that order.
 }
 
 \examples{
-if (requireNamespace("ranger", quietly = TRUE)) {
+\dontshow{if (mlr3misc::require_namespaces(lrn("regr.ranger")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.ranger")
 print(learner)
@@ -109,18 +109,18 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 
-# print the model
+# Print the model
 print(learner$model)
 
-# importance method
-if("importance" \%in\% learner$properties) print(learner$importance)
+# Importance method
+if ("importance" \%in\% learner$properties) print(learner$importance)
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 Wright, N. M, Ziegler, Andreas (2017).
@@ -199,6 +199,7 @@ Other Learner:
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerRegr.html#method-LearnerRegr-predict_newdata_fast'><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -237,7 +238,7 @@ The out-of-bag error, extracted from model slot \code{prediction.error}.
 }
 
 \subsection{Returns}{
-\code{numeric(1)}.
+\code{numeric(1)}
 }
 }
 \if{html}{\out{<hr>}}

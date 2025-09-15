@@ -104,12 +104,17 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     #' @description
     #' The out-of-bag error, extracted from model slot `prediction.error`.
     #'
-    #' @return `numeric(1)`.
+    #' @return `numeric(1)`
     oob_error = function() {
-      if (is.null(self$model$model)) {
-        stopf("No model stored")
+      if (!is.null(self$state$oob_error)) {
+        return(self$state$oob_error)
       }
-      self$model$model$prediction.error
+
+      if (!is.null(self$model$model)) {
+        return(self$model$model$prediction.error)
+      }
+
+      stopf("No model stored")
     },
 
     #' @description
@@ -168,6 +173,7 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         prediction = mlr3misc::invoke(predict, self$model$model, data = newdata, type = self$predict_type, quantiles = private$.quantiles, .args = pv)
 
         if (self$predict_type == "quantiles") {
+          assert_quantiles(self, quantile_response = TRUE)
           quantiles = prediction$predictions
           setattr(quantiles, "probs", private$.quantiles)
           setattr(quantiles, "response", private$.quantile_response)
@@ -182,6 +188,10 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
       model = self$model$model
       model$num.trees = self$param_set$values$num.trees
       list(model = model)
+    },
+
+    .extract_oob_error = function() {
+      self$model$model$prediction.error
     }
   )
 )

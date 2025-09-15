@@ -1,7 +1,13 @@
-# dev cmd check workflow of the mlr3 ecosystem v0.2.0
+# dev cmd check workflow of the mlr3 ecosystem v0.4.0
 # https://github.com/mlr-org/actions
 on:
   workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled'
+        required: false
+        default: false
   push:
     branches:
       - main
@@ -25,10 +31,11 @@ jobs:
       matrix:
         config:
           - {os: ubuntu-latest, r: 'release', dev-package: 'mlr-org/mlr3'}
+          - {os: ubuntu-latest, r: 'release', dev-package: 'mlr-org/mlr3misc'}
           - {os: ubuntu-latest, r: 'release', dev-package: 'mlr-org/paradox'}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -45,4 +52,12 @@ jobs:
         run: pak::pkg_install('${{ matrix.config.dev-package }}')
         shell: Rscript {0}
 
+      - uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        with:
+          limit-access-to-actor: true
+
       - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--as-cran")'
+          error-on: '"note"'

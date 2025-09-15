@@ -24,7 +24,7 @@ Request additional learners over there.
 install.packages("mlr3learners")
 
 # Development version:
-remotes::install_github("mlr-org/mlr3learners")
+pak::pak("mlr-org/mlr3learners")
 ```
 
 If you also want to install all packages of the connected learners, set `dependencies = TRUE`:
@@ -34,7 +34,7 @@ If you also want to install all packages of the connected learners, set `depende
 install.packages("mlr3learners", dependencies = TRUE)
 
 # Development version:
-remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)
+pak::pak("mlr-org/mlr3learners", dependencies = TRUE)
 ```
 
 ## Classification Learners

@@ -20,6 +20,9 @@ See the section \emph{Early Stopping and Validation} on how to do this.
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 against CUDA.
 See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
+
+The \code{outputmargin}, \code{predcontrib}, \code{predinteraction}, and \code{predleaf} parameters are not supported.
+You can still call e.g. \code{predict(learner$model, newdata = newdata, outputmargin = TRUE)} to get these predictions.
 }
 \section{Initial parameter values}{
 
@@ -113,10 +116,6 @@ lrn("classif.xgboost")
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    objective \tab untyped \tab "binary:logistic" \tab  \tab - \cr
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   outputmargin \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predinteraction \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   predleaf \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    process_type \tab character \tab default \tab default, update \tab - \cr
    rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
@@ -289,6 +288,7 @@ a ratio, \code{"test"}, or \code{"predefined"}.}
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href='../../mlr3/html/Learner.html#method-Learner-selected_features'><code>mlr3::Learner$selected_features()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
 </ul>
 </details>
 }}
