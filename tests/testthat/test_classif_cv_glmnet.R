@@ -1,6 +1,9 @@
 skip_on_os("solaris") # glmnet not working properly on solaris
 skip_if_not_installed("glmnet")
 
+options(warnPartialMatchArgs = FALSE)
+on.exit(options(warnPartialMatchArgs = TRUE))
+
 test_that("autotest", {
   learner = mlr3::lrn("classif.cv_glmnet")
   expect_learner(learner)
