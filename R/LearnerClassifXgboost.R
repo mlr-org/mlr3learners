@@ -425,7 +425,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 #' @export
 default_values.LearnerClassifXgboost = function(x, search_space, task, ...) { # nolint
   special_defaults = list(
-    nrounds = 1L
+    nrounds = 1000L
   )
   defaults = insert_named(default_values(x$param_set), special_defaults)
   defaults[search_space$ids()]
