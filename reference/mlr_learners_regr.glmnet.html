@@ -17,7 +17,7 @@ The default for hyperparameter family is set to "gaussian".'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.12.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.13.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,9 @@ The default for hyperparameter family is set to "gaussian".'></head><body>
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html"><span class="fa fa-file-alt"></span> Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://mlr3book.mlr-org.com"><span class="fa fa-link"></span> mlr3book</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/mlr-org/mlr3learners/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/mlr-org/mlr3learners/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/"><span class="fa fa-comments"></span></a></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://stackoverflow.com/questions/tagged/mlr"><span class="fa fab fa-stack-overflow"></span></a></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://mlr-org.com/"><span class="fa fa-rss"></span></a></li>
@@ -172,6 +174,7 @@ for established default tuning spaces.</p></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
 </ul></details></p><hr><a id="method-LearnerRegrGlmnet-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
@@ -224,10 +227,19 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"glmnet"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.glmnet"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerRegrGlmnet&gt;</span><span style="font-weight: bold;"> (regr.glmnet): GLM with Elastic Net Regularization</span> <span style="color: #00BBBB;">──────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: family=gaussian, use_pred_offset=TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">glmnet</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, and numeric</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: offset and weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define a Task</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
@@ -238,108 +250,102 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 <span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="co"># Print the model</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># importance method</span></span></span>
-<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
-<span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
-<span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;LearnerRegrGlmnet:regr.glmnet&gt;: GLM with Elastic Net Regularization</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Parameters: family=gaussian, use_pred_offset=TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Packages: mlr3, mlr3learners, glmnet</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Predict Types:  [response]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Feature Types: logical, integer, numeric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * Properties: offset, weights</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:  (if (cv) glmnet::cv.glmnet else glmnet::glmnet)(x = data, y = target,      family = "gaussian") </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Df  %Dev Lambda</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  0.00 5.3800</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 12.71 4.9020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 23.27 4.4670</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   2 33.34 4.0700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2 41.88 3.7080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2 48.98 3.3790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   2 54.86 3.0790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   2 59.75 2.8050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   2 63.81 2.5560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  2 67.18 2.3290</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  2 69.97 2.1220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  2 72.29 1.9330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  2 74.22 1.7620</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  2 75.82 1.6050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  3 77.23 1.4630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  3 78.48 1.3330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  3 79.52 1.2140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  3 80.38 1.1060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  3 81.10 1.0080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  3 81.70 0.9185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  4 82.34 0.8369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  4 82.95 0.7626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  4 83.46 0.6948</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  4 83.88 0.6331</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  4 84.22 0.5769</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  4 84.51 0.5256</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  4 84.75 0.4789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  4 84.95 0.4364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  4 85.12 0.3976</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  4 85.25 0.3623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  4 85.37 0.3301</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  5 85.50 0.3008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  5 85.61 0.2741</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  5 85.70 0.2497</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  5 85.77 0.2275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  5 85.84 0.2073</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37  5 85.89 0.1889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38  5 85.93 0.1721</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39  5 85.97 0.1568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40  5 86.00 0.1429</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41  6 86.02 0.1302</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42  6 86.05 0.1186</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43  6 86.07 0.1081</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44  6 86.09 0.0985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45  6 86.11 0.0897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46  6 86.12 0.0818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47  8 86.24 0.0745</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48  8 86.42 0.0679</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  8 86.56 0.0619</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50  8 86.68 0.0564</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51  8 86.78 0.0514</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52  8 86.86 0.0468</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53  8 86.93 0.0426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54  8 86.99 0.0389</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55  9 87.04 0.0354</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56  9 87.08 0.0322</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57  9 87.11 0.0294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58  9 87.14 0.0268</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59  9 87.17 0.0244</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60  9 87.19 0.0222</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61  9 87.20 0.0203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62  9 87.22 0.0185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63  9 87.23 0.0168</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64  9 87.24 0.0153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65  9 87.24 0.0140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66  9 87.25 0.0127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67  9 87.25 0.0116</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68 10 87.26 0.0106</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69 10 87.27 0.0096</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70 10 87.27 0.0088</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71 10 87.28 0.0080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72 10 87.28 0.0073</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73 10 87.28 0.0066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74 10 87.28 0.0060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75 10 87.29 0.0055</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76 10 87.29 0.0050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0  0.00 5.4050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 13.45 4.9250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   2 25.47 4.4880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   2 35.75 4.0890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2 44.29 3.7260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2 51.38 3.3950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   2 57.26 3.0930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   2 62.15 2.8180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   2 66.21 2.5680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  2 69.58 2.3400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  2 72.37 2.1320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  2 74.69 1.9430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  3 76.63 1.7700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  3 78.26 1.6130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  4 79.84 1.4700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  4 81.14 1.3390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  4 82.23 1.2200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  4 83.13 1.1120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  4 83.87 1.0130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  5 84.55 0.9229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  5 85.16 0.8409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  5 85.66 0.7662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  5 86.08 0.6981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  5 86.42 0.6361</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  4 86.70 0.5796</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  4 86.94 0.5281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  4 87.14 0.4812</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  4 87.30 0.4385</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  4 87.44 0.3995</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  6 87.57 0.3640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  8 87.81 0.3317</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  8 88.25 0.3022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  8 88.61 0.2754</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  8 88.91 0.2509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  7 89.06 0.2286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  7 89.11 0.2083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  7 89.15 0.1898</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  7 89.19 0.1729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  7 89.22 0.1576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  7 89.24 0.1436</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  7 89.26 0.1308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  7 89.28 0.1192</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  7 89.29 0.1086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  7 89.31 0.0990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  7 89.31 0.0902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  7 89.32 0.0822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  7 89.33 0.0749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  7 89.34 0.0682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  8 89.47 0.0621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  9 89.71 0.0566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51  9 89.91 0.0516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52  9 90.08 0.0470</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53  9 90.22 0.0428</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54  9 90.34 0.0390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55 10 90.65 0.0356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56 10 91.06 0.0324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57 10 91.37 0.0295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58 10 91.64 0.0269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59 10 91.86 0.0245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60 10 92.04 0.0223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61 10 92.19 0.0204</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62 10 92.31 0.0185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63 10 92.42 0.0169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64 10 92.50 0.0154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65 10 92.58 0.0140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66 10 92.64 0.0128</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67 10 92.69 0.0117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68 10 92.73 0.0106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69 10 92.76 0.0097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70 10 92.79 0.0088</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71 10 92.81 0.0080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72 10 92.83 0.0073</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73 10 92.85 0.0067</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74 10 92.86 0.0061</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75 10 92.88 0.0055</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76 10 92.88 0.0050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77 10 92.90 0.0046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78 10 92.90 0.0042</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple lambdas have been fit. Lambda will be set to 0.01 (see parameter 's').</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
+<span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  10.7196 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49.58993 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -351,7 +357,7 @@ Custom <code>lambda</code>, defaults to the active lambda depending on parameter
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
