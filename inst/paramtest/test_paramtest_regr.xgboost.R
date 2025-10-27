@@ -64,7 +64,8 @@ test_that("predict regr.xgboost", {
     "outputmargin", # not supported
     "predcontrib", # not supported
     "predinteraction", # not supported
-    "predleaf" # not supported
+    "predleaf", # not supported
+    "nthread" # handled by mlr3
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
