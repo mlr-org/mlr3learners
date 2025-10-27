@@ -124,7 +124,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         monotone_constraints        = p_uty(default = 0, tags = c("train", "control"), custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
         nrounds                     = p_nrounds,
         normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train", depends = quote(booster == "dart")),
-        nthread                     = p_int(1L, default = 1L, tags = c("train", "control", "threads")),
+        nthread                     = p_int(1L, default = 1L, tags = c("train", "predict", "control", "threads")),
         ntreelimit                  = p_int(1L, default = NULL, special_vals = list(NULL), tags = "predict"),
         num_parallel_tree           = p_int(1L, default = 1L, tags = c("train", "control")),
         objective                   = p_uty(default = "binary:logistic", tags = c("train", "predict", "control")),
