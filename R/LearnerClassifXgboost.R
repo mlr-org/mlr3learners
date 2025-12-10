@@ -248,7 +248,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         stopf("objective = 'multi:softmax' does not work with predict_type = 'prob'")
       }
 
-      if (pv$objective == "multi:softmax") pv$num_class = nlvls
+      if (pv$objective %in% c("multi:softmax", "multi:softprob")) pv$num_class = nlvls
 
       data = task$data(cols = task$feature_names)
       # recode to 0:1 so that for the binary case the positive class translates to 1 (#32)
