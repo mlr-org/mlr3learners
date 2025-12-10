@@ -31,6 +31,7 @@ Depends:
 Imports:
     checkmate,
     data.table,
+    methods,
     mlr3misc (>= 0.9.4),
     paradox (>= 1.0.0),
     R6
