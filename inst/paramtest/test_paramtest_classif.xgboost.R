@@ -46,7 +46,8 @@ test_that("predict classif.xgboost", {
     "predleaf", # not supported
     "avoid_transpose", # not supported
     "base_margin", # not supported
-    "objective" # use by mlr3 not xgboost
+    "objective", # use by mlr3 not xgboost
+    "strict_shape" # destroys prediction format
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")

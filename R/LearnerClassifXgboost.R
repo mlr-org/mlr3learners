@@ -98,20 +98,20 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
         base_score                  = p_dbl(default = 0.5, tags = "train"),
-        booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = c("train", "control")),
+        booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = "train"),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
         colsample_bynode            = p_dbl(0, 1, default = 1, tags = "train"),
-        colsample_bytree            = p_dbl(0, 1, default = 1, tags = c("train", "control")),
+        colsample_bytree            = p_dbl(0, 1, default = 1, tags = "train"),
         device                      = p_uty(default = "cpu", tags = "train"),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
-        eta                         = p_dbl(0, 1, default = 0.3, tags = c("train", "control")),
+        eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
         evals                       = p_uty(default = NULL, tags = "train"),
         eval_metric                 = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.character(x), is.function(x), test_multi_class(x, c("MeasureClassifSimple", "MeasureBinarySimple"))))})),
         extmem_single_page          = p_lgl(default = FALSE, tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
-        gamma                       = p_dbl(0, default = 0, tags = c("train", "control")),
+        gamma                       = p_dbl(0, default = 0, tags = "train"),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(tree_method == "hist")),
         interaction_constraints     = p_uty(tags = "train"),
         iterationrange              = p_uty(tags = "predict"),
@@ -121,17 +121,17 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         max_cat_to_onehot           = p_int(tags = "train"),
         max_cat_threshold           = p_dbl(tags = "train"),
         max_delta_step              = p_dbl(0, default = 0, tags = "train"),
-        max_depth                   = p_int(0L, default = 6L, tags = c("train", "control")),
+        max_depth                   = p_int(0L, default = 6L, tags = "train"),
         max_leaves                  = p_int(0L, default = 0L, tags = "train", depends = quote(grow_policy == "lossguide")),
         maximize                    = p_lgl(default = NULL, special_vals = list(NULL), tags = "train"),
-        min_child_weight            = p_dbl(0, default = 1, tags = c("train", "control")),
-        missing                     = p_dbl(tags = "predict"),
-        monotone_constraints        = p_uty(default = 0, tags = c("train", "control"), custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
+        min_child_weight            = p_dbl(0, default = 1, tags = "train"),
+        missing                     = p_dbl(default = NA, tags = "predict", special_vals = list(NA, NA_real_, NULL)),
+        monotone_constraints        = p_uty(default = 0, tags = "train", custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
         nrounds                     = p_nrounds,
         normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train", depends = quote(booster == "dart")),
-        nthread                     = p_int(1L, init = 1L, tags = c("train", "control", "threads")),
-        num_parallel_tree           = p_int(1L, default = 1L, tags = c("train", "control")),
-        objective                   = p_uty(default = "binary:logistic", tags = c("train", "predict", "control")),
+        nthread                     = p_int(1L, init = 1L, tags = c("train", "threads")),
+        num_parallel_tree           = p_int(1L, default = 1L, tags = "train"),
+        objective                   = p_uty(default = "binary:logistic", tags = c("train", "predict")),
         one_drop                    = p_lgl(default = FALSE, tags = "train", depends = quote(booster == "dart")),
         print_every_n               = p_int(1L, default = 1L, tags = "train", depends = quote(verbose == 1L)),
         rate_drop                   = p_dbl(0, 1, default = 0, tags = "train", depends = quote(booster == "dart")),
@@ -144,8 +144,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         save_period                 = p_int(0, default = NULL, special_vals = list(NULL), tags = "train"),
         scale_pos_weight            = p_dbl(default = 1, tags = "train"),
         skip_drop                   = p_dbl(0, 1, default = 0, tags = "train", depends = quote(booster == "dart")),
-        strict_shape                = p_lgl(default = FALSE, tags = "predict"),
-        subsample                   = p_dbl(0, 1, default = 1, tags = c("train", "control")),
+        subsample                   = p_dbl(0, 1, default = 1, tags = "train"),
         top_k                       = p_int(0, default = 0, tags = "train", depends = quote(feature_selector %in% c("greedy", "thrifty") && booster == "gblinear")),
         training                    = p_lgl(default = FALSE, tags = "predict"),
         tree_method                 = p_fct(c("auto", "exact", "approx", "hist", "gpu_hist"), default = "auto", tags = "train", depends = quote(booster %in% c("gbtree", "dart"))),
@@ -209,6 +208,21 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         private$.validate = assert_validate(rhs)
       }
       private$.validate
+    },
+
+    #' @field model (any)\cr
+    #' The fitted model. Only available after `$train()` has been called.
+    model = function(rhs) {
+      if (!missing(rhs)) {
+        if (inherits(rhs, "xgb.Booster")) {
+          rhs = list(
+            structure("wrapper", model = rhs)
+          )
+        }
+        self$state$model = rhs
+      }
+      # workaround https://github.com/Rdatatable/data.table/issues/7456
+      attributes(self$state$model[[1]])$model
     }
   ),
   private = list(
@@ -337,7 +351,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         pv$maximize = !measure$minimize
       }
 
-      xgboost::xgb.train(
+      model = xgboost::xgb.train(
         params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
         data = xgb_data,
         nrounds = pv$nrounds,
@@ -351,10 +365,14 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         save_name = pv$save_name,
         callbacks = pv$callbacks %??% list()
       )
+
+      # workaround https://github.com/Rdatatable/data.table/issues/7456
+      list(
+        structure("wrapper", model = model)
+      )
     },
 
     .predict = function(task) {
-
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
       response = prob = NULL
@@ -367,10 +385,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       newdata = as_numeric_matrix(ordered_features(task, self))
       pred = invoke(predict, model, newdata = newdata, .args = pv)
-
       if (nlvls == 2L) { # binaryclass
         if (pv$objective == "multi:softprob") {
-          prob = matrix(pred, ncol = nlvls, byrow = TRUE)
+          prob = matrix(pred, ncol = nlvls, byrow = FALSE)
           colnames(prob) = lvls
         } else {
           prob = pvec2mat(pred, lvls)
@@ -379,7 +396,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         if (pv$objective == "multi:softmax") {
           response = lvls[pred + 1L]
         } else {
-          prob = matrix(pred, ncol = nlvls, byrow = TRUE)
+          prob = pred
           colnames(prob) = lvls
         }
       }
@@ -412,20 +429,26 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       label = nlvls - as.integer(task$truth())
       xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
 
-      xgboost::xgb.train(
-        params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
-        data = xgb_data,
-        nrounds = nrounds,
-        evals = pv$evals,
-        custom_metric = pv$custom_metric,
-        verbose = pv$verbose,
-        print_every_n = pv$print_every_n,
-        early_stopping_rounds = pv$early_stopping_rounds,
-        maximize = pv$maximize,
-        save_period = pv$save_period,
-        save_name = pv$save_name,
-        xgb_model = model,
-        callbacks = pv$callbacks %??% list()
+      if (nrounds > 0) {
+        model = xgboost::xgb.train(
+          params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
+          data = xgb_data,
+          nrounds = nrounds,
+          evals = pv$evals,
+          custom_metric = pv$custom_metric,
+          verbose = pv$verbose,
+          print_every_n = pv$print_every_n,
+          early_stopping_rounds = pv$early_stopping_rounds,
+          maximize = pv$maximize,
+          save_period = pv$save_period,
+          save_name = pv$save_name,
+          xgb_model = model,
+          callbacks = pv$callbacks %??% list()
+        )
+      }
+
+      list(
+        structure("wrapper", model = model)
       )
     },
 
@@ -440,6 +463,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (is.null(self$model$evaluation_log)) {
         NULL
       }
+      browser()
       iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
       as.list(self$model$evaluation_log[
         iter,
