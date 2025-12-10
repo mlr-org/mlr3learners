@@ -9,11 +9,11 @@ Random regression forest.
 Calls \code{ranger()} from package \CRANpkg{ranger}.
 }
 \details{
-Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a ensemble variance and law of total variance uncertainty estimation.
+Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a ensemble standard deviation and law of total variance uncertainty estimation.
 Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
-The ensemble variance method calculates the variance of the mean of the leaf nodes.
+The ensemble standard deviation method calculates the standard deviation of the mean of the leaf nodes.
 The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
-Formulas for the ensemble variance and law of total variance method are given in Hutter et al. (2015).
+Formulas for the ensemble standard deviation and law of total variance method are given in Hutter et al. (2015).
 
 For these 2 methods, the parameter \code{sigma2.threshold} can be used to set a threshold for the variance of the leaf nodes,
 this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value (as described in the paper).
@@ -64,7 +64,7 @@ lrn("regr.ranger")
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   se.method \tab character \tab infjack \tab jack, infjack, ensemble_variance, law_of_total_variance \tab - \cr
+   se.method \tab character \tab infjack \tab jack, infjack, ensemble_standard_deviation, law_of_total_variance \tab - \cr
    sigma2.threshold \tab numeric \tab 0.01 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
