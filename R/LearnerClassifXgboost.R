@@ -6,11 +6,8 @@
 #' eXtreme Gradient Boosting classification.
 #' Calls [xgboost::xgb.train()] from package \CRANpkg{xgboost}.
 #'
-#' If not specified otherwise, the evaluation metric is set to the default `"logloss"`
-#' for binary classification problems and set to `"mlogloss"` for multiclass problems.
-#' This was necessary to silence a deprecation warning.
-#'
-#' Note that using the `evals` parameter directly will lead to problems when wrapping this [mlr3::Learner] in a `mlr3pipelines` `GraphLearner`
+#' Note that using the `evals` parameter directly will lead to problems
+#' when wrapping this [mlr3::Learner] in a `mlr3pipelines` `GraphLearner`
 #' as the preprocessing steps will not be applied to the data in `evals`.
 #' See the section *Early Stopping and Validation* on how to do this.
 #'
@@ -29,13 +26,17 @@
 #'   - Actual default: 1.
 #'   - Adjusted default: 0.
 #'   - Reason for change: Reduce verbosity.
+#' - `verbosity`:
+#'   - Actual default: 1.
+#'   - Adjusted default: 0.
+#'   - Reason for change: Reduce verbosity.
 #'
 #' @section Early Stopping and Validation:
 #' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
 #' For information on how to configure the validation set, see the *Validation* section of [mlr3::Learner].
 #' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
 #' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the optimal `nrounds` via `$internal_tuned_values`.
-#' The internal validation measure can be set via the `eval_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
+#' The internal validation measure can be set via the `custom_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
 #' Using an [mlr3::Measure] is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 #'
 #' @inheritSection mlr_learners_regr.xgboost Offset
@@ -86,8 +87,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           if (is.null(param_vals$early_stopping_rounds)) {
             stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
           }
-          if (is.null(param_vals$eval_metric)) {
-            stop("Parameter 'eval_metric' must be set explicitly when using internal tuning.")
+          if (is.null(param_vals$custom_metric) && is.null(param_vals$eval_metric)) {
+            stop("Parameter 'custom_metric' or 'eval_metric' must be set explicitly when using internal tuning.")
           }
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
         disable_in_tune = list(early_stopping_rounds = NULL),
@@ -108,7 +109,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
         evals                       = p_uty(default = NULL, tags = "train"),
-        eval_metric                 = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.character(x), is.function(x), test_multi_class(x, c("MeasureClassifSimple", "MeasureBinarySimple"))))})),
+        eval_metric                 = p_uty(tags = "train"),
+        custom_metric               = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.function(x), test_multi_class(x, c("MeasureClassifSimple", "MeasureBinarySimple"))))})),
         extmem_single_page          = p_lgl(default = FALSE, tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
         gamma                       = p_dbl(0, default = 0, tags = "train"),
@@ -152,8 +154,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
         use_rmm                     = p_lgl(tags = "train"),
         validate_features           = p_lgl(default = TRUE, tags = "predict"),
-        verbose                     = p_int(0L, 2L, init = 1L, tags = "train"),
-        verbosity                   = p_int(0L, 2L, init = 1L, tags = "train"),
+        verbose                     = p_int(0L, 2L, init = 0L, tags = "train"),
+        verbosity                   = p_int(0L, 2L, init = 0L, tags = "train"),
         xgb_model                   = p_uty(default = NULL, tags = "train")
       )
 
@@ -246,20 +248,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         stopf("objective = 'multi:softmax' does not work with predict_type = 'prob'")
       }
 
-      switch(pv$objective,
-        "multi:softprob" =,
-        "multi:softmax" = {
-          # add the number of classes 'num_class'
-          pv$num_class = nlvls
-
-          # we have to set this to avoid a deprecation warning
-          if (is.null(pv$feval)) pv$eval_metric = pv$eval_metric %??% "mlogloss"
-        },
-
-        "binary:logistic" = {
-          if (is.null(pv$feval)) pv$eval_metric = pv$eval_metric %??% "logloss"
-        }
-      )
+      if (pv$objective == "multi:softmax") pv$num_class = nlvls
 
       data = task$data(cols = task$feature_names)
       # recode to 0:1 so that for the binary case the positive class translates to 1 (#32)
@@ -325,9 +314,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       }
 
       # set internal validation measure
-      if (inherits(pv$eval_metric, "Measure")) {
+      if (inherits(pv$custom_metric, "Measure")) {
         n_classes = length(task$class_names)
-        measure = pv$eval_metric
+        measure = pv$custom_metric
 
         fun = if (pv$objective == "binary:logistic" && measure$predict_type == "prob" && inherits(measure, "MeasureBinarySimple")) {
           xgboost_binary_binary_prob
@@ -347,7 +336,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           scores = fun(pred, dtrain, measure, n_classes)
           list(metric = measure$id, value = scores)
         }}, n_classes, measure, fun)
-
         pv$maximize = !measure$minimize
       }
 
@@ -456,16 +444,19 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (is.null(self$state$param_vals$early_stopping_rounds)) {
         return(NULL)
       }
-      list(nrounds = self$model$best_iteration)
+      list(nrounds = attributes(self$model)$early_stop$best_iteration)
     },
 
     .extract_internal_valid_scores = function() {
-      if (is.null(self$model$evaluation_log)) {
-        NULL
+      if (is.null(attributes(self$model)$evaluation_log)) {
+        return(named_list())
       }
-      browser()
-      iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
-      as.list(self$model$evaluation_log[
+      iter = attributes(self$model)$early_stop$best_iteration
+      if (is.null(iter)) {
+        iter = xgboost::xgb.get.num.boosted.rounds(self$model)
+      }
+      log = attributes(self$model)$evaluation_log
+      as.list(log[
         iter,
         set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),
         .SDcols = patterns("^test_")
@@ -521,11 +512,9 @@ xgboost_multiclass_prob = function(pred, dtrain, measure, n_classes, ...) {
   # label is a vector of labels (0, 1, ..., n_classes - 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = seq_len(n_classes) - 1L)
 
-  # pred is a vector of log odds for each class
-  # matrix must be filled by row
-  pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
+  # pred is a matrix of log odds for each class
   # transform log odds to probabilities
-  pred_exp = exp(pred_mat)
+  pred_exp = exp(pred)
   pred_mat = pred_exp / rowSums(pred_exp)
   colnames(pred_mat) = levels(truth)
 
@@ -536,11 +525,8 @@ xgboost_multiclass_response = function(pred, dtrain, measure, n_classes, ...) {
   # label is a vector of labels (0, 1, ..., n_classes - 1)
   truth = factor(xgboost::getinfo(dtrain, "label"), levels = seq_len(n_classes) - 1L)
 
-  # pred is a vector of log odds for each class
-  # matrix must be filled by row
-  pred_mat = matrix(pred, ncol = n_classes, byrow = TRUE)
-
-  response = factor(max.col(pred_mat, ties.method = "random") - 1, levels = levels(truth))
+  # pred is a matrix of log odds for each class
+  response = factor(max.col(pred, ties.method = "random") - 1, levels = levels(truth))
   measure$fun(truth, response)
 }
 

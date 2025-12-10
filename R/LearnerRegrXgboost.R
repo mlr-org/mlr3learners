@@ -67,8 +67,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           if (is.null(param_vals$early_stopping_rounds)) {
             stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
           }
-          if (is.null(param_vals$eval_metric)) {
-            stop("Parameter 'eval_metric' must be set explicitly when using internal tuning.")
+          if (is.null(param_vals$eval_metric) && is.null(param_vals$custom_metric)) {
+            stop("Parameter 'eval_metric' or 'custom_metric' must be set explicitly when using internal tuning.")
           }
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
         disable_in_tune = list(early_stopping_rounds = NULL),
@@ -88,7 +88,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
         evals                       = p_uty(default = NULL, tags = "train"),
-        eval_metric                 = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.character(x), is.function(x), test_multi_class(x, c("MeasureClassifSimple", "MeasureBinarySimple"))))})),
+        eval_metric                 = p_uty(tags = "train"),
+        custom_metric               = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.function(x), test_multi_class(x, c("MeasureRegrSimple"))))})),
         extmem_single_page          = p_lgl(default = FALSE, tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
         gamma                       = p_dbl(0, default = 0, tags = "train"),
@@ -133,8 +134,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
         use_rmm                     = p_lgl(tags = "train"),
         validate_features           = p_lgl(default = TRUE, tags = "predict"),
-        verbose                     = p_int(0L, 2L, init = 1L, tags = "train"),
-        verbosity                   = p_int(0L, 2L, init = 1L, tags = "train"),
+        verbose                     = p_int(0L, 2L, init = 0L, tags = "train"),
+        verbosity                   = p_int(0L, 2L, init = 0L, tags = "train"),
         xgb_model                   = p_uty(default = NULL, tags = "train")
       )
 
@@ -249,18 +250,18 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           xgboost::setinfo(xgb_valid_data, "base_margin", internal_valid_task$offset$offset)
         }
 
-        pv$watchlist = c(pv$watchlist, list(test = xgb_valid_data))
+        pv$evals = c(pv$evals, list(test = xgb_valid_data))
       }
 
       # set internal validation measure
-      if (inherits(pv$eval_metric, "Measure")) {
-        measure = pv$eval_metric
+      if (inherits(pv$custom_metric, "Measure")) {
+        measure = pv$custom_metric
 
         if (pv$objective %nin% c("reg:absoluteerror", "reg:squarederror")) {
           stop("Only 'reg:squarederror' and 'reg:absoluteerror' objectives are supported.")
         }
 
-        pv$eval_metric =  mlr3misc::crate({function(pred, dtrain) {
+        pv$custom_metric = mlr3misc::crate({function(pred, dtrain) {
           truth = xgboost::getinfo(dtrain, "label")
           scores = measure$fun(truth, pred)
           list(metric = measure$id, value = scores)
@@ -269,7 +270,20 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         pv$maximize = !measure$minimize
       }
 
-      model = invoke(xgboost::xgb.train, data = xgb_data, .args = pv)
+      model = xgboost::xgb.train(
+        params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
+        data = xgb_data,
+        nrounds = pv$nrounds,
+        evals = pv$evals,
+        custom_metric = pv$custom_metric,
+        verbose = pv$verbose,
+        print_every_n = pv$print_every_n,
+        early_stopping_rounds = pv$early_stopping_rounds,
+        maximize = pv$maximize,
+        save_period = pv$save_period,
+        save_name = pv$save_name,
+        callbacks = pv$callbacks %??% list()
+      )
 
       # workaround https://github.com/Rdatatable/data.table/issues/7456
       list(
@@ -289,23 +303,37 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
     .hotstart = function(task) {
       model = self$model
-      pars = self$param_set$get_values(tags = "train")
-      pars_train = self$state$param_vals
-      if (!is.null(pars_train$early_stopping_rounds)) {
+      pv = self$param_set$get_values(tags = "train")
+      pv_train = self$state$param_vals
+      if (!is.null(pv_train$early_stopping_rounds)) {
         stopf("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
       }
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
-      pars$nrounds = pars$nrounds - pars_train$nrounds
+      nrounds = pv$nrounds - pv_train$nrounds
 
       # Construct data
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
+      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
-      if (pars$nrounds > 0) {
-        model = invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
+      if (nrounds > 0) {
+        model = xgboost::xgb.train(
+          params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
+          data = xgb_data,
+          nrounds = nrounds,
+          evals = pv$evals,
+          custom_metric = pv$custom_metric,
+          verbose = pv$verbose,
+          print_every_n = pv$print_every_n,
+          early_stopping_rounds = pv$early_stopping_rounds,
+          maximize = pv$maximize,
+          save_period = pv$save_period,
+          save_name = pv$save_name,
+          xgb_model = model,
+          callbacks = pv$callbacks %??% list()
+        )
       }
 
       list(
@@ -317,15 +345,19 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       if (is.null(self$state$param_vals$early_stopping_rounds)) {
         return(NULL)
       }
-      list(nrounds = self$model$best_iteration)
+      list(nrounds = attributes(self$model)$early_stop$best_iteration)
     },
 
     .extract_internal_valid_scores = function() {
-      if (is.null(self$model$evaluation_log)) {
+      if (is.null(attributes(self$model)$evaluation_log)) {
         return(named_list())
       }
-      iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
-      as.list(self$model$evaluation_log[
+      iter = attributes(self$model)$early_stop$best_iteration
+      if (is.null(iter)) {
+        iter = xgboost::xgb.get.num.boosted.rounds(self$model)
+      }
+      log = attributes(self$model)$evaluation_log
+      as.list(log[
         iter,
         set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),
         .SDcols = patterns("^test_")
