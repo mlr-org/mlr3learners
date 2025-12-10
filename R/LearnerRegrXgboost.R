@@ -9,8 +9,8 @@
 #' To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 #' against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 #'
-#' Note that using the `watchlist` parameter directly will lead to problems when wrapping this [mlr3::Learner] in a
-#' `mlr3pipelines` `GraphLearner` as the preprocessing steps will not be applied to the data in the watchlist.
+#' Note that using the `evals` parameter directly will lead to problems when wrapping this [mlr3::Learner] in a `mlr3pipelines` `GraphLearner`
+#' as the preprocessing steps will not be applied to the data in `evals`.
 #' See the section *Early Stopping and Validation* on how to do this.
 #'
 #' @template note_xgboost
@@ -67,11 +67,12 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           if (is.null(param_vals$early_stopping_rounds)) {
             stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
           }
-          if (is.null(param_vals$eval_metric)) {
-            stop("Parameter 'eval_metric' must be set explicitly when using internal tuning.")
+          if (is.null(param_vals$eval_metric) && is.null(param_vals$custom_metric)) {
+            stop("Parameter 'eval_metric' or 'custom_metric' must be set explicitly when using internal tuning.")
           }
           assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
-        disable_in_tune = list(early_stopping_rounds = NULL)
+        disable_in_tune = list(early_stopping_rounds = NULL),
+        init = 1000L
       )
       ps = ps(
         alpha                       = p_dbl(0, default = 0, tags = "train"),
@@ -86,56 +87,57 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
         eta                         = p_dbl(0, 1, default = 0.3, tags = "train"),
-        eval_metric                 = p_uty(default = "rmse", tags = "train", custom_check = crate({function(x) check_true(any(is.character(x), is.function(x), inherits(x, "MeasureRegrSimple")))})),
+        evals                       = p_uty(default = NULL, tags = "train"),
+        eval_metric                 = p_uty(tags = "train"),
+        custom_metric               = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.function(x), test_multi_class(x, c("MeasureRegrSimple"))))})),
+        extmem_single_page          = p_lgl(default = FALSE, tags = "train"),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
         gamma                       = p_dbl(0, default = 0, tags = "train"),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(tree_method == "hist")),
+        huber_slope                 = p_dbl(default = 1, tags = "train"),
         interaction_constraints     = p_uty(tags = "train"),
         iterationrange              = p_uty(tags = "predict"),
         lambda                      = p_dbl(0, default = 1, tags = "train"),
-        lambda_bias                 = p_dbl(0, default = 0, tags = "train", depends = quote(booster == "gblinear")),
         max_bin                     = p_int(2L, default = 256L, tags = "train", depends = quote(tree_method == "hist")),
+        max_cached_hist_node        = p_int(default = 65536L, tags = "train", depends = quote(tree_method == "hist")),
+        max_cat_to_onehot           = p_int(tags = "train"),
+        max_cat_threshold           = p_dbl(tags = "train"),
         max_delta_step              = p_dbl(0, default = 0, tags = "train"),
         max_depth                   = p_int(0L, default = 6L, tags = "train"),
         max_leaves                  = p_int(0L, default = 0L, tags = "train", depends = quote(grow_policy == "lossguide")),
         maximize                    = p_lgl(default = NULL, special_vals = list(NULL), tags = "train"),
         min_child_weight            = p_dbl(0, default = 1, tags = "train"),
-        missing                     = p_dbl(default = NA, tags = c("train", "predict"), special_vals = list(NA, NA_real_, NULL)),
-        monotone_constraints        = p_uty(default = 0, tags = c("train", "control"), custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
-        normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train", depends = quote(booster == "dart")),
+        missing                     = p_dbl(default = NA, tags = "predict", special_vals = list(NA, NA_real_, NULL)),
+        monotone_constraints        = p_uty(default = 0, tags = "train", custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) })), # nolint
         nrounds                     = p_nrounds,
-        nthread                     = p_int(1L, default = 1L, tags = c("train", "predict", "threads")),
-        ntreelimit                  = p_int(1, default = NULL, special_vals = list(NULL), tags = "predict"),
+        normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train", depends = quote(booster == "dart")),
+        nthread                     = p_int(1L, init = 1L, tags = c("train", "threads")),
         num_parallel_tree           = p_int(1L, default = 1L, tags = "train"),
         objective                   = p_uty(default = "reg:squarederror", tags = c("train", "predict")),
         one_drop                    = p_lgl(default = FALSE, tags = "train", depends = quote(booster == "dart")),
         print_every_n               = p_int(1L, default = 1L, tags = "train", depends = quote(verbose == 1L)),
-        process_type                = p_fct(c("default", "update"), default = "default", tags = "train"),
         rate_drop                   = p_dbl(0, 1, default = 0, tags = "train", depends = quote(booster == "dart")),
         refresh_leaf                = p_lgl(default = TRUE, tags = "train"),
-        reshape                     = p_lgl(default = FALSE, tags = "predict"),
+        seed                        = p_int(tags = "train"),
+        seed_per_iteration          = p_lgl(default = FALSE, tags = "train"),
         sampling_method             = p_fct(c("uniform", "gradient_based"), default = "uniform", tags = "train", depends = quote(booster == "gbtree")),
         sample_type                 = p_fct(c("uniform", "weighted"), default = "uniform", tags = "train", depends = quote(booster == "dart")),
         save_name                   = p_uty(default = NULL, tags = "train"),
         save_period                 = p_int(0, default = NULL, special_vals = list(NULL), tags = "train"),
         scale_pos_weight            = p_dbl(default = 1, tags = "train"),
-        seed_per_iteration          = p_lgl(default = FALSE, tags = "train"),
         skip_drop                   = p_dbl(0, 1, default = 0, tags = "train", depends = quote(booster == "dart")),
-        strict_shape                = p_lgl(default = FALSE, tags = "predict"),
         subsample                   = p_dbl(0, 1, default = 1, tags = "train"),
-        top_k                       = p_int(0, default = 0, tags = "train", depends = quote(booster == "gblinear" && feature_selector %in% c("greedy", "thrifty"))),
+        top_k                       = p_int(0, default = 0, tags = "train", depends = quote(feature_selector %in% c("greedy", "thrifty") && booster == "gblinear")),
         training                    = p_lgl(default = FALSE, tags = "predict"),
         tree_method                 = p_fct(c("auto", "exact", "approx", "hist", "gpu_hist"), default = "auto", tags = "train", depends = quote(booster %in% c("gbtree", "dart"))),
         tweedie_variance_power      = p_dbl(1, 2, default = 1.5, tags = "train", depends = quote(objective == "reg:tweedie")),
         updater                     = p_uty(tags = "train"), # Default depends on the selected booster
-        verbose                     = p_int(0L, 2L, default = 1L, tags = "train"),
-        watchlist                   = p_uty(default = NULL, tags = "train"),
+        use_rmm                     = p_lgl(tags = "train"),
+        validate_features           = p_lgl(default = TRUE, tags = "predict"),
+        verbose                     = p_int(0L, 2L, init = 0L, tags = "train"),
+        verbosity                   = p_int(0L, 2L, init = 0L, tags = "train"),
         xgb_model                   = p_uty(default = NULL, tags = "train")
       )
-      # param deps
-
-      # custom defaults
-      ps$set_values(nrounds = 1000L, nthread = 1L, verbose = 0L)
 
       super$initialize(
         id = "regr.xgboost",
@@ -186,6 +188,21 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         private$.validate = assert_validate(rhs)
       }
       private$.validate
+    },
+
+    #' @field model (any)\cr
+    #' The fitted model. Only available after `$train()` has been called.
+    model = function(rhs) {
+      if (!missing(rhs)) {
+        if (inherits(rhs, "xgb.Booster")) {
+          rhs = list(
+            structure("wrapper", model = rhs)
+          )
+        }
+        self$state$model = rhs
+      }
+      # workaround https://github.com/Rdatatable/data.table/issues/7456
+      attributes(self$state$model[[1]])$model
     }
   ),
 
@@ -233,27 +250,45 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
           xgboost::setinfo(xgb_valid_data, "base_margin", internal_valid_task$offset$offset)
         }
 
-        pv$watchlist = c(pv$watchlist, list(test = xgb_valid_data))
+        pv$evals = c(pv$evals, list(test = xgb_valid_data))
       }
 
       # set internal validation measure
-      if (inherits(pv$eval_metric, "Measure")) {
-        measure = pv$eval_metric
+      if (inherits(pv$custom_metric, "Measure")) {
+        measure = pv$custom_metric
 
         if (pv$objective %nin% c("reg:absoluteerror", "reg:squarederror")) {
           stop("Only 'reg:squarederror' and 'reg:absoluteerror' objectives are supported.")
         }
 
-        pv$eval_metric =  mlr3misc::crate({function(pred, dtrain) {
+        pv$custom_metric = mlr3misc::crate({function(pred, dtrain) {
           truth = xgboost::getinfo(dtrain, "label")
           scores = measure$fun(truth, pred)
           list(metric = measure$id, value = scores)
-          }}, measure)
+        }}, measure)
 
         pv$maximize = !measure$minimize
       }
 
-      invoke(xgboost::xgb.train, data = xgb_data, .args = pv)
+      model = xgboost::xgb.train(
+        params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
+        data = xgb_data,
+        nrounds = pv$nrounds,
+        evals = pv$evals,
+        custom_metric = pv$custom_metric,
+        verbose = pv$verbose,
+        print_every_n = pv$print_every_n,
+        early_stopping_rounds = pv$early_stopping_rounds,
+        maximize = pv$maximize,
+        save_period = pv$save_period,
+        save_name = pv$save_name,
+        callbacks = pv$callbacks %??% list()
+      )
+
+      # workaround https://github.com/Rdatatable/data.table/issues/7456
+      list(
+        structure("wrapper", model = model)
+      )
     },
     #' Returns the `$best_iteration` when early stopping is activated.
     .predict = function(task) {
@@ -268,37 +303,61 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
     .hotstart = function(task) {
       model = self$model
-      pars = self$param_set$get_values(tags = "train")
-      pars_train = self$state$param_vals
-      if (!is.null(pars_train$early_stopping_rounds)) {
+      pv = self$param_set$get_values(tags = "train")
+      pv_train = self$state$param_vals
+      if (!is.null(pv_train$early_stopping_rounds)) {
         stopf("The parameter `early_stopping_rounds` is set. Early stopping and hotstarting are incompatible.")
       }
 
       # Calculate additional boosting iterations
       # niter in model and nrounds in ps should be equal after train and continue
-      pars$nrounds = pars$nrounds - pars_train$nrounds
+      nrounds = pv$nrounds - pv_train$nrounds
 
       # Construct data
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
+      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
 
-      invoke(xgboost::xgb.train, data = data, xgb_model = model, .args = pars)
+      if (nrounds > 0) {
+        model = xgboost::xgb.train(
+          params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)],
+          data = xgb_data,
+          nrounds = nrounds,
+          evals = pv$evals,
+          custom_metric = pv$custom_metric,
+          verbose = pv$verbose,
+          print_every_n = pv$print_every_n,
+          early_stopping_rounds = pv$early_stopping_rounds,
+          maximize = pv$maximize,
+          save_period = pv$save_period,
+          save_name = pv$save_name,
+          xgb_model = model,
+          callbacks = pv$callbacks %??% list()
+        )
+      }
+
+      list(
+        structure("wrapper", model = model)
+      )
     },
 
     .extract_internal_tuned_values = function() {
       if (is.null(self$state$param_vals$early_stopping_rounds)) {
         return(NULL)
       }
-      list(nrounds = self$model$best_iteration)
+      list(nrounds = attributes(self$model)$early_stop$best_iteration)
     },
 
     .extract_internal_valid_scores = function() {
-      if (is.null(self$model$evaluation_log)) {
+      if (is.null(attributes(self$model)$evaluation_log)) {
         return(named_list())
       }
-      iter = if (!is.null(self$model$best_iteration)) self$model$best_iteration else self$model$niter
-      as.list(self$model$evaluation_log[
+      iter = attributes(self$model)$early_stop$best_iteration
+      if (is.null(iter)) {
+        iter = xgboost::xgb.get.num.boosted.rounds(self$model)
+      }
+      log = attributes(self$model)$evaluation_log
+      as.list(log[
         iter,
         set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),
         .SDcols = patterns("^test_")

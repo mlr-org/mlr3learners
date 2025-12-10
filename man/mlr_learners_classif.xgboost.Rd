@@ -8,12 +8,9 @@
 eXtreme Gradient Boosting classification.
 Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpkg{xgboost}.
 
-If not specified otherwise, the evaluation metric is set to the default \code{"logloss"}
-for binary classification problems and set to \code{"mlogloss"} for multiclass problems.
-This was necessary to silence a deprecation warning.
-
-Note that using the \code{watchlist} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a
-\code{mlr3pipelines} \code{GraphLearner} as the preprocessing steps will not be applied to the data in the watchlist.
+Note that using the \code{evals} parameter directly will lead to problems
+when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a \code{mlr3pipelines} \code{GraphLearner}
+as the preprocessing steps will not be applied to the data in \code{evals}.
 See the section \emph{Early Stopping and Validation} on how to do this.
 }
 \note{
@@ -46,6 +43,12 @@ The lightgbm learner has a default of 1000, so we use the same here.
 \item Adjusted default: 0.
 \item Reason for change: Reduce verbosity.
 }
+\item \code{verbosity}:
+\itemize{
+\item Actual default: 1.
+\item Adjusted default: 0.
+\item Reason for change: Reduce verbosity.
+}
 }
 }
 
@@ -55,7 +58,7 @@ In order to monitor the validation performance during the training, you can set 
 For information on how to configure the validation set, see the \emph{Validation} section of \link[mlr3:Learner]{mlr3::Learner}.
 This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
 The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
-The internal validation measure can be set via the \code{eval_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
+The internal validation measure can be set via the \code{custom_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
 Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
 }
 
@@ -93,15 +96,20 @@ lrn("classif.xgboost")
    disable_default_eval_metric \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    early_stopping_rounds \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    eta \tab numeric \tab 0.3 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   evals \tab untyped \tab NULL \tab  \tab - \cr
    eval_metric \tab untyped \tab - \tab  \tab - \cr
+   custom_metric \tab untyped \tab - \tab  \tab - \cr
+   extmem_single_page \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
    interaction_constraints \tab untyped \tab - \tab  \tab - \cr
    iterationrange \tab untyped \tab - \tab  \tab - \cr
    lambda \tab numeric \tab 1 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   lambda_bias \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    max_bin \tab integer \tab 256 \tab  \tab \eqn{[2, \infty)}{[2, Inf)} \cr
+   max_cached_hist_node \tab integer \tab 65536 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   max_cat_to_onehot \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   max_cat_threshold \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    max_delta_step \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    max_depth \tab integer \tab 6 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    max_leaves \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
@@ -111,16 +119,14 @@ lrn("classif.xgboost")
    monotone_constraints \tab untyped \tab 0 \tab  \tab - \cr
    nrounds \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    normalize_type \tab character \tab tree \tab tree, forest \tab - \cr
-   nthread \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   ntreelimit \tab integer \tab NULL \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   nthread \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    num_parallel_tree \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    objective \tab untyped \tab "binary:logistic" \tab  \tab - \cr
    one_drop \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    print_every_n \tab integer \tab 1 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   process_type \tab character \tab default \tab default, update \tab - \cr
    rate_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    refresh_leaf \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   reshape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   seed \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed_per_iteration \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    sampling_method \tab character \tab uniform \tab uniform, gradient_based \tab - \cr
    sample_type \tab character \tab uniform \tab uniform, weighted \tab - \cr
@@ -128,15 +134,16 @@ lrn("classif.xgboost")
    save_period \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    scale_pos_weight \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    skip_drop \tab numeric \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   strict_shape \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    subsample \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    top_k \tab integer \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    training \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    tree_method \tab character \tab auto \tab auto, exact, approx, hist, gpu_hist \tab - \cr
    tweedie_variance_power \tab numeric \tab 1.5 \tab  \tab \eqn{[1, 2]}{[1, 2]} \cr
    updater \tab untyped \tab - \tab  \tab - \cr
-   verbose \tab integer \tab 1 \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
-   watchlist \tab untyped \tab NULL \tab  \tab - \cr
+   use_rmm \tab logical \tab - \tab TRUE, FALSE \tab - \cr
+   validate_features \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   verbose \tab integer \tab - \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
+   verbosity \tab integer \tab - \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
    xgb_model \tab untyped \tab NULL \tab  \tab - \cr
 }
 }
@@ -263,6 +270,9 @@ which is extracted from \verb{$best_iteration} of the model and otherwise \code{
 \item{\code{validate}}{(\code{numeric(1)} or \code{character(1)} or \code{NULL})
 How to construct the internal validation data. This parameter can be either \code{NULL},
 a ratio, \code{"test"}, or \code{"predefined"}.}
+
+\item{\code{model}}{(any)\cr
+The fitted model. Only available after \verb{$train()} has been called.}
 }
 \if{html}{\out{</div>}}
 }

@@ -6,6 +6,7 @@
 #' @importFrom mlr3 mlr_learners LearnerClassif LearnerRegr assert_validate assert_quantiles
 #' @importFrom stats predict reformulate
 #' @importFrom utils packageVersion
+#' @importFrom methods formalArgs
 #' @useDynLib mlr3learners c_ranger_mu_sigma c_ranger_var
 #'
 #' @description

@@ -1,48 +1,28 @@
 library(mlr3learners)
-library(magrittr, exclude = c("equals", "is_less_than", "not"))
-library(rvest)
-
-x = rvest::read_html("https://xgboost.readthedocs.io/en/latest/parameter.html")
-xli = rvest::html_elements(x, "li")
-xp = rvest::html_elements(x, "p")
-x = c(rvest::html_text2(xli), rvest::html_text2(xp))
-
-add_params_xgboost = x %>%
-  grep("default=", ., value = TRUE) %>%
-  strsplit(., split = " ", fixed = TRUE) %>%
-  mlr3misc::map_chr(1L) %>%
-  gsub(",", replacement = "", ., fixed = TRUE) %>%
-  ## these are defined on the same line as colsample_bytree and cannot be scraped therefore
-  append(values = c("colsample_bylevel", "colsample_bynode")) %>%
-  # values which do not match regex
-  append(values = c("interaction_constraints", "monotone_constraints", "base_score")) %>%
-  # only defined in help page but not in signature or website
-  append(values = c("lambda_bias"))
 
 test_that("classif.xgboost", {
   learner = lrn("classif.xgboost", nrounds = 1L)
-  fun = list(xgboost::xgb.train, xgboost::xgboost, add_params_xgboost)
+  fun = list(xgboost::xgb.train, xgboost::xgb.params)
   exclude = c(
-    "x", # handled by mlr3
-    "params", # handled by mlr3
     "data", # handled by mlr3
-    "obj", # handled via type parameter
-    "verbosity", # handled by mlr3
-    "seed", # not available in R package
-    "train", # handled by mlr3
-    "task", # handled by mlr3
-    "model_in", # handled by mlr3
-    "model_out", # handled by mlr3
-    "model_dir", # handled by mlr3
-    "dump_format", # CLI parameter, not for R package
-    "name_dump", # CLI parameter, not for R package
-    "name_pred", # CLI parameter, not for R package
-    "pred_margin", # CLI parameter, not for R package
-    "eval_metric", # handled by mlr3
-    "label", # handled by mlr3
-    "weight", # handled by mlr3
-    "nthread", # handled by mlr3
-    "feval" # handled via eval_metric parameter
+    "params", # handled by mlr3
+    "custom_metric", # handled by eval_metric parameter
+    "learning_rate", # handled by eta parameter
+    "min_split_loss", # handled by gamma parameter
+    "reg_alpha", # handled by alpha parameter
+    "reg_lambda", # handled by lambda parameter
+    "multi_strategy", # not supported
+    "num_class", # handled by mlr3
+    "huber_slope", # regression only
+    "quantile_alpha", # regression only
+    "aft_loss_distribution", # survival only
+    "lambdarank_pair_method", # rank only
+    "lambdarank_num_pair_per_sample", # rank only
+    "lambdarank_normalization", # rank only
+    "lambdarank_score_normalization", # rank only
+    "lambdarank_unbiased", # rank only
+    "lambdarank_bias_norm", # rank only
+    "ndcg_exp_gain" # rank only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
@@ -51,7 +31,7 @@ test_that("classif.xgboost", {
     paste0("- ", ParamTest$missing, "\n", collapse = ""),
     "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
     paste0("- ", ParamTest$extra, "\n", collapse = ""))
-    )
+  )
 })
 
 test_that("predict classif.xgboost", {
@@ -60,12 +40,14 @@ test_that("predict classif.xgboost", {
   exclude = c(
     "object", # handled by mlr3
     "newdata", # handled by mlr3o
-    "objective", # defined in xgboost::xgboost and already in param set
     "outputmargin", # not supported
     "predcontrib", # not supported
     "predinteraction", # not supported
     "predleaf", # not supported
-    "nthread" # handled by mlr3
+    "avoid_transpose", # not supported
+    "base_margin", # not supported
+    "objective", # use by mlr3 not xgboost
+    "strict_shape" # destroys prediction format
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
@@ -74,5 +56,6 @@ test_that("predict classif.xgboost", {
     paste0("- ", ParamTest$missing, "\n", collapse = ""),
     "\nOutdated param or param defined in additional control function not included in list of function definitions:\n",
     paste0("- ", ParamTest$extra, "\n", collapse = ""))
-    )
+  )
 })
+
