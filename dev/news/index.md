@@ -2,6 +2,10 @@
 
 ## mlr3learners (development version)
 
+## mlr3learners 0.14.0
+
+- compatibility: xgboost 3.1.2.1
+
 ## mlr3learners 0.13.0
 
 CRAN release: 2025-10-02

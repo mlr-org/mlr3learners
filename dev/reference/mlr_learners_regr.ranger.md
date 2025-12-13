@@ -121,7 +121,6 @@ Hutter, Frank, Xu, Lin, Hoos, H. H, Leyton-Brown, Kevin (2015).
 “Algorithm runtime prediction: methods and evaluation.” In *Proceedings
 of the 24th International Conference on Artificial Intelligence*, series
 IJCAI'15, 4197–4201.
-[doi:10.5555/2832747.2832840](https://doi.org/10.5555/2832747.2832840) .
 
 ## See also
 
@@ -335,7 +334,7 @@ if ("importance" %in% learner$properties) print(learner$importance)
 #> function () 
 #> .__LearnerRegrRanger__importance(self = self, private = private, 
 #>     super = super)
-#> <environment: 0x557db50da200>
+#> <environment: 0x56277d712500>
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

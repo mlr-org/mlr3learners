@@ -22,12 +22,12 @@ Source:
 
 Lang M, Au Q, Coors S, Schratz P, Becker M, Zobolas J (2025).
 *mlr3learners: Recommended Learners for 'mlr3'*. R package version
-0.13.0.9000, <https://mlr3learners.mlr-org.com>.
+0.14.0.9000, <https://mlr3learners.mlr-org.com>.
 
     @Manual{,
       title = {mlr3learners: Recommended Learners for 'mlr3'},
       author = {Michel Lang and Quay Au and Stefan Coors and Patrick Schratz and Marc Becker and John Zobolas},
       year = {2025},
-      note = {R package version 0.13.0.9000},
+      note = {R package version 0.14.0.9000},
       url = {https://mlr3learners.mlr-org.com},
     }
