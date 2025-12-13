@@ -1,4 +1,4 @@
-# r cmd check workflow without suggests of the mlr3 ecosystem v0.1.0
+# r cmd check workflow without suggests of the mlr3 ecosystem v0.3.1
 # https://github.com/mlr-org/actions
 on:
   workflow_dispatch:
