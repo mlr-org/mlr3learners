@@ -5,21 +5,17 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost"><meta name="description" content='eXtreme Gradient Boosting classification.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extreme Gradient Boosting Classification Learner — mlr_learners_classif.xgboost"><meta name="description" content="eXtreme Gradient Boosting classification.
 Calls xgboost::xgb.train() from package xgboost.
-If not specified otherwise, the evaluation metric is set to the default "logloss"
-for binary classification problems and set to "mlogloss" for multiclass problems.
-This was necessary to silence a deprecation warning.
-Note that using the watchlist parameter directly will lead to problems when wrapping this mlr3::Learner in a
-mlr3pipelines GraphLearner as the preprocessing steps will not be applied to the data in the watchlist.
-See the section Early Stopping and Validation on how to do this.'><meta property="og:description" content='eXtreme Gradient Boosting classification.
+Note that using the evals parameter directly will lead to problems
+when wrapping this mlr3::Learner in a mlr3pipelines GraphLearner
+as the preprocessing steps will not be applied to the data in evals.
+See the section Early Stopping and Validation on how to do this."><meta property="og:description" content="eXtreme Gradient Boosting classification.
 Calls xgboost::xgb.train() from package xgboost.
-If not specified otherwise, the evaluation metric is set to the default "logloss"
-for binary classification problems and set to "mlogloss" for multiclass problems.
-This was necessary to silence a deprecation warning.
-Note that using the watchlist parameter directly will lead to problems when wrapping this mlr3::Learner in a
-mlr3pipelines GraphLearner as the preprocessing steps will not be applied to the data in the watchlist.
-See the section Early Stopping and Validation on how to do this.'></head><body>
+Note that using the evals parameter directly will lead to problems
+when wrapping this mlr3::Learner in a mlr3pipelines GraphLearner
+as the preprocessing steps will not be applied to the data in evals.
+See the section Early Stopping and Validation on how to do this."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -27,7 +23,7 @@ See the section Early Stopping and Validation on how to do this.'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.13.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,11 +62,9 @@ See the section Early Stopping and Validation on how to do this.'></head><body>
     <div class="ref-description section level2">
     <p>eXtreme Gradient Boosting classification.
 Calls <code><a href="https://rdrr.io/pkg/xgboost/man/xgb.train.html" class="external-link">xgboost::xgb.train()</a></code> from package <a href="https://CRAN.R-project.org/package=xgboost" class="external-link"><span class="pkg">xgboost</span></a>.</p>
-<p>If not specified otherwise, the evaluation metric is set to the default <code>"logloss"</code>
-for binary classification problems and set to <code>"mlogloss"</code> for multiclass problems.
-This was necessary to silence a deprecation warning.</p>
-<p>Note that using the <code>watchlist</code> parameter directly will lead to problems when wrapping this <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> in a
-<code>mlr3pipelines</code> <code>GraphLearner</code> as the preprocessing steps will not be applied to the data in the watchlist.
+<p>Note that using the <code>evals</code> parameter directly will lead to problems
+when wrapping this <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> in a <code>mlr3pipelines</code> <code>GraphLearner</code>
+as the preprocessing steps will not be applied to the data in <code>evals</code>.
 See the section <em>Early Stopping and Validation</em> on how to do this.</p>
     </div>
 
@@ -100,6 +94,10 @@ The lightgbm learner has a default of 1000, so we use the same here.</p></li>
 <li><p>Adjusted default: 0.</p></li>
 <li><p>Reason for change: Reduce verbosity.</p></li>
 </ul></li>
+<li><p><code>verbosity</code>:</p><ul><li><p>Actual default: 1.</p></li>
+<li><p>Adjusted default: 0.</p></li>
+<li><p>Reason for change: Reduce verbosity.</p></li>
+</ul></li>
 </ul></div>
     <div class="section level2">
     <h2 id="early-stopping-and-validation">Early Stopping and Validation<a class="anchor" aria-label="anchor" href="#early-stopping-and-validation"></a></h2>
@@ -109,7 +107,7 @@ The lightgbm learner has a default of 1000, so we use the same here.</p></li>
 For information on how to configure the validation set, see the <em>Validation</em> section of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>.
 This validation data can also be used for early stopping, which can be enabled by setting the <code>early_stopping_rounds</code> parameter.
 The final (or in the case of early stopping best) validation scores can be accessed via <code>$internal_valid_scores</code>, and the optimal <code>nrounds</code> via <code>$internal_tuned_values</code>.
-The internal validation measure can be set via the <code>eval_metric</code> parameter that can be a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>, a function, or a character string for the internal xgboost measures.
+The internal validation measure can be set via the <code>custom_metric</code> parameter that can be a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>, a function, or a character string for the internal xgboost measures.
 Using an <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a> is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.</p>
     </div>
     <div class="section level2">
@@ -132,7 +130,7 @@ Using an <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="extern
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
 
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>alpha</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>approxcontrib</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>base_score</td><td>numeric</td><td>0.5</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>booster</td><td>character</td><td>gbtree</td><td>gbtree, gblinear, dart</td><td>-</td></tr><tr><td>callbacks</td><td>untyped</td><td>list()</td><td></td><td>-</td></tr><tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>device</td><td>untyped</td><td>"cpu"</td><td></td><td>-</td></tr><tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr><tr><td>eval_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>-</td></tr><tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>grow_policy</td><td>character</td><td>depthwise</td><td>depthwise, lossguide</td><td>-</td></tr><tr><td>interaction_constraints</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>iterationrange</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>lambda</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>lambda_bias</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_bin</td><td>integer</td><td>256</td><td></td><td>\([2, \infty)\)</td></tr><tr><td>max_delta_step</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_depth</td><td>integer</td><td>6</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_leaves</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>maximize</td><td>logical</td><td>NULL</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>min_child_weight</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>missing</td><td>numeric</td><td>NA</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>monotone_constraints</td><td>untyped</td><td>0</td><td></td><td>-</td></tr><tr><td>nrounds</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>normalize_type</td><td>character</td><td>tree</td><td>tree, forest</td><td>-</td></tr><tr><td>nthread</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>ntreelimit</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num_parallel_tree</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>objective</td><td>untyped</td><td>"binary:logistic"</td><td></td><td>-</td></tr><tr><td>one_drop</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>process_type</td><td>character</td><td>default</td><td>default, update</td><td>-</td></tr><tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>reshape</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>-</td></tr><tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>-</td></tr><tr><td>save_name</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>save_period</td><td>integer</td><td>NULL</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>strict_shape</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>training</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>tree_method</td><td>character</td><td>auto</td><td>auto, exact, approx, hist, gpu_hist</td><td>-</td></tr><tr><td>tweedie_variance_power</td><td>numeric</td><td>1.5</td><td></td><td>\([1, 2]\)</td></tr><tr><td>updater</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>verbose</td><td>integer</td><td>1</td><td></td><td>\([0, 2]\)</td></tr><tr><td>watchlist</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>xgb_model</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>alpha</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>approxcontrib</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>base_score</td><td>numeric</td><td>0.5</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>booster</td><td>character</td><td>gbtree</td><td>gbtree, gblinear, dart</td><td>-</td></tr><tr><td>callbacks</td><td>untyped</td><td>list()</td><td></td><td>-</td></tr><tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>device</td><td>untyped</td><td>"cpu"</td><td></td><td>-</td></tr><tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr><tr><td>evals</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>eval_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>custom_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>extmem_single_page</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>-</td></tr><tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>grow_policy</td><td>character</td><td>depthwise</td><td>depthwise, lossguide</td><td>-</td></tr><tr><td>interaction_constraints</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>iterationrange</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>lambda</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_bin</td><td>integer</td><td>256</td><td></td><td>\([2, \infty)\)</td></tr><tr><td>max_cached_hist_node</td><td>integer</td><td>65536</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_cat_to_onehot</td><td>integer</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_cat_threshold</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_delta_step</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_depth</td><td>integer</td><td>6</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_leaves</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>maximize</td><td>logical</td><td>NULL</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>min_child_weight</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>missing</td><td>numeric</td><td>NA</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>monotone_constraints</td><td>untyped</td><td>0</td><td></td><td>-</td></tr><tr><td>nrounds</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>normalize_type</td><td>character</td><td>tree</td><td>tree, forest</td><td>-</td></tr><tr><td>nthread</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num_parallel_tree</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>objective</td><td>untyped</td><td>"binary:logistic"</td><td></td><td>-</td></tr><tr><td>one_drop</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>seed</td><td>integer</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>-</td></tr><tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>-</td></tr><tr><td>save_name</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>save_period</td><td>integer</td><td>NULL</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>training</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>tree_method</td><td>character</td><td>auto</td><td>auto, exact, approx, hist, gpu_hist</td><td>-</td></tr><tr><td>tweedie_variance_power</td><td>numeric</td><td>1.5</td><td></td><td>\([1, 2]\)</td></tr><tr><td>updater</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>use_rmm</td><td>logical</td><td>-</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>validate_features</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>verbose</td><td>integer</td><td>-</td><td></td><td>\([0, 2]\)</td></tr><tr><td>verbosity</td><td>integer</td><td>-</td><td></td><td>\([0, 2]\)</td></tr><tr><td>xgb_model</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="offset">Offset<a class="anchor" aria-label="anchor" href="#offset"></a></h2>
 
@@ -209,6 +207,11 @@ which is extracted from <code>$best_iteration</code> of the model and otherwise 
 <dd><p>(<code>numeric(1)</code> or <code>character(1)</code> or <code>NULL</code>)
 How to construct the internal validation data. This parameter can be either <code>NULL</code>,
 a ratio, <code>"test"</code>, or <code>"predefined"</code>.</p></dd>
+
+
+<dt><code>model</code></dt>
+<dd><p>(any)<br>
+The fitted model. Only available after <code>$train()</code> has been called.</p></dd>
 
 
 </dl><p></p></div>
@@ -335,7 +338,7 @@ a ratio, <code>"test"</code>, or <code>"predefined"</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
