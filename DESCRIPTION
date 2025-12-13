@@ -1,6 +1,6 @@
 Package: mlr3learners
 Title: Recommended Learners for 'mlr3'
-Version: 0.13.0.9000
+Version: 0.14.0
 Authors@R: c(
     person("Michel", "Lang", , "michellang@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-9754-0393")),
