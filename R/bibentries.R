@@ -116,8 +116,8 @@ bibentries = c( # nolint start
     publisher        = "AAAI Press",
     booktitle        = "Proceedings of the 24th International Conference on Artificial Intelligence",
     pages            = "4197--4201",
-    series           = "IJCAI'15",
-    doi              = "10.5555/2832747.2832840"
+    series           = "IJCAI'15"
+    #doi              = "10.5555/2832747.2832840"
 )
 
 ) # nolint end
