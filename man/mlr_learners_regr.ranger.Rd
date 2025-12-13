@@ -142,7 +142,6 @@ ISSN 1573-0565, \doi{10.1023/A:1010933404324}.
 Hutter, Frank, Xu, Lin, Hoos, H. H, Leyton-Brown, Kevin (2015).
 \dQuote{Algorithm runtime prediction: methods and evaluation.}
 In \emph{Proceedings of the 24th International Conference on Artificial Intelligence},  series IJCAI'15, 4197--4201.
-\doi{10.5555/2832747.2832840}.
 }
 \seealso{
 \itemize{
