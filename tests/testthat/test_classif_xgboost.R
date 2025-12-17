@@ -380,8 +380,8 @@ test_that("base_margin (offset)", {
   task_offset2$internal_valid_task = part$validation
 
   l1 = lrn("classif.xgboost", objective = "binary:logistic", nrounds = 3, predict_type = "prob")
-  l2 = l1$clone()
-  l3 = l1$clone()
+  l2 = l1$clone(deep = TRUE)
+  l3 = l1$clone(deep = TRUE)
   l1$param_set$set_values(base_score = 0.5)
   l1$validate = "predefined"
   l2$validate = "predefined"
@@ -391,6 +391,9 @@ test_that("base_margin (offset)", {
   l1$train(task, part$train) # fixed global intercept (base_score = 0.5 <=> base_margin = 0)
   l2$train(task_offset, part$train) # with "V42" values as offset
   l3$train(task_offset2, part$train) # with base_margin = 0 as offset
+  # if you peek inside the l2 and l3 xgboost models, you will see a
+  # base_score value has also been estimated (i.e. to be used for prediction)
+  # see https://github.com/dmlc/xgboost/issues/11872#issuecomment-3666848941
 
   expect_true("V42" %in% xgboost::getinfo(l1$model, "feature_name"))
   expect_true("V42" %nin% xgboost::getinfo(l2$model, "feature_name"))
@@ -404,8 +407,8 @@ test_that("base_margin (offset)", {
 
   # predict (default: use_pred_offset = TRUE)
   p1 = l1$predict(task, part$test) # task has no offset, base_score = 0.5 is used
-  p2 = l2$predict(task_offset, part$test) # "V42" offset is used
-  p3 = l3$predict(task_offset2, part$test) # zero offset is used
+  p2 = l2$predict(task_offset, part$test) # "V42" base_margin is used
+  p3 = l3$predict(task_offset2, part$test) # base_margin = 0 is used
 
   # different models + offsets => different predictions
   expect_false(all(p1$prob[, 1L] == p2$prob[, 1L]))
@@ -413,7 +416,7 @@ test_that("base_margin (offset)", {
   # same models + same offsets => same predictions
   expect_equal(p1$prob, p3$prob)
 
-  # predict (default: use_pred_offset = FALSE)
+  # predict (use_pred_offset = FALSE)
   l1$param_set$set_values(use_pred_offset = FALSE)
   l2$param_set$set_values(use_pred_offset = FALSE)
   l3$param_set$set_values(use_pred_offset = FALSE)
@@ -422,10 +425,8 @@ test_that("base_margin (offset)", {
   p22 = l2$predict(task_offset, part$test)
   p33 = l3$predict(task_offset2, part$test)
   expect_equal(p1$prob, p11$prob) # task has no offset, again base_score = 0.5 is used
-  expect_false(all(p2$prob[, 1L] == p22$prob[, 1L])) # "V42" offset is not used
-  # task was trained with zero offset, so even if no offset was applied during
-  # prediction, we get exactly the same logit probabilities as before
-  expect_equal(p3$prob, p33$prob)
+  expect_false(all(p2$prob[, 1L] == p22$prob[, 1L])) # base_score = 0.512 is used
+  expect_false(all(p3$prob[, 1L] == p33$prob[, 1L])) # base_score = 0.512 is used
 
   # multiclass task
   task = tsk("iris")

@@ -263,8 +263,8 @@ test_that("base_margin (offset)", {
            nrounds = 3, base_score = 1)
   l1 = lrn("regr.xgboost", objective = "count:poisson",
            nrounds = 3) # estimated base_score (learned global intercept)
-  l2 = l1$clone() # train and test on task_offset
-  l3 = l1$clone() # train and test on task_offset2
+  l2 = l1$clone(deep = TRUE) # train and test on task_offset
+  l3 = l1$clone(deep = TRUE) # train and test on task_offset2
   l0$validate = "predefined"
   l1$validate = "predefined"
   l2$validate = "predefined"
@@ -275,6 +275,9 @@ test_that("base_margin (offset)", {
   l1$train(task, part$train) # estimates base_score
   l2$train(task_offset, part$train) # uses base_margin = 0
   l3$train(task_offset2, part$train) # uses random base_margin
+  # if you peek inside the l1, l2 and l3 xgboost models, you will see a
+  # base_score value that has been estimated (i.e. to be used for prediction)
+  # https://github.com/dmlc/xgboost/issues/11872#issuecomment-3666848941
 
   # different models: base_score = 1 vs estimated base_score
   expect_false(length(xgboost::xgb.dump(l0$model)) == length(xgboost::xgb.dump(l1$model)))
