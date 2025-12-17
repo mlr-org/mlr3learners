@@ -38,15 +38,16 @@ test_that("predict regr.xgboost", {
   fun = xgboost:::predict.xgb.Booster
   exclude = c(
     "object", # handled by mlr3
-    "newdata", # handled by mlr3o
+    "newdata", # handled by mlr3
     "outputmargin", # not supported
     "predcontrib", # not supported
     "predinteraction", # not supported
     "predleaf", # not supported
     "avoid_transpose", # not supported
-    "base_margin", # not supported
+    "base_margin", # supported via use_pred_offset
     "objective", # use by mlr3 not xgboost
-    "strict_shape" # destroys prediction format
+    "strict_shape", # destroys prediction format
+    "use_pred_offset" # sets base_margin if applicable
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
@@ -57,4 +58,3 @@ test_that("predict regr.xgboost", {
     paste0("- ", ParamTest$extra, "\n", collapse = ""))
   )
 })
-

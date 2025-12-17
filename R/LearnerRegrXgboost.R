@@ -20,7 +20,10 @@
 #' @section Offset:
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
 #' The offset is incorporated through the [xgboost::xgb.DMatrix] interface, using the `base_margin` field.
-#' No offset is applied during prediction for this learner.
+#' During prediction, the offset column from the test set is used only if `use_pred_offset = TRUE` (default) and the `Task` has a column with the role `offset`.
+#' The test set offsets are passed via the `base_margin` argument in [xgboost::predict.xgb.Booster()].
+#' Otherwise, if the user sets `use_pred_offset = FALSE` (or the `Task` doesn't have a column with the `offset` role), the (possibly estimated) global intercept from the train set is applied.
+#' See \url{https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html}.
 #'
 #' @templateVar id regr.xgboost
 #' @template learner
@@ -77,7 +80,7 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       ps = ps(
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
-        base_score                  = p_dbl(default = 0.5, tags = "train"),
+        base_score                  = p_dbl(tags = "train"),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = "train"),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -136,7 +139,8 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
         validate_features           = p_lgl(default = TRUE, tags = "predict"),
         verbose                     = p_int(0L, 2L, init = 0L, tags = "train"),
         verbosity                   = p_int(0L, 2L, init = 0L, tags = "train"),
-        xgb_model                   = p_uty(default = NULL, tags = "train")
+        xgb_model                   = p_uty(default = NULL, tags = "train"),
+        use_pred_offset             = p_lgl(init = TRUE, tags = "predict")
       )
 
       super$initialize(
@@ -295,6 +299,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
       newdata = as_numeric_matrix(ordered_features(task, self))
+      if (isTRUE(pv$use_pred_offset) && "offset" %in% task$properties) {
+        pv$base_margin = task$offset$offset
+      }
 
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
