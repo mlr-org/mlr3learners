@@ -68,7 +68,7 @@ lrn("classif.glmnet")
    mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   use_pred_offset \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
    penalty.factor \tab untyped \tab - \tab  \tab - \cr
    pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr

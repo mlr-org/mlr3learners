@@ -84,4 +84,5 @@ Collate:
     'helpers.R'
     'helpers_glmnet.R'
     'helpers_ranger.R'
+    'helpers_xgboost.R'
     'zzz.R'
