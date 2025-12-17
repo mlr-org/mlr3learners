@@ -86,7 +86,7 @@ lrn("classif.xgboost")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   base_score \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
    callbacks \tab untyped \tab list() \tab  \tab - \cr
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
@@ -145,6 +145,7 @@ lrn("classif.xgboost")
    verbose \tab integer \tab - \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
    verbosity \tab integer \tab - \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
    xgb_model \tab untyped \tab NULL \tab  \tab - \cr
+   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
 }
 }
 
