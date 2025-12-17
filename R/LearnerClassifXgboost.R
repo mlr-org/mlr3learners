@@ -98,7 +98,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       ps = ps(
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
-        base_score                  = p_dbl(default = 0.5, tags = "train"),
+        base_score                  = p_dbl(tags = "train"),
         booster                     = p_fct(c("gbtree", "gblinear", "dart"), default = "gbtree", tags = "train"),
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train"),
@@ -156,7 +156,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         validate_features           = p_lgl(default = TRUE, tags = "predict"),
         verbose                     = p_int(0L, 2L, init = 0L, tags = "train"),
         verbosity                   = p_int(0L, 2L, init = 0L, tags = "train"),
-        xgb_model                   = p_uty(default = NULL, tags = "train")
+        xgb_model                   = p_uty(default = NULL, tags = "train"),
+        use_pred_offset             = p_lgl(init = TRUE, tags = "predict")
       )
 
       super$initialize(
@@ -261,22 +262,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgboost::setinfo(xgb_data, "weight", weights)
       }
 
-      if ("offset" %in% task$properties) {
-        offset = task$offset
-        if (nlvls == 2L) {
-          # binary case
-          base_margin = offset$offset
-        } else {
-          # multiclass needs a matrix (n_samples, n_classes)
-          # it seems reasonable to reorder according to label (0,1,2,...)
-          reordered_cols = paste0("offset_", rev(levels(task$truth())))
-          n_offsets = ncol(offset) - 1 # all expect `row_id`
-          if (length(reordered_cols) != n_offsets) {
-            stopf("Task has %i class labels, and only %i offset columns are provided",
-                 nlevels(task$truth()), n_offsets)
-          }
-          base_margin = as_numeric_matrix(offset)[, reordered_cols]
-        }
+      base_margin = xgboost_get_base_margin(task, "train", pv)
+      if (!is.null(base_margin)) {
         xgboost::setinfo(xgb_data, "base_margin", base_margin)
       }
 
@@ -292,22 +279,13 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgb_valid_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(valid_data), label = valid_label)
 
         weights = get_weights(internal_valid_task, private)
-
         if (!is.null(weights)) {
           xgboost::setinfo(xgb_valid_data, "weight", weights)
         }
 
-        if ("offset" %in% internal_valid_task$properties) {
-          valid_offset = internal_valid_task$offset
-          if (nlvls == 2L) {
-            base_margin = valid_offset$offset
-          } else {
-            # multiclass needs a matrix (n_samples, n_classes)
-            # it seems reasonable to reorder according to label (0,1,2,...)
-            reordered_cols = paste0("offset_", rev(levels(internal_valid_task$truth())))
-            base_margin = as_numeric_matrix(valid_offset)[, reordered_cols]
-          }
-          xgboost::setinfo(xgb_valid_data, "base_margin", base_margin)
+        valid_base_margin = xgboost_get_base_margin(internal_valid_task, "train", pv)
+        if (!is.null(base_margin)) {
+          xgboost::setinfo(xgb_valid_data, "base_margin", valid_base_margin)
         }
 
         pv$evals = c(pv$evals, list(test = xgb_valid_data))
@@ -370,6 +348,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       if (is.null(pv$objective)) {
         pv$objective = ifelse(nlvls == 2L, "binary:logistic", "multi:softprob")
       }
+
+      pv$base_margin = xgboost_get_base_margin(task, "predict", pv)
 
       newdata = as_numeric_matrix(ordered_features(task, self))
       pred = invoke(predict, model, newdata = newdata, .args = pv)
