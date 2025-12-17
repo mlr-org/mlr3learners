@@ -152,7 +152,10 @@ lrn("classif.xgboost")
 
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
-No offset is applied during prediction for this learner.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default) and the \code{Task} has a column with the role \code{offset}.
+The test set offsets are passed via the \code{base_margin} argument in \code{\link[xgboost:predict.xgb.Booster]{xgboost::predict.xgb.Booster()}}.
+Otherwise, if the user sets \code{use_pred_offset = FALSE} (or the \code{Task} doesn't have a column with the \code{offset} role), the (possibly estimated) global intercept from the train set is applied.
+See \url{https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html}.
 }
 
 \examples{
