@@ -277,20 +277,20 @@ test_that("base_margin (offset)", {
   l3$train(task_offset2, part$train) # uses random base_margin
 
   # different models: base_score = 1 vs estimated base_score
-  expect_false(length(xgb.dump(l0$model)) == length(xgb.dump(l1$model)))
+  expect_false(length(xgboost::xgb.dump(l0$model)) == length(xgboost::xgb.dump(l1$model)))
   # different models: estimated base_score vs base_margin = 0
-  expect_false(length(xgb.dump(l1$model)) == length(xgb.dump(l2$model)))
+  expect_false(length(xgboost::xgb.dump(l1$model)) == length(xgboost::xgb.dump(l2$model)))
   # different models: estimated base_score vs random base_margin
-  expect_false(length(xgb.dump(l1$model)) == length(xgb.dump(l3$model)))
+  expect_false(length(xgboost::xgb.dump(l1$model)) == length(xgboost::xgb.dump(l3$model)))
   # same models: base_score = 1 <=> base_margin = 0
-  expect_equal(xgb.dump(l0$model), xgb.dump(l2$model))
+  expect_equal(xgboost::xgb.dump(l0$model), xgboost::xgb.dump(l2$model))
 
   # l2 model: "zeros" is not a feature (it is the offset), "x" is a feature
-  expect_true("zeros" %nin% getinfo(l2$model, "feature_name"))
-  expect_true("x" %in% getinfo(l2$model, "feature_name"))
+  expect_true("zeros" %nin% xgboost::getinfo(l2$model, "feature_name"))
+  expect_true("x" %in% xgboost::getinfo(l2$model, "feature_name"))
   # similar for the l3 model
-  expect_true("random_offset" %nin% getinfo(l3$model, "feature_name"))
-  expect_true("x" %in% getinfo(l3$model, "feature_name"))
+  expect_true("random_offset" %nin% xgboost::getinfo(l3$model, "feature_name"))
+  expect_true("x" %in% xgboost::getinfo(l3$model, "feature_name"))
 
   # predict (default: use_pred_offset = TRUE)
   p0 = l0$predict(task, part$test) # task has no offset, base_score = 1 is used
