@@ -58,7 +58,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         mxit                 = p_int(1L, default = 100L, tags = "train"),
         nfolds               = p_int(3L, default = 10L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        use_pred_offset      = p_lgl(default = TRUE, tags = "predict"),
+        use_pred_offset      = p_lgl(init = TRUE, tags = "predict"),
         parallel             = p_lgl(default = FALSE, tags = "train"),
         penalty.factor       = p_uty(tags = "train"),
         pmax                 = p_int(0L, tags = "train"),
@@ -77,8 +77,6 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
         upper.limits         = p_uty(tags = "train")
       )
-
-      ps$set_values(use_pred_offset = TRUE)
 
       super$initialize(
         id = "classif.cv_glmnet",

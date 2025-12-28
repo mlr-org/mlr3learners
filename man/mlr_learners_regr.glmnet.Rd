@@ -73,7 +73,7 @@ lrn("regr.glmnet")
    mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   use_pred_offset \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    parallel \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    penalty.factor \tab untyped \tab - \tab  \tab - \cr
