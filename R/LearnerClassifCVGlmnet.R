@@ -110,7 +110,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       target = swap_levels(task$truth())
       pv = self$param_set$get_values(tags = "train")
-      pv$family = ifelse(length(task$class_names) == 2L, "binomial", "multinomial")
+      pv$family = if (length(task$class_names) == 2L) "binomial" else "multinomial"
       pv$weights = get_weights(task, private)
 
       pv = glmnet_set_offset(task, "train", pv)
