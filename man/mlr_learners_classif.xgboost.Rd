@@ -265,7 +265,7 @@ Other Learner:
 \item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
 The validation scores extracted from \code{model$evaluation_log}.
 If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
-otherwise the \code{nrounds} for the final model.}
+otherwise the scores are taken from the final boosting round \code{nrounds}.}
 
 \item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
 If early stopping is activated, this returns a list with \code{nrounds},

@@ -191,7 +191,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
     #' @field internal_valid_scores (named `list()` or `NULL`)
     #' The validation scores extracted from `model$evaluation_log`.
     #' If early stopping is activated, this contains the validation scores of the model for the optimal `nrounds`,
-    #' otherwise the `nrounds` for the final model.
+    #' otherwise the scores are taken from the final boosting round `nrounds`.
     internal_valid_scores = function() {
       self$state$internal_valid_scores
     },
