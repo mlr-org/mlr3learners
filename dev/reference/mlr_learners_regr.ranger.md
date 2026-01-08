@@ -334,7 +334,7 @@ if ("importance" %in% learner$properties) print(learner$importance)
 #> function () 
 #> .__LearnerRegrRanger__importance(self = self, private = private, 
 #>     super = super)
-#> <environment: 0x56196ccc2dc8>
+#> <environment: 0x560d59eae820>
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
