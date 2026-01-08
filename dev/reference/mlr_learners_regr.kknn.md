@@ -255,6 +255,7 @@ print(learner$model)
 #> 20:  19.7     1     6     6 145.0  3.62     5   175 15.50     0 2.770
 #> 21:  15.0     1     8     8 301.0  3.54     5   335 14.60     0 3.570
 #>       mpg    am  carb   cyl  disp  drat  gear    hp  qsec    vs    wt
+#>     <num> <num> <num> <num> <num> <num> <num> <num> <num> <num> <num>
 #> 
 #> $pv
 #> $pv$k

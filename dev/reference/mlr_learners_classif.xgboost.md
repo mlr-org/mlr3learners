@@ -110,7 +110,7 @@ or with the associated sugar function
 | Id                          | Type      | Default           | Levels                                   | Range                 |
 | alpha                       | numeric   | 0                 |                                          | \\\[0, \infty)\\      |
 | approxcontrib               | logical   | FALSE             | TRUE, FALSE                              | \-                    |
-| base_score                  | numeric   | 0.5               |                                          | \\(-\infty, \infty)\\ |
+| base_score                  | numeric   | \-                |                                          | \\(-\infty, \infty)\\ |
 | booster                     | character | gbtree            | gbtree, gblinear, dart                   | \-                    |
 | callbacks                   | untyped   | list()            |                                          | \-                    |
 | colsample_bylevel           | numeric   | 1                 |                                          | \\\[0, 1\]\\          |
@@ -169,14 +169,22 @@ or with the associated sugar function
 | verbose                     | integer   | \-                |                                          | \\\[0, 2\]\\          |
 | verbosity                   | integer   | \-                |                                          | \\\[0, 2\]\\          |
 | xgb_model                   | untyped   | NULL              |                                          | \-                    |
+| use_pred_offset             | logical   | \-                | TRUE, FALSE                              | \-                    |
 
 ## Offset
 
 If a `Task` has a column with the role `offset`, it will automatically
 be used during training. The offset is incorporated through the
 [xgboost::xgb.DMatrix](https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html)
-interface, using the `base_margin` field. No offset is applied during
-prediction for this learner.
+interface, using the `base_margin` field. During prediction, the offset
+column from the test set is used only if `use_pred_offset = TRUE`
+(default) and the `Task` has a column with the role `offset`. The test
+set offsets are passed via the `base_margin` argument in
+[`xgboost::predict.xgb.Booster()`](https://rdrr.io/pkg/xgboost/man/predict.xgb.Booster.html).
+Otherwise, if the user sets `use_pred_offset = FALSE` (or the `Task`
+doesn't have a column with the `offset` role), the (possibly estimated)
+global intercept from the train set is applied. See
+<https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html>.
 
 ## References
 
@@ -253,8 +261,8 @@ Other Learner:
   (named [`list()`](https://rdrr.io/r/base/list.html) or `NULL`) The
   validation scores extracted from `model$evaluation_log`. If early
   stopping is activated, this contains the validation scores of the
-  model for the optimal `nrounds`, otherwise the `nrounds` for the final
-  model.
+  model for the optimal `nrounds`, otherwise the scores are taken from
+  the final boosting round `nrounds`.
 
 - `internal_tuned_values`:
 

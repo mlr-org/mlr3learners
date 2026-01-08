@@ -2,7 +2,11 @@
 
 ## mlr3learners (development version)
 
+- fix: using offset during prediction for `xgboost` learners
+
 ## mlr3learners 0.14.0
+
+CRAN release: 2025-12-13
 
 - compatibility: xgboost 3.1.2.1
 

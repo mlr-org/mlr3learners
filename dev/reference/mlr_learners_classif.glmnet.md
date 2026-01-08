@@ -79,7 +79,7 @@ or with the associated sugar function
 | mxit                 | integer   | 100     |                         | \\\[1, \infty)\\      |
 | mxitnr               | integer   | 25      |                         | \\\[1, \infty)\\      |
 | nlambda              | integer   | 100     |                         | \\\[1, \infty)\\      |
-| use_pred_offset      | logical   | TRUE    | TRUE, FALSE             | \-                    |
+| use_pred_offset      | logical   | \-      | TRUE, FALSE             | \-                    |
 | penalty.factor       | untyped   | \-      |                         | \-                    |
 | pmax                 | integer   | \-      |                         | \\\[0, \infty)\\      |
 | pmin                 | numeric   | 1e-09   |                         | \\\[0, 1\]\\          |

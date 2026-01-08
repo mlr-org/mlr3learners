@@ -306,7 +306,7 @@ if ("importance" %in% learner$properties) print(learner$importance)
 #> function () 
 #> .__LearnerClassifRanger__importance(self = self, private = private, 
 #>     super = super)
-#> <environment: 0x56277980e960>
+#> <environment: 0x561968974148>
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

@@ -84,7 +84,7 @@ or with the associated sugar function
 | mnlam                | integer   | 5        |                         | \\\[1, \infty)\\      |
 | mxit                 | integer   | 100      |                         | \\\[1, \infty)\\      |
 | mxitnr               | integer   | 25       |                         | \\\[1, \infty)\\      |
-| use_pred_offset      | logical   | TRUE     | TRUE, FALSE             | \-                    |
+| use_pred_offset      | logical   | \-       | TRUE, FALSE             | \-                    |
 | nlambda              | integer   | 100      |                         | \\\[1, \infty)\\      |
 | parallel             | logical   | FALSE    | TRUE, FALSE             | \-                    |
 | penalty.factor       | untyped   | \-       |                         | \-                    |

@@ -72,7 +72,7 @@ or with the associated sugar function
 | mxit                 | integer   | 100        |                                | \\\[1, \infty)\\      |
 | nfolds               | integer   | 10         |                                | \\\[3, \infty)\\      |
 | nlambda              | integer   | 100        |                                | \\\[1, \infty)\\      |
-| use_pred_offset      | logical   | TRUE       | TRUE, FALSE                    | \-                    |
+| use_pred_offset      | logical   | \-         | TRUE, FALSE                    | \-                    |
 | parallel             | logical   | FALSE      | TRUE, FALSE                    | \-                    |
 | penalty.factor       | untyped   | \-         |                                | \-                    |
 | pmax                 | integer   | \-         |                                | \\\[0, \infty)\\      |
