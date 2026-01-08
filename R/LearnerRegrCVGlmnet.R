@@ -53,7 +53,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
         mxitnr               = p_int(1L, default = 25L, tags = "train"),
         nfolds               = p_int(3L, default = 10L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        use_pred_offset      = p_lgl(default = TRUE, tags = "predict"),
+        use_pred_offset      = p_lgl(init = TRUE, tags = "predict"),
         parallel             = p_lgl(default = FALSE, tags = "train"),
         penalty.factor       = p_uty(tags = "train"),
         pmax                 = p_int(0L, tags = "train"),
@@ -73,7 +73,7 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
         upper.limits         = p_uty(tags = "train")
       )
 
-      ps$set_values(family = "gaussian", use_pred_offset = TRUE)
+      ps$set_values(family = "gaussian")
 
       super$initialize(
         id = "regr.cv_glmnet",

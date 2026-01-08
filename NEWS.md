@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+* fix: using offset during prediction for `xgboost` learners
+
 # mlr3learners 0.14.0
 
 * compatibility: xgboost 3.1.2.1

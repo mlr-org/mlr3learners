@@ -86,7 +86,7 @@ lrn("classif.xgboost")
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    approxcontrib \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   base_score \tab numeric \tab 0.5 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   base_score \tab numeric \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    booster \tab character \tab gbtree \tab gbtree, gblinear, dart \tab - \cr
    callbacks \tab untyped \tab list() \tab  \tab - \cr
    colsample_bylevel \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
@@ -145,6 +145,7 @@ lrn("classif.xgboost")
    verbose \tab integer \tab - \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
    verbosity \tab integer \tab - \tab  \tab \eqn{[0, 2]}{[0, 2]} \cr
    xgb_model \tab untyped \tab NULL \tab  \tab - \cr
+   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
 }
 }
 
@@ -152,7 +153,10 @@ lrn("classif.xgboost")
 
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
-No offset is applied during prediction for this learner.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default) and the \code{Task} has a column with the role \code{offset}.
+The test set offsets are passed via the \code{base_margin} argument in \code{\link[xgboost:predict.xgb.Booster]{xgboost::predict.xgb.Booster()}}.
+Otherwise, if the user sets \code{use_pred_offset = FALSE} (or the \code{Task} doesn't have a column with the \code{offset} role), the (possibly estimated) global intercept from the train set is applied.
+See \url{https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html}.
 }
 
 \examples{
@@ -261,7 +265,7 @@ Other Learner:
 \item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
 The validation scores extracted from \code{model$evaluation_log}.
 If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
-otherwise the \code{nrounds} for the final model.}
+otherwise the scores are taken from the final boosting round \code{nrounds}.}
 
 \item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
 If early stopping is activated, this returns a list with \code{nrounds},
