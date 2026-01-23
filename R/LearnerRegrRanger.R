@@ -126,6 +126,14 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
     }
   ),
 
+  active = list(
+    #' @field native_model ([ranger::ranger])\cr
+    #' The fitted model.
+    native_model = function() {
+      self$model$model
+    }
+  ),
+
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
