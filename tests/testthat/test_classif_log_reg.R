@@ -18,7 +18,7 @@ test_that("class labels are correctly encoded", {
   expect_equal(unname(learner$model$y), rep(1:0, c(97, 111)))
 })
 
-test_that("link hyperparameter is respected", {
+test_that("link hyperparameter works", {
   task = tsk("sonar")
   learner = lrn("classif.log_reg", link = "probit")
 

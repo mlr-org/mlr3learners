@@ -15,7 +15,8 @@ test_that("classif.logreg", {
     "method", # we always use glm()
     "control", # handled by glm.control
     "contrasts", # causes lots of troubles just when setting the default
-    "offset" # handled via mlr3
+    "offset", # handled via mlr3
+    "link" # handled by learner
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
