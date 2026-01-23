@@ -183,6 +183,13 @@ Other Learner:
 [`mlr3::LearnerRegr`](https://mlr3.mlr-org.com/reference/LearnerRegr.html)
 -\> `LearnerRegrRanger`
 
+## Active bindings
+
+- `native_model`:
+
+  ([ranger::ranger](http://imbs-hl.github.io/ranger/reference/ranger.md))  
+  The fitted model.
+
 ## Methods
 
 ### Public methods
@@ -334,7 +341,7 @@ if ("importance" %in% learner$properties) print(learner$importance)
 #> function () 
 #> .__LearnerRegrRanger__importance(self = self, private = private, 
 #>     super = super)
-#> <environment: 0x560d59eae820>
+#> <environment: 0x5579976c6e00>
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
