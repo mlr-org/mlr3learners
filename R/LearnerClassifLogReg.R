@@ -4,7 +4,7 @@
 #'
 #' @description
 #' Classification via logistic regression.
-#' Calls [stats::glm()] with `family` set to `"binomial"`.
+#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)`.
 #'
 #' @section Internal Encoding:
 #' Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
@@ -44,6 +44,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         dispersion      = p_uty(default = NULL, tags = "predict"),
         epsilon         = p_dbl(default = 1e-8, tags = c("train", "control")),
         etastart        = p_uty(tags = "train"),
+        link            = p_fct(c("logit", "probit", "cloglog", "cauchit", "log"), init = "logit", tags = "train"),
         maxit           = p_dbl(default = 25, tags = c("train", "control")),
         model           = p_lgl(default = TRUE, tags = "train"),
         mustart         = p_uty(tags = "train"),
@@ -52,10 +53,8 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         trace           = p_lgl(default = FALSE, tags = c("train", "control")),
         x               = p_lgl(default = FALSE, tags = "train"),
         y               = p_lgl(default = TRUE, tags = "train"),
-        use_pred_offset = p_lgl(default = TRUE, tags = "predict")
+        use_pred_offset = p_lgl(init = TRUE, tags = "predict")
       )
-
-      ps$set_values(use_pred_offset = TRUE)
 
       super$initialize(
         id = "classif.log_reg",
@@ -73,6 +72,8 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
+      link = pv$link
+      pv$link = NULL
       pv$weights = get_weights(task, private)
 
       form = task$formula()
@@ -96,7 +97,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
 
       invoke(stats::glm,
         formula = form, data = data,
-        family = "binomial", model = FALSE, .args = pv, .opts = opts_default_contrasts)
+        family = stats::binomial(link = link), model = FALSE, .args = pv, .opts = opts_default_contrasts)
     },
 
     .predict = function(task) {
