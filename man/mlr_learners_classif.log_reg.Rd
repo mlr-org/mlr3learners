@@ -6,7 +6,7 @@
 \title{Logistic Regression Classification Learner}
 \description{
 Classification via logistic regression.
-Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \code{"binomial"}.
+Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \verb{binomial(link = <link>)} with \code{link} either as \code{"logit"} or `"probit"``.
 }
 \section{Internal Encoding}{
 
@@ -24,6 +24,13 @@ as the first factor level.
 \item Adjusted default: \code{FALSE}.
 \item Reason for change: Save some memory.
 }
+}
+}
+
+\section{Custom mlr3 parameters}{
+
+\itemize{
+\item \code{link}: \code{"logit"} as default.
 }
 }
 
@@ -61,6 +68,7 @@ lrn("classif.log_reg")
    dispersion \tab untyped \tab NULL \tab  \tab - \cr
    epsilon \tab numeric \tab 1e-08 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    etastart \tab untyped \tab - \tab  \tab - \cr
+   link \tab character \tab - \tab logit, probit \tab - \cr
    maxit \tab numeric \tab 25 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    model \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
    mustart \tab untyped \tab - \tab  \tab - \cr
@@ -69,7 +77,7 @@ lrn("classif.log_reg")
    trace \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    x \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    y \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   use_pred_offset \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
 }
 }
 

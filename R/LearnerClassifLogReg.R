@@ -4,7 +4,7 @@
 #'
 #' @description
 #' Classification via logistic regression.
-#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)`.
+#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)` with `link` either as `"logit"` or `"probit"``.
 #'
 #' @section Internal Encoding:
 #' Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
@@ -16,6 +16,9 @@
 #'   - Actual default: `TRUE`.
 #'   - Adjusted default: `FALSE`.
 #'   - Reason for change: Save some memory.
+#' 
+#' @section Custom mlr3 parameters:
+#' - `link`: `"logit"` as default.
 #'
 #' @section Offset:
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
