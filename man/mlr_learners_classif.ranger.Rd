@@ -92,6 +92,7 @@ lrn("classif.ranger")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.ranger")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.ranger")
+learner$param_set$values = list(importance = "permutation")
 print(learner)
 
 # Define a Task

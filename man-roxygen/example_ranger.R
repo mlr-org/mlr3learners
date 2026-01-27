@@ -1,11 +1,11 @@
 <%
 learner = mlr3::lrn(id)
-learner$param_set$values = list(importance = "permutation")
 task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 %>
 #' <%= sprintf("@examplesIf mlr3misc::require_namespaces(lrn(\"%s\")$packages, quietly = TRUE)", id) %>
 #' # Define the Learner and set parameter values
 #' <%= sprintf("learner = lrn(\"%s\")", id) %>
+#' learner$param_set$values = list(importance = "permutation")
 #' print(learner)
 #'
 #' # Define a Task
