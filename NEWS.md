@@ -1,6 +1,7 @@
 # mlr3learners (development version)
 
 * fix: using offset during prediction for `xgboost` learners
+* feat: add parameter `local.importance` to ranger learners
 
 # mlr3learners 0.14.0
 
