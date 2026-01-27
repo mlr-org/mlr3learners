@@ -51,7 +51,6 @@ lrn("regr.svm")
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.svm")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.svm")
-
 print(learner)
 
 # Define a Task

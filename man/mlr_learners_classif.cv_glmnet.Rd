@@ -96,7 +96,6 @@ as the first factor level.
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.cv_glmnet")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.cv_glmnet")
-
 print(learner)
 
 # Define a Task

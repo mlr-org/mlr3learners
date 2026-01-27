@@ -75,7 +75,6 @@ lrn("regr.nnet")
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.nnet")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.nnet")
-
 print(learner)
 
 # Define a Task

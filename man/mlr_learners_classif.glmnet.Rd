@@ -104,7 +104,6 @@ Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is app
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.glmnet")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.glmnet")
-
 print(learner)
 
 # Define a Task

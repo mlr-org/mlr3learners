@@ -72,7 +72,6 @@ Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to cre
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.lm")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.lm")
-
 print(learner)
 
 # Define a Task

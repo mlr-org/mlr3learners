@@ -75,7 +75,6 @@ lrn("classif.nnet")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.nnet")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.nnet")
-
 print(learner)
 
 # Define a Task

@@ -33,28 +33,7 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @template example_dontrun
-#' @examples
-#'
-#' \dontrun{
-#' # Train learner with early stopping on spam data set
-#' task = tsk("mtcars")
-#'
-#' # use 30 percent for validation
-#' # Set early stopping parameter
-#' learner = lrn("regr.xgboost",
-#'   nrounds = 100,
-#'   early_stopping_rounds = 10,
-#'   validate = 0.3
-#' )
-#'
-#' # Train learner with early stopping
-#' learner$train(task)
-#'
-#' # Inspect optimal nrounds and validation performance
-#' learner$internal_tuned_values
-#' learner$internal_valid_scores
-#' }
+#' @template example_xgboost
 LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
   inherit = LearnerRegr,
   public = list(

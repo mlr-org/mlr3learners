@@ -53,7 +53,6 @@ lrn("classif.svm")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.svm")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.svm")
-
 print(learner)
 
 # Define a Task

@@ -40,7 +40,6 @@ lrn("classif.naive_bayes")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.naive_bayes")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.naive_bayes")
-
 print(learner)
 
 # Define a Task

@@ -50,7 +50,6 @@ lrn("classif.lda")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.lda")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.lda")
-
 print(learner)
 
 # Define a Task

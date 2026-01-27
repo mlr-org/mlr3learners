@@ -28,7 +28,7 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @template example
+#' @template example_ranger
 LearnerClassifRanger = R6Class("LearnerClassifRanger",
   inherit = LearnerClassif,
 

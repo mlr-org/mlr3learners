@@ -74,7 +74,6 @@ lrn("regr.km")
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.km")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.km")
-
 print(learner)
 
 # Define a Task

@@ -55,7 +55,6 @@ lrn("classif.multinom")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.multinom")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.multinom")
-
 print(learner)
 
 # Define a Task

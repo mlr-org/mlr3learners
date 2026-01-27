@@ -48,7 +48,6 @@ lrn("classif.qda")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.qda")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.qda")
-
 print(learner)
 
 # Define a Task
