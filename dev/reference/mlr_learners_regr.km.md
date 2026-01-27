@@ -229,66 +229,85 @@ learner$train(task, row_ids = ids$train)
 #>   - type :  matern5_2 
 #>   - nugget : NO
 #>   - parameters lower bounds :  1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 
-#>   - parameters upper bounds :  2 14 8 801.8 4 4 566 16.8 2 7.822 
-#>   - best initial criterion value(s) :  -59.9162 
+#>   - parameters upper bounds :  2 14 8 801.8 4 4 566 10.82 2 7.822 
+#>   - best initial criterion value(s) :  -59.07016 
 #> 
 #> N = 10, M = 5 machine precision = 2.22045e-16
 #> At X0, 0 variables are exactly at the bounds
-#> At iterate     0  f=       59.916  |proj g|=      0.95668
-#> At iterate     1  f =       59.505  |proj g|=        1.4334
-#> At iterate     2  f =       58.793  |proj g|=        1.0213
-#> At iterate     3  f =       58.578  |proj g|=        1.6463
-#> At iterate     4  f =       58.481  |proj g|=       0.75148
-#> At iterate     5  f =       58.268  |proj g|=       0.41674
-#> At iterate     6  f =       58.075  |proj g|=        0.2204
-#> At iterate     7  f =       58.002  |proj g|=       0.11193
-#> At iterate     8  f =       57.985  |proj g|=      0.057232
-#> At iterate     9  f =       57.953  |proj g|=      0.043051
-#> At iterate    10  f =       57.942  |proj g|=      0.040194
-#> At iterate    11  f =       57.876  |proj g|=       0.20848
-#> At iterate    12  f =       57.842  |proj g|=       0.28907
-#> At iterate    13  f =       57.801  |proj g|=       0.27715
-#> At iterate    14  f =       57.761  |proj g|=       0.16308
-#> At iterate    15  f =       57.736  |proj g|=      0.031602
-#> At iterate    16  f =       57.733  |proj g|=       0.02224
-#> At iterate    17  f =        57.73  |proj g|=       0.01521
-#> At iterate    18  f =       57.728  |proj g|=      0.011744
-#> At iterate    19  f =       57.728  |proj g|=     0.0042265
-#> At iterate    20  f =       57.728  |proj g|=      0.024901
-#> At iterate    21  f =       57.728  |proj g|=      0.010714
-#> At iterate    22  f =       57.728  |proj g|=     0.0020135
-#> At iterate    23  f =       57.728  |proj g|=     0.0016093
-#> At iterate    24  f =       57.728  |proj g|=     0.0012447
-#> At iterate    25  f =       57.728  |proj g|=     0.0012442
-#> At iterate    26  f =       57.728  |proj g|=     0.0028344
-#> At iterate    27  f =       57.728  |proj g|=     0.0054748
-#> At iterate    28  f =       57.728  |proj g|=       0.03389
-#> At iterate    29  f =       57.728  |proj g|=      0.014418
-#> At iterate    30  f =       57.727  |proj g|=      0.021228
-#> At iterate    31  f =       57.725  |proj g|=      0.072795
-#> At iterate    32  f =       57.721  |proj g|=       0.14126
-#> At iterate    33  f =       57.713  |proj g|=          0.22
-#> At iterate    34  f =       57.696  |proj g|=        0.2928
-#> At iterate    35  f =       57.668  |proj g|=       0.24473
-#> At iterate    36  f =       57.645  |proj g|=       0.47784
-#> At iterate    37  f =       57.568  |proj g|=       0.17836
-#> At iterate    38  f =       57.536  |proj g|=      0.057029
-#> At iterate    39  f =       57.527  |proj g|=      0.020982
-#> At iterate    40  f =       57.527  |proj g|=      0.032198
-#> At iterate    41  f =       57.527  |proj g|=     0.0015031
-#> At iterate    42  f =       57.527  |proj g|=     0.0002306
-#> At iterate    43  f =       57.527  |proj g|=    0.00010318
+#> At iterate     0  f=        59.07  |proj g|=       1.5851
+#> At iterate     1  f =        58.47  |proj g|=        1.4468
+#> At iterate     2  f =       57.682  |proj g|=        1.1083
+#> At iterate     3  f =        57.31  |proj g|=        1.4804
+#> At iterate     4  f =       57.102  |proj g|=       0.22804
+#> At iterate     5  f =       57.072  |proj g|=       0.12852
+#> At iterate     6  f =       57.023  |proj g|=      0.092505
+#> At iterate     7  f =       56.993  |proj g|=      0.082785
+#> At iterate     8  f =       56.942  |proj g|=      0.078875
+#> At iterate     9  f =       56.935  |proj g|=        0.3505
+#> At iterate    10  f =       56.925  |proj g|=      0.075868
+#> At iterate    11  f =       56.914  |proj g|=      0.071404
+#> At iterate    12  f =       56.904  |proj g|=      0.065766
+#> At iterate    13  f =       56.874  |proj g|=      0.056692
+#> At iterate    14  f =       56.843  |proj g|=         0.183
+#> At iterate    15  f =       56.834  |proj g|=      0.069327
+#> At iterate    16  f =       56.816  |proj g|=      0.079876
+#> At iterate    17  f =       56.791  |proj g|=       0.17252
+#> At iterate    18  f =       56.741  |proj g|=       0.23101
+#> At iterate    19  f =         56.7  |proj g|=      0.078292
+#> At iterate    20  f =       56.699  |proj g|=       0.42973
+#> At iterate    21  f =       56.692  |proj g|=           0.1
+#> At iterate    22  f =       56.692  |proj g|=      0.020136
+#> At iterate    23  f =       56.692  |proj g|=      0.019801
+#> At iterate    24  f =       56.691  |proj g|=      0.016019
+#> At iterate    25  f =       56.691  |proj g|=      0.012699
+#> At iterate    26  f =        56.69  |proj g|=     0.0086906
+#> At iterate    27  f =        56.69  |proj g|=      0.020358
+#> At iterate    28  f =        56.69  |proj g|=     0.0095171
+#> At iterate    29  f =        56.69  |proj g|=     0.0014117
+#> At iterate    30  f =        56.69  |proj g|=     0.0011036
+#> At iterate    31  f =        56.69  |proj g|=     0.0007854
+#> At iterate    32  f =        56.69  |proj g|=    0.00059486
+#> At iterate    33  f =        56.69  |proj g|=    0.00059486
+#> At iterate    34  f =        56.69  |proj g|=     0.0041266
+#> At iterate    35  f =        56.69  |proj g|=     0.0029411
+#> At iterate    36  f =        56.69  |proj g|=     0.0039306
+#> At iterate    37  f =        56.69  |proj g|=     0.0052101
+#> At iterate    38  f =        56.69  |proj g|=      0.005922
+#> At iterate    39  f =       56.689  |proj g|=      0.042845
+#> At iterate    40  f =       56.689  |proj g|=      0.037171
+#> At iterate    41  f =       56.688  |proj g|=       0.20109
+#> At iterate    42  f =       56.685  |proj g|=      0.068051
+#> At iterate    43  f =       56.682  |proj g|=      0.052802
+#> At iterate    44  f =        56.68  |proj g|=      0.077905
+#> At iterate    45  f =       56.674  |proj g|=       0.11328
+#> At iterate    46  f =       56.662  |proj g|=        0.3624
+#> At iterate    47  f =        56.64  |proj g|=       0.13956
+#> At iterate    48  f =       56.631  |proj g|=       0.11137
+#> At iterate    49  f =       56.623  |proj g|=      0.082252
+#> At iterate    50  f =       56.619  |proj g|=       0.41233
+#> At iterate    51  f =       56.611  |proj g|=      0.096519
+#> At iterate    52  f =       56.609  |proj g|=      0.057431
+#> At iterate    53  f =       56.609  |proj g|=      0.078522
+#> At iterate    54  f =       56.607  |proj g|=       0.11328
+#> At iterate    55  f =       56.606  |proj g|=      0.026921
+#> At iterate    56  f =       56.606  |proj g|=     0.0044438
+#> At iterate    57  f =       56.606  |proj g|=     0.0020148
+#> At iterate    58  f =       56.606  |proj g|=     0.0021817
+#> At iterate    59  f =       56.606  |proj g|=     0.0077769
+#> At iterate    60  f =       56.606  |proj g|=     0.0017723
+#> At iterate    61  f =       56.606  |proj g|=    0.00017898
+#> At iterate    62  f =       56.606  |proj g|=    0.00018164
 #> 
-#> iterations 43
-#> function evaluations 46
-#> segments explored during Cauchy searches 43
+#> iterations 62
+#> function evaluations 68
+#> segments explored during Cauchy searches 63
 #> BFGS updates skipped 0
-#> active bounds at final generalized Cauchy point 5
-#> norm of the final projected gradient 0.000103179
-#> final function value 57.5268
+#> active bounds at final generalized Cauchy point 4
+#> norm of the final projected gradient 0.000181643
+#> final function value 56.6056
 #> 
-#> F = 57.5268
-#> final  value 57.526779 
+#> F = 56.6056
+#> final  value 56.605601 
 #> converged
 
 # Print the model
@@ -299,26 +318,26 @@ print(learner$model)
 #> 
 #> Trend  coeff.:
 #>                Estimate
-#>  (Intercept)    21.4124
+#>  (Intercept)    20.9518
 #> 
 #> Covar. type  : matern5_2 
 #> Covar. coeff.:
 #>                Estimate
-#>    theta(am)     2.0000
+#>    theta(am)     1.3090
 #>  theta(carb)    14.0000
 #>   theta(cyl)     8.0000
 #>  theta(disp)   801.8000
-#>  theta(drat)     1.0159
-#>  theta(gear)     2.3302
-#>    theta(hp)   472.6205
-#>  theta(qsec)     1.4230
+#>  theta(drat)     2.3370
+#>  theta(gear)     2.3296
+#>    theta(hp)   565.1725
+#>  theta(qsec)     1.1729
 #>    theta(vs)     2.0000
-#>    theta(wt)     2.6510
+#>    theta(wt)     2.4287
 #> 
-#> Variance estimate: 42.09598
+#> Variance estimate: 41.95229
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -326,5 +345,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 8.151569 
+#> 4.053721 
 ```

@@ -358,11 +358,22 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-if (requireNamespace("xgboost", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("regr.xgboost")
 print(learner)
+#> 
+#> ── <LearnerRegrXgboost> (regr.xgboost): Extreme Gradient Boosting ──────────────
+#> • Model: -
+#> • Parameters: nrounds=1000, nthread=1, verbose=0, verbosity=0,
+#> use_pred_offset=TRUE
+#> • Validate: NULL
+#> • Packages: mlr3, mlr3learners, and xgboost
+#> • Predict Types: [response]
+#> • Feature Types: logical, integer, and numeric
+#> • Encapsulation: none (fallback: -)
+#> • Properties: hotstart_forward, importance, internal_tuning, missings, offset,
+#> validation, and weights
+#> • Other settings: use_weights = 'use'
 
 # Define a Task
 task = tsk("mtcars")
@@ -373,37 +384,47 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 
-# print the model
+# Print the model
 print(learner$model)
+#> ##### xgb.Booster
+#> call:
+#>   xgboost::xgb.train(params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)], 
+#>     data = xgb_data, nrounds = pv$nrounds, evals = pv$evals, 
+#>     custom_metric = pv$custom_metric, verbose = pv$verbose, print_every_n = pv$print_every_n, 
+#>     early_stopping_rounds = pv$early_stopping_rounds, maximize = pv$maximize, 
+#>     save_period = pv$save_period, save_name = pv$save_name, callbacks = pv$callbacks %??% 
+#>         list())
+#> # of features: 10 
+#> # of rounds:  1000 
 
-# importance method
-if("importance" %in% learner$properties) print(learner$importance)
+# Importance method
+if ("importance" %in% learner$properties) print(learner$importance())
+#>           wt          cyl         disp           hp         qsec         carb 
+#> 7.950221e-01 1.201062e-01 4.794340e-02 2.802553e-02 5.570186e-03 1.650137e-03 
+#>           am         drat         gear 
+#> 1.273202e-03 4.092488e-04 9.657912e-10 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
-} # }
+#> regr.mse 
+#>  10.3963 
 
-if (FALSE) { # \dontrun{
-# Train learner with early stopping on spam data set
-task = tsk("mtcars")
-
-# use 30 percent for validation
-# Set early stopping parameter
-learner = lrn("regr.xgboost",
-  nrounds = 100,
-  early_stopping_rounds = 10,
-  validate = 0.3
-)
+# Early stopping
+learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)
 
 # Train learner with early stopping
 learner$train(task)
 
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
+#> $nrounds
+#> [1] 16
+#> 
 learner$internal_valid_scores
-} # }
+#> $rmse
+#> [1] 3.030325
+#> 
 ```

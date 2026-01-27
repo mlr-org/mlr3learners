@@ -266,7 +266,7 @@ print(learner$model)
 #> Residual Deviance: 8.973e-09     AIC: 122
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

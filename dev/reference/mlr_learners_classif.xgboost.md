@@ -351,11 +351,22 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-if (requireNamespace("xgboost", quietly = TRUE)) {
 # Define the Learner and set parameter values
 learner = lrn("classif.xgboost")
 print(learner)
+#> 
+#> ── <LearnerClassifXgboost> (classif.xgboost): Extreme Gradient Boosting ────────
+#> • Model: -
+#> • Parameters: nrounds=1000, nthread=1, verbose=0, verbosity=0,
+#> use_pred_offset=TRUE
+#> • Validate: NULL
+#> • Packages: mlr3, mlr3learners, and xgboost
+#> • Predict Types: [response] and prob
+#> • Feature Types: logical, integer, and numeric
+#> • Encapsulation: none (fallback: -)
+#> • Properties: hotstart_forward, importance, internal_tuning, missings,
+#> multiclass, offset, twoclass, validation, and weights
+#> • Other settings: use_weights = 'use'
 
 # Define a Task
 task = tsk("sonar")
@@ -366,37 +377,59 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 
-# print the model
+# Print the model
 print(learner$model)
+#> ##### xgb.Booster
+#> call:
+#>   xgboost::xgb.train(params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)], 
+#>     data = xgb_data, nrounds = pv$nrounds, evals = pv$evals, 
+#>     custom_metric = pv$custom_metric, verbose = pv$verbose, print_every_n = pv$print_every_n, 
+#>     early_stopping_rounds = pv$early_stopping_rounds, maximize = pv$maximize, 
+#>     save_period = pv$save_period, save_name = pv$save_name, callbacks = pv$callbacks %??% 
+#>         list())
+#> # of features: 60 
+#> # of rounds:  1000 
 
-# importance method
-if("importance" %in% learner$properties) print(learner$importance)
+# Importance method
+if ("importance" %in% learner$properties) print(learner$importance())
+#>          V12          V52          V45          V20          V48          V36 
+#> 0.1913429724 0.1156073538 0.0754178506 0.0727729692 0.0705704052 0.0649181658 
+#>          V11          V23          V49          V44          V47          V37 
+#> 0.0511647632 0.0342193616 0.0322207985 0.0284559922 0.0269096965 0.0199268940 
+#>          V31          V28          V25          V51          V43          V21 
+#> 0.0189730382 0.0185971956 0.0169041089 0.0162353892 0.0125918171 0.0120586522 
+#>           V9          V15           V5          V24          V34           V4 
+#> 0.0104133960 0.0092412054 0.0090557387 0.0083255828 0.0079496959 0.0071776699 
+#>          V40          V46          V10          V55          V38          V17 
+#> 0.0070807163 0.0070548352 0.0070059491 0.0065617249 0.0061949628 0.0060334511 
+#>          V32          V53          V54          V60          V59          V50 
+#> 0.0058413994 0.0041317725 0.0033295236 0.0032392012 0.0026154487 0.0021014714 
+#>           V8          V39          V33          V29          V27          V18 
+#> 0.0015051329 0.0013138548 0.0011376653 0.0011284622 0.0006982279 0.0006765504 
+#>          V57          V58           V1 
+#> 0.0005266029 0.0004945725 0.0002777623 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
-} # }
+#> classif.ce 
+#>  0.2028986 
 
-if (FALSE) { # \dontrun{
-# Train learner with early stopping on spam data set
-task = tsk("spam")
-
-# use 30 percent for validation
-# Set early stopping parameter
-learner = lrn("classif.xgboost",
-  nrounds = 100,
-  early_stopping_rounds = 10,
-  validate = 0.3
-)
+# Early stopping
+learner = lrn("classif.xgboost", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)
 
 # Train learner with early stopping
 learner$train(task)
 
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
+#> $nrounds
+#> [1] 32
+#> 
 learner$internal_valid_scores
-} # }
+#> $logloss
+#> [1] 0.3309164
+#> 
 ```

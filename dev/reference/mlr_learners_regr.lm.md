@@ -220,13 +220,13 @@ print(learner$model)
 #> 
 #> Coefficients:
 #> (Intercept)           am         carb          cyl         disp         drat  
-#>   10.337625     4.732097    -0.034816     0.215756     0.005722     0.737139  
+#>    -3.79542      0.71203     -0.82496      0.84213      0.01318      1.79127  
 #>        gear           hp         qsec           vs           wt  
-#>   -0.730979    -0.021468     0.868526     0.560087    -2.376125  
+#>     3.15780     -0.01510      0.95526     -0.15189     -4.78057  
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -234,5 +234,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 9.640261 
+#> 12.23695 
 ```

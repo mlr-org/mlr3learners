@@ -392,7 +392,7 @@ print(learner$model)
 #> 100 49 99.84 0.000022
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

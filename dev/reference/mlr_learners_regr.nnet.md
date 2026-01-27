@@ -210,8 +210,8 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 #> # weights:  37
-#> initial  value 9370.049674 
-#> final  value 735.418095 
+#> initial  value 10126.435371 
+#> final  value 671.309524 
 #> converged
 
 # Print the model
@@ -222,7 +222,7 @@ print(learner$model)
 #> options were - linear output units 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -230,5 +230,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 36.19762 
+#> 44.95085 
 ```

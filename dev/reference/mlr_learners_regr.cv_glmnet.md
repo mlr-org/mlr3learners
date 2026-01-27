@@ -270,11 +270,11 @@ print(learner$model)
 #> Measure: Mean-Squared Error 
 #> 
 #>     Lambda Index Measure    SE Nonzero
-#> min 0.5715    26   8.141 2.396       5
-#> 1se 1.7452    14  10.501 4.100       3
+#> min 0.5398    25    8.24 3.179       4
+#> 1se 1.6484    13   11.17 4.759       2
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -282,5 +282,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 4.397693 
+#> 11.86383 
 ```

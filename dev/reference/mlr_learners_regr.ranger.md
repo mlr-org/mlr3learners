@@ -75,6 +75,7 @@ or with the associated sugar function
 | sample.fraction              | numeric   | \-       |                                                                   | \\\[0, 1\]\\          |
 | save.memory                  | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
 | scale.permutation.importance | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
+| local.importance             | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
 | se.method                    | character | infjack  | jack, infjack, ensemble_standard_deviation, law_of_total_variance | \-                    |
 | sigma2.threshold             | numeric   | 0.01     |                                                                   | \\(-\infty, \infty)\\ |
 | seed                         | integer   | NULL     |                                                                   | \\(-\infty, \infty)\\ |
@@ -294,11 +295,12 @@ The objects of this class are cloneable with this method.
 ``` r
 # Define the Learner and set parameter values
 learner = lrn("regr.ranger")
+learner$param_set$set_values(importance = "permutation")
 print(learner)
 #> 
 #> ── <LearnerRegrRanger> (regr.ranger): Random Forest ────────────────────────────
 #> • Model: -
-#> • Parameters: num.threads=1, sigma2.threshold=0.01
+#> • Parameters: importance=permutation, num.threads=1, sigma2.threshold=0.01
 #> • Packages: mlr3, mlr3learners, and ranger
 #> • Predict Types: [response], se, and quantiles
 #> • Feature Types: logical, integer, numeric, character, factor, and ordered
@@ -322,7 +324,7 @@ print(learner$model)
 #> Ranger result
 #> 
 #> Call:
-#>  ranger::ranger(dependent.variable.name = task$target_names, data = data,      num.threads = 1L) 
+#>  ranger::ranger(dependent.variable.name = task$target_names, data = data,      importance = "permutation", num.threads = 1L) 
 #> 
 #> Type:                             Regression 
 #> Number of trees:                  500 
@@ -330,18 +332,18 @@ print(learner$model)
 #> Number of independent variables:  10 
 #> Mtry:                             3 
 #> Target node size:                 5 
-#> Variable importance mode:         none 
+#> Variable importance mode:         permutation 
 #> Splitrule:                        variance 
-#> OOB prediction error (MSE):       8.593097 
-#> R squared (OOB):                  0.8063534 
+#> OOB prediction error (MSE):       5.489741 
+#> R squared (OOB):                  0.8257944 
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
-#> function () 
-#> .__LearnerRegrRanger__importance(self = self, private = private, 
-#>     super = super)
-#> <environment: 0x555e727a9760>
+print(learner$importance())
+#>        cyl       disp         wt         hp       carb         am       drat 
+#> 9.01567530 7.20446366 6.40331573 5.62457522 1.10778727 0.56593264 0.52324113 
+#>         vs       gear       qsec 
+#> 0.30713582 0.30088234 0.02006789 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -349,5 +351,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 4.013859 
+#> 11.41103 
 ```

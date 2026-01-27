@@ -282,11 +282,22 @@ The fitted model. Only available after <code>$train()</code> has been called.</p
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"xgboost"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.xgboost"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerClassifXgboost&gt;</span><span style="font-weight: bold;"> (classif.xgboost): Extreme Gradient Boosting</span> <span style="color: #00BBBB;">────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: nrounds=1000, nthread=1, verbose=0, verbosity=0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> use_pred_offset=TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Validate: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">xgboost</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response] and prob</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, and numeric</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: hotstart_forward, importance, internal_tuning, missings,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> multiclass, offset, twoclass, validation, and weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define a Task</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"sonar"</span><span class="op">)</span></span></span>
@@ -297,39 +308,61 @@ The fitted model. Only available after <code>$train()</code> has been called.</p
 <span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="co"># Print the model</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xgboost::xgb.train(params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)], </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     data = xgb_data, nrounds = pv$nrounds, evals = pv$evals, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     custom_metric = pv$custom_metric, verbose = pv$verbose, print_every_n = pv$print_every_n, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     early_stopping_rounds = pv$early_stopping_rounds, maximize = pv$maximize, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     save_period = pv$save_period, save_name = pv$save_name, callbacks = pv$callbacks %??% </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         list())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of features: 60 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of rounds:  1000 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># importance method</span></span></span>
-<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V12          V52          V45          V20          V48          V36 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.1913429724 0.1156073538 0.0754178506 0.0727729692 0.0705704052 0.0649181658 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V11          V23          V49          V44          V47          V37 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0511647632 0.0342193616 0.0322207985 0.0284559922 0.0269096965 0.0199268940 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V31          V28          V25          V51          V43          V21 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0189730382 0.0185971956 0.0169041089 0.0162353892 0.0125918171 0.0120586522 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V9          V15           V5          V24          V34           V4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0104133960 0.0092412054 0.0090557387 0.0083255828 0.0079496959 0.0071776699 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V40          V46          V10          V55          V38          V17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0070807163 0.0070548352 0.0070059491 0.0065617249 0.0061949628 0.0060334511 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V32          V53          V54          V60          V59          V50 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0058413994 0.0041317725 0.0033295236 0.0032392012 0.0026154487 0.0021014714 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           V8          V39          V33          V29          V27          V18 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0015051329 0.0013138548 0.0011376653 0.0011284622 0.0006982279 0.0006765504 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V57          V58           V1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0005266029 0.0004945725 0.0002777623 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2028986 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Train learner with early stopping on spam data set</span></span></span>
-<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"spam"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># use 30 percent for validation</span></span></span>
-<span class="r-in"><span><span class="co"># Set early stopping parameter</span></span></span>
-<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.xgboost"</span>,</span></span>
-<span class="r-in"><span>  nrounds <span class="op">=</span> <span class="fl">100</span>,</span></span>
-<span class="r-in"><span>  early_stopping_rounds <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>  validate <span class="op">=</span> <span class="fl">0.3</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Early stopping</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.xgboost"</span>, nrounds <span class="op">=</span> <span class="fl">100</span>, early_stopping_rounds <span class="op">=</span> <span class="fl">10</span>, validate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Train learner with early stopping</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Inspect optimal nrounds and validation performance</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_tuned_values</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $nrounds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_valid_scores</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $logloss</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3309164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

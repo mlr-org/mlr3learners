@@ -206,11 +206,11 @@ print(learner$model)
 #>     epsilon:  0.1 
 #> 
 #> 
-#> Number of Support Vectors:  20
+#> Number of Support Vectors:  17
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -218,5 +218,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 11.54447 
+#> 12.12744 
 ```

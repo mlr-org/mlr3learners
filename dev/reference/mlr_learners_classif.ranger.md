@@ -79,6 +79,7 @@ or with the associated sugar function
 | sample.fraction              | numeric   | \-       |                                                 | \\\[0, 1\]\\          |
 | save.memory                  | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
 | scale.permutation.importance | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
+| local.importance             | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
 | seed                         | integer   | NULL     |                                                 | \\(-\infty, \infty)\\ |
 | split.select.weights         | untyped   | NULL     |                                                 | \-                    |
 | splitrule                    | character | gini     | gini, extratrees, hellinger                     | \-                    |
@@ -262,11 +263,12 @@ The objects of this class are cloneable with this method.
 ``` r
 # Define the Learner and set parameter values
 learner = lrn("classif.ranger")
+learner$param_set$set_values(importance = "permutation")
 print(learner)
 #> 
 #> ── <LearnerClassifRanger> (classif.ranger): Random Forest ──────────────────────
 #> • Model: -
-#> • Parameters: num.threads=1
+#> • Parameters: importance=permutation, num.threads=1
 #> • Packages: mlr3, mlr3learners, and ranger
 #> • Predict Types: [response] and prob
 #> • Feature Types: logical, integer, numeric, character, factor, and ordered
@@ -289,7 +291,7 @@ print(learner$model)
 #> Ranger result
 #> 
 #> Call:
-#>  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == "prob", num.threads = 1L) 
+#>  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == "prob", importance = "permutation",      num.threads = 1L) 
 #> 
 #> Type:                             Classification 
 #> Number of trees:                  500 
@@ -297,16 +299,36 @@ print(learner$model)
 #> Number of independent variables:  60 
 #> Mtry:                             7 
 #> Target node size:                 1 
-#> Variable importance mode:         none 
+#> Variable importance mode:         permutation 
 #> Splitrule:                        gini 
 #> OOB prediction error:             18.71 % 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
-#> function () 
-#> .__LearnerClassifRanger__importance(self = self, private = private, 
-#>     super = super)
-#> <environment: 0x555e7738d6f0>
+print(learner$importance())
+#>           V11           V12            V9           V48           V10 
+#>  2.907732e-02  2.081168e-02  1.416521e-02  1.013412e-02  9.932664e-03 
+#>           V49           V36           V45           V37           V46 
+#>  9.218636e-03  7.653640e-03  7.491513e-03  6.358383e-03  5.262950e-03 
+#>           V13            V5            V6           V28           V47 
+#>  4.958936e-03  4.894211e-03  4.724120e-03  4.619224e-03  4.013001e-03 
+#>           V18           V31           V52            V7           V21 
+#>  3.949882e-03  3.902219e-03  3.875056e-03  3.814926e-03  3.583567e-03 
+#>            V8           V20           V27            V4           V17 
+#>  3.404986e-03  3.207793e-03  2.849060e-03  2.683960e-03  2.550693e-03 
+#>           V23           V33           V32           V35           V39 
+#>  2.433713e-03  2.352639e-03  2.339197e-03  2.055994e-03  1.730373e-03 
+#>           V43           V22            V2           V16           V19 
+#>  1.703165e-03  1.532948e-03  1.523019e-03  1.436040e-03  1.301010e-03 
+#>           V15           V42           V44           V51           V25 
+#>  1.252977e-03  1.247813e-03  1.242833e-03  1.235211e-03  1.210964e-03 
+#>           V34           V24           V30           V55            V1 
+#>  1.164864e-03  1.029063e-03  9.988362e-04  9.534820e-04  9.399139e-04 
+#>           V38           V53           V59           V60           V41 
+#>  9.338938e-04  7.314214e-04  5.471997e-04  5.172327e-04  4.846357e-04 
+#>           V14           V26            V3           V29           V56 
+#>  4.457893e-04  4.084666e-04  3.791453e-04  3.259506e-04  2.045161e-04 
+#>           V54           V58           V57           V40           V50 
+#>  5.106627e-05 -6.653969e-05 -1.476340e-04 -3.734763e-04 -8.806703e-04 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
