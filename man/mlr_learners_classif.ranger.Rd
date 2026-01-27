@@ -92,7 +92,7 @@ lrn("classif.ranger")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.ranger")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.ranger")
-learner$param_set$values = list(importance = "permutation")
+learner$param_set$set_values(importance = "permutation")
 print(learner)
 
 # Define a Task
@@ -108,7 +108,7 @@ learner$train(task, row_ids = ids$train)
 print(learner$model)
 
 # Importance method
-if ("importance" \%in\% learner$properties) print(learner$importance())
+print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

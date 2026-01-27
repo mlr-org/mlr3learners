@@ -5,7 +5,7 @@ task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 #' <%= sprintf("@examplesIf mlr3misc::require_namespaces(lrn(\"%s\")$packages, quietly = TRUE)", id) %>
 #' # Define the Learner and set parameter values
 #' <%= sprintf("learner = lrn(\"%s\")", id) %>
-#' learner$param_set$values = list(importance = "permutation")
+#' learner$param_set$set_values(importance = "permutation")
 #' print(learner)
 #'
 #' # Define a Task
@@ -21,7 +21,7 @@ task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 #' print(learner$model)
 #'
 #' # Importance method
-#' if ("importance" %in% learner$properties) print(learner$importance())
+#' print(learner$importance())
 #'
 #' # Make predictions for the test rows
 #' predictions = learner$predict(task, row_ids = ids$test)
