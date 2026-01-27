@@ -4,7 +4,7 @@
 #'
 #' @description
 #' Classification via logistic regression.
-#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)` with `link` either as `"logit"` or `"probit"``.
+#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)` with `link` either as `"logit"` or `"probit"`.
 #'
 #' @section Internal Encoding:
 #' Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
