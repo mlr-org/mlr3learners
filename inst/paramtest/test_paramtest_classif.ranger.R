@@ -10,7 +10,6 @@ test_that("classif.ranger", {
     "data", # handled via mlr3
     "probability", # handled via mlr3
     "case.weights", # handled via mlr3
-    "local.importance", # handled via importance() method
     "class.weights", # handled via mlr3
     "inbag", # handled via mlr3 stratification
     "quantreg", # regression only
