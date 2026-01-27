@@ -6,7 +6,7 @@
 \title{Logistic Regression Classification Learner}
 \description{
 Classification via logistic regression.
-Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \verb{binomial(link = <link>)} with \code{link} either as \code{"logit"} or `"probit"``.
+Calls \code{\link[stats:glm]{stats::glm()}} with \code{family} set to \verb{binomial(link = <link>)} with \code{link} either as \code{"logit"} (default) or \code{"probit"}.
 }
 \section{Internal Encoding}{
 
@@ -24,13 +24,6 @@ as the first factor level.
 \item Adjusted default: \code{FALSE}.
 \item Reason for change: Save some memory.
 }
-}
-}
-
-\section{Custom mlr3 parameters}{
-
-\itemize{
-\item \code{link}: \code{"logit"} as default.
 }
 }
 
