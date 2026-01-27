@@ -79,6 +79,7 @@ lrn("classif.ranger")
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   local.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    split.select.weights \tab untyped \tab NULL \tab  \tab - \cr
    splitrule \tab character \tab gini \tab gini, extratrees, hellinger \tab - \cr
@@ -91,6 +92,7 @@ lrn("classif.ranger")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.ranger")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.ranger")
+learner$param_set$set_values(importance = "permutation")
 print(learner)
 
 # Define a Task
@@ -106,7 +108,7 @@ learner$train(task, row_ids = ids$train)
 print(learner$model)
 
 # Importance method
-if ("importance" \%in\% learner$properties) print(learner$importance)
+print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

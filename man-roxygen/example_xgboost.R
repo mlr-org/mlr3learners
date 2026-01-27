@@ -27,3 +27,14 @@ task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 #'
 #' # Score the predictions
 #' predictions$score()
+#'
+#' # Early stopping
+#' <%= sprintf("learner = lrn(\"%s\", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)", id) %>
+#'
+#' # Train learner with early stopping
+#' learner$train(task)
+#'
+#' # Inspect optimal nrounds and validation performance
+#' learner$internal_tuned_values
+#' learner$internal_valid_scores
+

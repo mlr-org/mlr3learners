@@ -28,7 +28,7 @@
 #'
 #' @export
 #' @template seealso_learner
-#' @template example
+#' @template example_ranger
 LearnerClassifRanger = R6Class("LearnerClassifRanger",
   inherit = LearnerClassif,
 
@@ -69,6 +69,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         sample.fraction              = p_dbl(0L, 1L, tags = "train"),
         save.memory                  = p_lgl(default = FALSE, tags = "train"),
         scale.permutation.importance = p_lgl(default = FALSE, tags = "train", depends = quote(importance == "permutation")),
+        local.importance             = p_lgl(default = FALSE, tags = "train", depends = quote(importance == "permutation")),
         seed                         = p_int(default = NULL, special_vals = list(NULL), tags = c("train", "predict")),
         split.select.weights         = p_uty(default = NULL, tags = "train"),
         splitrule                    = p_fct(c("gini", "extratrees", "hellinger"), default = "gini", tags = "train"),

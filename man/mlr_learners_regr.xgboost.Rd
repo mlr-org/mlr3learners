@@ -163,8 +163,7 @@ The lightgbm learner has a default of 1000, so we use the same here.
 }
 
 \examples{
-\dontrun{
-if (requireNamespace("xgboost", quietly = TRUE)) {
+\dontshow{if (mlr3misc::require_namespaces(lrn("regr.xgboost")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.xgboost")
 print(learner)
@@ -178,31 +177,20 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 
-# print the model
+# Print the model
 print(learner$model)
 
-# importance method
-if("importance" \%in\% learner$properties) print(learner$importance)
+# Importance method
+if ("importance" \%in\% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
-}
 
-\dontrun{
-# Train learner with early stopping on spam data set
-task = tsk("mtcars")
-
-# use 30 percent for validation
-# Set early stopping parameter
-learner = lrn("regr.xgboost",
-  nrounds = 100,
-  early_stopping_rounds = 10,
-  validate = 0.3
-)
+# Early stopping
+learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)
 
 # Train learner with early stopping
 learner$train(task)
@@ -210,7 +198,7 @@ learner$train(task)
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
 learner$internal_valid_scores
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 Chen, Tianqi, Guestrin, Carlos (2016).
