@@ -38,3 +38,8 @@ Authors:
 
 - John Zobolas <bblodfon@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-3609-8674))
+
+Other contributors:
+
+- Alexander Winterstetter <alexanderwinterstetter@gmail.com>
+  \[contributor\]

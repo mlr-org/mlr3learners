@@ -15,6 +15,8 @@
 
 - **John Zobolas**. Author. [](https://orcid.org/0000-0002-3609-8674)
 
+- **Alexander Winterstetter**. Contributor.
+
 ## Citation
 
 Source:

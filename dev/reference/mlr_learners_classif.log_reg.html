@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Logistic Regression Classification Learner — mlr_learners_classif.log_reg"><meta name="description" content='Classification via logistic regression.
-Calls stats::glm() with family set to "binomial".'><meta property="og:description" content='Classification via logistic regression.
-Calls stats::glm() with family set to "binomial".'><meta name="robots" content="noindex"></head><body>
+Calls stats::glm() with family set to binomial(link = &amp;lt;link&amp;gt;) with link either as "logit" (default) or "probit".'><meta property="og:description" content='Classification via logistic regression.
+Calls stats::glm() with family set to binomial(link = &amp;lt;link&amp;gt;) with link either as "logit" (default) or "probit".'><meta name="robots" content="noindex"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -53,7 +53,7 @@ Calls stats::glm() with family set to "binomial".'><meta name="robots" content="
 
     <div class="ref-description section level2">
     <p>Classification via logistic regression.
-Calls <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code> with <code>family</code> set to <code>"binomial"</code>.</p>
+Calls <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code> with <code>family</code> set to <code>binomial(link = &lt;link&gt;)</code> with <code>link</code> either as <code>"logit"</code> (default) or <code>"probit"</code>.</p>
     </div>
 
 
@@ -104,7 +104,7 @@ Otherwise, if the user sets <code>use_pred_offset = FALSE</code>, a zero offset 
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
 
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>use_pred_offset</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>dispersion</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>epsilon</td><td>numeric</td><td>1e-08</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>etastart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>link</td><td>character</td><td>-</td><td>logit, probit</td><td>-</td></tr><tr><td>maxit</td><td>numeric</td><td>25</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>model</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>mustart</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>singular.ok</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>start</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>trace</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>x</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>y</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>use_pred_offset</td><td>logical</td><td>-</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="contrasts">Contrasts<a class="anchor" aria-label="anchor" href="#contrasts"></a></h2>
 
@@ -210,7 +210,7 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerClassifLogReg&gt;</span><span style="font-weight: bold;"> (classif.log_reg): Logistic Regression</span> <span style="color: #00BBBB;">───────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: use_pred_offset=TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: link=logit, use_pred_offset=TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">stats</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response] and prob</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, numeric, character, factor, and ordered</span>
@@ -232,8 +232,8 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Print the model</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = form, family = "binomial", data = data, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     model = FALSE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  stats::glm(formula = form, family = stats::binomial(link = link), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     data = data, model = FALSE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)           V1          V10          V11          V12          V13  </span>

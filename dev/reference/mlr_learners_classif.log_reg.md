@@ -2,7 +2,8 @@
 
 Classification via logistic regression. Calls
 [`stats::glm()`](https://rdrr.io/r/stats/glm.html) with `family` set to
-`"binomial"`.
+`binomial(link = <link>)` with `link` either as `"logit"` (default) or
+`"probit"`.
 
 ## Internal Encoding
 
@@ -60,21 +61,22 @@ or with the associated sugar function
 
 ## Parameters
 
-|                 |         |         |             |                       |
-|-----------------|---------|---------|-------------|-----------------------|
-| Id              | Type    | Default | Levels      | Range                 |
-| dispersion      | untyped | NULL    |             | \-                    |
-| epsilon         | numeric | 1e-08   |             | \\(-\infty, \infty)\\ |
-| etastart        | untyped | \-      |             | \-                    |
-| maxit           | numeric | 25      |             | \\(-\infty, \infty)\\ |
-| model           | logical | TRUE    | TRUE, FALSE | \-                    |
-| mustart         | untyped | \-      |             | \-                    |
-| singular.ok     | logical | TRUE    | TRUE, FALSE | \-                    |
-| start           | untyped | NULL    |             | \-                    |
-| trace           | logical | FALSE   | TRUE, FALSE | \-                    |
-| x               | logical | FALSE   | TRUE, FALSE | \-                    |
-| y               | logical | TRUE    | TRUE, FALSE | \-                    |
-| use_pred_offset | logical | TRUE    | TRUE, FALSE | \-                    |
+|                 |           |         |               |                       |
+|-----------------|-----------|---------|---------------|-----------------------|
+| Id              | Type      | Default | Levels        | Range                 |
+| dispersion      | untyped   | NULL    |               | \-                    |
+| epsilon         | numeric   | 1e-08   |               | \\(-\infty, \infty)\\ |
+| etastart        | untyped   | \-      |               | \-                    |
+| link            | character | \-      | logit, probit | \-                    |
+| maxit           | numeric   | 25      |               | \\(-\infty, \infty)\\ |
+| model           | logical   | TRUE    | TRUE, FALSE   | \-                    |
+| mustart         | untyped   | \-      |               | \-                    |
+| singular.ok     | logical   | TRUE    | TRUE, FALSE   | \-                    |
+| start           | untyped   | NULL    |               | \-                    |
+| trace           | logical   | FALSE   | TRUE, FALSE   | \-                    |
+| x               | logical   | FALSE   | TRUE, FALSE   | \-                    |
+| y               | logical   | TRUE    | TRUE, FALSE   | \-                    |
+| use_pred_offset | logical   | \-      | TRUE, FALSE   | \-                    |
 
 ## Contrasts
 
@@ -212,7 +214,7 @@ print(learner)
 #> 
 #> ── <LearnerClassifLogReg> (classif.log_reg): Logistic Regression ───────────────
 #> • Model: -
-#> • Parameters: use_pred_offset=TRUE
+#> • Parameters: link=logit, use_pred_offset=TRUE
 #> • Packages: mlr3, mlr3learners, and stats
 #> • Predict Types: [response] and prob
 #> • Feature Types: logical, integer, numeric, character, factor, and ordered
@@ -234,8 +236,8 @@ learner$train(task, row_ids = ids$train)
 # Print the model
 print(learner$model)
 #> 
-#> Call:  stats::glm(formula = form, family = "binomial", data = data, 
-#>     model = FALSE)
+#> Call:  stats::glm(formula = form, family = stats::binomial(link = link), 
+#>     data = data, model = FALSE)
 #> 
 #> Coefficients:
 #> (Intercept)           V1          V10          V11          V12          V13  
