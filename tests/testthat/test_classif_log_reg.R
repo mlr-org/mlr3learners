@@ -18,6 +18,14 @@ test_that("class labels are correctly encoded", {
   expect_equal(unname(learner$model$y), rep(1:0, c(97, 111)))
 })
 
+test_that("link hyperparameter works", {
+  task = tsk("sonar")
+  learner = lrn("classif.log_reg", link = "probit")
+
+  suppressWarnings(learner$train(task))
+  expect_equal(learner$model$family$link, "probit")
+})
+
 test_that("offset works", {
   with_seed(7832, {
     data = data.table(x = 1:30, y = stats::rbinom(30, size = 1, prob = 0.5))
