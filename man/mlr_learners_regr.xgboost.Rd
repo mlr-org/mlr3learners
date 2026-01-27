@@ -190,11 +190,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 predictions$score()
 
 # Early stopping
-learner$set_values(
-  nrounds = 100,
-  early_stopping_rounds = 10,
-  validate = 0.3
-)
+learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)
 
 # Train learner with early stopping
 learner$train(task)
