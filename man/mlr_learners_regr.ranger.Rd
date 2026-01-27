@@ -64,6 +64,7 @@ lrn("regr.ranger")
    sample.fraction \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    save.memory \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    scale.permutation.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   local.importance \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    se.method \tab character \tab infjack \tab jack, infjack, ensemble_standard_deviation, law_of_total_variance \tab - \cr
    sigma2.threshold \tab numeric \tab 0.01 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    seed \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
@@ -104,6 +105,9 @@ precedence in that order.
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.ranger")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.ranger")
+
+learner$param_set$values = list(importance = "permutation")
+
 print(learner)
 
 # Define a Task
@@ -119,7 +123,7 @@ learner$train(task, row_ids = ids$train)
 print(learner$model)
 
 # Importance method
-if ("importance" \%in\% learner$properties) print(learner$importance)
+if ("importance" \%in\% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

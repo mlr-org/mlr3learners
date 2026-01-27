@@ -72,6 +72,7 @@ Instead, set the respective hyperparameter or use \CRANpkg{mlr3pipelines} to cre
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.lm")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("regr.lm")
+
 print(learner)
 
 # Define a Task
@@ -87,7 +88,7 @@ learner$train(task, row_ids = ids$train)
 print(learner$model)
 
 # Importance method
-if ("importance" \%in\% learner$properties) print(learner$importance)
+if ("importance" \%in\% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)

@@ -75,6 +75,7 @@ lrn("classif.nnet")
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.nnet")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Define the Learner and set parameter values
 learner = lrn("classif.nnet")
+
 print(learner)
 
 # Define a Task
@@ -90,7 +91,7 @@ learner$train(task, row_ids = ids$train)
 print(learner$model)
 
 # Importance method
-if ("importance" \%in\% learner$properties) print(learner$importance)
+if ("importance" \%in\% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
