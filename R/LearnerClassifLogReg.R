@@ -113,7 +113,7 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
       p = unname(invoke(predict, object = self$model, newdata = newdata, type = "response", .args = pv))
 
       if (self$predict_type == "response") {
-        list(response = ifelse(p < 0.5, lvls[1L], lvls[2L]))
+        list(response = fifelse(p < 0.5, lvls[1L], lvls[2L]))
       } else {
         list(prob = pvec2mat(p, lvls))
       }

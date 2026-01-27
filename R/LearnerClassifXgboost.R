@@ -346,7 +346,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       nlvls = length(lvls)
 
       if (is.null(pv$objective)) {
-        pv$objective = ifelse(nlvls == 2L, "binary:logistic", "multi:softprob")
+        pv$objective = if (nlvls == 2L) "binary:logistic" else "multi:softprob"
       }
 
       pv$base_margin = xgboost_get_base_margin(task, "predict", pv)
