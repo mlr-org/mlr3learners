@@ -145,9 +145,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
         properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward", "internal_tuning", "validation", "offset"),
-        packages = c("mlr3learners", "xgboost"),
-        label = "Extreme Gradient Boosting",
-        man = "mlr3learners::mlr_learners_classif.xgboost"
+        packages = "xgboost"
       )
     },
 
