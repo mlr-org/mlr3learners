@@ -28,7 +28,7 @@ URL: https://mlr3learners.mlr-org.com,
 BugReports: https://github.com/mlr-org/mlr3learners/issues
 Depends:
     mlr3 (>= 1.2.0),
-    R (>= 3.3.0)
+    R (>= 3.4.0)
 Imports:
     checkmate,
     data.table,
