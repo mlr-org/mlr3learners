@@ -14,7 +14,7 @@
 #' While fitting the whole path of `lambda`s would be more efficient, as is done
 #' by default in [glmnet::glmnet()], tuning/selecting the parameter at prediction time
 #' (using parameter `s`) is currently not supported in \CRANpkg{mlr3}
-#' (at least not in efficient manner).
+#' (at least not in an efficient manner).
 #' Tuning the `s` parameter is, therefore, currently discouraged.
 #'
 #' When the data are i.i.d. and efficiency is key, we recommend using the respective
