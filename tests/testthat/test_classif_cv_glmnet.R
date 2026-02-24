@@ -98,3 +98,14 @@ test_that("seed param works", {
   w_wide[seed.name=="null", expect_false(identical(run1, run2))]
   w_wide[seed.name=="one", expect_identical(run1, run2)]
 })
+
+test_that("error for invalid seed param", {
+  task.obj <- mlr3::tsk("sonar")
+  kfoldcv <- mlr3::rsmp("cv")
+  lrn_cvg <- mlr3learners::LearnerClassifCVGlmnet$new()
+  lrn_cvg$param_set$values$seed <- "foo"
+  bgrid <- mlr3::benchmark_grid(task.obj, lrn_cvg, kfoldcv)
+  expect_error({
+    mlr3::benchmark(bgrid, store_models=TRUE)
+  }, "cv_glmnet seed param must be integer or NULL")
+})
