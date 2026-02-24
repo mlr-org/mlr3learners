@@ -59,3 +59,53 @@ test_that("selected_features", {
     character()
   )
 })
+
+test_that("seed param works", {
+  library(data.table)
+  task.obj <- mlr3::tsk("sonar")
+  task.obj$col_roles$feature <- paste0("V", 1:9)#simplify result
+  kfoldcv <- mlr3::rsmp("cv")
+  kfoldcv$param_set$values$folds <- 2
+  set.seed(1)
+  kfoldcv$instantiate(task.obj)
+  seed.list <- list(null=NULL, one=1L)
+  w_dt_list <- list()
+  for(seed.name in names(seed.list)){
+    lrn_cvg <- mlr3learners::LearnerClassifCVGlmnet$new()
+    lrn_cvg$param_set$values$seed <- seed.list[[seed.name]]
+    for(iteration in paste0("run",1:2)){
+      bgrid <- mlr3::benchmark_grid(task.obj, lrn_cvg, kfoldcv)
+      bmr <- mlr3::benchmark(bgrid, store_models=TRUE)
+      score_dt <- bmr$score(mlr3::msr("classif.acc"))
+      for(test.fold in 1:nrow(score_dt)){
+        L <- score_dt$learner[[test.fold]]
+        w <- coef(L$model)
+        nz <- as.logical(w!=0)
+        w_dt_list[[paste(
+          seed.name, iteration, test.fold
+        )]] <- data.table(
+          seed.name, iteration, test.fold,
+          name=rownames(w)[nz], coef=w[nz]
+        )
+      }
+    }
+  }
+  w_dt <- rbindlist(w_dt_list)
+  w_wide <- dcast(
+    w_dt,
+    seed.name + test.fold + name ~ iteration,
+    value.var="coef")
+  w_wide[seed.name=="null", expect_false(identical(run1, run2))]
+  w_wide[seed.name=="one", expect_identical(run1, run2)]
+})
+
+test_that("error for invalid seed param", {
+  task.obj <- mlr3::tsk("sonar")
+  kfoldcv <- mlr3::rsmp("cv")
+  lrn_cvg <- mlr3learners::LearnerClassifCVGlmnet$new()
+  lrn_cvg$param_set$values$seed <- "foo"
+  bgrid <- mlr3::benchmark_grid(task.obj, lrn_cvg, kfoldcv)
+  expect_error({
+    mlr3::benchmark(bgrid, store_models=TRUE)
+  }, "cv_glmnet seed param must be integer or NULL")
+})
