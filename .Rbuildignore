@@ -20,3 +20,4 @@ vignettes/learners/
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 .clangd
+.claude

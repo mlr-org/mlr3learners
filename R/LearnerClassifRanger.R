@@ -156,11 +156,12 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         data = newdata,
         predict.type = "response", .args = pv
       )
+      raw = if (self$predict_raw) prediction
 
       if (self$predict_type == "response") {
-        list(response = prediction$predictions)
+        list(response = prediction$predictions, raw = raw)
       } else {
-        list(prob = prediction$predictions)
+        list(prob = prediction$predictions, raw = raw)
       }
     },
 

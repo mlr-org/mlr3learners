@@ -74,10 +74,12 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
       p = invoke(predict, self$model,
         newdata = newdata,
         probability = (self$predict_type == "prob"), .args = pv)
+      raw = if (self$predict_raw) p
 
       list(
         response = as.character(p),
-        prob = attr(p, "probabilities") # is NULL if not requested during predict
+        prob = attr(p, "probabilities"), # is NULL if not requested during predict
+        raw = raw
       )
     }
   )

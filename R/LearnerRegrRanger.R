@@ -177,19 +177,22 @@ LearnerRegrRanger = R6Class("LearnerRegrRanger",
         prediction_nodes = mlr3misc::invoke(predict, self$model$model, data = newdata, type = "terminalNodes", .args = pv[setdiff(names(pv), "se.method")], predict.all = TRUE)
         storage.mode(prediction_nodes$predictions) = "integer"
         method = if (pv$se.method == "ensemble_standard_deviation") 0 else 1
-        .Call("c_ranger_var", prediction_nodes$predictions, self$model$mu_sigma, method)
+        result = .Call("c_ranger_var", prediction_nodes$predictions, self$model$mu_sigma, method)
+        if (self$predict_raw) result$raw = prediction_nodes
+        result
       } else {
         prediction = mlr3misc::invoke(predict, self$model$model, data = newdata, type = self$predict_type, quantiles = private$.quantiles, .args = pv)
+        raw = if (self$predict_raw) prediction
 
         if (self$predict_type == "quantiles") {
           assert_quantiles(self, quantile_response = TRUE)
           quantiles = prediction$predictions
           setattr(quantiles, "probs", private$.quantiles)
           setattr(quantiles, "response", private$.quantile_response)
-          return(list(quantiles = quantiles))
+          return(list(quantiles = quantiles, raw = raw))
         }
 
-        list(response = prediction$predictions, se = prediction$se)
+        list(response = prediction$predictions, se = prediction$se, raw = raw)
       }
     },
 

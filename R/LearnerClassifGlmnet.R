@@ -131,11 +131,13 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
         response = invoke(predict, self$model,
           newx = newdata, type = "class",
           .args = pv)
-        list(response = drop(response))
+        raw = if (self$predict_raw) response
+        list(response = drop(response), raw = raw)
       } else {
         prob = invoke(predict, self$model,
           newx = newdata, type = "response",
           .args = pv)
+        raw = if (self$predict_raw) prob
 
         if (length(task$class_names) == 2L) {
           # the docs are really not clear here; before we tried to reorder the class
@@ -147,7 +149,7 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
           prob = prob[, , 1L]
         }
 
-        list(prob = prob)
+        list(prob = prob, raw = raw)
       }
     }
   )
