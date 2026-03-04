@@ -111,13 +111,18 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         newdata[, (offset_colname) := if (isTRUE(pv$use_pred_offset)) task$offset$offset else 0]
       }
 
-      p = unname(invoke(predict, object = self$model, newdata = newdata, type = "response", .args = pv))
+      p = invoke(predict, object = self$model, newdata = newdata, type = "response", .args = pv)
+      raw = p
+      p = unname(p)
 
-      if (self$predict_type == "response") {
+      result = if (self$predict_type == "response") {
         list(response = fifelse(p < 0.5, lvls[1L], lvls[2L]))
       } else {
         list(prob = pvec2mat(p, lvls))
       }
+
+      if (self$predict_raw) result$raw = raw
+      result
     }
   )
 )

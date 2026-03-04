@@ -83,11 +83,14 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
         self$state$model$kknn = p
       }
 
-      if (self$predict_type == "response") {
+      result = if (self$predict_type == "response") {
         list(response = p$fitted.values)
       } else {
         list(prob = p$prob)
       }
+
+      if (self$predict_raw) result$raw = p
+      result
     }
   )
 )

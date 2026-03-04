@@ -85,7 +85,9 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
       newdata = ordered_features(task, self)
 
       prediction = invoke(predict, self$model, newdata = newdata, .args = pv)
-      list(response = as.numeric(prediction))
+      result = list(response = as.numeric(prediction))
+      if (self$predict_raw) result$raw = prediction
+      result
     }
   )
 )

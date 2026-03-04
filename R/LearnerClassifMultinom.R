@@ -76,10 +76,13 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pv)
-        list(response = drop(response))
+        raw = response
+        result = list(response = drop(response))
       } else {
         lvls = self$model$lev
-        prob = unname(invoke(predict, self$model, newdata = newdata, type = "probs", .args = pv))
+        prob = invoke(predict, self$model, newdata = newdata, type = "probs", .args = pv)
+        raw = prob
+        prob = unname(prob)
 
         # fix dimensions being dropped for n == 1 (https://github.com/mlr-org/mlr3/issues/883)
         if (task$nrow == 1L) {
@@ -92,8 +95,11 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
           colnames(prob) = lvls
         }
 
-        list(prob = prob)
+        result = list(prob = prob)
       }
+
+      if (self$predict_raw) result$raw = raw
+      result
     }
   )
 )

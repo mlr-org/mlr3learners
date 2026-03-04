@@ -119,8 +119,9 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         .args = remove_named(pv, "jitter"),
         .opts = list(warnPartialMatchArgs = FALSE)
       )
-
-      list(response = p$mean, se = p$sd)
+      result = list(response = p$mean, se = p$sd)
+      if (self$predict_raw) result$raw = p
+      result
     }
   )
 )

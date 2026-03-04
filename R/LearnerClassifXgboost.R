@@ -347,7 +347,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         }
       }
 
-      if (!is.null(response)) {
+      result = if (!is.null(response)) {
         list(response = response)
       } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
@@ -355,6 +355,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       } else {
         list(prob = prob)
       }
+
+      if (self$predict_raw) result$raw = pred
+      result
     },
 
     .hotstart = function(task) {

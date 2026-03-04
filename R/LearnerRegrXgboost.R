@@ -283,7 +283,9 @@ LearnerRegrXgboost = R6Class("LearnerRegrXgboost",
 
       response = invoke(predict, model, newdata = newdata, .args = pv)
 
-      list(response = response)
+      result = list(response = response)
+      if (self$predict_raw) result$raw = response
+      result
     },
 
     .hotstart = function(task) {

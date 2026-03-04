@@ -157,11 +157,14 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         predict.type = "response", .args = pv
       )
 
-      if (self$predict_type == "response") {
+      result = if (self$predict_type == "response") {
         list(response = prediction$predictions)
       } else {
         list(prob = prediction$predictions)
       }
+
+      if (self$predict_raw) result$raw = prediction
+      result
     },
 
     .hotstart = function(task) {
