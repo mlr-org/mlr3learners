@@ -2,6 +2,8 @@
 
 ## mlr3learners (development version)
 
+- feat: All learners now support the `predict_raw` flag to store raw
+  prediction objects from upstream models.
 - fix: using offset during prediction for `xgboost` learners
 - fix: importance in doc examples is now printed correctly
 - feat: add parameter `local.importance` to ranger learners
