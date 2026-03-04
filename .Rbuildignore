@@ -19,4 +19,6 @@ vignettes/learners/
 ^revdep$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
-.clangd
+^.clangd$
+^AGENTS.md$
+^CLAUDE.md$
