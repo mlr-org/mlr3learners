@@ -120,8 +120,9 @@ LearnerRegrCVGlmnet = R6Class("LearnerRegrCVGlmnet",
 
       response = invoke(predict, self$model, newx = newdata,
         type = "response", .args = pv)
-      raw = if (self$predict_raw) response
-      list(response = drop(response), raw = raw)
+      result = list(response = drop(response))
+      if (self$predict_raw) result$raw = response
+      result
     }
   )
 )

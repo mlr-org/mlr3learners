@@ -82,8 +82,9 @@ LearnerRegrKKNN = R6Class("LearnerRegrKKNN",
         self$state$model$kknn = p
       }
 
-      raw = if (self$predict_raw) p
-      list(response = p$fitted.values, raw = raw)
+      result = list(response = p$fitted.values)
+      if (self$predict_raw) result$raw = p
+      result
     }
   )
 )

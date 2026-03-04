@@ -98,18 +98,21 @@ LearnerRegrLM = R6Class("LearnerRegrLM",
       }
 
       prediction = invoke(predict, object = self$model, newdata = newdata, se.fit = se_fit, .args = pv)
-      raw = if (self$predict_raw) prediction
+      raw = prediction
 
       # need to remove NAs for this crazy replication that using offset in lm does
       if ("offset" %in% task$properties) {
         prediction = prediction[!is.na(prediction)]
       }
 
-      if (se_fit) {
-        list(response = unname(prediction$fit), se = unname(prediction$se.fit), raw = raw)
+      result = if (se_fit) {
+        list(response = unname(prediction$fit), se = unname(prediction$se.fit))
       } else {
-        list(response = unname(prediction), raw = raw)
+        list(response = unname(prediction))
       }
+
+      if (self$predict_raw) result$raw = raw
+      result
     }
   )
 )

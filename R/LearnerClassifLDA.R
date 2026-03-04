@@ -65,13 +65,15 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
       newdata = ordered_features(task, self)
 
       p = invoke(predict, self$model, newdata = newdata, .args = pv)
-      raw = if (self$predict_raw) p
 
-      if (self$predict_type == "response") {
-        list(response = p[["class"]], raw = raw)
+      result = if (self$predict_type == "response") {
+        list(response = p[["class"]])
       } else {
-        list(response = p[["class"]], prob = p[["posterior"]], raw = raw)
+        list(response = p[["class"]], prob = p[["posterior"]])
       }
+
+      if (self$predict_raw) result$raw = p
+      result
     }
   )
 )

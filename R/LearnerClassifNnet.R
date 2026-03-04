@@ -85,18 +85,21 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pv)
-        raw = if (self$predict_raw) response
-        return(list(response = response, raw = raw))
+        raw = response
+        result = list(response = response)
       } else {
         prob = invoke(predict, self$model, newdata = newdata, type = "raw", .args = pv)
-        raw = if (self$predict_raw) prob
+        raw = prob
 
         lvls = self$model$lev
         if (length(lvls) == 2L) {
           prob = pvec2mat(prob[, 1L], lvls)
         }
-        return(list(prob = prob, raw = raw))
+        result = list(prob = prob)
       }
+
+      if (self$predict_raw) result$raw = raw
+      result
     }
   )
 )

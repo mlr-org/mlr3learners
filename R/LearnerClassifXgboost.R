@@ -331,7 +331,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       newdata = as_numeric_matrix(ordered_features(task, self))
       pred = invoke(predict, model, newdata = newdata, .args = pv)
-      raw = if (self$predict_raw) pred
       if (nlvls == 2L) { # binaryclass
         if (pv$objective == "multi:softprob") {
           prob = matrix(pred, ncol = nlvls, byrow = FALSE)
@@ -348,14 +347,17 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         }
       }
 
-      if (!is.null(response)) {
-        list(response = response, raw = raw)
+      result = if (!is.null(response)) {
+        list(response = response)
       } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
-        list(response = factor(colnames(prob)[i], levels = lvls), raw = raw)
+        list(response = factor(colnames(prob)[i], levels = lvls))
       } else {
-        list(prob = prob, raw = raw)
+        list(prob = prob)
       }
+
+      if (self$predict_raw) result$raw = pred
+      result
     },
 
     .hotstart = function(task) {

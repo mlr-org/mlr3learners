@@ -56,14 +56,17 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
         response = invoke(predict, self$model,
           newdata = newdata,
           type = "class", .args = pv)
-        raw = if (self$predict_raw) response
-        list(response = response, raw = raw)
+        raw = response
+        result = list(response = response)
       } else {
         prob = invoke(predict, self$model, newdata = newdata,
           type = "raw", .args = pv)
-        raw = if (self$predict_raw) prob
-        list(prob = prob, raw = raw)
+        raw = prob
+        result = list(prob = prob)
       }
+
+      if (self$predict_raw) result$raw = raw
+      result
     }
   )
 )
