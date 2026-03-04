@@ -19,5 +19,11 @@ vignettes/learners/
 ^revdep$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+<<<<<<< HEAD
 .clangd
 .claude
+=======
+^.clangd$
+^AGENTS.md$
+^CLAUDE.md$
+>>>>>>> main

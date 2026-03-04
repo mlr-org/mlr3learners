@@ -21,7 +21,8 @@ test_that("regr.xgboost", {
     "lambdarank_score_normalization", # rank only
     "lambdarank_unbiased", # rank only
     "lambdarank_bias_norm", # rank only
-    "ndcg_exp_gain" # rank only
+    "ndcg_exp_gain", # rank only
+    "aft_loss_distribution_scale" # survival only
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")

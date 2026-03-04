@@ -182,4 +182,8 @@ revdep/
 # misc
 Meta/
 .clangd
+
+# AI
+AGENTS.md
+CLAUDE.md
 .claude
