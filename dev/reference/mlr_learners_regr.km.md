@@ -283,27 +283,27 @@ learner$train(task, row_ids = ids$train)
 #> At iterate    46  f =       56.662  |proj g|=        0.3624
 #> At iterate    47  f =        56.64  |proj g|=       0.13956
 #> At iterate    48  f =       56.631  |proj g|=       0.11137
-#> At iterate    49  f =       56.623  |proj g|=      0.082252
-#> At iterate    50  f =       56.619  |proj g|=       0.41233
-#> At iterate    51  f =       56.611  |proj g|=      0.096519
-#> At iterate    52  f =       56.609  |proj g|=      0.057431
-#> At iterate    53  f =       56.609  |proj g|=      0.078522
+#> At iterate    49  f =       56.623  |proj g|=      0.082253
+#> At iterate    50  f =       56.619  |proj g|=       0.41237
+#> At iterate    51  f =       56.611  |proj g|=      0.096543
+#> At iterate    52  f =       56.609  |proj g|=      0.057432
+#> At iterate    53  f =       56.609  |proj g|=      0.078519
 #> At iterate    54  f =       56.607  |proj g|=       0.11328
-#> At iterate    55  f =       56.606  |proj g|=      0.026921
-#> At iterate    56  f =       56.606  |proj g|=     0.0044438
-#> At iterate    57  f =       56.606  |proj g|=     0.0020148
-#> At iterate    58  f =       56.606  |proj g|=     0.0021817
-#> At iterate    59  f =       56.606  |proj g|=     0.0077769
-#> At iterate    60  f =       56.606  |proj g|=     0.0017723
-#> At iterate    61  f =       56.606  |proj g|=    0.00017898
-#> At iterate    62  f =       56.606  |proj g|=    0.00018164
+#> At iterate    55  f =       56.606  |proj g|=      0.026946
+#> At iterate    56  f =       56.606  |proj g|=     0.0044416
+#> At iterate    57  f =       56.606  |proj g|=      0.002015
+#> At iterate    58  f =       56.606  |proj g|=     0.0021819
+#> At iterate    59  f =       56.606  |proj g|=     0.0077759
+#> At iterate    60  f =       56.606  |proj g|=     0.0017651
+#> At iterate    61  f =       56.606  |proj g|=    0.00017932
+#> At iterate    62  f =       56.606  |proj g|=    0.00018094
 #> 
 #> iterations 62
 #> function evaluations 68
 #> segments explored during Cauchy searches 63
 #> BFGS updates skipped 0
 #> active bounds at final generalized Cauchy point 4
-#> norm of the final projected gradient 0.000181643
+#> norm of the final projected gradient 0.000180936
 #> final function value 56.6056
 #> 
 #> F = 56.6056
@@ -345,5 +345,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 4.053721 
+#> 4.053722 
 ```
