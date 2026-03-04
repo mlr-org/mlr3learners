@@ -201,7 +201,7 @@ print(learner)
 #> • Feature Types: logical, integer, numeric, character, and factor
 #> • Encapsulation: none (fallback: -)
 #> • Properties: offset and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")

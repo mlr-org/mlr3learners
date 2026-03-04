@@ -275,7 +275,7 @@ print(learner)
 #> • Encapsulation: none (fallback: -)
 #> • Properties: hotstart_backward, importance, missings, multiclass, oob_error,
 #> selected_features, twoclass, and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("sonar")

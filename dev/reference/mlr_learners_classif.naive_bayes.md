@@ -163,7 +163,7 @@ print(learner)
 #> • Feature Types: logical, integer, numeric, and factor
 #> • Encapsulation: none (fallback: -)
 #> • Properties: multiclass and twoclass
-#> • Other settings: use_weights = 'error'
+#> • Other settings: use_weights = 'error', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("sonar")
