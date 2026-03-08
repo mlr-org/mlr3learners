@@ -11,7 +11,7 @@ Package website: [release](https://mlr3learners.mlr-org.com/) | [dev](https://ml
 
 <!-- badges: end -->
 
-This packages provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
+This package provides essential learners for [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
 Additional learners can be found in the [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners) package on GitHub.
 Request additional learners over there.
 

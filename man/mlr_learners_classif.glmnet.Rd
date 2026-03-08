@@ -16,7 +16,7 @@ When \code{lambda} is tuned, the \code{glmnet} will be trained for each tuning i
 While fitting the whole path of \code{lambda}s would be more efficient, as is done
 by default in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}, tuning/selecting the parameter at prediction time
 (using parameter \code{s}) is currently not supported in \CRANpkg{mlr3}
-(at least not in efficient manner).
+(at least not in an efficient manner).
 Tuning the \code{s} parameter is, therefore, currently discouraged.
 
 When the data are i.i.d. and efficiency is key, we recommend using the respective
