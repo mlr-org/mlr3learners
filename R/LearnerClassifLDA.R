@@ -21,14 +21,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifLDA = R6Class("LearnerClassifLDA",
+LearnerClassifLDA = R6Class(
+  "LearnerClassifLDA",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         dimen          = p_uty(tags = "predict"),
         method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
@@ -72,7 +73,9 @@ LearnerClassifLDA = R6Class("LearnerClassifLDA",
         list(response = p[["class"]], prob = p[["posterior"]])
       }
 
-      if (self$predict_raw) result$raw = p
+      if (self$predict_raw) {
+        result$raw = p
+      }
       result
     }
   )

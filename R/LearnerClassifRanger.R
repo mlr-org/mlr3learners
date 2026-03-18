@@ -29,14 +29,16 @@
 #' @export
 #' @template seealso_learner
 #' @template example_ranger
-LearnerClassifRanger = R6Class("LearnerClassifRanger",
+LearnerClassifRanger = R6Class(
+  "LearnerClassifRanger",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
+      # nolint start
       ps = ps(
         always.split.variables       = p_uty(tags = "train"),
         class.weights                = p_uty(default = NULL, tags = "train"),
@@ -76,6 +78,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         verbose                      = p_lgl(default = TRUE, tags = c("train", "predict")),
         write.forest                 = p_lgl(default = TRUE, tags = "train")
       )
+      # nolint end
 
       ps$set_values(num.threads = 1L)
 
@@ -84,7 +87,16 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         param_set = ps,
         predict_types = c("response", "prob"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        properties = c("weights", "twoclass", "multiclass", "importance", "oob_error", "hotstart_backward", "missings", "selected_features"),
+        properties = c(
+          "weights",
+          "twoclass",
+          "multiclass",
+          "importance",
+          "oob_error",
+          "hotstart_backward",
+          "missings",
+          "selected_features"
+        ),
         packages = c("mlr3learners", "ranger"),
         label = "Random Forest",
         man = "mlr3learners::mlr_learners_classif.ranger"
@@ -139,7 +151,8 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       pv = convert_ratio(pv, "mtry", "mtry.ratio", length(task$feature_names))
       pv$case.weights = get_weights(task, private)
 
-      invoke(ranger::ranger,
+      invoke(
+        ranger::ranger,
         dependent.variable.name = task$target_names,
         data = task$data(),
         probability = self$predict_type == "prob",
@@ -151,11 +164,7 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
       pv = self$param_set$get_values(tags = "predict")
       newdata = ordered_features(task, self)
 
-      prediction = invoke(predict,
-        self$model,
-        data = newdata,
-        predict.type = "response", .args = pv
-      )
+      prediction = invoke(predict, self$model, data = newdata, predict.type = "response", .args = pv)
 
       result = if (self$predict_type == "response") {
         list(response = prediction$predictions)
@@ -163,7 +172,9 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
         list(prob = prediction$predictions)
       }
 
-      if (self$predict_raw) result$raw = prediction
+      if (self$predict_raw) {
+        result$raw = prediction
+      }
       result
     },
 
@@ -180,7 +191,8 @@ LearnerClassifRanger = R6Class("LearnerClassifRanger",
 )
 
 #' @export
-default_values.LearnerClassifRanger = function(x, search_space, task, ...) { # nolint
+#nolint next
+default_values.LearnerClassifRanger = function(x, search_space, task, ...) {
   special_defaults = list(
     mtry = floor(sqrt(length(task$feature_names))),
     mtry.ratio = floor(sqrt(length(task$feature_names))) / length(task$feature_names),

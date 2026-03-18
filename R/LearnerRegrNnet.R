@@ -26,13 +26,14 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrNnet = R6Class("LearnerRegrNnet",
+LearnerRegrNnet = R6Class(
+  "LearnerRegrNnet",
   inherit = LearnerRegr,
   public = list(
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-
+      # fmt: skip
       ps = ps(
         Hess      = p_lgl(default = FALSE, tags = "train"),
         MaxNWts   = p_int(1L, default = 1000L, tags = "train"),
@@ -86,7 +87,9 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
 
       prediction = invoke(predict, self$model, newdata = newdata, .args = pv)
       result = list(response = as.numeric(prediction))
-      if (self$predict_raw) result$raw = prediction
+      if (self$predict_raw) {
+        result$raw = prediction
+      }
       result
     }
   )

@@ -16,7 +16,8 @@
 #' @return (named `list()`) with new hyperparameter settings.
 #' @noRd
 convert_ratio = function(pv, target, ratio, n) {
-  switch(to_decimal(c(target, ratio) %in% names(pv)) + 1L,
+  switch(
+    to_decimal(c(target, ratio) %in% names(pv)) + 1L,
     # !mtry && !mtry.ratio
     pv,
 
@@ -25,7 +26,6 @@ convert_ratio = function(pv, target, ratio, n) {
       pv[[target]] = max(ceiling(pv[[ratio]] * n), 1)
       remove_named(pv, ratio)
     },
-
 
     # mtry && !mtry.ratio
     pv,

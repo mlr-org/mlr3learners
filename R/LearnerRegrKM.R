@@ -23,14 +23,16 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrKM = R6Class("LearnerRegrKM",
+LearnerRegrKM = R6Class(
+  "LearnerRegrKM",
   inherit = LearnerRegr,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
+      # nolint start
       ps = ps(
         bias.correct     = p_lgl(default = FALSE, tags = "predict"),
         checkNames       = p_lgl(default = TRUE, tags = "predict"),
@@ -61,6 +63,7 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         type             = p_fct(c("SK", "UK"), default = "SK", tags = "predict"),
         upper            = p_uty(default = NULL, tags = "train")
       )
+      # nolint end
 
       super$initialize(
         id = "regr.km",
@@ -76,7 +79,6 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
 
   private = list(
     .train = function(task) {
-
       pv = self$param_set$get_values(tags = "train")
       data = as_numeric_matrix(task$data(cols = task$feature_names))
       truth = task$truth()
@@ -90,7 +92,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         pv$nugget = if (ns == 0) 0 else ns * stats::var(truth)
       }
 
-      invoke(DiceKriging::km,
+      invoke(
+        DiceKriging::km,
         response = truth,
         design = data,
         control = pv$control,
@@ -111,7 +114,8 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
       # alternatively, we could set checkNames = FALSE
       colnames(newdata) = make.names(colnames(newdata), unique = TRUE)
 
-      p = invoke(DiceKriging::predict.km,
+      p = invoke(
+        DiceKriging::predict.km,
         self$model,
         newdata = newdata,
         type = if (is.null(pv$type)) "SK" else pv$type,
@@ -120,7 +124,9 @@ LearnerRegrKM = R6Class("LearnerRegrKM",
         .opts = list(warnPartialMatchArgs = FALSE)
       )
       result = list(response = p$mean, se = p$sd)
-      if (self$predict_raw) result$raw = p
+      if (self$predict_raw) {
+        result$raw = p
+      }
       result
     }
   )

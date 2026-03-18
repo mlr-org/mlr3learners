@@ -21,14 +21,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifQDA = R6Class("LearnerClassifQDA",
+LearnerClassifQDA = R6Class(
+  "LearnerClassifQDA",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         method         = p_fct(c("moment", "mle", "mve", "t"), default = "moment", tags = "train"),
         nu             = p_int(tags = "train", depends = quote(method == "t")),
@@ -52,9 +53,7 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
 
   private = list(
     .train = function(task) {
-      invoke(MASS::qda, task$formula(),
-        data = task$data(),
-        .args = self$param_set$get_values(tags = "train"))
+      invoke(MASS::qda, task$formula(), data = task$data(), .args = self$param_set$get_values(tags = "train"))
     },
 
     .predict = function(task) {
@@ -70,7 +69,9 @@ LearnerClassifQDA = R6Class("LearnerClassifQDA",
         list(prob = p$posterior)
       }
 
-      if (self$predict_raw) result$raw = p
+      if (self$predict_raw) {
+        result$raw = p
+      }
       result
     }
   )

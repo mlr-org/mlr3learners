@@ -12,14 +12,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
+LearnerClassifMultinom = R6Class(
+  "LearnerClassifMultinom",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         Hess     = p_lgl(default = FALSE, tags = "train"),
         abstol   = p_dbl(default = 1.0e-4, tags = "train"),
@@ -98,7 +99,9 @@ LearnerClassifMultinom = R6Class("LearnerClassifMultinom",
         result = list(prob = prob)
       }
 
-      if (self$predict_raw) result$raw = raw
+      if (self$predict_raw) {
+        result$raw = raw
+      }
       result
     }
   )
