@@ -399,10 +399,10 @@ print(learner$model)
 
 # Importance method
 if ("importance" %in% learner$properties) print(learner$importance())
-#>           wt          cyl         disp           hp         qsec         carb 
-#> 7.950221e-01 1.201062e-01 4.794340e-02 2.802553e-02 5.570186e-03 1.650137e-03 
+#>          cyl         disp           wt           hp         qsec         carb 
+#> 0.8281008185 0.0721833631 0.0459378468 0.0324108864 0.0115456247 0.0050338213 
 #>           am         drat         gear 
-#> 1.273202e-03 4.092488e-04 9.657912e-10 
+#> 0.0023449711 0.0019763203 0.0004663478 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -410,7 +410,7 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#>  10.3963 
+#> 4.875786 
 
 # Early stopping
 learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)
@@ -421,10 +421,10 @@ learner$train(task)
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
 #> $nrounds
-#> [1] 16
+#> [1] 4
 #> 
 learner$internal_valid_scores
 #> $rmse
-#> [1] 3.030325
+#> [1] 4.534558
 #> 
 ```

@@ -206,7 +206,7 @@ print(learner$model)
 #>  SVM-Kernel:  radial 
 #>        cost:  1 
 #> 
-#> Number of Support Vectors:  108
+#> Number of Support Vectors:  110
 #> 
 
 # Importance method
@@ -218,5 +218,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> classif.ce 
-#>  0.2318841 
+#>  0.1304348 
 ```

@@ -276,8 +276,8 @@ print(learner$model)
 #> Measure: Binomial Deviance 
 #> 
 #>      Lambda Index Measure      SE Nonzero
-#> min 0.03215    23  0.9976 0.07175      17
-#> 1se 0.07427    14  1.0581 0.03836      10
+#> min 0.03602    22  0.9852 0.09482      15
+#> 1se 0.08322    13  1.0594 0.05488       6
 
 # Importance method
 if ("importance" %in% learner$properties) print(learner$importance())
@@ -288,5 +288,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> classif.ce 
-#>  0.3043478 
+#>  0.2753623 
 ```

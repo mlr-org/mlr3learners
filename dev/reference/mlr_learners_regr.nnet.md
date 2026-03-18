@@ -210,8 +210,8 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 #> # weights:  37
-#> initial  value 10126.435371 
-#> final  value 671.309524 
+#> initial  value 8557.823190 
+#> final  value 494.802857 
 #> converged
 
 # Print the model
@@ -230,5 +230,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 44.95085 
+#> 58.50121 
 ```

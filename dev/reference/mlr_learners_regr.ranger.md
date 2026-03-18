@@ -334,16 +334,16 @@ print(learner$model)
 #> Target node size:                 5 
 #> Variable importance mode:         permutation 
 #> Splitrule:                        variance 
-#> OOB prediction error (MSE):       5.489741 
-#> R squared (OOB):                  0.8257944 
+#> OOB prediction error (MSE):       6.286945 
+#> R squared (OOB):                  0.7989872 
 #> 
 
 # Importance method
 print(learner$importance())
-#>        cyl       disp         wt         hp       carb         am       drat 
-#> 9.01567530 7.20446366 6.40331573 5.62457522 1.10778727 0.56593264 0.52324113 
-#>         vs       gear       qsec 
-#> 0.30713582 0.30088234 0.02006789 
+#>        wt        hp      disp       cyl      carb      qsec        vs        am 
+#> 9.3383982 9.0161966 6.7330742 3.5933842 0.5417945 0.4585819 0.4326767 0.3657782 
+#>      drat      gear 
+#> 0.3517244 0.2711266 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -351,5 +351,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 11.41103 
+#> 12.33023 
 ```

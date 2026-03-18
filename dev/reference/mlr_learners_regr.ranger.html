@@ -305,16 +305,16 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 <span class="r-out co"><span class="r-pr">#&gt;</span> Target node size:                 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variable importance mode:         permutation </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Splitrule:                        variance </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> OOB prediction error (MSE):       5.489741 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R squared (OOB):                  0.8257944 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> OOB prediction error (MSE):       6.286945 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R squared (OOB):                  0.7989872 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Importance method</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        cyl       disp         wt         hp       carb         am       drat </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9.01567530 7.20446366 6.40331573 5.62457522 1.10778727 0.56593264 0.52324113 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         vs       gear       qsec </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.30713582 0.30088234 0.02006789 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        wt        hp      disp       cyl      carb      qsec        vs        am </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9.3383982 9.0161966 6.7330742 3.5933842 0.5417945 0.4585819 0.4326767 0.3657782 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      drat      gear </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.3517244 0.2711266 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
@@ -322,7 +322,7 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11.41103 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12.33023 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

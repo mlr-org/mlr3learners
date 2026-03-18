@@ -323,22 +323,22 @@ The fitted model. Only available after <code>$train()</code> has been called.</p
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Importance method</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V12          V52          V45          V20          V48          V36 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.1913429724 0.1156073538 0.0754178506 0.0727729692 0.0705704052 0.0649181658 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V11          V23          V49          V44          V47          V37 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0511647632 0.0342193616 0.0322207985 0.0284559922 0.0269096965 0.0199268940 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V31          V28          V25          V51          V43          V21 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0189730382 0.0185971956 0.0169041089 0.0162353892 0.0125918171 0.0120586522 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           V9          V15           V5          V24          V34           V4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0104133960 0.0092412054 0.0090557387 0.0083255828 0.0079496959 0.0071776699 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V40          V46          V10          V55          V38          V17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0070807163 0.0070548352 0.0070059491 0.0065617249 0.0061949628 0.0060334511 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V32          V53          V54          V60          V59          V50 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0058413994 0.0041317725 0.0033295236 0.0032392012 0.0026154487 0.0021014714 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           V8          V39          V33          V29          V27          V18 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0015051329 0.0013138548 0.0011376653 0.0011284622 0.0006982279 0.0006765504 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          V57          V58           V1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0005266029 0.0004945725 0.0002777623 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V11          V44          V36          V27          V39          V31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.2695612384 0.0767602955 0.0534629061 0.0495598404 0.0439474966 0.0436734388 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V12           V9          V51          V45          V20          V47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0418860897 0.0403469550 0.0328710617 0.0315765982 0.0256193337 0.0242189464 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V23          V28          V17          V52           V3           V4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0223276583 0.0220107694 0.0218727454 0.0180908980 0.0170899016 0.0168644617 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V58          V13          V35          V55          V34          V41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0150293607 0.0138347531 0.0127656222 0.0127229704 0.0126051090 0.0106864222 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V48          V50          V10          V38          V43           V2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0077612826 0.0071840864 0.0065475359 0.0057306463 0.0056585461 0.0049971443 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V21          V57          V18          V40           V6          V32 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0047707806 0.0046292754 0.0045257171 0.0041487932 0.0035976166 0.0029803511 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V19          V54           V7          V60          V53           V5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0016330666 0.0013435950 0.0012746084 0.0011752298 0.0011161542 0.0005219524 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          V59          V37          V15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0004627309 0.0003563353 0.0001996791 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
@@ -346,7 +346,7 @@ The fitted model. Only available after <code>$train()</code> has been called.</p
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> classif.ce </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2028986 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1449275 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Early stopping</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"classif.xgboost"</span>, nrounds <span class="op">=</span> <span class="fl">100</span>, early_stopping_rounds <span class="op">=</span> <span class="fl">10</span>, validate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
@@ -357,11 +357,11 @@ The fitted model. Only available after <code>$train()</code> has been called.</p
 <span class="r-in"><span><span class="co"># Inspect optimal nrounds and validation performance</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_tuned_values</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $nrounds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 66</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_valid_scores</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $logloss</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3309164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3486057</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

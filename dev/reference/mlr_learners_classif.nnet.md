@@ -210,14 +210,19 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 #> # weights:  187
-#> initial  value 120.824794 
-#> iter  10 value 71.033272
-#> iter  20 value 31.614906
-#> iter  30 value 26.888788
-#> iter  40 value 26.793799
-#> iter  50 value 26.792747
-#> final  value 26.792675 
-#> converged
+#> initial  value 98.709611 
+#> iter  10 value 51.544891
+#> iter  20 value 25.722922
+#> iter  30 value 25.198270
+#> iter  40 value 24.829482
+#> iter  50 value 24.422203
+#> iter  60 value 24.409340
+#> iter  70 value 21.790075
+#> iter  80 value 20.729026
+#> iter  90 value 20.151006
+#> iter 100 value 20.002287
+#> final  value 20.002287 
+#> stopped after 100 iterations
 
 # Print the model
 print(learner$model)
@@ -235,5 +240,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> classif.ce 
-#>   0.115942 
+#>  0.1449275 
 ```
