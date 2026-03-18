@@ -1,5 +1,7 @@
 #' @importFrom utils bibentry
-bibentries = c( # nolint start
+# fmt: skip
+# nolint start
+bibentries = c(
   breiman_2001 = bibentry("article",
     title            = "Random Forests",
     author           = "Breiman, Leo",
@@ -117,7 +119,6 @@ bibentries = c( # nolint start
     booktitle        = "Proceedings of the 24th International Conference on Artificial Intelligence",
     pages            = "4197--4201",
     series           = "IJCAI'15"
-    #doi              = "10.5555/2832747.2832840"
 )
 
 ) # nolint end

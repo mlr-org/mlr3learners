@@ -86,7 +86,7 @@ test_that("default_values", {
   task = tsk("pima")
 
   values = default_values(learner, search_space, task)
-  expect_names(names(values), permutation.of =  c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
+  expect_names(names(values), permutation.of = c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
 })
 
 test_that("selected_features", {

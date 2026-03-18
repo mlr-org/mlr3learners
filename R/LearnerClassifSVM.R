@@ -15,14 +15,16 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifSVM = R6Class("LearnerClassifSVM",
+LearnerClassifSVM = R6Class(
+  "LearnerClassifSVM",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
+      # nolint start
       ps = ps(
         cachesize       = p_dbl(default = 40L, tags = "train"),
         class.weights   = p_uty(default = NULL, tags = "train"),
@@ -41,6 +43,7 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
         tolerance       = p_dbl(0, default = 0.001, tags = "train"),
         type            = p_fct(c("C-classification", "nu-classification"), default = "C-classification", tags = "train")
       )
+      # nolint end
 
       super$initialize(
         id = "classif.svm",
@@ -60,34 +63,30 @@ LearnerClassifSVM = R6Class("LearnerClassifSVM",
       pv = self$param_set$get_values(tags = "train")
       data = as_numeric_matrix(task$data(cols = task$feature_names))
 
-      invoke(e1071::svm,
-        x = data,
-        y = task$truth(),
-        probability = (self$predict_type == "prob"),
-        .args = pv
-      )
+      invoke(e1071::svm, x = data, y = task$truth(), probability = (self$predict_type == "prob"), .args = pv)
     },
 
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       newdata = as_numeric_matrix(ordered_features(task, self))
-      p = invoke(predict, self$model,
-        newdata = newdata,
-        probability = (self$predict_type == "prob"), .args = pv)
+      p = invoke(predict, self$model, newdata = newdata, probability = (self$predict_type == "prob"), .args = pv)
 
       result = list(
         response = as.character(p),
         prob = attr(p, "probabilities") # is NULL if not requested during predict
       )
 
-      if (self$predict_raw) result$raw = p
+      if (self$predict_raw) {
+        result$raw = p
+      }
       result
     }
   )
 )
 
 #' @export
-default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # nolint
+#nolint next
+default_values.LearnerClassifSVM = function(x, search_space, task, ...) {
   special_defaults = list(
     gamma = 1 / length(task$feature_names)
   )
@@ -96,8 +95,12 @@ default_values.LearnerClassifSVM = function(x, search_space, task, ...) { # noli
   defaults = defaults[search_space$ids()]
 
   # fix dependencies
-  if (!is.null(defaults[["degree"]])) defaults[["degree"]] = NA_real_
-  if (!is.null(defaults[["coef0"]])) defaults[["coef0"]] = NA_real_
+  if (!is.null(defaults[["degree"]])) {
+    defaults[["degree"]] = NA_real_
+  }
+  if (!is.null(defaults[["coef0"]])) {
+    defaults[["coef0"]] = NA_real_
+  }
 
   defaults
 }

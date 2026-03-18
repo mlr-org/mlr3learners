@@ -1,3 +1,4 @@
+# nolint next
 <%
 learner = mlr3::lrn(id)
 task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"

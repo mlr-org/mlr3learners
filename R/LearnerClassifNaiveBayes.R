@@ -12,14 +12,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
+LearnerClassifNaiveBayes = R6Class(
+  "LearnerClassifNaiveBayes",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         eps       = p_dbl(default = 0, tags = "predict"),
         laplace   = p_dbl(0, default = 0, tags = "train"),
@@ -43,9 +44,7 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
     .train = function(task) {
       y = task$truth()
       x = task$data(cols = task$feature_names)
-      invoke(e1071::naiveBayes,
-        x = x, y = y,
-        .args = self$param_set$get_values(tags = "train"))
+      invoke(e1071::naiveBayes, x = x, y = y, .args = self$param_set$get_values(tags = "train"))
     },
 
     .predict = function(task) {
@@ -53,19 +52,18 @@ LearnerClassifNaiveBayes = R6Class("LearnerClassifNaiveBayes",
       newdata = ordered_features(task, self)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model,
-          newdata = newdata,
-          type = "class", .args = pv)
+        response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pv)
         raw = response
         result = list(response = response)
       } else {
-        prob = invoke(predict, self$model, newdata = newdata,
-          type = "raw", .args = pv)
+        prob = invoke(predict, self$model, newdata = newdata, type = "raw", .args = pv)
         raw = prob
         result = list(prob = prob)
       }
 
-      if (self$predict_raw) result$raw = raw
+      if (self$predict_raw) {
+        result$raw = raw
+      }
       result
     }
   )
