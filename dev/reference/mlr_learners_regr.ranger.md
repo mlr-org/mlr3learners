@@ -5,9 +5,9 @@ Random regression forest. Calls `ranger()` from package
 
 ## Details
 
-Additionally to the uncertainty estimation methods provided by the
-ranger package, the learner provides a ensemble standard deviation and
-law of total variance uncertainty estimation. Both methods compute the
+In addition to the uncertainty estimation methods provided by the ranger
+package, the learner provides an ensemble standard deviation and law of
+total variance uncertainty estimation. Both methods compute the
 empirical mean and variance of the training data points that fall into
 the predicted leaf nodes. The ensemble standard deviation method
 calculates the standard deviation of the mean of the leaf nodes. The law

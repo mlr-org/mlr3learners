@@ -17,7 +17,7 @@ efficient, as is done by default in
 [`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html),
 tuning/selecting the parameter at prediction time (using parameter `s`)
 is currently not supported in
-[mlr3](https://CRAN.R-project.org/package=mlr3) (at least not in
+[mlr3](https://CRAN.R-project.org/package=mlr3) (at least not in an
 efficient manner). Tuning the `s` parameter is, therefore, currently
 discouraged.
 

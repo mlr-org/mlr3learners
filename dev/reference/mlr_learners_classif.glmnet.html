@@ -66,7 +66,7 @@ When <code>lambda</code> is tuned, the <code>glmnet</code> will be trained for e
 While fitting the whole path of <code>lambda</code>s would be more efficient, as is done
 by default in <code><a href="https://glmnet.stanford.edu/reference/glmnet.html" class="external-link">glmnet::glmnet()</a></code>, tuning/selecting the parameter at prediction time
 (using parameter <code>s</code>) is currently not supported in <a href="https://CRAN.R-project.org/package=mlr3" class="external-link"><span class="pkg">mlr3</span></a>
-(at least not in efficient manner).
+(at least not in an efficient manner).
 Tuning the <code>s</code> parameter is, therefore, currently discouraged.</p>
 <p>When the data are i.i.d. and efficiency is key, we recommend using the respective
 auto-tuning counterparts in <code><a href="mlr_learners_classif.cv_glmnet.html">mlr_learners_classif.cv_glmnet()</a></code> or
