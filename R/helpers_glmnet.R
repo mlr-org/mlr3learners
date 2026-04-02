@@ -10,7 +10,8 @@ glmnet_get_lambda = function(self, pv) {
     self$model[[s]]
   } else if (is.numeric(s)) {
     s
-  } else { # null / missing
+  } else {
+    # null / missing
     if (inherits(self$model, "cv.glmnet")) {
       self$model[["lambda.1se"]]
     } else if (length(self$model$lambda) == 1L) {
@@ -80,7 +81,9 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
 glmnet_set_offset = function(task, phase = "train", pv) {
   assert_choice(phase, c("train", "predict"))
 
-  if ("offset" %nin% task$properties) return(pv)
+  if ("offset" %nin% task$properties) {
+    return(pv)
+  }
 
   use_pred_offset = isTRUE(pv$use_pred_offset)
   is_train = phase == "train"
@@ -101,8 +104,11 @@ glmnet_set_offset = function(task, phase = "train", pv) {
         if (is_train || use_pred_offset) task$offset$offset else rep(0, task$nrow)
     } else {
       pv[[if (is_train) "offset" else "newoffset"]] =
-        if (is_train || use_pred_offset) as_numeric_matrix(task$offset)[, offset_cols]
-      else matrix(0, nrow = task$nrow, ncol = length(task$class_names))
+        if (is_train || use_pred_offset) {
+          as_numeric_matrix(task$offset)[, offset_cols]
+        } else {
+          matrix(0, nrow = task$nrow, ncol = length(task$class_names))
+        }
     }
   }
 

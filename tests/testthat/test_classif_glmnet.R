@@ -35,8 +35,11 @@ test_that("same label ordering as in glm() / log_reg", {
     l1$train(task)
     l2$train(task)
 
-    expect_equal(sign(as.numeric(coef(l1$model))), sign(as.numeric(coef(l2$model))),
-      info = sprintf("positive label = %s", pos))
+    expect_equal(
+      sign(as.numeric(coef(l1$model))),
+      sign(as.numeric(coef(l2$model))),
+      info = sprintf("positive label = %s", pos)
+    )
   }
 })
 
@@ -90,7 +93,7 @@ test_that("offset works", {
   # predictions are different
   expect_true(all(prob != prob_offset))
   # but connected via:
-  expect_equal(log(prob_offset/(1 - prob_offset)), log(prob/(1 - prob)) + off)
+  expect_equal(log(prob_offset / (1 - prob_offset)), log(prob / (1 - prob)) + off)
 
   # using a task with offset on a learner that didn't use offset during training
   # results in the same prediction: offset is completely ignored

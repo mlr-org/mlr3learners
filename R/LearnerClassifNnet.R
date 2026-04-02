@@ -26,13 +26,14 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifNnet = R6Class("LearnerClassifNnet",
+LearnerClassifNnet = R6Class(
+  "LearnerClassifNnet",
   inherit = LearnerClassif,
   public = list(
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-
+      # fmt: skip
       ps = ps(
         Hess      = p_lgl(default = FALSE, tags = "train"),
         MaxNWts   = p_int(1L, default = 1000L, tags = "train"),
@@ -85,16 +86,23 @@ LearnerClassifNnet = R6Class("LearnerClassifNnet",
 
       if (self$predict_type == "response") {
         response = invoke(predict, self$model, newdata = newdata, type = "class", .args = pv)
-        return(list(response = response))
+        raw = response
+        result = list(response = response)
       } else {
         prob = invoke(predict, self$model, newdata = newdata, type = "raw", .args = pv)
+        raw = prob
 
         lvls = self$model$lev
         if (length(lvls) == 2L) {
           prob = pvec2mat(prob[, 1L], lvls)
         }
-        return(list(prob = prob))
+        result = list(prob = prob)
       }
+
+      if (self$predict_raw) {
+        result$raw = raw
+      }
+      result
     }
   )
 )

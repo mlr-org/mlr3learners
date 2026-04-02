@@ -25,11 +25,13 @@ register_mlr3 = function() {
   iwalk(learners, function(obj, nm) x$add(nm, obj))
 }
 
-.onLoad = function(libname, pkgname) { # nolint
+# nolint next
+.onLoad = function(libname, pkgname) {
   register_namespace_callback(pkgname, "mlr3", register_mlr3)
 } # nocov end
 
-.onUnload = function(libpaths) { # nolint
+# nolint next
+.onUnload = function(libpaths) {
   mlr_learners = mlr3::mlr_learners
 
   walk(names(learners), function(id) mlr_learners$remove(id))

@@ -13,7 +13,8 @@ ordered_features = function(task, learner) {
 }
 
 
-as_numeric_matrix = function(x) { # for svm / #181
+as_numeric_matrix = function(x) {
+  # for svm / #181
   x = as.matrix(x)
   if (is.logical(x)) {
     storage.mode(x) = "double"

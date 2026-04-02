@@ -12,9 +12,12 @@
 #' @inheritSection mlr_learners_classif.log_reg Internal Encoding
 #'
 #' @section Offset:
-#' If a `Task` contains a column with the `offset` role, it is automatically incorporated during training via the `offset` argument in [glmnet::glmnet()].
-#' During prediction, the offset column from the test set is used only if `use_pred_offset = TRUE` (default), passed via the `newoffset` argument in [glmnet::predict.glmnet()].
-#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#' If a `Task` contains a column with the `offset` role,
+#' it is automatically incorporated during training via the `offset` argument in [glmnet::glmnet()].
+#' During prediction, the offset column from the test set is used only if `use_pred_offset = TRUE` (default),
+#' passed via the `newoffset` argument in [glmnet::predict.glmnet()].
+#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied,
+#' effectively disabling the offset adjustment during prediction.
 #'
 #' @templateVar id classif.cv_glmnet
 #' @template learner
@@ -25,14 +28,16 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
+LearnerClassifCVGlmnet = R6Class(
+  "LearnerClassifCVGlmnet",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
+      # nolint start
       ps = ps(
         alignment            = p_fct(c("lambda", "fraction"), default = "lambda", tags = "train"),
         alpha                = p_dbl(0, 1, default = 1, tags = "train"),
@@ -78,6 +83,7 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
         upper.limits         = p_uty(tags = "train")
       )
+      # nolint end
 
       super$initialize(
         id = "classif.cv_glmnet",
@@ -125,15 +131,13 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
       pv = glmnet_set_offset(task, "predict", pv)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model,
-          newx = newdata, type = "class",
-          .args = pv)
+        response = invoke(predict, self$model, newx = newdata, type = "class", .args = pv)
+        raw = response
 
-        list(response = drop(response))
+        result = list(response = drop(response))
       } else {
-        prob = invoke(predict, self$model,
-          newx = newdata, type = "response",
-          .args = pv)
+        prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pv)
+        raw = prob
 
         if (length(task$class_names) == 2L) {
           # the docs are really not clear here; before we tried to reorder the class
@@ -145,8 +149,13 @@ LearnerClassifCVGlmnet = R6Class("LearnerClassifCVGlmnet",
           prob = prob[, , 1L]
         }
 
-        list(prob = prob)
+        result = list(prob = prob)
       }
+
+      if (self$predict_raw) {
+        result$raw = raw
+      }
+      result
     }
   )
 )

@@ -64,15 +64,17 @@ test_that("default_values", {
   task = tsk("pima")
 
   values = default_values(learner, search_space, task)
-  expect_names(names(values), permutation.of =  c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
+  expect_names(names(values), permutation.of = c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
 })
 
 test_that("quantile prediction", {
-  learner = mlr3::lrn("regr.ranger",
+  learner = mlr3::lrn(
+    "regr.ranger",
     num.trees = 100,
     predict_type = "quantiles",
     quantiles = c(0.1, 0.5, 0.9),
-    quantile_response = 0.5)
+    quantile_response = 0.5
+  )
   task = tsk("mtcars")
 
   learner$train(task)
@@ -293,12 +295,7 @@ test_that("ensemble standard deviation se method works", {
 })
 
 test_that("ensemble standard deviation se method works with single tree", {
-  learner = lrn("regr.ranger",
-    se.method = "ensemble_standard_deviation",
-    predict_type = "se",
-    num.trees = 1,
-    seed = 1
-  )
+  learner = lrn("regr.ranger", se.method = "ensemble_standard_deviation", predict_type = "se", num.trees = 1, seed = 1)
 
   task = tsk("mtcars")
   learner$train(task)
@@ -314,7 +311,8 @@ test_that("ensemble standard deviation se method works with single tree", {
 })
 
 test_that("ensemble standard deviation se method works with stump trees", {
-  learner = lrn("regr.ranger",
+  learner = lrn(
+    "regr.ranger",
     se.method = "ensemble_standard_deviation",
     predict_type = "se",
     num.trees = 2,
@@ -335,7 +333,8 @@ test_that("ensemble standard deviation se method works with stump trees", {
 })
 
 test_that("ensemble standard deviation se method works with single stump tree", {
-  learner = lrn("regr.ranger",
+  learner = lrn(
+    "regr.ranger",
     se.method = "ensemble_standard_deviation",
     predict_type = "se",
     num.trees = 1,

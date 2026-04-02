@@ -6,4 +6,3 @@ test_that("autotest", {
   result = run_autotest(learner, N = 100L, exclude = "feat_single")
   expect_true(result, info = result$error)
 })
-

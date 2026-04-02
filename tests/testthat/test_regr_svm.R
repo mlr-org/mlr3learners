@@ -24,5 +24,5 @@ test_that("default_values", {
   task = tsk("pima")
 
   values = default_values(learner, search_space, task)
-  expect_names(names(values), permutation.of =  c("cost", "gamma"))
+  expect_names(names(values), permutation.of = c("cost", "gamma"))
 })

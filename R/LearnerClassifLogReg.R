@@ -4,7 +4,8 @@
 #'
 #' @description
 #' Classification via logistic regression.
-#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)` with `link` either as `"logit"` (default) or `"probit"`.
+#' Calls [stats::glm()] with `family` set to `binomial(link = <link>)` with `link` either as `"logit"` (default) or
+#' `"probit"`.
 #'
 #' @section Internal Encoding:
 #' Starting with \CRANpkg{mlr3} v0.5.0, the order of class labels is reversed prior to
@@ -21,8 +22,10 @@
 #' If a `Task` has a column with the role `offset`, it will automatically be used during training.
 #' The offset is incorporated through the formula interface to ensure compatibility with [stats::glm()].
 #' We add it to the model formula as `offset(<column_name>)` and also include it in the training data.
-#' During prediction, the default behavior is to use the offset column from the test set (enabled by `use_pred_offset = TRUE`).
-#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+#' During prediction, the default behavior is to use the offset column from the test set (enabled by
+#' `use_pred_offset = TRUE`).
+#' Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is applied,
+#' effectively disabling the offset adjustment during prediction.
 #'
 #' @templateVar id classif.log_reg
 #' @template learner
@@ -32,14 +35,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
+LearnerClassifLogReg = R6Class(
+  "LearnerClassifLogReg",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         dispersion      = p_uty(default = NULL, tags = "predict"),
         epsilon         = p_dbl(default = 1e-8, tags = c("train", "control")),
@@ -95,9 +99,15 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
       tn = task$target_names
       data[[tn]] = swap_levels(data[[tn]])
 
-      invoke(stats::glm,
-        formula = form, data = data,
-        family = stats::binomial(link = link), model = FALSE, .args = pv, .opts = opts_default_contrasts)
+      invoke(
+        stats::glm,
+        formula = form,
+        data = data,
+        family = stats::binomial(link = link),
+        model = FALSE,
+        .args = pv,
+        .opts = opts_default_contrasts
+      )
     },
 
     .predict = function(task) {
@@ -111,13 +121,20 @@ LearnerClassifLogReg = R6Class("LearnerClassifLogReg",
         newdata[, (offset_colname) := if (isTRUE(pv$use_pred_offset)) task$offset$offset else 0]
       }
 
-      p = unname(invoke(predict, object = self$model, newdata = newdata, type = "response", .args = pv))
+      p = invoke(predict, object = self$model, newdata = newdata, type = "response", .args = pv)
+      raw = p
+      p = unname(p)
 
-      if (self$predict_type == "response") {
+      result = if (self$predict_type == "response") {
         list(response = fifelse(p < 0.5, lvls[1L], lvls[2L]))
       } else {
         list(prob = pvec2mat(p, lvls))
       }
+
+      if (self$predict_raw) {
+        result$raw = raw
+      }
+      result
     }
   )
 )

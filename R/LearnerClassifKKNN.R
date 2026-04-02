@@ -21,13 +21,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
+LearnerClassifKKNN = R6Class(
+  "LearnerClassifKKNN",
   inherit = LearnerClassif,
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
+      # nolint start
       ps = ps(
         k           = p_int(default = 7L, lower = 1L, tags = "train"),
         distance    = p_dbl(0, default = 2, tags = "train"),
@@ -36,6 +38,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
         ykernel     = p_uty(default = NULL, tags = "train"),
         store_model = p_lgl(default = FALSE, tags = "train")
       )
+      # nolint end
       ps$set_values(k = 7L)
 
       super$initialize(
@@ -56,8 +59,7 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
       # https://github.com/mlr-org/mlr3learners/issues/191
       pv = self$param_set$get_values(tags = "train")
       if (pv$k >= task$nrow) {
-        stopf("Parameter k = %i must be smaller than the number of observations (n = %i)",
-          pv$k, task$nrow)
+        stopf("Parameter k = %i must be smaller than the number of observations (n = %i)", pv$k, task$nrow)
       }
 
       list(
@@ -73,21 +75,31 @@ LearnerClassifKKNN = R6Class("LearnerClassifKKNN",
       newdata = ordered_features(task, self)
       pv = insert_named(model$pv, self$param_set$get_values(tags = "predict"))
 
-      with_package("kknn", { # https://github.com/KlausVigo/kknn/issues/16
-        p = invoke(kknn::kknn,
-          formula = model$formula, train = model$data,
-          test = newdata, .args = remove_named(pv, "store_model"))
+      with_package("kknn", {
+        # https://github.com/KlausVigo/kknn/issues/16
+        p = invoke(
+          kknn::kknn,
+          formula = model$formula,
+          train = model$data,
+          test = newdata,
+          .args = remove_named(pv, "store_model")
+        )
       })
 
       if (isTRUE(pv$store_model)) {
         self$state$model$kknn = p
       }
 
-      if (self$predict_type == "response") {
+      result = if (self$predict_type == "response") {
         list(response = p$fitted.values)
       } else {
         list(prob = p$prob)
       }
+
+      if (self$predict_raw) {
+        result$raw = p
+      }
+      result
     }
   )
 )
