@@ -50,15 +50,13 @@ test_that("offset works", {
   expect_false(all(learner$model$coefficients == learner_offset$model$coefficients))
 
   # check: we get same trained model manually using the formula interface
-  model = stats::glm(y ~ x + offset(offset_col), family = "binomial",
-                     data = data_with_offset, subset = part$train)
+  model = stats::glm(y ~ x + offset(offset_col), family = "binomial", data = data_with_offset, subset = part$train)
   expect_equal(model$coefficients, learner_offset$model$coefficients)
 
   # predict on test set (offset is used by default)
   p1 = learner_offset$predict(task_with_offset, part$test)
   # same thing manually
-  res = unname(predict(model, type = "response",
-                       newdata = data_with_offset[part$test, ]))
+  res = unname(predict(model, type = "response", newdata = data_with_offset[part$test, ]))
   prob_offset = p1$prob[, "1"]
   expect_equal(prob_offset, res)
   # no offset during predict
@@ -69,11 +67,10 @@ test_that("offset works", {
   # predictions are different
   expect_true(all(prob_offset != prob))
   # but connected via:
-  expect_equal(log(prob_offset/(1 - prob_offset)), log(prob/(1 - prob)) + off)
+  expect_equal(log(prob_offset / (1 - prob_offset)), log(prob / (1 - prob)) + off)
 
   # verify predictions manually
-  res = unname(predict(model, type = "response",
-                       newdata = cbind(data[part$test, ], offset_col = 0)))
+  res = unname(predict(model, type = "response", newdata = cbind(data[part$test, ], offset_col = 0)))
   expect_equal(prob, res)
 
   # using a task with offset on a learner that didn't use offset during training

@@ -47,11 +47,7 @@ test_that("hotstart", {
 test_that("validation and inner tuning", {
   task = tsk("mtcars")
 
-  learner = lrn("regr.xgboost",
-    nrounds = 10,
-    early_stopping_rounds = 1,
-    validate = 0.2
-  )
+  learner = lrn("regr.xgboost", nrounds = 10, early_stopping_rounds = 1, validate = 0.2)
 
   learner$train(task)
   expect_named(attributes(learner$model)$evaluation_log, c("iter", "test_rmse"))
@@ -75,24 +71,19 @@ test_that("validation and inner tuning", {
   expect_list(learner$internal_valid_scores, types = "numeric")
   expect_equal(names(learner$internal_valid_scores), "rmse")
 
-  learner = lrn("regr.xgboost",
-    nrounds = to_tune(upper = 1000, internal = TRUE),
-    validate = 0.2
-  )
+  learner = lrn("regr.xgboost", nrounds = to_tune(upper = 1000, internal = TRUE), validate = 0.2)
   s = learner$param_set$search_space()
   expect_error(learner$param_set$convert_internal_search_space(s), "Parameter")
   learner$param_set$set_values(early_stopping_rounds = 10)
   learner$param_set$disable_internal_tuning("nrounds")
   expect_equal(learner$param_set$values$early_stopping_rounds, NULL)
 
-  learner = lrn("regr.xgboost",
-    nrounds = 100L,
-    early_stopping_rounds = 5,
-    validate = 0.2
-  )
+  learner = lrn("regr.xgboost", nrounds = 100L, early_stopping_rounds = 5, validate = 0.2)
   learner$train(task)
-  expect_equal(learner$internal_valid_scores$rmse,
-    attributes(learner$model)$evaluation_log$test_rmse[learner$internal_tuned_values$nrounds])
+  expect_equal(
+    learner$internal_valid_scores$rmse,
+    attributes(learner$model)$evaluation_log$test_rmse[learner$internal_tuned_values$nrounds]
+  )
 
   learner = lrn("regr.xgboost")
   learner$train(task)
@@ -123,16 +114,10 @@ test_that("validation and inner tuning", {
 })
 
 test_that("custom inner validation measure", {
-
   # internal measure
   task = tsk("mtcars")
 
-  learner = lrn("regr.xgboost",
-    nrounds = 10,
-    validate = 0.2,
-    early_stopping_rounds = 10,
-    eval_metric = "error"
-  )
+  learner = lrn("regr.xgboost", nrounds = 10, validate = 0.2, early_stopping_rounds = 10, eval_metric = "error")
 
   learner$train(task)
 
@@ -146,10 +131,11 @@ test_that("custom inner validation measure", {
   rmse = function(preds, dtrain) {
     truth = xgboost::getinfo(dtrain, "label")
     rmse = sqrt(mean((truth - preds)^2))
-    return(list(metric = "rmse", value = rmse))
+    list(metric = "rmse", value = rmse)
   }
 
-  learner = lrn("regr.xgboost",
+  learner = lrn(
+    "regr.xgboost",
     nrounds = 10,
     validate = 0.2,
     early_stopping_rounds = 10,
@@ -166,7 +152,8 @@ test_that("custom inner validation measure", {
   # mlr3 measure
   task = tsk("mtcars")
 
-  learner = lrn("regr.xgboost",
+  learner = lrn(
+    "regr.xgboost",
     nrounds = 10,
     validate = 0.2,
     early_stopping_rounds = 10,
@@ -185,7 +172,8 @@ test_that("mlr3measures are equal to internal measures", {
   set.seed(1)
   task = tsk("mtcars")
 
-  learner = lrn("regr.xgboost",
+  learner = lrn(
+    "regr.xgboost",
     nrounds = 10,
     validate = 0.2,
     early_stopping_rounds = 10,
@@ -207,7 +195,8 @@ test_that("mlr3measures are equal to internal measures", {
   set.seed(1)
   task = tsk("mtcars")
 
-  learner = lrn("regr.xgboost",
+  learner = lrn(
+    "regr.xgboost",
     nrounds = 10,
     validate = 0.2,
     objective = "reg:absoluteerror",
@@ -259,10 +248,8 @@ test_that("base_margin (offset)", {
   # use Poisson where base_score = 1 is equivalent to base_margin = 0:
   # log(mean-scale) = base_margin + f(x)
   # https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html#offset
-  l0 = lrn("regr.xgboost", objective = "count:poisson",
-           nrounds = 3, base_score = 1)
-  l1 = lrn("regr.xgboost", objective = "count:poisson",
-           nrounds = 3) # estimated base_score (learned global intercept)
+  l0 = lrn("regr.xgboost", objective = "count:poisson", nrounds = 3, base_score = 1)
+  l1 = lrn("regr.xgboost", objective = "count:poisson", nrounds = 3) # estimated base_score (learned global intercept)
   l2 = l1$clone(deep = TRUE) # train and test on task_offset
   l3 = l1$clone(deep = TRUE) # train and test on task_offset2
   l0$validate = "predefined"

@@ -81,12 +81,13 @@ xgboost_get_base_margin = function(task, phase = "train", pv) {
   # it seems reasonable to reorder according to label (0,1,2,...)
   # which is reverted in the train function due to integer conversion
   reordered_cols = paste0("offset_", rev(levels(task$truth())))
-  n_offsets = ncol(offset) - 1L  # excluding row_id
+  n_offsets = ncol(offset) - 1L # excluding row_id
 
   if (length(reordered_cols) != n_offsets) {
     stopf(
       "Task has %i class labels, but %i offset columns are provided",
-      n_levels, n_offsets
+      n_levels,
+      n_offsets
     )
   }
 

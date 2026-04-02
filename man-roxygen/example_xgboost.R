@@ -1,3 +1,4 @@
+# nolint next
 <%
 learner = mlr3::lrn(id)
 task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
@@ -37,4 +38,3 @@ task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 #' # Inspect optimal nrounds and validation performance
 #' learner$internal_tuned_values
 #' learner$internal_valid_scores
-

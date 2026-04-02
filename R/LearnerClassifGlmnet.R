@@ -36,14 +36,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
+LearnerClassifGlmnet = R6Class(
+  "LearnerClassifGlmnet",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         alpha                = p_dbl(0, 1, default = 1, tags = "train"),
         big                  = p_dbl(default = 9.9e35, tags = "train"),
@@ -128,14 +129,12 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
       pv = glmnet_set_offset(task, "predict", pv)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model,
-          newx = newdata, type = "class",
-          .args = pv)
-        list(response = drop(response))
+        response = invoke(predict, self$model, newx = newdata, type = "class", .args = pv)
+        raw = response
+        result = list(response = drop(response))
       } else {
-        prob = invoke(predict, self$model,
-          newx = newdata, type = "response",
-          .args = pv)
+        prob = invoke(predict, self$model, newx = newdata, type = "response", .args = pv)
+        raw = prob
 
         if (length(task$class_names) == 2L) {
           # the docs are really not clear here; before we tried to reorder the class
@@ -147,8 +146,13 @@ LearnerClassifGlmnet = R6Class("LearnerClassifGlmnet",
           prob = prob[, , 1L]
         }
 
-        list(prob = prob)
+        result = list(prob = prob)
       }
+
+      if (self$predict_raw) {
+        result$raw = raw
+      }
+      result
     }
   )
 )

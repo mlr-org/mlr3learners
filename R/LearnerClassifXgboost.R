@@ -34,10 +34,14 @@
 #' @section Early Stopping and Validation:
 #' In order to monitor the validation performance during the training, you can set the `$validate` field of the Learner.
 #' For information on how to configure the validation set, see the *Validation* section of [mlr3::Learner].
-#' This validation data can also be used for early stopping, which can be enabled by setting the `early_stopping_rounds` parameter.
-#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`, and the optimal `nrounds` via `$internal_tuned_values`.
-#' The internal validation measure can be set via the `custom_metric` parameter that can be a [mlr3::Measure], a function, or a character string for the internal xgboost measures.
-#' Using an [mlr3::Measure] is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
+#' This validation data can also be used for early stopping,
+#' which can be enabled by setting the `early_stopping_rounds` parameter.
+#' The final (or in the case of early stopping best) validation scores can be accessed via `$internal_valid_scores`,
+#' and the optimal `nrounds` via `$internal_tuned_values`.
+#' The internal validation measure can be set via the `custom_metric` parameter that can be a [mlr3::Measure],
+#' a function, or a character string for the internal xgboost measures.
+#' Using an [mlr3::Measure] is slower than the internal xgboost measures,
+#' but allows to use the same measure for tuning and validation.
 #'
 #' @inheritSection mlr_learners_regr.xgboost Offset
 #'
@@ -50,30 +54,36 @@
 #' @export
 #' @template seealso_learner
 #' @template example_xgboost
-LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
+LearnerClassifXgboost = R6Class(
+  "LearnerClassifXgboost",
   inherit = LearnerClassif,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
-
-      p_nrounds = p_int(1L,
+      p_nrounds = p_int(
+        1L,
         tags = c("train", "hotstart", "internal_tuning"),
         aggr = crate(function(x) as.integer(ceiling(mean(unlist(x)))), .parent = topenv()),
-        in_tune_fn = crate(function(domain, param_vals) {
-          if (is.null(param_vals$early_stopping_rounds)) {
-            stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
-          }
-          if (is.null(param_vals$custom_metric) && is.null(param_vals$eval_metric)) {
-            stop("Parameter 'custom_metric' or 'eval_metric' must be set explicitly when using internal tuning.")
-          }
-          assert_integerish(domain$upper, len = 1L, any.missing = FALSE) }, .parent = topenv()),
+        in_tune_fn = crate(
+          function(domain, param_vals) {
+            if (is.null(param_vals$early_stopping_rounds)) {
+              stop("Parameter 'early_stopping_rounds' must be set to use internal tuning.")
+            }
+            if (is.null(param_vals$custom_metric) && is.null(param_vals$eval_metric)) {
+              stop("Parameter 'custom_metric' or 'eval_metric' must be set explicitly when using internal tuning.")
+            }
+            assert_integerish(domain$upper, len = 1L, any.missing = FALSE)
+          },
+          .parent = topenv()
+        ),
         disable_in_tune = list(early_stopping_rounds = NULL),
         init = 1000L
       )
 
+      # fmt: skip
+      # nolint start
       ps = ps(
         alpha                       = p_dbl(0, default = 0, tags = "train"),
         approxcontrib               = p_lgl(default = FALSE, tags = "predict"),
@@ -90,7 +100,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         evals                       = p_uty(default = NULL, tags = "train"),
         eval_metric                 = p_uty(tags = "train"),
         custom_metric               = p_uty(tags = "train", custom_check = crate({function(x) check_true(any(is.function(x), test_multi_class(x, c("MeasureClassifSimple", "MeasureBinarySimple"))))})),
-        extmem_single_page          = p_lgl(default = FALSE, tags = "train", depends = quote(tree_method %in% c("hist", "approx"))),
         feature_selector            = p_fct(c("cyclic", "shuffle", "random", "greedy", "thrifty"), default = "cyclic", tags = "train", depends = quote(booster == "gblinear")),
         gamma                       = p_dbl(0, default = 0, tags = "train"),
         grow_policy                 = p_fct(c("depthwise", "lossguide"), default = "depthwise", tags = "train", depends = quote(booster == "gbtree" && tree_method %in% c("hist", "approx"))),
@@ -107,7 +116,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         maximize                    = p_lgl(default = NULL, special_vals = list(NULL), tags = "train"),
         min_child_weight            = p_dbl(0, default = 1, tags = "train", depends = quote(booster == "gbtree")),
         missing                     = p_dbl(default = NA, tags = "predict", special_vals = list(NA, NA_real_, NULL)),
-        monotone_constraints        = p_uty(default = 0, tags = "train", custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) }), depends = quote(booster == "gbtree")), # nolint
+        monotone_constraints        = p_uty(default = 0, tags = "train", custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) }), depends = quote(booster == "gbtree")),
         nrounds                     = p_nrounds,
         normalize_type              = p_fct(c("tree", "forest"), default = "tree", tags = "train", depends = quote(booster == "dart")),
         nthread                     = p_int(1L, init = 1L, tags = c("train", "threads")),
@@ -138,13 +147,24 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         xgb_model                   = p_uty(default = NULL, tags = "train"),
         use_pred_offset             = p_lgl(init = TRUE, tags = "predict")
       )
+      # nolint end
 
       super$initialize(
         id = "classif.xgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
         feature_types = c("logical", "integer", "numeric"),
-        properties = c("weights", "missings", "twoclass", "multiclass", "importance", "hotstart_forward", "internal_tuning", "validation", "offset"),
+        properties = c(
+          "weights",
+          "missings",
+          "twoclass",
+          "multiclass",
+          "importance",
+          "hotstart_forward",
+          "internal_tuning",
+          "validation",
+          "offset"
+        ),
         packages = c("mlr3learners", "xgboost"),
         label = "Extreme Gradient Boosting",
         man = "mlr3learners::mlr_learners_classif.xgboost"
@@ -210,7 +230,6 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
   private = list(
     .validate = NULL,
     .train = function(task) {
-
       pv = self$param_set$get_values(tags = "train")
 
       lvls = task$class_names
@@ -228,7 +247,9 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         stopf("objective = 'multi:softmax' does not work with predict_type = 'prob'")
       }
 
-      if (pv$objective %in% c("multi:softmax", "multi:softprob")) pv$num_class = nlvls
+      if (pv$objective %in% c("multi:softmax", "multi:softprob")) {
+        pv$num_class = nlvls
+      }
 
       data = task$data(cols = task$feature_names)
       # recode to 0:1 so that for the binary case the positive class translates to 1 (#32)
@@ -275,9 +296,17 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         n_classes = length(task$class_names)
         measure = pv$custom_metric
 
-        fun = if (pv$objective == "binary:logistic" && measure$predict_type == "prob" && inherits(measure, "MeasureBinarySimple")) {
+        fun = if (
+          pv$objective == "binary:logistic" &&
+            measure$predict_type == "prob" &&
+            inherits(measure, "MeasureBinarySimple")
+        ) {
           xgboost_binary_binary_prob
-        } else if (pv$objective == "binary:logistic" && measure$predict_type == "prob" && inherits(measure, "MeasureClassifSimple")) {
+        } else if (
+          pv$objective == "binary:logistic" &&
+            measure$predict_type == "prob" &&
+            inherits(measure, "MeasureClassifSimple")
+        ) {
           xgboost_binary_classif_prob
         } else if (pv$objective == "binary:logistic" && measure$predict_type == "response") {
           xgboost_binary_response
@@ -289,10 +318,17 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
           stop("Only 'binary:logistic', 'multi:softprob' and 'multi:softmax' objectives are supported.")
         }
 
-        pv$custom_metric =  mlr3misc::crate({function(pred, dtrain) {
-          scores = fun(pred, dtrain, measure, n_classes)
-          list(metric = measure$id, value = scores)
-        }}, n_classes, measure, fun)
+        pv$custom_metric = mlr3misc::crate(
+          {
+            function(pred, dtrain) {
+              scores = fun(pred, dtrain, measure, n_classes)
+              list(metric = measure$id, value = scores)
+            }
+          },
+          n_classes,
+          measure,
+          fun
+        )
         pv$maximize = !measure$minimize
       }
 
@@ -332,14 +368,16 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 
       newdata = as_numeric_matrix(ordered_features(task, self))
       pred = invoke(predict, model, newdata = newdata, .args = pv)
-      if (nlvls == 2L) { # binaryclass
+      if (nlvls == 2L) {
+        # binaryclass
         if (pv$objective == "multi:softprob") {
           prob = matrix(pred, ncol = nlvls, byrow = FALSE)
           colnames(prob) = lvls
         } else {
           prob = pvec2mat(pred, lvls)
         }
-      } else { # multiclass
+      } else {
+        # multiclass
         if (pv$objective == "multi:softmax") {
           response = lvls[pred + 1L]
         } else {
@@ -348,7 +386,7 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
         }
       }
 
-      if (!is.null(response)) {
+      result = if (!is.null(response)) {
         list(response = response)
       } else if (self$predict_type == "response") {
         i = max.col(prob, ties.method = "random")
@@ -356,6 +394,11 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
       } else {
         list(prob = prob)
       }
+
+      if (self$predict_raw) {
+        result$raw = pred
+      }
+      result
     },
 
     .hotstart = function(task) {
@@ -425,7 +468,8 @@ LearnerClassifXgboost = R6Class("LearnerClassifXgboost",
 )
 
 #' @export
-default_values.LearnerClassifXgboost = function(x, search_space, task, ...) { # nolint
+#nolint next
+default_values.LearnerClassifXgboost = function(x, search_space, task, ...) {
   special_defaults = list(
     nrounds = 1000L
   )

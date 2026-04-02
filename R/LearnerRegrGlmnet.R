@@ -20,14 +20,15 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
+LearnerRegrGlmnet = R6Class(
+  "LearnerRegrGlmnet",
   inherit = LearnerRegr,
 
   public = list(
-
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+      # fmt: skip
       ps = ps(
         alignment             = p_fct(c("lambda", "fraction"), default = "lambda", tags = "train"),
         alpha                 = p_dbl(0, 1, default = 1, tags = "train"),
@@ -117,10 +118,12 @@ LearnerRegrGlmnet = R6Class("LearnerRegrGlmnet",
 
       pv = glmnet_set_offset(task, "predict", pv)
 
-      response = invoke(predict, self$model,
-        newx = newdata,
-        type = "response", .args = pv)
-      list(response = drop(response))
+      response = invoke(predict, self$model, newx = newdata, type = "response", .args = pv)
+      result = list(response = drop(response))
+      if (self$predict_raw) {
+        result$raw = response
+      }
+      result
     }
   )
 )
