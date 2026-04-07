@@ -63,7 +63,7 @@ test_that("selected_features", {
   )
 })
 
-test_that("seed param works", {
+test_that("seed param works in benchmark", {
   library(data.table)
   task.obj <- mlr3::tsk("sonar")
   task.obj$col_roles$feature <- paste0("V", 1:9)#simplify result
@@ -71,11 +71,14 @@ test_that("seed param works", {
   kfoldcv$param_set$values$folds <- 2
   set.seed(1)
   kfoldcv$instantiate(task.obj)
-  seed.list <- list(null=NULL, one=1L)
+  seed.list <- list(default=NULL, one=1L)
   w_dt_list <- list()
   for(seed.name in names(seed.list)){
     lrn_cvg <- mlr3learners::LearnerClassifCVGlmnet$new()
-    lrn_cvg$param_set$values$seed <- seed.list[[seed.name]]
+    seed <- seed.list[[seed.name]]
+    if(is.integer(seed)){
+      lrn_cvg$param_set$values$seed <- seed
+    }
     for(iteration in paste0("run",1:2)){
       bgrid <- mlr3::benchmark_grid(task.obj, lrn_cvg, kfoldcv)
       bmr <- mlr3::benchmark(bgrid, store_models=TRUE)
@@ -98,17 +101,6 @@ test_that("seed param works", {
     w_dt,
     seed.name + test.fold + name ~ iteration,
     value.var="coef")
-  w_wide[seed.name=="null", expect_false(identical(run1, run2))]
+  w_wide[seed.name=="default", expect_false(identical(run1, run2))]
   w_wide[seed.name=="one", expect_identical(run1, run2)]
-})
-
-test_that("error for invalid seed param", {
-  task.obj <- mlr3::tsk("sonar")
-  kfoldcv <- mlr3::rsmp("cv")
-  lrn_cvg <- mlr3learners::LearnerClassifCVGlmnet$new()
-  lrn_cvg$param_set$values$seed <- "foo"
-  bgrid <- mlr3::benchmark_grid(task.obj, lrn_cvg, kfoldcv)
-  expect_error({
-    mlr3::benchmark(bgrid, store_models=TRUE)
-  }, "cv_glmnet seed param must be integer or NULL")
 })

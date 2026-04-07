@@ -66,15 +66,13 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
     invoke(glmnet::glmnet.control, .args = pv[is_ctrl_pars])
   }
 
-  is_fun_pars <- (!is_ctrl_pars) & (names(pv)!="seed")
-  if (is.integer(pv$seed)) {
-    set.seed(pv$seed)
-  } else if (!is.null(pv$seed)) {
-    stop("cv_glmnet seed param must be integer or NULL")
-  }
+  is_train_pars <- (!is_ctrl_pars) & (names(pv)!="seed")
   invoke(
     if (cv) glmnet::cv.glmnet else glmnet::glmnet,
-    x = data, y = target, .args = pv[is_fun_pars]
+    x = data,
+    y = target,
+    .args = pv[is_train_pars],
+    .seed = pv[["seed"]]
   )
 }
 
