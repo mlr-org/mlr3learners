@@ -40,7 +40,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RUSH_TEST_USE_REDIS: true
-      TARGET_PKG_DIR: rush
+      TARGET_PKG_DIR: mlr3learners
 
     strategy:
       fail-fast: false
