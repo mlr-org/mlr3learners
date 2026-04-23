@@ -64,6 +64,7 @@ LearnerRegrCVGlmnet = R6Class(
         predict.gamma        = p_dbl(default = "gamma.1se", special_vals = list("gamma.1se", "gamma.min"), tags = "predict"),
         relax                = p_lgl(default = FALSE, tags = "train"),
         s                    = p_dbl(0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
+        seed                 = p_int(init = NA_integer_, special_vals = list(NA_integer_), tags = "train"),
         standardize          = p_lgl(default = TRUE, tags = "train"),
         standardize.response = p_lgl(default = FALSE, tags = "train"),
         thresh               = p_dbl(0, default = 1e-07, tags = "train"),

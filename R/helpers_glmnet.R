@@ -64,14 +64,15 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
 
   if (any(is_ctrl_pars)) {
     invoke(glmnet::glmnet.control, .args = pv[is_ctrl_pars])
-    pv = pv[!is_ctrl_pars]
   }
 
+  is_train_pars <- (!is_ctrl_pars) & (names(pv)!="seed")
   invoke(
     if (cv) glmnet::cv.glmnet else glmnet::glmnet,
     x = data,
     y = target,
-    .args = pv
+    .args = pv[is_train_pars],
+    .seed = pv[["seed"]]
   )
 }
 
