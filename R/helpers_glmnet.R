@@ -43,11 +43,10 @@ glmnet_selected_features = function(self, lambda = NULL) {
   assert_number(lambda, null.ok = TRUE, lower = 0)
   lambda = lambda %??% glmnet_get_lambda(self)
   nonzero = predict(self$model, type = "nonzero", s = lambda)
-  if (is.data.frame(nonzero)) {
-    nonzero = nonzero[[1L]]
+  nonzero = if (is.data.frame(nonzero)) {
+    nonzero[[1L]]
   } else {
-    nonzero = unlist(map(nonzero, 1L), use.names = FALSE)
-    nonzero = if (length(nonzero)) sort(unique(nonzero)) else integer()
+    sort(unique(unlist(nonzero, use.names = FALSE)))
   }
 
   glmnet_feature_names(self$model)[nonzero]
