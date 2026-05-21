@@ -1,7 +1,7 @@
 # GLM with Elastic Net Regularization Classification Learner
 
 Generalized linear models with elastic net regularization. Calls
-[`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html)
+[`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html)
 from package [glmnet](https://CRAN.R-project.org/package=glmnet).
 
 The default for hyperparameter `family` is set to `"binomial"` or
@@ -11,11 +11,11 @@ The default for hyperparameter `family` is set to `"binomial"` or
 
 If a `Task` contains a column with the `offset` role, it is
 automatically incorporated during training via the `offset` argument in
-[`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html).
-During prediction, the offset column from the test set is used only if
+[`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html). During
+prediction, the offset column from the test set is used only if
 `use_pred_offset = TRUE` (default), passed via the `newoffset` argument
 in
-[`glmnet::predict.glmnet()`](https://glmnet.stanford.edu/reference/predict.glmnet.html).
+[`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html).
 Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is
 applied, effectively disabling the offset adjustment during prediction.
 
@@ -206,7 +206,7 @@ Creates a new instance of this
 ### Method `selected_features()`
 
 Returns the set of selected features as reported by
-[`glmnet::predict.glmnet()`](https://glmnet.stanford.edu/reference/predict.glmnet.html)
+[`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html)
 with `type` set to `"nonzero"`.
 
 #### Usage
