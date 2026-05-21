@@ -1,9 +1,14 @@
-# mlr3learners (development version)
+# mlr3learners 0.15.0
 
+* compatibility: glmnet 5.0.
 * feat: All learners now support the `predict_raw` flag to store raw prediction objects from upstream models.
-* fix: using offset during prediction for `xgboost` learners.
-* fix: importance in doc examples is now printed correctly.
-* feat: add parameter `local.importance` to ranger learners.
+* feat: `classif.log_reg` gains a `link` hyperparameter to support probit regression (#376).
+* feat: `classif.ranger` and `regr.ranger` gain a `native_model` field to access the underlying ranger object (#375).
+* feat: Add parameter `local.importance` to ranger learners (#377).
+* fix: `glmnet_selected_features()` now works correctly with glmnet >= 5.0.
+* fix: Using offset during prediction for `xgboost` learners (#371).
+* fix: Importance in doc examples is now printed correctly.
+* fix: `xgboost` parameter set (#384).
 
 # mlr3learners 0.14.0
 
