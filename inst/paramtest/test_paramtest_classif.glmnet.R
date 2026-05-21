@@ -15,7 +15,9 @@ test_that("classif.glmnet", {
     "family", # handled by mlr3
     "itrace", # supported via param trace.it
     "factory", # only used in scripts, no effect within mlr3
-    "offset" # handled by mlr3
+    "offset", # handled by mlr3
+    "control", # individual control params are set directly
+    "cox.ties" # only used for cox models
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")
