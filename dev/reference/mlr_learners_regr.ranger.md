@@ -49,40 +49,40 @@ or with the associated sugar function
 
 ## Parameters
 
-|                              |           |          |                                                                   |                       |
-|------------------------------|-----------|----------|-------------------------------------------------------------------|-----------------------|
-| Id                           | Type      | Default  | Levels                                                            | Range                 |
-| always.split.variables       | untyped   | \-       |                                                                   | \-                    |
-| holdout                      | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| importance                   | character | \-       | none, impurity, impurity_corrected, permutation                   | \-                    |
-| keep.inbag                   | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| max.depth                    | integer   | NULL     |                                                                   | \\\[1, \infty)\\      |
-| min.bucket                   | integer   | 1        |                                                                   | \\\[1, \infty)\\      |
-| min.node.size                | integer   | 5        |                                                                   | \\\[1, \infty)\\      |
-| mtry                         | integer   | \-       |                                                                   | \\\[1, \infty)\\      |
-| mtry.ratio                   | numeric   | \-       |                                                                   | \\\[0, 1\]\\          |
-| na.action                    | character | na.learn | na.learn, na.omit, na.fail                                        | \-                    |
-| node.stats                   | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| num.random.splits            | integer   | 1        |                                                                   | \\\[1, \infty)\\      |
-| num.threads                  | integer   | 1        |                                                                   | \\\[1, \infty)\\      |
-| num.trees                    | integer   | 500      |                                                                   | \\\[1, \infty)\\      |
-| oob.error                    | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
-| poisson.tau                  | numeric   | 1        |                                                                   | \\(-\infty, \infty)\\ |
-| regularization.factor        | untyped   | 1        |                                                                   | \-                    |
-| regularization.usedepth      | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| replace                      | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
-| respect.unordered.factors    | character | \-       | ignore, order, partition                                          | \-                    |
-| sample.fraction              | numeric   | \-       |                                                                   | \\\[0, 1\]\\          |
-| save.memory                  | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| scale.permutation.importance | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| local.importance             | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| se.method                    | character | infjack  | jack, infjack, ensemble_standard_deviation, law_of_total_variance | \-                    |
-| sigma2.threshold             | numeric   | 0.01     |                                                                   | \\(-\infty, \infty)\\ |
-| seed                         | integer   | NULL     |                                                                   | \\(-\infty, \infty)\\ |
-| split.select.weights         | untyped   | NULL     |                                                                   | \-                    |
-| splitrule                    | character | variance | variance, extratrees, maxstat, beta, poisson                      | \-                    |
-| verbose                      | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
-| write.forest                 | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| always.split.variables | untyped | \- |  | \- |
+| holdout | logical | FALSE | TRUE, FALSE | \- |
+| importance | character | \- | none, impurity, impurity_corrected, permutation | \- |
+| keep.inbag | logical | FALSE | TRUE, FALSE | \- |
+| max.depth | integer | NULL |  | \\\[1, \infty)\\ |
+| min.bucket | integer | 1 |  | \\\[1, \infty)\\ |
+| min.node.size | integer | 5 |  | \\\[1, \infty)\\ |
+| mtry | integer | \- |  | \\\[1, \infty)\\ |
+| mtry.ratio | numeric | \- |  | \\\[0, 1\]\\ |
+| na.action | character | na.learn | na.learn, na.omit, na.fail | \- |
+| node.stats | logical | FALSE | TRUE, FALSE | \- |
+| num.random.splits | integer | 1 |  | \\\[1, \infty)\\ |
+| num.threads | integer | 1 |  | \\\[1, \infty)\\ |
+| num.trees | integer | 500 |  | \\\[1, \infty)\\ |
+| oob.error | logical | TRUE | TRUE, FALSE | \- |
+| poisson.tau | numeric | 1 |  | \\(-\infty, \infty)\\ |
+| regularization.factor | untyped | 1 |  | \- |
+| regularization.usedepth | logical | FALSE | TRUE, FALSE | \- |
+| replace | logical | TRUE | TRUE, FALSE | \- |
+| respect.unordered.factors | character | \- | ignore, order, partition | \- |
+| sample.fraction | numeric | \- |  | \\\[0, 1\]\\ |
+| save.memory | logical | FALSE | TRUE, FALSE | \- |
+| scale.permutation.importance | logical | FALSE | TRUE, FALSE | \- |
+| local.importance | logical | FALSE | TRUE, FALSE | \- |
+| se.method | character | infjack | jack, infjack, ensemble_standard_deviation, law_of_total_variance | \- |
+| sigma2.threshold | numeric | 0.01 |  | \\(-\infty, \infty)\\ |
+| seed | integer | NULL |  | \\(-\infty, \infty)\\ |
+| split.select.weights | untyped | NULL |  | \- |
+| splitrule | character | variance | variance, extratrees, maxstat, beta, poisson | \- |
+| verbose | logical | TRUE | TRUE, FALSE | \- |
+| write.forest | logical | TRUE | TRUE, FALSE | \- |
 
 ## Custom mlr3 parameters
 

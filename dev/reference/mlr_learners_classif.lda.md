@@ -37,16 +37,16 @@ or with the associated sugar function
 
 ## Parameters
 
-|                |           |         |                               |                       |
-|----------------|-----------|---------|-------------------------------|-----------------------|
-| Id             | Type      | Default | Levels                        | Range                 |
-| dimen          | untyped   | \-      |                               | \-                    |
-| method         | character | moment  | moment, mle, mve, t           | \-                    |
-| nu             | integer   | \-      |                               | \\(-\infty, \infty)\\ |
-| predict.method | character | plug-in | plug-in, predictive, debiased | \-                    |
-| predict.prior  | untyped   | \-      |                               | \-                    |
-| prior          | untyped   | \-      |                               | \-                    |
-| tol            | numeric   | \-      |                               | \\(-\infty, \infty)\\ |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| dimen | untyped | \- |  | \- |
+| method | character | moment | moment, mle, mve, t | \- |
+| nu | integer | \- |  | \\(-\infty, \infty)\\ |
+| predict.method | character | plug-in | plug-in, predictive, debiased | \- |
+| predict.prior | untyped | \- |  | \- |
+| prior | untyped | \- |  | \- |
+| tol | numeric | \- |  | \\(-\infty, \infty)\\ |
 
 ## References
 

@@ -42,37 +42,37 @@ or with the associated sugar function
 
 ## Parameters
 
-|                  |           |           |                                          |                       |
-|------------------|-----------|-----------|------------------------------------------|-----------------------|
-| Id               | Type      | Default   | Levels                                   | Range                 |
-| bias.correct     | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| checkNames       | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| coef.cov         | untyped   | NULL      |                                          | \-                    |
-| coef.trend       | untyped   | NULL      |                                          | \-                    |
-| coef.var         | untyped   | NULL      |                                          | \-                    |
-| control          | untyped   | NULL      |                                          | \-                    |
-| cov.compute      | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| covtype          | character | matern5_2 | gauss, matern5_2, matern3_2, exp, powexp | \-                    |
-| estim.method     | character | MLE       | MLE, LOO                                 | \-                    |
-| gr               | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| iso              | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| jitter           | numeric   | 0         |                                          | \\\[0, \infty)\\      |
-| kernel           | untyped   | NULL      |                                          | \-                    |
-| knots            | untyped   | NULL      |                                          | \-                    |
-| light.return     | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| lower            | untyped   | NULL      |                                          | \-                    |
-| multistart       | integer   | 1         |                                          | \\(-\infty, \infty)\\ |
-| noise.var        | untyped   | NULL      |                                          | \-                    |
-| nugget           | numeric   | \-        |                                          | \\(-\infty, \infty)\\ |
-| nugget.estim     | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| nugget.stability | numeric   | 0         |                                          | \\\[0, \infty)\\      |
-| optim.method     | character | BFGS      | BFGS, gen                                | \-                    |
-| parinit          | untyped   | NULL      |                                          | \-                    |
-| penalty          | untyped   | NULL      |                                          | \-                    |
-| scaling          | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| se.compute       | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| type             | character | SK        | SK, UK                                   | \-                    |
-| upper            | untyped   | NULL      |                                          | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| bias.correct | logical | FALSE | TRUE, FALSE | \- |
+| checkNames | logical | TRUE | TRUE, FALSE | \- |
+| coef.cov | untyped | NULL |  | \- |
+| coef.trend | untyped | NULL |  | \- |
+| coef.var | untyped | NULL |  | \- |
+| control | untyped | NULL |  | \- |
+| cov.compute | logical | TRUE | TRUE, FALSE | \- |
+| covtype | character | matern5_2 | gauss, matern5_2, matern3_2, exp, powexp | \- |
+| estim.method | character | MLE | MLE, LOO | \- |
+| gr | logical | TRUE | TRUE, FALSE | \- |
+| iso | logical | FALSE | TRUE, FALSE | \- |
+| jitter | numeric | 0 |  | \\\[0, \infty)\\ |
+| kernel | untyped | NULL |  | \- |
+| knots | untyped | NULL |  | \- |
+| light.return | logical | FALSE | TRUE, FALSE | \- |
+| lower | untyped | NULL |  | \- |
+| multistart | integer | 1 |  | \\(-\infty, \infty)\\ |
+| noise.var | untyped | NULL |  | \- |
+| nugget | numeric | \- |  | \\(-\infty, \infty)\\ |
+| nugget.estim | logical | FALSE | TRUE, FALSE | \- |
+| nugget.stability | numeric | 0 |  | \\\[0, \infty)\\ |
+| optim.method | character | BFGS | BFGS, gen | \- |
+| parinit | untyped | NULL |  | \- |
+| penalty | untyped | NULL |  | \- |
+| scaling | logical | FALSE | TRUE, FALSE | \- |
+| se.compute | logical | TRUE | TRUE, FALSE | \- |
+| type | character | SK | SK, UK | \- |
+| upper | untyped | NULL |  | \- |
 
 ## References
 

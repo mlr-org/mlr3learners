@@ -59,15 +59,15 @@ or with the associated sugar function
 
 ## Parameters
 
-|             |           |         |                                                                                               |                  |
-|-------------|-----------|---------|-----------------------------------------------------------------------------------------------|------------------|
-| Id          | Type      | Default | Levels                                                                                        | Range            |
-| k           | integer   | 7       |                                                                                               | \\\[1, \infty)\\ |
-| distance    | numeric   | 2       |                                                                                               | \\\[0, \infty)\\ |
-| kernel      | character | optimal | rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal | \-               |
-| scale       | logical   | TRUE    | TRUE, FALSE                                                                                   | \-               |
-| ykernel     | untyped   | NULL    |                                                                                               | \-               |
-| store_model | logical   | FALSE   | TRUE, FALSE                                                                                   | \-               |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| k | integer | 7 |  | \\\[1, \infty)\\ |
+| distance | numeric | 2 |  | \\\[0, \infty)\\ |
+| kernel | character | optimal | rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal | \- |
+| scale | logical | TRUE | TRUE, FALSE | \- |
+| ykernel | untyped | NULL |  | \- |
+| store_model | logical | FALSE | TRUE, FALSE | \- |
 
 ## References
 

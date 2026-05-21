@@ -1,7 +1,7 @@
 # GLM with Elastic Net Regularization Classification Learner
 
 Generalized linear models with elastic net regularization. Calls
-[`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html)
+[`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html)
 from package [glmnet](https://CRAN.R-project.org/package=glmnet).
 
 The default for hyperparameter `family` is set to `"binomial"` or
@@ -11,11 +11,11 @@ The default for hyperparameter `family` is set to `"binomial"` or
 
 If a `Task` contains a column with the `offset` role, it is
 automatically incorporated during training via the `offset` argument in
-[`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html). During
-prediction, the offset column from the test set is used only if
+[`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html).
+During prediction, the offset column from the test set is used only if
 `use_pred_offset = TRUE` (default), passed via the `newoffset` argument
 in
-[`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html).
+[`glmnet::predict.glmnet()`](https://glmnet.stanford.edu/reference/predict.glmnet.html).
 Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is
 applied, effectively disabling the offset adjustment during prediction.
 
@@ -45,51 +45,51 @@ or with the associated sugar function
 
 ## Parameters
 
-|                      |           |            |                                |                       |
-|----------------------|-----------|------------|--------------------------------|-----------------------|
-| Id                   | Type      | Default    | Levels                         | Range                 |
-| alignment            | character | lambda     | lambda, fraction               | \-                    |
-| alpha                | numeric   | 1          |                                | \\\[0, 1\]\\          |
-| big                  | numeric   | 9.9e+35    |                                | \\(-\infty, \infty)\\ |
-| devmax               | numeric   | 0.999      |                                | \\\[0, 1\]\\          |
-| dfmax                | integer   | \-         |                                | \\\[0, \infty)\\      |
-| epsnr                | numeric   | 1e-08      |                                | \\\[0, 1\]\\          |
-| eps                  | numeric   | 1e-06      |                                | \\\[0, 1\]\\          |
-| exclude              | integer   | \-         |                                | \\\[1, \infty)\\      |
-| exmx                 | numeric   | 250        |                                | \\(-\infty, \infty)\\ |
-| fdev                 | numeric   | 1e-05      |                                | \\\[0, 1\]\\          |
-| foldid               | untyped   | NULL       |                                | \-                    |
-| gamma                | untyped   | \-         |                                | \-                    |
-| grouped              | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| intercept            | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| keep                 | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| lambda.min.ratio     | numeric   | \-         |                                | \\\[0, 1\]\\          |
-| lambda               | untyped   | \-         |                                | \-                    |
-| lower.limits         | untyped   | \-         |                                | \-                    |
-| maxit                | integer   | 100000     |                                | \\\[1, \infty)\\      |
-| mnlam                | integer   | 5          |                                | \\\[1, \infty)\\      |
-| mxitnr               | integer   | 25         |                                | \\\[1, \infty)\\      |
-| mxit                 | integer   | 100        |                                | \\\[1, \infty)\\      |
-| nfolds               | integer   | 10         |                                | \\\[3, \infty)\\      |
-| nlambda              | integer   | 100        |                                | \\\[1, \infty)\\      |
-| use_pred_offset      | logical   | \-         | TRUE, FALSE                    | \-                    |
-| parallel             | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| penalty.factor       | untyped   | \-         |                                | \-                    |
-| pmax                 | integer   | \-         |                                | \\\[0, \infty)\\      |
-| pmin                 | numeric   | 1e-09      |                                | \\\[0, 1\]\\          |
-| prec                 | numeric   | 1e-10      |                                | \\(-\infty, \infty)\\ |
-| predict.gamma        | numeric   | gamma.1se  |                                | \\(-\infty, \infty)\\ |
-| relax                | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| s                    | numeric   | lambda.1se |                                | \\\[0, \infty)\\      |
-| standardize          | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| standardize.response | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| thresh               | numeric   | 1e-07      |                                | \\\[0, \infty)\\      |
-| trace.it             | integer   | 0          |                                | \\\[0, 1\]\\          |
-| type.gaussian        | character | \-         | covariance, naive              | \-                    |
-| type.logistic        | character | \-         | Newton, modified.Newton        | \-                    |
-| type.measure         | character | deviance   | deviance, class, auc, mse, mae | \-                    |
-| type.multinomial     | character | \-         | ungrouped, grouped             | \-                    |
-| upper.limits         | untyped   | \-         |                                | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| alignment | character | lambda | lambda, fraction | \- |
+| alpha | numeric | 1 |  | \\\[0, 1\]\\ |
+| big | numeric | 9.9e+35 |  | \\(-\infty, \infty)\\ |
+| devmax | numeric | 0.999 |  | \\\[0, 1\]\\ |
+| dfmax | integer | \- |  | \\\[0, \infty)\\ |
+| epsnr | numeric | 1e-08 |  | \\\[0, 1\]\\ |
+| eps | numeric | 1e-06 |  | \\\[0, 1\]\\ |
+| exclude | integer | \- |  | \\\[1, \infty)\\ |
+| exmx | numeric | 250 |  | \\(-\infty, \infty)\\ |
+| fdev | numeric | 1e-05 |  | \\\[0, 1\]\\ |
+| foldid | untyped | NULL |  | \- |
+| gamma | untyped | \- |  | \- |
+| grouped | logical | TRUE | TRUE, FALSE | \- |
+| intercept | logical | TRUE | TRUE, FALSE | \- |
+| keep | logical | FALSE | TRUE, FALSE | \- |
+| lambda.min.ratio | numeric | \- |  | \\\[0, 1\]\\ |
+| lambda | untyped | \- |  | \- |
+| lower.limits | untyped | \- |  | \- |
+| maxit | integer | 100000 |  | \\\[1, \infty)\\ |
+| mnlam | integer | 5 |  | \\\[1, \infty)\\ |
+| mxitnr | integer | 25 |  | \\\[1, \infty)\\ |
+| mxit | integer | 100 |  | \\\[1, \infty)\\ |
+| nfolds | integer | 10 |  | \\\[3, \infty)\\ |
+| nlambda | integer | 100 |  | \\\[1, \infty)\\ |
+| use_pred_offset | logical | \- | TRUE, FALSE | \- |
+| parallel | logical | FALSE | TRUE, FALSE | \- |
+| penalty.factor | untyped | \- |  | \- |
+| pmax | integer | \- |  | \\\[0, \infty)\\ |
+| pmin | numeric | 1e-09 |  | \\\[0, 1\]\\ |
+| prec | numeric | 1e-10 |  | \\(-\infty, \infty)\\ |
+| predict.gamma | numeric | gamma.1se |  | \\(-\infty, \infty)\\ |
+| relax | logical | FALSE | TRUE, FALSE | \- |
+| s | numeric | lambda.1se |  | \\\[0, \infty)\\ |
+| standardize | logical | TRUE | TRUE, FALSE | \- |
+| standardize.response | logical | FALSE | TRUE, FALSE | \- |
+| thresh | numeric | 1e-07 |  | \\\[0, \infty)\\ |
+| trace.it | integer | 0 |  | \\\[0, 1\]\\ |
+| type.gaussian | character | \- | covariance, naive | \- |
+| type.logistic | character | \- | Newton, modified.Newton | \- |
+| type.measure | character | deviance | deviance, class, auc, mse, mae | \- |
+| type.multinomial | character | \- | ungrouped, grouped | \- |
+| upper.limits | untyped | \- |  | \- |
 
 ## Internal Encoding
 
@@ -206,7 +206,7 @@ Creates a new instance of this
 ### Method `selected_features()`
 
 Returns the set of selected features as reported by
-[`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html)
+[`glmnet::predict.glmnet()`](https://glmnet.stanford.edu/reference/predict.glmnet.html)
 with `type` set to `"nonzero"`.
 
 #### Usage

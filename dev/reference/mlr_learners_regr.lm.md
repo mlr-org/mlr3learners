@@ -41,23 +41,23 @@ or with the associated sugar function
 
 ## Parameters
 
-|                 |           |         |                                       |                       |
-|-----------------|-----------|---------|---------------------------------------|-----------------------|
-| Id              | Type      | Default | Levels                                | Range                 |
-| df              | numeric   | Inf     |                                       | \\(-\infty, \infty)\\ |
-| interval        | character | \-      | none, confidence, prediction          | \-                    |
-| level           | numeric   | 0.95    |                                       | \\(-\infty, \infty)\\ |
-| model           | logical   | TRUE    | TRUE, FALSE                           | \-                    |
-| pred.var        | untyped   | \-      |                                       | \-                    |
-| qr              | logical   | TRUE    | TRUE, FALSE                           | \-                    |
-| scale           | numeric   | NULL    |                                       | \\(-\infty, \infty)\\ |
-| singular.ok     | logical   | TRUE    | TRUE, FALSE                           | \-                    |
-| x               | logical   | FALSE   | TRUE, FALSE                           | \-                    |
-| y               | logical   | FALSE   | TRUE, FALSE                           | \-                    |
-| rankdeficient   | character | \-      | warnif, simple, non-estim, NA, NAwarn | \-                    |
-| tol             | numeric   | 1e-07   |                                       | \\(-\infty, \infty)\\ |
-| verbose         | logical   | FALSE   | TRUE, FALSE                           | \-                    |
-| use_pred_offset | logical   | TRUE    | TRUE, FALSE                           | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| df | numeric | Inf |  | \\(-\infty, \infty)\\ |
+| interval | character | \- | none, confidence, prediction | \- |
+| level | numeric | 0.95 |  | \\(-\infty, \infty)\\ |
+| model | logical | TRUE | TRUE, FALSE | \- |
+| pred.var | untyped | \- |  | \- |
+| qr | logical | TRUE | TRUE, FALSE | \- |
+| scale | numeric | NULL |  | \\(-\infty, \infty)\\ |
+| singular.ok | logical | TRUE | TRUE, FALSE | \- |
+| x | logical | FALSE | TRUE, FALSE | \- |
+| y | logical | FALSE | TRUE, FALSE | \- |
+| rankdeficient | character | \- | warnif, simple, non-estim, NA, NAwarn | \- |
+| tol | numeric | 1e-07 |  | \\(-\infty, \infty)\\ |
+| verbose | logical | FALSE | TRUE, FALSE | \- |
+| use_pred_offset | logical | TRUE | TRUE, FALSE | \- |
 
 ## Contrasts
 

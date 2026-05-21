@@ -30,25 +30,25 @@ or with the associated sugar function
 
 ## Parameters
 
-|                 |           |                  |                                     |                       |
-|-----------------|-----------|------------------|-------------------------------------|-----------------------|
-| Id              | Type      | Default          | Levels                              | Range                 |
-| cachesize       | numeric   | 40               |                                     | \\(-\infty, \infty)\\ |
-| class.weights   | untyped   | NULL             |                                     | \-                    |
-| coef0           | numeric   | 0                |                                     | \\(-\infty, \infty)\\ |
-| cost            | numeric   | 1                |                                     | \\\[0, \infty)\\      |
-| cross           | integer   | 0                |                                     | \\\[0, \infty)\\      |
-| decision.values | logical   | FALSE            | TRUE, FALSE                         | \-                    |
-| degree          | integer   | 3                |                                     | \\\[1, \infty)\\      |
-| epsilon         | numeric   | 0.1              |                                     | \\\[0, \infty)\\      |
-| fitted          | logical   | TRUE             | TRUE, FALSE                         | \-                    |
-| gamma           | numeric   | \-               |                                     | \\\[0, \infty)\\      |
-| kernel          | character | radial           | linear, polynomial, radial, sigmoid | \-                    |
-| nu              | numeric   | 0.5              |                                     | \\(-\infty, \infty)\\ |
-| scale           | untyped   | TRUE             |                                     | \-                    |
-| shrinking       | logical   | TRUE             | TRUE, FALSE                         | \-                    |
-| tolerance       | numeric   | 0.001            |                                     | \\\[0, \infty)\\      |
-| type            | character | C-classification | C-classification, nu-classification | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| cachesize | numeric | 40 |  | \\(-\infty, \infty)\\ |
+| class.weights | untyped | NULL |  | \- |
+| coef0 | numeric | 0 |  | \\(-\infty, \infty)\\ |
+| cost | numeric | 1 |  | \\\[0, \infty)\\ |
+| cross | integer | 0 |  | \\\[0, \infty)\\ |
+| decision.values | logical | FALSE | TRUE, FALSE | \- |
+| degree | integer | 3 |  | \\\[1, \infty)\\ |
+| epsilon | numeric | 0.1 |  | \\\[0, \infty)\\ |
+| fitted | logical | TRUE | TRUE, FALSE | \- |
+| gamma | numeric | \- |  | \\\[0, \infty)\\ |
+| kernel | character | radial | linear, polynomial, radial, sigmoid | \- |
+| nu | numeric | 0.5 |  | \\(-\infty, \infty)\\ |
+| scale | untyped | TRUE |  | \- |
+| shrinking | logical | TRUE | TRUE, FALSE | \- |
+| tolerance | numeric | 0.001 |  | \\\[0, \infty)\\ |
+| type | character | C-classification | C-classification, nu-classification | \- |
 
 ## References
 
