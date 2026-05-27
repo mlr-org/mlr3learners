@@ -56,15 +56,20 @@ The lightgbm learner has a default of 1000, so we use the same here.
 
 In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
 For information on how to configure the validation set, see the \emph{Validation} section of \link[mlr3:Learner]{mlr3::Learner}.
-This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
-The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
-The internal validation measure can be set via the \code{custom_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
-Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
+This validation data can also be used for early stopping,
+which can be enabled by setting the \code{early_stopping_rounds} parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores},
+and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
+The internal validation measure can be set via the \code{custom_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure},
+a function, or a character string for the internal xgboost measures.
+Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures,
+but allows to use the same measure for tuning and validation.
 }
 
 \section{Dictionary}{
 
-This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+or with the associated sugar function \code{\link[mlr3:lrn]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.xgboost")
 lrn("classif.xgboost")
@@ -99,7 +104,6 @@ lrn("classif.xgboost")
    evals \tab untyped \tab NULL \tab  \tab - \cr
    eval_metric \tab untyped \tab - \tab  \tab - \cr
    custom_metric \tab untyped \tab - \tab  \tab - \cr
-   extmem_single_page \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
@@ -153,14 +157,17 @@ lrn("classif.xgboost")
 
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
-During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default) and the \code{Task} has a column with the role \code{offset}.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default) and
+the \code{Task} has a column with the role \code{offset}.
 The test set offsets are passed via the \code{base_margin} argument in \code{\link[xgboost:predict.xgb.Booster]{xgboost::predict.xgb.Booster()}}.
-Otherwise, if the user sets \code{use_pred_offset = FALSE} (or the \code{Task} doesn't have a column with the \code{offset} role), the (possibly estimated) global intercept from the train set is applied.
+Otherwise, if the user sets \code{use_pred_offset = FALSE} (or the \code{Task} doesn't have a column with the \code{offset} role),
+the (possibly estimated) global intercept from the train set is applied.
 See \url{https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html}.
 }
 
 \examples{
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.xgboost")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\donttest{
 # Define the Learner and set parameter values
 learner = lrn("classif.xgboost")
 print(learner)
@@ -195,6 +202,7 @@ learner$train(task)
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
 learner$internal_valid_scores
+}
 \dontshow{\}) # examplesIf}
 }
 \references{
@@ -210,7 +218,8 @@ ACM.
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners}
+in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{
@@ -221,7 +230,7 @@ ACM.
 for established default tuning spaces.
 }
 
-Other Learner: 
+Other Learner:
 \code{\link{mlr_learners_classif.cv_glmnet}},
 \code{\link{mlr_learners_classif.glmnet}},
 \code{\link{mlr_learners_classif.kknn}},
@@ -248,90 +257,94 @@ Other Learner:
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerClassif]{mlr3::LearnerClassif}} -> \code{LearnerClassifXgboost}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{internal_valid_scores}}{(named \code{list()} or \code{NULL})
 The validation scores extracted from \code{model$evaluation_log}.
 If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
 otherwise the scores are taken from the final boosting round \code{nrounds}.}
 
-\item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
+    \item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
 If early stopping is activated, this returns a list with \code{nrounds},
 which is extracted from \verb{$best_iteration} of the model and otherwise \code{NULL}.}
 
-\item{\code{validate}}{(\code{numeric(1)} or \code{character(1)} or \code{NULL})
+    \item{\code{validate}}{(\code{numeric(1)} or \code{character(1)} or \code{NULL})
 How to construct the internal validation data. This parameter can be either \code{NULL},
 a ratio, \code{"test"}, or \code{"predefined"}.}
 
-\item{\code{model}}{(any)\cr
+    \item{\code{model}}{(any)\cr
 The fitted model. Only available after \verb{$train()} has been called.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-LearnerClassifXgboost-new}{\code{LearnerClassifXgboost$new()}}
-\item \href{#method-LearnerClassifXgboost-importance}{\code{LearnerClassifXgboost$importance()}}
-\item \href{#method-LearnerClassifXgboost-clone}{\code{LearnerClassifXgboost$clone()}}
+  \itemize{
+    \item \href{#method-LearnerClassifXgboost-initialize}{\code{LearnerClassifXgboost$new()}}
+    \item \href{#method-LearnerClassifXgboost-importance}{\code{LearnerClassifXgboost$importance()}}
+    \item \href{#method-LearnerClassifXgboost-clone}{\code{LearnerClassifXgboost$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href='../../mlr3/html/Learner.html#method-Learner-selected_features'><code>mlr3::Learner$selected_features()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href='../../mlr3/html/Learner.html#method-Learner-selected_features'><code>mlr3::Learner$selected_features()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-LearnerClassifXgboost-new"></a>}}
-\if{latex}{\out{\hypertarget{method-LearnerClassifXgboost-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifXgboost$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-LearnerClassifXgboost-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifXgboost-initialize}{}}}
+\subsection{\code{LearnerClassifXgboost$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifXgboost$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifXgboost-importance"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifXgboost-importance}{}}}
-\subsection{Method \code{importance()}}{
-The importance scores are calculated with \code{\link[xgboost:xgb.importance]{xgboost::xgb.importance()}}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifXgboost$importance()}\if{html}{\out{</div>}}
+\subsection{\code{LearnerClassifXgboost$importance()}}{
+  The importance scores are calculated with \code{\link[xgboost:xgb.importance]{xgboost::xgb.importance()}}.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifXgboost$importance()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Named \code{numeric()}.
+  }
 }
 
-\subsection{Returns}{
-Named \code{numeric()}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifXgboost-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifXgboost-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifXgboost$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{LearnerClassifXgboost$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifXgboost$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
