@@ -105,24 +105,27 @@ test_that("offset works", {
 test_that("relax = TRUE works", {
   task = tsk("iris")
   part = partition(task)
+  train_rows = part$train
+  test_rows = part$test
+
   learner = lrn("classif.glmnet", relax = TRUE, s = 0.03, predict_type = "prob")
-  learner$train(task, part$train)
+  learner$train(task, train_rows)
   assert_class(learner$model, "relaxed")
 
   # gamma = 1 gives the original lasso fit
   # gamma = 0 gives the fully relaxed (unpenalized refit) model
   # intermediate gamma values mix the two
-  p1 = learner$predict(task, part$test)
+  p1 = learner$predict(task, test_rows)
   learner$param_set$set_values(gamma = 1) # original lasso fit
-  p2 = learner$predict(task, part$test)
+  p2 = learner$predict(task, test_rows)
   expect_equal(p1$response, p2$response)
   expect_equal(p1$prob, p2$prob)
 
   learner$param_set$set_values(gamma = 0.5)
-  p3 = learner$predict(task, part$test)
+  p3 = learner$predict(task, test_rows)
   expect_false(all(p2$prob[, "setosa"] == p3$prob[, "setosa"]))
 
   learner$param_set$set_values(gamma = 0)
-  p4 = learner$predict(task, part$test)
+  p4 = learner$predict(task, test_rows)
   expect_false(all(p2$prob[, "setosa"] == p4$prob[, "setosa"]))
 })
