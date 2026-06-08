@@ -103,10 +103,9 @@ test_that("offset works", {
 })
 
 test_that("relax = TRUE works", {
-  task = tsk("iris")
-  part = partition(task)
-  train_rows = part$train
-  test_rows = part$test
+  task = tsk("sonar")
+  train_rows = 1:150
+  test_rows = 151:208
 
   learner = lrn("classif.glmnet", relax = TRUE, s = 0.03, predict_type = "prob")
   learner$train(task, train_rows)
@@ -123,9 +122,9 @@ test_that("relax = TRUE works", {
 
   learner$param_set$set_values(gamma = 0.5)
   p3 = learner$predict(task, test_rows)
-  expect_false(all(p2$prob[, "setosa"] == p3$prob[, "setosa"]))
+  expect_false(all(p2$prob[, "M"] == p3$prob[, "M"]))
 
   learner$param_set$set_values(gamma = 0)
   p4 = learner$predict(task, test_rows)
-  expect_false(all(p2$prob[, "setosa"] == p4$prob[, "setosa"]))
+  expect_false(all(p2$prob[, "M"] == p4$prob[, "M"]))
 })
