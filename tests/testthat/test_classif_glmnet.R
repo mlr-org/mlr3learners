@@ -108,7 +108,7 @@ test_that("relax = TRUE works", {
   test_rows = 151:208
 
   learner = lrn("classif.glmnet", relax = TRUE, s = 0.03, predict_type = "prob")
-  learner$train(task, train_rows)
+  suppressWarnings(learner$train(task, train_rows))
   assert_class(learner$model, "relaxed")
 
   # gamma = 1 gives the original lasso fit
