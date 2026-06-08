@@ -1,6 +1,9 @@
 skip_on_os("solaris") # glmnet not working properly on solaris
 skip_if_not_installed("glmnet")
 
+options(warnPartialMatchArgs = FALSE)
+on.exit(options(warnPartialMatchArgs = TRUE))
+
 test_that("autotest", {
   learner = mlr3::lrn("regr.glmnet", lambda = 0.1)
   expect_learner(learner)
@@ -70,7 +73,7 @@ test_that("relax = TRUE works", {
   train_rows = 1:25
   test_rows = 26:32
   learner = lrn("regr.glmnet", relax = TRUE, s = 0.03)
-  suppressWarnings(learner$train(task, train_rows))
+  learner$train(task, train_rows)
   assert_class(learner$model, "relaxed")
 
   # gamma = 1 gives the original lasso fit
