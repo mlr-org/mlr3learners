@@ -41,7 +41,7 @@ test_that("predict classif.glmnet", {
     "newx", # handled via mlr3
     "type", # handled via mlr3
     "newoffset", # handled via mlr3
-    "use_pred_offset" # handled via mlr3
+    "use_pred_offset" # for using the offset during prediction
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")
