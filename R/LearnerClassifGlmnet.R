@@ -6,7 +6,8 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
-#' The learner sets `family = "binomial"` for two-class tasks, and `family = "multinomial"` for multiclass classification.
+#' The default for hyperparameter `family` is set to `"binomial"` or `"multinomial"`,
+#' depending on the number of classes.
 #'
 #' @details
 #' Caution: This learner is different to learners calling [glmnet::cv.glmnet()]
