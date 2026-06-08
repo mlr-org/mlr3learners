@@ -64,3 +64,28 @@ test_that("offset works", {
   p4 = learner$predict(task_with_offset, part$test)
   expect_equal(p3$response, p4$response)
 })
+
+test_that("relax = TRUE works", {
+  task = tsk("mtcars")
+  train_rows = 1:25
+  test_rows = 26:32
+  learner = lrn("regr.glmnet", relax = TRUE, s = 0.03)
+  suppressWarnings(learner$train(task, train_rows))
+  assert_class(learner$model, "relaxed")
+
+  # gamma = 1 gives the original lasso fit
+  # gamma = 0 gives the fully relaxed (unpenalized refit) model
+  # intermediate gamma values mix the two
+  p1 = learner$predict(task, test_rows)
+  learner$param_set$set_values(gamma = 1) # original lasso fit
+  p2 = learner$predict(task, test_rows)
+  expect_equal(p1$response, p2$response)
+
+  learner$param_set$set_values(gamma = 0.5)
+  p3 = learner$predict(task, test_rows)
+  expect_false(all(p2$response == p3$response))
+
+  learner$param_set$set_values(gamma = 0)
+  p4 = learner$predict(task, test_rows)
+  expect_false(all(p2$response == p4$response))
+})
