@@ -7,7 +7,7 @@
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
 #' Supported `family` values are `"gaussian"` and `"poisson"`.
-#' The default for hyperparameter `family` is `"gaussian"`.
+#' The default for the hyperparameter `family` is `"gaussian"`.
 #'
 #' @inherit mlr_learners_classif.glmnet details
 #' @inheritSection mlr_learners_classif.cv_glmnet Offset
