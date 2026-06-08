@@ -4,18 +4,19 @@ skip_on_os("solaris")
 
 test_that("classif.glmnet", {
   learner = lrn("classif.glmnet")
-  fun = list(glmnet::glmnet, glmnet::glmnet.control)
+  fun = list(glmnet::glmnet, glmnet::relax.glmnet, glmnet::glmnet.control)
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
-    "weights", # handled by mlr3
-    "nfolds", # not used by learner
-    "foldid", # not used by learner
-    "type.measure", # only used by cv.glmnet
     "family", # handled by mlr3
+    "weights", # handled by mlr3
+    "offset", # handled by mlr3
+    "fit", # fit object is passed on to relax.glmnet()
+    "check.args", # default TRUE is good for mlr3, no need to expose
+    "type.gaussian", # not applicable for classification
+    "standardize.response", # not applicable for classification
     "itrace", # supported via param trace.it
     "factory", # only used in scripts, no effect within mlr3
-    "offset", # handled by mlr3
     "control", # individual control params are set directly
     "cox.ties" # only used for cox models
   )
