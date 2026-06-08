@@ -89,5 +89,5 @@ test_that("relax = TRUE works", {
   # numeric gamma value should also work and give different predictions
   learner$param_set$set_values(predict.gamma = 0.33)
   p4 = learner$predict(task, test_rows)
-  expect_false(all(p1$prob[, "setosa"] == p4$prob[, "setosa"]))
+  expect_false(all(p1$prob[, "M"] == p4$prob[, "M"]))
 })
