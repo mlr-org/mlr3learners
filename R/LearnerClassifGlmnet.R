@@ -6,6 +6,8 @@
 #' Generalized linear models with elastic net regularization.
 #' Calls [glmnet::glmnet()] from package \CRANpkg{glmnet}.
 #'
+#' The learner sets `family = "binomial"` for two-class tasks, and `family = "multinomial"` for multiclass classification.
+#'
 #' @details
 #' Caution: This learner is different to learners calling [glmnet::cv.glmnet()]
 #' in that it does not use the internal optimization of parameter `lambda`.
@@ -46,41 +48,47 @@ LearnerClassifGlmnet = R6Class(
     initialize = function() {
       # fmt: skip
       ps = ps(
+        # glmnet::glmnet() parameters
         alpha                = p_dbl(0, 1, default = 1, tags = "train"),
-        big                  = p_dbl(default = 9.9e35, tags = "train"),
-        devmax               = p_dbl(0, 1, default = 0.999, tags = "train"),
-        dfmax                = p_int(0L, tags = "train"),
-        eps                  = p_dbl(0, 1, default = 1.0e-6, tags = "train"),
-        epsnr                = p_dbl(0, 1, default = 1.0e-8, tags = "train"),
-        exact                = p_lgl(default = FALSE, tags = "predict"),
-        exclude              = p_int(1L, tags = "train"),
-        exmx                 = p_dbl(default = 250.0, tags = "train"),
-        fdev                 = p_dbl(0, 1, default = 1.0e-5, tags = "train"),
-        gamma                = p_dbl(default = 1, tags = "predict", depends = quote(relax == TRUE)),
-        intercept            = p_lgl(default = TRUE, tags = "train"),
-        lambda               = p_uty(tags = "train"),
-        lambda.min.ratio     = p_dbl(0, 1, tags = "train"),
-        lower.limits         = p_uty(tags = "train"),
-        maxit                = p_int(1L, default = 100000L, tags = "train"),
-        mnlam                = p_int(1L, default = 5, tags = "train"),
-        mxit                 = p_int(1L, default = 100L, tags = "train"),
-        mxitnr               = p_int(1L, default = 25L, tags = "train"),
         nlambda              = p_int(1L, default = 100L, tags = "train"),
-        use_pred_offset      = p_lgl(init = TRUE, tags = "predict"),
-        penalty.factor       = p_uty(tags = "train"),
-        pmax                 = p_int(0L, tags = "train"),
-        pmin                 = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
-        prec                 = p_dbl(default = 1e-10, tags = "train"),
-        relax                = p_lgl(default = FALSE, tags = "train"),
-        s                    = p_dbl(0, default = 0.01, tags = "predict"),
+        lambda.min.ratio     = p_dbl(0, 1, tags = "train"),
+        lambda               = p_uty(default = NULL, tags = "train"),
         standardize          = p_lgl(default = TRUE, tags = "train"),
-        standardize.response = p_lgl(default = FALSE, tags = "train"),
-        thresh               = p_dbl(0, default = 1e-07, tags = "train"),
-        trace.it             = p_int(0, 1, default = 0, tags = "train"),
-        type.gaussian        = p_fct(c("covariance", "naive"), tags = "train"),
+        intercept            = p_lgl(default = TRUE, tags = "train"),
+        exclude              = p_uty(default = NULL, tags = "train"),
+        penalty.factor       = p_uty(tags = "train"),
+        lower.limits         = p_uty(default = -Inf, tags = "train"),
+        upper.limits         = p_uty(default = Inf, tags = "train"),
         type.logistic        = p_fct(c("Newton", "modified.Newton"), tags = "train"),
         type.multinomial     = p_fct(c("ungrouped", "grouped"), tags = "train"),
-        upper.limits         = p_uty(tags = "train")
+        relax                = p_lgl(default = FALSE, tags = "train"),
+        trace.it             = p_int(0, 1, default = 0, tags = "train"), # alias: itrace
+        # glmnet::relax.glmnet() parameters
+        maxp                 = p_int(1L, tags = "train"),
+        path                 = p_lgl(default = FALSE, tags = "train"),
+        # glmnet::glmnet.control() parameters
+        fdev                 = p_dbl(0, 1, default = 1.0e-5, tags = "train"),
+        devmax               = p_dbl(0, 1, default = 0.999, tags = "train"),
+        eps                  = p_dbl(0, 1, default = 1.0e-6, tags = "train"),
+        big                  = p_dbl(default = 9.9e+35, tags = "train"),
+        mnlam                = p_int(1L, default = 5L, tags = "train"),
+        pmin                 = p_dbl(0, 1, default = 1.0e-9, tags = "train"),
+        exmx                 = p_dbl(default = 250L, tags = "train"),
+        prec                 = p_dbl(default = 1e-10, tags = "train"),
+        mxit                 = p_int(1L, default = 100L, tags = "train"),
+        epsnr                = p_dbl(0, 1, default = 1.0e-6, tags = "train"),
+        mxitnr               = p_int(1L, default = 25L, tags = "train"),
+        thresh               = p_dbl(0, default = 1e-07, tags = "train"),
+        maxit                = p_int(1L, default = 1e+05, tags = "train"),
+        dfmax                = p_int(0L, default = NULL, special_vals = list(NULL), tags = "train"),
+        pmax                 = p_int(0L, default = NULL, special_vals = list(NULL), tags = "train"),
+        # glmnet::predict.glmnet() parameters
+        exact                = p_lgl(default = FALSE, tags = "predict"),
+        s                    = p_dbl(0, default = 0.01, tags = "predict"),
+        # glmnet::predict.relaxed() parameters
+        gamma                = p_dbl(0, 1, default = 1L, tags = "predict"),
+        # for using the offset during prediction
+        use_pred_offset      = p_lgl(init = TRUE, tags = "predict")
       )
 
       super$initialize(
@@ -123,7 +131,6 @@ LearnerClassifGlmnet = R6Class(
     .predict = function(task) {
       newdata = as_numeric_matrix(ordered_features(task, self))
       pv = self$param_set$get_values(tags = "predict")
-      pv = rename(pv, "predict.gamma", "gamma")
       pv$s = glmnet_get_lambda(self, pv)
 
       pv = glmnet_set_offset(task, "predict", pv)
@@ -143,7 +150,7 @@ LearnerClassifGlmnet = R6Class(
           prob = cbind(1 - prob, prob)
           colnames(prob) = self$model$classnames
         } else {
-          prob = prob[, , 1L]
+          prob = prob[,, 1L]
         }
 
         result = list(prob = prob)
