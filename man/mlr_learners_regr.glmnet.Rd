@@ -30,7 +30,8 @@ custom resampling strategies (blocked design, stratification).
 }
 \section{Dictionary}{
 
-This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.glmnet")
 lrn("regr.glmnet")
@@ -95,9 +96,12 @@ lrn("regr.glmnet")
 
 \section{Offset}{
 
-If a \code{Task} contains a column with the \code{offset} role, it is automatically incorporated during training via the \code{offset} argument in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
-During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default), passed via the \code{newoffset} argument in \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}.
-Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+If a \code{Task} contains a column with the \code{offset} role,
+it is automatically incorporated during training via the \code{offset} argument in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default),
+passed via the \code{newoffset} argument in \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}.
+Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied,
+effectively disabling the offset adjustment during prediction.
 }
 
 \examples{
@@ -140,7 +144,8 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners}
+in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{

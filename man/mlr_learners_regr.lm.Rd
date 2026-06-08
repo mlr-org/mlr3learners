@@ -13,13 +13,16 @@ Calls \code{\link[stats:lm]{stats::lm()}}.
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the formula interface to ensure compatibility with \code{\link[stats:lm]{stats::lm()}}.
 We add it to the model formula as \verb{offset(<column_name>)} and also include it in the training data.
-During prediction, the default behavior is to use the offset column from the test set (enabled by \code{use_pred_offset = TRUE}).
-Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+During prediction, the default behavior is to use the offset column from the test set (enabled by
+\code{use_pred_offset = TRUE}).
+Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied,
+effectively disabling the offset adjustment during prediction.
 }
 
 \section{Dictionary}{
 
-This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.lm")
 lrn("regr.lm")
@@ -102,7 +105,8 @@ predictions$score()
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners}
+in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{

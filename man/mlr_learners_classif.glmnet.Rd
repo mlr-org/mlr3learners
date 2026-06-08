@@ -7,6 +7,9 @@
 \description{
 Generalized linear models with elastic net regularization.
 Calls \code{\link[glmnet:glmnet]{glmnet::glmnet()}} from package \CRANpkg{glmnet}.
+
+The default for hyperparameter \code{family} is set to \code{"binomial"} or \code{"multinomial"},
+depending on the number of classes.
 }
 \details{
 Caution: This learner is different to learners calling \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}
@@ -28,7 +31,8 @@ custom resampling strategies (blocked design, stratification).
 }
 \section{Dictionary}{
 
-This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.glmnet")
 lrn("classif.glmnet")
@@ -49,40 +53,40 @@ lrn("classif.glmnet")
 \tabular{lllll}{
    Id \tab Type \tab Default \tab Levels \tab Range \cr
    alpha \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   dfmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   epsnr \tab numeric \tab 1e-08 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   exclude \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   gamma \tab numeric \tab 1 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   lambda \tab untyped \tab - \tab  \tab - \cr
-   lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   lower.limits \tab untyped \tab - \tab  \tab - \cr
-   maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    nlambda \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
-   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
-   penalty.factor \tab untyped \tab - \tab  \tab - \cr
-   pmax \tab integer \tab - \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
-   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   lambda.min.ratio \tab numeric \tab - \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   lambda \tab untyped \tab NULL \tab  \tab - \cr
    standardize \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
-   standardize.response \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
-   thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
-   type.gaussian \tab character \tab - \tab covariance, naive \tab - \cr
+   intercept \tab logical \tab TRUE \tab TRUE, FALSE \tab - \cr
+   exclude \tab untyped \tab NULL \tab  \tab - \cr
+   penalty.factor \tab untyped \tab - \tab  \tab - \cr
+   lower.limits \tab untyped \tab -Inf \tab  \tab - \cr
+   upper.limits \tab untyped \tab Inf \tab  \tab - \cr
    type.logistic \tab character \tab - \tab Newton, modified.Newton \tab - \cr
    type.multinomial \tab character \tab - \tab ungrouped, grouped \tab - \cr
-   upper.limits \tab untyped \tab - \tab  \tab - \cr
+   relax \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   trace.it \tab integer \tab 0 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   maxp \tab integer \tab - \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   path \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   fdev \tab numeric \tab 1e-05 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   devmax \tab numeric \tab 0.999 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   eps \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   big \tab numeric \tab 9.9e+35 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   mnlam \tab integer \tab 5 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   pmin \tab numeric \tab 1e-09 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   exmx \tab numeric \tab 250 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   prec \tab numeric \tab 1e-10 \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+   mxit \tab integer \tab 100 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   epsnr \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   maxit \tab integer \tab 1e+05 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   dfmax \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   pmax \tab integer \tab NULL \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
+   s \tab numeric \tab 0.01 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
+   gamma \tab numeric \tab 1 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
+   use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
 }
 }
 
@@ -95,9 +99,12 @@ as the first factor level.
 
 \section{Offset}{
 
-If a \code{Task} contains a column with the \code{offset} role, it is automatically incorporated during training via the \code{offset} argument in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
-During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default), passed via the \code{newoffset} argument in \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}.
-Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied, effectively disabling the offset adjustment during prediction.
+If a \code{Task} contains a column with the \code{offset} role,
+it is automatically incorporated during training via the \code{offset} argument in \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default),
+passed via the \code{newoffset} argument in \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}.
+Otherwise, if the user sets \code{use_pred_offset = FALSE}, a zero offset is applied,
+effectively disabling the offset adjustment during prediction.
 }
 
 \examples{
@@ -140,7 +147,8 @@ Friedman J, Hastie T, Tibshirani R (2010).
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners}
+in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{

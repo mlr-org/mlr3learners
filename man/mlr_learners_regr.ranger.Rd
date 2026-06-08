@@ -9,19 +9,25 @@ Random regression forest.
 Calls \code{ranger()} from package \CRANpkg{ranger}.
 }
 \details{
-In addition to the uncertainty estimation methods provided by the ranger package, the learner provides an ensemble standard deviation and law of total variance uncertainty estimation.
-Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
+In addition to the uncertainty estimation methods provided by the ranger package,
+the learner provides an ensemble standard deviation and law of total variance uncertainty estimation.
+Both methods compute the empirical mean and variance of the training data points
+that fall into the predicted leaf nodes.
 The ensemble standard deviation method calculates the standard deviation of the mean of the leaf nodes.
-The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
+The law of total variance method calculates the mean of the variance of the leaf nodes
+plus the variance of the means of the leaf nodes.
 Formulas for the ensemble standard deviation and law of total variance method are given in Hutter et al. (2015).
 
-For these 2 methods, the parameter \code{sigma2.threshold} can be used to set a threshold for the variance of the leaf nodes,
-this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value (as described in the paper).
+For these 2 methods, the parameter \code{sigma2.threshold} can be used to set a threshold
+for the variance of the leaf nodes,
+this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold,
+it is set to this value (as described in the paper).
 Default is 1e-2.
 }
 \section{Dictionary}{
 
-This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.ranger")
 lrn("regr.ranger")
@@ -151,7 +157,8 @@ In \emph{Proceedings of the 24th International Conference on Artificial Intellig
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners}
+in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{

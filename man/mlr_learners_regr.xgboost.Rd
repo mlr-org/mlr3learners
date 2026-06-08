@@ -11,7 +11,8 @@ Calls \code{\link[xgboost:xgb.train]{xgboost::xgb.train()}} from package \CRANpk
 To compute on GPUs, you first need to compile \CRANpkg{xgboost} yourself and link
 against CUDA. See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support}.
 
-Note that using the \code{evals} parameter directly will lead to problems when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a \code{mlr3pipelines} \code{GraphLearner}
+Note that using the \code{evals} parameter directly will lead to problems
+when wrapping this \link[mlr3:Learner]{mlr3::Learner} in a \code{mlr3pipelines} \code{GraphLearner}
 as the preprocessing steps will not be applied to the data in \code{evals}.
 See the section \emph{Early Stopping and Validation} on how to do this.
 }
@@ -27,15 +28,18 @@ You can still call e.g. \code{predict(learner$model, newdata = newdata, outputma
 
 If a \code{Task} has a column with the role \code{offset}, it will automatically be used during training.
 The offset is incorporated through the \link[xgboost:xgb.DMatrix]{xgboost::xgb.DMatrix} interface, using the \code{base_margin} field.
-During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default) and the \code{Task} has a column with the role \code{offset}.
+During prediction, the offset column from the test set is used only if \code{use_pred_offset = TRUE} (default) and
+the \code{Task} has a column with the role \code{offset}.
 The test set offsets are passed via the \code{base_margin} argument in \code{\link[xgboost:predict.xgb.Booster]{xgboost::predict.xgb.Booster()}}.
-Otherwise, if the user sets \code{use_pred_offset = FALSE} (or the \code{Task} doesn't have a column with the \code{offset} role), the (possibly estimated) global intercept from the train set is applied.
+Otherwise, if the user sets \code{use_pred_offset = FALSE} (or the \code{Task} doesn't have a column with the \code{offset} role),
+the (possibly estimated) global intercept from the train set is applied.
 See \url{https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html}.
 }
 
 \section{Dictionary}{
 
-This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("regr.xgboost")
 lrn("regr.xgboost")
@@ -70,7 +74,6 @@ lrn("regr.xgboost")
    evals \tab untyped \tab NULL \tab  \tab - \cr
    eval_metric \tab untyped \tab - \tab  \tab - \cr
    custom_metric \tab untyped \tab - \tab  \tab - \cr
-   extmem_single_page \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    feature_selector \tab character \tab cyclic \tab cyclic, shuffle, random, greedy, thrifty \tab - \cr
    gamma \tab numeric \tab 0 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
    grow_policy \tab character \tab depthwise \tab depthwise, lossguide \tab - \cr
@@ -125,10 +128,14 @@ lrn("regr.xgboost")
 
 In order to monitor the validation performance during the training, you can set the \verb{$validate} field of the Learner.
 For information on how to configure the validation set, see the \emph{Validation} section of \link[mlr3:Learner]{mlr3::Learner}.
-This validation data can also be used for early stopping, which can be enabled by setting the \code{early_stopping_rounds} parameter.
-The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores}, and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
-The internal validation measure can be set via the \code{custom_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure}, a function, or a character string for the internal xgboost measures.
-Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.
+This validation data can also be used for early stopping,
+which can be enabled by setting the \code{early_stopping_rounds} parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via \verb{$internal_valid_scores},
+and the optimal \code{nrounds} via \verb{$internal_tuned_values}.
+The internal validation measure can be set via the \code{custom_metric} parameter that can be a \link[mlr3:Measure]{mlr3::Measure},
+a function, or a character string for the internal xgboost measures.
+Using an \link[mlr3:Measure]{mlr3::Measure} is slower than the internal xgboost measures,
+but allows to use the same measure for tuning and validation.
 }
 
 \section{Initial parameter values}{
@@ -213,7 +220,8 @@ ACM.
 \url{https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners}
 \item Package \href{https://github.com/mlr-org/mlr3extralearners}{mlr3extralearners} for more learners.
 \item \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners} in the running session (depending on the loaded packages).
+\item \code{as.data.table(mlr_learners)} for a table of available \link[mlr3:Learner]{Learners}
+in the running session (depending on the loaded packages).
 \item \CRANpkg{mlr3pipelines} to combine learners with pre- and postprocessing steps.
 \item Extension packages for additional task types:
 \itemize{
