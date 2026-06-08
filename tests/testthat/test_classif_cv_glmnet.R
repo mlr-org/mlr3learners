@@ -67,16 +67,17 @@ test_that("relax = TRUE works", {
   train_rows = 1:150
   test_rows = 151:208
 
+  # pre-specified lambdas to ensure that the relaxed fit doesn't fail due to convergence issues (for non-gaussian families according to the doc)
+  lambda = c(1e-03, 3e-03, 7e-03, 1e-02, 1e-01)
   # by default, fits for gamma in (0, 0.25, 0.5, 0.75, 1)
-  learner = lrn("classif.cv_glmnet", relax = TRUE, predict_type = "prob")
-  # relaxed fit produces warnings about convergence, but this is expected
-  suppressWarnings(learner$train(task, train_rows))
+  learner = lrn("classif.cv_glmnet", relax = TRUE, lambda = lambda, predict_type = "prob")
+  learner$train(task, train_rows)
   assert_class(learner$model, "cv.relaxed")
   expect_equal(learner$model$relaxed$gamma, c(0, 0.25, 0.5, 0.75, 1))
   # fit custom gamma values
   gammas = seq(0, 1, length.out = 8)
   learner$param_set$set_values(gamma = gammas)
-  suppressWarnings(learner$train(task, train_rows))
+  learner$train(task, train_rows)
   expect_equal(learner$model$relaxed$gamma, gammas)
 
   p1 = learner$predict(task, test_rows)
@@ -88,6 +89,6 @@ test_that("relax = TRUE works", {
 
   # numeric gamma value should also work and give different predictions
   learner$param_set$set_values(predict.gamma = 0.33)
-  p4 = learner$predict(task, test_rows)
-  expect_false(all(p1$prob[, "M"] == p4$prob[, "M"]))
+  p3 = learner$predict(task, test_rows)
+  expect_false(all(p1$prob[, "M"] == p3$prob[, "M"]))
 })
