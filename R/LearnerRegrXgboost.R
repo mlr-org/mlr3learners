@@ -73,7 +73,7 @@ LearnerRegrXgboost = R6Class(
         callbacks                   = p_uty(default = list(), tags = "train"),
         colsample_bylevel           = p_dbl(0, 1, default = 1, tags = "train", depends = quote(booster == "gbtree")),
         colsample_bynode            = p_dbl(0, 1, default = 1, tags = "train", depends = quote(booster == "gbtree")),
-        colsample_bytree            = p_dbl(0, 1, default = 1, tags = "train", depends = quote(booster == "gbtree")),
+        colsample_bytree            = p_dbl(0, 1, default = 1, tags = "train"), # FIXME: depends = quote(booster == "gbtree")
         device                      = p_uty(default = "cpu", tags = "train"),
         disable_default_eval_metric = p_lgl(default = FALSE, tags = "train"),
         early_stopping_rounds       = p_int(1L, default = NULL, special_vals = list(NULL), tags = "train"),
@@ -93,10 +93,10 @@ LearnerRegrXgboost = R6Class(
         max_cat_to_onehot           = p_int(tags = "train", depends = quote(tree_method %in% c("hist", "approx"))),
         max_cat_threshold           = p_dbl(tags = "train", depends = quote(tree_method %in% c("hist", "approx"))),
         max_delta_step              = p_dbl(0, default = 0, tags = "train", depends = quote(booster == "gbtree")),
-        max_depth                   = p_int(0L, default = 6L, tags = "train", depends = quote(booster == "gbtree")),
+        max_depth                   = p_int(0L, default = 6L, tags = "train"), # FIXME: depends = quote(booster == "gbtree")
         max_leaves                  = p_int(0L, default = 0L, tags = "train", depends = quote(booster == "gbtree")),
         maximize                    = p_lgl(default = NULL, special_vals = list(NULL), tags = "train"),
-        min_child_weight            = p_dbl(0, default = 1, tags = "train", depends = quote(booster == "gbtree")),
+        min_child_weight            = p_dbl(0, default = 1, tags = "train"), # FIXME: depends = quote(booster == "gbtree")
         missing                     = p_dbl(default = NA, tags = "predict", special_vals = list(NA, NA_real_, NULL)),
         monotone_constraints        = p_uty(default = 0, tags = "train", custom_check = crate(function(x) { checkmate::check_integerish(x, lower = -1, upper = 1, any.missing = FALSE) }), depends = quote(booster == "gbtree")),
         nrounds                     = p_nrounds,
@@ -116,7 +116,7 @@ LearnerRegrXgboost = R6Class(
         save_period                 = p_int(0, default = NULL, special_vals = list(NULL), tags = "train"),
         scale_pos_weight            = p_dbl(default = 1, tags = "train", depends = quote(booster == "gbtree")),
         skip_drop                   = p_dbl(0, 1, default = 0, tags = "train", depends = quote(booster == "dart")),
-        subsample                   = p_dbl(0, 1, default = 1, tags = "train", depends = quote(booster == "gbtree")),
+        subsample                   = p_dbl(0, 1, default = 1, tags = "train"), # FIXME: depends = quote(booster == "gbtree")
         top_k                       = p_int(0, default = 0, tags = "train", depends = quote(feature_selector %in% c("greedy", "thrifty") && booster == "gblinear")),
         training                    = p_lgl(default = FALSE, tags = "predict"),
         tree_method                 = p_fct(c("auto", "exact", "approx", "hist", "gpu_hist"), default = "auto", tags = "train", depends = quote(booster %in% c("gbtree", "dart"))),
