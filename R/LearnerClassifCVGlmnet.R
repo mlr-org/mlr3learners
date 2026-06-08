@@ -78,12 +78,12 @@ LearnerClassifCVGlmnet = R6Class(
         mxit             = p_int(1L, default = 100L, tags = "train"),
         epsnr            = p_dbl(0, 1, default = 1.0e-6, tags = "train"),
         mxitnr           = p_int(1L, default = 25L, tags = "train"),
-        thresh           = p_dbl(0, default = 1e-07, tags = "train"),
+        thresh           = p_dbl(0L, default = 1e-07, tags = "train"),
         maxit            = p_int(1L, default = 1e+05, tags = "train"),
         dfmax            = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
         pmax             = p_int(default = NULL, special_vals = list(NULL), tags = "train"),
         # glmnet::predict.cv.glmnet() and glmnet::predict.cv.relaxed() parameters
-        s                = p_dbl(0, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
+        s                = p_dbl(0L, special_vals = list("lambda.1se", "lambda.min"), default = "lambda.1se", tags = "predict"),
         predict.gamma    = p_dbl(0, 1, default = "gamma.1se", special_vals = list("gamma.1se", "gamma.min"), tags = "predict"), # renamed from 'gamma' to avoid duplication
         # glmnet::predict.glmnet() parameters
         exact            = p_lgl(default = FALSE, tags = "predict"),

@@ -79,13 +79,13 @@ LearnerClassifGlmnet = R6Class(
         mxit                 = p_int(1L, default = 100L, tags = "train"),
         epsnr                = p_dbl(0, 1, default = 1.0e-6, tags = "train"),
         mxitnr               = p_int(1L, default = 25L, tags = "train"),
-        thresh               = p_dbl(0, default = 1e-07, tags = "train"),
+        thresh               = p_dbl(0L, default = 1e-07, tags = "train"),
         maxit                = p_int(1L, default = 1e+05, tags = "train"),
         dfmax                = p_int(0L, default = NULL, special_vals = list(NULL), tags = "train"),
         pmax                 = p_int(0L, default = NULL, special_vals = list(NULL), tags = "train"),
         # glmnet::predict.glmnet() parameters
         exact                = p_lgl(default = FALSE, tags = "predict"),
-        s                    = p_dbl(0, default = 0.01, tags = "predict"),
+        s                    = p_dbl(0L, default = 0.01, tags = "predict"),
         # glmnet::predict.relaxed() parameters
         gamma                = p_dbl(0, 1, default = 1L, tags = "predict"),
         # for using the offset during prediction
