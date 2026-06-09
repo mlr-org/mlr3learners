@@ -11,6 +11,13 @@
 #'
 #' @inheritSection mlr_learners_classif.log_reg Internal Encoding
 #'
+#' @section Custom mlr3 parameters:
+#' - `seed`:
+#'   - Optional integer used to seed the call to [glmnet::cv.glmnet()],
+#'     making its random fold assignment, and therefore the selected lambda, reproducible.
+#'   - The global random state is reset afterwards, so it is left unchanged.
+#'   - Defaults to `NA`, in which case no seed is set and the global random state is used.
+#'
 #' @section Offset:
 #' If a `Task` contains a column with the `offset` role,
 #' it is automatically incorporated during training via the `offset` argument in [glmnet::glmnet()].
@@ -88,7 +95,9 @@ LearnerClassifCVGlmnet = R6Class(
         # glmnet::predict.glmnet() parameters
         exact            = p_lgl(default = FALSE, tags = "predict"),
         # for using the offset during prediction
-        use_pred_offset  = p_lgl(init = TRUE, tags = "predict")
+        use_pred_offset  = p_lgl(init = TRUE, tags = "predict"),
+        # mlr3 parameter: seeds the call so cv.glmnet's random fold assignment is reproducible
+        seed             = p_int(init = NA_integer_, special_vals = list(NA_integer_), tags = "train")
       )
       # nolint end
 

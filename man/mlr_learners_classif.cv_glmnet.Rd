@@ -11,6 +11,19 @@ Calls \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}} from package \CRANpkg{
 The default for hyperparameter \code{family} is set to \code{"binomial"} or \code{"multinomial"},
 depending on the number of classes.
 }
+\section{Custom mlr3 parameters}{
+
+\itemize{
+\item \code{seed}:
+\itemize{
+\item Optional integer used to seed the call to \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}},
+making its random fold assignment, and therefore the selected lambda, reproducible.
+\item The global random state is reset afterwards, so it is left unchanged.
+\item Defaults to \code{NA}, in which case no seed is set and the global random state is used.
+}
+}
+}
+
 \section{Offset}{
 
 If a \code{Task} contains a column with the \code{offset} role,
@@ -87,6 +100,7 @@ lrn("classif.cv_glmnet")
    predict.gamma \tab numeric \tab gamma.1se \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
+   seed \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
 }
 }
 

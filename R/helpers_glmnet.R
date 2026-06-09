@@ -66,10 +66,17 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
     pv = pv[!is_ctrl_pars]
   }
 
+  # `seed` is an mlr3-only parameter that seeds the fit (e.g. cv.glmnet's random folds)
+  # via invoke's `.seed`; it must not be passed on to glmnet itself.
+  # We must call glmnet::glmnet / glmnet::cv.glmnet by their literal names so that the
+  # call captured by glmnet works when relax.glmnet re-evaluates it.
+  seed = pv[["seed"]] %??% NA_integer_
+  pv = pv[names(pv) != "seed"]
+
   if (cv) {
-    invoke(glmnet::cv.glmnet, x = data, y = target, .args = pv)
+    invoke(glmnet::cv.glmnet, x = data, y = target, .args = pv, .seed = seed)
   } else {
-    invoke(glmnet::glmnet, x = data, y = target, .args = pv)
+    invoke(glmnet::glmnet, x = data, y = target, .args = pv, .seed = seed)
   }
 }
 

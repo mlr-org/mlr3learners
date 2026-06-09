@@ -62,6 +62,23 @@ test_that("selected_features", {
   )
 })
 
+test_that("seed makes cv_glmnet reproducible", {
+  task = tsk("sonar")$select(paste0("V", 1:9))
+
+  fit_coefs = function(seed = NA_integer_) {
+    learner = lrn("classif.cv_glmnet", seed = seed)
+    learner$train(task)
+    as.matrix(coef(learner$model))
+  }
+
+  # without a seed the random folds differ between runs
+  set.seed(1)
+  expect_false(identical(fit_coefs(), fit_coefs()))
+
+  # with a seed the fit is reproducible
+  expect_identical(fit_coefs(1L), fit_coefs(1L))
+})
+
 test_that("relax = TRUE works", {
   task = tsk("sonar")
   train_rows = 1:150
