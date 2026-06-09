@@ -16,7 +16,8 @@ test_that("classif.cv_glmnet", {
     "itrace", # supported via param trace.it
     "factory", # only used in scripts, no effect within mlr3
     "control", # individual control params are set directly
-    "cox.ties" # only used for cox models
+    "cox.ties", # only used for cox models
+    "seed" # mlr3 parameter to seed cv.glmnet's random fold assignment
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "train")

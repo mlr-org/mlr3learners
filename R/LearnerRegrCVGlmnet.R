@@ -9,6 +9,7 @@
 #' Supported `family` values are `"gaussian"` and `"poisson"`.
 #' The default for the hyperparameter `family` is `"gaussian"`.
 #'
+#' @inheritSection mlr_learners_classif.cv_glmnet Custom mlr3 parameters
 #' @inheritSection mlr_learners_classif.cv_glmnet Offset
 #'
 #' @templateVar id regr.cv_glmnet
@@ -80,7 +81,9 @@ LearnerRegrCVGlmnet = R6Class(
         # glmnet::predict.glmnet() parameters
         exact            = p_lgl(default = FALSE, tags = "predict"),
         # for using the offset during prediction
-        use_pred_offset  = p_lgl(init = TRUE, tags = "predict")
+        use_pred_offset  = p_lgl(init = TRUE, tags = "predict"),
+        # mlr3 parameter: seeds the call so cv.glmnet's random fold assignment is reproducible
+        seed             = p_int(init = NA_integer_, special_vals = list(NA_integer_), tags = "train")
       )
       # nolint end
 

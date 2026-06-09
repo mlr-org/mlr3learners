@@ -77,6 +77,20 @@ lrn("regr.cv_glmnet")
    predict.gamma \tab numeric \tab gamma.1se \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    exact \tab logical \tab FALSE \tab TRUE, FALSE \tab - \cr
    use_pred_offset \tab logical \tab - \tab TRUE, FALSE \tab - \cr
+   seed \tab integer \tab - \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
+}
+}
+
+\section{Custom mlr3 parameters}{
+
+\itemize{
+\item \code{seed}:
+\itemize{
+\item Optional integer used to seed the call to \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}},
+making its random fold assignment, and therefore the selected lambda, reproducible.
+\item The global random state is reset afterwards, so it is left unchanged.
+\item Defaults to \code{NA}, in which case no seed is set and the global random state is used.
+}
 }
 }
 
