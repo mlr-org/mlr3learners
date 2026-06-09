@@ -37,7 +37,7 @@ precedence in that order.
 \section{Dictionary}{
 
 This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+or with the associated sugar function \code{\link[mlr3:lrn]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.ranger")
 lrn("classif.ranger")
@@ -127,7 +127,8 @@ Wright, N. M, Ziegler, Andreas (2017).
 Breiman, Leo (2001).
 \dQuote{Random Forests.}
 \emph{Machine Learning}, \bold{45}(1), 5--32.
-ISSN 1573-0565, \doi{10.1023/A:1010933404324}.
+ISSN 1573-0565.
+\doi{10.1023/A:1010933404324}.
 }
 \seealso{
 \itemize{
@@ -147,7 +148,7 @@ in the running session (depending on the loaded packages).
 for established default tuning spaces.
 }
 
-Other Learner: 
+Other Learner:
 \code{\link{mlr_learners_classif.cv_glmnet}},
 \code{\link{mlr_learners_classif.glmnet}},
 \code{\link{mlr_learners_classif.kknn}},
@@ -175,97 +176,105 @@ Other Learner:
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-LearnerClassifRanger-new}{\code{LearnerClassifRanger$new()}}
-\item \href{#method-LearnerClassifRanger-importance}{\code{LearnerClassifRanger$importance()}}
-\item \href{#method-LearnerClassifRanger-oob_error}{\code{LearnerClassifRanger$oob_error()}}
-\item \href{#method-LearnerClassifRanger-selected_features}{\code{LearnerClassifRanger$selected_features()}}
-\item \href{#method-LearnerClassifRanger-clone}{\code{LearnerClassifRanger$clone()}}
+  \itemize{
+    \item \href{#method-LearnerClassifRanger-initialize}{\code{LearnerClassifRanger$new()}}
+    \item \href{#method-LearnerClassifRanger-importance}{\code{LearnerClassifRanger$importance()}}
+    \item \href{#method-LearnerClassifRanger-oob_error}{\code{LearnerClassifRanger$oob_error()}}
+    \item \href{#method-LearnerClassifRanger-selected_features}{\code{LearnerClassifRanger$selected_features()}}
+    \item \href{#method-LearnerClassifRanger-clone}{\code{LearnerClassifRanger$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-LearnerClassifRanger-new"></a>}}
-\if{latex}{\out{\hypertarget{method-LearnerClassifRanger-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifRanger$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-LearnerClassifRanger-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifRanger-initialize}{}}}
+\subsection{\code{LearnerClassifRanger$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifRanger$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifRanger-importance"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifRanger-importance}{}}}
-\subsection{Method \code{importance()}}{
-The importance scores are extracted from the model slot \code{variable.importance}.
+\subsection{\code{LearnerClassifRanger$importance()}}{
+  The importance scores are extracted from the model slot \code{variable.importance}.
 Parameter \code{importance.mode} must be set to \code{"impurity"}, \code{"impurity_corrected"}, or
 \code{"permutation"}
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifRanger$importance()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifRanger$importance()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Named \code{numeric()}.
+  }
 }
 
-\subsection{Returns}{
-Named \code{numeric()}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifRanger-oob_error"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifRanger-oob_error}{}}}
-\subsection{Method \code{oob_error()}}{
-The out-of-bag error, extracted from model slot \code{prediction.error}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifRanger$oob_error()}\if{html}{\out{</div>}}
+\subsection{\code{LearnerClassifRanger$oob_error()}}{
+  The out-of-bag error, extracted from model slot \code{prediction.error}.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifRanger$oob_error()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{numeric(1)}.
+  }
 }
 
-\subsection{Returns}{
-\code{numeric(1)}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifRanger-selected_features"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifRanger-selected_features}{}}}
-\subsection{Method \code{selected_features()}}{
-The set of features used for node splitting in the forest.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifRanger$selected_features()}\if{html}{\out{</div>}}
+\subsection{\code{LearnerClassifRanger$selected_features()}}{
+  The set of features used for node splitting in the forest.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifRanger$selected_features()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{character()}.
+  }
 }
 
-\subsection{Returns}{
-\code{character()}.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifRanger-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifRanger-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifRanger$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{LearnerClassifRanger$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifRanger$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

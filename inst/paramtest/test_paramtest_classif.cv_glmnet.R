@@ -15,7 +15,7 @@ test_that("classif.cv_glmnet", {
     "standardize.response", # not applicable for classification
     "itrace", # supported via param trace.it
     "factory", # only used in scripts, no effect within mlr3
-    "control", # individual control params are set directlys
+    "control", # individual control params are set directly
     "cox.ties" # only used for cox models
   )
 

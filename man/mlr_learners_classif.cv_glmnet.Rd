@@ -24,7 +24,7 @@ effectively disabling the offset adjustment during prediction.
 \section{Dictionary}{
 
 This \link[mlr3:Learner]{mlr3::Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners}
-or with the associated sugar function \code{\link[mlr3:mlr_sugar]{mlr3::lrn()}}:
+or with the associated sugar function \code{\link[mlr3:lrn]{mlr3::lrn()}}:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{mlr_learners$get("classif.cv_glmnet")
 lrn("classif.cv_glmnet")
@@ -80,7 +80,7 @@ lrn("classif.cv_glmnet")
    epsnr \tab numeric \tab 1e-06 \tab  \tab \eqn{[0, 1]}{[0, 1]} \cr
    mxitnr \tab integer \tab 25 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    thresh \tab numeric \tab 1e-07 \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
-   maxit \tab integer \tab 1e+05 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
+   maxit \tab integer \tab 100000 \tab  \tab \eqn{[1, \infty)}{[1, Inf)} \cr
    dfmax \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    pmax \tab integer \tab NULL \tab  \tab \eqn{(-\infty, \infty)}{(-Inf, Inf)} \cr
    s \tab numeric \tab lambda.1se \tab  \tab \eqn{[0, \infty)}{[0, Inf)} \cr
@@ -149,7 +149,7 @@ in the running session (depending on the loaded packages).
 for established default tuning spaces.
 }
 
-Other Learner: 
+Other Learner:
 \code{\link{mlr_learners_classif.glmnet}},
 \code{\link{mlr_learners_classif.kknn}},
 \code{\link{mlr_learners_classif.lda}},
@@ -177,76 +177,80 @@ Other Learner:
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-LearnerClassifCVGlmnet-new}{\code{LearnerClassifCVGlmnet$new()}}
-\item \href{#method-LearnerClassifCVGlmnet-selected_features}{\code{LearnerClassifCVGlmnet$selected_features()}}
-\item \href{#method-LearnerClassifCVGlmnet-clone}{\code{LearnerClassifCVGlmnet$clone()}}
+  \itemize{
+    \item \href{#method-LearnerClassifCVGlmnet-initialize}{\code{LearnerClassifCVGlmnet$new()}}
+    \item \href{#method-LearnerClassifCVGlmnet-selected_features}{\code{LearnerClassifCVGlmnet$selected_features()}}
+    \item \href{#method-LearnerClassifCVGlmnet-clone}{\code{LearnerClassifCVGlmnet$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href='../../mlr3/html/Learner.html#method-Learner-base_learner'><code>mlr3::Learner$base_learner()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href='../../mlr3/html/Learner.html#method-Learner-configure'><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href='../../mlr3/html/Learner.html#method-Learner-encapsulate'><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-Learner-format'><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-Learner-help'><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-Learner-predict'><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-Learner-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-Learner-print'><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-Learner-reset'><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-Learner-train'><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerClassif" data-id="predict_newdata_fast"><a href='../../mlr3/html/LearnerClassif.html#method-LearnerClassif-predict_newdata_fast'><code>mlr3::LearnerClassif$predict_newdata_fast()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-LearnerClassifCVGlmnet-new"></a>}}
-\if{latex}{\out{\hypertarget{method-LearnerClassifCVGlmnet-new}{}}}
-\subsection{Method \code{new()}}{
-Creates a new instance of this \link[R6:R6Class]{R6} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifCVGlmnet$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-LearnerClassifCVGlmnet-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-LearnerClassifCVGlmnet-initialize}{}}}
+\subsection{\code{LearnerClassifCVGlmnet$new()}}{
+  Creates a new instance of this \link[R6:R6Class]{R6} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifCVGlmnet$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifCVGlmnet-selected_features"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifCVGlmnet-selected_features}{}}}
-\subsection{Method \code{selected_features()}}{
-Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
+\subsection{\code{LearnerClassifCVGlmnet$selected_features()}}{
+  Returns the set of selected features as reported by \code{\link[glmnet:predict.glmnet]{glmnet::predict.glmnet()}}
 with \code{type} set to \code{"nonzero"}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifCVGlmnet$selected_features(lambda = NULL)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifCVGlmnet$selected_features(lambda = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{lambda}}{(\code{numeric(1)})\cr
+Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    (\code{character()}) of feature names.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{lambda}}{(\code{numeric(1)})\cr
-Custom \code{lambda}, defaults to the active lambda depending on parameter set.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-(\code{character()}) of feature names.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LearnerClassifCVGlmnet-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-LearnerClassifCVGlmnet-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LearnerClassifCVGlmnet$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{LearnerClassifCVGlmnet$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{LearnerClassifCVGlmnet$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
