@@ -7,6 +7,21 @@ from package [glmnet](https://CRAN.R-project.org/package=glmnet).
 The default for hyperparameter `family` is set to `"binomial"` or
 `"multinomial"`, depending on the number of classes.
 
+## Custom mlr3 parameters
+
+- `seed`:
+
+  - Optional integer used to seed the call to
+    [`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html),
+    making its random fold assignment, and therefore the selected
+    lambda, reproducible.
+
+  - The global random state is reset afterwards, so it is left
+    unchanged.
+
+  - Defaults to `NA`, in which case no seed is set and the global random
+    state is used.
+
 ## Offset
 
 If a `Task` contains a column with the `offset` role, it is
@@ -91,6 +106,7 @@ or with the associated sugar function
 | predict.gamma | numeric | gamma.1se |  | \\\[0, 1\]\\ |
 | exact | logical | FALSE | TRUE, FALSE | \- |
 | use_pred_offset | logical | \- | TRUE, FALSE | \- |
+| seed | integer | \- |  | \\(-\infty, \infty)\\ |
 
 ## Internal Encoding
 
@@ -252,7 +268,7 @@ print(learner)
 #> 
 #> ── <LearnerClassifCVGlmnet> (classif.cv_glmnet): GLM with Elastic Net Regulariza
 #> • Model: -
-#> • Parameters: use_pred_offset=TRUE
+#> • Parameters: use_pred_offset=TRUE, seed=NA
 #> • Packages: mlr3, mlr3learners, and glmnet
 #> • Predict Types: [response] and prob
 #> • Feature Types: logical, integer, and numeric

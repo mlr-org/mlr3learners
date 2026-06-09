@@ -79,6 +79,22 @@ or with the associated sugar function
 | predict.gamma | numeric | gamma.1se |  | \\\[0, 1\]\\ |
 | exact | logical | FALSE | TRUE, FALSE | \- |
 | use_pred_offset | logical | \- | TRUE, FALSE | \- |
+| seed | integer | \- |  | \\(-\infty, \infty)\\ |
+
+## Custom mlr3 parameters
+
+- `seed`:
+
+  - Optional integer used to seed the call to
+    [`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html),
+    making its random fold assignment, and therefore the selected
+    lambda, reproducible.
+
+  - The global random state is reset afterwards, so it is left
+    unchanged.
+
+  - Defaults to `NA`, in which case no seed is set and the global random
+    state is used.
 
 ## Offset
 
@@ -245,7 +261,7 @@ print(learner)
 #> 
 #> ── <LearnerRegrCVGlmnet> (regr.cv_glmnet): GLM with Elastic Net Regularization ─
 #> • Model: -
-#> • Parameters: family=gaussian, use_pred_offset=TRUE
+#> • Parameters: family=gaussian, use_pred_offset=TRUE, seed=NA
 #> • Packages: mlr3, mlr3learners, and glmnet
 #> • Predict Types: [response]
 #> • Feature Types: logical, integer, and numeric

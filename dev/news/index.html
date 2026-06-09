@@ -54,6 +54,7 @@
 <li>fix: using offset during prediction for <code>xgboost</code> learners</li>
 <li>fix: importance in doc examples is now printed correctly</li>
 <li>feat: add parameter <code>local.importance</code> to ranger learners</li>
+<li>feat: <code>cv_glmnet</code> learners gained a <code>seed</code> parameter to make the random fold assignment of <code>cv.glmnet</code>, and therefore the selected lambda, reproducible.</li>
 <li>fix: compatibility with <code>glmnet</code> 5.0</li>
 <li>fix: use of <code>relax = TRUE</code> with glmnet learners</li>
 <li>refactor: went through <code>glmnet</code> parameters and updated their order, defaults, removed those that are not utilized by corresponding learners, etc.</li>
