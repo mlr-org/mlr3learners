@@ -25,6 +25,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Marc Becker \email{marcbecker@posteo.de} (\href{https://orcid.org/0000-0002-8115-0400}{ORCID})
   \item Michel Lang \email{michellang@gmail.com} (\href{https://orcid.org/0000-0001-9754-0393}{ORCID})
   \item Quay Au \email{quayau@gmail.com} (\href{https://orcid.org/0000-0002-5252-8902}{ORCID})
   \item Stefan Coors \email{mail@stefancoors.de} (\href{https://orcid.org/0000-0002-7465-2146}{ORCID})
