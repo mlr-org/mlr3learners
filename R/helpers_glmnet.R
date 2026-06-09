@@ -43,11 +43,10 @@ glmnet_selected_features = function(self, lambda = NULL) {
   assert_number(lambda, null.ok = TRUE, lower = 0)
   lambda = lambda %??% glmnet_get_lambda(self)
   nonzero = predict(self$model, type = "nonzero", s = lambda)
-  if (is.data.frame(nonzero)) {
-    nonzero = nonzero[[1L]]
+  nonzero = if (is.data.frame(nonzero)) {
+    nonzero[[1L]]
   } else {
-    nonzero = unlist(map(nonzero, 1L), use.names = FALSE)
-    nonzero = if (length(nonzero)) sort(unique(nonzero)) else integer()
+    sort(unique(unlist(nonzero, use.names = FALSE)))
   }
 
   glmnet_feature_names(self$model)[nonzero]
@@ -64,16 +63,21 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
 
   if (any(is_ctrl_pars)) {
     invoke(glmnet::glmnet.control, .args = pv[is_ctrl_pars])
+    pv = pv[!is_ctrl_pars]
   }
 
-  is_train_pars = !is_ctrl_pars & names(pv) != "seed"
-  invoke(
-    if (cv) glmnet::cv.glmnet else glmnet::glmnet,
-    x = data,
-    y = target,
-    .args = pv[is_train_pars],
-    .seed = pv[["seed"]] %??% NA_integer_
-  )
+  # `seed` is an mlr3-only parameter that seeds the fit (e.g. cv.glmnet's random folds)
+  # via invoke's `.seed`; it must not be passed on to glmnet itself.
+  # We must call glmnet::glmnet / glmnet::cv.glmnet by their literal names so that the
+  # call captured by glmnet works when relax.glmnet re-evaluates it.
+  seed = pv[["seed"]] %??% NA_integer_
+  pv = pv[names(pv) != "seed"]
+
+  if (cv) {
+    invoke(glmnet::cv.glmnet, x = data, y = target, .args = pv, .seed = seed)
+  } else {
+    invoke(glmnet::glmnet, x = data, y = target, .args = pv, .seed = seed)
+  }
 }
 
 glmnet_set_offset = function(task, phase = "train", pv) {

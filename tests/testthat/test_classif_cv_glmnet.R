@@ -46,7 +46,6 @@ test_that("same label ordering as in glm() / log_reg", {
   }
 })
 
-
 test_that("selected_features", {
   task = tsk("iris")
   learner = lrn("classif.cv_glmnet")
@@ -63,44 +62,50 @@ test_that("selected_features", {
   )
 })
 
-test_that("seed param works in benchmark", {
-  library(data.table)
-  task.obj <- mlr3::tsk("sonar")
-  task.obj$col_roles$feature <- paste0("V", 1:9)#simplify result
-  kfoldcv <- mlr3::rsmp("cv")
-  kfoldcv$param_set$values$folds <- 2
-  set.seed(1)
-  kfoldcv$instantiate(task.obj)
-  seed.list <- list(default=NULL, one=1L)
-  w_dt_list <- list()
-  for(seed.name in names(seed.list)){
-    lrn_cvg <- mlr3learners::LearnerClassifCVGlmnet$new()
-    seed <- seed.list[[seed.name]]
-    if(is.integer(seed)){
-      lrn_cvg$param_set$values$seed <- seed
-    }
-    for(iteration in paste0("run",1:2)){
-      bgrid <- mlr3::benchmark_grid(task.obj, lrn_cvg, kfoldcv)
-      bmr <- mlr3::benchmark(bgrid, store_models=TRUE)
-      score_dt <- bmr$score(mlr3::msr("classif.acc"))
-      for(test.fold in 1:nrow(score_dt)){
-        L <- score_dt$learner[[test.fold]]
-        w <- coef(L$model)
-        nz <- as.logical(w!=0)
-        w_dt_list[[paste(
-          seed.name, iteration, test.fold
-        )]] <- data.table(
-          seed.name, iteration, test.fold,
-          name=rownames(w)[nz], coef=w[nz]
-        )
-      }
-    }
+test_that("seed makes cv_glmnet reproducible", {
+  task = tsk("sonar")$select(paste0("V", 1:9))
+
+  fit_coefs = function(seed = NA_integer_) {
+    learner = lrn("classif.cv_glmnet", seed = seed)
+    learner$train(task)
+    as.matrix(coef(learner$model))
   }
-  w_dt <- rbindlist(w_dt_list)
-  w_wide <- dcast(
-    w_dt,
-    seed.name + test.fold + name ~ iteration,
-    value.var="coef")
-  w_wide[seed.name=="default", expect_false(identical(run1, run2))]
-  w_wide[seed.name=="one", expect_identical(run1, run2)]
+
+  # without a seed the random folds differ between runs
+  set.seed(1)
+  expect_false(identical(fit_coefs(), fit_coefs()))
+
+  # with a seed the fit is reproducible
+  expect_identical(fit_coefs(1L), fit_coefs(1L))
+})
+
+test_that("relax = TRUE works", {
+  task = tsk("sonar")
+  train_rows = 1:150
+  test_rows = 151:208
+
+  # pre-specified lambdas to ensure that the relaxed fit doesn't fail due to convergence issues (for non-gaussian families according to the doc)
+  lambda = c(1e-03, 3e-03, 7e-03, 1e-02, 1e-01)
+  # by default, fits for gamma in (0, 0.25, 0.5, 0.75, 1)
+  learner = lrn("classif.cv_glmnet", relax = TRUE, lambda = lambda, predict_type = "prob")
+  learner$train(task, train_rows)
+  assert_class(learner$model, "cv.relaxed")
+  expect_equal(learner$model$relaxed$gamma, c(0, 0.25, 0.5, 0.75, 1))
+  # fit custom gamma values
+  gammas = seq(0, 1, length.out = 8)
+  learner$param_set$set_values(gamma = gammas)
+  learner$train(task, train_rows)
+  expect_equal(learner$model$relaxed$gamma, gammas)
+
+  p1 = learner$predict(task, test_rows)
+  # default used gamma for prediction, should not change anything
+  learner$param_set$set_values(predict.gamma = "gamma.1se")
+  p2 = learner$predict(task, test_rows)
+  expect_equal(p1$response, p2$response)
+  expect_equal(p1$prob[, "M"], p2$prob[, "M"])
+
+  # numeric gamma value should also work and give different predictions
+  learner$param_set$set_values(predict.gamma = 0.33)
+  p3 = learner$predict(task, test_rows)
+  expect_false(all(p1$prob[, "M"] == p3$prob[, "M"]))
 })

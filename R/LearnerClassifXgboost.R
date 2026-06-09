@@ -318,7 +318,7 @@ LearnerClassifXgboost = R6Class(
           stop("Only 'binary:logistic', 'multi:softprob' and 'multi:softmax' objectives are supported.")
         }
 
-        pv$custom_metric = mlr3misc::crate(
+        pv$custom_metric = crate(
           {
             function(pred, dtrain) {
               scores = fun(pred, dtrain, measure, n_classes)
