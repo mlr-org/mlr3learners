@@ -89,7 +89,7 @@ LearnerClassifLogReg = R6Class(
         # re-write formula
         formula_terms = c(task$feature_names, paste0("offset(", offset_colname, ")"))
         # needs both `env = ...` and `quote = "left"` args to work
-        form = mlr3misc::formulate(lhs = task$target_names, rhs = formula_terms, env = environment(), quote = "left")
+        form = formulate(lhs = task$target_names, rhs = formula_terms, env = environment(), quote = "left")
         # add offset column to the data
         data[, (offset_colname) := task$offset$offset][]
       }

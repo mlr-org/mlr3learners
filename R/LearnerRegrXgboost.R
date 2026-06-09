@@ -260,7 +260,7 @@ LearnerRegrXgboost = R6Class(
           stop("Only 'reg:squarederror' and 'reg:absoluteerror' objectives are supported.")
         }
 
-        pv$custom_metric = mlr3misc::crate(
+        pv$custom_metric = crate(
           {
             function(pred, dtrain) {
               truth = xgboost::getinfo(dtrain, "label")

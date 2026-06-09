@@ -7,9 +7,9 @@
 #' Calls `ranger()` from package \CRANpkg{ranger}.
 #'
 #' @details
-#' In addition to the uncertainty estimation methods provided by the ranger package, 
+#' In addition to the uncertainty estimation methods provided by the ranger package,
 #' the learner provides an ensemble standard deviation and law of total variance uncertainty estimation.
-#' Both methods compute the empirical mean and variance of the training data points 
+#' Both methods compute the empirical mean and variance of the training data points
 #' that fall into the predicted leaf nodes.
 #' The ensemble standard deviation method calculates the standard deviation of the mean of the leaf nodes.
 #' The law of total variance method calculates the mean of the variance of the leaf nodes
@@ -166,7 +166,7 @@ LearnerRegrRanger = R6Class(
 
       if (isTRUE(self$param_set$values$se.method %in% c("ensemble_standard_deviation", "law_of_total_variance"))) {
         # num.threads is the only thing from the param set we want to pass here and not set manually
-        prediction_nodes = mlr3misc::invoke(
+        prediction_nodes = invoke(
           predict,
           model,
           data = data,
@@ -187,7 +187,7 @@ LearnerRegrRanger = R6Class(
       newdata = ordered_features(task, self)
 
       if (isTRUE(pv$se.method %in% c("ensemble_standard_deviation", "law_of_total_variance"))) {
-        prediction_nodes = mlr3misc::invoke(
+        prediction_nodes = invoke(
           predict,
           self$model$model,
           data = newdata,
@@ -203,7 +203,7 @@ LearnerRegrRanger = R6Class(
         }
         result
       } else {
-        prediction = mlr3misc::invoke(
+        prediction = invoke(
           predict,
           self$model$model,
           data = newdata,
