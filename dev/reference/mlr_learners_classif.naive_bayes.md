@@ -102,7 +102,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifNaiveBayes$new()`](#method-LearnerClassifNaiveBayes-new)
+- [`LearnerClassifNaiveBayes$new()`](#method-LearnerClassifNaiveBayes-initialize)
 
 - [`LearnerClassifNaiveBayes$clone()`](#method-LearnerClassifNaiveBayes-clone)
 
@@ -123,7 +123,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifNaiveBayes$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -134,7 +134,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifNaiveBayes$clone()`
 
 The objects of this class are cloneable with this method.
 

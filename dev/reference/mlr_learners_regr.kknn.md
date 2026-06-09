@@ -152,7 +152,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrKKNN$new()`](#method-LearnerRegrKKNN-new)
+- [`LearnerRegrKKNN$new()`](#method-LearnerRegrKKNN-initialize)
 
 - [`LearnerRegrKKNN$clone()`](#method-LearnerRegrKKNN-clone)
 
@@ -173,7 +173,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrKKNN$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -184,7 +184,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrKKNN$clone()`
 
 The objects of this class are cloneable with this method.
 

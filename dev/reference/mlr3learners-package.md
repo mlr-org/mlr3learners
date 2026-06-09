@@ -24,6 +24,9 @@ Useful links:
 
 Authors:
 
+- Marc Becker <marcbecker@posteo.de>
+  ([ORCID](https://orcid.org/0000-0002-8115-0400))
+
 - Michel Lang <michellang@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-9754-0393))
 

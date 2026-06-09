@@ -4,6 +4,9 @@ Generalized linear models with elastic net regularization. Calls
 [`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html) from
 package [glmnet](https://CRAN.R-project.org/package=glmnet).
 
+The default for hyperparameter `family` is set to `"binomial"` or
+`"multinomial"`, depending on the number of classes.
+
 ## Details
 
 Caution: This learner is different to learners calling
@@ -60,40 +63,40 @@ or with the associated sugar function
 |----|----|----|----|----|
 | Id | Type | Default | Levels | Range |
 | alpha | numeric | 1 |  | \\\[0, 1\]\\ |
-| big | numeric | 9.9e+35 |  | \\(-\infty, \infty)\\ |
-| devmax | numeric | 0.999 |  | \\\[0, 1\]\\ |
-| dfmax | integer | \- |  | \\\[0, \infty)\\ |
-| eps | numeric | 1e-06 |  | \\\[0, 1\]\\ |
-| epsnr | numeric | 1e-08 |  | \\\[0, 1\]\\ |
-| exact | logical | FALSE | TRUE, FALSE | \- |
-| exclude | integer | \- |  | \\\[1, \infty)\\ |
-| exmx | numeric | 250 |  | \\(-\infty, \infty)\\ |
-| fdev | numeric | 1e-05 |  | \\\[0, 1\]\\ |
-| gamma | numeric | 1 |  | \\(-\infty, \infty)\\ |
-| intercept | logical | TRUE | TRUE, FALSE | \- |
-| lambda | untyped | \- |  | \- |
-| lambda.min.ratio | numeric | \- |  | \\\[0, 1\]\\ |
-| lower.limits | untyped | \- |  | \- |
-| maxit | integer | 100000 |  | \\\[1, \infty)\\ |
-| mnlam | integer | 5 |  | \\\[1, \infty)\\ |
-| mxit | integer | 100 |  | \\\[1, \infty)\\ |
-| mxitnr | integer | 25 |  | \\\[1, \infty)\\ |
 | nlambda | integer | 100 |  | \\\[1, \infty)\\ |
-| use_pred_offset | logical | \- | TRUE, FALSE | \- |
-| penalty.factor | untyped | \- |  | \- |
-| pmax | integer | \- |  | \\\[0, \infty)\\ |
-| pmin | numeric | 1e-09 |  | \\\[0, 1\]\\ |
-| prec | numeric | 1e-10 |  | \\(-\infty, \infty)\\ |
-| relax | logical | FALSE | TRUE, FALSE | \- |
-| s | numeric | 0.01 |  | \\\[0, \infty)\\ |
+| lambda.min.ratio | numeric | \- |  | \\\[0, 1\]\\ |
+| lambda | untyped | NULL |  | \- |
 | standardize | logical | TRUE | TRUE, FALSE | \- |
-| standardize.response | logical | FALSE | TRUE, FALSE | \- |
-| thresh | numeric | 1e-07 |  | \\\[0, \infty)\\ |
-| trace.it | integer | 0 |  | \\\[0, 1\]\\ |
-| type.gaussian | character | \- | covariance, naive | \- |
+| intercept | logical | TRUE | TRUE, FALSE | \- |
+| exclude | untyped | NULL |  | \- |
+| penalty.factor | untyped | \- |  | \- |
+| lower.limits | untyped | -Inf |  | \- |
+| upper.limits | untyped | Inf |  | \- |
 | type.logistic | character | \- | Newton, modified.Newton | \- |
 | type.multinomial | character | \- | ungrouped, grouped | \- |
-| upper.limits | untyped | \- |  | \- |
+| relax | logical | FALSE | TRUE, FALSE | \- |
+| trace.it | integer | 0 |  | \\\[0, 1\]\\ |
+| maxp | integer | \- |  | \\\[1, \infty)\\ |
+| path | logical | FALSE | TRUE, FALSE | \- |
+| fdev | numeric | 1e-05 |  | \\\[0, 1\]\\ |
+| devmax | numeric | 0.999 |  | \\\[0, 1\]\\ |
+| eps | numeric | 1e-06 |  | \\\[0, 1\]\\ |
+| big | numeric | 9.9e+35 |  | \\(-\infty, \infty)\\ |
+| mnlam | integer | 5 |  | \\\[1, \infty)\\ |
+| pmin | numeric | 1e-09 |  | \\\[0, 1\]\\ |
+| exmx | numeric | 250 |  | \\(-\infty, \infty)\\ |
+| prec | numeric | 1e-10 |  | \\(-\infty, \infty)\\ |
+| mxit | integer | 100 |  | \\\[1, \infty)\\ |
+| epsnr | numeric | 1e-06 |  | \\\[0, 1\]\\ |
+| mxitnr | integer | 25 |  | \\\[1, \infty)\\ |
+| thresh | numeric | 1e-07 |  | \\\[0, \infty)\\ |
+| maxit | integer | 100000 |  | \\\[1, \infty)\\ |
+| dfmax | integer | NULL |  | \\\[0, \infty)\\ |
+| pmax | integer | NULL |  | \\\[0, \infty)\\ |
+| exact | logical | FALSE | TRUE, FALSE | \- |
+| s | numeric | 0.01 |  | \\\[0, \infty)\\ |
+| gamma | numeric | 1 |  | \\\[0, 1\]\\ |
+| use_pred_offset | logical | \- | TRUE, FALSE | \- |
 
 ## Internal Encoding
 
@@ -186,7 +189,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifGlmnet$new()`](#method-LearnerClassifGlmnet-new)
+- [`LearnerClassifGlmnet$new()`](#method-LearnerClassifGlmnet-initialize)
 
 - [`LearnerClassifGlmnet$selected_features()`](#method-LearnerClassifGlmnet-selected_features)
 
@@ -208,7 +211,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifGlmnet$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -219,7 +222,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `LearnerClassifGlmnet$selected_features()`
 
 Returns the set of selected features as reported by
 [`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html)
@@ -244,7 +247,7 @@ names.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifGlmnet$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -287,7 +290,7 @@ learner$train(task, row_ids = ids$train)
 # Print the model
 print(learner$model)
 #> 
-#> Call:  (if (cv) glmnet::cv.glmnet else glmnet::glmnet)(x = data, y = target,      family = "binomial") 
+#> Call:  glmnet::glmnet(x = data, y = target, family = "binomial") 
 #> 
 #>     Df  %Dev   Lambda
 #> 1    0  0.00 0.220000

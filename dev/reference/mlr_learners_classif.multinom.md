@@ -117,7 +117,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifMultinom$new()`](#method-LearnerClassifMultinom-new)
+- [`LearnerClassifMultinom$new()`](#method-LearnerClassifMultinom-initialize)
 
 - [`LearnerClassifMultinom$clone()`](#method-LearnerClassifMultinom-clone)
 
@@ -138,7 +138,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifMultinom$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -149,7 +149,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifMultinom$clone()`
 
 The objects of this class are cloneable with this method.
 

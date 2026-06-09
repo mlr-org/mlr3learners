@@ -138,7 +138,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrNnet$new()`](#method-LearnerRegrNnet-new)
+- [`LearnerRegrNnet$new()`](#method-LearnerRegrNnet-initialize)
 
 - [`LearnerRegrNnet$clone()`](#method-LearnerRegrNnet-clone)
 
@@ -159,7 +159,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrNnet$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -170,7 +170,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrNnet$clone()`
 
 The objects of this class are cloneable with this method.
 

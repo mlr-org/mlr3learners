@@ -94,7 +94,7 @@ Statistical Software*, **77**(1), 1–17.
 [doi:10.18637/jss.v077.i01](https://doi.org/10.18637/jss.v077.i01) .
 
 Breiman, Leo (2001). “Random Forests.” *Machine Learning*, **45**(1),
-5–32. ISSN 1573-0565,
+5–32. ISSN 1573-0565.
 [doi:10.1023/A:1010933404324](https://doi.org/10.1023/A%3A1010933404324)
 .
 
@@ -163,7 +163,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifRanger$new()`](#method-LearnerClassifRanger-new)
+- [`LearnerClassifRanger$new()`](#method-LearnerClassifRanger-initialize)
 
 - [`LearnerClassifRanger$importance()`](#method-LearnerClassifRanger-importance)
 
@@ -189,7 +189,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifRanger$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -200,7 +200,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `LearnerClassifRanger$importance()`
 
 The importance scores are extracted from the model slot
 `variable.importance`. Parameter `importance.mode` must be set to
@@ -216,7 +216,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `oob_error()`
+### `LearnerClassifRanger$oob_error()`
 
 The out-of-bag error, extracted from model slot `prediction.error`.
 
@@ -230,7 +230,7 @@ The out-of-bag error, extracted from model slot `prediction.error`.
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `LearnerClassifRanger$selected_features()`
 
 The set of features used for node splitting in the forest.
 
@@ -244,7 +244,7 @@ The set of features used for node splitting in the forest.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifRanger$clone()`
 
 The objects of this class are cloneable with this method.
 

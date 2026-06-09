@@ -119,7 +119,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrSVM$new()`](#method-LearnerRegrSVM-new)
+- [`LearnerRegrSVM$new()`](#method-LearnerRegrSVM-initialize)
 
 - [`LearnerRegrSVM$clone()`](#method-LearnerRegrSVM-clone)
 
@@ -140,7 +140,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrSVM$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -151,7 +151,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrSVM$clone()`
 
 The objects of this class are cloneable with this method.
 

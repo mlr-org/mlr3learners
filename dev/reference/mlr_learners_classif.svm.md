@@ -121,7 +121,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifSVM$new()`](#method-LearnerClassifSVM-new)
+- [`LearnerClassifSVM$new()`](#method-LearnerClassifSVM-initialize)
 
 - [`LearnerClassifSVM$clone()`](#method-LearnerClassifSVM-clone)
 
@@ -142,7 +142,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifSVM$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -153,7 +153,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifSVM$clone()`
 
 The objects of this class are cloneable with this method.
 

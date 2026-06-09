@@ -123,7 +123,6 @@ or with the associated sugar function
 | evals | untyped | NULL |  | \- |
 | eval_metric | untyped | \- |  | \- |
 | custom_metric | untyped | \- |  | \- |
-| extmem_single_page | logical | FALSE | TRUE, FALSE | \- |
 | feature_selector | character | cyclic | cyclic, shuffle, random, greedy, thrifty | \- |
 | gamma | numeric | 0 |  | \\\[0, \infty)\\ |
 | grow_policy | character | depthwise | depthwise, lossguide | \- |
@@ -285,7 +284,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifXgboost$new()`](#method-LearnerClassifXgboost-new)
+- [`LearnerClassifXgboost$new()`](#method-LearnerClassifXgboost-initialize)
 
 - [`LearnerClassifXgboost$importance()`](#method-LearnerClassifXgboost-importance)
 
@@ -308,7 +307,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifXgboost$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -319,7 +318,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `LearnerClassifXgboost$importance()`
 
 The importance scores are calculated with
 [`xgboost::xgb.importance()`](https://rdrr.io/pkg/xgboost/man/xgb.importance.html).
@@ -334,7 +333,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifXgboost$clone()`
 
 The objects of this class are cloneable with this method.
 

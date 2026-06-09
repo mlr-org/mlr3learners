@@ -117,7 +117,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifQDA$new()`](#method-LearnerClassifQDA-new)
+- [`LearnerClassifQDA$new()`](#method-LearnerClassifQDA-initialize)
 
 - [`LearnerClassifQDA$clone()`](#method-LearnerClassifQDA-clone)
 
@@ -138,7 +138,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifQDA$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -149,7 +149,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifQDA$clone()`
 
 The objects of this class are cloneable with this method.
 

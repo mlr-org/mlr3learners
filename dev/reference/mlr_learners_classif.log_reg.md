@@ -159,7 +159,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifLogReg$new()`](#method-LearnerClassifLogReg-new)
+- [`LearnerClassifLogReg$new()`](#method-LearnerClassifLogReg-initialize)
 
 - [`LearnerClassifLogReg$clone()`](#method-LearnerClassifLogReg-clone)
 
@@ -180,7 +180,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifLogReg$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -191,7 +191,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifLogReg$clone()`
 
 The objects of this class are cloneable with this method.
 

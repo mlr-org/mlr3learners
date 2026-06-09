@@ -59,20 +59,26 @@ Calls <code>ranger()</code> from package <a href="https://CRAN.R-project.org/pac
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>In addition to the uncertainty estimation methods provided by the ranger package, the learner provides an ensemble standard deviation and law of total variance uncertainty estimation.
-Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
+    <p>In addition to the uncertainty estimation methods provided by the ranger package,
+the learner provides an ensemble standard deviation and law of total variance uncertainty estimation.
+Both methods compute the empirical mean and variance of the training data points
+that fall into the predicted leaf nodes.
 The ensemble standard deviation method calculates the standard deviation of the mean of the leaf nodes.
-The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
+The law of total variance method calculates the mean of the variance of the leaf nodes
+plus the variance of the means of the leaf nodes.
 Formulas for the ensemble standard deviation and law of total variance method are given in Hutter et al. (2015).</p>
-<p>For these 2 methods, the parameter <code>sigma2.threshold</code> can be used to set a threshold for the variance of the leaf nodes,
-this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value (as described in the paper).
+<p>For these 2 methods, the parameter <code>sigma2.threshold</code> can be used to set a threshold
+for the variance of the leaf nodes,
+this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold,
+it is set to this value (as described in the paper).
 Default is 1e-2.</p>
     </div>
     <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 
-<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a> or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
+<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a>
+or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.ranger"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.ranger"</span>)</span></code></pre><p></p></div>
     </div>
@@ -119,7 +125,8 @@ precedence in that order.</p></li>
 <p>Breiman, Leo (2001).
 “Random Forests.”
 <em>Machine Learning</em>, <b>45</b>(1), 5–32.
-ISSN 1573-0565, <a href="https://doi.org/10.1023/A%3A1010933404324" class="external-link">doi:10.1023/A:1010933404324</a>
+ISSN 1573-0565.
+<a href="https://doi.org/10.1023/A%3A1010933404324" class="external-link">doi:10.1023/A:1010933404324</a>
 .</p>
 <p>Hutter, Frank, Xu, Lin, Hoos, H. H, Leyton-Brown, Kevin (2015).
 “Algorithm runtime prediction: methods and evaluation.”
@@ -132,7 +139,8 @@ In <em>Proceedings of the 24th International Conference on Artificial Intelligen
 <a href="https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners" class="external-link">https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners</a></p></li>
 <li><p>Package <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link">mlr3extralearners</a> for more learners.</p></li>
 <li><p><a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">Dictionary</a> of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>: <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a></p></li>
-<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a> in the running session (depending on the loaded packages).</p></li>
+<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>
+in the running session (depending on the loaded packages).</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3pipelines" class="external-link"><span class="pkg">mlr3pipelines</span></a> to combine learners with pre- and postprocessing steps.</p></li>
 <li><p>Extension packages for additional task types:</p><ul><li><p><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a> for probabilistic supervised regression and survival analysis.</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3cluster" class="external-link"><span class="pkg">mlr3cluster</span></a> for unsupervised clustering.</p></li>
@@ -179,77 +187,75 @@ The fitted model.</p></dd>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-LearnerRegrRanger-new"><code>LearnerRegrRanger$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-LearnerRegrRanger-initialize"><code>LearnerRegrRanger$new()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-importance"><code>LearnerRegrRanger$importance()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-oob_error"><code>LearnerRegrRanger$oob_error()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-selected_features"><code>LearnerRegrRanger$selected_features()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-clone"><code>LearnerRegrRanger$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
-</ul></details></p><hr><a id="method-LearnerRegrRanger-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerRegrRanger-initialize"></a><div class="section">
+<h3 id="learnerregrranger-new-"><code>LearnerRegrRanger$new()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/mlr_learners_regr.ranger.html">LearnerRegrRanger</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+</div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-importance"></a><div class="section">
-<h3 id="method-importance-">Method <code>importance()</code><a class="anchor" aria-label="anchor" href="#method-importance-"></a></h3>
+<p></p><hr><a id="method-LearnerRegrRanger-importance"></a><div class="section">
+<h3 id="learnerregrranger-importance-"><code>LearnerRegrRanger$importance()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-importance-"></a></h3>
 <p>The importance scores are extracted from the model slot <code>variable.importance</code>.
 Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <code>"impurity_corrected"</code>, or
 <code>"permutation"</code></p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>Named <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-oob_error"></a><div class="section">
-<h3 id="method-oob-error-">Method <code>oob_error()</code><a class="anchor" aria-label="anchor" href="#method-oob-error-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrRanger-oob_error"></a><div class="section">
+<h3 id="learnerregrranger-oob-error-"><code>LearnerRegrRanger$oob_error()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-oob-error-"></a></h3>
 <p>The out-of-bag error, extracted from model slot <code>prediction.error</code>.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">oob_error</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p><code>numeric(1)</code></p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-selected_features"></a><div class="section">
-<h3 id="method-selected-features-">Method <code>selected_features()</code><a class="anchor" aria-label="anchor" href="#method-selected-features-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrRanger-selected_features"></a><div class="section">
+<h3 id="learnerregrranger-selected-features-"><code>LearnerRegrRanger$selected_features()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-selected-features-"></a></h3>
 <p>The set of features used for node splitting in the forest.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">selected_features</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrRanger-clone"></a><div class="section">
+<h3 id="learnerregrranger-clone-"><code>LearnerRegrRanger$clone()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -259,6 +265,7 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 </div>
 
 </div>
+
 
     </div>
 
