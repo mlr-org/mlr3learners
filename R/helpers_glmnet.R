@@ -66,12 +66,11 @@ glmnet_invoke = function(data, target, pv, cv = FALSE) {
     pv = pv[!is_ctrl_pars]
   }
 
-  invoke(
-    if (cv) glmnet::cv.glmnet else glmnet::glmnet,
-    x = data,
-    y = target,
-    .args = pv
-  )
+  if (cv) {
+    invoke(glmnet::cv.glmnet, x = data, y = target, .args = pv)
+  } else {
+    invoke(glmnet::glmnet, x = data, y = target, .args = pv)
+  }
 }
 
 glmnet_set_offset = function(task, phase = "train", pv) {

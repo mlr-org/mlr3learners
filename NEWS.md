@@ -9,6 +9,8 @@
 * fix: Using offset during prediction for `xgboost` learners (#371).
 * fix: Importance in doc examples is now printed correctly.
 * fix: `xgboost` parameter set (#384).
+* refactor: Went through `glmnet` parameters and updated their order, defaults, removed those that are not utilized by corresponding learners.
+* fix: Use of `relax = TRUE` with glmnet learners
 
 # mlr3learners 0.14.0
 

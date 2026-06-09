@@ -4,14 +4,20 @@ skip_on_os("solaris")
 
 test_that("regr.cv_glmnet", {
   learner = lrn("regr.cv_glmnet")
-  fun = list(glmnet::cv.glmnet, glmnet::glmnet.control, glmnet::glmnet)
+  fun = list(glmnet::cv.glmnet, glmnet::glmnet, glmnet::relax.glmnet, glmnet::glmnet.control)
   exclude = c(
     "x", # handled by mlr3
     "y", # handled by mlr3
+    "family", # handled by mlr3
     "weights", # handled by mlr3
+    "offset", # handled by mlr3
+    "fit", # fit object is passed on to relax.glmnet()
+    "check.args", # default TRUE is good for mlr3, no need to expose
+    "type.logistic", # not applicable for regression
+    "type.multinomial", # not applicable for regression
+    "standardize.response", # not applicable for regression
     "itrace", # supported via param trace.it
     "factory", # only used in scripts, no effect within mlr3
-    "offset", # handled by mlr3
     "control", # individual control params are set directly
     "cox.ties" # only used for cox models
   )
@@ -30,12 +36,15 @@ test_that("regr.cv_glmnet", {
 
 test_that("predict regr.cv_glmnet", {
   learner = lrn("regr.cv_glmnet")
-  fun = glmnet:::predict.cv.glmnet
+  fun = list(glmnet::predict.glmnet, glmnet::predict.relaxed)
   exclude = c(
     "object", # handled via mlr3
     "newx", # handled via mlr3
+    "type", # handled via mlr3
+    "newoffset", # handled by mlr3
     "predict.gamma", # renamed from gamma
-    "use_pred_offset" # handled by mlr3
+    "gamma", # renamed to predict.gamma in mlr3 to avoid confusion with train gamma parameter
+    "use_pred_offset" # for using the offset during prediction
   )
 
   ParamTest = run_paramtest(learner, fun, exclude, tag = "predict")

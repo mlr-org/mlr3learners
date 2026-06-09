@@ -46,7 +46,6 @@ test_that("same label ordering as in glm() / log_reg", {
   }
 })
 
-
 test_that("selected_features", {
   task = tsk("iris")
   learner = lrn("classif.cv_glmnet")
@@ -61,4 +60,35 @@ test_that("selected_features", {
     learner$selected_features(Inf),
     character()
   )
+})
+
+test_that("relax = TRUE works", {
+  task = tsk("sonar")
+  train_rows = 1:150
+  test_rows = 151:208
+
+  # pre-specified lambdas to ensure that the relaxed fit doesn't fail due to convergence issues (for non-gaussian families according to the doc)
+  lambda = c(1e-03, 3e-03, 7e-03, 1e-02, 1e-01)
+  # by default, fits for gamma in (0, 0.25, 0.5, 0.75, 1)
+  learner = lrn("classif.cv_glmnet", relax = TRUE, lambda = lambda, predict_type = "prob")
+  learner$train(task, train_rows)
+  assert_class(learner$model, "cv.relaxed")
+  expect_equal(learner$model$relaxed$gamma, c(0, 0.25, 0.5, 0.75, 1))
+  # fit custom gamma values
+  gammas = seq(0, 1, length.out = 8)
+  learner$param_set$set_values(gamma = gammas)
+  learner$train(task, train_rows)
+  expect_equal(learner$model$relaxed$gamma, gammas)
+
+  p1 = learner$predict(task, test_rows)
+  # default used gamma for prediction, should not change anything
+  learner$param_set$set_values(predict.gamma = "gamma.1se")
+  p2 = learner$predict(task, test_rows)
+  expect_equal(p1$response, p2$response)
+  expect_equal(p1$prob[, "M"], p2$prob[, "M"])
+
+  # numeric gamma value should also work and give different predictions
+  learner$param_set$set_values(predict.gamma = 0.33)
+  p3 = learner$predict(task, test_rows)
+  expect_false(all(p1$prob[, "M"] == p3$prob[, "M"]))
 })
