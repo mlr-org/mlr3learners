@@ -171,6 +171,7 @@ The lightgbm learner has a default of 1000, so we use the same here.
 
 \examples{
 \dontshow{if (mlr3misc::require_namespaces(lrn("regr.xgboost")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\donttest{
 # Define the Learner and set parameter values
 learner = lrn("regr.xgboost")
 print(learner)
@@ -205,6 +206,7 @@ learner$train(task)
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
 learner$internal_valid_scores
+}
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -4,6 +4,7 @@ learner = mlr3::lrn(id)
 task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 %>
 #' <%= sprintf("@examplesIf mlr3misc::require_namespaces(lrn(\"%s\")$packages, quietly = TRUE)", id) %>
+#' \donttest{
 #' # Define the Learner and set parameter values
 #' <%= sprintf("learner = lrn(\"%s\")", id) %>
 #' print(learner)
@@ -38,3 +39,4 @@ task_id = if ("LearnerClassif" %in% class(learner)) "sonar" else "mtcars"
 #' # Inspect optimal nrounds and validation performance
 #' learner$internal_tuned_values
 #' learner$internal_valid_scores
+#' }

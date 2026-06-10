@@ -167,6 +167,7 @@ See \url{https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html}.
 
 \examples{
 \dontshow{if (mlr3misc::require_namespaces(lrn("classif.xgboost")$packages, quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\donttest{
 # Define the Learner and set parameter values
 learner = lrn("classif.xgboost")
 print(learner)
@@ -201,6 +202,7 @@ learner$train(task)
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
 learner$internal_valid_scores
+}
 \dontshow{\}) # examplesIf}
 }
 \references{

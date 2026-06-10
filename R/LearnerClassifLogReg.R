@@ -76,7 +76,7 @@ LearnerClassifLogReg = R6Class(
   private = list(
     .train = function(task) {
       pv = self$param_set$get_values(tags = "train")
-      link = pv$link
+      link = pv$link %??% "logit"
       pv$link = NULL
       pv$weights = get_weights(task, private)
 
