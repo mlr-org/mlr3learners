@@ -350,6 +350,7 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
+# \donttest{
 # Define the Learner and set parameter values
 learner = lrn("classif.xgboost")
 print(learner)
@@ -431,4 +432,5 @@ learner$internal_valid_scores
 #> $logloss
 #> [1] 0.3486057
 #> 
+# }
 ```

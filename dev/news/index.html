@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.15.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,17 +50,21 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="mlr3learners-development-version">mlr3learners (development version)<a class="anchor" aria-label="anchor" href="#mlr3learners-development-version"></a></h2>
-<ul><li>feat: All learners now support the <code>predict_raw</code> flag to store raw prediction objects from upstream models.</li>
-<li>fix: using offset during prediction for <code>xgboost</code> learners</li>
-<li>fix: importance in doc examples is now printed correctly</li>
-<li>feat: add parameter <code>local.importance</code> to ranger learners</li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.15.0" id="mlr3learners-0150">mlr3learners 0.15.0<a class="anchor" aria-label="anchor" href="#mlr3learners-0150"></a></h2><p class="text-muted">CRAN release: 2026-06-09</p>
+<ul><li>compatibility: glmnet 5.0.</li>
+<li>feat: All learners now support the <code>predict_raw</code> flag to store raw prediction objects from upstream models.</li>
+<li>feat: <code>classif.log_reg</code> gains a <code>link</code> hyperparameter to support probit regression (<a href="https://github.com/mlr-org/mlr3learners/issues/376" class="external-link">#376</a>).</li>
+<li>feat: <code>classif.ranger</code> and <code>regr.ranger</code> gain a <code>native_model</code> field to access the underlying ranger object (<a href="https://github.com/mlr-org/mlr3learners/issues/375" class="external-link">#375</a>).</li>
+<li>feat: Add parameter <code>local.importance</code> to ranger learners (<a href="https://github.com/mlr-org/mlr3learners/issues/377" class="external-link">#377</a>).</li>
+<li>fix: <code>glmnet_selected_features()</code> now works correctly with glmnet &gt;= 5.0.</li>
+<li>fix: Using offset during prediction for <code>xgboost</code> learners (<a href="https://github.com/mlr-org/mlr3learners/issues/371" class="external-link">#371</a>).</li>
+<li>fix: Importance in doc examples is now printed correctly.</li>
+<li>fix: <code>xgboost</code> parameter set (<a href="https://github.com/mlr-org/mlr3learners/issues/384" class="external-link">#384</a>).</li>
+<li>refactor: Went through <code>glmnet</code> parameters and updated their order, defaults, removed those that are not utilized by corresponding learners.</li>
+<li>fix: Use of <code>relax = TRUE</code> with glmnet learners.</li>
 <li>feat: <code>cv_glmnet</code> learners gained a <code>seed</code> parameter to make the random fold assignment of <code>cv.glmnet</code>, and therefore the selected lambda, reproducible.</li>
-<li>fix: compatibility with <code>glmnet</code> 5.0</li>
-<li>fix: use of <code>relax = TRUE</code> with glmnet learners</li>
-<li>refactor: went through <code>glmnet</code> parameters and updated their order, defaults, removed those that are not utilized by corresponding learners, etc.</li>
-<li>fix: using offset during prediction for <code>xgboost</code> learners.</li>
-<li>fix: importance in doc examples is now printed correctly.</li>
-<li>feat: add parameter <code>local.importance</code> to ranger learners.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.14.0" id="mlr3learners-0140">mlr3learners 0.14.0<a class="anchor" aria-label="anchor" href="#mlr3learners-0140"></a></h2><p class="text-muted">CRAN release: 2025-12-13</p>

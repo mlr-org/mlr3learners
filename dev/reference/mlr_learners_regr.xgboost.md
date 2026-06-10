@@ -357,6 +357,7 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
+# \donttest{
 # Define the Learner and set parameter values
 learner = lrn("regr.xgboost")
 print(learner)
@@ -426,4 +427,5 @@ learner$internal_valid_scores
 #> $rmse
 #> [1] 4.534558
 #> 
+# }
 ```
