@@ -1,6 +1,38 @@
 # Changelog
 
+## mlr3learners 0.15.0
+
+CRAN release: 2026-06-09
+
+- compatibility: glmnet 5.0.
+- feat: All learners now support the `predict_raw` flag to store raw
+  prediction objects from upstream models.
+- feat: `classif.log_reg` gains a `link` hyperparameter to support
+  probit regression
+  ([\#376](https://github.com/mlr-org/mlr3learners/issues/376)).
+- feat: `classif.ranger` and `regr.ranger` gain a `native_model` field
+  to access the underlying ranger object
+  ([\#375](https://github.com/mlr-org/mlr3learners/issues/375)).
+- feat: Add parameter `local.importance` to ranger learners
+  ([\#377](https://github.com/mlr-org/mlr3learners/issues/377)).
+- fix: `glmnet_selected_features()` now works correctly with glmnet \>=
+  5.0.
+- fix: Using offset during prediction for `xgboost` learners
+  ([\#371](https://github.com/mlr-org/mlr3learners/issues/371)).
+- fix: Importance in doc examples is now printed correctly.
+- fix: `xgboost` parameter set
+  ([\#384](https://github.com/mlr-org/mlr3learners/issues/384)).
+- refactor: Went through `glmnet` parameters and updated their order,
+  defaults, removed those that are not utilized by corresponding
+  learners.
+- fix: Use of `relax = TRUE` with glmnet learners.
+- feat: `cv_glmnet` learners gained a `seed` parameter to make the
+  random fold assignment of `cv.glmnet`, and therefore the selected
+  lambda, reproducible.
+
 ## mlr3learners 0.14.0
+
+CRAN release: 2025-12-13
 
 - compatibility: xgboost 3.1.2.1
 

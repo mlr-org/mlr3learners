@@ -5,17 +5,19 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extreme Gradient Boosting Regression Learner — mlr_learners_regr.xgboost"><meta name="description" content="eXtreme Gradient Boosting regression.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extreme Gradient Boosting Regression Learner — mlr_learners_regr.xgboost"><meta name="description" content="eXtreme Gradient Boosting regression.
 Calls xgboost::xgb.train() from package xgboost.
 To compute on GPUs, you first need to compile xgboost yourself and link
 against CUDA. See https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support.
-Note that using the evals parameter directly will lead to problems when wrapping this mlr3::Learner in a mlr3pipelines GraphLearner
+Note that using the evals parameter directly will lead to problems
+when wrapping this mlr3::Learner in a mlr3pipelines GraphLearner
 as the preprocessing steps will not be applied to the data in evals.
 See the section Early Stopping and Validation on how to do this."><meta property="og:description" content="eXtreme Gradient Boosting regression.
 Calls xgboost::xgb.train() from package xgboost.
 To compute on GPUs, you first need to compile xgboost yourself and link
 against CUDA. See https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support.
-Note that using the evals parameter directly will lead to problems when wrapping this mlr3::Learner in a mlr3pipelines GraphLearner
+Note that using the evals parameter directly will lead to problems
+when wrapping this mlr3::Learner in a mlr3pipelines GraphLearner
 as the preprocessing steps will not be applied to the data in evals.
 See the section Early Stopping and Validation on how to do this."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -25,7 +27,7 @@ See the section Early Stopping and Validation on how to do this."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.14.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +68,8 @@ See the section Early Stopping and Validation on how to do this."></head><body>
 Calls <code><a href="https://rdrr.io/pkg/xgboost/man/xgb.train.html" class="external-link">xgboost::xgb.train()</a></code> from package <a href="https://CRAN.R-project.org/package=xgboost" class="external-link"><span class="pkg">xgboost</span></a>.</p>
 <p>To compute on GPUs, you first need to compile <a href="https://CRAN.R-project.org/package=xgboost" class="external-link"><span class="pkg">xgboost</span></a> yourself and link
 against CUDA. See <a href="https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support" class="external-link">https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-support</a>.</p>
-<p>Note that using the <code>evals</code> parameter directly will lead to problems when wrapping this <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> in a <code>mlr3pipelines</code> <code>GraphLearner</code>
+<p>Note that using the <code>evals</code> parameter directly will lead to problems
+when wrapping this <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> in a <code>mlr3pipelines</code> <code>GraphLearner</code>
 as the preprocessing steps will not be applied to the data in <code>evals</code>.
 See the section <em>Early Stopping and Validation</em> on how to do this.</p>
     </div>
@@ -86,13 +89,19 @@ You can still call e.g. <code>predict(learner$model, newdata = newdata, outputma
 
 <p>If a <code>Task</code> has a column with the role <code>offset</code>, it will automatically be used during training.
 The offset is incorporated through the <a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgboost::xgb.DMatrix</a> interface, using the <code>base_margin</code> field.
-No offset is applied during prediction for this learner.</p>
+During prediction, the offset column from the test set is used only if <code>use_pred_offset = TRUE</code> (default) and
+the <code>Task</code> has a column with the role <code>offset</code>.
+The test set offsets are passed via the <code>base_margin</code> argument in <code><a href="https://rdrr.io/pkg/xgboost/man/predict.xgb.Booster.html" class="external-link">xgboost::predict.xgb.Booster()</a></code>.
+Otherwise, if the user sets <code>use_pred_offset = FALSE</code> (or the <code>Task</code> doesn't have a column with the <code>offset</code> role),
+the (possibly estimated) global intercept from the train set is applied.
+See <a href="https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html" class="external-link">https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 
-<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a> or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
+<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a>
+or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.xgboost"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.xgboost"</span>)</span></code></pre><p></p></div>
     </div>
@@ -108,17 +117,21 @@ No offset is applied during prediction for this learner.</p>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
 
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>alpha</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>approxcontrib</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>base_score</td><td>numeric</td><td>0.5</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>booster</td><td>character</td><td>gbtree</td><td>gbtree, gblinear, dart</td><td>-</td></tr><tr><td>callbacks</td><td>untyped</td><td>list()</td><td></td><td>-</td></tr><tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>device</td><td>untyped</td><td>"cpu"</td><td></td><td>-</td></tr><tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr><tr><td>evals</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>eval_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>custom_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>extmem_single_page</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>-</td></tr><tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>grow_policy</td><td>character</td><td>depthwise</td><td>depthwise, lossguide</td><td>-</td></tr><tr><td>huber_slope</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>interaction_constraints</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>iterationrange</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>lambda</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_bin</td><td>integer</td><td>256</td><td></td><td>\([2, \infty)\)</td></tr><tr><td>max_cached_hist_node</td><td>integer</td><td>65536</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_cat_to_onehot</td><td>integer</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_cat_threshold</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_delta_step</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_depth</td><td>integer</td><td>6</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_leaves</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>maximize</td><td>logical</td><td>NULL</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>min_child_weight</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>missing</td><td>numeric</td><td>NA</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>monotone_constraints</td><td>untyped</td><td>0</td><td></td><td>-</td></tr><tr><td>nrounds</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>normalize_type</td><td>character</td><td>tree</td><td>tree, forest</td><td>-</td></tr><tr><td>nthread</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num_parallel_tree</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>objective</td><td>untyped</td><td>"reg:squarederror"</td><td></td><td>-</td></tr><tr><td>one_drop</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>seed</td><td>integer</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>-</td></tr><tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>-</td></tr><tr><td>save_name</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>save_period</td><td>integer</td><td>NULL</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>training</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>tree_method</td><td>character</td><td>auto</td><td>auto, exact, approx, hist, gpu_hist</td><td>-</td></tr><tr><td>tweedie_variance_power</td><td>numeric</td><td>1.5</td><td></td><td>\([1, 2]\)</td></tr><tr><td>updater</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>use_rmm</td><td>logical</td><td>-</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>validate_features</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>verbose</td><td>integer</td><td>-</td><td></td><td>\([0, 2]\)</td></tr><tr><td>verbosity</td><td>integer</td><td>-</td><td></td><td>\([0, 2]\)</td></tr><tr><td>xgb_model</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>alpha</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>approxcontrib</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>base_score</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>booster</td><td>character</td><td>gbtree</td><td>gbtree, gblinear, dart</td><td>-</td></tr><tr><td>callbacks</td><td>untyped</td><td>list()</td><td></td><td>-</td></tr><tr><td>colsample_bylevel</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bynode</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>colsample_bytree</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>device</td><td>untyped</td><td>"cpu"</td><td></td><td>-</td></tr><tr><td>disable_default_eval_metric</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>early_stopping_rounds</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>eta</td><td>numeric</td><td>0.3</td><td></td><td>\([0, 1]\)</td></tr><tr><td>evals</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>eval_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>custom_metric</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>feature_selector</td><td>character</td><td>cyclic</td><td>cyclic, shuffle, random, greedy, thrifty</td><td>-</td></tr><tr><td>gamma</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>grow_policy</td><td>character</td><td>depthwise</td><td>depthwise, lossguide</td><td>-</td></tr><tr><td>huber_slope</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>interaction_constraints</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>iterationrange</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>lambda</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_bin</td><td>integer</td><td>256</td><td></td><td>\([2, \infty)\)</td></tr><tr><td>max_cached_hist_node</td><td>integer</td><td>65536</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_cat_to_onehot</td><td>integer</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_cat_threshold</td><td>numeric</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>max_delta_step</td><td>numeric</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_depth</td><td>integer</td><td>6</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>max_leaves</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>maximize</td><td>logical</td><td>NULL</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>min_child_weight</td><td>numeric</td><td>1</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>missing</td><td>numeric</td><td>NA</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>monotone_constraints</td><td>untyped</td><td>0</td><td></td><td>-</td></tr><tr><td>nrounds</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>normalize_type</td><td>character</td><td>tree</td><td>tree, forest</td><td>-</td></tr><tr><td>nthread</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num_parallel_tree</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>objective</td><td>untyped</td><td>"reg:squarederror"</td><td></td><td>-</td></tr><tr><td>one_drop</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>print_every_n</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>rate_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>refresh_leaf</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>seed</td><td>integer</td><td>-</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>seed_per_iteration</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>sampling_method</td><td>character</td><td>uniform</td><td>uniform, gradient_based</td><td>-</td></tr><tr><td>sample_type</td><td>character</td><td>uniform</td><td>uniform, weighted</td><td>-</td></tr><tr><td>save_name</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>save_period</td><td>integer</td><td>NULL</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>scale_pos_weight</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>skip_drop</td><td>numeric</td><td>0</td><td></td><td>\([0, 1]\)</td></tr><tr><td>subsample</td><td>numeric</td><td>1</td><td></td><td>\([0, 1]\)</td></tr><tr><td>top_k</td><td>integer</td><td>0</td><td></td><td>\([0, \infty)\)</td></tr><tr><td>training</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>tree_method</td><td>character</td><td>auto</td><td>auto, exact, approx, hist, gpu_hist</td><td>-</td></tr><tr><td>tweedie_variance_power</td><td>numeric</td><td>1.5</td><td></td><td>\([1, 2]\)</td></tr><tr><td>updater</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>use_rmm</td><td>logical</td><td>-</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>validate_features</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>verbose</td><td>integer</td><td>-</td><td></td><td>\([0, 2]\)</td></tr><tr><td>verbosity</td><td>integer</td><td>-</td><td></td><td>\([0, 2]\)</td></tr><tr><td>xgb_model</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>use_pred_offset</td><td>logical</td><td>-</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="early-stopping-and-validation">Early Stopping and Validation<a class="anchor" aria-label="anchor" href="#early-stopping-and-validation"></a></h2>
 
 
 <p>In order to monitor the validation performance during the training, you can set the <code>$validate</code> field of the Learner.
 For information on how to configure the validation set, see the <em>Validation</em> section of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>.
-This validation data can also be used for early stopping, which can be enabled by setting the <code>early_stopping_rounds</code> parameter.
-The final (or in the case of early stopping best) validation scores can be accessed via <code>$internal_valid_scores</code>, and the optimal <code>nrounds</code> via <code>$internal_tuned_values</code>.
-The internal validation measure can be set via the <code>custom_metric</code> parameter that can be a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>, a function, or a character string for the internal xgboost measures.
-Using an <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a> is slower than the internal xgboost measures, but allows to use the same measure for tuning and validation.</p>
+This validation data can also be used for early stopping,
+which can be enabled by setting the <code>early_stopping_rounds</code> parameter.
+The final (or in the case of early stopping best) validation scores can be accessed via <code>$internal_valid_scores</code>,
+and the optimal <code>nrounds</code> via <code>$internal_tuned_values</code>.
+The internal validation measure can be set via the <code>custom_metric</code> parameter that can be a <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a>,
+a function, or a character string for the internal xgboost measures.
+Using an <a href="https://mlr3.mlr-org.com/reference/Measure.html" class="external-link">mlr3::Measure</a> is slower than the internal xgboost measures,
+but allows to use the same measure for tuning and validation.</p>
     </div>
     <div class="section level2">
     <h2 id="initial-parameter-values">Initial parameter values<a class="anchor" aria-label="anchor" href="#initial-parameter-values"></a></h2>
@@ -158,7 +171,8 @@ ACM.
 <a href="https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners" class="external-link">https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners</a></p></li>
 <li><p>Package <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link">mlr3extralearners</a> for more learners.</p></li>
 <li><p><a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">Dictionary</a> of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>: <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a></p></li>
-<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a> in the running session (depending on the loaded packages).</p></li>
+<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>
+in the running session (depending on the loaded packages).</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3pipelines" class="external-link"><span class="pkg">mlr3pipelines</span></a> to combine learners with pre- and postprocessing steps.</p></li>
 <li><p>Extension packages for additional task types:</p><ul><li><p><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a> for probabilistic supervised regression and survival analysis.</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3cluster" class="external-link"><span class="pkg">mlr3cluster</span></a> for unsupervised clustering.</p></li>
@@ -200,19 +214,19 @@ If early stopping is activated, this contains the validation scores of the model
 otherwise the <code>nrounds</code> for the final model.</p></dd>
 
 
-<dt><code>internal_tuned_values</code></dt>
+    <dt><code>internal_tuned_values</code></dt>
 <dd><p>(named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> or <code>NULL</code>)
 If early stopping is activated, this returns a list with <code>nrounds</code>,
 which is extracted from <code>$best_iteration</code> of the model and otherwise <code>NULL</code>.</p></dd>
 
 
-<dt><code>validate</code></dt>
+    <dt><code>validate</code></dt>
 <dd><p>(<code>numeric(1)</code> or <code>character(1)</code> or <code>NULL</code>)
 How to construct the internal validation data. This parameter can be either <code>NULL</code>,
 a ratio, <code>"test"</code>, or <code>"predefined"</code>.</p></dd>
 
 
-<dt><code>model</code></dt>
+    <dt><code>model</code></dt>
 <dd><p>(any)<br>
 The fitted model. Only available after <code>$train()</code> has been called.
 Returns the <code>$best_iteration</code> when early stopping is activated.</p></dd>
@@ -225,50 +239,48 @@ Returns the <code>$best_iteration</code> when early stopping is activated.</p></
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-LearnerRegrXgboost-new"><code>LearnerRegrXgboost$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-LearnerRegrXgboost-initialize"><code>LearnerRegrXgboost$new()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrXgboost-importance"><code>LearnerRegrXgboost$importance()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrXgboost-clone"><code>LearnerRegrXgboost$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-selected_features"><code>mlr3::Learner$selected_features()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
-</ul></details></p><hr><a id="method-LearnerRegrXgboost-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-selected_features"><code>mlr3::Learner$selected_features()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerRegrXgboost-initialize"></a><div class="section">
+<h3 id="learnerregrxgboost-new-"><code>LearnerRegrXgboost$new()</code><a class="anchor" aria-label="anchor" href="#learnerregrxgboost-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/mlr_learners_regr.xgboost.html">LearnerRegrXgboost</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+</div>
 
-</div><p></p><hr><a id="method-LearnerRegrXgboost-importance"></a><div class="section">
-<h3 id="method-importance-">Method <code>importance()</code><a class="anchor" aria-label="anchor" href="#method-importance-"></a></h3>
+<p></p><hr><a id="method-LearnerRegrXgboost-importance"></a><div class="section">
+<h3 id="learnerregrxgboost-importance-"><code>LearnerRegrXgboost$importance()</code><a class="anchor" aria-label="anchor" href="#learnerregrxgboost-importance-"></a></h3>
 <p>The importance scores are calculated with <code><a href="https://rdrr.io/pkg/xgboost/man/xgb.importance.html" class="external-link">xgboost::xgb.importance()</a></code>.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrXgboost</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>Named <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrXgboost-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrXgboost-clone"></a><div class="section">
+<h3 id="learnerregrxgboost-clone-"><code>LearnerRegrXgboost$clone()</code><a class="anchor" aria-label="anchor" href="#learnerregrxgboost-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrXgboost</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -279,15 +291,28 @@ Returns the <code>$best_iteration</code> when early stopping is activated.</p></
 
 </div>
 
+
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"xgboost"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.xgboost"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerRegrXgboost&gt;</span><span style="font-weight: bold;"> (regr.xgboost): Extreme Gradient Boosting</span> <span style="color: #00BBBB;">──────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: nrounds=1000, nthread=1, verbose=0, verbosity=0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> use_pred_offset=TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Validate: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">xgboost</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, and numeric</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: hotstart_forward, importance, internal_tuning, missings, offset,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> validation, and weights</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use', predict_raw = 'FALSE'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define a Task</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
@@ -298,39 +323,50 @@ Returns the <code>$best_iteration</code> when early stopping is activated.</p></
 <span class="r-in"><span><span class="co"># Train the learner on the training ids</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">train</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># print the model</span></span></span>
+<span class="r-in"><span><span class="co"># Print the model</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xgboost::xgb.train(params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)], </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     data = xgb_data, nrounds = pv$nrounds, evals = pv$evals, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     custom_metric = pv$custom_metric, verbose = pv$verbose, print_every_n = pv$print_every_n, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     early_stopping_rounds = pv$early_stopping_rounds, maximize = pv$maximize, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     save_period = pv$save_period, save_name = pv$save_name, callbacks = pv$callbacks %??% </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         list())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of features: 10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of rounds:  1000 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># importance method</span></span></span>
-<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Importance method</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          cyl         disp           wt           hp         qsec         carb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.8281008185 0.0721833631 0.0459378468 0.0324108864 0.0115456247 0.0050338213 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           am         drat         gear </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.0023449711 0.0019763203 0.0004663478 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4.875786 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Train learner with early stopping on spam data set</span></span></span>
-<span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># use 30 percent for validation</span></span></span>
-<span class="r-in"><span><span class="co"># Set early stopping parameter</span></span></span>
-<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.xgboost"</span>,</span></span>
-<span class="r-in"><span>  nrounds <span class="op">=</span> <span class="fl">100</span>,</span></span>
-<span class="r-in"><span>  early_stopping_rounds <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>  validate <span class="op">=</span> <span class="fl">0.3</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Early stopping</span></span></span>
+<span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.xgboost"</span>, nrounds <span class="op">=</span> <span class="fl">100</span>, early_stopping_rounds <span class="op">=</span> <span class="fl">10</span>, validate <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Train learner with early stopping</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="fu">train</span><span class="op">(</span><span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Inspect optimal nrounds and validation performance</span></span></span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_tuned_values</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $nrounds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">internal_valid_scores</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $rmse</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4.534558</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

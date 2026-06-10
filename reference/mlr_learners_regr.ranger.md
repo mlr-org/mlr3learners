@@ -5,9 +5,9 @@ Random regression forest. Calls `ranger()` from package
 
 ## Details
 
-Additionally to the uncertainty estimation methods provided by the
-ranger package, the learner provides a ensemble standard deviation and
-law of total variance uncertainty estimation. Both methods compute the
+In addition to the uncertainty estimation methods provided by the ranger
+package, the learner provides an ensemble standard deviation and law of
+total variance uncertainty estimation. Both methods compute the
 empirical mean and variance of the training data points that fall into
 the predicted leaf nodes. The ensemble standard deviation method
 calculates the standard deviation of the mean of the leaf nodes. The law
@@ -49,39 +49,40 @@ or with the associated sugar function
 
 ## Parameters
 
-|                              |           |          |                                                                   |                       |
-|------------------------------|-----------|----------|-------------------------------------------------------------------|-----------------------|
-| Id                           | Type      | Default  | Levels                                                            | Range                 |
-| always.split.variables       | untyped   | \-       |                                                                   | \-                    |
-| holdout                      | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| importance                   | character | \-       | none, impurity, impurity_corrected, permutation                   | \-                    |
-| keep.inbag                   | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| max.depth                    | integer   | NULL     |                                                                   | \\\[1, \infty)\\      |
-| min.bucket                   | integer   | 1        |                                                                   | \\\[1, \infty)\\      |
-| min.node.size                | integer   | 5        |                                                                   | \\\[1, \infty)\\      |
-| mtry                         | integer   | \-       |                                                                   | \\\[1, \infty)\\      |
-| mtry.ratio                   | numeric   | \-       |                                                                   | \\\[0, 1\]\\          |
-| na.action                    | character | na.learn | na.learn, na.omit, na.fail                                        | \-                    |
-| node.stats                   | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| num.random.splits            | integer   | 1        |                                                                   | \\\[1, \infty)\\      |
-| num.threads                  | integer   | 1        |                                                                   | \\\[1, \infty)\\      |
-| num.trees                    | integer   | 500      |                                                                   | \\\[1, \infty)\\      |
-| oob.error                    | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
-| poisson.tau                  | numeric   | 1        |                                                                   | \\(-\infty, \infty)\\ |
-| regularization.factor        | untyped   | 1        |                                                                   | \-                    |
-| regularization.usedepth      | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| replace                      | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
-| respect.unordered.factors    | character | \-       | ignore, order, partition                                          | \-                    |
-| sample.fraction              | numeric   | \-       |                                                                   | \\\[0, 1\]\\          |
-| save.memory                  | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| scale.permutation.importance | logical   | FALSE    | TRUE, FALSE                                                       | \-                    |
-| se.method                    | character | infjack  | jack, infjack, ensemble_standard_deviation, law_of_total_variance | \-                    |
-| sigma2.threshold             | numeric   | 0.01     |                                                                   | \\(-\infty, \infty)\\ |
-| seed                         | integer   | NULL     |                                                                   | \\(-\infty, \infty)\\ |
-| split.select.weights         | untyped   | NULL     |                                                                   | \-                    |
-| splitrule                    | character | variance | variance, extratrees, maxstat, beta, poisson                      | \-                    |
-| verbose                      | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
-| write.forest                 | logical   | TRUE     | TRUE, FALSE                                                       | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| always.split.variables | untyped | \- |  | \- |
+| holdout | logical | FALSE | TRUE, FALSE | \- |
+| importance | character | \- | none, impurity, impurity_corrected, permutation | \- |
+| keep.inbag | logical | FALSE | TRUE, FALSE | \- |
+| max.depth | integer | NULL |  | \\\[1, \infty)\\ |
+| min.bucket | integer | 1 |  | \\\[1, \infty)\\ |
+| min.node.size | integer | 5 |  | \\\[1, \infty)\\ |
+| mtry | integer | \- |  | \\\[1, \infty)\\ |
+| mtry.ratio | numeric | \- |  | \\\[0, 1\]\\ |
+| na.action | character | na.learn | na.learn, na.omit, na.fail | \- |
+| node.stats | logical | FALSE | TRUE, FALSE | \- |
+| num.random.splits | integer | 1 |  | \\\[1, \infty)\\ |
+| num.threads | integer | 1 |  | \\\[1, \infty)\\ |
+| num.trees | integer | 500 |  | \\\[1, \infty)\\ |
+| oob.error | logical | TRUE | TRUE, FALSE | \- |
+| poisson.tau | numeric | 1 |  | \\(-\infty, \infty)\\ |
+| regularization.factor | untyped | 1 |  | \- |
+| regularization.usedepth | logical | FALSE | TRUE, FALSE | \- |
+| replace | logical | TRUE | TRUE, FALSE | \- |
+| respect.unordered.factors | character | \- | ignore, order, partition | \- |
+| sample.fraction | numeric | \- |  | \\\[0, 1\]\\ |
+| save.memory | logical | FALSE | TRUE, FALSE | \- |
+| scale.permutation.importance | logical | FALSE | TRUE, FALSE | \- |
+| local.importance | logical | FALSE | TRUE, FALSE | \- |
+| se.method | character | infjack | jack, infjack, ensemble_standard_deviation, law_of_total_variance | \- |
+| sigma2.threshold | numeric | 0.01 |  | \\(-\infty, \infty)\\ |
+| seed | integer | NULL |  | \\(-\infty, \infty)\\ |
+| split.select.weights | untyped | NULL |  | \- |
+| splitrule | character | variance | variance, extratrees, maxstat, beta, poisson | \- |
+| verbose | logical | TRUE | TRUE, FALSE | \- |
+| write.forest | logical | TRUE | TRUE, FALSE | \- |
 
 ## Custom mlr3 parameters
 
@@ -113,7 +114,7 @@ Statistical Software*, **77**(1), 1–17.
 [doi:10.18637/jss.v077.i01](https://doi.org/10.18637/jss.v077.i01) .
 
 Breiman, Leo (2001). “Random Forests.” *Machine Learning*, **45**(1),
-5–32. ISSN 1573-0565,
+5–32. ISSN 1573-0565.
 [doi:10.1023/A:1010933404324](https://doi.org/10.1023/A%3A1010933404324)
 .
 
@@ -183,11 +184,18 @@ Other Learner:
 [`mlr3::LearnerRegr`](https://mlr3.mlr-org.com/reference/LearnerRegr.html)
 -\> `LearnerRegrRanger`
 
+## Active bindings
+
+- `native_model`:
+
+  ([ranger::ranger](http://imbs-hl.github.io/ranger/reference/ranger.md))  
+  The fitted model.
+
 ## Methods
 
 ### Public methods
 
-- [`LearnerRegrRanger$new()`](#method-LearnerRegrRanger-new)
+- [`LearnerRegrRanger$new()`](#method-LearnerRegrRanger-initialize)
 
 - [`LearnerRegrRanger$importance()`](#method-LearnerRegrRanger-importance)
 
@@ -213,7 +221,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrRanger$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -224,7 +232,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `LearnerRegrRanger$importance()`
 
 The importance scores are extracted from the model slot
 `variable.importance`. Parameter `importance.mode` must be set to
@@ -240,7 +248,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `oob_error()`
+### `LearnerRegrRanger$oob_error()`
 
 The out-of-bag error, extracted from model slot `prediction.error`.
 
@@ -254,7 +262,7 @@ The out-of-bag error, extracted from model slot `prediction.error`.
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `LearnerRegrRanger$selected_features()`
 
 The set of features used for node splitting in the forest.
 
@@ -268,7 +276,7 @@ The set of features used for node splitting in the forest.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrRanger$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -287,18 +295,19 @@ The objects of this class are cloneable with this method.
 ``` r
 # Define the Learner and set parameter values
 learner = lrn("regr.ranger")
+learner$param_set$set_values(importance = "permutation")
 print(learner)
 #> 
 #> ── <LearnerRegrRanger> (regr.ranger): Random Forest ────────────────────────────
 #> • Model: -
-#> • Parameters: num.threads=1, sigma2.threshold=0.01
+#> • Parameters: importance=permutation, num.threads=1, sigma2.threshold=0.01
 #> • Packages: mlr3, mlr3learners, and ranger
 #> • Predict Types: [response], se, and quantiles
 #> • Feature Types: logical, integer, numeric, character, factor, and ordered
 #> • Encapsulation: none (fallback: -)
 #> • Properties: hotstart_backward, importance, missings, oob_error,
 #> selected_features, and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")
@@ -315,7 +324,7 @@ print(learner$model)
 #> Ranger result
 #> 
 #> Call:
-#>  ranger::ranger(dependent.variable.name = task$target_names, data = data,      num.threads = 1L) 
+#>  ranger::ranger(dependent.variable.name = task$target_names, data = data,      importance = "permutation", num.threads = 1L) 
 #> 
 #> Type:                             Regression 
 #> Number of trees:                  500 
@@ -323,18 +332,18 @@ print(learner$model)
 #> Number of independent variables:  10 
 #> Mtry:                             3 
 #> Target node size:                 5 
-#> Variable importance mode:         none 
+#> Variable importance mode:         permutation 
 #> Splitrule:                        variance 
-#> OOB prediction error (MSE):       8.593097 
-#> R squared (OOB):                  0.8063534 
+#> OOB prediction error (MSE):       6.286945 
+#> R squared (OOB):                  0.7989872 
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
-#> function () 
-#> .__LearnerRegrRanger__importance(self = self, private = private, 
-#>     super = super)
-#> <environment: 0x55c30fa00870>
+print(learner$importance())
+#>        wt        hp      disp       cyl      carb      qsec        vs        am 
+#> 9.3383982 9.0161966 6.7330742 3.5933842 0.5417945 0.4585819 0.4326767 0.3657782 
+#>      drat      gear 
+#> 0.3517244 0.2711266 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -342,5 +351,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 4.013859 
+#> 12.33023 
 ```

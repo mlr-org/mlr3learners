@@ -1,21 +1,36 @@
 # GLM with Elastic Net Regularization Classification Learner
 
 Generalized linear models with elastic net regularization. Calls
-[`glmnet::cv.glmnet()`](https://glmnet.stanford.edu/reference/cv.glmnet.html)
+[`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html)
 from package [glmnet](https://CRAN.R-project.org/package=glmnet).
 
 The default for hyperparameter `family` is set to `"binomial"` or
 `"multinomial"`, depending on the number of classes.
 
+## Custom mlr3 parameters
+
+- `seed`:
+
+  - Optional integer used to seed the call to
+    [`glmnet::cv.glmnet()`](https://rdrr.io/pkg/glmnet/man/cv.glmnet.html),
+    making its random fold assignment, and therefore the selected
+    lambda, reproducible.
+
+  - The global random state is reset afterwards, so it is left
+    unchanged.
+
+  - Defaults to `NA`, in which case no seed is set and the global random
+    state is used.
+
 ## Offset
 
 If a `Task` contains a column with the `offset` role, it is
 automatically incorporated during training via the `offset` argument in
-[`glmnet::glmnet()`](https://glmnet.stanford.edu/reference/glmnet.html).
-During prediction, the offset column from the test set is used only if
+[`glmnet::glmnet()`](https://rdrr.io/pkg/glmnet/man/glmnet.html). During
+prediction, the offset column from the test set is used only if
 `use_pred_offset = TRUE` (default), passed via the `newoffset` argument
 in
-[`glmnet::predict.glmnet()`](https://glmnet.stanford.edu/reference/predict.glmnet.html).
+[`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html).
 Otherwise, if the user sets `use_pred_offset = FALSE`, a zero offset is
 applied, effectively disabling the offset adjustment during prediction.
 
@@ -45,51 +60,53 @@ or with the associated sugar function
 
 ## Parameters
 
-|                      |           |            |                                |                       |
-|----------------------|-----------|------------|--------------------------------|-----------------------|
-| Id                   | Type      | Default    | Levels                         | Range                 |
-| alignment            | character | lambda     | lambda, fraction               | \-                    |
-| alpha                | numeric   | 1          |                                | \\\[0, 1\]\\          |
-| big                  | numeric   | 9.9e+35    |                                | \\(-\infty, \infty)\\ |
-| devmax               | numeric   | 0.999      |                                | \\\[0, 1\]\\          |
-| dfmax                | integer   | \-         |                                | \\\[0, \infty)\\      |
-| epsnr                | numeric   | 1e-08      |                                | \\\[0, 1\]\\          |
-| eps                  | numeric   | 1e-06      |                                | \\\[0, 1\]\\          |
-| exclude              | integer   | \-         |                                | \\\[1, \infty)\\      |
-| exmx                 | numeric   | 250        |                                | \\(-\infty, \infty)\\ |
-| fdev                 | numeric   | 1e-05      |                                | \\\[0, 1\]\\          |
-| foldid               | untyped   | NULL       |                                | \-                    |
-| gamma                | untyped   | \-         |                                | \-                    |
-| grouped              | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| intercept            | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| keep                 | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| lambda.min.ratio     | numeric   | \-         |                                | \\\[0, 1\]\\          |
-| lambda               | untyped   | \-         |                                | \-                    |
-| lower.limits         | untyped   | \-         |                                | \-                    |
-| maxit                | integer   | 100000     |                                | \\\[1, \infty)\\      |
-| mnlam                | integer   | 5          |                                | \\\[1, \infty)\\      |
-| mxitnr               | integer   | 25         |                                | \\\[1, \infty)\\      |
-| mxit                 | integer   | 100        |                                | \\\[1, \infty)\\      |
-| nfolds               | integer   | 10         |                                | \\\[3, \infty)\\      |
-| nlambda              | integer   | 100        |                                | \\\[1, \infty)\\      |
-| use_pred_offset      | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| parallel             | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| penalty.factor       | untyped   | \-         |                                | \-                    |
-| pmax                 | integer   | \-         |                                | \\\[0, \infty)\\      |
-| pmin                 | numeric   | 1e-09      |                                | \\\[0, 1\]\\          |
-| prec                 | numeric   | 1e-10      |                                | \\(-\infty, \infty)\\ |
-| predict.gamma        | numeric   | gamma.1se  |                                | \\(-\infty, \infty)\\ |
-| relax                | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| s                    | numeric   | lambda.1se |                                | \\\[0, \infty)\\      |
-| standardize          | logical   | TRUE       | TRUE, FALSE                    | \-                    |
-| standardize.response | logical   | FALSE      | TRUE, FALSE                    | \-                    |
-| thresh               | numeric   | 1e-07      |                                | \\\[0, \infty)\\      |
-| trace.it             | integer   | 0          |                                | \\\[0, 1\]\\          |
-| type.gaussian        | character | \-         | covariance, naive              | \-                    |
-| type.logistic        | character | \-         | Newton, modified.Newton        | \-                    |
-| type.measure         | character | deviance   | deviance, class, auc, mse, mae | \-                    |
-| type.multinomial     | character | \-         | ungrouped, grouped             | \-                    |
-| upper.limits         | untyped   | \-         |                                | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| lambda | untyped | NULL |  | \- |
+| type.measure | character | deviance | deviance, class, auc, mse, mae | \- |
+| nfolds | integer | 10 |  | \\\[3, \infty)\\ |
+| foldid | untyped | NULL |  | \- |
+| alignment | character | lambda | lambda, fraction | \- |
+| grouped | logical | TRUE | TRUE, FALSE | \- |
+| keep | logical | FALSE | TRUE, FALSE | \- |
+| parallel | logical | FALSE | TRUE, FALSE | \- |
+| gamma | untyped | c(0, 0.25, 0.5, 0.75, 1) |  | \- |
+| relax | logical | FALSE | TRUE, FALSE | \- |
+| trace.it | integer | 0 |  | \\\[0, 1\]\\ |
+| alpha | numeric | 1 |  | \\\[0, 1\]\\ |
+| nlambda | integer | 100 |  | \\\[1, \infty)\\ |
+| lambda.min.ratio | numeric | \- |  | \\\[0, 1\]\\ |
+| standardize | logical | TRUE | TRUE, FALSE | \- |
+| intercept | logical | TRUE | TRUE, FALSE | \- |
+| exclude | untyped | NULL |  | \- |
+| penalty.factor | untyped | \- |  | \- |
+| lower.limits | untyped | -Inf |  | \- |
+| upper.limits | untyped | Inf |  | \- |
+| type.logistic | character | \- | Newton, modified.Newton | \- |
+| type.multinomial | character | \- | ungrouped, grouped | \- |
+| maxp | integer | \- |  | \\\[1, \infty)\\ |
+| path | logical | FALSE | TRUE, FALSE | \- |
+| fdev | numeric | 1e-05 |  | \\\[0, 1\]\\ |
+| devmax | numeric | 0.999 |  | \\\[0, 1\]\\ |
+| eps | numeric | 1e-06 |  | \\\[0, 1\]\\ |
+| big | numeric | 9.9e+35 |  | \\(-\infty, \infty)\\ |
+| mnlam | integer | 5 |  | \\(-\infty, \infty)\\ |
+| pmin | numeric | 1e-09 |  | \\\[0, 1\]\\ |
+| exmx | numeric | 250 |  | \\(-\infty, \infty)\\ |
+| prec | numeric | 1e-10 |  | \\(-\infty, \infty)\\ |
+| mxit | integer | 100 |  | \\\[1, \infty)\\ |
+| epsnr | numeric | 1e-06 |  | \\\[0, 1\]\\ |
+| mxitnr | integer | 25 |  | \\\[1, \infty)\\ |
+| thresh | numeric | 1e-07 |  | \\\[0, \infty)\\ |
+| maxit | integer | 100000 |  | \\\[1, \infty)\\ |
+| dfmax | integer | NULL |  | \\(-\infty, \infty)\\ |
+| pmax | integer | NULL |  | \\(-\infty, \infty)\\ |
+| s | numeric | lambda.1se |  | \\\[0, \infty)\\ |
+| predict.gamma | numeric | gamma.1se |  | \\\[0, 1\]\\ |
+| exact | logical | FALSE | TRUE, FALSE | \- |
+| use_pred_offset | logical | \- | TRUE, FALSE | \- |
+| seed | integer | \- |  | \\(-\infty, \infty)\\ |
 
 ## Internal Encoding
 
@@ -170,7 +187,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifCVGlmnet$new()`](#method-LearnerClassifCVGlmnet-new)
+- [`LearnerClassifCVGlmnet$new()`](#method-LearnerClassifCVGlmnet-initialize)
 
 - [`LearnerClassifCVGlmnet$selected_features()`](#method-LearnerClassifCVGlmnet-selected_features)
 
@@ -192,7 +209,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifCVGlmnet$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -203,10 +220,10 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `LearnerClassifCVGlmnet$selected_features()`
 
 Returns the set of selected features as reported by
-[`glmnet::predict.glmnet()`](https://glmnet.stanford.edu/reference/predict.glmnet.html)
+[`glmnet::predict.glmnet()`](https://rdrr.io/pkg/glmnet/man/predict.glmnet.html)
 with `type` set to `"nonzero"`.
 
 #### Usage
@@ -228,7 +245,7 @@ names.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifCVGlmnet$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -251,13 +268,13 @@ print(learner)
 #> 
 #> ── <LearnerClassifCVGlmnet> (classif.cv_glmnet): GLM with Elastic Net Regulariza
 #> • Model: -
-#> • Parameters: use_pred_offset=TRUE
+#> • Parameters: use_pred_offset=TRUE, seed=NA
 #> • Packages: mlr3, mlr3learners, and glmnet
 #> • Predict Types: [response] and prob
 #> • Feature Types: logical, integer, and numeric
 #> • Encapsulation: none (fallback: -)
 #> • Properties: multiclass, offset, selected_features, twoclass, and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("sonar")
@@ -271,16 +288,16 @@ learner$train(task, row_ids = ids$train)
 # Print the model
 print(learner$model)
 #> 
-#> Call:  (if (cv) glmnet::cv.glmnet else glmnet::glmnet)(x = data, y = target,      family = "binomial") 
+#> Call:  glmnet::cv.glmnet(x = data, y = target, family = "binomial") 
 #> 
 #> Measure: Binomial Deviance 
 #> 
 #>      Lambda Index Measure      SE Nonzero
-#> min 0.03215    23  0.9976 0.07175      17
-#> 1se 0.07427    14  1.0581 0.03836      10
+#> min 0.03602    22  0.9852 0.09482      15
+#> 1se 0.08322    13  1.0594 0.05488       6
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -288,5 +305,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> classif.ce 
-#>  0.3043478 
+#>  0.2753623 
 ```

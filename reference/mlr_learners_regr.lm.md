@@ -41,23 +41,23 @@ or with the associated sugar function
 
 ## Parameters
 
-|                 |           |         |                                       |                       |
-|-----------------|-----------|---------|---------------------------------------|-----------------------|
-| Id              | Type      | Default | Levels                                | Range                 |
-| df              | numeric   | Inf     |                                       | \\(-\infty, \infty)\\ |
-| interval        | character | \-      | none, confidence, prediction          | \-                    |
-| level           | numeric   | 0.95    |                                       | \\(-\infty, \infty)\\ |
-| model           | logical   | TRUE    | TRUE, FALSE                           | \-                    |
-| pred.var        | untyped   | \-      |                                       | \-                    |
-| qr              | logical   | TRUE    | TRUE, FALSE                           | \-                    |
-| scale           | numeric   | NULL    |                                       | \\(-\infty, \infty)\\ |
-| singular.ok     | logical   | TRUE    | TRUE, FALSE                           | \-                    |
-| x               | logical   | FALSE   | TRUE, FALSE                           | \-                    |
-| y               | logical   | FALSE   | TRUE, FALSE                           | \-                    |
-| rankdeficient   | character | \-      | warnif, simple, non-estim, NA, NAwarn | \-                    |
-| tol             | numeric   | 1e-07   |                                       | \\(-\infty, \infty)\\ |
-| verbose         | logical   | FALSE   | TRUE, FALSE                           | \-                    |
-| use_pred_offset | logical   | TRUE    | TRUE, FALSE                           | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| df | numeric | Inf |  | \\(-\infty, \infty)\\ |
+| interval | character | \- | none, confidence, prediction | \- |
+| level | numeric | 0.95 |  | \\(-\infty, \infty)\\ |
+| model | logical | TRUE | TRUE, FALSE | \- |
+| pred.var | untyped | \- |  | \- |
+| qr | logical | TRUE | TRUE, FALSE | \- |
+| scale | numeric | NULL |  | \\(-\infty, \infty)\\ |
+| singular.ok | logical | TRUE | TRUE, FALSE | \- |
+| x | logical | FALSE | TRUE, FALSE | \- |
+| y | logical | FALSE | TRUE, FALSE | \- |
+| rankdeficient | character | \- | warnif, simple, non-estim, NA, NAwarn | \- |
+| tol | numeric | 1e-07 |  | \\(-\infty, \infty)\\ |
+| verbose | logical | FALSE | TRUE, FALSE | \- |
+| use_pred_offset | logical | TRUE | TRUE, FALSE | \- |
 
 ## Contrasts
 
@@ -140,7 +140,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrLM$new()`](#method-LearnerRegrLM-new)
+- [`LearnerRegrLM$new()`](#method-LearnerRegrLM-initialize)
 
 - [`LearnerRegrLM$clone()`](#method-LearnerRegrLM-clone)
 
@@ -161,7 +161,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrLM$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -172,7 +172,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrLM$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -201,7 +201,7 @@ print(learner)
 #> • Feature Types: logical, integer, numeric, character, and factor
 #> • Encapsulation: none (fallback: -)
 #> • Properties: offset and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")
@@ -220,13 +220,13 @@ print(learner$model)
 #> 
 #> Coefficients:
 #> (Intercept)           am         carb          cyl         disp         drat  
-#>   10.337625     4.732097    -0.034816     0.215756     0.005722     0.737139  
+#>    21.16641      1.25270      0.18604     -0.20467      0.01538      0.75466  
 #>        gear           hp         qsec           vs           wt  
-#>   -0.730979    -0.021468     0.868526     0.560087    -2.376125  
+#>    -0.29885     -0.02139      0.76344      0.01426     -5.17662  
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -234,5 +234,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 9.640261 
+#> 9.232464 
 ```

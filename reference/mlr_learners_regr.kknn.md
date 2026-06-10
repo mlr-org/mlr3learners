@@ -59,15 +59,15 @@ or with the associated sugar function
 
 ## Parameters
 
-|             |           |         |                                                                                               |                  |
-|-------------|-----------|---------|-----------------------------------------------------------------------------------------------|------------------|
-| Id          | Type      | Default | Levels                                                                                        | Range            |
-| k           | integer   | 7       |                                                                                               | \\\[1, \infty)\\ |
-| distance    | numeric   | 2       |                                                                                               | \\\[0, \infty)\\ |
-| kernel      | character | optimal | rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal | \-               |
-| scale       | logical   | TRUE    | TRUE, FALSE                                                                                   | \-               |
-| ykernel     | untyped   | NULL    |                                                                                               | \-               |
-| store_model | logical   | FALSE   | TRUE, FALSE                                                                                   | \-               |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| k | integer | 7 |  | \\\[1, \infty)\\ |
+| distance | numeric | 2 |  | \\\[0, \infty)\\ |
+| kernel | character | optimal | rectangular, triangular, epanechnikov, biweight, triweight, cos, inv, gaussian, rank, optimal | \- |
+| scale | logical | TRUE | TRUE, FALSE | \- |
+| ykernel | untyped | NULL |  | \- |
+| store_model | logical | FALSE | TRUE, FALSE | \- |
 
 ## References
 
@@ -152,7 +152,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrKKNN$new()`](#method-LearnerRegrKKNN-new)
+- [`LearnerRegrKKNN$new()`](#method-LearnerRegrKKNN-initialize)
 
 - [`LearnerRegrKKNN$clone()`](#method-LearnerRegrKKNN-clone)
 
@@ -173,7 +173,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrKKNN$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -184,7 +184,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrKKNN$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -213,7 +213,7 @@ print(learner)
 #> • Feature Types: logical, integer, numeric, factor, and ordered
 #> • Encapsulation: none (fallback: -)
 #> • Properties:
-#> • Other settings: use_weights = 'error'
+#> • Other settings: use_weights = 'error', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")
@@ -234,27 +234,28 @@ print(learner$model)
 #>       mpg    am  carb   cyl  disp  drat  gear    hp  qsec    vs    wt
 #>     <num> <num> <num> <num> <num> <num> <num> <num> <num> <num> <num>
 #>  1:  21.0     1     4     6 160.0  3.90     4   110 16.46     0 2.620
-#>  2:  22.8     1     1     4 108.0  3.85     4    93 18.61     1 2.320
-#>  3:  18.7     0     2     8 360.0  3.15     3   175 17.02     0 3.440
-#>  4:  18.1     0     1     6 225.0  2.76     3   105 20.22     1 3.460
-#>  5:  14.3     0     4     8 360.0  3.21     3   245 15.84     0 3.570
-#>  6:  19.2     0     4     6 167.6  3.92     4   123 18.30     1 3.440
-#>  7:  16.4     0     3     8 275.8  3.07     3   180 17.40     0 4.070
-#>  8:  15.2     0     3     8 275.8  3.07     3   180 18.00     0 3.780
-#>  9:  10.4     0     4     8 472.0  2.93     3   205 17.98     0 5.250
-#> 10:  10.4     0     4     8 460.0  3.00     3   215 17.82     0 5.424
-#> 11:  14.7     0     4     8 440.0  3.23     3   230 17.42     0 5.345
-#> 12:  32.4     1     1     4  78.7  4.08     4    66 19.47     1 2.200
-#> 13:  15.5     0     2     8 318.0  2.76     3   150 16.87     0 3.520
-#> 14:  15.2     0     2     8 304.0  3.15     3   150 17.30     0 3.435
-#> 15:  19.2     0     2     8 400.0  3.08     3   175 17.05     0 3.845
-#> 16:  27.3     1     1     4  79.0  4.08     4    66 18.90     1 1.935
-#> 17:  26.0     1     2     4 120.3  4.43     5    91 16.70     0 2.140
-#> 18:  30.4     1     2     4  95.1  3.77     5   113 16.90     1 1.513
-#> 19:  15.8     1     4     8 351.0  4.22     5   264 14.50     0 3.170
-#> 20:  19.7     1     6     6 145.0  3.62     5   175 15.50     0 2.770
-#> 21:  15.0     1     8     8 301.0  3.54     5   335 14.60     0 3.570
+#>  2:  21.0     1     4     6 160.0  3.90     4   110 17.02     0 2.875
+#>  3:  22.8     1     1     4 108.0  3.85     4    93 18.61     1 2.320
+#>  4:  21.4     0     1     6 258.0  3.08     3   110 19.44     1 3.215
+#>  5:  18.7     0     2     8 360.0  3.15     3   175 17.02     0 3.440
+#>  6:  14.3     0     4     8 360.0  3.21     3   245 15.84     0 3.570
+#>  7:  19.2     0     4     6 167.6  3.92     4   123 18.30     1 3.440
+#>  8:  17.8     0     4     6 167.6  3.92     4   123 18.90     1 3.440
+#>  9:  16.4     0     3     8 275.8  3.07     3   180 17.40     0 4.070
+#> 10:  17.3     0     3     8 275.8  3.07     3   180 17.60     0 3.730
+#> 11:  15.2     0     3     8 275.8  3.07     3   180 18.00     0 3.780
+#> 12:  10.4     0     4     8 472.0  2.93     3   205 17.98     0 5.250
+#> 13:  10.4     0     4     8 460.0  3.00     3   215 17.82     0 5.424
+#> 14:  30.4     1     2     4  75.7  4.93     4    52 18.52     1 1.615
+#> 15:  21.5     0     1     4 120.1  3.70     3    97 20.01     1 2.465
+#> 16:  15.5     0     2     8 318.0  2.76     3   150 16.87     0 3.520
+#> 17:  15.2     0     2     8 304.0  3.15     3   150 17.30     0 3.435
+#> 18:  19.2     0     2     8 400.0  3.08     3   175 17.05     0 3.845
+#> 19:  27.3     1     1     4  79.0  4.08     4    66 18.90     1 1.935
+#> 20:  15.8     1     4     8 351.0  4.22     5   264 14.50     0 3.170
+#> 21:  19.7     1     6     6 145.0  3.62     5   175 15.50     0 2.770
 #>       mpg    am  carb   cyl  disp  drat  gear    hp  qsec    vs    wt
+#>     <num> <num> <num> <num> <num> <num> <num> <num> <num> <num> <num>
 #> 
 #> $pv
 #> $pv$k
@@ -266,7 +267,7 @@ print(learner$model)
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -274,5 +275,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 10.70219 
+#> 20.15076 
 ```

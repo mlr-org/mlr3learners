@@ -2,7 +2,8 @@
 
 Classification via logistic regression. Calls
 [`stats::glm()`](https://rdrr.io/r/stats/glm.html) with `family` set to
-`"binomial"`.
+`binomial(link = <link>)` with `link` either as `"logit"` (default) or
+`"probit"`.
 
 ## Internal Encoding
 
@@ -60,21 +61,22 @@ or with the associated sugar function
 
 ## Parameters
 
-|                 |         |         |             |                       |
-|-----------------|---------|---------|-------------|-----------------------|
-| Id              | Type    | Default | Levels      | Range                 |
-| dispersion      | untyped | NULL    |             | \-                    |
-| epsilon         | numeric | 1e-08   |             | \\(-\infty, \infty)\\ |
-| etastart        | untyped | \-      |             | \-                    |
-| maxit           | numeric | 25      |             | \\(-\infty, \infty)\\ |
-| model           | logical | TRUE    | TRUE, FALSE | \-                    |
-| mustart         | untyped | \-      |             | \-                    |
-| singular.ok     | logical | TRUE    | TRUE, FALSE | \-                    |
-| start           | untyped | NULL    |             | \-                    |
-| trace           | logical | FALSE   | TRUE, FALSE | \-                    |
-| x               | logical | FALSE   | TRUE, FALSE | \-                    |
-| y               | logical | TRUE    | TRUE, FALSE | \-                    |
-| use_pred_offset | logical | TRUE    | TRUE, FALSE | \-                    |
+|                 |           |         |               |                       |
+|-----------------|-----------|---------|---------------|-----------------------|
+| Id              | Type      | Default | Levels        | Range                 |
+| dispersion      | untyped   | NULL    |               | \-                    |
+| epsilon         | numeric   | 1e-08   |               | \\(-\infty, \infty)\\ |
+| etastart        | untyped   | \-      |               | \-                    |
+| link            | character | \-      | logit, probit | \-                    |
+| maxit           | numeric   | 25      |               | \\(-\infty, \infty)\\ |
+| model           | logical   | TRUE    | TRUE, FALSE   | \-                    |
+| mustart         | untyped   | \-      |               | \-                    |
+| singular.ok     | logical   | TRUE    | TRUE, FALSE   | \-                    |
+| start           | untyped   | NULL    |               | \-                    |
+| trace           | logical   | FALSE   | TRUE, FALSE   | \-                    |
+| x               | logical   | FALSE   | TRUE, FALSE   | \-                    |
+| y               | logical   | TRUE    | TRUE, FALSE   | \-                    |
+| use_pred_offset | logical   | \-      | TRUE, FALSE   | \-                    |
 
 ## Contrasts
 
@@ -157,7 +159,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifLogReg$new()`](#method-LearnerClassifLogReg-new)
+- [`LearnerClassifLogReg$new()`](#method-LearnerClassifLogReg-initialize)
 
 - [`LearnerClassifLogReg$clone()`](#method-LearnerClassifLogReg-clone)
 
@@ -178,7 +180,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifLogReg$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -189,7 +191,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifLogReg$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -212,13 +214,13 @@ print(learner)
 #> 
 #> ── <LearnerClassifLogReg> (classif.log_reg): Logistic Regression ───────────────
 #> • Model: -
-#> • Parameters: use_pred_offset=TRUE
+#> • Parameters: link=logit, use_pred_offset=TRUE
 #> • Packages: mlr3, mlr3learners, and stats
 #> • Predict Types: [response] and prob
 #> • Feature Types: logical, integer, numeric, character, factor, and ordered
 #> • Encapsulation: none (fallback: -)
 #> • Properties: offset, twoclass, and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("sonar")
@@ -234,39 +236,39 @@ learner$train(task, row_ids = ids$train)
 # Print the model
 print(learner$model)
 #> 
-#> Call:  stats::glm(formula = form, family = "binomial", data = data, 
-#>     model = FALSE)
+#> Call:  stats::glm(formula = form, family = stats::binomial(link = link), 
+#>     data = data, model = FALSE)
 #> 
 #> Coefficients:
 #> (Intercept)           V1          V10          V11          V12          V13  
-#>    -285.756     -677.894     -138.149     -256.903      518.509      -95.833  
+#>    -218.269      447.294     -101.657       57.785      238.149       76.659  
 #>         V14          V15          V16          V17          V18          V19  
-#>       5.969       88.531     -317.354      127.805       73.806     -146.011  
+#>    -147.612       73.619     -124.589       10.025       76.102      -20.279  
 #>          V2          V20          V21          V22          V23          V24  
-#>    1042.352      258.374     -233.810      407.294     -305.507      388.313  
+#>     -17.516      -89.098      136.322      -21.343       -9.840      204.983  
 #>         V25          V26          V27          V28          V29           V3  
-#>    -295.362      -67.455      220.419      -15.845     -171.077     -592.316  
+#>    -317.268      279.089     -173.946      168.871     -286.918     -819.898  
 #>         V30          V31          V32          V33          V34          V35  
-#>     366.534     -363.831      176.149      -62.702       89.860       53.869  
+#>     464.489     -403.653      275.932     -227.678      183.149       25.895  
 #>         V36          V37          V38          V39           V4          V40  
-#>    -126.325     -105.908       -4.911      504.074      146.961     -543.467  
+#>    -264.215       67.057      167.517       50.848      173.382     -143.493  
 #>         V41          V42          V43          V44          V45          V46  
-#>     307.564     -245.771       50.703      528.297     -947.786      853.212  
+#>     -31.279       -6.487       16.469      260.527      -99.417     -363.118  
 #>         V47          V48          V49           V5          V50          V51  
-#>    -368.984     1132.261      582.159       80.766    -4700.025     2208.161  
+#>    1021.223     -328.349      307.948      428.923    -1749.079     -494.081  
 #>         V52          V53          V54          V55          V56          V57  
-#>     682.343     1965.509    -1969.410    -5174.850    -1851.471    -2349.680  
+#>    1741.766      946.441      152.633    -2309.507    -2846.633     -143.526  
 #>         V58          V59           V6          V60           V7           V8  
-#>    6718.001     2307.788      135.176     2462.877        4.320      123.704  
+#>    4298.927     1961.737     -190.439      706.956        4.573      323.417  
 #>          V9  
-#>     175.307  
+#>      10.981  
 #> 
 #> Degrees of Freedom: 138 Total (i.e. Null);  78 Residual
-#> Null Deviance:       192.1 
-#> Residual Deviance: 8.973e-09     AIC: 122
+#> Null Deviance:       190.1 
+#> Residual Deviance: 5.789e-09     AIC: 122
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -274,5 +276,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> classif.ce 
-#>  0.3043478 
+#>  0.2898551 
 ```

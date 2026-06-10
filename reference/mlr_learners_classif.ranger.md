@@ -53,37 +53,38 @@ or with the associated sugar function
 
 ## Parameters
 
-|                              |           |          |                                                 |                       |
-|------------------------------|-----------|----------|-------------------------------------------------|-----------------------|
-| Id                           | Type      | Default  | Levels                                          | Range                 |
-| always.split.variables       | untyped   | \-       |                                                 | \-                    |
-| class.weights                | untyped   | NULL     |                                                 | \-                    |
-| holdout                      | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
-| importance                   | character | \-       | none, impurity, impurity_corrected, permutation | \-                    |
-| keep.inbag                   | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
-| max.depth                    | integer   | NULL     |                                                 | \\\[1, \infty)\\      |
-| min.bucket                   | untyped   | 1L       |                                                 | \-                    |
-| min.node.size                | untyped   | NULL     |                                                 | \-                    |
-| mtry                         | integer   | \-       |                                                 | \\\[1, \infty)\\      |
-| mtry.ratio                   | numeric   | \-       |                                                 | \\\[0, 1\]\\          |
-| na.action                    | character | na.learn | na.learn, na.omit, na.fail                      | \-                    |
-| num.random.splits            | integer   | 1        |                                                 | \\\[1, \infty)\\      |
-| node.stats                   | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
-| num.threads                  | integer   | 1        |                                                 | \\\[1, \infty)\\      |
-| num.trees                    | integer   | 500      |                                                 | \\\[1, \infty)\\      |
-| oob.error                    | logical   | TRUE     | TRUE, FALSE                                     | \-                    |
-| regularization.factor        | untyped   | 1        |                                                 | \-                    |
-| regularization.usedepth      | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
-| replace                      | logical   | TRUE     | TRUE, FALSE                                     | \-                    |
-| respect.unordered.factors    | character | \-       | ignore, order, partition                        | \-                    |
-| sample.fraction              | numeric   | \-       |                                                 | \\\[0, 1\]\\          |
-| save.memory                  | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
-| scale.permutation.importance | logical   | FALSE    | TRUE, FALSE                                     | \-                    |
-| seed                         | integer   | NULL     |                                                 | \\(-\infty, \infty)\\ |
-| split.select.weights         | untyped   | NULL     |                                                 | \-                    |
-| splitrule                    | character | gini     | gini, extratrees, hellinger                     | \-                    |
-| verbose                      | logical   | TRUE     | TRUE, FALSE                                     | \-                    |
-| write.forest                 | logical   | TRUE     | TRUE, FALSE                                     | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| always.split.variables | untyped | \- |  | \- |
+| class.weights | untyped | NULL |  | \- |
+| holdout | logical | FALSE | TRUE, FALSE | \- |
+| importance | character | \- | none, impurity, impurity_corrected, permutation | \- |
+| keep.inbag | logical | FALSE | TRUE, FALSE | \- |
+| max.depth | integer | NULL |  | \\\[1, \infty)\\ |
+| min.bucket | untyped | 1L |  | \- |
+| min.node.size | untyped | NULL |  | \- |
+| mtry | integer | \- |  | \\\[1, \infty)\\ |
+| mtry.ratio | numeric | \- |  | \\\[0, 1\]\\ |
+| na.action | character | na.learn | na.learn, na.omit, na.fail | \- |
+| num.random.splits | integer | 1 |  | \\\[1, \infty)\\ |
+| node.stats | logical | FALSE | TRUE, FALSE | \- |
+| num.threads | integer | 1 |  | \\\[1, \infty)\\ |
+| num.trees | integer | 500 |  | \\\[1, \infty)\\ |
+| oob.error | logical | TRUE | TRUE, FALSE | \- |
+| regularization.factor | untyped | 1 |  | \- |
+| regularization.usedepth | logical | FALSE | TRUE, FALSE | \- |
+| replace | logical | TRUE | TRUE, FALSE | \- |
+| respect.unordered.factors | character | \- | ignore, order, partition | \- |
+| sample.fraction | numeric | \- |  | \\\[0, 1\]\\ |
+| save.memory | logical | FALSE | TRUE, FALSE | \- |
+| scale.permutation.importance | logical | FALSE | TRUE, FALSE | \- |
+| local.importance | logical | FALSE | TRUE, FALSE | \- |
+| seed | integer | NULL |  | \\(-\infty, \infty)\\ |
+| split.select.weights | untyped | NULL |  | \- |
+| splitrule | character | gini | gini, extratrees, hellinger | \- |
+| verbose | logical | TRUE | TRUE, FALSE | \- |
+| write.forest | logical | TRUE | TRUE, FALSE | \- |
 
 ## References
 
@@ -93,7 +94,7 @@ Statistical Software*, **77**(1), 1–17.
 [doi:10.18637/jss.v077.i01](https://doi.org/10.18637/jss.v077.i01) .
 
 Breiman, Leo (2001). “Random Forests.” *Machine Learning*, **45**(1),
-5–32. ISSN 1573-0565,
+5–32. ISSN 1573-0565.
 [doi:10.1023/A:1010933404324](https://doi.org/10.1023/A%3A1010933404324)
 .
 
@@ -162,7 +163,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerClassifRanger$new()`](#method-LearnerClassifRanger-new)
+- [`LearnerClassifRanger$new()`](#method-LearnerClassifRanger-initialize)
 
 - [`LearnerClassifRanger$importance()`](#method-LearnerClassifRanger-importance)
 
@@ -188,7 +189,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerClassifRanger$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -199,7 +200,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `LearnerClassifRanger$importance()`
 
 The importance scores are extracted from the model slot
 `variable.importance`. Parameter `importance.mode` must be set to
@@ -215,7 +216,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `oob_error()`
+### `LearnerClassifRanger$oob_error()`
 
 The out-of-bag error, extracted from model slot `prediction.error`.
 
@@ -229,7 +230,7 @@ The out-of-bag error, extracted from model slot `prediction.error`.
 
 ------------------------------------------------------------------------
 
-### Method `selected_features()`
+### `LearnerClassifRanger$selected_features()`
 
 The set of features used for node splitting in the forest.
 
@@ -243,7 +244,7 @@ The set of features used for node splitting in the forest.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerClassifRanger$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -262,18 +263,19 @@ The objects of this class are cloneable with this method.
 ``` r
 # Define the Learner and set parameter values
 learner = lrn("classif.ranger")
+learner$param_set$set_values(importance = "permutation")
 print(learner)
 #> 
 #> ── <LearnerClassifRanger> (classif.ranger): Random Forest ──────────────────────
 #> • Model: -
-#> • Parameters: num.threads=1
+#> • Parameters: importance=permutation, num.threads=1
 #> • Packages: mlr3, mlr3learners, and ranger
 #> • Predict Types: [response] and prob
 #> • Feature Types: logical, integer, numeric, character, factor, and ordered
 #> • Encapsulation: none (fallback: -)
 #> • Properties: hotstart_backward, importance, missings, multiclass, oob_error,
 #> selected_features, twoclass, and weights
-#> • Other settings: use_weights = 'use'
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("sonar")
@@ -289,7 +291,7 @@ print(learner$model)
 #> Ranger result
 #> 
 #> Call:
-#>  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == "prob", num.threads = 1L) 
+#>  ranger::ranger(dependent.variable.name = task$target_names, data = task$data(),      probability = self$predict_type == "prob", importance = "permutation",      num.threads = 1L) 
 #> 
 #> Type:                             Classification 
 #> Number of trees:                  500 
@@ -297,16 +299,36 @@ print(learner$model)
 #> Number of independent variables:  60 
 #> Mtry:                             7 
 #> Target node size:                 1 
-#> Variable importance mode:         none 
+#> Variable importance mode:         permutation 
 #> Splitrule:                        gini 
-#> OOB prediction error:             18.71 % 
+#> OOB prediction error:             19.42 % 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
-#> function () 
-#> .__LearnerClassifRanger__importance(self = self, private = private, 
-#>     super = super)
-#> <environment: 0x55c30e6dab00>
+print(learner$importance())
+#>           V12           V11           V10            V9           V36 
+#>  3.337599e-02  2.616688e-02  1.624741e-02  1.267319e-02  1.266523e-02 
+#>           V49           V35           V37           V48           V51 
+#>  9.591239e-03  8.398474e-03  8.011852e-03  6.791566e-03  6.429335e-03 
+#>           V47           V46            V5           V45           V13 
+#>  5.677990e-03  5.196811e-03  5.063672e-03  5.059326e-03  4.602567e-03 
+#>           V34           V21           V28           V16            V8 
+#>  4.510314e-03  4.251763e-03  4.227416e-03  4.196607e-03  3.784386e-03 
+#>            V4           V26           V22           V23           V31 
+#>  3.073572e-03  2.800287e-03  2.762688e-03  2.617181e-03  2.560049e-03 
+#>           V18           V15            V2           V27           V44 
+#>  2.298490e-03  2.274618e-03  2.217058e-03  2.123583e-03  2.066563e-03 
+#>           V30            V1           V24           V52           V38 
+#>  1.738636e-03  1.713017e-03  1.664384e-03  1.490453e-03  1.475323e-03 
+#>           V17           V29           V32           V33            V6 
+#>  1.353299e-03  1.321075e-03  1.313594e-03  1.173741e-03  1.161417e-03 
+#>           V56           V54           V42           V43           V14 
+#>  1.094181e-03  9.343498e-04  8.589654e-04  7.394226e-04  6.846147e-04 
+#>            V3           V57           V25           V59           V53 
+#>  5.795359e-04  5.719396e-04  5.257730e-04  3.131463e-04  2.842464e-04 
+#>           V55           V40            V7           V39           V20 
+#>  2.524405e-04  2.439645e-04  2.408485e-04  2.336106e-04  1.872417e-04 
+#>           V19           V60           V41           V58           V50 
+#>  2.669592e-05  2.124530e-05  1.185959e-05 -3.304456e-04 -4.521934e-04 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -314,5 +336,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> classif.ce 
-#>  0.1594203 
+#>   0.173913 
 ```

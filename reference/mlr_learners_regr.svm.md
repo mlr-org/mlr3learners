@@ -30,23 +30,23 @@ or with the associated sugar function
 
 ## Parameters
 
-|           |           |                |                                     |                       |
-|-----------|-----------|----------------|-------------------------------------|-----------------------|
-| Id        | Type      | Default        | Levels                              | Range                 |
-| cachesize | numeric   | 40             |                                     | \\(-\infty, \infty)\\ |
-| coef0     | numeric   | 0              |                                     | \\(-\infty, \infty)\\ |
-| cost      | numeric   | 1              |                                     | \\\[0, \infty)\\      |
-| cross     | integer   | 0              |                                     | \\\[0, \infty)\\      |
-| degree    | integer   | 3              |                                     | \\\[1, \infty)\\      |
-| epsilon   | numeric   | 0.1            |                                     | \\\[0, \infty)\\      |
-| fitted    | logical   | TRUE           | TRUE, FALSE                         | \-                    |
-| gamma     | numeric   | \-             |                                     | \\\[0, \infty)\\      |
-| kernel    | character | radial         | linear, polynomial, radial, sigmoid | \-                    |
-| nu        | numeric   | 0.5            |                                     | \\(-\infty, \infty)\\ |
-| scale     | untyped   | TRUE           |                                     | \-                    |
-| shrinking | logical   | TRUE           | TRUE, FALSE                         | \-                    |
-| tolerance | numeric   | 0.001          |                                     | \\\[0, \infty)\\      |
-| type      | character | eps-regression | eps-regression, nu-regression       | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| cachesize | numeric | 40 |  | \\(-\infty, \infty)\\ |
+| coef0 | numeric | 0 |  | \\(-\infty, \infty)\\ |
+| cost | numeric | 1 |  | \\\[0, \infty)\\ |
+| cross | integer | 0 |  | \\\[0, \infty)\\ |
+| degree | integer | 3 |  | \\\[1, \infty)\\ |
+| epsilon | numeric | 0.1 |  | \\\[0, \infty)\\ |
+| fitted | logical | TRUE | TRUE, FALSE | \- |
+| gamma | numeric | \- |  | \\\[0, \infty)\\ |
+| kernel | character | radial | linear, polynomial, radial, sigmoid | \- |
+| nu | numeric | 0.5 |  | \\(-\infty, \infty)\\ |
+| scale | untyped | TRUE |  | \- |
+| shrinking | logical | TRUE | TRUE, FALSE | \- |
+| tolerance | numeric | 0.001 |  | \\\[0, \infty)\\ |
+| type | character | eps-regression | eps-regression, nu-regression | \- |
 
 ## References
 
@@ -119,7 +119,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrSVM$new()`](#method-LearnerRegrSVM-new)
+- [`LearnerRegrSVM$new()`](#method-LearnerRegrSVM-initialize)
 
 - [`LearnerRegrSVM$clone()`](#method-LearnerRegrSVM-clone)
 
@@ -140,7 +140,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrSVM$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -151,7 +151,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrSVM$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -180,7 +180,7 @@ print(learner)
 #> • Feature Types: logical, integer, and numeric
 #> • Encapsulation: none (fallback: -)
 #> • Properties:
-#> • Other settings: use_weights = 'error'
+#> • Other settings: use_weights = 'error', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")
@@ -206,11 +206,11 @@ print(learner$model)
 #>     epsilon:  0.1 
 #> 
 #> 
-#> Number of Support Vectors:  20
+#> Number of Support Vectors:  18
 #> 
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -218,5 +218,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 11.54447 
+#> 13.69849 
 ```

@@ -42,37 +42,37 @@ or with the associated sugar function
 
 ## Parameters
 
-|                  |           |           |                                          |                       |
-|------------------|-----------|-----------|------------------------------------------|-----------------------|
-| Id               | Type      | Default   | Levels                                   | Range                 |
-| bias.correct     | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| checkNames       | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| coef.cov         | untyped   | NULL      |                                          | \-                    |
-| coef.trend       | untyped   | NULL      |                                          | \-                    |
-| coef.var         | untyped   | NULL      |                                          | \-                    |
-| control          | untyped   | NULL      |                                          | \-                    |
-| cov.compute      | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| covtype          | character | matern5_2 | gauss, matern5_2, matern3_2, exp, powexp | \-                    |
-| estim.method     | character | MLE       | MLE, LOO                                 | \-                    |
-| gr               | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| iso              | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| jitter           | numeric   | 0         |                                          | \\\[0, \infty)\\      |
-| kernel           | untyped   | NULL      |                                          | \-                    |
-| knots            | untyped   | NULL      |                                          | \-                    |
-| light.return     | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| lower            | untyped   | NULL      |                                          | \-                    |
-| multistart       | integer   | 1         |                                          | \\(-\infty, \infty)\\ |
-| noise.var        | untyped   | NULL      |                                          | \-                    |
-| nugget           | numeric   | \-        |                                          | \\(-\infty, \infty)\\ |
-| nugget.estim     | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| nugget.stability | numeric   | 0         |                                          | \\\[0, \infty)\\      |
-| optim.method     | character | BFGS      | BFGS, gen                                | \-                    |
-| parinit          | untyped   | NULL      |                                          | \-                    |
-| penalty          | untyped   | NULL      |                                          | \-                    |
-| scaling          | logical   | FALSE     | TRUE, FALSE                              | \-                    |
-| se.compute       | logical   | TRUE      | TRUE, FALSE                              | \-                    |
-| type             | character | SK        | SK, UK                                   | \-                    |
-| upper            | untyped   | NULL      |                                          | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| bias.correct | logical | FALSE | TRUE, FALSE | \- |
+| checkNames | logical | TRUE | TRUE, FALSE | \- |
+| coef.cov | untyped | NULL |  | \- |
+| coef.trend | untyped | NULL |  | \- |
+| coef.var | untyped | NULL |  | \- |
+| control | untyped | NULL |  | \- |
+| cov.compute | logical | TRUE | TRUE, FALSE | \- |
+| covtype | character | matern5_2 | gauss, matern5_2, matern3_2, exp, powexp | \- |
+| estim.method | character | MLE | MLE, LOO | \- |
+| gr | logical | TRUE | TRUE, FALSE | \- |
+| iso | logical | FALSE | TRUE, FALSE | \- |
+| jitter | numeric | 0 |  | \\\[0, \infty)\\ |
+| kernel | untyped | NULL |  | \- |
+| knots | untyped | NULL |  | \- |
+| light.return | logical | FALSE | TRUE, FALSE | \- |
+| lower | untyped | NULL |  | \- |
+| multistart | integer | 1 |  | \\(-\infty, \infty)\\ |
+| noise.var | untyped | NULL |  | \- |
+| nugget | numeric | \- |  | \\(-\infty, \infty)\\ |
+| nugget.estim | logical | FALSE | TRUE, FALSE | \- |
+| nugget.stability | numeric | 0 |  | \\\[0, \infty)\\ |
+| optim.method | character | BFGS | BFGS, gen | \- |
+| parinit | untyped | NULL |  | \- |
+| penalty | untyped | NULL |  | \- |
+| scaling | logical | FALSE | TRUE, FALSE | \- |
+| se.compute | logical | TRUE | TRUE, FALSE | \- |
+| type | character | SK | SK, UK | \- |
+| upper | untyped | NULL |  | \- |
 
 ## References
 
@@ -147,7 +147,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrKM$new()`](#method-LearnerRegrKM-new)
+- [`LearnerRegrKM$new()`](#method-LearnerRegrKM-initialize)
 
 - [`LearnerRegrKM$clone()`](#method-LearnerRegrKM-clone)
 
@@ -168,7 +168,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrKM$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -179,7 +179,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrKM$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -208,7 +208,7 @@ print(learner)
 #> • Feature Types: logical, integer, and numeric
 #> • Encapsulation: none (fallback: -)
 #> • Properties:
-#> • Other settings: use_weights = 'error'
+#> • Other settings: use_weights = 'error', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")
@@ -229,66 +229,83 @@ learner$train(task, row_ids = ids$train)
 #>   - type :  matern5_2 
 #>   - nugget : NO
 #>   - parameters lower bounds :  1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 
-#>   - parameters upper bounds :  2 14 8 801.8 4 4 566 16.8 2 7.822 
-#>   - best initial criterion value(s) :  -59.9162 
+#>   - parameters upper bounds :  2 14 8 737.8 4.34 4 566 16.8 2 7.664 
+#>   - best initial criterion value(s) :  -60.35636 
 #> 
 #> N = 10, M = 5 machine precision = 2.22045e-16
 #> At X0, 0 variables are exactly at the bounds
-#> At iterate     0  f=       59.916  |proj g|=      0.95668
-#> At iterate     1  f =       59.505  |proj g|=        1.4334
-#> At iterate     2  f =       58.793  |proj g|=        1.0213
-#> At iterate     3  f =       58.578  |proj g|=        1.6463
-#> At iterate     4  f =       58.481  |proj g|=       0.75148
-#> At iterate     5  f =       58.268  |proj g|=       0.41674
-#> At iterate     6  f =       58.075  |proj g|=        0.2204
-#> At iterate     7  f =       58.002  |proj g|=       0.11193
-#> At iterate     8  f =       57.985  |proj g|=      0.057232
-#> At iterate     9  f =       57.953  |proj g|=      0.043051
-#> At iterate    10  f =       57.942  |proj g|=      0.040194
-#> At iterate    11  f =       57.876  |proj g|=       0.20848
-#> At iterate    12  f =       57.842  |proj g|=       0.28907
-#> At iterate    13  f =       57.801  |proj g|=       0.27715
-#> At iterate    14  f =       57.761  |proj g|=       0.16308
-#> At iterate    15  f =       57.736  |proj g|=      0.031602
-#> At iterate    16  f =       57.733  |proj g|=       0.02224
-#> At iterate    17  f =        57.73  |proj g|=       0.01521
-#> At iterate    18  f =       57.728  |proj g|=      0.011744
-#> At iterate    19  f =       57.728  |proj g|=     0.0042265
-#> At iterate    20  f =       57.728  |proj g|=      0.024901
-#> At iterate    21  f =       57.728  |proj g|=      0.010714
-#> At iterate    22  f =       57.728  |proj g|=     0.0020135
-#> At iterate    23  f =       57.728  |proj g|=     0.0016093
-#> At iterate    24  f =       57.728  |proj g|=     0.0012447
-#> At iterate    25  f =       57.728  |proj g|=     0.0012442
-#> At iterate    26  f =       57.728  |proj g|=     0.0028344
-#> At iterate    27  f =       57.728  |proj g|=     0.0054748
-#> At iterate    28  f =       57.728  |proj g|=       0.03389
-#> At iterate    29  f =       57.728  |proj g|=      0.014418
-#> At iterate    30  f =       57.727  |proj g|=      0.021228
-#> At iterate    31  f =       57.725  |proj g|=      0.072795
-#> At iterate    32  f =       57.721  |proj g|=       0.14126
-#> At iterate    33  f =       57.713  |proj g|=          0.22
-#> At iterate    34  f =       57.696  |proj g|=        0.2928
-#> At iterate    35  f =       57.668  |proj g|=       0.24473
-#> At iterate    36  f =       57.645  |proj g|=       0.47784
-#> At iterate    37  f =       57.568  |proj g|=       0.17836
-#> At iterate    38  f =       57.536  |proj g|=      0.057029
-#> At iterate    39  f =       57.527  |proj g|=      0.020982
-#> At iterate    40  f =       57.527  |proj g|=      0.032198
-#> At iterate    41  f =       57.527  |proj g|=     0.0015031
-#> At iterate    42  f =       57.527  |proj g|=     0.0002306
-#> At iterate    43  f =       57.527  |proj g|=    0.00010318
+#> At iterate     0  f=       60.356  |proj g|=       1.0441
+#> At iterate     1  f =       59.578  |proj g|=       0.61557
+#> At iterate     2  f =       59.551  |proj g|=       0.43639
+#> At iterate     3  f =       59.508  |proj g|=        0.1072
+#> At iterate     4  f =       59.501  |proj g|=      0.045916
+#> At iterate     5  f =       59.498  |proj g|=      0.035272
+#> At iterate     6  f =       59.486  |proj g|=      0.049029
+#> At iterate     7  f =       59.458  |proj g|=       0.13826
+#> At iterate     8  f =       59.437  |proj g|=       0.16631
+#> At iterate     9  f =       59.397  |proj g|=      0.062371
+#> At iterate    10  f =        59.39  |proj g|=       0.12121
+#> At iterate    11  f =       59.385  |proj g|=      0.040085
+#> At iterate    12  f =        59.38  |proj g|=      0.044928
+#> At iterate    13  f =       59.351  |proj g|=      0.076988
+#> At iterate    14  f =       59.317  |proj g|=       0.11096
+#> At iterate    15  f =       59.278  |proj g|=       0.03651
+#> At iterate    16  f =       59.276  |proj g|=       0.10888
+#> At iterate    17  f =       59.272  |proj g|=      0.028216
+#> At iterate    18  f =       59.271  |proj g|=       0.02276
+#> At iterate    19  f =       59.269  |proj g|=      0.028528
+#> At iterate    20  f =       59.267  |proj g|=      0.024534
+#> At iterate    21  f =       59.264  |proj g|=       0.01321
+#> At iterate    22  f =       59.259  |proj g|=      0.020469
+#> At iterate    23  f =       59.258  |proj g|=       0.03941
+#> At iterate    24  f =       59.256  |proj g|=      0.034892
+#> At iterate    25  f =       59.252  |proj g|=      0.019909
+#> At iterate    26  f =       59.246  |proj g|=      0.021398
+#> At iterate    27  f =       59.207  |proj g|=       0.17622
+#> At iterate    28  f =       59.155  |proj g|=       0.26612
+#> At iterate    29  f =       59.075  |proj g|=      0.088692
+#> At iterate    30  f =       59.044  |proj g|=      0.085756
+#> At iterate    31  f =       58.896  |proj g|=       0.16094
+#> At iterate    32  f =       58.655  |proj g|=       0.31974
+#> At iterate    33  f =       58.588  |proj g|=       0.12902
+#> At iterate    34  f =       58.543  |proj g|=       0.12928
+#> At iterate    35  f =       58.431  |proj g|=       0.21067
+#> At iterate    36  f =       58.393  |proj g|=       0.23517
+#> At iterate    37  f =       58.346  |proj g|=      0.079539
+#> At iterate    38  f =       58.299  |proj g|=      0.028819
+#> At iterate    39  f =       58.299  |proj g|=      0.018978
+#> At iterate    40  f =       58.299  |proj g|=     0.0014728
+#> At iterate    41  f =       58.298  |proj g|=     0.0014731
+#> At iterate    42  f =       58.298  |proj g|=     0.0016648
+#> At iterate    43  f =       58.298  |proj g|=     0.0043608
+#> At iterate    44  f =       58.298  |proj g|=     0.0070433
+#> At iterate    45  f =       58.298  |proj g|=      0.012799
+#> At iterate    46  f =       58.298  |proj g|=      0.024266
+#> At iterate    47  f =       58.297  |proj g|=       0.03984
+#> At iterate    48  f =       58.295  |proj g|=       0.06895
+#> At iterate    49  f =       58.289  |proj g|=       0.11864
+#> At iterate    50  f =       58.274  |proj g|=       0.18326
+#> At iterate    51  f =       58.242  |proj g|=       0.21753
+#> At iterate    52  f =       58.148  |proj g|=       0.28915
+#> At iterate    53  f =       58.039  |proj g|=       0.11486
+#> At iterate    54  f =       58.014  |proj g|=       0.12402
+#> At iterate    55  f =       57.995  |proj g|=      0.042399
+#> At iterate    56  f =       57.994  |proj g|=      0.024083
+#> At iterate    57  f =       57.994  |proj g|=     0.0087811
+#> At iterate    58  f =       57.994  |proj g|=     0.0051456
+#> At iterate    59  f =       57.994  |proj g|=    0.00014385
+#> At iterate    60  f =       57.994  |proj g|=    9.7976e-05
 #> 
-#> iterations 43
-#> function evaluations 46
-#> segments explored during Cauchy searches 43
+#> iterations 60
+#> function evaluations 66
+#> segments explored during Cauchy searches 60
 #> BFGS updates skipped 0
-#> active bounds at final generalized Cauchy point 5
-#> norm of the final projected gradient 0.000103179
-#> final function value 57.5268
+#> active bounds at final generalized Cauchy point 6
+#> norm of the final projected gradient 9.7976e-05
+#> final function value 57.9936
 #> 
-#> F = 57.5268
-#> final  value 57.526779 
+#> F = 57.9936
+#> final  value 57.993584 
 #> converged
 
 # Print the model
@@ -299,26 +316,26 @@ print(learner$model)
 #> 
 #> Trend  coeff.:
 #>                Estimate
-#>  (Intercept)    21.4124
+#>  (Intercept)    20.6909
 #> 
 #> Covar. type  : matern5_2 
 #> Covar. coeff.:
 #>                Estimate
-#>    theta(am)     2.0000
+#>    theta(am)     1.0794
 #>  theta(carb)    14.0000
 #>   theta(cyl)     8.0000
-#>  theta(disp)   801.8000
-#>  theta(drat)     1.0159
-#>  theta(gear)     2.3302
-#>    theta(hp)   472.6205
-#>  theta(qsec)     1.4230
-#>    theta(vs)     2.0000
-#>    theta(wt)     2.6510
+#>  theta(disp)   737.8000
+#>  theta(drat)     1.3933
+#>  theta(gear)     4.0000
+#>    theta(hp)   566.0000
+#>  theta(qsec)     1.4621
+#>    theta(vs)     0.0000
+#>    theta(wt)     2.1558
 #> 
-#> Variance estimate: 42.09598
+#> Variance estimate: 36.67326
 
 # Importance method
-if ("importance" %in% learner$properties) print(learner$importance)
+if ("importance" %in% learner$properties) print(learner$importance())
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
@@ -326,5 +343,5 @@ predictions = learner$predict(task, row_ids = ids$test)
 # Score the predictions
 predictions$score()
 #> regr.mse 
-#> 8.151569 
+#> 9.673668 
 ```

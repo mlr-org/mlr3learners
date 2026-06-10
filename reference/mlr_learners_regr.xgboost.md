@@ -33,8 +33,15 @@ these predictions.
 If a `Task` has a column with the role `offset`, it will automatically
 be used during training. The offset is incorporated through the
 [xgboost::xgb.DMatrix](https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html)
-interface, using the `base_margin` field. No offset is applied during
-prediction for this learner.
+interface, using the `base_margin` field. During prediction, the offset
+column from the test set is used only if `use_pred_offset = TRUE`
+(default) and the `Task` has a column with the role `offset`. The test
+set offsets are passed via the `base_margin` argument in
+[`xgboost::predict.xgb.Booster()`](https://rdrr.io/pkg/xgboost/man/predict.xgb.Booster.html).
+Otherwise, if the user sets `use_pred_offset = FALSE` (or the `Task`
+doesn't have a column with the `offset` role), the (possibly estimated)
+global intercept from the train set is applied. See
+<https://xgboost.readthedocs.io/en/stable/tutorials/intercept.html>.
 
 ## Dictionary
 
@@ -62,71 +69,71 @@ or with the associated sugar function
 
 ## Parameters
 
-|                             |           |                    |                                          |                       |
-|-----------------------------|-----------|--------------------|------------------------------------------|-----------------------|
-| Id                          | Type      | Default            | Levels                                   | Range                 |
-| alpha                       | numeric   | 0                  |                                          | \\\[0, \infty)\\      |
-| approxcontrib               | logical   | FALSE              | TRUE, FALSE                              | \-                    |
-| base_score                  | numeric   | 0.5                |                                          | \\(-\infty, \infty)\\ |
-| booster                     | character | gbtree             | gbtree, gblinear, dart                   | \-                    |
-| callbacks                   | untyped   | list()             |                                          | \-                    |
-| colsample_bylevel           | numeric   | 1                  |                                          | \\\[0, 1\]\\          |
-| colsample_bynode            | numeric   | 1                  |                                          | \\\[0, 1\]\\          |
-| colsample_bytree            | numeric   | 1                  |                                          | \\\[0, 1\]\\          |
-| device                      | untyped   | "cpu"              |                                          | \-                    |
-| disable_default_eval_metric | logical   | FALSE              | TRUE, FALSE                              | \-                    |
-| early_stopping_rounds       | integer   | NULL               |                                          | \\\[1, \infty)\\      |
-| eta                         | numeric   | 0.3                |                                          | \\\[0, 1\]\\          |
-| evals                       | untyped   | NULL               |                                          | \-                    |
-| eval_metric                 | untyped   | \-                 |                                          | \-                    |
-| custom_metric               | untyped   | \-                 |                                          | \-                    |
-| extmem_single_page          | logical   | FALSE              | TRUE, FALSE                              | \-                    |
-| feature_selector            | character | cyclic             | cyclic, shuffle, random, greedy, thrifty | \-                    |
-| gamma                       | numeric   | 0                  |                                          | \\\[0, \infty)\\      |
-| grow_policy                 | character | depthwise          | depthwise, lossguide                     | \-                    |
-| huber_slope                 | numeric   | 1                  |                                          | \\(-\infty, \infty)\\ |
-| interaction_constraints     | untyped   | \-                 |                                          | \-                    |
-| iterationrange              | untyped   | \-                 |                                          | \-                    |
-| lambda                      | numeric   | 1                  |                                          | \\\[0, \infty)\\      |
-| max_bin                     | integer   | 256                |                                          | \\\[2, \infty)\\      |
-| max_cached_hist_node        | integer   | 65536              |                                          | \\(-\infty, \infty)\\ |
-| max_cat_to_onehot           | integer   | \-                 |                                          | \\(-\infty, \infty)\\ |
-| max_cat_threshold           | numeric   | \-                 |                                          | \\(-\infty, \infty)\\ |
-| max_delta_step              | numeric   | 0                  |                                          | \\\[0, \infty)\\      |
-| max_depth                   | integer   | 6                  |                                          | \\\[0, \infty)\\      |
-| max_leaves                  | integer   | 0                  |                                          | \\\[0, \infty)\\      |
-| maximize                    | logical   | NULL               | TRUE, FALSE                              | \-                    |
-| min_child_weight            | numeric   | 1                  |                                          | \\\[0, \infty)\\      |
-| missing                     | numeric   | NA                 |                                          | \\(-\infty, \infty)\\ |
-| monotone_constraints        | untyped   | 0                  |                                          | \-                    |
-| nrounds                     | integer   | \-                 |                                          | \\\[1, \infty)\\      |
-| normalize_type              | character | tree               | tree, forest                             | \-                    |
-| nthread                     | integer   | \-                 |                                          | \\\[1, \infty)\\      |
-| num_parallel_tree           | integer   | 1                  |                                          | \\\[1, \infty)\\      |
-| objective                   | untyped   | "reg:squarederror" |                                          | \-                    |
-| one_drop                    | logical   | FALSE              | TRUE, FALSE                              | \-                    |
-| print_every_n               | integer   | 1                  |                                          | \\\[1, \infty)\\      |
-| rate_drop                   | numeric   | 0                  |                                          | \\\[0, 1\]\\          |
-| refresh_leaf                | logical   | TRUE               | TRUE, FALSE                              | \-                    |
-| seed                        | integer   | \-                 |                                          | \\(-\infty, \infty)\\ |
-| seed_per_iteration          | logical   | FALSE              | TRUE, FALSE                              | \-                    |
-| sampling_method             | character | uniform            | uniform, gradient_based                  | \-                    |
-| sample_type                 | character | uniform            | uniform, weighted                        | \-                    |
-| save_name                   | untyped   | NULL               |                                          | \-                    |
-| save_period                 | integer   | NULL               |                                          | \\\[0, \infty)\\      |
-| scale_pos_weight            | numeric   | 1                  |                                          | \\(-\infty, \infty)\\ |
-| skip_drop                   | numeric   | 0                  |                                          | \\\[0, 1\]\\          |
-| subsample                   | numeric   | 1                  |                                          | \\\[0, 1\]\\          |
-| top_k                       | integer   | 0                  |                                          | \\\[0, \infty)\\      |
-| training                    | logical   | FALSE              | TRUE, FALSE                              | \-                    |
-| tree_method                 | character | auto               | auto, exact, approx, hist, gpu_hist      | \-                    |
-| tweedie_variance_power      | numeric   | 1.5                |                                          | \\\[1, 2\]\\          |
-| updater                     | untyped   | \-                 |                                          | \-                    |
-| use_rmm                     | logical   | \-                 | TRUE, FALSE                              | \-                    |
-| validate_features           | logical   | TRUE               | TRUE, FALSE                              | \-                    |
-| verbose                     | integer   | \-                 |                                          | \\\[0, 2\]\\          |
-| verbosity                   | integer   | \-                 |                                          | \\\[0, 2\]\\          |
-| xgb_model                   | untyped   | NULL               |                                          | \-                    |
+|  |  |  |  |  |
+|----|----|----|----|----|
+| Id | Type | Default | Levels | Range |
+| alpha | numeric | 0 |  | \\\[0, \infty)\\ |
+| approxcontrib | logical | FALSE | TRUE, FALSE | \- |
+| base_score | numeric | \- |  | \\(-\infty, \infty)\\ |
+| booster | character | gbtree | gbtree, gblinear, dart | \- |
+| callbacks | untyped | list() |  | \- |
+| colsample_bylevel | numeric | 1 |  | \\\[0, 1\]\\ |
+| colsample_bynode | numeric | 1 |  | \\\[0, 1\]\\ |
+| colsample_bytree | numeric | 1 |  | \\\[0, 1\]\\ |
+| device | untyped | "cpu" |  | \- |
+| disable_default_eval_metric | logical | FALSE | TRUE, FALSE | \- |
+| early_stopping_rounds | integer | NULL |  | \\\[1, \infty)\\ |
+| eta | numeric | 0.3 |  | \\\[0, 1\]\\ |
+| evals | untyped | NULL |  | \- |
+| eval_metric | untyped | \- |  | \- |
+| custom_metric | untyped | \- |  | \- |
+| feature_selector | character | cyclic | cyclic, shuffle, random, greedy, thrifty | \- |
+| gamma | numeric | 0 |  | \\\[0, \infty)\\ |
+| grow_policy | character | depthwise | depthwise, lossguide | \- |
+| huber_slope | numeric | 1 |  | \\(-\infty, \infty)\\ |
+| interaction_constraints | untyped | \- |  | \- |
+| iterationrange | untyped | \- |  | \- |
+| lambda | numeric | 1 |  | \\\[0, \infty)\\ |
+| max_bin | integer | 256 |  | \\\[2, \infty)\\ |
+| max_cached_hist_node | integer | 65536 |  | \\(-\infty, \infty)\\ |
+| max_cat_to_onehot | integer | \- |  | \\(-\infty, \infty)\\ |
+| max_cat_threshold | numeric | \- |  | \\(-\infty, \infty)\\ |
+| max_delta_step | numeric | 0 |  | \\\[0, \infty)\\ |
+| max_depth | integer | 6 |  | \\\[0, \infty)\\ |
+| max_leaves | integer | 0 |  | \\\[0, \infty)\\ |
+| maximize | logical | NULL | TRUE, FALSE | \- |
+| min_child_weight | numeric | 1 |  | \\\[0, \infty)\\ |
+| missing | numeric | NA |  | \\(-\infty, \infty)\\ |
+| monotone_constraints | untyped | 0 |  | \- |
+| nrounds | integer | \- |  | \\\[1, \infty)\\ |
+| normalize_type | character | tree | tree, forest | \- |
+| nthread | integer | \- |  | \\\[1, \infty)\\ |
+| num_parallel_tree | integer | 1 |  | \\\[1, \infty)\\ |
+| objective | untyped | "reg:squarederror" |  | \- |
+| one_drop | logical | FALSE | TRUE, FALSE | \- |
+| print_every_n | integer | 1 |  | \\\[1, \infty)\\ |
+| rate_drop | numeric | 0 |  | \\\[0, 1\]\\ |
+| refresh_leaf | logical | TRUE | TRUE, FALSE | \- |
+| seed | integer | \- |  | \\(-\infty, \infty)\\ |
+| seed_per_iteration | logical | FALSE | TRUE, FALSE | \- |
+| sampling_method | character | uniform | uniform, gradient_based | \- |
+| sample_type | character | uniform | uniform, weighted | \- |
+| save_name | untyped | NULL |  | \- |
+| save_period | integer | NULL |  | \\\[0, \infty)\\ |
+| scale_pos_weight | numeric | 1 |  | \\(-\infty, \infty)\\ |
+| skip_drop | numeric | 0 |  | \\\[0, 1\]\\ |
+| subsample | numeric | 1 |  | \\\[0, 1\]\\ |
+| top_k | integer | 0 |  | \\\[0, \infty)\\ |
+| training | logical | FALSE | TRUE, FALSE | \- |
+| tree_method | character | auto | auto, exact, approx, hist, gpu_hist | \- |
+| tweedie_variance_power | numeric | 1.5 |  | \\\[1, 2\]\\ |
+| updater | untyped | \- |  | \- |
+| use_rmm | logical | \- | TRUE, FALSE | \- |
+| validate_features | logical | TRUE | TRUE, FALSE | \- |
+| verbose | integer | \- |  | \\\[0, 2\]\\ |
+| verbosity | integer | \- |  | \\\[0, 2\]\\ |
+| xgb_model | untyped | NULL |  | \- |
+| use_pred_offset | logical | \- | TRUE, FALSE | \- |
 
 ## Early Stopping and Validation
 
@@ -284,7 +291,7 @@ Other Learner:
 
 ### Public methods
 
-- [`LearnerRegrXgboost$new()`](#method-LearnerRegrXgboost-new)
+- [`LearnerRegrXgboost$new()`](#method-LearnerRegrXgboost-initialize)
 
 - [`LearnerRegrXgboost$importance()`](#method-LearnerRegrXgboost-importance)
 
@@ -307,7 +314,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `LearnerRegrXgboost$new()`
 
 Creates a new instance of this
 [R6](https://r6.r-lib.org/reference/R6Class.html) class.
@@ -318,7 +325,7 @@ Creates a new instance of this
 
 ------------------------------------------------------------------------
 
-### Method `importance()`
+### `LearnerRegrXgboost$importance()`
 
 The importance scores are calculated with
 [`xgboost::xgb.importance()`](https://rdrr.io/pkg/xgboost/man/xgb.importance.html).
@@ -333,7 +340,7 @@ Named [`numeric()`](https://rdrr.io/r/base/numeric.html).
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `LearnerRegrXgboost$clone()`
 
 The objects of this class are cloneable with this method.
 
@@ -350,11 +357,23 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-if (requireNamespace("xgboost", quietly = TRUE)) {
+# \donttest{
 # Define the Learner and set parameter values
 learner = lrn("regr.xgboost")
 print(learner)
+#> 
+#> ── <LearnerRegrXgboost> (regr.xgboost): Extreme Gradient Boosting ──────────────
+#> • Model: -
+#> • Parameters: nrounds=1000, nthread=1, verbose=0, verbosity=0,
+#> use_pred_offset=TRUE
+#> • Validate: NULL
+#> • Packages: mlr3, mlr3learners, and xgboost
+#> • Predict Types: [response]
+#> • Feature Types: logical, integer, and numeric
+#> • Encapsulation: none (fallback: -)
+#> • Properties: hotstart_forward, importance, internal_tuning, missings, offset,
+#> validation, and weights
+#> • Other settings: use_weights = 'use', predict_raw = 'FALSE'
 
 # Define a Task
 task = tsk("mtcars")
@@ -365,37 +384,48 @@ ids = partition(task)
 # Train the learner on the training ids
 learner$train(task, row_ids = ids$train)
 
-# print the model
+# Print the model
 print(learner$model)
+#> ##### xgb.Booster
+#> call:
+#>   xgboost::xgb.train(params = pv[names(pv) %in% formalArgs(xgboost::xgb.params)], 
+#>     data = xgb_data, nrounds = pv$nrounds, evals = pv$evals, 
+#>     custom_metric = pv$custom_metric, verbose = pv$verbose, print_every_n = pv$print_every_n, 
+#>     early_stopping_rounds = pv$early_stopping_rounds, maximize = pv$maximize, 
+#>     save_period = pv$save_period, save_name = pv$save_name, callbacks = pv$callbacks %??% 
+#>         list())
+#> # of features: 10 
+#> # of rounds:  1000 
 
-# importance method
-if("importance" %in% learner$properties) print(learner$importance)
+# Importance method
+if ("importance" %in% learner$properties) print(learner$importance())
+#>          cyl         disp           wt           hp         qsec         carb 
+#> 0.8281008185 0.0721833631 0.0459378468 0.0324108864 0.0115456247 0.0050338213 
+#>           am         drat         gear 
+#> 0.0023449711 0.0019763203 0.0004663478 
 
 # Make predictions for the test rows
 predictions = learner$predict(task, row_ids = ids$test)
 
 # Score the predictions
 predictions$score()
-}
-} # }
+#> regr.mse 
+#> 4.875786 
 
-if (FALSE) { # \dontrun{
-# Train learner with early stopping on spam data set
-task = tsk("mtcars")
-
-# use 30 percent for validation
-# Set early stopping parameter
-learner = lrn("regr.xgboost",
-  nrounds = 100,
-  early_stopping_rounds = 10,
-  validate = 0.3
-)
+# Early stopping
+learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 10, validate = 0.3)
 
 # Train learner with early stopping
 learner$train(task)
 
 # Inspect optimal nrounds and validation performance
 learner$internal_tuned_values
+#> $nrounds
+#> [1] 4
+#> 
 learner$internal_valid_scores
-} # }
+#> $rmse
+#> [1] 4.534558
+#> 
+# }
 ```

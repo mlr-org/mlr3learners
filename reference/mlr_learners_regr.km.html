@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Kriging Regression Learner — mlr_learners_regr.km"><meta name="description" content='Kriging regression.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Kriging Regression Learner — mlr_learners_regr.km"><meta name="description" content='Kriging regression.
 Calls DiceKriging::km() from package DiceKriging.
 The predict type hyperparameter "type" defaults to "SK" (simple kriging).
 The additional hyperparameter nugget.stability is used to overwrite the
@@ -33,7 +33,7 @@ perfect interpolation. We recommend a value of 1e-12.
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.14.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,8 @@ perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 
-<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a> or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
+<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a>
+or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.km"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.km"</span>)</span></code></pre><p></p></div>
     </div>
@@ -117,7 +118,8 @@ perfect interpolation. We recommend a value of <code>1e-12</code>.</p></li>
 <a href="https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners" class="external-link">https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners</a></p></li>
 <li><p>Package <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link">mlr3extralearners</a> for more learners.</p></li>
 <li><p><a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">Dictionary</a> of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>: <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a></p></li>
-<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a> in the running session (depending on the loaded packages).</p></li>
+<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>
+in the running session (depending on the loaded packages).</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3pipelines" class="external-link"><span class="pkg">mlr3pipelines</span></a> to combine learners with pre- and postprocessing steps.</p></li>
 <li><p>Extension packages for additional task types:</p><ul><li><p><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a> for probabilistic supervised regression and survival analysis.</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3cluster" class="external-link"><span class="pkg">mlr3cluster</span></a> for unsupervised clustering.</p></li>
@@ -155,37 +157,35 @@ for established default tuning spaces.</p></li>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-LearnerRegrKM-new"><code>LearnerRegrKM$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-LearnerRegrKM-initialize"><code>LearnerRegrKM$new()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrKM-clone"><code>LearnerRegrKM$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-selected_features"><code>mlr3::Learner$selected_features()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
-</ul></details></p><hr><a id="method-LearnerRegrKM-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="selected_features"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-selected_features"><code>mlr3::Learner$selected_features()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerRegrKM-initialize"></a><div class="section">
+<h3 id="learnerregrkm-new-"><code>LearnerRegrKM$new()</code><a class="anchor" aria-label="anchor" href="#learnerregrkm-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/mlr_learners_regr.km.html">LearnerRegrKM</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+</div>
 
-</div><p></p><hr><a id="method-LearnerRegrKM-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p></p><hr><a id="method-LearnerRegrKM-clone"></a><div class="section">
+<h3 id="learnerregrkm-clone-"><code>LearnerRegrKM$clone()</code><a class="anchor" aria-label="anchor" href="#learnerregrkm-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrKM</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -195,6 +195,7 @@ for established default tuning spaces.</p></li>
 </div>
 
 </div>
+
 
     </div>
 
@@ -212,7 +213,7 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, and numeric</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Properties:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'error'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'error', predict_raw = 'FALSE'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define a Task</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
@@ -233,66 +234,83 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - type :  matern5_2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - nugget : NO</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - parameters lower bounds :  1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 1e-10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - parameters upper bounds :  2 14 8 801.8 4 4 566 16.8 2 7.822 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - best initial criterion value(s) :  -59.9162 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - parameters upper bounds :  2 14 8 737.8 4.34 4 566 16.8 2 7.664 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - best initial criterion value(s) :  -60.35636 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> N = 10, M = 5 machine precision = 2.22045e-16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> At X0, 0 variables are exactly at the bounds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     0  f=       59.916  |proj g|=      0.95668</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     1  f =       59.505  |proj g|=        1.4334</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     2  f =       58.793  |proj g|=        1.0213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     3  f =       58.578  |proj g|=        1.6463</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     4  f =       58.481  |proj g|=       0.75148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     5  f =       58.268  |proj g|=       0.41674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     6  f =       58.075  |proj g|=        0.2204</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     7  f =       58.002  |proj g|=       0.11193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     8  f =       57.985  |proj g|=      0.057232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     9  f =       57.953  |proj g|=      0.043051</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    10  f =       57.942  |proj g|=      0.040194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    11  f =       57.876  |proj g|=       0.20848</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    12  f =       57.842  |proj g|=       0.28907</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    13  f =       57.801  |proj g|=       0.27715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    14  f =       57.761  |proj g|=       0.16308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    15  f =       57.736  |proj g|=      0.031602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    16  f =       57.733  |proj g|=       0.02224</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    17  f =        57.73  |proj g|=       0.01521</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    18  f =       57.728  |proj g|=      0.011744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    19  f =       57.728  |proj g|=     0.0042265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    20  f =       57.728  |proj g|=      0.024901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    21  f =       57.728  |proj g|=      0.010714</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    22  f =       57.728  |proj g|=     0.0020135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    23  f =       57.728  |proj g|=     0.0016093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    24  f =       57.728  |proj g|=     0.0012447</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    25  f =       57.728  |proj g|=     0.0012442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    26  f =       57.728  |proj g|=     0.0028344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    27  f =       57.728  |proj g|=     0.0054748</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    28  f =       57.728  |proj g|=       0.03389</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    29  f =       57.728  |proj g|=      0.014418</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    30  f =       57.727  |proj g|=      0.021228</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    31  f =       57.725  |proj g|=      0.072795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    32  f =       57.721  |proj g|=       0.14126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    33  f =       57.713  |proj g|=          0.22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    34  f =       57.696  |proj g|=        0.2928</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    35  f =       57.668  |proj g|=       0.24473</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    36  f =       57.645  |proj g|=       0.47784</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    37  f =       57.568  |proj g|=       0.17836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    38  f =       57.536  |proj g|=      0.057029</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    39  f =       57.527  |proj g|=      0.020982</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    40  f =       57.527  |proj g|=      0.032198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    41  f =       57.527  |proj g|=     0.0015031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    42  f =       57.527  |proj g|=     0.0002306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    43  f =       57.527  |proj g|=    0.00010318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     0  f=       60.356  |proj g|=       1.0441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     1  f =       59.578  |proj g|=       0.61557</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     2  f =       59.551  |proj g|=       0.43639</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     3  f =       59.508  |proj g|=        0.1072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     4  f =       59.501  |proj g|=      0.045916</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     5  f =       59.498  |proj g|=      0.035272</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     6  f =       59.486  |proj g|=      0.049029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     7  f =       59.458  |proj g|=       0.13826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     8  f =       59.437  |proj g|=       0.16631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate     9  f =       59.397  |proj g|=      0.062371</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    10  f =        59.39  |proj g|=       0.12121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    11  f =       59.385  |proj g|=      0.040085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    12  f =        59.38  |proj g|=      0.044928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    13  f =       59.351  |proj g|=      0.076988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    14  f =       59.317  |proj g|=       0.11096</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    15  f =       59.278  |proj g|=       0.03651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    16  f =       59.276  |proj g|=       0.10888</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    17  f =       59.272  |proj g|=      0.028216</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    18  f =       59.271  |proj g|=       0.02276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    19  f =       59.269  |proj g|=      0.028528</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    20  f =       59.267  |proj g|=      0.024534</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    21  f =       59.264  |proj g|=       0.01321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    22  f =       59.259  |proj g|=      0.020469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    23  f =       59.258  |proj g|=       0.03941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    24  f =       59.256  |proj g|=      0.034892</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    25  f =       59.252  |proj g|=      0.019909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    26  f =       59.246  |proj g|=      0.021398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    27  f =       59.207  |proj g|=       0.17622</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    28  f =       59.155  |proj g|=       0.26612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    29  f =       59.075  |proj g|=      0.088692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    30  f =       59.044  |proj g|=      0.085756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    31  f =       58.896  |proj g|=       0.16094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    32  f =       58.655  |proj g|=       0.31974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    33  f =       58.588  |proj g|=       0.12902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    34  f =       58.543  |proj g|=       0.12928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    35  f =       58.431  |proj g|=       0.21067</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    36  f =       58.393  |proj g|=       0.23517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    37  f =       58.346  |proj g|=      0.079539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    38  f =       58.299  |proj g|=      0.028819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    39  f =       58.299  |proj g|=      0.018978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    40  f =       58.299  |proj g|=     0.0014728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    41  f =       58.298  |proj g|=     0.0014731</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    42  f =       58.298  |proj g|=     0.0016648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    43  f =       58.298  |proj g|=     0.0043608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    44  f =       58.298  |proj g|=     0.0070433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    45  f =       58.298  |proj g|=      0.012799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    46  f =       58.298  |proj g|=      0.024266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    47  f =       58.297  |proj g|=       0.03984</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    48  f =       58.295  |proj g|=       0.06895</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    49  f =       58.289  |proj g|=       0.11864</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    50  f =       58.274  |proj g|=       0.18326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    51  f =       58.242  |proj g|=       0.21753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    52  f =       58.148  |proj g|=       0.28915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    53  f =       58.039  |proj g|=       0.11486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    54  f =       58.014  |proj g|=       0.12402</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    55  f =       57.995  |proj g|=      0.042399</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    56  f =       57.994  |proj g|=      0.024083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    57  f =       57.994  |proj g|=     0.0087811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    58  f =       57.994  |proj g|=     0.0051456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    59  f =       57.994  |proj g|=    0.00014385</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> At iterate    60  f =       57.994  |proj g|=    9.7976e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> iterations 43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function evaluations 46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> segments explored during Cauchy searches 43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iterations 60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function evaluations 66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> segments explored during Cauchy searches 60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> BFGS updates skipped 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> active bounds at final generalized Cauchy point 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> norm of the final projected gradient 0.000103179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final function value 57.5268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> active bounds at final generalized Cauchy point 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> norm of the final projected gradient 9.7976e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final function value 57.9936</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F = 57.5268</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 57.526779 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> F = 57.9936</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> final  value 57.993584 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converged</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Print the model</span></span></span>
@@ -303,26 +321,26 @@ for established default tuning spaces.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Trend  coeff.:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                Estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)    21.4124</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (Intercept)    20.6909</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Covar. type  : matern5_2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Covar. coeff.:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                Estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(am)     2.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(am)     1.0794</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  theta(carb)    14.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   theta(cyl)     8.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(disp)   801.8000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(drat)     1.0159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(gear)     2.3302</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(hp)   472.6205</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(qsec)     1.4230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(vs)     2.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(wt)     2.6510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(disp)   737.8000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(drat)     1.3933</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(gear)     4.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(hp)   566.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  theta(qsec)     1.4621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(vs)     0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    theta(wt)     2.1558</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variance estimate: 42.09598</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variance estimate: 36.67326</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Importance method</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
@@ -330,7 +348,7 @@ for established default tuning spaces.</p></li>
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8.151569 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9.673668 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

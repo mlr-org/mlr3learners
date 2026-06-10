@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Ranger Regression Learner — mlr_learners_regr.ranger"><meta name="description" content="Random regression forest.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet"><link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Ranger Regression Learner — mlr_learners_regr.ranger"><meta name="description" content="Random regression forest.
 Calls ranger() from package ranger."><meta property="og:description" content="Random regression forest.
 Calls ranger() from package ranger."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -15,7 +15,7 @@ Calls ranger() from package ranger."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.14.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,20 +59,26 @@ Calls <code>ranger()</code> from package <a href="https://CRAN.R-project.org/pac
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Additionally to the uncertainty estimation methods provided by the ranger package, the learner provides a ensemble standard deviation and law of total variance uncertainty estimation.
-Both methods compute the empirical mean and variance of the training data points that fall into the predicted leaf nodes.
+    <p>In addition to the uncertainty estimation methods provided by the ranger package,
+the learner provides an ensemble standard deviation and law of total variance uncertainty estimation.
+Both methods compute the empirical mean and variance of the training data points
+that fall into the predicted leaf nodes.
 The ensemble standard deviation method calculates the standard deviation of the mean of the leaf nodes.
-The law of total variance method calculates the mean of the variance of the leaf nodes plus the variance of the means of the leaf nodes.
+The law of total variance method calculates the mean of the variance of the leaf nodes
+plus the variance of the means of the leaf nodes.
 Formulas for the ensemble standard deviation and law of total variance method are given in Hutter et al. (2015).</p>
-<p>For these 2 methods, the parameter <code>sigma2.threshold</code> can be used to set a threshold for the variance of the leaf nodes,
-this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold, it is set to this value (as described in the paper).
+<p>For these 2 methods, the parameter <code>sigma2.threshold</code> can be used to set a threshold
+for the variance of the leaf nodes,
+this is a minimal value for the variance of the leaf nodes, if the variance is below this threshold,
+it is set to this value (as described in the paper).
 Default is 1e-2.</p>
     </div>
     <div class="section level2">
     <h2 id="dictionary">Dictionary<a class="anchor" aria-label="anchor" href="#dictionary"></a></h2>
 
 
-<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a> or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
+<p>This <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a> can be instantiated via the <a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">dictionary</a> <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a>
+or with the associated sugar function <code><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html" class="external-link">mlr3::lrn()</a></code>:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mlr_learners<span class="sc">$</span><span class="fu">get</span>(<span class="st">"regr.ranger"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">lrn</span>(<span class="st">"regr.ranger"</span>)</span></code></pre><p></p></div>
     </div>
@@ -88,7 +94,7 @@ Default is 1e-2.</p>
     <div class="section level2">
     <h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a></h2>
 
-<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>always.split.variables</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>holdout</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>importance</td><td>character</td><td>-</td><td>none, impurity, impurity_corrected, permutation</td><td>-</td></tr><tr><td>keep.inbag</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>max.depth</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>min.bucket</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>min.node.size</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mtry</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mtry.ratio</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr><tr><td>na.action</td><td>character</td><td>na.learn</td><td>na.learn, na.omit, na.fail</td><td>-</td></tr><tr><td>node.stats</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>num.random.splits</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num.threads</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num.trees</td><td>integer</td><td>500</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>oob.error</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>poisson.tau</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>regularization.factor</td><td>untyped</td><td>1</td><td></td><td>-</td></tr><tr><td>regularization.usedepth</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>replace</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>respect.unordered.factors</td><td>character</td><td>-</td><td>ignore, order, partition</td><td>-</td></tr><tr><td>sample.fraction</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr><tr><td>save.memory</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>scale.permutation.importance</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>se.method</td><td>character</td><td>infjack</td><td>jack, infjack, ensemble_standard_deviation, law_of_total_variance</td><td>-</td></tr><tr><td>sigma2.threshold</td><td>numeric</td><td>0.01</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>seed</td><td>integer</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>split.select.weights</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>splitrule</td><td>character</td><td>variance</td><td>variance, extratrees, maxstat, beta, poisson</td><td>-</td></tr><tr><td>verbose</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>write.forest</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
+<table class="table table"><tr><td>Id</td><td>Type</td><td>Default</td><td>Levels</td><td>Range</td></tr><tr><td>always.split.variables</td><td>untyped</td><td>-</td><td></td><td>-</td></tr><tr><td>holdout</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>importance</td><td>character</td><td>-</td><td>none, impurity, impurity_corrected, permutation</td><td>-</td></tr><tr><td>keep.inbag</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>max.depth</td><td>integer</td><td>NULL</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>min.bucket</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>min.node.size</td><td>integer</td><td>5</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mtry</td><td>integer</td><td>-</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>mtry.ratio</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr><tr><td>na.action</td><td>character</td><td>na.learn</td><td>na.learn, na.omit, na.fail</td><td>-</td></tr><tr><td>node.stats</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>num.random.splits</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num.threads</td><td>integer</td><td>1</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>num.trees</td><td>integer</td><td>500</td><td></td><td>\([1, \infty)\)</td></tr><tr><td>oob.error</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>poisson.tau</td><td>numeric</td><td>1</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>regularization.factor</td><td>untyped</td><td>1</td><td></td><td>-</td></tr><tr><td>regularization.usedepth</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>replace</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>respect.unordered.factors</td><td>character</td><td>-</td><td>ignore, order, partition</td><td>-</td></tr><tr><td>sample.fraction</td><td>numeric</td><td>-</td><td></td><td>\([0, 1]\)</td></tr><tr><td>save.memory</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>scale.permutation.importance</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>local.importance</td><td>logical</td><td>FALSE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>se.method</td><td>character</td><td>infjack</td><td>jack, infjack, ensemble_standard_deviation, law_of_total_variance</td><td>-</td></tr><tr><td>sigma2.threshold</td><td>numeric</td><td>0.01</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>seed</td><td>integer</td><td>NULL</td><td></td><td>\((-\infty, \infty)\)</td></tr><tr><td>split.select.weights</td><td>untyped</td><td>NULL</td><td></td><td>-</td></tr><tr><td>splitrule</td><td>character</td><td>variance</td><td>variance, extratrees, maxstat, beta, poisson</td><td>-</td></tr><tr><td>verbose</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr><tr><td>write.forest</td><td>logical</td><td>TRUE</td><td>TRUE, FALSE</td><td>-</td></tr></table></div>
     <div class="section level2">
     <h2 id="custom-mlr-parameters">Custom mlr3 parameters<a class="anchor" aria-label="anchor" href="#custom-mlr-parameters"></a></h2>
 
@@ -119,7 +125,8 @@ precedence in that order.</p></li>
 <p>Breiman, Leo (2001).
 “Random Forests.”
 <em>Machine Learning</em>, <b>45</b>(1), 5–32.
-ISSN 1573-0565, <a href="https://doi.org/10.1023/A%3A1010933404324" class="external-link">doi:10.1023/A:1010933404324</a>
+ISSN 1573-0565.
+<a href="https://doi.org/10.1023/A%3A1010933404324" class="external-link">doi:10.1023/A:1010933404324</a>
 .</p>
 <p>Hutter, Frank, Xu, Lin, Hoos, H. H, Leyton-Brown, Kevin (2015).
 “Algorithm runtime prediction: methods and evaluation.”
@@ -132,7 +139,8 @@ In <em>Proceedings of the 24th International Conference on Artificial Intelligen
 <a href="https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners" class="external-link">https://mlr3book.mlr-org.com/chapters/chapter2/data_and_basic_modeling.html#sec-learners</a></p></li>
 <li><p>Package <a href="https://github.com/mlr-org/mlr3extralearners" class="external-link">mlr3extralearners</a> for more learners.</p></li>
 <li><p><a href="https://mlr3misc.mlr-org.com/reference/Dictionary.html" class="external-link">Dictionary</a> of <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>: <a href="https://mlr3.mlr-org.com/reference/mlr_learners.html" class="external-link">mlr3::mlr_learners</a></p></li>
-<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a> in the running session (depending on the loaded packages).</p></li>
+<li><p><code>as.data.table(mlr_learners)</code> for a table of available <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learners</a>
+in the running session (depending on the loaded packages).</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3pipelines" class="external-link"><span class="pkg">mlr3pipelines</span></a> to combine learners with pre- and postprocessing steps.</p></li>
 <li><p>Extension packages for additional task types:</p><ul><li><p><a href="https://CRAN.R-project.org/package=mlr3proba" class="external-link"><span class="pkg">mlr3proba</span></a> for probabilistic supervised regression and survival analysis.</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=mlr3cluster" class="external-link"><span class="pkg">mlr3cluster</span></a> for unsupervised clustering.</p></li>
@@ -166,81 +174,88 @@ for established default tuning spaces.</p></li>
     <p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a></code> -&gt; <code><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html" class="external-link">mlr3::LearnerRegr</a></code> -&gt; <code>LearnerRegrRanger</code></p>
     </div>
     <div class="section level2">
+    <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
+    <p></p><div class="r6-active-bindings"><dl><dt><code>native_model</code></dt>
+<dd><p>(<a href="http://imbs-hl.github.io/ranger/reference/ranger.html" class="external-link">ranger::ranger</a>)<br>
+The fitted model.</p></dd>
+
+
+</dl><p></p></div>
+    </div>
+    <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-LearnerRegrRanger-new"><code>LearnerRegrRanger$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-LearnerRegrRanger-initialize"><code>LearnerRegrRanger$new()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-importance"><code>LearnerRegrRanger$importance()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-oob_error"><code>LearnerRegrRanger$oob_error()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-selected_features"><code>LearnerRegrRanger$selected_features()</code></a></p></li>
 <li><p><a href="#method-LearnerRegrRanger-clone"><code>LearnerRegrRanger$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="base_learner"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-base_learner"><code>mlr3::Learner$base_learner()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
-</ul></details></p><hr><a id="method-LearnerRegrRanger-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="configure"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-configure"><code>mlr3::Learner$configure()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="encapsulate"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-encapsulate"><code>mlr3::Learner$encapsulate()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-format"><code>mlr3::Learner$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-help"><code>mlr3::Learner$help()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict"><code>mlr3::Learner$predict()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-predict_newdata"><code>mlr3::Learner$predict_newdata()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-print"><code>mlr3::Learner$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-reset"><code>mlr3::Learner$reset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href="https://mlr3.mlr-org.com/reference/Learner.html#method-train"><code>mlr3::Learner$train()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="mlr3" data-topic="LearnerRegr" data-id="predict_newdata_fast"><a href="https://mlr3.mlr-org.com/reference/LearnerRegr.html#method-predict_newdata_fast"><code>mlr3::LearnerRegr$predict_newdata_fast()</code></a></span></li>
+</ul></details></p><hr><a id="method-LearnerRegrRanger-initialize"></a><div class="section">
+<h3 id="learnerregrranger-new-"><code>LearnerRegrRanger$new()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-new-"></a></h3>
 <p>Creates a new instance of this <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6</a> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/mlr_learners_regr.ranger.html">LearnerRegrRanger</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+</div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-importance"></a><div class="section">
-<h3 id="method-importance-">Method <code>importance()</code><a class="anchor" aria-label="anchor" href="#method-importance-"></a></h3>
+<p></p><hr><a id="method-LearnerRegrRanger-importance"></a><div class="section">
+<h3 id="learnerregrranger-importance-"><code>LearnerRegrRanger$importance()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-importance-"></a></h3>
 <p>The importance scores are extracted from the model slot <code>variable.importance</code>.
 Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <code>"impurity_corrected"</code>, or
 <code>"permutation"</code></p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>Named <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-oob_error"></a><div class="section">
-<h3 id="method-oob-error-">Method <code>oob_error()</code><a class="anchor" aria-label="anchor" href="#method-oob-error-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrRanger-oob_error"></a><div class="section">
+<h3 id="learnerregrranger-oob-error-"><code>LearnerRegrRanger$oob_error()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-oob-error-"></a></h3>
 <p>The out-of-bag error, extracted from model slot <code>prediction.error</code>.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">oob_error</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p><code>numeric(1)</code></p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-selected_features"></a><div class="section">
-<h3 id="method-selected-features-">Method <code>selected_features()</code><a class="anchor" aria-label="anchor" href="#method-selected-features-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrRanger-selected_features"></a><div class="section">
+<h3 id="learnerregrranger-selected-features-"><code>LearnerRegrRanger$selected_features()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-selected-features-"></a></h3>
 <p>The set of features used for node splitting in the forest.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">selected_features</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-LearnerRegrRanger-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-LearnerRegrRanger-clone"></a><div class="section">
+<h3 id="learnerregrranger-clone-"><code>LearnerRegrRanger$clone()</code><a class="anchor" aria-label="anchor" href="#learnerregrranger-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">LearnerRegrRanger</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -251,24 +266,26 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 
 </div>
 
+
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Define the Learner and set parameter values</span></span></span>
 <span class="r-in"><span><span class="va">learner</span> <span class="op">=</span> <span class="fu">lrn</span><span class="op">(</span><span class="st">"regr.ranger"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">learner</span><span class="op">$</span><span class="va">param_set</span><span class="op">$</span><span class="fu">set_values</span><span class="op">(</span>importance <span class="op">=</span> <span class="st">"permutation"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #0000BB; font-weight: bold;">&lt;LearnerRegrRanger&gt;</span><span style="font-weight: bold;"> (regr.ranger): Random Forest</span> <span style="color: #00BBBB;">────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Model: -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: num.threads=1, sigma2.threshold=0.01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Parameters: importance=permutation, num.threads=1, sigma2.threshold=0.01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Packages: <span style="color: #0000BB;">mlr3</span>, <span style="color: #0000BB;">mlr3learners</span>, and <span style="color: #0000BB;">ranger</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Predict Types: [response], se, and quantiles</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Feature Types: logical, integer, numeric, character, factor, and ordered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Encapsulation: none (fallback: -)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> • Properties: hotstart_backward, importance, missings, oob_error,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> selected_features, and weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> • Other settings: use_weights = 'use', predict_raw = 'FALSE'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define a Task</span></span></span>
 <span class="r-in"><span><span class="va">task</span> <span class="op">=</span> <span class="fu">tsk</span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
@@ -285,7 +302,7 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 <span class="r-out co"><span class="r-pr">#&gt;</span> Ranger result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ranger::ranger(dependent.variable.name = task$target_names, data = data,      num.threads = 1L) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ranger::ranger(dependent.variable.name = task$target_names, data = data,      importance = "permutation", num.threads = 1L) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Type:                             Regression </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of trees:                  500 </span>
@@ -293,18 +310,18 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of independent variables:  10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mtry:                             3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Target node size:                 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variable importance mode:         none </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable importance mode:         permutation </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Splitrule:                        variance </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> OOB prediction error (MSE):       8.593097 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R squared (OOB):                  0.8063534 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> OOB prediction error (MSE):       6.286945 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R squared (OOB):                  0.7989872 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Importance method</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"importance"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">learner</span><span class="op">$</span><span class="va">properties</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="va">importance</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function () </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> .__LearnerRegrRanger__importance(self = self, private = private, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     super = super)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55c30fa00870&gt;</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">learner</span><span class="op">$</span><span class="fu">importance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        wt        hp      disp       cyl      carb      qsec        vs        am </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9.3383982 9.0161966 6.7330742 3.5933842 0.5417945 0.4585819 0.4326767 0.3657782 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      drat      gear </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.3517244 0.2711266 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make predictions for the test rows</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span> <span class="op">=</span> <span class="va">learner</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">task</span>, row_ids <span class="op">=</span> <span class="va">ids</span><span class="op">$</span><span class="va">test</span><span class="op">)</span></span></span>
@@ -312,7 +329,7 @@ Parameter <code>importance.mode</code> must be set to <code>"impurity"</code>, <
 <span class="r-in"><span><span class="co"># Score the predictions</span></span></span>
 <span class="r-in"><span><span class="va">predictions</span><span class="op">$</span><span class="fu">score</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> regr.mse </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4.013859 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12.33023 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
