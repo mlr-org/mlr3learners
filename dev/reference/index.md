@@ -1,6 +1,6 @@
 # Package index
 
-## Classification Learnes
+## Classification Learners
 
 - [`mlr_learners_classif.cv_glmnet`](https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_classif.cv_glmnet.md)
   [`LearnerClassifCVGlmnet`](https://mlr3learners.mlr-org.com/dev/reference/mlr_learners_classif.cv_glmnet.md)
