@@ -46,3 +46,6 @@ Other contributors:
 
 - Alexander Winterstetter <alexanderwinterstetter@gmail.com>
   \[contributor\]
+
+- Toby Hocking <toby.hocking@r-project.org>
+  ([ORCID](https://orcid.org/0000-0002-3146-0865)) \[contributor\]
