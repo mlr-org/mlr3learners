@@ -36,6 +36,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Alexander Winterstetter \email{alexanderwinterstetter@gmail.com} [contributor]
+  \item Toby Hocking \email{toby.hocking@r-project.org} (\href{https://orcid.org/0000-0002-3146-0865}{ORCID}) [contributor]
 }
 
 }
