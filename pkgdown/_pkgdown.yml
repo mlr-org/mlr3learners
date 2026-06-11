@@ -42,7 +42,7 @@ navbar:
       href: https://mlr3extralearners.mlr-org.com/articles/learners/list_learners.html
 
 reference:
-  - title: Classification Learnes
+  - title: Classification Learners
     contents:
       - starts_with("mlr_learners_classif")
   - title: Regression Learners

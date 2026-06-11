@@ -16,12 +16,12 @@
 
 
 /*
-funcions below use an "s_pred_tab" prediction table,
+functions below use an "s_pred_tab" prediction table,
 for a given ranger model and 'n_obs' observations, which where predicted by the RF
   int matrix, n_obs x n_trees, no row or column names
   each row is an observation, each cell states the
   terminal node id that the obs falls into for the tree of the col
-  the terminnal node IDs are 0-based, and might have -- or will have -- gaps
+  the terminal node IDs are 0-based, and might have -- or will have -- gaps
 */
 
 /////////////////////////////////////////////////////////////////////////////
@@ -45,8 +45,8 @@ the created matrix has 2 columns: "mu" and "sigma2"
 its rows correspond to the terminal nodes, in the sense that a (0-based)
 row-index is the node-id that ranger used to label it
 NB: this can mean that some row are "gap-rows" if the row-index is not
-present as a node id. such rows will be 0, but this shouldnt even matter
-as you should not access them as the node doesnt exist.
+present as a node id. such rows will be 0, but this shouldn't even matter
+as you should not access them as the node doesn't exist.
 
 */
 void c_ranger_mu_sigma_per_tree(int j_tree, int n_obs, int n_trees, const int *pred_tab,
