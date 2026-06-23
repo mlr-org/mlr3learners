@@ -203,7 +203,6 @@ SEXP c_ranger_var(SEXP s_pred_tab, SEXP s_mu_sigma2_mats, SEXP s_method) {
 
    // Welford's variance algorithm (numerically stable)
   for (int j = 0; j < n_trees; ++j) {
-    int n_term_rows_j = n_term_rows[j];
     double *mu_j = mu_ptr[j];
     double *sig_j = sig_ptr[j];
     for (int i = 0; i < n_obs; ++i) {
