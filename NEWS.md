@@ -1,4 +1,6 @@
-# mlr3learners (development version)
+# mlr3learners 0.15.1
+
+* compatibility: mlr3 1.7.2
 
 # mlr3learners 0.15.0
 
