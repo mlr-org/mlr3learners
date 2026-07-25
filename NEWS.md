@@ -1,4 +1,4 @@
-# mlr3learners (development version)
+# mlr3learners 0.15.1
 
 # mlr3learners 0.15.0
 
