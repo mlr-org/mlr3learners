@@ -83,7 +83,7 @@ test_that("default_values", {
     num.trees = p_int(1, 2000),
     mtry.ratio = p_dbl(0, 1)
   )
-  task = tsk("pima")
+  task = tsk("sonar")
 
   values = default_values(learner, search_space, task)
   expect_names(names(values), permutation.of = c("replace", "sample.fraction", "num.trees", "mtry.ratio"))
@@ -99,7 +99,7 @@ test_that("selected_features", {
 })
 
 test_that("oob_error available without stored model", {
-  task = tsk("pima")
+  task = tsk("sonar")
   learner = lrn("classif.ranger")
 
   rr = resample(task, learner, rsmp("holdout"), store_models = FALSE)

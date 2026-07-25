@@ -61,7 +61,7 @@ test_that("default_values", {
     num.trees = p_int(1, 2000),
     mtry.ratio = p_dbl(0, 1)
   )
-  task = tsk("pima")
+  task = tsk("sonar")
 
   values = default_values(learner, search_space, task)
   expect_names(names(values), permutation.of = c("replace", "sample.fraction", "num.trees", "mtry.ratio"))

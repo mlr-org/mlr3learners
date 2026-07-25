@@ -21,7 +21,7 @@ test_that("default_values", {
     cost = p_dbl(1e-2, 100),
     gamma = p_dbl(0, 1)
   )
-  task = tsk("pima")
+  task = tsk("sonar")
 
   values = default_values(learner, search_space, task)
   expect_names(names(values), permutation.of = c("cost", "gamma"))
