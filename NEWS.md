@@ -1,5 +1,7 @@
 # mlr3learners 0.15.1
 
+* compatibility: mlr3 1.7.2
+
 # mlr3learners 0.15.0
 
 * compatibility: glmnet 5.0.
