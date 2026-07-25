@@ -277,7 +277,7 @@ learner$train(task, row_ids = ids$train)
 #> At iterate    40  f =       58.299  |proj g|=     0.0014728
 #> At iterate    41  f =       58.298  |proj g|=     0.0014731
 #> At iterate    42  f =       58.298  |proj g|=     0.0016648
-#> At iterate    43  f =       58.298  |proj g|=     0.0043608
+#> At iterate    43  f =       58.298  |proj g|=     0.0043607
 #> At iterate    44  f =       58.298  |proj g|=     0.0070433
 #> At iterate    45  f =       58.298  |proj g|=      0.012799
 #> At iterate    46  f =       58.298  |proj g|=      0.024266
@@ -286,22 +286,22 @@ learner$train(task, row_ids = ids$train)
 #> At iterate    49  f =       58.289  |proj g|=       0.11864
 #> At iterate    50  f =       58.274  |proj g|=       0.18326
 #> At iterate    51  f =       58.242  |proj g|=       0.21753
-#> At iterate    52  f =       58.148  |proj g|=       0.28915
+#> At iterate    52  f =       58.148  |proj g|=       0.28914
 #> At iterate    53  f =       58.039  |proj g|=       0.11486
 #> At iterate    54  f =       58.014  |proj g|=       0.12402
-#> At iterate    55  f =       57.995  |proj g|=      0.042399
-#> At iterate    56  f =       57.994  |proj g|=      0.024083
-#> At iterate    57  f =       57.994  |proj g|=     0.0087811
-#> At iterate    58  f =       57.994  |proj g|=     0.0051456
-#> At iterate    59  f =       57.994  |proj g|=    0.00014385
-#> At iterate    60  f =       57.994  |proj g|=    9.7976e-05
+#> At iterate    55  f =       57.995  |proj g|=      0.042404
+#> At iterate    56  f =       57.994  |proj g|=       0.02408
+#> At iterate    57  f =       57.994  |proj g|=     0.0087769
+#> At iterate    58  f =       57.994  |proj g|=     0.0051443
+#> At iterate    59  f =       57.994  |proj g|=    0.00014381
+#> At iterate    60  f =       57.994  |proj g|=    9.8036e-05
 #> 
 #> iterations 60
 #> function evaluations 66
 #> segments explored during Cauchy searches 60
 #> BFGS updates skipped 0
 #> active bounds at final generalized Cauchy point 6
-#> norm of the final projected gradient 9.7976e-05
+#> norm of the final projected gradient 9.80364e-05
 #> final function value 57.9936
 #> 
 #> F = 57.9936
