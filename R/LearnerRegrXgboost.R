@@ -174,6 +174,14 @@ LearnerRegrXgboost = R6Class(
     internal_valid_scores = function() {
       self$state$internal_valid_scores
     },
+    #' @field best_valid_scores (named `list()` or `NULL`)
+    #' The validation scores of the best boosting round, extracted from `model$evaluation_log`.
+    #' Because XGBoost also predicts with the best `nrounds`, these are identical to
+    #' `$internal_valid_scores` whenever early stopping is activated.
+    #' If early stopping is not activated, no best round is tracked and this is an empty list.
+    best_valid_scores = function() {
+      self$state$best_valid_scores
+    },
     #' @field internal_tuned_values (named `list()` or `NULL`)
     #' If early stopping is activated, this returns a list with `nrounds`,
     #' which is extracted from `$best_iteration` of the model and otherwise `NULL`.
@@ -359,15 +367,21 @@ LearnerRegrXgboost = R6Class(
       list(nrounds = attributes(self$model)$early_stop$best_iteration)
     },
 
-    .extract_internal_valid_scores = function() {
-      if (is.null(attributes(self$model)$evaluation_log)) {
+    .extract_internal_valid_scores = function(which = "last") {
+      log = attributes(self$model)$evaluation_log
+      if (is.null(log)) {
         return(named_list())
       }
-      iter = attributes(self$model)$early_stop$best_iteration
-      if (is.null(iter)) {
-        iter = xgboost::xgb.get.num.boosted.rounds(self$model)
+      best_iter = attributes(self$model)$early_stop$best_iteration
+      iter = if (which == "best") {
+        # the best iteration is only tracked when early stopping is enabled
+        if (is.null(best_iter)) return(named_list())
+        best_iter
+      } else {
+        # when early stopping was used, xgboost also predicts with the best iteration,
+        # so this is the score of the model that is used for prediction
+        best_iter %??% xgboost::xgb.get.num.boosted.rounds(self$model)
       }
-      log = attributes(self$model)$evaluation_log
       as.list(log[
         iter,
         set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),

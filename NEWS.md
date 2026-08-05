@@ -1,5 +1,8 @@
 # mlr3learners (development version)
 
+* feat: `classif.xgboost` and `regr.xgboost` now support the `which` argument of `$.extract_internal_valid_scores()` and gained a `$best_valid_scores` field, so `msr("best_valid_score")` can be used with them.
+  Because XGBoost predicts with the best `nrounds`, these are identical to `$internal_valid_scores` whenever early stopping is activated.
+
 # mlr3learners 0.15.1
 
 * compatibility: mlr3 1.7.2

@@ -264,6 +264,12 @@ The validation scores extracted from \code{model$evaluation_log}.
 If early stopping is activated, this contains the validation scores of the model for the optimal \code{nrounds},
 otherwise the scores are taken from the final boosting round \code{nrounds}.}
 
+    \item{\code{best_valid_scores}}{(named \code{list()} or \code{NULL})
+The validation scores of the best boosting round, extracted from \code{model$evaluation_log}.
+Because XGBoost also predicts with the best \code{nrounds}, these are identical to
+\verb{$internal_valid_scores} whenever early stopping is activated.
+If early stopping is not activated, no best round is tracked and this is an empty list.}
+
     \item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
 If early stopping is activated, this returns a list with \code{nrounds},
 which is extracted from \verb{$best_iteration} of the model and otherwise \code{NULL}.}
