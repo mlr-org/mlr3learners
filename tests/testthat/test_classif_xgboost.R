@@ -445,3 +445,44 @@ test_that("base_margin (offset)", {
 
   expect_false(all(p1$prob == p2$prob))
 })
+
+test_that("best valid scores", {
+  task = tsk("spam")
+
+  # with early stopping, xgboost also predicts with the best `nrounds`,
+  # so the final model is the best model and both extractors agree
+  learner = lrn("classif.xgboost", nrounds = 100, early_stopping_rounds = 5, validate = 0.3)
+  learner$train(task)
+
+  expect_list(learner$best_valid_scores, types = "numeric")
+  expect_equal(names(learner$best_valid_scores), "logloss")
+  expect_equal(learner$best_valid_scores, learner$internal_valid_scores)
+  expect_equal(
+    learner$best_valid_scores$logloss,
+    attributes(learner$model)$evaluation_log$test_logloss[learner$internal_tuned_values$nrounds]
+  )
+
+  # without early stopping no best round is tracked
+  learner = lrn("classif.xgboost", nrounds = 10, validate = 0.3)
+  learner$train(task)
+  expect_equal(learner$best_valid_scores, named_list())
+  expect_equal(
+    learner$internal_valid_scores$logloss,
+    attributes(learner$model)$evaluation_log$test_logloss[10L]
+  )
+
+  # without validation nothing is reported at all
+  learner = lrn("classif.xgboost", nrounds = 10)
+  learner$train(task)
+  expect_null(learner$best_valid_scores)
+  expect_null(learner$internal_valid_scores)
+
+  # the measure reads the scores from the state, also without stored models
+  learner = lrn("classif.xgboost", nrounds = 100, early_stopping_rounds = 5, validate = 0.3)
+  rr = resample(task, learner, rsmp("holdout"), store_models = FALSE)
+  expect_number(rr$score(msr("best_valid_score", select = "logloss"))$logloss)
+  expect_equal(
+    rr$score(msr("best_valid_score", select = "logloss"))$logloss,
+    rr$score(msr("internal_valid_score", select = "logloss"))$logloss
+  )
+})

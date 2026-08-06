@@ -316,3 +316,44 @@ test_that("base_margin (offset)", {
   expect_true(all(p2$response != p22$response))
   expect_true(all(p3$response != p33$response))
 })
+
+test_that("best valid scores", {
+  task = tsk("mtcars")
+
+  # with early stopping, xgboost also predicts with the best `nrounds`,
+  # so the final model is the best model and both extractors agree
+  learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 5, validate = 0.3)
+  learner$train(task)
+
+  expect_list(learner$best_valid_scores, types = "numeric")
+  expect_equal(names(learner$best_valid_scores), "rmse")
+  expect_equal(learner$best_valid_scores, learner$internal_valid_scores)
+  expect_equal(
+    learner$best_valid_scores$rmse,
+    attributes(learner$model)$evaluation_log$test_rmse[learner$internal_tuned_values$nrounds]
+  )
+
+  # without early stopping no best round is tracked
+  learner = lrn("regr.xgboost", nrounds = 10, validate = 0.3)
+  learner$train(task)
+  expect_equal(learner$best_valid_scores, named_list())
+  expect_equal(
+    learner$internal_valid_scores$rmse,
+    attributes(learner$model)$evaluation_log$test_rmse[10L]
+  )
+
+  # without validation nothing is reported at all
+  learner = lrn("regr.xgboost", nrounds = 10)
+  learner$train(task)
+  expect_null(learner$best_valid_scores)
+  expect_null(learner$internal_valid_scores)
+
+  # the measure reads the scores from the state, also without stored models
+  learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 5, validate = 0.3)
+  rr = resample(task, learner, rsmp("holdout"), store_models = FALSE)
+  expect_number(rr$score(msr("best_valid_score", select = "rmse"))$rmse)
+  expect_equal(
+    rr$score(msr("best_valid_score", select = "rmse"))$rmse,
+    rr$score(msr("internal_valid_score", select = "rmse"))$rmse
+  )
+})
