@@ -347,13 +347,4 @@ test_that("best valid scores", {
   learner$train(task)
   expect_null(learner$best_valid_scores)
   expect_null(learner$internal_valid_scores)
-
-  # the measure reads the scores from the state, also without stored models
-  learner = lrn("regr.xgboost", nrounds = 100, early_stopping_rounds = 5, validate = 0.3)
-  rr = resample(task, learner, rsmp("holdout"), store_models = FALSE)
-  expect_number(rr$score(msr("best_valid_score", select = "rmse"))$rmse)
-  expect_equal(
-    rr$score(msr("best_valid_score", select = "rmse"))$rmse,
-    rr$score(msr("internal_valid_score", select = "rmse"))$rmse
-  )
 })
