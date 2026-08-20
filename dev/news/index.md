@@ -4,6 +4,8 @@
 
 ## mlr3learners 0.15.1
 
+CRAN release: 2026-07-25
+
 - compatibility: mlr3 1.7.2
 
 ## mlr3learners 0.15.0
