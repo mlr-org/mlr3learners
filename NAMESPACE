@@ -33,14 +33,20 @@ import(mlr3misc)
 import(paradox)
 importFrom(R6,R6Class)
 importFrom(methods,formalArgs)
-importFrom(mlr3,LearnerClassif)
-importFrom(mlr3,LearnerRegr)
-importFrom(mlr3,assert_quantiles)
-importFrom(mlr3,assert_validate)
-importFrom(mlr3,mlr_learners)
-importFrom(stats,predict)
-importFrom(stats,reformulate)
-importFrom(utils,bibentry)
-importFrom(utils,packageVersion)
+importFrom(mlr3,
+  LearnerClassif,
+  LearnerRegr,
+  assert_quantiles,
+  assert_validate,
+  mlr_learners
+)
+importFrom(stats,
+  predict,
+  reformulate
+)
+importFrom(utils,
+  bibentry,
+  packageVersion
+)
 useDynLib(mlr3learners,c_ranger_mu_sigma)
 useDynLib(mlr3learners,c_ranger_var)
