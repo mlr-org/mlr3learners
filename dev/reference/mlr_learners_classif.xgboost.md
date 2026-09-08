@@ -263,6 +263,16 @@ Other Learner:
   model for the optimal `nrounds`, otherwise the scores are taken from
   the final boosting round `nrounds`.
 
+- `best_valid_scores`:
+
+  (named [`list()`](https://rdrr.io/r/base/list.html) or `NULL`) The
+  validation scores of the best boosting round, extracted from
+  `model$evaluation_log`. Because XGBoost predicts with the best
+  `nrounds` by default, these are identical to `$internal_valid_scores`
+  whenever early stopping is activated. If early stopping is not
+  activated, no best round is tracked and this is an empty list, in
+  which case `msr("best_valid_score")` cannot be computed.
+
 - `internal_tuned_values`:
 
   (named [`list()`](https://rdrr.io/r/base/list.html) or `NULL`) If
