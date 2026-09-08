@@ -27,7 +27,7 @@ See the section Early Stopping and Validation on how to do this."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mlr3learners</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -212,6 +212,15 @@ for established default tuning spaces.</p></li>
 The validation scores extracted from <code>model$evaluation_log</code>.
 If early stopping is activated, this contains the validation scores of the model for the optimal <code>nrounds</code>,
 otherwise the <code>nrounds</code> for the final model.</p></dd>
+
+
+    <dt><code>best_valid_scores</code></dt>
+<dd><p>(named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> or <code>NULL</code>)
+The validation scores of the best boosting round, extracted from <code>model$evaluation_log</code>.
+Because XGBoost predicts with the best <code>nrounds</code> by default, these are identical to
+<code>$internal_valid_scores</code> whenever early stopping is activated.
+If early stopping is not activated, no best round is tracked and this is an empty list,
+in which case <code>msr("best_valid_score")</code> cannot be computed.</p></dd>
 
 
     <dt><code>internal_tuned_values</code></dt>
