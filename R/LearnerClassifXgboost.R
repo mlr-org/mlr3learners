@@ -195,6 +195,16 @@ LearnerClassifXgboost = R6Class(
       self$state$internal_valid_scores
     },
 
+    #' @field best_valid_scores (named `list()` or `NULL`)
+    #' The validation scores of the best boosting round, extracted from `model$evaluation_log`.
+    #' Because XGBoost predicts with the best `nrounds` by default, these are identical to
+    #' `$internal_valid_scores` whenever early stopping is activated.
+    #' If early stopping is not activated, no best round is tracked and this is an empty list,
+    #' in which case `msr("best_valid_score")` cannot be computed.
+    best_valid_scores = function() {
+      self$state$best_valid_scores
+    },
+
     #' @field internal_tuned_values (named `list()` or `NULL`)
     #' If early stopping is activated, this returns a list with `nrounds`,
     #' which is extracted from `$best_iteration` of the model and otherwise `NULL`.
@@ -450,14 +460,23 @@ LearnerClassifXgboost = R6Class(
     },
 
     .extract_internal_valid_scores = function() {
-      if (is.null(attributes(self$model)$evaluation_log)) {
+      # with early stopping xgboost predicts with the best iteration, otherwise
+      # with all boosting rounds
+      iter = attributes(self$model)$early_stop$best_iteration %??%
+        xgboost::xgb.get.num.boosted.rounds(self$model)
+      private$.valid_scores_at(iter)
+    },
+
+    .extract_best_valid_scores = function() {
+      # the best iteration is only tracked when early stopping is enabled
+      private$.valid_scores_at(attributes(self$model)$early_stop$best_iteration)
+    },
+
+    .valid_scores_at = function(iter) {
+      log = attributes(self$model)$evaluation_log
+      if (is.null(log) || is.null(iter)) {
         return(named_list())
       }
-      iter = attributes(self$model)$early_stop$best_iteration
-      if (is.null(iter)) {
-        iter = xgboost::xgb.get.num.boosted.rounds(self$model)
-      }
-      log = attributes(self$model)$evaluation_log
       as.list(log[
         iter,
         set_names(get(".SD"), gsub("^test_", "", colnames(get(".SD")))),
