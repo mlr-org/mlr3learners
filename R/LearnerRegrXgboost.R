@@ -176,9 +176,10 @@ LearnerRegrXgboost = R6Class(
     },
     #' @field best_valid_scores (named `list()` or `NULL`)
     #' The validation scores of the best boosting round, extracted from `model$evaluation_log`.
-    #' Because XGBoost also predicts with the best `nrounds`, these are identical to
+    #' Because XGBoost predicts with the best `nrounds` by default, these are identical to
     #' `$internal_valid_scores` whenever early stopping is activated.
-    #' If early stopping is not activated, no best round is tracked and this is an empty list.
+    #' If early stopping is not activated, no best round is tracked and this is an empty list,
+    #' in which case `msr("best_valid_score")` cannot be computed.
     best_valid_scores = function() {
       self$state$best_valid_scores
     },
@@ -368,10 +369,11 @@ LearnerRegrXgboost = R6Class(
     },
 
     .extract_internal_valid_scores = function() {
-      # when early stopping was used, xgboost also predicts with the best iteration,
-      # so this is the score of the model that is used for prediction
-      best_iter = attributes(self$model)$early_stop$best_iteration
-      private$.valid_scores_at(best_iter %??% xgboost::xgb.get.num.boosted.rounds(self$model))
+      # with early stopping xgboost predicts with the best iteration, otherwise
+      # with all boosting rounds
+      iter = attributes(self$model)$early_stop$best_iteration %??%
+        xgboost::xgb.get.num.boosted.rounds(self$model)
+      private$.valid_scores_at(iter)
     },
 
     .extract_best_valid_scores = function() {

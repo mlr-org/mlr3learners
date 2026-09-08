@@ -266,9 +266,10 @@ otherwise the scores are taken from the final boosting round \code{nrounds}.}
 
     \item{\code{best_valid_scores}}{(named \code{list()} or \code{NULL})
 The validation scores of the best boosting round, extracted from \code{model$evaluation_log}.
-Because XGBoost also predicts with the best \code{nrounds}, these are identical to
+Because XGBoost predicts with the best \code{nrounds} by default, these are identical to
 \verb{$internal_valid_scores} whenever early stopping is activated.
-If early stopping is not activated, no best round is tracked and this is an empty list.}
+If early stopping is not activated, no best round is tracked and this is an empty list,
+in which case \code{msr("best_valid_score")} cannot be computed.}
 
     \item{\code{internal_tuned_values}}{(named \code{list()} or \code{NULL})
 If early stopping is activated, this returns a list with \code{nrounds},
