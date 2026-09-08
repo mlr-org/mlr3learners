@@ -318,7 +318,7 @@ test_that("base_margin (offset)", {
 })
 
 test_that("best valid scores", {
-  withr::local_seed(1)
+  set.seed(1)
   task = tsk("mtcars")
 
   # with early stopping, xgboost also predicts with the best `nrounds`,
