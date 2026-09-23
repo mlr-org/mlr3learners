@@ -4,6 +4,8 @@
 
 ## mlr3learners 0.16.0
 
+CRAN release: 2026-09-08
+
 - feat: `classif.xgboost` and `regr.xgboost` now implement
   `$best_valid_scores`.
 
