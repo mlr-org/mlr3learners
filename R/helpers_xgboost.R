@@ -93,3 +93,8 @@ xgboost_get_base_margin = function(task, phase = "train", pv) {
 
   as_numeric_matrix(offset)[, reordered_cols, drop = FALSE]
 }
+
+# xgboost only treats factors as categorical when given a data.frame; keep the matrix path otherwise
+xgboost_data = function(data) {
+  if (any(map_lgl(data, is.factor))) data else as_numeric_matrix(data)
+}
