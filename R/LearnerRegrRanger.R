@@ -138,7 +138,8 @@ LearnerRegrRanger = R6Class(
   active = list(
     #' @field native_model ([ranger::ranger])\cr
     #' The fitted model.
-    native_model = function() {
+    native_model = function(rhs) {
+      assert_ro_binding(rhs)
       self$model$model
     }
   ),
