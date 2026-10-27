@@ -8,6 +8,28 @@ test_that("autotest", {
   expect_true(result, info = result$error)
 })
 
+test_that("factor features", {
+  data = tsk("mtcars")$data()
+  data$cyl = factor(data$cyl)
+  data$cyl[1:3] = NA
+  task = as_task_regr(data, target = "mpg")
+  learner = lrn("regr.xgboost", nrounds = 5L)
+  learner$train(task)
+  types = set_names(xgboost::getinfo(learner$model, "feature_type"), xgboost::getinfo(learner$model, "feature_name"))
+  expect_equal(unname(types["cyl"]), "c")
+  expect_prediction(learner$predict(task))
+
+  learner_2 = lrn("regr.xgboost", nrounds = 10L)
+  learner_2$hotstart_stack = HotstartStack$new(learner)
+  expect_equal(learner_2$hotstart_stack$start_cost(learner_2, task$hash), 5L)
+  learner_2$train(task)
+  expect_equal(xgboost::xgb.get.num.boosted.rounds(learner_2$model), 10L)
+
+  learner_3 = lrn("regr.xgboost", nrounds = 5L, validate = 0.3)
+  learner_3$train(task)
+  expect_list(learner_3$internal_valid_scores)
+})
+
 test_that("hotstart", {
   task = tsk("mtcars")
   task$select(task$feature_names[task$feature_names %nin% c("chas", "town")])
@@ -349,4 +371,3 @@ test_that("best valid scores", {
   expect_null(learner$best_valid_scores)
   expect_null(learner$internal_valid_scores)
 })
-

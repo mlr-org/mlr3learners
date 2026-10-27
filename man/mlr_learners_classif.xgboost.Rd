@@ -20,6 +20,11 @@ See \url{https://xgboost.readthedocs.io/en/stable/build.html#building-with-gpu-s
 
 The \code{outputmargin}, \code{predcontrib}, \code{predinteraction}, and \code{predleaf} parameters are not supported.
 You can still call e.g. \code{predict(learner$model, newdata = newdata, outputmargin = TRUE)} to get these predictions.
+
+Factor features are passed to \CRANpkg{xgboost} as categorical features,
+see \url{https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html}.
+This requires \code{tree_method} \code{"hist"} (the upstream default) or \code{"approx"},
+and is not supported by the \code{"gblinear"} booster.
 }
 \section{Initial parameter values}{
 
@@ -81,7 +86,7 @@ lrn("classif.xgboost")
 \itemize{
 \item Task type: \dQuote{classif}
 \item Predict Types: \dQuote{response}, \dQuote{prob}
-\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}
+\item Feature Types: \dQuote{logical}, \dQuote{integer}, \dQuote{numeric}, \dQuote{factor}
 \item Required Packages: \CRANpkg{mlr3}, \CRANpkg{mlr3learners}, \CRANpkg{xgboost}
 }
 }

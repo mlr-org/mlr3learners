@@ -153,7 +153,7 @@ LearnerClassifXgboost = R6Class(
         id = "classif.xgboost",
         predict_types = c("response", "prob"),
         param_set = ps,
-        feature_types = c("logical", "integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric", "factor"),
         properties = c(
           "weights",
           "missings",
@@ -265,7 +265,7 @@ LearnerClassifXgboost = R6Class(
       # recode to 0:1 so that for the binary case the positive class translates to 1 (#32)
       # note that task$truth() is guaranteed to have the factor levels in the right order
       label = nlvls - as.integer(task$truth())
-      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
+      xgb_data = xgboost::xgb.DMatrix(data = xgboost_data(data), label = label)
 
       weights = get_weights(task, private)
       if (!is.null(weights)) {
@@ -286,7 +286,7 @@ LearnerClassifXgboost = R6Class(
       if (!is.null(internal_valid_task)) {
         valid_data = internal_valid_task$data(cols = internal_valid_task$feature_names)
         valid_label = nlvls - as.integer(internal_valid_task$truth())
-        xgb_valid_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(valid_data), label = valid_label)
+        xgb_valid_data = xgboost::xgb.DMatrix(data = xgboost_data(valid_data), label = valid_label)
 
         weights = get_weights(internal_valid_task, private)
         if (!is.null(weights)) {
@@ -376,7 +376,7 @@ LearnerClassifXgboost = R6Class(
 
       pv$base_margin = xgboost_get_base_margin(task, "predict", pv)
 
-      newdata = as_numeric_matrix(ordered_features(task, self))
+      newdata = xgboost_data(ordered_features(task, self))
       pred = invoke(predict, model, newdata = newdata, .args = pv)
       if (nlvls == 2L) {
         # binaryclass
@@ -427,7 +427,7 @@ LearnerClassifXgboost = R6Class(
       nlvls = length(task$class_names)
       data = task$data(cols = task$feature_names)
       label = nlvls - as.integer(task$truth())
-      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = label)
+      xgb_data = xgboost::xgb.DMatrix(data = xgboost_data(data), label = label)
 
       if (nrounds > 0) {
         model = xgboost::xgb.train(

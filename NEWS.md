@@ -1,5 +1,7 @@
 # mlr3learners (development version)
 
+* feat: `classif.xgboost` and `regr.xgboost` now support factor features, which are passed to xgboost as categorical features.
+
 # mlr3learners 0.16.0
 
 * feat: `classif.xgboost` and `regr.xgboost` now implement `$best_valid_scores`.

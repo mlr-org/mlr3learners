@@ -134,7 +134,7 @@ LearnerRegrXgboost = R6Class(
       super$initialize(
         id = "regr.xgboost",
         param_set = ps,
-        feature_types = c("logical", "integer", "numeric"),
+        feature_types = c("logical", "integer", "numeric", "factor"),
         properties = c(
           "weights",
           "missings",
@@ -227,7 +227,7 @@ LearnerRegrXgboost = R6Class(
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
 
-      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
+      xgb_data = xgboost::xgb.DMatrix(data = xgboost_data(data), label = data.matrix(target))
 
       weights = get_weights(task, private)
       if (!is.null(weights)) {
@@ -247,7 +247,7 @@ LearnerRegrXgboost = R6Class(
         valid_data = internal_valid_task$data(cols = task$feature_names)
         valid_target = internal_valid_task$data(cols = task$target_names)
 
-        xgb_valid_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(valid_data), label = data.matrix(valid_target))
+        xgb_valid_data = xgboost::xgb.DMatrix(data = xgboost_data(valid_data), label = data.matrix(valid_target))
 
         weights = get_weights(internal_valid_task, private)
         if (!is.null(weights)) {
@@ -307,7 +307,7 @@ LearnerRegrXgboost = R6Class(
     .predict = function(task) {
       pv = self$param_set$get_values(tags = "predict")
       model = self$model
-      newdata = as_numeric_matrix(ordered_features(task, self))
+      newdata = xgboost_data(ordered_features(task, self))
       if (isTRUE(pv$use_pred_offset) && "offset" %in% task$properties) {
         pv$base_margin = task$offset$offset
       }
@@ -336,7 +336,7 @@ LearnerRegrXgboost = R6Class(
       # Construct data
       data = task$data(cols = task$feature_names)
       target = task$data(cols = task$target_names)
-      xgb_data = xgboost::xgb.DMatrix(data = as_numeric_matrix(data), label = data.matrix(target))
+      xgb_data = xgboost::xgb.DMatrix(data = xgboost_data(data), label = data.matrix(target))
 
       if (nrounds > 0) {
         model = xgboost::xgb.train(
