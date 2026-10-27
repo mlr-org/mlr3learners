@@ -23,6 +23,13 @@ parameters are not supported. You can still call e.g.
 `predict(learner$model, newdata = newdata, outputmargin = TRUE)` to get
 these predictions.
 
+Factor features are passed to
+[xgboost](https://CRAN.R-project.org/package=xgboost) as categorical
+features, see
+<https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html>.
+This requires `tree_method` `"hist"` (the upstream default) or
+`"approx"`, and is not supported by the `"gblinear"` booster.
+
 ## Initial parameter values
 
 - `nrounds`:
@@ -97,7 +104,7 @@ or with the associated sugar function
 
 - Predict Types: “response”, “prob”
 
-- Feature Types: “logical”, “integer”, “numeric”
+- Feature Types: “logical”, “integer”, “numeric”, “factor”
 
 - Required Packages: [mlr3](https://CRAN.R-project.org/package=mlr3),
   [mlr3learners](https://CRAN.R-project.org/package=mlr3learners),
@@ -372,7 +379,7 @@ print(learner)
 #> • Validate: NULL
 #> • Packages: mlr3, mlr3learners, and xgboost
 #> • Predict Types: [response] and prob
-#> • Feature Types: logical, integer, and numeric
+#> • Feature Types: logical, integer, numeric, and factor
 #> • Encapsulation: none (fallback: -)
 #> • Properties: hotstart_forward, importance, internal_tuning, missings,
 #> multiclass, offset, twoclass, validation, and weights
