@@ -7,7 +7,9 @@ This package provides essential learners for
 [mlr3](https://mlr3.mlr-org.com), maintained by the mlr-org team.
 Additional learners can be found in the
 [mlr3extralearners](https://github.com/mlr-org/mlr3extralearners)
-package on GitHub. Request additional learners over there.
+package on GitHub. The latest tabular foundation models like TabPFN and
+TabFM are also included in mlr3extralearners. Request additional
+learners over there.
 
 👉 [Table of all learners](https://mlr-org.com/learners.html)
 
