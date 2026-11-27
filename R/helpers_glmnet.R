@@ -99,7 +99,8 @@ glmnet_set_offset = function(task, phase = "train", pv) {
   # classification
   if (task$task_type == "classif") {
     is_twoclass = length(task$class_names) == 2L
-    offset_cols = paste0("offset_", task$class_names)
+    # target levels are reversed with swap_levels() during training
+    offset_cols = paste0("offset_", rev(task$class_names))
 
     if (is_twoclass) {
       pv[[if (is_train) "offset" else "newoffset"]] =
@@ -107,7 +108,7 @@ glmnet_set_offset = function(task, phase = "train", pv) {
     } else {
       pv[[if (is_train) "offset" else "newoffset"]] =
         if (is_train || use_pred_offset) {
-          as_numeric_matrix(task$offset)[, offset_cols]
+          as_numeric_matrix(task$offset)[, offset_cols, drop = FALSE]
         } else {
           matrix(0, nrow = task$nrow, ncol = length(task$class_names))
         }

@@ -105,6 +105,57 @@ test_that("offset works", {
   expect_equal(p3$prob, p4$prob)
 })
 
+test_that("multiclass offset matches class label ordering", {
+  task = tsk("iris")
+  with_seed(7832, {
+    off = data.table(
+      offset_setosa = rnorm(task$nrow, 0.5, 0.3),
+      offset_versicolor = rnorm(task$nrow, -0.3, 0.3),
+      offset_virginica = rnorm(task$nrow, 0, 0.3)
+    )
+  })
+  task_offset = task$clone()
+  task_offset$cbind(off)
+  task_offset$set_col_roles(names(off), "offset")
+  part = partition(task_offset)
+
+  learner = lrn("classif.glmnet", predict_type = "prob", lambda = 0.05)
+  learner$train(task_offset, part$train)
+
+  p1 = learner$predict(task_offset, part$test)
+  learner$param_set$set_values(use_pred_offset = FALSE)
+  p2 = learner$predict(task_offset, part$test)
+
+  expect_equal(
+    log(p1$prob[, "setosa"] / p1$prob[, "virginica"]) - log(p2$prob[, "setosa"] / p2$prob[, "virginica"]),
+    off$offset_setosa[part$test] - off$offset_virginica[part$test]
+  )
+  expect_equal(
+    log(p1$prob[, "versicolor"] / p1$prob[, "virginica"]) - log(p2$prob[, "versicolor"] / p2$prob[, "virginica"]),
+    off$offset_versicolor[part$test] - off$offset_virginica[part$test]
+  )
+
+  # matches direct glmnet::glmnet() with natural factor levels
+  x_train = as.matrix(task$data(rows = part$train, cols = task$feature_names))
+  x_test = as.matrix(task$data(rows = part$test, cols = task$feature_names))
+  off_mat = as.matrix(off)
+  fit_direct = glmnet::glmnet(
+    x_train,
+    task$truth(part$train),
+    family = "multinomial",
+    lambda = 0.05,
+    offset = off_mat[part$train, ]
+  )
+  p_direct = predict(fit_direct, newx = x_test, newoffset = off_mat[part$test, ], s = 0.05, type = "response")[, , 1L]
+  expect_equal(p1$prob, unname(p_direct), ignore_attr = TRUE, tolerance = 1e-3)
+
+  # single-row prediction with multiclass offset preserves matrix dimensions
+  learner_resp = lrn("classif.glmnet", predict_type = "response", lambda = 0.05)
+  learner_resp$train(task_offset, part$train)
+  p_single = learner_resp$predict(task_offset, part$test[1L])
+  expect_prediction_classif(p_single)
+})
+
 test_that("relax = TRUE works", {
   task = tsk("sonar")
   train_rows = 1:150

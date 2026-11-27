@@ -109,3 +109,30 @@ test_that("relax = TRUE works", {
   p3 = learner$predict(task, test_rows)
   expect_false(all(p1$prob[, "M"] == p3$prob[, "M"]))
 })
+
+test_that("multiclass offset matches class label ordering", {
+  task = tsk("iris")
+  with_seed(7832, {
+    off = data.table(
+      offset_setosa = rnorm(task$nrow, 0.5, 0.3),
+      offset_versicolor = rnorm(task$nrow, -0.3, 0.3),
+      offset_virginica = rnorm(task$nrow, 0, 0.3)
+    )
+  })
+  task_offset = task$clone()
+  task_offset$cbind(off)
+  task_offset$set_col_roles(names(off), "offset")
+  part = partition(task_offset)
+
+  learner = lrn("classif.cv_glmnet", predict_type = "prob", seed = 1L)
+  learner$train(task_offset, part$train)
+
+  p1 = learner$predict(task_offset, part$test)
+  learner$param_set$set_values(use_pred_offset = FALSE)
+  p2 = learner$predict(task_offset, part$test)
+
+  expect_equal(
+    log(p1$prob[, "setosa"] / p1$prob[, "virginica"]) - log(p2$prob[, "setosa"] / p2$prob[, "virginica"]),
+    off$offset_setosa[part$test] - off$offset_virginica[part$test]
+  )
+})
